@@ -7618,6 +7618,108 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                                   renderArea->getHintForSeamlessTransition());
         sdrWhitePointNits = state.sdrWhitePointNits;
 
+<<<<<<< PATCH SET (13ef99 Android codelab change Test: manual atest)
+    const float colorSaturation = grayscale ? 0 : 1;
+    clientCompositionDisplay.colorTransform = calculateColorMatrix(colorSaturation);
+    clientCompositionDisplay.colorTransform =
+            mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                 vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
+
+    const float alpha = RenderArea::getCaptureFillValue(renderArea.getCaptureFill());
+
+    compositionengine::LayerFE::LayerSettings fillLayer;
+    fillLayer.source.buffer.buffer = nullptr;
+    fillLayer.source.solidColor = half3(0.0, 0.0, 0.0);
+    fillLayer.geometry.boundaries =
+            FloatRect(sourceCrop.left, sourceCrop.top, sourceCrop.right, sourceCrop.bottom);
+    fillLayer.alpha = half(alpha);
+    clientCompositionLayers.push_back(fillLayer);
+
+    const auto display = renderArea.getDisplayDevice();
+    std::vector<Layer*> renderedLayers;
+    Region clearRegion = Region::INVALID_REGION;
+    bool disableBlurs = false;
+    traverseLayers([&](Layer* layer) {
+        disableBlurs |= layer->getDrawingState().sidebandStream != nullptr;
+
+        Region clip(renderArea.getBounds());
+        compositionengine::LayerFE::ClientCompositionTargetSettings targetSettings{
+                clip,
+                layer->needsFilteringForScreenshots(display.get(), transform) ||
+                        renderArea.needsFiltering(),
+                renderArea.isSecure(),
+                useProtected,
+                clearRegion,
+                layerStackSpaceRect,
+                clientCompositionDisplay.outputDataspace,
+                true,  /* realContentIsVisible */
+                false, /* clearContent */
+                disableBlurs ? compositionengine::LayerFE::ClientCompositionTargetSettings::
+                                       BlurSetting::Disabled
+                             : compositionengine::LayerFE::ClientCompositionTargetSettings::
+                                       BlurSetting::Enabled,
+        };
+        std::vector<compositionengine::LayerFE::LayerSettings> results =
+                layer->prepareClientCompositionList(targetSettings);
+        if (results.size() > 0) {
+            for (auto& settings : results) {
+                settings.geometry.positionTransform =
+                        transform.asMatrix4() * settings.geometry.positionTransform;
+                // There's no need to process blurs when we're executing region sampling,
+                // we're just trying to understand what we're drawing, and doing so without
+                // blurs is already a pretty good approximation.
+                if (regionSampling) {
+                    settings.backgroundBlurRadius = 0;
+||||||| BASE
+    const float colorSaturation = grayscale ? 0 : 1;
+    clientCompositionDisplay.colorTransform = calculateColorMatrix(colorSaturation);
+
+    const float alpha = RenderArea::getCaptureFillValue(renderArea.getCaptureFill());
+
+    compositionengine::LayerFE::LayerSettings fillLayer;
+    fillLayer.source.buffer.buffer = nullptr;
+    fillLayer.source.solidColor = half3(0.0, 0.0, 0.0);
+    fillLayer.geometry.boundaries =
+            FloatRect(sourceCrop.left, sourceCrop.top, sourceCrop.right, sourceCrop.bottom);
+    fillLayer.alpha = half(alpha);
+    clientCompositionLayers.push_back(fillLayer);
+
+    const auto display = renderArea.getDisplayDevice();
+    std::vector<Layer*> renderedLayers;
+    Region clearRegion = Region::INVALID_REGION;
+    bool disableBlurs = false;
+    traverseLayers([&](Layer* layer) {
+        disableBlurs |= layer->getDrawingState().sidebandStream != nullptr;
+
+        Region clip(renderArea.getBounds());
+        compositionengine::LayerFE::ClientCompositionTargetSettings targetSettings{
+                clip,
+                layer->needsFilteringForScreenshots(display.get(), transform) ||
+                        renderArea.needsFiltering(),
+                renderArea.isSecure(),
+                useProtected,
+                clearRegion,
+                layerStackSpaceRect,
+                clientCompositionDisplay.outputDataspace,
+                true,  /* realContentIsVisible */
+                false, /* clearContent */
+                disableBlurs ? compositionengine::LayerFE::ClientCompositionTargetSettings::
+                                       BlurSetting::Disabled
+                             : compositionengine::LayerFE::ClientCompositionTargetSettings::
+                                       BlurSetting::Enabled,
+        };
+        std::vector<compositionengine::LayerFE::LayerSettings> results =
+                layer->prepareClientCompositionList(targetSettings);
+        if (results.size() > 0) {
+            for (auto& settings : results) {
+                settings.geometry.positionTransform =
+                        transform.asMatrix4() * settings.geometry.positionTransform;
+                // There's no need to process blurs when we're executing region sampling,
+                // we're just trying to understand what we're drawing, and doing so without
+                // blurs is already a pretty good approximation.
+                if (regionSampling) {
+                    settings.backgroundBlurRadius = 0;
+=======
         if (!captureResults.capturedHdrLayers) {
             displayBrightnessNits = sdrWhitePointNits;
         } else {
@@ -7633,6 +7735,7 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                     constexpr float kMaxScreenshotHeadroom = 2.0f;
                     displayBrightnessNits = std::min(sdrWhitePointNits * kMaxScreenshotHeadroom,
                                                      displayBrightnessNits);
+>>>>>>> BASE      (4f463a Merge "Add capability to send tls server port" into main)
                 }
             }
         }
