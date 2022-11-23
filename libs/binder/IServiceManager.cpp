@@ -43,7 +43,7 @@
 #include <binder/IPermissionController.h>
 #endif
 
-#ifdef __ANDROID__
+#ifdef BINDER_WITH_KERNEL_IPC
 #include <cutils/properties.h>
 #else
 #include "ServiceManagerHost.h"
@@ -902,7 +902,7 @@ std::vector<IServiceManager::ServiceDebugInfo> CppBackendShim::getServiceDebugIn
     return ret;
 }
 
-#ifndef __ANDROID__
+#ifndef BINDER_WITH_KERNEL_IPC
 // CppBackendShim for host. Implements the old libbinder android::IServiceManager API.
 // The internal implementation of the AIDL interface android::os::IServiceManager calls into
 // on-device service manager.
