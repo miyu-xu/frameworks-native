@@ -70,6 +70,7 @@
     LIBBINDER_PRAGMA_FOR_COMPILER(diagnostic push) \
     LIBBINDER_PRAGMA_FOR_COMPILER(diagnostic ignored warning_flag)
 #define LIBBINDER_IGNORE_END() LIBBINDER_PRAGMA_FOR_COMPILER(diagnostic pop)
+#define ANDROID_OR_FUCHSIA (defined(__ANDROID__) || defined(__Fuchsia__))
 
 namespace android {
 

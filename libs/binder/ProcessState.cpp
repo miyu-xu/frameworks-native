@@ -613,7 +613,7 @@ ProcessState::ProcessState(const char* driver)
         }
     }
 
-#ifdef __ANDROID__
+#if ANDROID_OR_FUCHSIA
     LOG_ALWAYS_FATAL_IF(!opened.ok(),
                         "Binder driver '%s' could not be opened. Error: %s. Terminating.",
                         driver, error.c_str());
