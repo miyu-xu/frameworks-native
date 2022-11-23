@@ -1215,7 +1215,7 @@ status_t IPCThreadState::talkWithDriver(bool doReceive)
             std::string message = logStream.str();
             ALOGI("%s", message.c_str());
         }
-#if defined(__ANDROID__)
+#if defined(BINDER_WITH_KERNEL_IPC)
         if (ioctl(mProcess->mDriverFD, BINDER_WRITE_READ, &bwr) >= 0)
             err = NO_ERROR;
         else
@@ -1604,7 +1604,7 @@ void IPCThreadState::threadDestructor(void *st)
         IPCThreadState* const self = static_cast<IPCThreadState*>(st);
         if (self) {
                 self->flushCommands();
-#if defined(__ANDROID__)
+#if defined(BINDER_WITH_KERNEL_IPC)
         if (self->mProcess->mDriverFD >= 0) {
             ioctl(self->mProcess->mDriverFD, BINDER_THREAD_EXIT, 0);
         }
@@ -1620,7 +1620,7 @@ status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, uint32_t *sync_received
     binder_frozen_status_info info = {};
     info.pid = pid;
 
-#if defined(__ANDROID__)
+#if defined(BINDER_WITH_KERNEL_IPC)
     if (ioctl(self()->mProcess->mDriverFD, BINDER_GET_FROZEN_INFO, &info) < 0)
         ret = -errno;
 #endif
@@ -1639,7 +1639,7 @@ status_t IPCThreadState::freeze(pid_t pid, bool enable, uint32_t timeout_ms) {
     info.timeout_ms = timeout_ms;
 
 
-#if defined(__ANDROID__)
+#if defined(BINDER_WITH_KERNEL_IPC)
     if (ioctl(self()->mProcess->mDriverFD, BINDER_FREEZE, &info) < 0)
         ret = -errno;
 #endif
@@ -1657,7 +1657,7 @@ void IPCThreadState::logExtendedError() {
     if (!ProcessState::isDriverFeatureEnabled(ProcessState::DriverFeature::EXTENDED_ERROR))
         return;
 
-#if defined(__ANDROID__)
+#if defined(BINDER_WITH_KERNEL_IPC)
     if (ioctl(self()->mProcess->mDriverFD, BINDER_GET_EXTENDED_ERROR, &ee) < 0) {
         ALOGE("Failed to get extended error: %s", strerror(errno));
         return;
