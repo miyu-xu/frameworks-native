@@ -28,6 +28,7 @@ cc_test {
         "libgmock",
         "libinstalld",
         "liblog",
+        "android_security_flags_aconfig_c_lib",
     ],
     test_config: "installd_utils_test.xml",
 }
@@ -58,6 +59,7 @@ cc_test {
         "libziparchive",
         "liblog",
         "liblogwrap",
+        "android_security_flags_aconfig_c_lib",
     ],
     test_config: "installd_cache_test.xml",
 
@@ -103,6 +105,7 @@ cc_defaults {
         "liblog",
         "liblogwrap",
         "libc++fs",
+        "android_security_flags_aconfig_c_lib",
     ],
     product_variables: {
         arc: {
@@ -155,6 +158,7 @@ cc_test {
         "liblogwrap",
         "libziparchive",
         "libz",
+        "android_security_flags_aconfig_c_lib",
     ],
     test_config: "installd_dexopt_test.xml",
 
@@ -211,6 +215,7 @@ cc_test {
         "libext2_uuid",
         "libinstalld",
         "liblog",
+        "android_security_flags_aconfig_c_lib",
     ],
 }
 
