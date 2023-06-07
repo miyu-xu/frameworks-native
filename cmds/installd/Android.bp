@@ -52,6 +52,7 @@ cc_defaults {
     static_libs: [
         "libasync_safe",
         "libext2_uuid",
+        "android_security_flags_aconfig_c_lib",
     ],
     export_shared_lib_headers: [
         "libbinder",
