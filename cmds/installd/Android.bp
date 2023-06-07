@@ -98,6 +98,10 @@ cc_library_static {
         export_aidl_headers: true,
     },
 
+    static_libs: [
+        "android_security_flags_aconfig_c_lib",
+    ],
+
     product_variables: {
         arc: {
             exclude_srcs: [
@@ -152,7 +156,10 @@ cc_binary {
     defaults: ["installd_defaults"],
     srcs: ["installd.cpp"],
 
-    static_libs: ["libdiskusage"],
+    static_libs: [
+        "libdiskusage",
+        "android_security_flags_aconfig_c_lib",
+    ],
 
     init_rc: ["installd.rc"],
 
