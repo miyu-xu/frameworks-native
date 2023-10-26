@@ -235,7 +235,7 @@ static unique_fd connectToUnixBootstrap(const RpcTransportFd& transportFd) {
     if (binder::os::sendMessageOnSocket(transportFd, &iov, 1, &fds) < 0) {
         PLOGF("Failed sendMessageOnSocket");
     }
-    return std::move(sockClient);
+    return sockClient;
 }
 #endif // BINDER_RPC_TO_TRUSTY_TEST
 
