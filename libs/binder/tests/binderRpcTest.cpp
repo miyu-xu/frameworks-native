@@ -235,7 +235,7 @@ static unique_fd connectToUnixBootstrap(const RpcTransportFd& transportFd) {
     if (binder::os::sendMessageOnSocket(transportFd, &iov, 1, &fds) < 0) {
         PLOGF("Failed sendMessageOnSocket");
     }
-    return std::move(sockClient);
+    return sockClient;
 }
 #endif // BINDER_RPC_TO_TRUSTY_TEST
 
@@ -268,6 +268,7 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
     auto servicePath =
             std::format("{}/binder_rpc_test_service{}{}", path,
                         singleThreaded ? "_single_threaded" : "", noKernel ? "_no_kernel" : "");
+    servicePath = "binder_rpc_test_service";
 
     unique_fd bootstrapClientFd, socketFd;
 
