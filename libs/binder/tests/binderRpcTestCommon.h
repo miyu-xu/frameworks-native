@@ -256,7 +256,7 @@ public:
         mValue.reset();
         lock.unlock();
         mCvEmpty.notify_all();
-        return std::move(v);
+        return v;
     }
 
 private:
