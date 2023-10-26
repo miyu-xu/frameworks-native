@@ -200,6 +200,9 @@ cc_library_static {
     defaults: [
         "binder_test_defaults",
     ],
+    header_libs: [
+        "libbinder_headers_base",
+    ],
     shared_libs: [
         "libbase",
         "liblog",
@@ -430,6 +433,12 @@ cc_test {
         "binderRpcTest_defaults",
         "binderRpcTest_shared_defaults",
         "libbinder_tls_shared_deps",
+    ],
+    cflags: [
+        "-D__ANDROID_VENDOR__",
+    ],
+    static_libs: [
+        "libgtest",
     ],
 
     // Add the Trusty mock library as a fake dependency so it gets built
