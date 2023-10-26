@@ -200,6 +200,9 @@ cc_library_static {
     defaults: [
         "binder_test_defaults",
     ],
+    header_libs: [
+        "libbinder_headers_base",
+    ],
     shared_libs: [
         "libbase",
         "liblog",
@@ -450,6 +453,7 @@ cc_test {
     ],
     static_libs: [
         "libbinder_rpc_no_kernel",
+        "libgtest",
     ],
 }
 
