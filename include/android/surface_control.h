@@ -391,8 +391,9 @@ void ASurfaceTransaction_setColor(ASurfaceTransaction* _Nonnull transaction,
  */
 void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
                                      ASurfaceControl* _Nonnull surface_control, const ARect& source,
-                                     const ARect& destination, int32_t transform)
-        __INTRODUCED_IN(29);
+                                     const ARect& destination,
+                                     enum ANativeWindowTransform transform)
+                                     __INTRODUCED_IN(29);
 
 /**
  * Bounds the surface and its children to the bounds specified. The crop and buffer size will be
@@ -592,7 +593,8 @@ void ASurfaceTransaction_setExtendedRangeBrightness(ASurfaceTransaction* _Nonnul
  */
 void ASurfaceTransaction_setFrameRate(ASurfaceTransaction* _Nonnull transaction,
                                       ASurfaceControl* _Nonnull surface_control, float frameRate,
-                                      int8_t compatibility) __INTRODUCED_IN(30);
+                                      enum ANativeWindow_FrameRateCompatibility compatibility)
+                                      __INTRODUCED_IN(30);
 
 /**
  * Sets the intended frame rate for \a surface_control.
@@ -627,10 +629,10 @@ void ASurfaceTransaction_setFrameRate(ASurfaceTransaction* _Nonnull transaction,
  * Available since API level 31.
  */
 void ASurfaceTransaction_setFrameRateWithChangeStrategy(ASurfaceTransaction* _Nonnull transaction,
-                                                        ASurfaceControl* _Nonnull surface_control,
-                                                        float frameRate, int8_t compatibility,
-                                                        int8_t changeFrameRateStrategy)
-                                                        __INTRODUCED_IN(31);
+                                      ASurfaceControl* _Nonnull surface_control, float frameRate,
+                                      enum ANativeWindow_FrameRateCompatibility compatibility,
+                                      enum ANativeWindow_ChangeFrameRateStrategy changeFrameRateStrategy)
+                                      __INTRODUCED_IN(31);
 
 /**
  * Clears the frame rate which is set for \a surface_control.
