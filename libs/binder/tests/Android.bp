@@ -157,6 +157,7 @@ cc_test {
     shared_libs: [
         "libbase",
         "libbinder",
+        "libbindernetlink",
         "liblog",
         "libprocessgroup",
         "libutils",
