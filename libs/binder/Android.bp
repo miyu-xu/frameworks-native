@@ -552,6 +552,9 @@ cc_defaults {
             ],
         },
         android: {
+            srcs: [
+                "BinderNetlink.cpp",
+            ],
             shared_libs: [
                 "libapexsupport",
                 "libvndksupport",
