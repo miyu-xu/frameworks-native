@@ -31,6 +31,7 @@
 #include <android-base/properties.h>
 #include <android-base/result-gmock.h>
 #include <binder/Binder.h>
+#include <binder/BinderGenl.h>
 #include <binder/BpBinder.h>
 #include <binder/Functional.h>
 #include <binder/IBinder.h>
@@ -433,6 +434,10 @@ class BinderLibTestEvent
         {
             pthread_mutex_init(&m_waitMutex, nullptr);
             pthread_cond_init(&m_waitCond, nullptr);
+        }
+        void reset()
+        {
+            m_eventTriggered = false;
         }
         int waitEvent(int timeout_s)
         {
@@ -1490,6 +1495,7 @@ TEST_F(BinderLibTest, FileDescriptorRemainsNonBlocking) {
 // buffers near the cap size.
 constexpr size_t kSizeBytesAlmostFull = 950'000;
 constexpr size_t kSizeBytesOverFull = 1'050'000;
+constexpr size_t kSizeBytesAsyncSpam = 480'000;
 
 TEST_F(BinderLibTest, GargantuanVectorSent) {
     sp<IBinder> server = addServer();
@@ -1854,6 +1860,248 @@ TEST_F(BinderLibTest, BinderProxyCountCallback) {
         createProxyOnce(kInvalidUid, kInvalidUid);
     }
     EXPECT_EQ(BpBinder::getBinderProxyCount(), initialCount);
+}
+
+/**
+ * Running BinderGenl tests requires "adb shell stop". Otherwise the tests would fail as the
+ * BinderGenl socket is already used by AMS.
+ */
+class TestGenl : public BinderGenl, public BinderLibTestEvent
+{
+    private:
+        bool finished = false;
+        int result = NONE;
+        __u32 from, to, code, err;
+
+        void binderHandler(void *data, __u16 len) {
+            struct binder_report *report;
+
+            if (len < sizeof(struct binder_report)) {
+                ALOGW("Invalid binder report %d", len);
+                result = ERROR;
+                triggerEvent();
+                return;
+            }
+
+            report = (struct binder_report *)data;
+            ALOGD("Binder report: %s %d 0x%08x %d:%d -> %d:%d %d 0x08%x %d %llu %d", "binder",
+                  report->err, report->err, report->from_pid, report->from_tid, report->to_pid,
+                  report->to_pid, report->reply, report->flags, report->code, report->data_size, len);
+            if (report->from_pid == from && report->to_pid == to &&
+                    report->code == code && report->err == err) {
+                ALOGD("Found expected report");
+                result = FOUND;
+                triggerEvent();
+            }
+        }
+
+        static void signalHandler(int sig) {
+            ALOGD("Received signal %d", sig);
+            pthread_exit(NULL);
+        }
+
+        void monitorBinderReport() {
+            struct sigaction sa = {};
+            sa.sa_handler = signalHandler;
+            sigaction(SIGUSR1, &sa, NULL);
+
+            using std::placeholders::_1, std::placeholders::_2;
+            GenlCallback callback = std::bind(&TestGenl::binderHandler, this, _1, _2);
+
+            result = STARTED;
+            triggerEvent();
+
+            while (!finished) {
+                struct GenlMsg msg;
+                ALOGD("Waiting for next binder report");
+                if (!recv(&msg, sizeof(msg), BINDER_GENL_CMD_REPORT, BINDER_GENL_A_ATTR_REPORT,
+                          callback)) {
+                    if (errno == EINTR) {
+                        break;
+                    }
+                    ALOGD("Failed to recv reports");
+                    result = ERROR;
+                    triggerEvent();
+                    return;
+                }
+
+                // Don't starve other threads in case there are huge amount of abnormal binder transactions
+                sched_yield();
+            }
+        }
+
+ public:
+        enum {
+            NONE,
+            ERROR,
+            FOUND,
+            STARTED,
+        };
+
+        TestGenl(const char *str) : BinderGenl(str) {
+        }
+
+        void expect(__u32 from, __u32 to, __u32 code, __u32 err) {
+            ALOGD("Expect %u --> %u (%u) returns %u", from, to, code, err);
+            reset();
+            this->from = from;
+            this->to = to;
+            this->code = code,
+            this->err = err;
+            result = NONE;
+        }
+
+        int getResult() {
+            return result;
+        }
+
+        std::thread monitorStart() {
+            __u32 flags = BINDER_GENL_FLAG_FAILED | BINDER_GENL_FLAG_DELAYED | BINDER_GENL_FLAG_SPAM;
+            EXPECT_EQ(NO_ERROR, setReport(0, flags));
+            return std::thread(&TestGenl::monitorBinderReport, this);
+        }
+
+        void monitorStop(std::thread t) {
+            finished = true;
+            pthread_kill(t.native_handle(), SIGUSR1);
+            t.join();
+            EXPECT_EQ(NO_ERROR, setReport(0, 0));
+        }
+};
+
+TEST_F(BinderLibTest, GenlOpen) {
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+    genl.close();
+}
+
+TEST_F(BinderLibTest, GenlMonitor) {
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+
+    std::thread t = genl.monitorStart();
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::STARTED, genl.getResult());
+    genl.monitorStop(std::move(t));
+    genl.close();
+}
+
+TEST_F(BinderLibTest, GenlFailedReply) {
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+
+    std::thread t = genl.monitorStart();
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::STARTED, genl.getResult());
+
+    Parcel data, reply, replypid;
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_GETPID, data, &replypid));
+    int32_t pid = replypid.readInt32();
+
+    const std::vector<uint64_t> testValue(kSizeBytesOverFull / sizeof(uint64_t), 42);
+    data.writeUint64Vector(testValue);
+    genl.expect(getpid(), pid, BINDER_LIB_TEST_ECHO_VECTOR, BR_FAILED_REPLY);
+    EXPECT_EQ(FAILED_TRANSACTION, m_server->transact(BINDER_LIB_TEST_ECHO_VECTOR, data, &reply));
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::FOUND, genl.getResult());
+
+    genl.monitorStop(std::move(t));
+    genl.close();
+}
+
+TEST_F(BinderLibTest, GenlFrozenReply) {
+    if (!checkFreezeSupport()) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support proceess freezing";
+    }
+
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+
+    std::thread t = genl.monitorStart();
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::STARTED, genl.getResult());
+
+    Parcel data, reply, replypid;
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_GETPID, data, &replypid));
+    int32_t pid = replypid.readInt32();
+
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, true, 1000));
+    genl.expect(getpid(), pid, BINDER_LIB_TEST_NOP_TRANSACTION, BR_FROZEN_REPLY);
+    EXPECT_EQ(FAILED_TRANSACTION, m_server->transact(BINDER_LIB_TEST_NOP_TRANSACTION, data, &reply));
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::FOUND, genl.getResult());
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, false, 0));
+
+    genl.monitorStop(std::move(t));
+    genl.close();
+}
+
+TEST_F(BinderLibTest, GenlPendingReply) {
+    if (!checkFreezeSupport()) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support proceess freezing";
+    }
+
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+
+    std::thread t = genl.monitorStart();
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::STARTED, genl.getResult());
+
+    Parcel data, reply, replypid;
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_GETPID, data, &replypid));
+    int32_t pid = replypid.readInt32();
+
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, true, 1000));
+    genl.expect(getpid(), pid, BINDER_LIB_TEST_NOP_TRANSACTION, BR_TRANSACTION_PENDING_FROZEN);
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_NOP_TRANSACTION, data, &reply, TF_ONE_WAY));
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::FOUND, genl.getResult());
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, false, 0));
+
+    genl.monitorStop(std::move(t));
+    genl.close();
+}
+
+TEST_F(BinderLibTest, GenlSpamReply) {
+    if (!checkFreezeSupport()) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support proceess freezing";
+    }
+
+    TestGenl genl("binder");
+    if (genl.open() < 0) {
+        GTEST_SKIP() << "Skipping test for kernels that do not support binder genl report";
+    }
+
+    std::thread t = genl.monitorStart();
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::STARTED, genl.getResult());
+
+    Parcel data, reply, replypid;
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_GETPID, data, &replypid));
+    int32_t pid = replypid.readInt32();
+
+    const std::vector<uint64_t> testValue(kSizeBytesAsyncSpam / sizeof(uint64_t), 42);
+    data.writeUint64Vector(testValue);
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, true, 1000));
+    genl.expect(getpid(), pid, BINDER_LIB_TEST_ECHO_VECTOR, BR_ONEWAY_SPAM_SUSPECT);
+    EXPECT_EQ(NO_ERROR, m_server->transact(BINDER_LIB_TEST_ECHO_VECTOR, data, &reply, TF_ONE_WAY));
+    genl.waitEvent(5);
+    EXPECT_EQ(TestGenl::FOUND, genl.getResult());
+    EXPECT_EQ(NO_ERROR, IPCThreadState::self()->freeze(pid, false, 0));
+
+    genl.monitorStop(std::move(t));
+    genl.close();
 }
 
 class BinderLibRpcTestBase : public BinderLibTest {
