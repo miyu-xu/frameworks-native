@@ -553,6 +553,7 @@ cc_library {
     ],
 
     srcs: [
+        "BinderGenl.cpp",
         "IMemory.cpp",
         "IShellCallback.cpp",
         "LazyServiceRegistrar.cpp",
