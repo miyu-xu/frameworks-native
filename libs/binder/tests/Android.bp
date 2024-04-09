@@ -576,6 +576,8 @@ cc_test {
         "libbinder_rpc_no_kernel",
         "libbinder_trusty",
         "libtrusty",
+        "libion",
+        "libdmabufheap",
     ],
 
     test_suites: ["device-tests"],

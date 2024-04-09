@@ -22,6 +22,9 @@
 #include <BnBinderRpcCallback.h>
 #include <BnBinderRpcSession.h>
 #include <BnBinderRpcTest.h>
+#ifndef __TRUSTY__
+#include <BufferAllocator/BufferAllocator.h>
+#endif
 #include <binder/Binder.h>
 #include <binder/BpBinder.h>
 #include <binder/IPCThreadState.h>
@@ -35,6 +38,7 @@
 #include <cinttypes>
 #include <string>
 #include <vector>
+#include <sys/mman.h>
 
 #ifdef __ANDROID__
 #include <android-base/properties.h>
@@ -238,6 +242,26 @@ static inline binder::unique_fd mockFileDescriptor(std::string contents) {
             LOG_ALWAYS_FATAL_IF(EPIPE != savedErrno, "mockFileDescriptor write failed: %s",
                                 strerror(savedErrno));
         }
+    }).detach();
+    return readFd;
+}
+
+// Create a dmabuf FD.
+static inline binder::unique_fd mockDmabufFileDescriptor(std::string contents) {
+    binder::unique_fd readFd, writeFd;
+    LOG_ALWAYS_FATAL_IF(!binder::Pipe(&readFd, &writeFd), "%s", strerror(errno));
+    RpcMaybeThread([writeFd = std::move(writeFd), contents = std::move(contents)]() {
+        BufferAllocator alloc;
+        long page_size = sysconf(_SC_PAGESIZE);
+        binder::unique_fd dmabuf_fd(alloc.Alloc(kDmabufSystemHeapName, page_size));
+        LOG_ALWAYS_FATAL_IF(!dmabuf_fd.ok());
+
+        void* shm = mmap(0, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, dmabuf_fd, 0);
+        if (shm == MAP_FAILED) {
+            return;
+        }
+        //TODO(dmitriyf): actually write something to shm
+        munmap(shm, page_size);
     }).detach();
     return readFd;
 }

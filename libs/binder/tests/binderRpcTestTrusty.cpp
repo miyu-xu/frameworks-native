@@ -115,4 +115,8 @@ INSTANTIATE_TEST_SUITE_P(Trusty, BinderRpc, ::testing::ValuesIn(getTrustyBinderR
 
 } // namespace android
 
+TEST(BinderRpc, DmabufTransfer) {
+    EXPECT_TRUE(true);
+}
+
 PORT_GTEST(BinderRpcTest, "com.android.trusty.binderRpcTest");

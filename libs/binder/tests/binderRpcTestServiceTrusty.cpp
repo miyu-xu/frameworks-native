@@ -98,6 +98,15 @@ int main(void) {
                     service->server = server;
                     return service;
                 });
+        std::vector<RpcSession::FileDescriptorTransportMode>
+                serverSupportedFileDescriptorTransportModes;
+        //TODO(dmitriyf): avoid this
+        serverSupportedFileDescriptorTransportModes.push_back(
+                RpcSession::FileDescriptorTransportMode::UNIX);
+        serverSupportedFileDescriptorTransportModes.push_back(
+                RpcSession::FileDescriptorTransportMode::TRUSTY);
+
+        serverInfo.server->setSupportedFileDescriptorTransportModes(serverSupportedFileDescriptorTransportModes);
 
         servers.push_back(std::move(serverInfo));
     }

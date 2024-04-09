@@ -633,6 +633,22 @@ TEST_P(BinderRpc, OnewayCallQueueingWithFds) {
     saturateThreadPool(kNumServerThreads, proc.rootIface);
 }
 
+TEST_P(BinderRpc, DmabufTransfer) {
+    if (socketType() != SocketType::TIPC) {
+        GTEST_SKIP() << "Dmabuf tests are only enabled for Trusty";
+    }
+
+    auto proc = createRpcTestSocketServerProcess({
+            .numThreads = 1,
+            .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::TRUSTY,
+            .serverSupportedFileDescriptorTransportModes =
+                    {RpcSession::FileDescriptorTransportMode::NONE, RpcSession::FileDescriptorTransportMode::TRUSTY},
+    });
+
+    EXPECT_OK(proc.rootIface->blockingSendFdOneway(
+            android::os::ParcelFileDescriptor(mockDmabufFileDescriptor("a"))));
+}
+
 TEST_P(BinderRpc, OnewayCallQueueing) {
     if (clientOrServerSingleThreaded()) {
         GTEST_SKIP() << "This test requires multiple threads";
