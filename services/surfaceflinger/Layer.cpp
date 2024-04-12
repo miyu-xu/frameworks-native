@@ -1737,10 +1737,10 @@ bool Layer::reparent(const sp<IBinder>& newParentHandle) {
         newParent->addChild(sp<Layer>::fromExisting(this));
         if (!newParent->isRemovedFromCurrentState()) {
             addToCurrentState();
-        } else {
+        } else if (!isRemovedFromCurrentState()) {
             onRemovedFromCurrentState();
         }
-    } else {
+    } else if (!isRemovedFromCurrentState()) {
         onRemovedFromCurrentState();
     }
 
