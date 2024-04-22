@@ -33,7 +33,16 @@
 #include <memory>
 
 /**
- * Allows to set RenderEngine backend to GLES (default) or SkiaGL (NOT yet supported).
+ * Allows setting the RenderEngine backend to SkiaGL (default) or SkiaVk (not officially supported).
+ *
+ * In either case, it is highly encouraged to use the "threaded" variant.
+ *
+ * Default: skiaglthreaded
+ * Allowable values:
+ * - skiagl
+ * - skiaglthreaded
+ * - skiavk
+ * - skiavkthreaded
  */
 #define PROPERTY_DEBUG_RENDERENGINE_BACKEND "debug.renderengine.backend"
 
