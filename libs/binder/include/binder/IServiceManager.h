@@ -236,5 +236,4 @@ struct RpcDelegateServiceManagerOptions {
 sp<IServiceManager> createRpcDelegateServiceManager(
         const RpcDelegateServiceManagerOptions& options);
 #endif
-
 } // namespace android
