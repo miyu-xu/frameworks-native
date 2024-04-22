@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe9364e_cd67f08f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958155
+      },
+      "writtenOn": "2024-04-22T20:55:05Z",
+      "side": 1,
+      "message": "Good point -- pretend that was a Gerrit comment. :)",
+      "parentUuid": "74612ef4_8cb74d4e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "312962c9_e1822e16",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-04-22T20:44:56Z",
       "side": 1,
       "message": "Add\n```\nMerged-In: Ib9b8abb25f4894f1b50b6286720c2abf89ca74e2\n```\n?",
+      "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f93ff5_0a41d91c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958155
+      },
+      "writtenOn": "2024-04-22T20:55:05Z",
+      "side": 1,
+      "message": "SGTM\n\nI don\u0027t think there would be merge issues without it (after updating to match the internal text), but it might keep the blame cleaner?",
+      "parentUuid": "312962c9_e1822e16",
       "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
