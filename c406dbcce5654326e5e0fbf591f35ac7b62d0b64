@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74612ef4_8cb74d4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-04-22T20:44:56Z",
+      "side": 1,
+      "message": "Leave this out? It\u0027s not meaningful as a commit, and it\u0027s already out of sync with the patch set we\u0027re landing.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312962c9_e1822e16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-04-22T20:44:56Z",
+      "side": 1,
+      "message": "Add\n```\nMerged-In: Ib9b8abb25f4894f1b50b6286720c2abf89ca74e2\n```\n?",
+      "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
