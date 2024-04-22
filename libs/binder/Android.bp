@@ -311,6 +311,7 @@ cc_defaults {
     name: "libbinder_kernel_defaults",
     srcs: [
         "BufferedTextOutput.cpp",
+        "BackendUnifiedServiceManager.cpp",
         "IPCThreadState.cpp",
         "IServiceManager.cpp",
         "ProcessState.cpp",
@@ -387,7 +388,6 @@ cc_library {
         "ParcelableHolder.cpp",
         "PersistableBundle.cpp",
     ],
-
     target: {
         android: {
             // NOT static to keep the wire protocol unfrozen
