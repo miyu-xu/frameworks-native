@@ -81,6 +81,24 @@
       "parentUuid": "312962c9_e1822e16",
       "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d6377c_942cb3c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-04-23T13:12:49Z",
+      "side": 1,
+      "message": "Not sure how it affects the blame, but it makes it clearer that we\u0027ve already made this change internally.",
+      "parentUuid": "78f93ff5_0a41d91c",
+      "revId": "c406dbcce5654326e5e0fbf591f35ac7b62d0b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
