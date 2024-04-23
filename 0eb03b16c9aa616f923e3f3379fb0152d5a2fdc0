@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52efdfb_809b0672",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-04-23T22:52:06Z",
+      "side": 1,
+      "message": "Do we still want this? I added https://r.android.com/3047957 to force git to detect the rename of `android.rs`, I can get rid of it once the current patch is ready to land.",
+      "revId": "0eb03b16c9aa616f923e3f3379fb0152d5a2fdc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
