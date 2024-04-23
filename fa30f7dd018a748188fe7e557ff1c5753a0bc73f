@@ -178,6 +178,24 @@
       "parentUuid": "2a84fa4f_51cd23d0",
       "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea741fa_0d1f84f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870086
+      },
+      "writtenOn": "2024-04-23T14:42:21Z",
+      "side": 1,
+      "message": "The temporary system property can be used to switch to the fixed algorithm for the follow-up Android version. And I will check the Cts tests. Thanks!",
+      "parentUuid": "522f25fe_bda6317a",
+      "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
