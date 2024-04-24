@@ -19,6 +19,7 @@
 #include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <android-base/strings.h>
+#include <android/os/IAccessor.h>
 #include <binder/BpBinder.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
@@ -41,6 +42,9 @@ using ::android::binder::Status;
 using ::android::internal::Stability;
 
 namespace android {
+
+using os::IAccessor;
+using os::ParcelFileDescriptor;
 
 bool is_multiuser_uid_isolated(uid_t uid) {
     uid_t appid = multiuser_get_app_id(uid);
@@ -232,6 +236,25 @@ static std::vector<std::string> getVintfUpdatableNames(const std::string& apexNa
     return names;
 }
 
+static std::optional<vintf::Accessor> getVintfAccessor(const std::string& name) {
+    AidlName aname;
+    if (!AidlName::fill(name, &aname)) return std::nullopt;
+
+    std::optional<vintf::Accessor> accessor;
+    forEachManifest([&](const ManifestWithDescription& mwd) {
+        mwd.manifest->forEachInstance([&](const auto& manifestInstance) {
+            if (manifestInstance.format() != vintf::HalFormat::AIDL) return true;
+            if (manifestInstance.package() != aname.package) return true;
+            if (manifestInstance.interface() != aname.iface) return true;
+            if (manifestInstance.instance() != aname.instance) return true;
+            accessor = manifestInstance.accessor();
+            return false; // break (libvintf uses opposite convention)
+        });
+        return false; // continue
+    });
+    return accessor;
+}
+
 static std::optional<ConnectionInfo> getVintfConnectionInfo(const std::string& name) {
     AidlName aname;
     if (!AidlName::fill(name, &aname)) return std::nullopt;
@@ -348,9 +371,29 @@ ServiceManager::~ServiceManager() {
 }
 
 Status ServiceManager::getService(const std::string& name, os::Service* outService) {
-    sp<IBinder> outBinder = tryGetService(name, true);
-    // TODO(b//338541373): Make a RemoteService if accessor is used.
-    *outService = os::Service::make<os::Service::Tag::binder>(outBinder);
+    std::optional<vintf::Accessor> accessor;
+#ifndef VENDORSERVICEMANAGER
+    accessor = getVintfAccessor(name);
+#endif
+    if (accessor.has_value()) {
+        std::string accessorName = "android.os.IAccessor/" + accessor->name;
+        sp<IBinder> outBinder = tryGetService(accessorName, true);
+        sp<IAccessor> outAccessor = interface_cast<IAccessor>(outBinder);
+        ParcelFileDescriptor fd;
+        if (outAccessor.get() != nullptr) {
+            Status status = outAccessor->connectToRpcSession(name, &fd);
+            if (!status.isOk()) {
+                return status;
+            }
+        }
+        os::RemoteService remoteService;
+        remoteService.mFdToRpcService = std::move(fd);
+        remoteService.mAccessor = std::move(outBinder);
+        *outService = os::Service::make<os::Service::Tag::remoteService>(std::move(remoteService));
+    } else {
+        sp<IBinder> outBinder = tryGetService(name, true);
+        *outService = os::Service::make<os::Service::Tag::binder>(outBinder);
+    }
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }
