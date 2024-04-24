@@ -78,6 +78,8 @@ Display::Display(android::Hwc2::Composer& composer,
                  DisplayType type)
       : mComposer(composer), mCapabilities(capabilities), mId(id), mType(type) {
     ALOGV("Created display %" PRIu64, id);
+    if (mType == hal::DisplayType::VIRTUAL)
+        updateCapabilities();
 }
 
 Display::~Display() {
@@ -481,31 +483,8 @@ Error Display::setPowerMode(PowerMode mode)
     auto intMode = static_cast<Hwc2::IComposerClient::PowerMode>(mode);
     auto intError = mComposer.setPowerMode(mId, intMode);
 
-    if (mode == PowerMode::ON) {
-        std::call_once(mDisplayCapabilityQueryFlag, [this]() {
-            std::vector<DisplayCapability> tmpCapabilities;
-            auto error =
-                    static_cast<Error>(mComposer.getDisplayCapabilities(mId, &tmpCapabilities));
-            if (error == Error::NONE) {
-                std::scoped_lock lock(mDisplayCapabilitiesMutex);
-                mDisplayCapabilities.emplace();
-                for (auto capability : tmpCapabilities) {
-                    mDisplayCapabilities->emplace(capability);
-                }
-            } else if (error == Error::UNSUPPORTED) {
-                std::scoped_lock lock(mDisplayCapabilitiesMutex);
-                mDisplayCapabilities.emplace();
-                if (mCapabilities.count(AidlCapability::SKIP_CLIENT_COLOR_TRANSFORM)) {
-                    mDisplayCapabilities->emplace(DisplayCapability::SKIP_CLIENT_COLOR_TRANSFORM);
-                }
-                bool dozeSupport = false;
-                error = static_cast<Error>(mComposer.getDozeSupport(mId, &dozeSupport));
-                if (error == Error::NONE && dozeSupport) {
-                    mDisplayCapabilities->emplace(DisplayCapability::DOZE);
-                }
-            }
-        });
-    }
+    if (mode == PowerMode::ON)
+        updateCapabilities();
 
     return static_cast<Error>(intError);
 }
@@ -635,6 +614,32 @@ void Display::setConnected(bool connected) {
 std::shared_ptr<HWC2::Layer> Display::getLayerById(HWLayerId id) const {
     auto it = mLayers.find(id);
     return it != mLayers.end() ? it->second.lock() : nullptr;
+}
+
+void Display::updateCapabilities() {
+    std::call_once(mDisplayCapabilityQueryFlag, [this]() {
+        std::vector<DisplayCapability> tmpCapabilities;
+        auto error =
+                static_cast<Error>(mComposer.getDisplayCapabilities(mId, &tmpCapabilities));
+        if (error == Error::NONE) {
+            std::scoped_lock lock(mDisplayCapabilitiesMutex);
+            mDisplayCapabilities.emplace();
+            for (auto capability : tmpCapabilities) {
+                mDisplayCapabilities->emplace(capability);
+            }
+        } else if (error == Error::UNSUPPORTED) {
+            std::scoped_lock lock(mDisplayCapabilitiesMutex);
+            mDisplayCapabilities.emplace();
+            if (mCapabilities.count(AidlCapability::SKIP_CLIENT_COLOR_TRANSFORM)) {
+                mDisplayCapabilities->emplace(DisplayCapability::SKIP_CLIENT_COLOR_TRANSFORM);
+            }
+            bool dozeSupport = false;
+            error = static_cast<Error>(mComposer.getDozeSupport(mId, &dozeSupport));
+            if (error == Error::NONE && dozeSupport) {
+                mDisplayCapabilities->emplace(DisplayCapability::DOZE);
+            }
+        }
+    });
 }
 } // namespace impl
 
