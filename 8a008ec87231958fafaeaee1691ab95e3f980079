@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b9b3d38_5193c4a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-25T23:16:39Z",
+      "side": 1,
+      "message": "(given other reviews from the team and PS12..PS13)",
+      "revId": "8a008ec87231958fafaeaee1691ab95e3f980079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
