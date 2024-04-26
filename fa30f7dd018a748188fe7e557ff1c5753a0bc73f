@@ -214,6 +214,24 @@
       "parentUuid": "0ea741fa_0d1f84f2",
       "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6655c7_50f2c3f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2024-04-26T12:10:43Z",
+      "side": 1,
+      "message": "Meanwhile I checked in the GaussianBlurFilter change internally and verified that CTS *does* pass with Skia built-in blur but RenderEngineTest *does not* pass with Skia built-in blur even though they\u0027re visually close.\n\nIf we can make RenderEngineTest pass on GaussianBlurFilter + your fixed blur without compromising the test, I don\u0027t think you should add a flag, just fix the algorithm and the test at the same time.\n\nIf the difference is too big (which I don\u0027t think it is) we could add a constant scaling for one release, but developers ought to expect window blur apis to match view blur apis so not sure if even that\u0027s necessary...\n\nHere is how the implementation looks of a gaussian filter in place of kawase, FYI:\n\n```\n// This constant approximates the scaling done in the software path\u0027s\n// \"high quality\" mode, in SkBlurMask::Blur() (1 / sqrt(3)).\nstatic const float BLUR_SIGMA_SCALE \u003d 0.57735f;\n\n...\n\nsk_sp\u003cSkImage\u003e GaussianBlurFilter::generate(GrRecordingContext* context, const uint32_t blurRadius,\n                                            const sk_sp\u003cSkImage\u003e input, const SkRect\u0026 blurRect)\n    const {\n    // Create blur surface with the bit depth and colorspace of the original surface\n    SkImageInfo scaledInfo \u003d input-\u003eimageInfo().makeWH(std::ceil(blurRect.width() * kInputScale),\n                                                       std::ceil(blurRect.height() * kInputScale));\n    sk_sp\u003cSkSurface\u003e surface \u003d SkSurfaces::RenderTarget(context,\n                                                        skgpu::Budgeted::kNo, scaledInfo);\n\n    SkPaint paint;\n    paint.setBlendMode(SkBlendMode::kSrc);\n    paint.setImageFilter(SkImageFilters::Blur(\n                blurRadius * kInputScale * BLUR_SIGMA_SCALE,\n                blurRadius * kInputScale * BLUR_SIGMA_SCALE,\n                SkTileMode::kClamp, nullptr));\n\n    surface-\u003egetCanvas()-\u003edrawImageRect(\n            input,\n            blurRect,\n            SkRect::MakeWH(scaledInfo.width(), scaledInfo.height()),\n            SkSamplingOptions{SkFilterMode::kLinear, SkMipmapMode::kNone},\n            \u0026paint,\n            SkCanvas::SrcRectConstraint::kFast_SrcRectConstraint);\n    return surface-\u003emakeImageSnapshot();\n}\n```\n\nI can see what the smallest change to the test is to make it pass with skia gaussian blur. Is 30 the absolute upper bound for the change you\u0027re proposing?",
+      "parentUuid": "0ea741fa_0d1f84f2",
+      "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
