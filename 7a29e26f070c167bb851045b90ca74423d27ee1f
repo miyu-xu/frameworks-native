@@ -87,6 +87,24 @@
       "parentUuid": "ca56d9de_c574a73a",
       "revId": "7a29e26f070c167bb851045b90ca74423d27ee1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f09c382_9f4adbdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-26T07:45:10Z",
+      "side": 1,
+      "message": "Hmm, it looks like those raw statistics do provide access to the raw data, so I could probably copy it out from those custom-statistic callbacks, even if it doesn\u0027t look like that\u0027s how they are intended to be used.\n\nI want to be able to plot a histogram or CDF over the latencies, and that requires the raw data. I\u0027ve found that they provide a lot insight that just the 50%, 90%, 99% percentiles don\u0027t give me.",
+      "parentUuid": "38f6c9d4_5836bf85",
+      "revId": "7a29e26f070c167bb851045b90ca74423d27ee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
