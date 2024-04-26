@@ -196,6 +196,24 @@
       "parentUuid": "522f25fe_bda6317a",
       "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64aa150c_6d7f908d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870086
+      },
+      "writtenOn": "2024-04-26T07:37:29Z",
+      "side": 1,
+      "message": "I have checked Cts tests, the results are PASSED.",
+      "parentUuid": "0ea741fa_0d1f84f2",
+      "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
