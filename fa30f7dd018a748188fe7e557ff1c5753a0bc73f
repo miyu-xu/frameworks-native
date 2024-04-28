@@ -232,6 +232,24 @@
       "parentUuid": "0ea741fa_0d1f84f2",
       "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cbc6f01_d05379e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870086
+      },
+      "writtenOn": "2024-04-28T10:56:26Z",
+      "side": 1,
+      "message": "As for the RenderEngineTest, the theoretical upper bound of the blur radius is 47, however, due to rounding, the experimental upper bound is 46.",
+      "parentUuid": "4d6655c7_50f2c3f4",
+      "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
