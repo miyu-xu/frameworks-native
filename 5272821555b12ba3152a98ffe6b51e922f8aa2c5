@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d6bb63_a74a3704",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-29T19:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a57f0faa_d042181c",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 26
+      },
+      "revId": "5272821555b12ba3152a98ffe6b51e922f8aa2c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "132c799a_07469396",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "Yeah, devices could accidentally include them in PRODUCT_PACKAGES. I\u0027ll change them to not be installable next time I touch this",
       "parentUuid": "132c799a_07469396",
+      "revId": "5272821555b12ba3152a98ffe6b51e922f8aa2c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32123b51_1f69e1f4",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-29T19:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c833aa6c_915d8e3a",
       "revId": "5272821555b12ba3152a98ffe6b51e922f8aa2c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
