@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "375b270d_0bd1713e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659539
+      },
+      "writtenOn": "2024-04-29T10:30:45Z",
+      "side": 1,
+      "message": "Fix confirmed in internal branch, cherry-picking them to fix aosp targets runs.",
+      "revId": "ac98de2f8e8796ba0a3b1290e04e71ccee24bf8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
