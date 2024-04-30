@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c5263bb_7e6f6995",
+        "filename": "opengl/libs/EGL/egl_display.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-04-30T01:07:50Z",
+      "side": 1,
+      "message": "shouldnt actually need to capture this -- it\u0027s really global!",
+      "revId": "fb9c2cf672882026724ade0deb98d33f8318d470",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
