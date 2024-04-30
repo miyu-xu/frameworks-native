@@ -54,6 +54,10 @@ public:
                                         uint32_t flags = 0,
                                         wp<DeathRecipient>* outRecipient = nullptr);
 
+    virtual status_t addFrozenStateChangeCallback(const sp<FrozenStateChangeCallback>& callback);
+
+    virtual status_t removeFrozenStateChangeCallback(const wp<FrozenStateChangeCallback>& callback);
+
     virtual void* attachObject(const void* objectID, void* object, void* cleanupCookie,
                                object_cleanup_func func) final;
     virtual void*       findObject(const void* objectID) const final;
