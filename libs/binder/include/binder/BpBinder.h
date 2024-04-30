@@ -70,6 +70,13 @@ public:
                                         uint32_t flags = 0,
                                         wp<DeathRecipient>* outRecipient = nullptr);
 
+    virtual status_t addFreezeStateChangeCallback(const sp<FreezeStateChangeCallback>& recipient);
+
+    virtual status_t removeFreezeStateChangeCallback(
+            const wp<FreezeStateChangeCallback>& recipient);
+
+    void onFreezeStateChange(bool isFrozen);
+
     virtual void* attachObject(const void* objectID, void* object, void* cleanupCookie,
                                object_cleanup_func func) final;
     virtual void*       findObject(const void* objectID) const final;
@@ -199,6 +206,9 @@ private:
             volatile int32_t    mAlive;
             volatile int32_t    mObitsSent;
             Vector<Obituary>*   mObituaries;
+            Vector<wp<FreezeStateChangeCallback>>* mFreezeStateChangeCallbacks;
+            volatile int32_t mFrozen;
+            volatile int32_t mInitialFreezeStateReceived;
             ObjectManager       mObjects;
     mutable String16            mDescriptorCache;
             int32_t             mTrackedUid;

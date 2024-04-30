@@ -240,6 +240,8 @@ BpBinder::BpBinder(Handle&& handle)
         mAlive(true),
         mObitsSent(false),
         mObituaries(nullptr),
+        mFrozen(false),
+        mInitialFreezeStateReceived(false),
         mDescriptorCache(kDescriptorUninit),
         mTrackedUid(-1) {
     extendObjectLifetime(OBJECT_LIFETIME_WEAK);
@@ -553,6 +555,138 @@ void BpBinder::sendObituary()
 
         delete obits;
     }
+}
+
+status_t BpBinder::addFreezeStateChangeCallback(const sp<FreezeStateChangeCallback>& callback) {
+    if (isRpcBinder()) {
+        if (rpcSession()->getMaxIncomingThreads() < 1) {
+            ALOGE("Cannot register a DeathRecipient without any incoming threads. Need to set max "
+                  "incoming threads to a value greater than 0 before calling linkToDeath.");
+            return INVALID_OPERATION;
+        }
+    } else if constexpr (!kEnableKernelIpc) {
+        LOG_ALWAYS_FATAL("Binder kernel driver disabled at build time");
+        return INVALID_OPERATION;
+    } else {
+        if (ProcessState::self()->getThreadPoolMaxTotalThreadCount() == 0) {
+            ALOGW("addFreezeStateChangeCallback on %s but there are no threads "
+                  "(yet?) listening "
+                  "to incoming transactions. See ProcessState::startThreadPool and "
+                  "ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the "
+                  "binder threadpool before other initialization steps.",
+                  String8(getInterfaceDescriptor()).c_str());
+        }
+    }
+
+    LOG_ALWAYS_FATAL_IF(callback == nullptr,
+                        "addFreezeStateChangeCallback(): callback must be non-NULL");
+
+    {
+        RpcMutexUniqueLock _l(mLock);
+        if (!mFreezeStateChangeCallbacks) {
+            mFreezeStateChangeCallbacks = new Vector<wp<FreezeStateChangeCallback>>;
+            if (!mFreezeStateChangeCallbacks) {
+                return NO_MEMORY;
+            }
+            ALOGV("Requesting freeze notification: %p handle %d\n", this, binderHandle());
+            if (!isRpcBinder()) {
+                if constexpr (kEnableKernelIpc) {
+                    getWeakRefs()->incWeak(this);
+                    IPCThreadState* self = IPCThreadState::self();
+                    status_t status = self->addFreezeStateChangeCallback(binderHandle(), this);
+                    if (status != NO_ERROR) {
+                        delete mFreezeStateChangeCallbacks;
+                        mFreezeStateChangeCallbacks = nullptr;
+                        // Avoids logspam if kernel does not support freeze
+                        // notification.
+                        if (status != INVALID_OPERATION) {
+                            ALOGE("IPCThreadState.addFreezeStateChangeCallback "
+                                  "failed with %s. %p handle %d\n",
+                                  statusToString(status).c_str(), this, binderHandle());
+                        }
+                        return status;
+                    }
+                    self->flushCommands();
+                }
+            }
+        }
+        ssize_t res = mFreezeStateChangeCallbacks->add(callback);
+        if (mInitialFreezeStateReceived) {
+            callback->onStateChange(wp<BpBinder>::fromExisting(this), mFrozen);
+        }
+        return res >= (ssize_t)NO_ERROR ? (status_t)NO_ERROR : res;
+    }
+}
+
+status_t BpBinder::removeFreezeStateChangeCallback(const wp<FreezeStateChangeCallback>& callback) {
+    if (!kEnableKernelIpc && !isRpcBinder()) {
+        LOG_ALWAYS_FATAL("Binder kernel driver disabled at build time");
+        return INVALID_OPERATION;
+    }
+
+    RpcMutexUniqueLock _l(mLock);
+
+    const size_t N = mFreezeStateChangeCallbacks ? mFreezeStateChangeCallbacks->size() : 0;
+    for (size_t i = 0; i < N; i++) {
+        if (mFreezeStateChangeCallbacks->itemAt(i) == callback) {
+            mFreezeStateChangeCallbacks->removeAt(i);
+            if (mFreezeStateChangeCallbacks->size() == 0) {
+                ALOGV("Clearing freeze notification: %p handle %d\n", this, binderHandle());
+                if (!isRpcBinder()) {
+                    if constexpr (kEnableKernelIpc) {
+                        IPCThreadState* self = IPCThreadState::self();
+                        status_t status =
+                                self->removeFreezeStateChangeCallback(binderHandle(), this);
+                        if (status != NO_ERROR) {
+                            ALOGE("Unexpected error from "
+                                  "IPCThreadState.removeFreezeStateChangeCallback: %s. "
+                                  "%p handle %d\n",
+                                  statusToString(status).c_str(), this, binderHandle());
+                        }
+                        self->flushCommands();
+                    }
+                    mInitialFreezeStateReceived = false;
+                }
+                delete mFreezeStateChangeCallbacks;
+                mFreezeStateChangeCallbacks = nullptr;
+            }
+            return NO_ERROR;
+        }
+    }
+
+    return NAME_NOT_FOUND;
+}
+
+void BpBinder::onFreezeStateChange(bool isFrozen) {
+    if (!kEnableKernelIpc && !isRpcBinder()) {
+        LOG_ALWAYS_FATAL("Binder kernel driver disabled at build time");
+        return;
+    }
+    ALOGV("Sending freeze state change notification for proxy %p handle %d, isFrozen=%s\n", this,
+          binderHandle(), isFrozen ? "true" : "false");
+
+    mLock.lock();
+    bool stateChanged;
+    if (!mInitialFreezeStateReceived) {
+        // Had not received the initial state. no_state -> has_a_state
+        // is considered a change.
+        stateChanged = true;
+    } else {
+        stateChanged = mFrozen != isFrozen;
+    }
+    if (mFreezeStateChangeCallbacks != nullptr && stateChanged) {
+        mFrozen = isFrozen;
+        mInitialFreezeStateReceived = true;
+        const size_t N = mFreezeStateChangeCallbacks->size();
+        for (size_t i = 0; i < N; i++) {
+            sp<FreezeStateChangeCallback> callback =
+                    mFreezeStateChangeCallbacks->itemAt(i).promote();
+            if (callback != nullptr) {
+                callback->onStateChange(wp<BpBinder>::fromExisting(this), isFrozen);
+            }
+        }
+    }
+    mLock.unlock();
 }
 
 void BpBinder::reportOneDeath(const Obituary& obit)
