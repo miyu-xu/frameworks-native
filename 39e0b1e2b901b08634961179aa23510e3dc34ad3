@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f96f312_2fa3a8e1",
+        "filename": "services/inputflinger/dispatcher/InputDispatcher.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1407716
+      },
+      "writtenOn": "2024-04-30T16:42:29Z",
+      "side": 1,
+      "message": "Hi chenxinyu7@,\n\nRather than skipping pokeUserActivity for certain keycodes in Dispatcher, I think we should rely on a signal from the policy instead, likely by introducing a new policy flag?\n\nLooks like @joseprio@google.com added this recently, so he might have ideas.",
+      "range": {
+        "startLine": 1757,
+        "startChar": 0,
+        "endLine": 1760,
+        "endChar": 9
+      },
+      "revId": "39e0b1e2b901b08634961179aa23510e3dc34ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
