@@ -25,6 +25,8 @@
 #include <sys/mman.h>
 #include <poll.h>
 
+#include "../binder_module.h"
+
 #define BINDER_DEV_NAME "/dev/binder"
 
 testing::Environment* binder_env;
@@ -337,6 +339,57 @@ TEST_F(BinderDriverInterfaceTest, RequestDeathNotification) {
         },
         .cmd3 = BC_DECREFS,
         .arg3 = 0,
+    };
+    struct {
+        uint32_t cmd0;
+        uint32_t cmd1;
+        binder_uintptr_t arg1;
+        uint32_t pad[16];
+    } __attribute__((packed)) br;
+    struct binder_write_read bwr = binder_write_read();
+
+    bwr.write_buffer = (uintptr_t)&bc;
+    bwr.write_size = sizeof(bc);
+    bwr.read_buffer = (uintptr_t)&br;
+    bwr.read_size = sizeof(br);
+
+    binderTestIoctl(BINDER_WRITE_READ, &bwr);
+    EXPECT_EQ(sizeof(bc), bwr.write_consumed);
+    EXPECT_EQ(sizeof(br) - sizeof(br.pad), bwr.read_consumed);
+    EXPECT_EQ(BR_NOOP, br.cmd0);
+    EXPECT_EQ(BR_CLEAR_DEATH_NOTIFICATION_DONE, br.cmd1);
+    EXPECT_EQ(cookie, br.arg1);
+    binderTestReadEmpty();
+}
+
+TEST_F(BinderDriverInterfaceTest, RequestFrozenNotification) {
+    binder_uintptr_t cookie = 1234;
+    struct {
+        uint32_t cmd0;
+        uint32_t arg0;
+        uint32_t cmd1;
+        struct binder_handle_cookie arg1;
+        uint32_t cmd2;
+        struct binder_handle_cookie arg2;
+        uint32_t cmd3;
+        uint32_t arg3;
+    } __attribute__((packed)) bc = {
+            .cmd0 = BC_INCREFS,
+            .arg0 = 0,
+            .cmd1 = BC_REQUEST_FREEZE_NOTIFICATION,
+            .arg1 =
+                    {
+                            .handle = 0,
+                            .cookie = cookie,
+                    },
+            .cmd2 = BC_CLEAR_FREEZE_NOTIFICATION,
+            .arg2 =
+                    {
+                            .handle = 0,
+                            .cookie = cookie,
+                    },
+            .cmd3 = BC_DECREFS,
+            .arg3 = 0,
     };
     struct {
         uint32_t cmd0;

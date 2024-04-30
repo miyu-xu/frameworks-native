@@ -127,6 +127,7 @@ cc_test {
         "libbase",
         "libbinder",
         "liblog",
+        "libprocessgroup",
         "libutils",
     ],
     static_libs: [
