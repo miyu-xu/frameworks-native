@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caced094_36055dd0",
+        "filename": "cmds/cmd/fuzzer/cmd_fuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-04-30T02:26:09Z",
+      "side": 1,
+      "message": "the current change will match \"-whatsHappening\", which is not what we want.\n\nsince argument is a std::string,  we could say \"argument \u003d\u003d \"-w\".",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "c98e3249a5c0cb8fae4c6aff00e3a0ac0c27c990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
