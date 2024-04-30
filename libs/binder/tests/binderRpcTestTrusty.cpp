@@ -45,7 +45,7 @@ std::unique_ptr<RpcTransportCtxFactory> BinderRpc::newFactory(RpcSecurity rpcSec
         case RpcSecurity::RAW:
             return RpcTransportCtxFactoryTipcTrusty::make();
         default:
-            LOG_ALWAYS_FATAL("Unknown RpcSecurity %d", rpcSecurity);
+            LOG_ALWAYS_FATAL("Unknown RpcSecurity %d", static_cast<int>(rpcSecurity));
     }
 }
 
