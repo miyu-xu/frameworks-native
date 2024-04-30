@@ -29,6 +29,7 @@
 // ---------------------------------------------------------------------------
 namespace android {
 
+class IPCThreadState;
 class RpcSession;
 class RpcState;
 namespace internal {
@@ -66,6 +67,14 @@ public:
                                                       void* cookie = nullptr, uint32_t flags = 0,
                                                       wp<DeathRecipient>* outRecipient = nullptr);
 
+    [[nodiscard]] virtual status_t addFrozenStateChangeCallback(
+            const wp<FrozenStateChangeCallback>& recipient);
+
+    [[nodiscard]] virtual status_t removeFrozenStateChangeCallback(
+            const wp<FrozenStateChangeCallback>& recipient);
+
+    void onFrozenStateChanged(bool isFrozen);
+
     LIBBINDER_EXPORTED virtual void* attachObject(const void* objectID, void* object,
                                                   void* cleanupCookie,
                                                   object_cleanup_func func) final;
@@ -75,7 +84,6 @@ public:
     LIBBINDER_EXPORTED sp<IBinder> lookupOrCreateWeak(const void* objectID,
                                                       IBinder::object_make_func make,
                                                       const void* makeArgs);
-
     LIBBINDER_EXPORTED virtual BpBinder* remoteBinder();
 
     LIBBINDER_EXPORTED void sendObituary();
@@ -192,6 +200,12 @@ private:
         uint32_t flags;
     };
 
+    struct FrozenStateChange {
+        bool isFrozen = false;
+        Vector<wp<FrozenStateChangeCallback>> callbacks;
+        bool initialStateReceived = false;
+    };
+
             void                reportOneDeath(const Obituary& obit);
             bool                isDescriptorCached() const;
 
@@ -199,6 +213,7 @@ private:
             volatile int32_t    mAlive;
             volatile int32_t    mObitsSent;
             Vector<Obituary>*   mObituaries;
+            FrozenStateChange* mFrozen;
             ObjectManager       mObjects;
     mutable String16            mDescriptorCache;
             int32_t             mTrackedUid;
