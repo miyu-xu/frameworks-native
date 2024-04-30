@@ -32,11 +32,58 @@ license {
     ],
 }
 
+cc_library_host_shared {
+    name: "libbinder_ndk_sdk",
+    // TODO: use defaults instead of copy-paste
+
+    recovery_available: true,
+    cmake_snapshot_supported: true,
+
+    export_include_dirs: [
+        "include_cpp",
+        "include_ndk",
+        "include_platform",
+    ],
+
+    cflags: [
+        "-DBINDER_ENABLE_LIBLOG_ASSERT",
+        "-DBINDER_DISABLE_NATIVE_HANDLE",
+        "-DBINDER_DISABLE_BLOB",
+        "-DBINDER_NO_LIBBASE",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+
+    srcs: [
+        "ibinder.cpp",
+        //"ibinder_jni.cpp",
+        "libbinder.cpp",
+        "parcel.cpp",
+        //"parcel_jni.cpp",
+        //"persistable_bundle.cpp",
+        //"process.cpp",
+        "stability.cpp",
+        "status.cpp",
+        //"service_manager.cpp",
+    ],
+
+    shared_libs: [
+        "libbinder_sdk",
+        "libutils_binder_sdk",
+    ],
+    header_libs: [
+        "libbinder_headers_base", // TODO: why not included via libbinder_sdk?
+        "liblog_stub",
+    ],
+}
+
 cc_library {
     name: "libbinder_ndk",
 
     host_supported: true,
     recovery_available: true,
+    cmake_snapshot_supported: false,
 
     llndk: {
         symbol_file: "libbinder_ndk.map.txt",
@@ -195,6 +242,7 @@ cc_library_headers {
     host_supported: true,
     // TODO(b/153609531): remove when no longer needed.
     native_bridge_supported: true,
+    cmake_snapshot_supported: true,
     target: {
         darwin: {
             enabled: false,
