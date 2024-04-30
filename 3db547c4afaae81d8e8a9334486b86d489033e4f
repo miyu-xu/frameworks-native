@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21543a1b_2888f000",
+        "filename": "services/inputflinger/reader/mapper/MultiTouchInputMapper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-04-30T17:20:32Z",
+      "side": 1,
+      "message": "technically, to preserve the old behaviour, we should use `clearLastMarkedBit` here.\n\nHowever, in practice i don\u0027t think this matters because there should not be duplicates.",
+      "range": {
+        "startLine": 147,
+        "startChar": 40,
+        "endLine": 147,
+        "endChar": 59
+      },
+      "revId": "3db547c4afaae81d8e8a9334486b86d489033e4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
