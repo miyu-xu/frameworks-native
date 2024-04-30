@@ -381,6 +381,9 @@ cc_test {
     static_libs: [
         "libbinder_rpc_single_threaded_no_kernel",
     ],
+    shared_libs: [
+        "libbinder_ndk",
+    ],
 }
 
 cc_binary {
@@ -486,6 +489,9 @@ cc_test {
     ],
     static_libs: [
         "libbinder_rpc_single_threaded_no_kernel",
+    ],
+    shared_libs: [
+        "libbinder_ndk",
     ],
 }
 
