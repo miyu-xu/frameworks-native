@@ -944,7 +944,7 @@ void Parcel::updateWorkSourceRequestHeaderPosition() const {
 
 #ifdef BINDER_WITH_KERNEL_IPC
 
-#if defined(__ANDROID__)
+#if defined(__ANDROID__) || defined(__Fuchsia__)
 
 #if defined(__ANDROID_VNDK__)
 constexpr int32_t kHeader = B_PACK_CHARS('V', 'N', 'D', 'R');
@@ -954,7 +954,7 @@ constexpr int32_t kHeader = B_PACK_CHARS('R', 'E', 'C', 'O');
 constexpr int32_t kHeader = B_PACK_CHARS('S', 'Y', 'S', 'T');
 #endif
 
-#else // ANDROID not defined
+#else // ANDROID or Fuchsia not defined
 
 // If kernel binder is used in new environments, we need to make sure it's separated
 // out and has a separate header.
