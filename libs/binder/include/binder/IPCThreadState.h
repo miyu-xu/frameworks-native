@@ -173,41 +173,42 @@ public:
             void                decWeakHandle(int32_t handle);
             status_t            attemptIncStrongHandle(int32_t handle);
     static  void                expungeHandle(int32_t handle, IBinder* binder);
-            status_t            requestDeathNotification(   int32_t handle,
-                                                            BpBinder* proxy); 
-            status_t            clearDeathNotification( int32_t handle,
-                                                        BpBinder* proxy); 
+    status_t requestDeathNotification(int32_t handle, BpBinder* proxy);
+    status_t clearDeathNotification(int32_t handle, BpBinder* proxy);
+    status_t addFreezeStateChangeCallback(int32_t handle, BpBinder* proxy);
+    status_t removeFreezeStateChangeCallback(int32_t handle, BpBinder* proxy);
 
-    static  void                shutdown();
+    static void shutdown();
 
     // Call this to disable switching threads to background scheduling when
     // receiving incoming IPC calls.  This is specifically here for the
     // Android system process, since it expects to have background apps calling
     // in to it but doesn't want to acquire locks in its services while in
     // the background.
-    static  void                disableBackgroundScheduling(bool disable);
-            bool                backgroundSchedulingDisabled();
+    static void disableBackgroundScheduling(bool disable);
+    bool backgroundSchedulingDisabled();
 
-            // Call blocks until the number of executing binder threads is less than
-            // the maximum number of binder threads threads allowed for this process.
-            void                blockUntilThreadAvailable();
+    // Call blocks until the number of executing binder threads is less than
+    // the maximum number of binder threads threads allowed for this process.
+    void blockUntilThreadAvailable();
 
-            // Service manager registration
-            void                setTheContextObject(const sp<BBinder>& obj);
+    // Service manager registration
+    void setTheContextObject(const sp<BBinder>& obj);
 
-            // WARNING: DO NOT USE THIS API
-            //
-            // Returns a pointer to the stack from the last time a transaction
-            // was initiated by the kernel. Used to compare when making nested
-            // calls between multiple different transports.
-            const void*         getServingStackPointer() const;
+    // WARNING: DO NOT USE THIS API
+    //
+    // Returns a pointer to the stack from the last time a transaction
+    // was initiated by the kernel. Used to compare when making nested
+    // calls between multiple different transports.
+    const void* getServingStackPointer() const;
 
-            // The work source represents the UID of the process we should attribute the transaction
-            // to. We use -1 to specify that the work source was not set using #setWorkSource.
-            //
-            // This constant needs to be kept in sync with Binder.UNSET_WORKSOURCE from the Java
-            // side.
-            static const int32_t kUnsetWorkSource = -1;
+    // The work source represents the UID of the process we should attribute the transaction
+    // to. We use -1 to specify that the work source was not set using #setWorkSource.
+    //
+    // This constant needs to be kept in sync with Binder.UNSET_WORKSOURCE from the Java
+    // side.
+    static const int32_t kUnsetWorkSource = -1;
+
 private:
                                 IPCThreadState();
                                 ~IPCThreadState();

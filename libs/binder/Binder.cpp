@@ -441,6 +441,16 @@ status_t BBinder::unlinkToDeath(
     return INVALID_OPERATION;
 }
 
+// NOLINTNEXTLINE(google-default-arguments)
+status_t BBinder::addFreezeStateChangeCallback(const sp<FreezeStateChangeCallback>&) {
+    return INVALID_OPERATION;
+}
+
+// NOLINTNEXTLINE(google-default-arguments)
+status_t BBinder::removeFreezeStateChangeCallback(const wp<FreezeStateChangeCallback>&) {
+    return INVALID_OPERATION;
+}
+
 status_t BBinder::dump(int /*fd*/, const Vector<String16>& /*args*/)
 {
     return NO_ERROR;
