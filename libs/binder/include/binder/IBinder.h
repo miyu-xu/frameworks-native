@@ -198,9 +198,14 @@ public:
         virtual void binderDied(const wp<IBinder>& who) = 0;
     };
 
-    #if defined(__clang__)
-    #pragma clang diagnostic pop
-    #endif
+    class FreezeStateChangeCallback : public virtual RefBase {
+    public:
+        virtual void onStateChange(const wp<IBinder>& who, bool is_frozen) = 0;
+    };
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
 
     /**
      * Register the @a recipient for a notification if this binder
@@ -248,6 +253,46 @@ public:
                                             void* cookie = nullptr,
                                             uint32_t flags = 0,
                                             wp<DeathRecipient>* outRecipient = nullptr) = 0;
+
+    /**
+     * addFreezeStateChangeCallback provides a callback mechanism to notify
+     * about process freeze/unfreeze events. Upon registration and any
+     * subsequent state changes, the callback is invoked with the latest process
+     * freeze state.
+     * If the listener process (the one using this API) is itself frozen, state
+     * change events might be combined into a single one with the latest freeze
+     * state. This single event would then be delivered when the listener
+     * process becomes unfrozen. Similarly, if an event happens before the
+     * previous event is consumed, they might be combined. This means the
+     * callback might not be called for every single state change, so don't rely
+     * on this API to count how many times the state has changed.
+     *
+     * @note When all references to the binder are dropped, the callback is
+     * automatically removed. So, you must hold onto a binder in order to
+     * receive notifications about it.
+     *
+     * @note You will only receive freeze notifications for remote binders, as
+     * local binders by definition can't be frozen without you being frozen as
+     * well. Trying to use this function on a local binder will result in an
+     * INVALID_OPERATION code being returned and nothing happening.
+     *
+     * @note This binder always holds a weak reference to the callback.
+     *
+     * @note You will only receive a weak reference to the binder object. You
+     * should not try to promote this to a strong reference. (Nor should you
+     * need to, as there is nothing useful you can directly do with it now that
+     * it has passed on.)
+     */
+    virtual status_t addFreezeStateChangeCallback(
+            const sp<FreezeStateChangeCallback>& callback) = 0;
+
+    /**
+     * Remove a previously registered freeze callback.
+     * The @a callback will no longer be called if this object
+     * changes its freeze state.
+     */
+    virtual status_t removeFreezeStateChangeCallback(
+            const wp<FreezeStateChangeCallback>& callback) = 0;
 
     virtual bool            checkSubclass(const void* subclassID) const;
 
