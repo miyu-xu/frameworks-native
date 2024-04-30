@@ -477,10 +477,12 @@ bool ProcessState::isThreadPoolStarted() const {
 #define DRIVER_FEATURES_PATH "/dev/binderfs/features/"
 bool ProcessState::isDriverFeatureEnabled(const DriverFeature feature) {
     static const char* const names[] = {
-        [static_cast<int>(DriverFeature::ONEWAY_SPAM_DETECTION)] =
-            DRIVER_FEATURES_PATH "oneway_spam_detection",
-        [static_cast<int>(DriverFeature::EXTENDED_ERROR)] =
-            DRIVER_FEATURES_PATH "extended_error",
+            [static_cast<int>(DriverFeature::ONEWAY_SPAM_DETECTION)] =
+                    DRIVER_FEATURES_PATH "oneway_spam_detection",
+            [static_cast<int>(DriverFeature::EXTENDED_ERROR)] =
+                    DRIVER_FEATURES_PATH "extended_error",
+            [static_cast<int>(DriverFeature::FREEZE_NOTIFICATION)] =
+                    DRIVER_FEATURES_PATH "freeze_notification",
     };
     int fd = open(names[static_cast<int>(feature)], O_RDONLY | O_CLOEXEC);
     char on;
