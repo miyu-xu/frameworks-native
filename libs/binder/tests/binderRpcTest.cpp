@@ -177,7 +177,7 @@ public:
 
             EXPECT_NE(nullptr, session);
             EXPECT_NE(nullptr, session->state());
-            EXPECT_EQ(0, session->state()->countBinders()) << (session->state()->dump(), "dump:");
+            EXPECT_EQ(0u, session->state()->countBinders()) << (session->state()->dump(), "dump:");
 
             wp<RpcSession> weakSession = session;
             session = nullptr;
@@ -235,7 +235,7 @@ static unique_fd connectToUnixBootstrap(const RpcTransportFd& transportFd) {
     if (binder::os::sendMessageOnSocket(transportFd, &iov, 1, &fds) < 0) {
         PLOGF("Failed sendMessageOnSocket");
     }
-    return std::move(sockClient);
+    return sockClient;
 }
 #endif // BINDER_RPC_TO_TRUSTY_TEST
 
@@ -623,7 +623,7 @@ TEST_P(BinderRpc, OnewayCallQueueing) {
     for (size_t i = 0; i + 1 < kNumQueued; i++) {
         int n;
         proc.rootIface->blockingRecvInt(&n);
-        EXPECT_EQ(n, i);
+        EXPECT_EQ(n, static_cast<ssize_t>(i));
     }
 
     saturateThreadPool(1 + kNumExtraServerThreads, proc.rootIface);
@@ -1384,7 +1384,7 @@ TEST(BinderRpc, Java) {
     auto binder = sm->checkService(String16("batteryproperties"));
     ASSERT_NE(nullptr, binder);
     auto descriptor = binder->getInterfaceDescriptor();
-    ASSERT_GE(descriptor.size(), 0);
+    ASSERT_GE(descriptor.size(), 0u);
     ASSERT_EQ(OK, binder->pingBinder());
 
     auto rpcServer = RpcServer::make();
