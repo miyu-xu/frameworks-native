@@ -16,6 +16,24 @@
       "message": "@smoreland@google.com: I\u0027m having a problem with this one - why binderRpcTestNoKernel attempts to run all tests (with and without kernel)?",
       "revId": "0ef47fabfe0b5dd98c200a277db02f4dff56505e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f95e5b_2f4f0326",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-01T00:52:28Z",
+      "side": 1,
+      "message": "it should fail on ToT if so, so it must be skipping it somewhere?",
+      "parentUuid": "699aecb4_faeaba1a",
+      "revId": "0ef47fabfe0b5dd98c200a277db02f4dff56505e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
