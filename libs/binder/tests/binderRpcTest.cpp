@@ -1299,7 +1299,7 @@ static std::vector<BinderRpc::ParamType> getBinderRpcParams() {
                     .clientVersion = RPC_WIRE_PROTOCOL_VERSION,
                     .serverVersion = RPC_WIRE_PROTOCOL_VERSION,
                     .singleThreaded = false,
-                    .noKernel = false,
+                    .noKernel = !kEnableKernelIpc,
             });
         }
     }
