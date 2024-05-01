@@ -1140,7 +1140,7 @@ static std::vector<BinderRpc::ParamType> getTrustyBinderRpcParams() {
                     .clientVersion = clientVersion,
                     .serverVersion = serverVersion,
                     .singleThreaded = true,
-                    .noKernel = true,
+                    .noKernel = !kEnableKernelIpc,
             });
         }
     }
@@ -1300,7 +1300,7 @@ static std::vector<BinderRpc::ParamType> getBinderRpcParams() {
                     .clientVersion = RPC_WIRE_PROTOCOL_VERSION,
                     .serverVersion = RPC_WIRE_PROTOCOL_VERSION,
                     .singleThreaded = false,
-                    .noKernel = false,
+                    .noKernel = !kEnableKernelIpc,
             });
         }
     }
