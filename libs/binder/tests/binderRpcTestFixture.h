@@ -144,6 +144,9 @@ public:
         if (socketType() == SocketType::UNIX_BOOTSTRAP && rpcSecurity() == RpcSecurity::TLS) {
             GTEST_SKIP() << "Unix bootstrap not supported over a TLS transport";
         }
+        if (!noKernel() && !kEnableKernelIpc) {
+            GTEST_SKIP() << "Binder IPC tests disabled";
+        }
     }
 
     BinderRpcTestProcessSession createRpcTestSocketServerProcess(const BinderRpcOptions& options) {
