@@ -72,6 +72,14 @@ static inline std::vector<RpcSecurity> RpcSecurityValues() {
     return {RpcSecurity::RAW, RpcSecurity::TLS};
 }
 
+static inline std::vector<bool> noKernelValues() {
+    std::vector<bool> values = {true};
+    if (kEnableKernelIpc) {
+        values.push_back(false);
+    }
+    return values;
+}
+
 static inline bool hasExperimentalRpc() {
 #ifdef BINDER_RPC_TO_TRUSTY_TEST
     // Trusty services do not support the experimental version,
