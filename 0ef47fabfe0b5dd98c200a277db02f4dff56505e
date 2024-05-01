@@ -34,6 +34,24 @@
       "parentUuid": "699aecb4_faeaba1a",
       "revId": "0ef47fabfe0b5dd98c200a277db02f4dff56505e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b2f5002_acea4dbf",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-01T17:52:28Z",
+      "side": 1,
+      "message": "They don\u0027t - just checked and `atest --host binderRpcTestNoKernel` runs (and passes) e.g. `ThreadPoolGreaterThanEqualRequested/unix_domain_socket_raw_clientV0_serverV0_multi_threaded_with_kernel`\n\nI think the problem is these tests were never run in environment completely without kernel support (i.e. not even kernel related symbols like service manager). Let me propose a fix for this.",
+      "parentUuid": "27f95e5b_2f4f0326",
+      "revId": "0ef47fabfe0b5dd98c200a277db02f4dff56505e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
