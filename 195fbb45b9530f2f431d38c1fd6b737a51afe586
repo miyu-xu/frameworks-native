@@ -16,6 +16,24 @@
       "message": "Can you add these warnings to our Android.bp, so we catch them in the future as well?",
       "revId": "195fbb45b9530f2f431d38c1fd6b737a51afe586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec662d2_ea6edd32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-01T16:32:45Z",
+      "side": 1,
+      "message": "Added then to tests Android.bp and had to fix a couple more there.\n\nFor the warnings in main library Android.bp, it\u0027s the same problem as with the other change - adding these warnings to cflags here doesn\u0027t trip Android build.",
+      "parentUuid": "72468f11_e7658328",
+      "revId": "195fbb45b9530f2f431d38c1fd6b737a51afe586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
