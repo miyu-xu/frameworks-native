@@ -347,8 +347,10 @@ ServiceManager::~ServiceManager() {
     }
 }
 
-Status ServiceManager::getService(const std::string& name, sp<IBinder>* outBinder) {
-    *outBinder = tryGetService(name, true);
+Status ServiceManager::getService(const std::string& name, os::Service* outService) {
+    sp<IBinder> outBinder = tryGetService(name, true);
+    // TODO(b//338541373): Make a RemoteService if accessor is used.
+    *outService = os::Service::make<os::Service::Tag::binder>(outBinder);
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }

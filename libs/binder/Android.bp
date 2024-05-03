@@ -605,6 +605,8 @@ filegroup {
         "aidl/android/os/IClientCallback.aidl",
         "aidl/android/os/IServiceCallback.aidl",
         "aidl/android/os/IServiceManager.aidl",
+        "aidl/android/os/RemoteService.aidl",
+        "aidl/android/os/Service.aidl",
         "aidl/android/os/ServiceDebugInfo.aidl",
     ],
     path: "aidl",
