@@ -143,34 +143,34 @@ void RpcServer::setSupportedFileDescriptorTransportModes(
 
 void RpcServer::setRootObject(const sp<IBinder>& binder) {
     RpcMutexLockGuard _l(mLock);
-    mRootObjectFactory = nullptr;
+    mRootObjectFactory.reset();
     mRootObjectWeak = mRootObject = binder;
 }
 
 void RpcServer::setRootObjectWeak(const wp<IBinder>& binder) {
     RpcMutexLockGuard _l(mLock);
     mRootObject.clear();
-    mRootObjectFactory = nullptr;
+    mRootObjectFactory.reset();
     mRootObjectWeak = binder;
 }
 void RpcServer::setPerSessionRootObject(
-        std::function<sp<IBinder>(wp<RpcSession> session, const void*, size_t)>&& makeObject) {
+        binder::function_ref<sp<IBinder>(wp<RpcSession> session, const void*, size_t)> makeObject) {
     RpcMutexLockGuard _l(mLock);
     mRootObject.clear();
     mRootObjectWeak.clear();
-    mRootObjectFactory = std::move(makeObject);
+    mRootObjectFactory = makeObject;
 }
 
-void RpcServer::setConnectionFilter(std::function<bool(const void*, size_t)>&& filter) {
+void RpcServer::setConnectionFilter(binder::function_ref<bool(const void*, size_t)> filter) {
     RpcMutexLockGuard _l(mLock);
     LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
-    mConnectionFilter = std::move(filter);
+    mConnectionFilter = filter;
 }
 
-void RpcServer::setServerSocketModifier(std::function<void(borrowed_fd)>&& modifier) {
+void RpcServer::setServerSocketModifier(binder::function_ref<void(borrowed_fd)> modifier) {
     RpcMutexLockGuard _l(mLock);
     LOG_ALWAYS_FATAL_IF(mServer.fd.ok(), "Already started");
-    mServerSocketModifier = std::move(modifier);
+    mServerSocketModifier = modifier;
 }
 
 sp<IBinder> RpcServer::getRootObject() {
@@ -242,7 +242,7 @@ void RpcServer::join() {
     {
         RpcMutexLockGuard _l(mLock);
         LOG_ALWAYS_FATAL_IF(!mServer.fd.ok(), "RpcServer must be setup to join.");
-        LOG_ALWAYS_FATAL_IF(mAcceptFn == nullptr, "RpcServer must have an accept() function");
+        LOG_ALWAYS_FATAL_IF(!mAcceptFn.has_value(), "RpcServer must have an accept() function");
         LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
         mJoinThreadRunning = true;
         mShutdownTrigger = FdTrigger::make();
@@ -256,7 +256,7 @@ void RpcServer::join() {
         socklen_t addrLen = addr.size();
 
         RpcTransportFd clientSocket;
-        if ((status = mAcceptFn(*this, &clientSocket)) != OK) {
+        if ((status = mAcceptFn.value()(*this, &clientSocket)) != OK) {
             if (status == DEAD_OBJECT)
                 break;
             else
@@ -271,7 +271,7 @@ void RpcServer::join() {
             continue;
         }
 
-        if (mConnectionFilter != nullptr && !mConnectionFilter(addr.data(), addrLen)) {
+        if (!mConnectionFilter(addr.data(), addrLen)) {
             ALOGE("Dropped client connection fd %d", clientSocket.fd.get());
             continue;
         }
@@ -370,7 +370,7 @@ size_t RpcServer::numUninitializedSessions() {
 void RpcServer::establishConnection(
         sp<RpcServer>&& server, RpcTransportFd clientFd, std::array<uint8_t, kRpcAddressSize> addr,
         size_t addrLen,
-        std::function<void(sp<RpcSession>&&, RpcSession::PreJoinSetupResult&&)>&& joinFn) {
+        binder::function_ref<void(sp<RpcSession>&&, RpcSession::PreJoinSetupResult&&)> joinFn) {
     // mShutdownTrigger can only be cleared once connection threads have joined.
     // It must be set before this thread is started
     LOG_ALWAYS_FATAL_IF(server->mShutdownTrigger == nullptr);
@@ -512,9 +512,9 @@ void RpcServer::establishConnection(
 
             // if null, falls back to server root
             sp<IBinder> sessionSpecificRoot;
-            if (server->mRootObjectFactory != nullptr) {
-                sessionSpecificRoot =
-                        server->mRootObjectFactory(wp<RpcSession>(session), addr.data(), addrLen);
+            if (server->mRootObjectFactory.has_value()) {
+                sessionSpecificRoot = server->mRootObjectFactory.value()(wp<RpcSession>(session),
+                                                                         addr.data(), addrLen);
                 if (sessionSpecificRoot == nullptr) {
                     ALOGE("Warning: server returned null from root object factory");
                 }
@@ -583,9 +583,7 @@ status_t RpcServer::setupSocketServer(const RpcSocketAddress& addr) {
 
     {
         RpcMutexLockGuard _l(mLock);
-        if (mServerSocketModifier != nullptr) {
-            mServerSocketModifier(socket_fd);
-        }
+        mServerSocketModifier(socket_fd);
     }
 
     if (0 != TEMP_FAILURE_RETRY(bind(socket_fd.get(), addr.addr(), addr.addrSize()))) {
@@ -645,14 +643,15 @@ unique_fd RpcServer::releaseServer() {
 }
 
 status_t RpcServer::setupExternalServer(
-        unique_fd serverFd, std::function<status_t(const RpcServer&, RpcTransportFd*)>&& acceptFn) {
+        unique_fd serverFd,
+        binder::function_ref<status_t(const RpcServer&, RpcTransportFd*)> acceptFn) {
     RpcMutexLockGuard _l(mLock);
     if (mServer.fd.ok()) {
         ALOGE("Each RpcServer can only have one server.");
         return INVALID_OPERATION;
     }
     mServer = std::move(serverFd);
-    mAcceptFn = std::move(acceptFn);
+    mAcceptFn = acceptFn;
     return OK;
 }
 
