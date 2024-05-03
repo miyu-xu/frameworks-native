@@ -191,7 +191,7 @@ private:
     [[nodiscard]] status_t rpcSend(
             const sp<RpcSession::RpcConnection>& connection, const sp<RpcSession>& session,
             const char* what, iovec* iovs, int niovs,
-            const std::optional<binder::impl::SmallFunction<status_t()>>& altPoll,
+            const std::optional<binder::function_ref<status_t()>>& altPoll,
             const std::vector<std::variant<binder::unique_fd, binder::borrowed_fd>>* ancillaryFds =
                     nullptr);
     [[nodiscard]] status_t rpcRec(const sp<RpcSession::RpcConnection>& connection,

@@ -146,10 +146,11 @@ public:
      *
      * For convenience, if 'fd' is -1, 'request' will be called.
      *
-     * For future compatibility, 'request' should not reference any stack data.
+     * For future compatibility, 'request' must be valid for the lifetime of
+     * the RpcSession.
      */
-    [[nodiscard]] LIBBINDER_EXPORTED status_t
-    setupPreconnectedClient(binder::unique_fd fd, std::function<binder::unique_fd()>&& request);
+    [[nodiscard]] LIBBINDER_EXPORTED status_t setupPreconnectedClient(
+            binder::unique_fd fd, binder::function_ref<binder::unique_fd()> request);
 
     /**
      * For debugging!
@@ -286,8 +287,8 @@ private:
     static void join(sp<RpcSession>&& session, PreJoinSetupResult&& result);
 
     [[nodiscard]] status_t setupClient(
-            const std::function<status_t(const std::vector<uint8_t>& sessionId, bool incoming)>&
-                    connectAndInit);
+            const binder::function_ref<status_t(const std::vector<uint8_t>& sessionId,
+                                                bool incoming)>& connectAndInit);
     [[nodiscard]] status_t setupSocketClient(const RpcSocketAddress& address);
     [[nodiscard]] status_t setupOneSocketConnection(const RpcSocketAddress& address,
                                                     const std::vector<uint8_t>& sessionId,

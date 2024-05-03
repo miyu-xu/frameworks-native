@@ -27,7 +27,7 @@ using android::binder::unique_fd;
 
 sp<RpcSession> RpcTrustyConnectWithSessionInitializer(
         const char* device, const char* port,
-        std::function<void(sp<RpcSession>&)> sessionInitializer) {
+        binder::function_ref<void(sp<RpcSession>&)> sessionInitializer) {
     auto session = RpcSession::make(RpcTransportCtxFactoryTipcAndroid::make());
     // using the callback to initialize the session
     sessionInitializer(session);
