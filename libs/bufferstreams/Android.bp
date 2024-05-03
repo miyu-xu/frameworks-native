@@ -19,7 +19,6 @@ package {
 aconfig_declarations {
     name: "bufferstreams_flags",
     package: "com.android.graphics.bufferstreams.flags",
-    container: "system",
     srcs: [
         "aconfig/bufferstreams_flags.aconfig",
     ],
