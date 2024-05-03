@@ -1,5 +1,4 @@
 package: "com.android.input.flags"
-container: "system"
 
 flag {
   name: "enable_outbound_event_verification"
