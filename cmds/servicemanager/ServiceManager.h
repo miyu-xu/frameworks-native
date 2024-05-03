@@ -27,6 +27,7 @@ namespace android {
 using os::ConnectionInfo;
 using os::IClientCallback;
 using os::IServiceCallback;
+using os::Service;
 using os::ServiceDebugInfo;
 
 class ServiceManager : public os::BnServiceManager, public IBinder::DeathRecipient {
@@ -35,7 +36,7 @@ public:
     ~ServiceManager();
 
     // getService will try to start any services it cannot find
-    binder::Status getService(const std::string& name, sp<IBinder>* outBinder) override;
+    binder::Status getService(const std::string& name, std::optional<Service>* outService) override;
     binder::Status checkService(const std::string& name, sp<IBinder>* outBinder) override;
     binder::Status addService(const std::string& name, const sp<IBinder>& binder,
                               bool allowIsolated, int32_t dumpPriority) override;
