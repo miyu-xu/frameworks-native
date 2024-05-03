@@ -76,7 +76,7 @@ public:
 
     status_t interruptableWriteFully(
             FdTrigger* fdTrigger, iovec* iovs, int niovs,
-            const std::optional<SmallFunction<status_t()>>& altPoll,
+            const std::optional<binder::function_ref<status_t()>>& altPoll,
             const std::vector<std::variant<unique_fd, borrowed_fd>>* ancillaryFds) override {
         auto writeFn = [&](iovec* iovs, size_t niovs) -> ssize_t {
             // TODO: send ancillaryFds. For now, we just abort if anyone tries
@@ -93,7 +93,7 @@ public:
 
     status_t interruptableReadFully(
             FdTrigger* fdTrigger, iovec* iovs, int niovs,
-            const std::optional<SmallFunction<status_t()>>& altPoll,
+            const std::optional<binder::function_ref<status_t()>>& altPoll,
             std::vector<std::variant<unique_fd, borrowed_fd>>* /*ancillaryFds*/) override {
         auto readFn = [&](iovec* iovs, size_t niovs) -> ssize_t {
             // Fill the read buffer at most once per readFn call, then try to
