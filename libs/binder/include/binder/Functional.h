@@ -17,9 +17,23 @@
 #pragma once
 
 #include <functional>
-#include <memory>
+#include <optional>
 
 namespace android::binder::impl {
+
+template <typename F>
+struct scope_guard {
+    std::optional<F> f;
+    ~scope_guard() {
+        if (f.has_value()) std::move(f.value())();
+    }
+    void release() { f.reset(); }
+};
+
+template <typename F>
+scope_guard<F> make_scope_guard(F f) {
+    return scope_guard<F>{.f = std::make_optional(std::move(f))};
+}
 
 template <typename F>
 constexpr void assert_small_callable() {
@@ -30,12 +44,6 @@ constexpr void assert_small_callable() {
     static_assert(sizeof(F) <= kFunctionBufferSize,
                   "Supplied callable is larger than std::function optimization buffer. "
                   "Try using std::ref, but make sure lambda lives long enough to be called.");
-}
-
-template <typename F>
-std::unique_ptr<void, std::function<void(void*)>> make_scope_guard(F&& f) {
-    assert_small_callable<decltype(std::bind(f))>();
-    return {reinterpret_cast<void*>(true), std::bind(f)};
 }
 
 template <typename T>
