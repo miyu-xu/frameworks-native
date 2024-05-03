@@ -232,6 +232,29 @@ static std::vector<std::string> getVintfUpdatableNames(const std::string& apexNa
     return names;
 }
 
+static std::optional<std::string> getVintfAccessorName(const std::string& name) {
+    AidlName aname;
+    if (!AidlName::fill(name, &aname)) return std::nullopt;
+
+    std::optional<vintf::Accessor> accessor;
+    forEachManifest([&](const ManifestWithDescription& mwd) {
+        mwd.manifest->forEachInstance([&](const auto& manifestInstance) {
+            if (manifestInstance.format() != vintf::HalFormat::AIDL) return true;
+            if (manifestInstance.package() != aname.package) return true;
+            if (manifestInstance.interface() != aname.iface) return true;
+            if (manifestInstance.instance() != aname.instance) return true;
+            accessor = manifestInstance.accessor();
+            return false; // break (libvintf uses opposite convention)
+        });
+        return false; // continue
+    });
+    if (accessor.has_value()) {
+        return accessor->name;
+    } else {
+        return std::nullopt;
+    }
+}
+
 static std::optional<ConnectionInfo> getVintfConnectionInfo(const std::string& name) {
     AidlName aname;
     if (!AidlName::fill(name, &aname)) return std::nullopt;
@@ -347,8 +370,20 @@ ServiceManager::~ServiceManager() {
     }
 }
 
-Status ServiceManager::getService(const std::string& name, sp<IBinder>* outBinder) {
-    *outBinder = tryGetService(name, true);
+Status ServiceManager::getService(const std::string& name, os::Service* outService) {
+    std::optional<std::string> accessorName;
+#ifndef VENDORSERVICEMANAGER
+    accessorName = getVintfAccessorName(name);
+#endif
+    if (accessorName.has_value()) {
+        LOG(WARNING) << "aaaaa A service is being accessed through an accessor: " << name << ":"
+                     << *accessorName;
+        *outService =
+                os::Service::make<os::Service::Tag::accessor>(tryGetService(*accessorName, true));
+    } else {
+        LOG(WARNING) << "aaaaa A service without an accessor: " << name;
+        *outService = os::Service::make<os::Service::Tag::binder>(tryGetService(name, true));
+    }
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }

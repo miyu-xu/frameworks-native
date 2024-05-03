@@ -602,12 +602,29 @@ filegroup {
     name: "libbinder_aidl",
     srcs: [
         "aidl/android/os/ConnectionInfo.aidl",
+        "aidl/android/os/IAccessor.aidl",
         "aidl/android/os/IClientCallback.aidl",
         "aidl/android/os/IServiceCallback.aidl",
         "aidl/android/os/IServiceManager.aidl",
+        "aidl/android/os/Service.aidl",
         "aidl/android/os/ServiceDebugInfo.aidl",
     ],
     path: "aidl",
+}
+
+aidl_interface {
+    name: "android.os.accessor",
+    srcs: [":libbinder_aidl"],
+    unstable: true,
+    backend: {
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+                "com.android.compos",
+            ],
+        },
+    },
 }
 
 aidl_interface {
