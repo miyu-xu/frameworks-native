@@ -602,9 +602,12 @@ filegroup {
     name: "libbinder_aidl",
     srcs: [
         "aidl/android/os/ConnectionInfo.aidl",
+        "aidl/android/os/IAccessor.aidl",
         "aidl/android/os/IClientCallback.aidl",
         "aidl/android/os/IServiceCallback.aidl",
         "aidl/android/os/IServiceManager.aidl",
+        "aidl/android/os/RemoteService.aidl",
+        "aidl/android/os/Service.aidl",
         "aidl/android/os/ServiceDebugInfo.aidl",
     ],
     path: "aidl",
