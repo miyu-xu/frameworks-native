@@ -22,6 +22,30 @@
       },
       "revId": "26620a62ebf3dd901f5d33e65c57c98414a11df9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a47c67e9_483850d2",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-03T19:54:49Z",
+      "side": 1,
+      "message": "Yeah... Maybe that\u0027s not helpful here. Yes, it might have received a wake, but it definitely received an unrecoverable error, and that makes the wake kind of unimportant.",
+      "parentUuid": "55ddc03e_4494e5c3",
+      "range": {
+        "startLine": 197,
+        "startChar": 38,
+        "endLine": 198,
+        "endChar": 25
+      },
+      "revId": "26620a62ebf3dd901f5d33e65c57c98414a11df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
