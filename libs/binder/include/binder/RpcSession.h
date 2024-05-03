@@ -36,6 +36,7 @@ class RpcSocketAddress;
 class RpcState;
 class RpcTransport;
 class FdTrigger;
+class ServiceManagerShim;
 
 constexpr uint32_t RPC_WIRE_PROTOCOL_VERSION_NEXT = 2;
 constexpr uint32_t RPC_WIRE_PROTOCOL_VERSION_EXPERIMENTAL = 0xF0000000;
@@ -225,6 +226,7 @@ private:
     friend RpcServer;
     friend RpcServerTrusty;
     friend RpcState;
+    friend ServiceManagerShim;
     explicit RpcSession(std::unique_ptr<RpcTransportCtx> ctx);
 
     static constexpr size_t kDefaultMaxOutgoingConnections = 10;
@@ -302,6 +304,7 @@ private:
                                     const wp<RpcSession::EventListener>& eventListener,
                                     const std::vector<uint8_t>& sessionId,
                                     const sp<IBinder>& sessionSpecificRoot);
+    void setSessionSpecificRoot(const sp<IBinder>& sessionSpecificRoot);
     sp<RpcConnection> assignIncomingConnectionToThisThread(
             std::unique_ptr<RpcTransport> rpcTransport);
     [[nodiscard]] bool removeIncomingConnection(const sp<RpcConnection>& connection);

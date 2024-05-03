@@ -797,8 +797,12 @@ bool RpcSession::setForServer(const wp<RpcServer>& server, const wp<EventListene
     mId = sessionId;
     mForServer = server;
     mEventListener = eventListener;
-    mSessionSpecificRootObject = sessionSpecificRoot;
+    setSessionSpecificRoot(sessionSpecificRoot);
     return true;
+}
+
+void RpcSession::setSessionSpecificRoot(const sp<IBinder>& sessionSpecificRoot) {
+    mSessionSpecificRootObject = sessionSpecificRoot;
 }
 
 sp<RpcSession::RpcConnection> RpcSession::assignIncomingConnectionToThisThread(
