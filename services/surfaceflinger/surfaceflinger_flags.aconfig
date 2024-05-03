@@ -1,5 +1,4 @@
 package: "com.android.graphics.surfaceflinger.flags"
-container: "system"
 
 flag {
   name: "misc1"
