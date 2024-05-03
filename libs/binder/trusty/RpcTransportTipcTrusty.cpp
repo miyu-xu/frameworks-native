@@ -49,7 +49,7 @@ public:
 
     status_t interruptableWriteFully(
             FdTrigger* /*fdTrigger*/, iovec* iovs, int niovs,
-            const std::optional<SmallFunction<status_t()>>& /*altPoll*/,
+            const std::optional<binder::function_ref<status_t()>>& /*altPoll*/,
             const std::vector<std::variant<unique_fd, borrowed_fd>>* ancillaryFds) override {
         if (niovs < 0) {
             return BAD_VALUE;
@@ -118,7 +118,7 @@ public:
 
     status_t interruptableReadFully(
             FdTrigger* /*fdTrigger*/, iovec* iovs, int niovs,
-            const std::optional<SmallFunction<status_t()>>& /*altPoll*/,
+            const std::optional<binder::function_ref<status_t()>>& /*altPoll*/,
             std::vector<std::variant<unique_fd, borrowed_fd>>* ancillaryFds) override {
         if (niovs < 0) {
             return BAD_VALUE;

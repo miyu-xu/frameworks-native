@@ -359,7 +359,7 @@ RpcState::CommandData::CommandData(size_t size) : mSize(size) {
 
 status_t RpcState::rpcSend(const sp<RpcSession::RpcConnection>& connection,
                            const sp<RpcSession>& session, const char* what, iovec* iovs, int niovs,
-                           const std::optional<SmallFunction<status_t()>>& altPoll,
+                           const std::optional<binder::function_ref<status_t()>>& altPoll,
                            const std::vector<std::variant<unique_fd, borrowed_fd>>* ancillaryFds) {
     for (int i = 0; i < niovs; i++) {
         LOG_RPC_DETAIL("Sending %s (part %d of %d) on RpcTransport %p: %s",

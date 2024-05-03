@@ -19,6 +19,66 @@
 #include <functional>
 #include <optional>
 
+namespace android::binder {
+
+// Copy of `android::base::function_ref`, see it for documentation.
+template <class Signature>
+class function_ref;
+
+template <class Ret, class... Args>
+class function_ref<Ret(Args...)> final {
+public:
+    constexpr function_ref() noexcept = delete;
+    constexpr function_ref(const function_ref& other) noexcept = default;
+    constexpr function_ref& operator=(const function_ref&) noexcept = default;
+
+    using RawFunc = Ret(Args...);
+
+    function_ref(RawFunc* funcptr) noexcept { *this = funcptr; }
+
+    template <class Callable,
+              class = std::enable_if_t<
+                      std::is_invocable_r_v<Ret, Callable, Args...> &&
+                      !std::is_same_v<function_ref, std::remove_reference_t<Callable>>>>
+    function_ref(Callable&& c) noexcept {
+        *this = std::forward<Callable>(c);
+    }
+
+    function_ref& operator=(RawFunc* funcptr) noexcept {
+        mTypeErasedFunction = [](uintptr_t funcptr, Args... args) -> Ret {
+            return (reinterpret_cast<RawFunc*>(funcptr))(std::forward<Args>(args)...);
+        };
+        mCallable = reinterpret_cast<uintptr_t>(funcptr);
+        return *this;
+    }
+
+    template <class Callable,
+              class = std::enable_if_t<
+                      std::is_invocable_r_v<Ret, Callable, Args...> &&
+                      !std::is_same_v<function_ref, std::remove_reference_t<Callable>>>>
+    function_ref& operator=(Callable&& c) noexcept {
+        mTypeErasedFunction = [](uintptr_t callable, Args... args) -> Ret {
+            // Generate a lambda that remembers the type of the passed
+            // |Callable|.
+            return (*reinterpret_cast<std::remove_reference_t<Callable>*>(callable))(
+                    std::forward<Args>(args)...);
+        };
+        mCallable = reinterpret_cast<uintptr_t>(&c);
+        return *this;
+    }
+
+    Ret operator()(Args... args) const {
+        return mTypeErasedFunction(mCallable, std::forward<Args>(args)...);
+    }
+
+private:
+    using TypeErasedFunc = Ret(uintptr_t, Args...);
+    TypeErasedFunc* mTypeErasedFunction;
+    uintptr_t mCallable;
+};
+
+} // namespace android::binder
+
 namespace android::binder::impl {
 
 template <typename F>
@@ -34,25 +94,5 @@ template <typename F>
 scope_guard<F> make_scope_guard(F f) {
     return scope_guard<F>{.f = std::make_optional(std::move(f))};
 }
-
-template <typename F>
-constexpr void assert_small_callable() {
-    // While this buffer (std::function::__func::__buf_) is an implementation detail generally not
-    // accessible to users, it's a good bet to assume its size to be around 3 pointers.
-    constexpr size_t kFunctionBufferSize = 3 * sizeof(void*);
-
-    static_assert(sizeof(F) <= kFunctionBufferSize,
-                  "Supplied callable is larger than std::function optimization buffer. "
-                  "Try using std::ref, but make sure lambda lives long enough to be called.");
-}
-
-template <typename T>
-class SmallFunction : public std::function<T> {
-public:
-    template <typename F>
-    SmallFunction(F&& f) : std::function<T>(f) {
-        assert_small_callable<F>();
-    }
-};
 
 } // namespace android::binder::impl
