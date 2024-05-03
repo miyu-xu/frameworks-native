@@ -771,9 +771,39 @@ filegroup {
         "aidl/android/os/IClientCallback.aidl",
         "aidl/android/os/IServiceCallback.aidl",
         "aidl/android/os/IServiceManager.aidl",
+        "aidl/android/os/Service.aidl",
         "aidl/android/os/ServiceDebugInfo.aidl",
+        ":libbinder_accessor_aidl",
     ],
     path: "aidl",
+}
+
+filegroup {
+    name: "libbinder_accessor_aidl",
+    srcs: [
+        "aidl/android/os/IAccessor.aidl",
+    ],
+    path: "aidl",
+}
+
+// TODO(b/353492849): Make this interface private to libbinder.
+aidl_interface {
+    name: "android.os.accessor",
+    srcs: [":libbinder_accessor_aidl"],
+    unstable: true,
+    backend: {
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+    },
+    visibility: [
+        ":__subpackages__",
+        "//system/tools/aidl:__subpackages__",
+        "//packages/modules/Virtualization:__subpackages__",
+    ],
 }
 
 aidl_interface {
