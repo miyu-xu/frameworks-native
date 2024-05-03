@@ -23,6 +23,7 @@
 
 #include <sstream>
 
+#include <binder/Functional.h>
 #include <log/log.h>
 
 #include "FdUtils.h"

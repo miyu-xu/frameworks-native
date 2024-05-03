@@ -177,9 +177,12 @@ public:
      * - an integer representing the size in bytes of that structure. The callable should
      *   validate the size, then cast the type-erased pointer to a pointer to the actual type of the
      *   address, e.g., const void* to const sockaddr_vm*.
+     *
+     * The callable must be valid for the lifetime of the RpcServer.
      */
     LIBBINDER_EXPORTED void setPerSessionRootObject(
-            std::function<sp<IBinder>(wp<RpcSession> session, const void*, size_t)>&& object);
+            binder::function_ref<sp<IBinder>(wp<RpcSession> session, const void*, size_t)>
+                    makeObject);
     LIBBINDER_EXPORTED sp<IBinder> getRootObject();
 
     /**
@@ -189,16 +192,21 @@ public:
      * connection and returns false if the connection should be dropped.
      * See the description of setPerSessionRootObject() for details about
      * the callable's arguments.
+     *
+     * The callable must be valid for the lifetime of the RpcServer.
      */
-    LIBBINDER_EXPORTED void setConnectionFilter(std::function<bool(const void*, size_t)>&& filter);
+    LIBBINDER_EXPORTED void setConnectionFilter(
+            binder::function_ref<bool(const void*, size_t)> filter);
 
     /**
      * Set optional modifier of each newly created server socket.
      *
      * The only argument is a successfully created file descriptor, not bound to an address yet.
+     *
+     * The callable must be valid for the lifetime of the RpcServer.
      */
     LIBBINDER_EXPORTED void setServerSocketModifier(
-            std::function<void(binder::borrowed_fd)>&& modifier);
+            binder::function_ref<void(binder::borrowed_fd)> modifier);
 
     /**
      * See RpcTransportCtx::getCertificate
@@ -255,13 +263,13 @@ private:
 
     status_t setupExternalServer(
             binder::unique_fd serverFd,
-            std::function<status_t(const RpcServer&, RpcTransportFd*)>&& acceptFn);
+            binder::function_ref<status_t(const RpcServer&, RpcTransportFd*)> acceptFn);
 
     static constexpr size_t kRpcAddressSize = 128;
     static void establishConnection(
             sp<RpcServer>&& server, RpcTransportFd clientFd,
             std::array<uint8_t, kRpcAddressSize> addr, size_t addrLen,
-            std::function<void(sp<RpcSession>&&, RpcSession::PreJoinSetupResult&&)>&& joinFn);
+            binder::function_ref<void(sp<RpcSession>&&, RpcSession::PreJoinSetupResult&&)> joinFn);
     static status_t acceptSocketConnection(const RpcServer& server, RpcTransportFd* out);
     static status_t recvmsgSocketConnection(const RpcServer& server, RpcTransportFd* out);
 
@@ -282,13 +290,18 @@ private:
 
     sp<IBinder> mRootObject;
     wp<IBinder> mRootObjectWeak;
-    std::function<sp<IBinder>(wp<RpcSession>, const void*, size_t)> mRootObjectFactory;
-    std::function<bool(const void*, size_t)> mConnectionFilter;
-    std::function<void(binder::borrowed_fd)> mServerSocketModifier;
+    std::optional<binder::function_ref<sp<IBinder>(wp<RpcSession>, const void*, size_t)>>
+            mRootObjectFactory;
+    binder::function_ref<bool(const void*, size_t)> mConnectionFilter = [](const void*, size_t) {
+        return true;
+    };
+    binder::function_ref<void(binder::borrowed_fd)> mServerSocketModifier =
+            [](binder::borrowed_fd) {};
     std::map<std::vector<uint8_t>, sp<RpcSession>> mSessions;
     std::unique_ptr<FdTrigger> mShutdownTrigger;
     RpcConditionVariable mShutdownCv;
-    std::function<status_t(const RpcServer& server, RpcTransportFd* out)> mAcceptFn;
+    std::optional<binder::function_ref<status_t(const RpcServer& server, RpcTransportFd* out)>>
+            mAcceptFn;
 };
 
 } // namespace android
