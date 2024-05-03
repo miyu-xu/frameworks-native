@@ -1,5 +1,4 @@
 package: "com.android.graphics.libgui.flags"
-container: "system"
 
 flag {
   name: "bq_setframerate"
