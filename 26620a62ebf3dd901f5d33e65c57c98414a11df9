@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ddc03e_4494e5c3",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-05-03T19:52:52Z",
+      "side": 1,
+      "message": "I know it\u0027s technically correct, but this is kinda hilarious after just saying this is an unrecoverable error condition",
+      "range": {
+        "startLine": 197,
+        "startChar": 38,
+        "endLine": 198,
+        "endChar": 25
+      },
+      "revId": "26620a62ebf3dd901f5d33e65c57c98414a11df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
