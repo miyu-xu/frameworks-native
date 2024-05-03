@@ -15,6 +15,9 @@
  */
 #include "BackendUnifiedServiceManager.h"
 
+#include <android/os/IAccessor.h>
+#include <binder/RpcSession.h>
+
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
 #endif
@@ -22,6 +25,7 @@
 namespace android {
 
 using AidlServiceManager = android::os::IServiceManager;
+using IAccessor = android::os::IAccessor;
 
 BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
       : mTheRealServiceManager(impl) {}
@@ -30,8 +34,37 @@ sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
     return mTheRealServiceManager;
 }
 binder::Status BackendUnifiedServiceManager::getService(const ::std::string& name,
-                                                        sp<IBinder>* _aidl_return) {
-    return mTheRealServiceManager->getService(name, _aidl_return);
+                                                        os::Service* _out) {
+    os::Service service;
+    binder::Status status = mTheRealServiceManager->getService(name, &service);
+    switch (service.getTag()) {
+        case os::Service::Tag::binder:
+            *_out = service;
+            break;
+        case os::Service::Tag::accessor:
+            sp<IBinder> out = service.get<os::Service::Tag::accessor>();
+            sp<IAccessor> accessor = interface_cast<IAccessor>(out);
+            if (accessor == nullptr) {
+                ALOGE("Service#accessor doesn't have accessor. VM is maybe starting...");
+                return status;
+            }
+            auto request = [=] {
+                os::ParcelFileDescriptor fd;
+                binder::Status ret = accessor->connectToRpcSession(&fd);
+                if (ret.isOk()) {
+                    return base::unique_fd(fd.release());
+                } else {
+                    ALOGE("Failed to connect to RpcSession: %s", ret.toString8().c_str());
+                    return base::unique_fd(-1);
+                }
+            };
+            auto session = RpcSession::make();
+            session->setupPreconnectedClient(base::unique_fd{}, request);
+            session->setSessionSpecificRoot(out);
+            *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
+            break;
+    }
+    return status;
 }
 binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
                                                           sp<IBinder>* _aidl_return) {
