@@ -318,30 +318,33 @@ android::status_t RecordedTransaction::writeChunk(borrowed_fd fd, uint32_t chunk
     }
     ChunkDescriptor descriptor = {.chunkType = chunkType,
                                   .dataSize = static_cast<uint32_t>(byteCount)};
-    // Prepare Chunk content as byte *
-    const std::byte* descriptorBytes = reinterpret_cast<const std::byte*>(&descriptor);
-    const std::byte* dataBytes = reinterpret_cast<const std::byte*>(data);
 
     // Add Chunk to intermediate buffer, except checksum
-    std::vector<std::byte> buffer;
-    buffer.insert(buffer.end(), descriptorBytes, descriptorBytes + sizeof(ChunkDescriptor));
-    buffer.insert(buffer.end(), dataBytes, dataBytes + byteCount);
-    std::byte zero{0};
-    buffer.insert(buffer.end(), PADDING8(byteCount), zero);
+    size_t bufferSize = sizeof(ChunkDescriptor) + byteCount + PADDING8(byteCount) +
+            sizeof(transaction_checksum_t);
+    std::unique_ptr<uint8_t[]> buffer(new uint8_t[bufferSize]);
+    uint8_t* writeCursor = buffer.get();
+    memcpy(writeCursor, &descriptor, sizeof(ChunkDescriptor));
+    writeCursor += sizeof(ChunkDescriptor);
+    memcpy(writeCursor, data, byteCount);
+    writeCursor += byteCount;
+    // buffer is initialized to zero, so padding is already handled.
+    writeCursor += PADDING8(byteCount);
 
     // Calculate checksum from buffer
-    transaction_checksum_t* checksumData = reinterpret_cast<transaction_checksum_t*>(buffer.data());
+    transaction_checksum_t* checksumCursor =
+            reinterpret_cast<transaction_checksum_t*>(buffer.get());
     transaction_checksum_t checksumValue = 0;
-    for (size_t idx = 0; idx < (buffer.size() / sizeof(transaction_checksum_t)); idx++) {
-        checksumValue ^= checksumData[idx];
+    while (checksumCursor < (void*)writeCursor) {
+        checksumValue ^= *checksumCursor;
+        checksumCursor += 1;
     }
 
     // Write checksum to buffer
-    std::byte* checksumBytes = reinterpret_cast<std::byte*>(&checksumValue);
-    buffer.insert(buffer.end(), checksumBytes, checksumBytes + sizeof(transaction_checksum_t));
+    memcpy(writeCursor, &checksumValue, sizeof(transaction_checksum_t));
 
     // Write buffer to file
-    if (!WriteFully(fd, buffer.data(), buffer.size())) {
+    if (!WriteFully(fd, buffer.get(), bufferSize)) {
         ALOGE("Failed to write chunk fd %d", fd.get());
         return UNKNOWN_ERROR;
     }
