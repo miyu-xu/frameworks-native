@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53588691_f35a54ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976388
+      },
+      "writtenOn": "2024-05-04T10:25:41Z",
+      "side": 1,
+      "message": "@vishnun@google.com Can you take a look at it,from Transform#dtdx() and Transform#dtdy() ,we know that mMatrix[1][0] is dtdx ,and mMatrix[0][1] is dtdy.\n```\nfloat Transform::dtdx() const {\n    return mMatrix[1][0];\n}\n\nfloat Transform::dtdy() const {\n    return mMatrix[0][1];\n}\n```\n\nFrom Transform#set(a,b,c,d), we know that,b is dtdx,c is dtdy\n```\nvoid Transform::set(float a, float b, float c, float d) {\n    mat33\u0026 M(mMatrix);\n    M[0][0] \u003d a;    M[1][0] \u003d b;\n    M[0][1] \u003d c;    M[1][1] \u003d d;\n    M[0][2] \u003d 0;    M[1][2] \u003d 0;\n    mType \u003d UNKNOWN_TYPE;\n}\n```",
+      "revId": "4d3ea37fde4be90e44841cbacee4e79bb7a5d376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
