@@ -256,13 +256,9 @@ private:
             sp<IBinder> ref;
             CommandData data;
             std::vector<std::variant<binder::unique_fd, binder::borrowed_fd>> ancillaryFds;
-            uint64_t asyncNumber = 0;
-
-            bool operator<(const AsyncTodo& o) const {
-                return asyncNumber > /* !!! */ o.asyncNumber;
-            }
         };
-        std::priority_queue<AsyncTodo> asyncTodo;
+        // Map key is `RpcWireTransaction::asyncNumber`.
+        std::map<uint64_t, AsyncTodo> asyncTodo;
 
         //
         // CASE B - remote binder, we are sending transactions to
