@@ -111,6 +111,30 @@
       },
       "revId": "87531ed4bd487f8d44d41865e4a98f8c32659786",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a74b6f_2b927b71",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6176,
+      "author": {
+        "id": 1976388
+      },
+      "writtenOn": "2024-05-04T11:52:24Z",
+      "side": 1,
+      "message": "Yes, I agree, thank you, I will abandon this CL",
+      "parentUuid": "b1f9dd39_e8e07883",
+      "range": {
+        "startLine": 6176,
+        "startChar": 46,
+        "endLine": 6176,
+        "endChar": 96
+      },
+      "revId": "87531ed4bd487f8d44d41865e4a98f8c32659786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
