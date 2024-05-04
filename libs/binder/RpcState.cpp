@@ -915,12 +915,13 @@ processTransactInternalTailCall:
             } else if (transaction->asyncNumber != it->second.asyncNumber) {
                 // we need to process some other asynchronous transaction
                 // first
-                it->second.asyncTodo.push(BinderNode::AsyncTodo{
-                        .ref = target,
-                        .data = std::move(transactionData),
-                        .ancillaryFds = std::move(ancillaryFds),
-                        .asyncNumber = transaction->asyncNumber,
-                });
+                it->second.asyncTodo.insert_or_assign(transaction->asyncNumber,
+                                                      BinderNode::AsyncTodo{
+                                                              .ref = target,
+                                                              .data = std::move(transactionData),
+                                                              .ancillaryFds =
+                                                                      std::move(ancillaryFds),
+                                                      });
 
                 size_t numPending = it->second.asyncTodo.size();
                 LOG_RPC_DETAIL("Enqueuing %" PRIu64 " on %" PRIu64 " (%zu pending)",
@@ -1067,23 +1068,18 @@ processTransactInternalTailCall:
                 return DEAD_OBJECT;
             }
 
-            if (it->second.asyncTodo.size() != 0 &&
-                it->second.asyncTodo.top().asyncNumber == it->second.asyncNumber) {
+            auto todoIt = it->second.asyncTodo.begin();
+            if (todoIt != it->second.asyncTodo.end() && todoIt->first == it->second.asyncNumber) {
                 LOG_RPC_DETAIL("Found next async transaction %" PRIu64 " on %" PRIu64,
                                it->second.asyncNumber, addr);
 
-                // justification for const_cast (consider avoiding priority_queue):
-                // - AsyncTodo operator< doesn't depend on 'data' or 'ref' objects
-                // - gotta go fast
-                auto& todo = const_cast<BinderNode::AsyncTodo&>(it->second.asyncTodo.top());
-
                 // reset up arguments
-                transactionData = std::move(todo.data);
-                ancillaryFds = std::move(todo.ancillaryFds);
-                LOG_ALWAYS_FATAL_IF(target != todo.ref,
+                transactionData = std::move(todoIt->second.data);
+                ancillaryFds = std::move(todoIt->second.ancillaryFds);
+                LOG_ALWAYS_FATAL_IF(target != todoIt->second.ref,
                                     "async list should be associated with a binder");
 
-                it->second.asyncTodo.pop();
+                it->second.asyncTodo.erase(todoIt->first);
                 goto processTransactInternalTailCall;
             }
         }
