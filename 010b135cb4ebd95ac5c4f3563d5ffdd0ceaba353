@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c77a3661_ccc3c58c",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-06T21:39:09Z",
+      "side": 1,
+      "message": "I don\u0027t think that makes the pointer to `ASurfaceControl*` nullable though, it\u0027ll just have a pointer to memory that should not be read per the length specified by `outASurfaceControlsSize`.\n\nRust has a similar concept IIRC.\n\nAfter all, what should we pass to the release function if it requires non-null `ASurfaceControl *` but this getter \"doesn\u0027t provide\" that?",
+      "parentUuid": "a5b600aa_83b239bb",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4dadfae_6a084bda",
         "filename": "include/android/surface_control.h",
         "patchSetId": 5
@@ -90,6 +108,24 @@
       "side": 1,
       "message": "\u003e A user probably can\u0027t reset/remove the callback by setting NULL here?\n\nNo, the callbacks are additive. They are removed when the framework invokes the callback.\n\n\u003e The callback will only be called once (allowing us to clean up state directly at the end of the callback)?\n\nCorrect they\u0027re only invoked once\n\n\u003e Will calling this function again overwrite or extend an existing callback?\n\nI suppose extend, although \"extend\" implies some ordering preservation which we don\u0027t guarantee.\n\n\u003e If the transaction is abandoned before being committed, the callback will not be called and the user should clean up any allocs/references in context themselves.\n\nIf by abandoned you mean that ASurfaceTransaction_apply() is not called prior to ASurfaceTransaction_delete(), then yes the transaction never made it downstream to the compositor so no callbacks are dispatched.",
       "parentUuid": "e4dadfae_6a084bda",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237f5d7a_e984933d",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-06T21:39:09Z",
+      "side": 1,
+      "message": "Thanks. Looking at how I originally implemented and documented these functions, it matches all that:\n\nhttps://github.com/rust-mobile/ndk/compare/master...surface-control#diff-967b72d1cb290ca6b626c9b8fd8f65902956105be0b5497e06c7784bfa58dd14\n\nI should add a note about not preserving submission ordering.\n\nMight be great to have the NDK documentation updated to reflect this kind of information (in a consistent, clear manner across all callbacks).",
+      "parentUuid": "9d63ff57_2b23d416",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
