@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e64b3ce_e1578ead",
+        "filename": "libs/nativewindow/include/android/native_window.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-06T09:49:35Z",
+      "side": 1,
+      "message": "Did we ever discuss the naming wrt the `_`, compared to `ANativeWindowTransform`?",
+      "revId": "64b19f9cf2572ac6acef5e851267b09116d43bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
