@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b98a526_871e73e8",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-05-06T20:31:55Z",
+      "side": 1,
+      "message": "the implementation of this never returns NULL",
+      "range": {
+        "startLine": 113,
+        "startChar": 21,
+        "endLine": 113,
+        "endChar": 30
+      },
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c51def9d_01de440e",
         "filename": "include/android/surface_control.h",
         "patchSetId": 5
@@ -20,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5b600aa_83b239bb",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-05-06T20:31:55Z",
+      "side": 1,
+      "message": "It\u0027s a little weird. If there\u0027s no surfacecontrols updated, then I think we still allocate a zero-length array of ASurfaceControl*s. It\u0027s not really NULL, but it\u0027s also not something a caller can dereference either.",
+      "parentUuid": "c51def9d_01de440e",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4dadfae_6a084bda",
         "filename": "include/android/surface_control.h",
         "patchSetId": 5
@@ -31,6 +72,24 @@
       "writtenOn": "2024-05-06T10:07:50Z",
       "side": 1,
       "message": "I started documenting semantics of NDK callbacks in https://github.com/rust-mobile/ndk/issues/464 and https://issuetracker.google.com/issues/318944941. I recall figuring out what these callbacks do, but haven\u0027t yet added the results to the table and will likely have to extract that again from my Rust wrapping and experiments with this API. Particularly:\n\n1. A user probably can\u0027t reset/remove the callback by setting `NULL` here?\n2. The callback will only be called _once_ (allowing us to clean up state directly at the end of the callback)?\n3. Will calling this function again _overwrite_ or _extend_ an existing callback?\n4. If the transaction is abandoned before being committed, the callback will not be called and the user should clean up any allocs/references in `context` themselves.\n\nSame question for the other callback.",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d63ff57_2b23d416",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-05-06T20:31:55Z",
+      "side": 1,
+      "message": "\u003e A user probably can\u0027t reset/remove the callback by setting NULL here?\n\nNo, the callbacks are additive. They are removed when the framework invokes the callback.\n\n\u003e The callback will only be called once (allowing us to clean up state directly at the end of the callback)?\n\nCorrect they\u0027re only invoked once\n\n\u003e Will calling this function again overwrite or extend an existing callback?\n\nI suppose extend, although \"extend\" implies some ordering preservation which we don\u0027t guarantee.\n\n\u003e If the transaction is abandoned before being committed, the callback will not be called and the user should clean up any allocs/references in context themselves.\n\nIf by abandoned you mean that ASurfaceTransaction_apply() is not called prior to ASurfaceTransaction_delete(), then yes the transaction never made it downstream to the compositor so no callbacks are dispatched.",
+      "parentUuid": "e4dadfae_6a084bda",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +142,24 @@
       "writtenOn": "2024-05-06T10:12:29Z",
       "side": 1,
       "message": "Before I forget: in https://android-review.googlesource.com/c/platform/frameworks/native/+/2897863 (when can I rebase that on this, btw?) marks this and the metadata argument below as `const`. Is that something we should do?",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "413f6426_cab61fd5",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-05-06T20:31:55Z",
+      "side": 1,
+      "message": "maybe? I don\u0027t think we mutate any of this metadata.",
+      "parentUuid": "c6f2f568_7baf0c35",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
