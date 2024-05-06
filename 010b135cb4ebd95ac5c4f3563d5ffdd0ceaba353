@@ -50,6 +50,23 @@
       "message": "Does `clang` have any special annotations saying that this cannot be `NULL` if `count \u003e 0`?",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f2f568_7baf0c35",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-06T10:12:29Z",
+      "side": 1,
+      "message": "Before I forget: in https://android-review.googlesource.com/c/platform/frameworks/native/+/2897863 (when can I rebase that on this, btw?) marks this and the metadata argument below as `const`. Is that something we should do?",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
