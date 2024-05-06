@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c2bdf7e_c80896f2",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-06T19:42:32Z",
+      "side": 1,
+      "message": "No. The nullability annotations really aren\u0027t that smart. They\u0027re better than nothing, but only just.",
+      "parentUuid": "8c25c6d2_76c73917",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6f2f568_7baf0c35",
         "filename": "include/android/surface_control.h",
         "patchSetId": 5
