@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "751edb3f_1d0e5aa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-07T17:38:40Z",
+      "side": 1,
+      "message": "Overriding empty lint -1",
+      "revId": "26620a62ebf3dd901f5d33e65c57c98414a11df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "55ddc03e_4494e5c3",
         "filename": "include/android/looper.h",
         "patchSetId": 1
