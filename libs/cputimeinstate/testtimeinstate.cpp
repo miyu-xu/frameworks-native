@@ -576,7 +576,7 @@ uint64_t timeNanos() {
 
 // Keeps CPU busy with some number crunching
 void useCpu() {
-    long sum = 0;
+    long sum __attribute__((unused)) = 0;
     for (int i = 0; i < 100000; i++) {
         sum *= i;
     }
