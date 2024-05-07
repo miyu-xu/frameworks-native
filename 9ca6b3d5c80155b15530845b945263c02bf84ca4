@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5eb829c_3d349e92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-07T17:41:11Z",
+      "side": 1,
+      "message": "Treehugger says:\n\n\u003e Change 3073883 has finished a presubmit run which includes this change. You can use Change 3073883 to submit this change.\n\nThat change says it can\u0027t merge because this one has PV-2. Bypassing.",
+      "revId": "9ca6b3d5c80155b15530845b945263c02bf84ca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
