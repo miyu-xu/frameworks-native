@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bafc7ff3_159d5a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-07T22:18:56Z",
+      "side": 1,
+      "message": "Ah, the merge conflict is because jreck is working on the nullability stuff in parallel, which has merged internally, but the AOSP side hasn\u0027t been submitted yet. Probably not a good idea for me to be working on this at the same time since we\u0027re just going to cause headaches for each other 😊 lmk when you\u0027re done with that CL and I\u0027ll pick this back up.",
+      "revId": "64b19f9cf2572ac6acef5e851267b09116d43bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e64b3ce_e1578ead",
