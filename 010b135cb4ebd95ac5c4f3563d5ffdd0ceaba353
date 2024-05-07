@@ -121,6 +121,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfa9e47e_f9a9ef73",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-05-07T23:52:36Z",
+      "side": 1,
+      "message": "\u003e outASurfaceControls\u0027s annotations should probably all be _Nonnull\n\nThat unfortunately doesn\u0027t work because clang doesn\u0027t know they are outputs, so if specified as _Nonnull they\u0027d be \"forced\" to be non-null when the function is called.\n\n\u003e Shouldn\u0027t this be: `ASurfaceControl* _Nullable* _Nullable* _Nonnull outASurfaceControls`\n\nIsn\u0027t that what it is in the current patch set?",
+      "parentUuid": "2ab8f3f1_5e13a120",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4dadfae_6a084bda",
         "filename": "include/android/surface_control.h",
         "patchSetId": 5
