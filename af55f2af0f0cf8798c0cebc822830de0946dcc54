@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304ec82a_657a2825",
+        "filename": "libs/cputimeinstate/testtimeinstate.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-05-07T23:24:04Z",
+      "side": 1,
+      "message": "I fret telling it is unused will result in the compiler optimizing it away.\nUsually I\u0027d do something like make sum a static global variable.",
+      "revId": "af55f2af0f0cf8798c0cebc822830de0946dcc54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
