@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ce7953_9e6a4c33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-05-07T18:17:31Z",
+      "side": 1,
+      "message": "Nit: \"HWC virtual display\" to clarify that GPU virtual displays are not affected.",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f81761c6_1dccbfd0",
@@ -14,6 +37,24 @@
       "writtenOn": "2024-05-07T14:58:30Z",
       "side": 1,
       "message": "A couple of nits, but overall lgtm. I also want to see what @domlaskowski@google.com thinks.",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2294eb_96f66415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-05-07T18:17:31Z",
+      "side": 1,
+      "message": "HWC virtual displays behaved this way prior to I3488927d9a854a42432b7575d0daa14e61677c3e, so LGTM.",
+      "parentUuid": "f81761c6_1dccbfd0",
       "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +89,29 @@
       "writtenOn": "2024-05-07T14:58:30Z",
       "side": 1,
       "message": "Braces",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e270c655_a6a69850",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-05-07T18:17:31Z",
+      "side": 1,
+      "message": "I think `loadDisplayCapabilities` would be a more precise name.",
+      "range": {
+        "startLine": 279,
+        "startChar": 9,
+        "endLine": 279,
+        "endChar": 27
+      },
       "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
