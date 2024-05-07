@@ -250,6 +250,24 @@
       "parentUuid": "4d6655c7_50f2c3f4",
       "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7142ffb6_89279203",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-05-07T19:54:12Z",
+      "side": 1,
+      "message": "Thanks all.\n\nGiven that the CTS passes and that skia\u0027s builtin gaussian blur causes the RenderEngine test to fail (plus Robin\u0027s feedback that the view blur should approximately be the same as the window blur), I think we can go ahead with this CL + test fix.",
+      "parentUuid": "0cbc6f01_d05379e2",
+      "revId": "fa30f7dd018a748188fe7e557ff1c5753a0bc73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
