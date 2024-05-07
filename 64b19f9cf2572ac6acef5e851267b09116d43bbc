@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f433b6bf_8c53df85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-07T23:26:24Z",
+      "side": 1,
+      "message": "jreck points out that I\u0027m reading it wrong. His change _is_ in AOSP, my CL is just out of date. Will upload the resolved change in a few.",
+      "parentUuid": "bafc7ff3_159d5a56",
+      "revId": "64b19f9cf2572ac6acef5e851267b09116d43bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e64b3ce_e1578ead",
