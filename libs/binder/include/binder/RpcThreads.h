@@ -18,9 +18,9 @@
 #include <pthread.h>
 
 #include <condition_variable>
-#include <functional>
-#include <memory>
 #include <thread>
+
+#include <log/log.h>
 
 namespace android {
 
@@ -68,31 +68,47 @@ public:
 class RpcMaybeThread {
 public:
     RpcMaybeThread() = default;
+    RpcMaybeThread(const RpcMaybeThread&) = delete;
+
+    RpcMaybeThread& operator=(RpcMaybeThread&& other) noexcept {
+        LOG_ALWAYS_FATAL_IF(mThunk != nullptr, "RpcMaybeThread destroyed before join was called");
+
+        mThunk = other.mThunk;
+        mCall = other.mCall;
+        mDelete = other.mDelete;
+
+        other.mThunk = nullptr;
+        other.mCall = nullptr;
+        other.mDelete = nullptr;
+
+        return *this;
+    }
+
+    RpcMaybeThread(RpcMaybeThread&& other) noexcept { *this = std::move(other); }
 
     template <typename Function, typename... Args>
     RpcMaybeThread(Function&& f, Args&&... args) {
-        // std::function requires a copy-constructible closure,
-        // so we need to wrap both the function and its arguments
-        // in a shared pointer that std::function can copy internally
-        struct Vars {
-            std::decay_t<Function> f;
-            std::tuple<std::decay_t<Args>...> args;
+        auto thunk = new auto([f = std::move(f), ... args = std::move(args)]() mutable {
+            std::move(f)(std::move(args)...);
+        });
+        mThunk = (void*)thunk;
+        mCall = [](void* t) { (*(decltype(thunk))t)(); };
+        mDelete = [](void* t) { delete (decltype(thunk))t; };
+    }
 
-            explicit Vars(Function&& f, Args&&... args)
-                  : f(std::move(f)), args(std::move(args)...) {}
-        };
-        auto vars = std::make_shared<Vars>(std::forward<Function>(f), std::forward<Args>(args)...);
-        mFunc = [vars]() { std::apply(std::move(vars->f), std::move(vars->args)); };
+    ~RpcMaybeThread() {
+        LOG_ALWAYS_FATAL_IF(mThunk != nullptr, "RpcMaybeThread destroyed before join was called");
     }
 
     void join() {
-        if (mFunc) {
-            // Move mFunc into a temporary so we can clear mFunc before
+        if (mThunk) {
+            // Move mThunk into a temporary so we can clear mThunk before
             // executing the callback. This avoids infinite recursion if
             // the callee then calls join() again directly or indirectly.
-            decltype(mFunc) func = nullptr;
-            mFunc.swap(func);
-            func();
+            void* thunk = mThunk;
+            mThunk = nullptr;
+            mCall(thunk);
+            mDelete(thunk);
         }
     }
     void detach() { join(); }
@@ -110,7 +126,11 @@ public:
     id get_id() const { return id(); }
 
 private:
-    std::function<void(void)> mFunc;
+    using TypeErasedFunc = void(void*);
+
+    void* mThunk = nullptr;
+    TypeErasedFunc* mCall = nullptr;
+    TypeErasedFunc* mDelete = nullptr;
 };
 
 namespace rpc_this_thread {
