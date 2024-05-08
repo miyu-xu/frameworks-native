@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "379231ad_785b2101",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-08T01:08:57Z",
+      "side": 1,
+      "message": "I have changed on patch set2.",
+      "parentUuid": "78ce7953_9e6a4c33",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f81761c6_1dccbfd0",
@@ -78,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39b70b0f_06320a20",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-08T01:08:57Z",
+      "side": 1,
+      "message": "I have added brace on patch set2.",
+      "parentUuid": "c90e9827_62eb48ff",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f5eec12_5fca9d2c",
         "filename": "services/surfaceflinger/DisplayHardware/HWC2.cpp",
         "patchSetId": 1
@@ -95,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bccc23a_6d3dd1ff",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-08T01:08:57Z",
+      "side": 1,
+      "message": "I have added brace on patch set2.",
+      "parentUuid": "3f5eec12_5fca9d2c",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e270c655_a6a69850",
         "filename": "services/surfaceflinger/DisplayHardware/HWC2.h",
         "patchSetId": 1
@@ -106,6 +166,30 @@
       "writtenOn": "2024-05-07T18:17:31Z",
       "side": 1,
       "message": "I think `loadDisplayCapabilities` would be a more precise name.",
+      "range": {
+        "startLine": 279,
+        "startChar": 9,
+        "endLine": 279,
+        "endChar": 27
+      },
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84038ab1_1044a325",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-08T01:08:57Z",
+      "side": 1,
+      "message": "I have changed on patch set2.",
+      "parentUuid": "e270c655_a6a69850",
       "range": {
         "startLine": 279,
         "startChar": 9,
