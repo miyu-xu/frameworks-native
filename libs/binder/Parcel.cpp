@@ -2010,7 +2010,7 @@ status_t Parcel::readAligned(T *pArg) const {
             }
         }
 
-        memcpy(pArg, mData + mDataPos, sizeof(T));
+        *pArg = *(T*)(mData + mDataPos);
         mDataPos += sizeof(T);
         return NO_ERROR;
     } else {
@@ -2035,7 +2035,7 @@ status_t Parcel::writeAligned(T val) {
 
     if ((mDataPos+sizeof(val)) <= mDataCapacity) {
 restart_write:
-        memcpy(mData + mDataPos, &val, sizeof(val));
+        *(T*)(mData + mDataPos) = val;
         return finishWrite(sizeof(val));
     }
 
