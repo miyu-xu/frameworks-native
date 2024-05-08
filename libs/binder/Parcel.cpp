@@ -2010,7 +2010,7 @@ status_t Parcel::readAligned(T *pArg) const {
             }
         }
 
-        memcpy(pArg, mData + mDataPos, sizeof(T));
+        *pArg = *(T*)(mData + mDataPos);
         mDataPos += sizeof(T);
         return NO_ERROR;
     } else {
@@ -2033,11 +2033,13 @@ status_t Parcel::writeAligned(T val) {
     static_assert(PAD_SIZE_UNSAFE(sizeof(T)) == sizeof(T));
     static_assert(std::is_trivially_copyable_v<T>);
 
+    // clang-format off
     if ((mDataPos+sizeof(val)) <= mDataCapacity) {
 restart_write:
-        memcpy(mData + mDataPos, &val, sizeof(val));
+        *(T*)(mData + mDataPos) = val;
         return finishWrite(sizeof(val));
     }
+    // clang-format on
 
     status_t err = growData(sizeof(val));
     if (err == NO_ERROR) goto restart_write;
