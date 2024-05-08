@@ -16,6 +16,24 @@
       "message": "I fret telling it is unused will result in the compiler optimizing it away.\nUsually I\u0027d do something like make sum a static global variable.",
       "revId": "af55f2af0f0cf8798c0cebc822830de0946dcc54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a895ee66_be36f6bc",
+        "filename": "libs/cputimeinstate/testtimeinstate.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-05-08T00:38:48Z",
+      "side": 1,
+      "message": "Hmm, interesting. This prompted me to do some digging. Per https://clang.llvm.org/docs/AttributeReference.html#maybe-unused-unused it appears that \u0027unused\u0027 simply silences the warning, with no effect on optimization (but it could be optimized out as-is).\n\nI tried \u0027used\u0027 \u003chttps://clang.llvm.org/docs/AttributeReference.html#used\u003e on the local variable, but the compiler complains that it applies to \"variables with non-local storage, functions and...\", so therefore settled on your suggestion with \n the used attribute",
+      "parentUuid": "304ec82a_657a2825",
+      "revId": "af55f2af0f0cf8798c0cebc822830de0946dcc54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
