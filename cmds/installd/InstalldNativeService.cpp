@@ -77,6 +77,8 @@
 #include "QuotaUtils.h"
 #include "SysTrace.h"
 
+#include <android_security_installd_flag.h>
+
 #ifndef LOG_TAG
 #define LOG_TAG "installd"
 #endif
@@ -911,7 +913,7 @@ binder::Status InstalldNativeService::createAppDataLocked(
             return status;
         }
 
-        if (!uuid) {
+        if (android::security::installd::flag::unlocked_storage_api() && !uuid) {
             // For internal storage only, create the app's storage_area directory.
             auto storage_area_path = create_data_storage_area_package_path(userId, pkgname);
             status = createStorageAreaDir(storage_area_path, uid,
@@ -1454,7 +1456,7 @@ binder::Status InstalldNativeService::destroyAppData(const std::optional<std::st
         if (rename_delete_dir_contents_and_dir(path) != 0) {
             res = error("Failed to delete " + path);
         }
-        if (!uuid) {
+        if (android::security::installd::flag::unlocked_storage_api() && !uuid) {
             // Delete the whole directory: this is the storage area for an app and so
             // destruction of the app's data will entirely remove it.
             // This is different than the deletion of the storage area itself: when a
@@ -2166,7 +2168,7 @@ binder::Status InstalldNativeService::destroyUserData(const std::optional<std::s
         if (delete_dir_contents_and_dir(sdk_sandbox_ce_path, true) != 0) {
             res = error("Failed to delete " + sdk_sandbox_ce_path);
         }
-        if (!uuid) {
+        if (android::security::installd::flag::unlocked_storage_api() && !uuid) {
             // Contents only, as vold is responsible for the storage_area dir itself.
             auto storage_area_path = create_data_storage_area_path(userId);
             if (delete_dir_contents(storage_area_path, true)) {
