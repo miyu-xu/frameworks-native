@@ -280,4 +280,8 @@ TEST(RpcWire, ReleaseBranchHasFrozenRpcWireProtocol) {
     }
 }
 
+TEST(RpcWire, PresubmitFailingTest) {
+    EXPECT_TRUE(false) << "This should break"; // TODO: remove
+}
+
 } // namespace android
