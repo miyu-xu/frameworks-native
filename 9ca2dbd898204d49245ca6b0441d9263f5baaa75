@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a9a859a1_b23caec2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-09T04:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "379231ad_785b2101",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f81761c6_1dccbfd0",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -118,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "383943e7_60501092",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-09T04:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39b70b0f_06320a20",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f5eec12_5fca9d2c",
@@ -149,6 +191,24 @@
       "side": 1,
       "message": "I have added brace on patch set2.",
       "parentUuid": "3f5eec12_5fca9d2c",
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b85add_74ffe64d",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-09T04:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bccc23a_6d3dd1ff",
       "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -190,6 +250,30 @@
       "side": 1,
       "message": "I have changed on patch set2.",
       "parentUuid": "e270c655_a6a69850",
+      "range": {
+        "startLine": 279,
+        "startChar": 9,
+        "endLine": 279,
+        "endChar": 27
+      },
+      "revId": "9ca2dbd898204d49245ca6b0441d9263f5baaa75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabbfcc5_9ff6b897",
+        "filename": "services/surfaceflinger/DisplayHardware/HWC2.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-09T04:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84038ab1_1044a325",
       "range": {
         "startLine": 279,
         "startChar": 9,
