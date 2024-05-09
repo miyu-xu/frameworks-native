@@ -91,6 +91,7 @@ cc_cmake_snapshot {
         "libbinder_sdk_single_threaded",
         "libbinder_ndk_sdk",
         "binderRpcTestNoKernel",
+        "libgtest_cmake", // TODO: figure out gtest
     ],
     prebuilts: [
         // to enable arm64 host support, build with musl - e.g. on aosp_cf_arm64_phone
@@ -133,12 +134,20 @@ cc_cmake_snapshot {
         {
             android_name: "libgtest",
             mapped_name: "GTest::gtest",
-            package_system: "GTest",
+            package_pregenerated: "external/googletest",
+            //package_system: "GTest", // TODO: figure out gtest
         },
         {
             android_name: "libgtest_main",
+            mapped_name: "GTest::gtest_main",
+            package_pregenerated: "external/googletest",
+            //package_system: "GTest", // TODO: figure out gtest
+        },
+        {
+            android_name: "libgtest_cmake",
             mapped_name: "GTest::gtest",
-            package_system: "GTest",
+            package_pregenerated: "external/googletest",
+            //package_system: "GTest", // TODO: figure out gtest
         },
 
         // use libbinder_sdk and friends instead of full Android's libbinder
