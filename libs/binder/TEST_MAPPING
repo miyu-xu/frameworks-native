@@ -108,6 +108,10 @@
     },
     {
       "name": "binderRpcTestSingleThreadedNoKernel"
+    },
+    {
+      "name": "binder_sdk_test",
+      "host": true
     }
   ],
   "hwasan-presubmit": [
