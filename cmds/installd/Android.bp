@@ -52,6 +52,7 @@ cc_defaults {
     static_libs: [
         "libasync_safe",
         "libext2_uuid",
+        "aconfig_storage_area_c_lib_installd",
     ],
     export_shared_lib_headers: [
         "libbinder",
@@ -300,4 +301,16 @@ sh_binary {
 sh_binary {
     name: "migrate_legacy_obb_data",
     src: "migrate_legacy_obb_data.sh",
+}
+
+aconfig_declarations {
+    name: "aconfig_storage_area_installd",
+    package: "android.security.installd.flag",
+    container: "system",
+    srcs: ["storage_area_flags.aconfig"],
+}
+
+cc_aconfig_library {
+    name: "aconfig_storage_area_c_lib_installd",
+    aconfig_declarations: "aconfig_storage_area_installd",
 }
