@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91196723_a9df44e9",
+        "filename": "cmds/installd/storage_area_flags.aconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-09T23:25:49Z",
+      "side": 1,
+      "message": "Is it not possible to use the existing flag?",
+      "revId": "4bec6484f0d01dc17538d588abaeaec5f7b6268d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
