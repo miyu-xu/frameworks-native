@@ -51,6 +51,24 @@
       "message": "Did we ever discuss the naming wrt the `_`, compared to `ANativeWindowTransform`?",
       "revId": "64b19f9cf2572ac6acef5e851267b09116d43bbc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28560a83_c7bd6f7d",
+        "filename": "libs/nativewindow/include/android/native_window.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-09T21:27:31Z",
+      "side": 1,
+      "message": "Yes, on the other API: https://r.android.com/c/platform/frameworks/native/+/3023923/1/include/android/surface_control.h#306\n\nThere aren\u0027t opinions one way or the other, and existing APIs already disagree with each other. If we want to change something, lets leave it for another time. This is hard enough to merge already.",
+      "parentUuid": "9e64b3ce_e1578ead",
+      "revId": "64b19f9cf2572ac6acef5e851267b09116d43bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
