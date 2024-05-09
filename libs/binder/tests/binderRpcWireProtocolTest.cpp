@@ -268,13 +268,15 @@ TEST(RpcWire, NextIsPlusOneReminder) {
     }
 }
 
-#ifdef __ANDROID__
 TEST(RpcWire, ReleaseBranchHasFrozenRpcWireProtocol) {
     if (RPC_WIRE_PROTOCOL_VERSION == RPC_WIRE_PROTOCOL_VERSION_EXPERIMENTAL) {
-        EXPECT_FALSE(base::GetProperty("ro.build.version.codename", "") == "REL")
-                << "Binder RPC wire protocol must be frozen on a release branch!";
+#ifdef __ANDROID__
+        constexpr bool isRelease = base::GetProperty("ro.build.version.codename", "") == "REL";
+#else
+        constexpr bool isRelease = true;
+#endif
+        EXPECT_FALSE(isRelease) << "Binder RPC wire protocol must be frozen on a release branch!";
     }
 }
-#endif //  __ANDROID__
 
 } // namespace android
