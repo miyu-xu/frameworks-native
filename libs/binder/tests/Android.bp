@@ -867,3 +867,14 @@ cc_defaults {
         ],
     },
 }
+
+cc_test {
+    name: "binderPersistableBundleTest",
+    defaults: ["binder_test_defaults"],
+    srcs: ["binderPersistableBundleTest.cpp"],
+    shared_libs: [
+        "libbinder",
+        "libutils",
+    ],
+    test_suites: ["device-tests"],
+}
