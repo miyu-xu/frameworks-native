@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3e254c_5e05082b",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-10T19:53:42Z",
+      "side": 1,
+      "message": "the package\u0027s directory of storage areas\n\n(The per-package directories are named by package; they\u0027re not actually called `storage_area`)",
+      "range": {
+        "startLine": 917,
+        "startChar": 53,
+        "endLine": 917,
+        "endChar": 81
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2abab7_3d977c7c",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-10T19:53:42Z",
+      "side": 1,
+      "message": "Why is the code to delete the package\u0027s storage areas under `FLAG_STORAGE_DE` instead of `FLAG_STORAGE_CE`?",
+      "range": {
+        "startLine": 1454,
+        "startChar": 16,
+        "endLine": 1454,
+        "endChar": 31
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aacb550b_1d74c7eb",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-10T19:53:42Z",
+      "side": 1,
+      "message": "This comment uses the phrase \"the storage area\" in two different ways, neither of which actually means a storage area.  Maybe just write that this code deletes the package\u0027s directory of storage areas.",
+      "range": {
+        "startLine": 1460,
+        "startChar": 51,
+        "endLine": 1462,
+        "endChar": 77
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b0c5ea_206088cf",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-10T19:53:42Z",
+      "side": 1,
+      "message": "Wrong path is being logged here",
+      "range": {
+        "startLine": 1474,
+        "startChar": 66,
+        "endLine": 1474,
+        "endChar": 83
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1192d358_f7084ffd",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 2957,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-10T19:53:42Z",
+      "side": 1,
+      "message": "Does anything need to be changed in the `FLAG_USE_QUOTA` case?  If not, why not?\n\nLikewise for `getAppSize()`.",
+      "range": {
+        "startLine": 2957,
+        "startChar": 16,
+        "endLine": 2957,
+        "endChar": 30
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
