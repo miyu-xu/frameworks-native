@@ -2182,6 +2182,43 @@ static void DumpstateOnboardingOnly() {
     ds.AddDir(LOGPERSIST_DATA_DIR, false);
 }
 
+static std::string GetTimestamp(const timespec& ts) {
+    tm tm;
+    localtime_r(&ts.tv_sec, &tm);
+
+    char buf[strlen("1970-01-01 00:00:00.123456789+0830") + 1];
+    char* s = buf;
+    size_t sz = sizeof(buf), n;
+    n = strftime(s, sz, "%F %H:%M", &tm), s += n, sz -= n;
+    n = snprintf(s, sz, ":%02d.%09ld", tm.tm_sec, ts.tv_nsec), s += n, sz -= n;
+    n = strftime(s, sz, "%z", &tm), s += n, sz -= n;
+    return buf;
+}
+
+static void DumpPidHeader(int fd, pid_t pid, std::string& exe, const timespec& ts) {
+    // For consistency, the header to this message matches the one
+    // dumped by debuggerd.
+    dprintf(fd, "\n---- pid %d at %s ----\n", pid, GetTimestamp(ts).c_str());
+    dprintf(fd, "Cmd line: %s\n", exe.c_str());
+}
+
+static void DumpPidFooter(int fd, pid_t pid) {
+    // For consistency, the footer to this message matches the one
+    // dumped by debuggerd.
+    dprintf(fd, "---- end %d ----\n", pid);
+}
+
+static bool DumpBacktrace(int fd, pid_t pid, bool is_java_process) {
+    int ret = dump_backtrace_to_file_timeout(
+        pid, is_java_process ? kDebuggerdJavaBacktrace : kDebuggerdNativeBacktrace, 3, fd);
+    if (ret == -1 && is_java_process) {
+        // Tried to unwind as a java process, try a native unwind.
+        dprintf(fd, "Java unwind failed for pid %d, trying a native unwind.\n", pid);
+        ret = dump_backtrace_to_file_timeout(pid, kDebuggerdNativeBacktrace, 3, fd);
+    }
+    return ret != -1;
+}
+
 Dumpstate::RunStatus Dumpstate::DumpTraces(const char** path) {
     const std::string temp_file_pattern = ds.bugreport_internal_dir_ + "/dumptrace_XXXXXX";
     const size_t buf_size = temp_file_pattern.length() + 1;
@@ -2230,16 +2267,6 @@ Dumpstate::RunStatus Dumpstate::DumpTraces(const char** path) {
             continue;
         }
 
-        // Skip cached processes.
-        if (IsCached(pid)) {
-            // For consistency, the header and footer to this message match those
-            // dumped by debuggerd in the success case.
-            dprintf(fd, "\n---- pid %d at [unknown] ----\n", pid);
-            dprintf(fd, "Dump skipped for cached process.\n");
-            dprintf(fd, "---- end %d ----", pid);
-            continue;
-        }
-
         const std::string link_name = android::base::StringPrintf("/proc/%d/exe", pid);
         std::string exe;
         if (!android::base::Readlink(link_name, &exe)) {
@@ -2268,16 +2295,31 @@ Dumpstate::RunStatus Dumpstate::DumpTraces(const char** path) {
             break;
         }
 
-        const uint64_t start = Nanotime();
-        const int ret = dump_backtrace_to_file_timeout(
-            pid, is_java_process ? kDebuggerdJavaBacktrace : kDebuggerdNativeBacktrace, 3, fd);
+        timespec start_timespec;
+        clock_gettime(CLOCK_REALTIME, &start_timespec);
+        if (IsCached(pid)) {
+            DumpPidHeader(fd, pid, exe, start_timespec);
+            dprintf(fd, "Process is cached, skipping backtrace due to high chance of timeout.\n");
+            DumpPidFooter(fd, pid);
+            continue;
+        }
 
-        if (ret == -1) {
-            // For consistency, the header and footer to this message match those
-            // dumped by debuggerd in the success case.
-            dprintf(fd, "\n---- pid %d at [unknown] ----\n", pid);
-            dprintf(fd, "Dump failed, likely due to a timeout.\n");
-            dprintf(fd, "---- end %d ----", pid);
+        const uint64_t start = Nanotime();
+        if (!DumpBacktrace(fd, pid, is_java_process)) {
+            if (IsCached(pid)) {
+                DumpPidHeader(fd, pid, exe, start_timespec);
+                dprintf(fd, "Backtrace failed, but process has become cached.\n");
+                DumpPidFooter(fd, pid);
+                continue;
+            }
+
+            DumpPidHeader(fd, pid, exe, start_timespec);
+            dprintf(fd, "Backtrace gathering failed, likely due to a timeout.\n");
+            DumpPidFooter(fd, pid);
+
+            dprintf(fd, "\n[dump %s stack %d: %.3fs elapsed]\n",
+                    is_java_process ? "dalvik" : "native", pid,
+                    (float)(Nanotime() - start) / NANOS_PER_SEC);
             timeout_failures++;
             continue;
         }
