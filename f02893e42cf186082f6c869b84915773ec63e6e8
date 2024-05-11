@@ -16,6 +16,24 @@
       "message": "does it need docker?",
       "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14df91bd_d0211ff8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-11T02:19:52Z",
+      "side": 1,
+      "message": "Yes. This is the best way to clearly test e.g. dependencies or isolated build.",
+      "parentUuid": "897712d4_fe25c518",
+      "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
