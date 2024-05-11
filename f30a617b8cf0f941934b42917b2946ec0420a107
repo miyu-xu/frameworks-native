@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161924b4_ece0cda9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:26:48Z",
+      "side": 1,
+      "message": "more generally, should we raise an issue to Rust team about lifting C++ deprecation to Rust and vice-versa? or maybe rust ffi code should be built with deprecation checks as errors?",
+      "revId": "f30a617b8cf0f941934b42917b2946ec0420a107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c987044e_20ad5f1a",
+        "filename": "libs/binder/rust/binder_tokio/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:26:48Z",
+      "side": 1,
+      "message": "this doesn\u0027t always spawn a thread, right?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 93
+      },
+      "revId": "f30a617b8cf0f941934b42917b2946ec0420a107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
