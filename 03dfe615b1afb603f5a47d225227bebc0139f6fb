@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0638b567_1ee7f2f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:22:20Z",
+      "side": 1,
+      "message": "this is a good change",
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd955cd_732aa0c9",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:22:20Z",
+      "side": 1,
+      "message": "as mentioned over email, please add or make sure we have tests for exceptions. A few Java/C++ exceptions are different, and we might need to handle those differences.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d10b50_d44f5e38",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:22:20Z",
+      "side": 1,
+      "message": "why do we need to delegate the callbacks instead of passing them directly?\n\nnormally this would only be used with a subclass of the delegator, to inject additional functionality, but here I think it would only add an allocation?\n\nsame elsewhere",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 67
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fa6cf8_75426540",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:22:20Z",
+      "side": 1,
+      "message": "\u003c3",
+      "range": {
+        "startLine": 131,
+        "startChar": 23,
+        "endLine": 131,
+        "endChar": 90
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dca9bab_61207676",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-11T01:22:20Z",
+      "side": 1,
+      "message": "we should not make two separate versions of this - please only allocate one",
+      "range": {
+        "startLine": 273,
+        "startChar": 28,
+        "endLine": 273,
+        "endChar": 68
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
