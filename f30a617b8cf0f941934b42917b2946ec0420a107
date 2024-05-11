@@ -39,6 +39,30 @@
       },
       "revId": "f30a617b8cf0f941934b42917b2946ec0420a107",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77e2b51_c9c7c4a7",
+        "filename": "libs/binder/rust/binder_tokio/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-11T08:19:04Z",
+      "side": 1,
+      "message": "Correct, `spawn_blocking` will reuse threads from a threadpool.",
+      "parentUuid": "c987044e_20ad5f1a",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 93
+      },
+      "revId": "f30a617b8cf0f941934b42917b2946ec0420a107",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
