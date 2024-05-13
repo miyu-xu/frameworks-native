@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <android-base/properties.h>
+// #include <android-base/properties.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 #include <binder/Status.h>
@@ -25,7 +25,7 @@
 #include "Access.h"
 #include "ServiceManager.h"
 
-#if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
+#if 0 && !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 
 #include <perfetto/public/producer.h>
 #include <perfetto/public/te_category_macros.h>
@@ -52,7 +52,7 @@ using ::android::LooperCallback;
 using ::android::ProcessState;
 using ::android::ServiceManager;
 using ::android::sp;
-using ::android::base::SetProperty;
+// using ::android::base::SetProperty;
 using ::android::os::IServiceManager;
 
 class BinderCallback : public LooperCallback {
@@ -147,7 +147,7 @@ int main(int argc, char** argv) {
 
     const char* driver = argc == 2 ? argv[1] : "/dev/binder";
 
-#if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
+#if 0 && !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
     android::register_perfetto_te_categories();
 #endif // !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 
@@ -172,7 +172,7 @@ int main(int argc, char** argv) {
     sp<BinderCallback> binderCallback = BinderCallback::setupTo(looper);
     ClientCallbackCallback::setupTo(looper, manager, binderCallback);
 
-#ifndef VENDORSERVICEMANAGER
+#if 0 // ndef VENDORSERVICEMANAGER
     if (!SetProperty("servicemanager.ready", "true")) {
         ALOGE("Failed to set servicemanager ready property");
     }
