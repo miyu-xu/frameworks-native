@@ -16,6 +16,24 @@
       "message": "Code looks good. Can you add tests?\n\nI haven\u0027t found that we test this class directly, but it\u0027s used by `TestableSurfaceFlinger`, so maybe it\u0027s tested indirectly?",
       "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d261674f_6e2e548b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-13T09:34:07Z",
+      "side": 1,
+      "message": "How can I test TestableSurfaceFlinger?",
+      "parentUuid": "03e9c20b_052b47eb",
+      "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
