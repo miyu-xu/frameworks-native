@@ -21,14 +21,11 @@
 #include <inttypes.h>
 #include <unistd.h>
 
-#include <android-base/properties.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
-#include <utils/Log.h>
 #include <utils/String8.h>
-#include <utils/SystemClock.h>
 
 #ifndef __ANDROID_VNDK__
 #include <binder/IPermissionController.h>
@@ -47,7 +44,42 @@
 
 #include "Static.h"
 
+#include <condition_variable>
+
 namespace android {
+
+typedef int64_t nsecs_t; // nano-seconds
+
+enum {
+    SYSTEM_TIME_REALTIME = 0,  // system-wide realtime clock
+    SYSTEM_TIME_MONOTONIC = 1, // monotonic time since unspecified starting point
+    SYSTEM_TIME_PROCESS = 2,   // high-resolution per-process clock
+    SYSTEM_TIME_THREAD = 3,    // high-resolution per-thread clock
+    SYSTEM_TIME_BOOTTIME = 4,  // same as SYSTEM_TIME_MONOTONIC, but including CPU suspend time
+};
+
+static nsecs_t systemTime(int clock) {
+    //    checkClockId(clock);
+    static constexpr clockid_t clocks[] = {CLOCK_REALTIME, CLOCK_MONOTONIC,
+                                           CLOCK_PROCESS_CPUTIME_ID, CLOCK_THREAD_CPUTIME_ID,
+                                           CLOCK_BOOTTIME};
+    timespec t = {};
+    clock_gettime(clocks[clock], &t);
+    return nsecs_t(t.tv_sec) * 1000000000LL + t.tv_nsec;
+}
+
+static constexpr inline nsecs_t nanoseconds_to_milliseconds(nsecs_t secs) {
+    return secs / 1000000;
+}
+
+static int64_t uptimeNanos() {
+    return systemTime(SYSTEM_TIME_MONOTONIC);
+}
+
+static int64_t uptimeMillis() // TODO: use std::chrono::steady_clock
+{
+    return nanoseconds_to_milliseconds(uptimeNanos());
+}
 
 using AidlRegistrationCallback = IServiceManager::LocalRegistrationCallback;
 
@@ -642,7 +674,7 @@ public:
 
 protected:
     // Override realGetService for ServiceManagerShim::waitForService.
-    Status realGetService(const std::string& name, sp<IBinder>* _aidl_return) {
+    Status realGetService(const std::string& name, sp<IBinder>* _aidl_return) override {
         *_aidl_return = getDeviceService({"-g", name}, mOptions);
         return Status::ok();
     }
