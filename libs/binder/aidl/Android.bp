@@ -1,0 +1,24 @@
+aidl_interface {
+    name: "libbinder_aidl_2",
+    unstable: true,
+    //local_include_dir: "aidl",
+    srcs: [
+        "android/os/ConnectionInfo.aidl",
+        "android/os/IClientCallback.aidl",
+        "android/os/IServiceCallback.aidl",
+        "android/os/IServiceManager.aidl",
+        "android/os/ServiceDebugInfo.aidl",
+    ],
+    vendor_available: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
+    backend: {
+        java: {
+            enabled: false,
+        },
+    },
+    visibility: [
+        ":__subpackages__",
+        "//system/tools/aidl:__subpackages__",
+    ],
+}
