@@ -29,6 +29,9 @@ using android::binder::borrowed_fd;
 using android::binder::WriteFully;
 using std::stack;
 
+#define AID_ROOT 0
+#define AID_USER 100000
+
 extern size_t kRandomInterfaceLength;
 // Keep this in sync with max_length in random_binder.cpp while creating a RandomBinder
 std::string kRandomInterfaceName(kRandomInterfaceLength, 'i');

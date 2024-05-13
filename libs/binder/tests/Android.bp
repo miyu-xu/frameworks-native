@@ -41,6 +41,7 @@ cc_test {
     name: "binderDriverInterfaceTest",
     defaults: ["binder_test_defaults"],
     header_libs: ["libbinder_headers"],
+    shared_libs: ["libutils_binder"],
     srcs: ["binderDriverInterfaceTest.cpp"],
     test_suites: [
         "device-tests",
@@ -52,6 +53,7 @@ cc_test {
 cc_test {
     name: "binderUnitTest",
     host_supported: true,
+    cmake_snapshot_supported: true,
     target: {
         darwin: {
             enabled: false,
@@ -85,6 +87,7 @@ cc_test {
         "libutils",
         "liblog",
     ],
+    cmake_snapshot_supported: true,
     static_libs: [
         "binderRecordReplayTestIface-cpp",
         "binderReadParcelIface-cpp",
@@ -98,6 +101,7 @@ cc_test {
 aidl_interface {
     name: "binderRecordReplayTestIface",
     unstable: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderRecordReplayTest.aidl",
     ],
@@ -605,6 +609,9 @@ cc_benchmark {
         "libbinder_tls_test_utils",
         "libbinder_tls_static",
     ],
+    cflags: [
+        "-Wno-zero-as-null-pointer-constant",
+    ],
 }
 
 cc_test {
@@ -719,6 +726,7 @@ cc_test {
 aidl_interface {
     name: "binderStabilityTestIface",
     unstable: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderStabilityTest.aidl",
     ],
@@ -764,7 +772,7 @@ cc_test {
         "liblog",
         "libcutils",
         "libutils",
-        "libutilscallstack",
+        //"libutilscallstack",
         "libbase",
     ],
     test_suites: ["device-tests"],
@@ -780,6 +788,9 @@ cc_benchmark {
         "libbinder",
         "liblog",
         "libutils",
+    ],
+    cflags: [
+        "-Wno-zero-as-null-pointer-constant",
     ],
     test_suites: ["general-tests"],
 }
