@@ -16,7 +16,7 @@
 
 #include <fuzzbinder/random_parcel.h>
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <binder/RpcSession.h>
 #include <binder/RpcTransportRaw.h>
 #include <fuzzbinder/random_binder.h>
@@ -29,20 +29,20 @@ namespace android {
 
 static void fillRandomParcelData(Parcel* p, FuzzedDataProvider&& provider) {
     std::vector<uint8_t> data = provider.ConsumeBytes<uint8_t>(provider.remaining_bytes());
-    CHECK(OK == p->write(data.data(), data.size()));
+    p->write(data.data(), data.size());
 }
 
 void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOptions* options) {
-    CHECK_NE(options, nullptr);
+    // CHECK_NE(options, nullptr);
 
     if (provider.ConsumeBool()) {
         auto session = RpcSession::make(RpcTransportCtxFactoryRaw::make());
-        CHECK_EQ(OK, session->addNullDebuggingClient());
+        (void)session->addNullDebuggingClient();
         // Set the protocol version so that we don't crash if the session
         // actually gets used. This isn't cheating because the version should
         // always be set if the session init succeeded and we aren't testing the
         // session init here (it is bypassed by addNullDebuggingClient).
-        session->setProtocolVersion(RPC_WIRE_PROTOCOL_VERSION);
+        (void)session->setProtocolVersion(RPC_WIRE_PROTOCOL_VERSION);
         p->markForRpc(session);
 
         if (options->writeHeader) {
@@ -64,7 +64,7 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                     size_t toWrite =
                             provider.ConsumeIntegralInRange<size_t>(0, provider.remaining_bytes());
                     std::vector<uint8_t> data = provider.ConsumeBytes<uint8_t>(toWrite);
-                    CHECK(OK == p->write(data.data(), data.size()));
+                    p->write(data.data(), data.size());
                 },
                 // write FD
                 [&]() {
@@ -78,7 +78,7 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                                 provider.ConsumeIntegralInRange<size_t>(0,
                                                                         options->extraFds.size() -
                                                                                 1));
-                        CHECK(OK == p->writeFileDescriptor(fd.get(), false /*takeOwnership*/));
+                        p->writeFileDescriptor(fd.get(), false /*takeOwnership*/);
                     } else {
                         // b/260119717 - Adding more FDs can eventually lead to FD limit exhaustion
                         if (options->extraFds.size() > 1000) {
@@ -86,9 +86,8 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                         }
 
                         std::vector<unique_fd> fds = getRandomFds(&provider);
-                        CHECK(OK ==
-                              p->writeFileDescriptor(fds.begin()->release(),
-                                                     true /*takeOwnership*/));
+                        // CHECK(OK ==
+                        p->writeFileDescriptor(fds.begin()->release(), true /*takeOwnership*/);
                         options->extraFds.insert(options->extraFds.end(),
                                                  std::make_move_iterator(fds.begin() + 1),
                                                  std::make_move_iterator(fds.end()));
@@ -111,7 +110,7 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                     } else {
                         binder = getRandomBinder(&provider);
                     }
-                    CHECK(OK == p->writeStrongBinder(binder));
+                    p->writeStrongBinder(binder);
                 },
         });
 

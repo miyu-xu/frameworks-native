@@ -18,7 +18,7 @@ FROM gcc:9
 
 RUN echo 'deb http://deb.debian.org/debian bullseye-backports main' >> /etc/apt/sources.list && \
     apt-get update -y && \
-    apt-get install -y cmake ninja-build libgtest-dev unzip
+    apt-get install -y cmake ninja-build libgtest-dev libgmock-dev unzip
 
 ADD binder_sdk.zip /
 RUN unzip -q -d binder_sdk binder_sdk.zip

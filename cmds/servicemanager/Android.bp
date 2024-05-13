@@ -15,6 +15,7 @@ cc_defaults {
         "-Wextra",
         "-Werror",
         "-DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION",
+        "-DANDROID_LOG_STUB_ENABLE_BASE",
     ],
 
     srcs: [
@@ -24,11 +25,11 @@ cc_defaults {
 
     shared_libs: [
         "libbase",
-        "libvintf",
+        //"libvintf",
         "libcutils",
         "liblog",
         "libutils",
-        "libselinux",
+        //"libselinux",
     ],
 
     target: {
@@ -59,6 +60,8 @@ cc_binary {
     init_rc: ["servicemanager.rc"],
     srcs: ["main.cpp"],
     bootstrap: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
 }
 
 cc_binary {
