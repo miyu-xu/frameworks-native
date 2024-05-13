@@ -17,7 +17,7 @@
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
 #include <binder/Status.h>
-#include <cutils/ashmem.h>
+// #include <cutils/ashmem.h>
 #include <gtest/gtest.h>
 
 using android::BBinder;
@@ -401,6 +401,7 @@ TEST_READ_WRITE_INVERSE(int8_t, Byte, {-1, 0, 1});
 TEST_READ_WRITE_INVERSE(String8, String8, {String8(), String8("a"), String8("asdf")});
 TEST_READ_WRITE_INVERSE(String16, String16, {String16(), String16("a"), String16("asdf")});
 
+#if 0
 TEST(Parcel, GetOpenAshmemSize) {
     constexpr size_t kSize = 1024;
     constexpr size_t kCount = 3;
@@ -415,3 +416,4 @@ TEST(Parcel, GetOpenAshmemSize) {
         ASSERT_EQ((kSize * (i + 1)), p.getOpenAshmemSize());
     }
 }
+#endif

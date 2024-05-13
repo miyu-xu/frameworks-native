@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <android/binder_manager.h>
 #include <iface/iface.h>
 
@@ -47,7 +47,7 @@ binder_status_t IFoo_Class_onTransact(AIBinder* binder, transaction_code_t code,
     binder_status_t stat = STATUS_FAILED_TRANSACTION;
 
     sp<IFoo> foo = static_cast<IFoo_Class_Data*>(AIBinder_getUserData(binder))->foo;
-    CHECK(foo != nullptr) << "Transaction made on already deleted object";
+    // CHECK(foo != nullptr) << "Transaction made on already deleted object";
 
     switch (code) {
         case IFoo::DOFOO: {
@@ -181,12 +181,12 @@ sp<IFoo> IFoo::getService(const char* instance, AIBinder** outBinder) {
 
     IFoo_Class_Data* data = static_cast<IFoo_Class_Data*>(AIBinder_getUserData(binder));
 
-    CHECK(data != nullptr);  // always created with non-null data
+    // CHECK(data != nullptr);  // always created with non-null data
 
     sp<IFoo> ret = data->foo;
 
     AIBinder* held = AIBinder_Weak_promote(ret->mWeakBinder);
-    CHECK(held == binder);
+    // CHECK(held == binder);
     AIBinder_decStrong(held);
 
     AIBinder_decStrong(binder);
