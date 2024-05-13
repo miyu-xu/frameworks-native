@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9e1122_73e7f9c8",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T23:21:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a7c005e2_6a195bb5",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "558e34ae_4e1e4a8f",
@@ -121,6 +139,24 @@
       "side": 1,
       "message": "Ah, I misread what you said. So we\u0027re testing non-IPC client connecting to IPC-enabled service, ok. And on Trusty you hardcoded this to only connect to non-IPC version.\n\nSo I need some way to configure which tests to run. Maybe `BINDER_TEST_KERNEL_IPC`. Ideally, there would be no hardcoded BINDER_RPC_TO_TRUSTY_TEST but a more flexible version that would be applicable to linux too.",
       "parentUuid": "0d3befc4_87ae8d9b",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a02790d7_fba4b8a2",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T23:21:42Z",
+      "side": 1,
+      "message": "\u003e And on Trusty you hardcoded this to only connect to non-IPC version.\n\nCorrect, with the caveat that on the Trusty side there is no IPC version (we don\u0027t have kernel Binder between Android and TrustZone).",
+      "parentUuid": "b11cfc24_6b860c60",
       "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
