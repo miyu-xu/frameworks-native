@@ -10,6 +10,7 @@ package {
 aidl_interface {
     name: "binderReadParcelIface",
     host_supported: true,
+    cmake_snapshot_supported: true,
     unstable: true,
     srcs: [
         "parcelables/EmptyParcelable.aidl",
@@ -88,6 +89,7 @@ cc_fuzz {
 cc_library_static {
     name: "libbinder_random_parcel",
     host_supported: true,
+    cmake_snapshot_supported: true,
     vendor_available: true,
     target: {
         darwin: {
@@ -115,6 +117,7 @@ cc_library_static {
 cc_library {
     name: "libbinder_random_parcel_seeds",
     host_supported: true,
+    cmake_snapshot_supported: true,
     vendor_available: true,
     target: {
         darwin: {
