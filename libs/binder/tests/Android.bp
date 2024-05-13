@@ -42,6 +42,19 @@ cc_test {
     defaults: ["binder_test_defaults"],
     header_libs: ["libbinder_headers"],
     srcs: ["binderDriverInterfaceTest.cpp"],
+    //host_supported: true, // TODO: why does it fail with "overriding commands for target"?
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+}
+
+cc_test_host {
+    name: "binderDriverInterfaceTestSdk",
+    defaults: ["binder_test_defaults"],
+    header_libs: ["libbinder_headers"],
+    shared_libs: ["libutils_binder_sdk"], // TODO: it's about headers (IBinder includes Errors.h)
+    srcs: ["binderDriverInterfaceTest.cpp"],
     test_suites: [
         "device-tests",
         "vts",
@@ -119,6 +132,27 @@ aidl_interface {
 
 cc_test {
     name: "binderLibTest",
+    defaults: ["binder_test_defaults"],
+
+    srcs: ["binderLibTest.cpp"],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "liblog",
+        "libutils",
+    ],
+    static_libs: [
+        "libgmock",
+    ],
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+    require_root: true,
+}
+
+cc_test_host {
+    name: "binderLibTestSdk",
     defaults: ["binder_test_defaults"],
 
     srcs: ["binderLibTest.cpp"],
