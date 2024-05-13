@@ -42,6 +42,19 @@ cc_test {
     defaults: ["binder_test_defaults"],
     header_libs: ["libbinder_headers"],
     srcs: ["binderDriverInterfaceTest.cpp"],
+    //host_supported: true, // TODO: why does it fail with "overriding commands for target"?
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+}
+
+cc_test_host {
+    name: "binderDriverInterfaceTestSdk",
+    defaults: ["binder_test_defaults"],
+    header_libs: ["libbinder_headers"],
+    shared_libs: ["libutils_binder_sdk"], // TODO: it's about headers (IBinder includes Errors.h)
+    srcs: ["binderDriverInterfaceTest.cpp"],
     test_suites: [
         "device-tests",
         "vts",
@@ -52,6 +65,7 @@ cc_test {
 cc_test {
     name: "binderUnitTest",
     host_supported: true,
+    cmake_snapshot_supported: true,
     target: {
         darwin: {
             enabled: false,
@@ -85,6 +99,8 @@ cc_test {
         "libutils",
         "liblog",
     ],
+    host_supported: true,
+    cmake_snapshot_supported: true,
     static_libs: [
         "binderRecordReplayTestIface-cpp",
         "binderReadParcelIface-cpp",
@@ -98,6 +114,8 @@ cc_test {
 aidl_interface {
     name: "binderRecordReplayTestIface",
     unstable: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderRecordReplayTest.aidl",
     ],
@@ -120,6 +138,27 @@ aidl_interface {
 
 cc_test {
     name: "binderLibTest",
+    defaults: ["binder_test_defaults"],
+
+    srcs: ["binderLibTest.cpp"],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "liblog",
+        "libutils",
+    ],
+    static_libs: [
+        "libgmock",
+    ],
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+    require_root: true,
+}
+
+cc_test_host {
+    name: "binderLibTestSdk",
     defaults: ["binder_test_defaults"],
 
     srcs: ["binderLibTest.cpp"],
@@ -604,6 +643,9 @@ cc_benchmark {
         "libbinder_tls_test_utils",
         "libbinder_tls_static",
     ],
+    cflags: [
+        "-Wno-zero-as-null-pointer-constant",
+    ],
 }
 
 cc_test {
@@ -636,6 +678,7 @@ cc_test {
 cc_test {
     name: "binderThroughputTest",
     defaults: ["binder_test_defaults"],
+    host_supported: true,
     srcs: ["binderThroughputTest.cpp"],
     shared_libs: [
         "libbinder",
@@ -700,6 +743,7 @@ cc_test {
 cc_test {
     name: "binderClearBufTest",
     defaults: ["binder_test_defaults"],
+    host_supported: true,
     srcs: [
         "binderClearBufTest.cpp",
     ],
@@ -718,6 +762,8 @@ cc_test {
 aidl_interface {
     name: "binderStabilityTestIface",
     unstable: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderStabilityTest.aidl",
     ],
@@ -754,6 +800,32 @@ cc_test {
     require_root: true,
 }
 
+cc_test_host {
+    name: "binderStabilityTestSdk",
+    defaults: ["binder_test_defaults"],
+    srcs: [
+        "binderStabilityTest.cpp",
+    ],
+
+    // critical that libbinder/libbinder_ndk are shared for VTS
+    shared_libs: [
+        "libbinder_ndk",
+        "libbinder",
+        "liblog",
+        "libutils",
+    ],
+    static_libs: [
+        "binderStabilityTestIface-cpp",
+        "binderStabilityTestIface-ndk",
+    ],
+
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+    require_root: true,
+}
+
 cc_test {
     name: "binderAllocationLimits",
     defaults: ["binder_test_defaults"],
@@ -763,11 +835,12 @@ cc_test {
         "liblog",
         "libcutils",
         "libutils",
-        "libutilscallstack",
+        //"libutilscallstack",
         "libbase",
     ],
     test_suites: ["device-tests"],
     require_root: true,
+    host_supported: true,
 }
 
 cc_benchmark {
@@ -780,7 +853,11 @@ cc_benchmark {
         "liblog",
         "libutils",
     ],
+    cflags: [
+        "-Wno-zero-as-null-pointer-constant",
+    ],
     test_suites: ["general-tests"],
+    host_supported: true,
 }
 
 cc_test_host {
