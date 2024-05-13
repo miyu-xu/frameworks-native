@@ -92,6 +92,7 @@ cc_library {
     srcs: [
         "ibinder_jni.cpp",
         "parcel_jni.cpp",
+        // TODO: add some of these to libbinder_sdk
         "persistable_bundle.cpp",
         "process.cpp",
         "service_manager.cpp",

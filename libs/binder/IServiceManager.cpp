@@ -22,16 +22,13 @@
 #include <unistd.h>
 #include <condition_variable>
 
-#include <android-base/properties.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
-#include <utils/Log.h>
 #include <utils/String8.h>
-#include <utils/SystemClock.h>
 
-#ifndef __ANDROID_VNDK__
+#if !defined(__ANDROID_VNDK__) && 0
 #include <binder/IPermissionController.h>
 #endif
 
@@ -49,6 +46,39 @@
 #include "Static.h"
 
 namespace android {
+
+typedef int64_t nsecs_t; // nano-seconds
+
+enum {
+    SYSTEM_TIME_REALTIME = 0,  // system-wide realtime clock
+    SYSTEM_TIME_MONOTONIC = 1, // monotonic time since unspecified starting point
+    SYSTEM_TIME_PROCESS = 2,   // high-resolution per-process clock
+    SYSTEM_TIME_THREAD = 3,    // high-resolution per-thread clock
+    SYSTEM_TIME_BOOTTIME = 4,  // same as SYSTEM_TIME_MONOTONIC, but including CPU suspend time
+};
+
+static nsecs_t systemTime(int clock) {
+    //    checkClockId(clock);
+    static constexpr clockid_t clocks[] = {CLOCK_REALTIME, CLOCK_MONOTONIC,
+                                           CLOCK_PROCESS_CPUTIME_ID, CLOCK_THREAD_CPUTIME_ID,
+                                           CLOCK_BOOTTIME};
+    timespec t = {};
+    clock_gettime(clocks[clock], &t);
+    return nsecs_t(t.tv_sec) * 1000000000LL + t.tv_nsec;
+}
+
+static constexpr inline nsecs_t nanoseconds_to_milliseconds(nsecs_t secs) {
+    return secs / 1000000;
+}
+
+static int64_t uptimeNanos() {
+    return systemTime(SYSTEM_TIME_MONOTONIC);
+}
+
+static int64_t uptimeMillis() // TODO: use std::chrono::steady_clock
+{
+    return nanoseconds_to_milliseconds(uptimeNanos());
+}
 
 using AidlRegistrationCallback = IServiceManager::LocalRegistrationCallback;
 
@@ -185,7 +215,7 @@ void setDefaultServiceManager(const sp<IServiceManager>& sm) {
     }
 }
 
-#if !defined(__ANDROID_VNDK__)
+#if !defined(__ANDROID_VNDK__) && 0
 // IPermissionController is not accessible to vendors
 
 bool checkCallingPermission(const String16& permission)
@@ -627,7 +657,7 @@ std::vector<IServiceManager::ServiceDebugInfo> ServiceManagerShim::getServiceDeb
     return ret;
 }
 
-#ifndef __ANDROID__
+#if !defined(__ANDROID__) && 0
 // ServiceManagerShim for host. Implements the old libbinder android::IServiceManager API.
 // The internal implementation of the AIDL interface android::os::IServiceManager calls into
 // on-device service manager.
