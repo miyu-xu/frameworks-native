@@ -16,6 +16,24 @@
       "message": "The async code requires some extra threads and has a few bugs open that will be hard to fix if there are more users. Are we sure we want to use it more?",
       "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f1e28c_51443b91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2024-05-13T08:35:01Z",
+      "side": 1,
+      "message": "Since the library is vendor_available, it can already be used by the OEMs on the /vendor partition. Exposing it to /product should not be a major change in the availability of the library - it only gives the OEMs (and their dependencies) another option for where to use it.",
+      "parentUuid": "d455a306_3cdbce90",
+      "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
