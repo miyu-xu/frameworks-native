@@ -27,6 +27,7 @@ cc_library_headers {
     vendor_available: true,
     recovery_available: true,
     host_supported: true,
+    product_available: true,
     native_bridge_supported: true,
     cmake_snapshot_supported: true,
 
@@ -37,6 +38,7 @@ cc_library_headers {
         "libbinder_headers_platform_shared",
     ],
     apex_available: [
+        "//apex_available:anyapex",
         "//apex_available:platform",
         "com.android.media",
         "com.android.media.swcodec",
@@ -47,9 +49,9 @@ cc_library_headers {
             enabled: false,
         },
     },
-    visibility: [
-        ":__subpackages__",
-    ],
+    //visibility: [
+    //    ":__subpackages__",
+    //],
 }
 
 cc_library_headers {
@@ -90,7 +92,11 @@ cc_cmake_snapshot {
         "libbinder_sdk",
         "libbinder_sdk_single_threaded",
         "libbinder_ndk_sdk",
+        "binderRpcTest",
         "binderRpcTestNoKernel",
+        "binderDriverInterfaceTestSdk",
+        "binderLibTestSdk",
+        "servicemanager",
     ],
     prebuilts: [
         // to enable arm64 host support, build with musl - e.g. on aosp_cf_arm64_phone
@@ -103,7 +109,7 @@ cc_cmake_snapshot {
         "-DBINDER_DISABLE_NATIVE_HANDLE",
         "-DBINDER_DISABLE_BLOB",
         "-DBINDER_NO_LIBBASE",
-        "-DBINDER_NO_KERNEL_IPC_TESTING",
+        "-DBINDER_WITH_KERNEL_IPC",
 
         // from Soong's global.go commonGlobalCflags and noOverrideGlobalCflags
         "-Wno-c99-designator",
@@ -139,11 +145,20 @@ cc_cmake_snapshot {
             mapped_name: "GTest::gtest",
             package_system: "GTest",
         },
+        {
+            android_name: "libgmock",
+            mapped_name: "GTest::gmock", // requires 3.23
+            package_system: "GTest",
+        },
 
         // use libbinder_sdk and friends instead of full Android's libbinder
         {
             android_name: "libbinder_rpc_no_kernel",
             mapped_name: "android::libbinder_sdk",
+        },
+        {
+            android_name: "libbinder_rpc_single_threaded",
+            mapped_name: "android::libbinder_sdk_single_threaded",
         },
         {
             android_name: "libbinder_rpc_single_threaded_no_kernel",
@@ -175,14 +190,6 @@ cc_cmake_snapshot {
         },
         {
             android_name: "libutils",
-        },
-
-        // disable tests that don't work outside of Android yet
-        {
-            android_name: "binder_rpc_test_service",
-        },
-        {
-            android_name: "binder_rpc_test_service_single_threaded",
         },
 
         // trusty mocks are artificially triggered and not needed outside of Android build
@@ -538,6 +545,7 @@ cc_defaults {
         "-DBINDER_DISABLE_NATIVE_HANDLE",
         "-DBINDER_DISABLE_BLOB",
         "-DBINDER_NO_LIBBASE",
+        "-DBINDER_WITH_KERNEL_IPC",
     ],
 
     header_libs: [
@@ -558,10 +566,26 @@ cc_defaults {
     shared_libs: [
         "libutils_binder_sdk",
     ],
+    static_libs: [
+        "libbinder_aidl_2-cpp", // TODO: shared should work too
+    ],
 
     srcs: [
+        "IServiceManager.cpp",
+        "IPCThreadState.cpp",
         "OS_non_android_linux.cpp",
         "OS_unix_base.cpp",
+        "ProcessState.cpp",
+        //TODO: what about Static.cpp (and BufferedTextOutput.cpp)
+
+        //"IMemory.cpp",
+        "IShellCallback.cpp",
+        "LazyServiceRegistrar.cpp",
+        "MemoryBase.cpp",
+        //"MemoryDealer.cpp",
+        //"MemoryHeapBase.cpp",
+        "ParcelableHolder.cpp",
+        "PersistableBundle.cpp",
     ],
 
     visibility: [
@@ -780,6 +804,8 @@ aidl_interface {
     local_include_dir: "aidl",
     srcs: [":libbinder_aidl"],
     vendor_available: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     backend: {
         java: {
             enabled: false,
