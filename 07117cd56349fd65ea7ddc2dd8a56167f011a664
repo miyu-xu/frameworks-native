@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c50d459_dbb3f265",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T21:32:59Z",
+      "side": 1,
+      "message": "This one is only compiler into `binderRpcToTrustyTest` which statically links against `libbinder_rpc_no_kernel`. `kEnableKernelIpc` is always `false` here.",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558e34ae_4e1e4a8f",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T21:32:59Z",
+      "side": 1,
+      "message": "`noKernel` here is the type of the service we\u0027re connecting to, not the client. Since these are RPC Binder tests, whether the service was built with kernel IPC is orthogonal to whether the client is.\n\nI guess it does make more sense for a non-kernel client to connect to a non-kernel service, since the IPC tests are disabled if either one doesn\u0027t support IPC.",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

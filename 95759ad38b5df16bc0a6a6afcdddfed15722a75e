@@ -34,6 +34,24 @@
       "parentUuid": "9e90eb35_0bf33471",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c40742c6_1f939d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T21:32:59Z",
+      "side": 1,
+      "message": "\u003e Andrei, did you configure nokernel tests to run in CI?\n\nYes, and I think they\u0027re working as intended. `kEnableKernelIpc` marks whether the _client_ supports kernel IPC, and `noKernel` whether the _service_ supports it. The IPC tests check both independently: `if (!kEnableKernelIpc || noKernel())`.",
+      "parentUuid": "fbb7ddc8_ba8500b8",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
