@@ -37,4 +37,4 @@ cd $WORKDIR
 
 cmake .
 make -j
-make test ARGS="--parallel 32 --output-on-failure"
+bash frameworks/native/libs/binder/tests/binder_sdk/run_all_tests.sh `pwd`
