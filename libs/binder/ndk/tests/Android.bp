@@ -25,6 +25,7 @@ package {
 
 cc_defaults {
     name: "test_libbinder_ndk_defaults",
+    cmake_snapshot_supported: true,
     shared_libs: [
         "libbase",
     ],
@@ -59,7 +60,7 @@ cc_defaults {
     defaults: ["test_libbinder_ndk_defaults"],
     // critical that libbinder/libbinder_ndk are shared for VTS
     shared_libs: [
-        "libandroid_runtime_lazy",
+        //"libandroid_runtime_lazy",
         "libbase",
         "libbinder",
         "libbinder_ndk",
@@ -122,7 +123,7 @@ cc_test {
     static_libs: [
         "IBinderVendorDoubleLoadTest-cpp",
         "IBinderVendorDoubleLoadTest-ndk",
-        "libbinder_aidl_test_stub-ndk",
+        "libbinder_aidl_2-ndk",
     ],
     // critical that libbinder/libbinder_ndk are shared for VTS
     shared_libs: [
@@ -133,12 +134,14 @@ cc_test {
     ],
     test_suites: ["general-tests"],
     require_root: true,
+    cmake_snapshot_supported: true,
 }
 
 aidl_interface {
     name: "IBinderVendorDoubleLoadTest",
     unstable: true,
     vendor: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderVendorDoubleLoadTest.aidl",
     ],
@@ -147,6 +150,7 @@ aidl_interface {
 aidl_interface {
     name: "IBinderNdkUnitTest",
     unstable: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderNdkUnitTest.aidl",
         "IEmpty.aidl",
