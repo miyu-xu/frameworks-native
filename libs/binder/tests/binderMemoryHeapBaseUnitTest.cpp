@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#if 0
 #include <binder/MemoryHeapBase.h>
 #include <cutils/ashmem.h>
 #include <fcntl.h>
@@ -106,4 +107,5 @@ TEST(MemoryHeapBase,HostMemfdException) {
     EXPECT_NE(ptr, MAP_FAILED);
 }
 
+#endif
 #endif

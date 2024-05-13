@@ -67,4 +67,4 @@ function cleanup {
 trap cleanup EXIT
 
 docker build --force-rm --tag "${DOCKER_TAG}" --file ${DOCKER_FILE} ${DOCKER_PATH}
-docker run ${DOCKER_RUN_FLAGS} --rm "${DOCKER_TAG}"
+docker run --device=/dev/binder ${DOCKER_RUN_FLAGS} --rm "${DOCKER_TAG}"

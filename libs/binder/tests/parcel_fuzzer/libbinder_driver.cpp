@@ -20,7 +20,11 @@
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 
-#include <private/android_filesystem_config.h>
+// #include <private/android_filesystem_config.h>
+
+#define AID_ROOT 0
+#define AID_USER 100000
+#define AID_SYSTEM 1000
 
 using android::binder::unique_fd;
 
