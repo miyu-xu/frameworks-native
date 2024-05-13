@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <android-base/properties.h>
+// #include <android-base/properties.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 #include <binder/Status.h>
@@ -32,7 +32,7 @@ using ::android::LooperCallback;
 using ::android::ProcessState;
 using ::android::ServiceManager;
 using ::android::sp;
-using ::android::base::SetProperty;
+// using ::android::base::SetProperty;
 using ::android::os::IServiceManager;
 
 class BinderCallback : public LooperCallback {
@@ -148,7 +148,7 @@ int main(int argc, char** argv) {
     sp<BinderCallback> binderCallback = BinderCallback::setupTo(looper);
     ClientCallbackCallback::setupTo(looper, manager, binderCallback);
 
-#ifndef VENDORSERVICEMANAGER
+#if 0 // ndef VENDORSERVICEMANAGER
     if (!SetProperty("servicemanager.ready", "true")) {
         ALOGE("Failed to set servicemanager ready property");
     }
