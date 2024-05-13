@@ -34,6 +34,24 @@
       "parentUuid": "03e9c20b_052b47eb",
       "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d203ee7_0f0c91a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-05-13T17:59:42Z",
+      "side": 1,
+      "message": "You can search the code for `TestableSurfaceFlinger` - it\u0027s used by a variety of tests.\n\nBut I\u0027m not sure we have an existing test harness for this. @domlaskowski@google.com referenced I3488927d9a854a42432b7575d0daa14e61677c3e. (That\u0027s a change id, and Gerrit will turn it into a link, but it was submitted to Android\u0027s internal Gerrit, so AOSP Gerrit won\u0027t find anything. But you can find it in the `git log`.) It shows some test updates, but nothing that tests the new behavior.\n\nI notice that `TestableSurfaceFlinger.h` has `FakeHwcDisplayInjector`, which has a method that injects a `HWC2Display`, which seems to help for testing? This might hint at a way to go? (Dom, any thoughts?)\n\nGiven that we have no tests already, I might be fine with landing as-is, with the caveat that I cannot guarantee that we won\u0027t break it later. (A test would help prevent that!)",
+      "parentUuid": "d261674f_6e2e548b",
+      "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
