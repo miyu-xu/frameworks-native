@@ -52,7 +52,7 @@ TEST(UtilsHost, ExecuteLongRunning) {
         auto result = execute(std::move(args), [&](const CommandResult& commandResult) {
             std::cout << millisSince(start)
                       << "ms: GOT PARTIAL COMMAND RESULT:" << commandResult.stdoutStr << std::endl;
-            return android::base::EndsWith(commandResult.stdoutStr, "\n");
+            return android::base::EndsWith(commandResult.stdoutStr, '\n');
         });
         auto elapsedMs = millisSince(start);
         EXPECT_GE(elapsedMs, 1000);
@@ -77,7 +77,7 @@ TEST(UtilsHost, ExecuteLongRunning2) {
         auto result = execute(std::move(args), [&](const CommandResult& commandResult) {
             std::cout << millisSince(start)
                       << "ms: GOT PARTIAL COMMAND RESULT:" << commandResult.stdoutStr << std::endl;
-            return android::base::EndsWith(commandResult.stdoutStr, "\n");
+            return android::base::EndsWith(commandResult.stdoutStr, '\n');
         });
         auto elapsedMs = millisSince(start);
         EXPECT_GE(elapsedMs, 4000);

@@ -54,6 +54,9 @@ cc_defaults {
         "ibinder.cpp",
         "libbinder.cpp",
         "parcel.cpp",
+        "persistable_bundle.cpp",
+        "process.cpp",
+        "service_manager.cpp",
         "stability.cpp",
         "status.cpp",
     ],
@@ -92,9 +95,6 @@ cc_library {
     srcs: [
         "ibinder_jni.cpp",
         "parcel_jni.cpp",
-        "persistable_bundle.cpp",
-        "process.cpp",
-        "service_manager.cpp",
     ],
 
     static_libs: [
@@ -220,6 +220,7 @@ cc_library_headers {
     vendor_available: true,
     recovery_available: true,
     host_supported: true,
+    product_available: true,
     // TODO(b/153609531): remove when no longer needed.
     native_bridge_supported: true,
     cmake_snapshot_supported: true,
@@ -232,6 +233,7 @@ cc_library_headers {
         "//apex_available:platform",
         "com.android.media",
         "com.android.media.swcodec",
+        "//apex_available:anyapex",
     ],
     min_sdk_version: "29",
 }
