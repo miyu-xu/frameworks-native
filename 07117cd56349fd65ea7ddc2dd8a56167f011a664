@@ -69,6 +69,24 @@
       "parentUuid": "558e34ae_4e1e4a8f",
       "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3befc4_87ae8d9b",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-05-13T22:18:57Z",
+      "side": 1,
+      "message": "Yes: `kEnableKernelIpc` marks whether the _client_ supports kernel IPC, and `noKernel` whether the _service_ supports it. The first one is set in `BuildFlags.h`, but is orthogonal to the second value.\n\nThe `noKernel` value determines which service binary the current test suite uses: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/tests/binderRpcTest.cpp;l\u003d266. If the chosen binary doesn\u0027t support the IPC tests, we disable them regardless of `kEnableKernelIpc`.",
+      "parentUuid": "d3220e74_ed39b92b",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
