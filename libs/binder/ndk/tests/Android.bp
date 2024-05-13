@@ -25,6 +25,7 @@ package {
 
 cc_defaults {
     name: "test_libbinder_ndk_defaults",
+    cmake_snapshot_supported: true,
     shared_libs: [
         "libbase",
     ],
@@ -44,6 +45,7 @@ cc_library_static {
     shared_libs: ["libbinder_ndk"],
     export_shared_lib_headers: ["libbinder_ndk"],
     srcs: ["iface.cpp"],
+    host_supported: true,
 }
 
 cc_defaults {
@@ -51,7 +53,7 @@ cc_defaults {
     defaults: ["test_libbinder_ndk_defaults"],
     // critical that libbinder/libbinder_ndk are shared for VTS
     shared_libs: [
-        "libandroid_runtime_lazy",
+        //"libandroid_runtime_lazy",
         "libbase",
         "libbinder",
         "libbinder_ndk",
@@ -67,6 +69,21 @@ cc_defaults {
 // also instead use AIDL to generate these stubs. See android.binder.cts.
 cc_test {
     name: "libbinder_ndk_unit_test",
+    defaults: ["test_libbinder_ndk_test_defaults"],
+    srcs: ["libbinder_ndk_unit_test.cpp"],
+    static_libs: [
+        "IBinderNdkUnitTest-cpp",
+        "IBinderNdkUnitTest-ndk",
+    ],
+    test_suites: [
+        "general-tests",
+        "vts",
+    ],
+    require_root: true,
+}
+
+cc_test_host {
+    name: "libbinder_ndk_unit_testSdk",
     defaults: ["test_libbinder_ndk_test_defaults"],
     srcs: ["libbinder_ndk_unit_test.cpp"],
     static_libs: [
@@ -111,7 +128,7 @@ cc_test {
     static_libs: [
         "IBinderVendorDoubleLoadTest-cpp",
         "IBinderVendorDoubleLoadTest-ndk",
-        "libbinder_aidl_test_stub-ndk",
+        "libbinder_aidl_2-ndk",
     ],
     // critical that libbinder/libbinder_ndk are shared for VTS
     shared_libs: [
@@ -122,12 +139,16 @@ cc_test {
     ],
     test_suites: ["general-tests"],
     require_root: true,
+    //host_supported: true,
+    cmake_snapshot_supported: true,
 }
 
 aidl_interface {
     name: "IBinderVendorDoubleLoadTest",
     unstable: true,
     vendor: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderVendorDoubleLoadTest.aidl",
     ],
@@ -136,6 +157,8 @@ aidl_interface {
 aidl_interface {
     name: "IBinderNdkUnitTest",
     unstable: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderNdkUnitTest.aidl",
         "IEmpty.aidl",
