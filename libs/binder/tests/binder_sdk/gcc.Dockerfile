@@ -27,6 +27,8 @@ WORKDIR /binder_sdk
 RUN CC=gcc CXX=g++ cmake -G Ninja -B build .
 RUN cmake --build build
 
-WORKDIR /binder_sdk/build
-# Alternatively: `ninja test`, but it won't pass parallel argument
-ENTRYPOINT [ "ctest", "--parallel", "32", "--output-on-failure" ]
+ENTRYPOINT [ \
+    "/bin/bash", \
+    "/binder_sdk/frameworks/native/libs/binder/tests/binder_sdk/run_all_tests.sh", \
+    "/binder_sdk/build" \
+]

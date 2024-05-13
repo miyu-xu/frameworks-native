@@ -22,9 +22,9 @@
 #include <utils/String8.h>
 
 #include <pthread.h>
-
 #include <atomic>
 #include <chrono>
+#include <condition_variable>
 #include <mutex>
 
 // ---------------------------------------------------------------------------
@@ -186,7 +186,7 @@ private:
 
     bool mForked;
     bool mThreadPoolStarted;
-    volatile int32_t mThreadPoolSeq;
+    std::atomic_uint32_t mThreadPoolSeq;
 
     CallRestriction mCallRestriction;
 };
