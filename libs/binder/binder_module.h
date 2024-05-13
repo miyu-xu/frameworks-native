@@ -29,7 +29,16 @@
 #undef B_PACK_CHARS
 #endif
 
+enum flat_binder_object_shifts {
+    FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT = 9,
+};
+enum flat_binder_object_flags {
+    FLAT_BINDER_FLAG_SCHED_POLICY_MASK = 3U << FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT,
+    FLAT_BINDER_FLAG_INHERIT_RT = 0x800,
+};
 #include <linux/android/binder.h>
 #include <sys/ioctl.h>
+
+enum { BR_TRANSACTION_PENDING_FROZEN = _IO('r', 20) };
 
 #endif // _BINDER_MODULE_H_
