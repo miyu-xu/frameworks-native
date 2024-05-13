@@ -42,7 +42,7 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
         // actually gets used. This isn't cheating because the version should
         // always be set if the session init succeeded and we aren't testing the
         // session init here (it is bypassed by addNullDebuggingClient).
-        session->setProtocolVersion(RPC_WIRE_PROTOCOL_VERSION);
+        (void)session->setProtocolVersion(RPC_WIRE_PROTOCOL_VERSION);
         p->markForRpc(session);
 
         if (options->writeHeader) {
