@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <binder/Binder.h>
 #include <binder/Functional.h>
 #include <binder/IServiceManager.h>
 #include <binder/Parcel.h>
 #include <binder/RpcServer.h>
 #include <binder/RpcSession.h>
-#include <cutils/trace.h>
+// #include <cutils/trace.h>
 #include <gtest/gtest.h>
-#include <utils/CallStack.h>
+// #include <utils/CallStack.h>
 
 #include <malloc.h>
 #include <functional>
@@ -127,9 +127,11 @@ __attribute__((warn_unused_result))
 DestructionAction ScopeDisallowMalloc() {
     return OnMalloc([&](size_t bytes) {
         ADD_FAILURE() << "Unexpected allocation: " << bytes;
-        using android::CallStack;
-        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION", CallStack::getCurrent(4 /*ignoreDepth*/).get())
-                  << std::endl;
+        //        using android::CallStack;
+        //        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION",
+        //        CallStack::getCurrent(4 /*ignoreDepth*/).get())
+        //                  << std::endl;
+        std::cout << "UNEXPECTED ALLOCATION" << std::endl;
     });
 }
 
@@ -256,15 +258,17 @@ TEST(RpcBinderAllocation, SetupRpcServer) {
 
 int main(int argc, char** argv) {
     if (getenv("LIBC_HOOKS_ENABLE") == nullptr) {
-        CHECK(0 == setenv("LIBC_HOOKS_ENABLE", "1", true /*overwrite*/));
+        if (0 != setenv("LIBC_HOOKS_ENABLE", "1", true /*overwrite*/)) LOG_ALWAYS_FATAL("setenv");
         execv(argv[0], argv);
         return 1;
     }
     ::testing::InitGoogleTest(&argc, argv);
 
+#if 0
     // if tracing is enabled, take in one-time cost
     (void)ATRACE_INIT();
     (void)ATRACE_GET_ENABLED_TAGS();
+#endif
 
     return RUN_ALL_TESTS();
 }

@@ -16,11 +16,11 @@
 
 #include "Access.h"
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <binder/IPCThreadState.h>
-#include <log/log_safetynet.h>
-#include <selinux/android.h>
-#include <selinux/avc.h>
+// #include <log/log_safetynet.h>
+// #include <selinux/android.h>
+// #include <selinux/avc.h>
 
 #include <sstream>
 
@@ -105,7 +105,7 @@ Access::Access() {
 }
 
 Access::~Access() {
-    freecon(mThisProcessContext);
+    // freecon(mThisProcessContext);
 }
 
 Access::CallingContext Access::getCallingContext() {

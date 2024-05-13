@@ -15,7 +15,7 @@
  */
 
 #include <android-base/logging.h>
-#include <android-base/properties.h>
+// #include <android-base/properties.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 #include <binder/Status.h>
@@ -33,7 +33,7 @@ using ::android::LooperCallback;
 using ::android::ProcessState;
 using ::android::ServiceManager;
 using ::android::sp;
-using ::android::base::SetProperty;
+// using ::android::base::SetProperty;
 using ::android::os::IServiceManager;
 
 class BinderCallback : public LooperCallback {
@@ -124,7 +124,7 @@ private:
 };
 
 int main(int argc, char** argv) {
-    android::base::InitLogging(argv, android::base::KernelLogger);
+    // android::base::InitLogging(argv, android::base::KernelLogger);
 
     if (argc > 2) {
         LOG(FATAL) << "usage: " << argv[0] << " [binder driver]";
@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
 
     const char* driver = argc == 2 ? argv[1] : "/dev/binder";
 
-    LOG(INFO) << "Starting sm instance on " << driver;
+    ALOGI("Starting sm instance on %s", driver);
 
     sp<ProcessState> ps = ProcessState::initWithDriver(driver);
     ps->setThreadPoolMaxThreadCount(0);
@@ -142,12 +142,12 @@ int main(int argc, char** argv) {
 
     sp<ServiceManager> manager = sp<ServiceManager>::make(std::make_unique<Access>());
     if (!manager->addService("manager", manager, false /*allowIsolated*/, IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk()) {
-        LOG(ERROR) << "Could not self register servicemanager";
+        ALOGE("Could not self register servicemanager");
     }
 
     IPCThreadState::self()->setTheContextObject(manager);
     if (!ps->becomeContextManager()) {
-        LOG(FATAL) << "Could not become context manager";
+        LOG_ALWAYS_FATAL("Could not become context manager");
     }
 
     sp<Looper> looper = Looper::prepare(false /*allowNonCallbacks*/);
@@ -155,9 +155,9 @@ int main(int argc, char** argv) {
     sp<BinderCallback> binderCallback = BinderCallback::setupTo(looper);
     ClientCallbackCallback::setupTo(looper, manager, binderCallback);
 
-#ifndef VENDORSERVICEMANAGER
+#if 0 // ndef VENDORSERVICEMANAGER
     if (!SetProperty("servicemanager.ready", "true")) {
-        LOG(ERROR) << "Failed to set servicemanager ready property";
+        ALOGE("Failed to set servicemanager ready property");
     }
 #endif
 
