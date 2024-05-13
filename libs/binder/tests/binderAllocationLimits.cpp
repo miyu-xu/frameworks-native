@@ -22,7 +22,7 @@
 #include <binder/RpcSession.h>
 #include <binder/Trace.h>
 #include <gtest/gtest.h>
-#include <utils/CallStack.h>
+// #include <utils/CallStack.h>
 
 #include <malloc.h>
 #include <functional>
@@ -126,9 +126,11 @@ __attribute__((warn_unused_result))
 DestructionAction ScopeDisallowMalloc() {
     return OnMalloc([&](size_t bytes) {
         ADD_FAILURE() << "Unexpected allocation: " << bytes;
-        using android::CallStack;
-        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION", CallStack::getCurrent(4 /*ignoreDepth*/).get())
-                  << std::endl;
+        //        using android::CallStack;
+        //        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION",
+        //        CallStack::getCurrent(4 /*ignoreDepth*/).get())
+        //                  << std::endl;
+        std::cout << "UNEXPECTED ALLOCATION" << std::endl;
     });
 }
 

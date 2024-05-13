@@ -22,7 +22,7 @@
 #include <binder/BpBinder.h>
 #include <binder/TextOutput.h>
 
-#include <utils/CallStack.h>
+// #include <utils/CallStack.h>
 
 #include <errno.h>
 #include <inttypes.h>
@@ -811,8 +811,9 @@ status_t IPCThreadState::transact(int32_t handle,
         if (mCallRestriction != ProcessState::CallRestriction::NONE) [[unlikely]] {
             if (mCallRestriction == ProcessState::CallRestriction::ERROR_IF_NOT_ONEWAY) {
                 ALOGE("Process making non-oneway call (code: %u) but is restricted.", code);
-                CallStack::logStack("non-oneway call", CallStack::getCurrent(10).get(),
-                    ANDROID_LOG_ERROR);
+                //                CallStack::logStack("non-oneway call",
+                //                CallStack::getCurrent(10).get(),
+                //                    ANDROID_LOG_ERROR);
             } else /* FATAL_IF_NOT_ONEWAY */ {
                 LOG_ALWAYS_FATAL("Process may not make non-oneway calls (code: %u).", code);
             }
@@ -981,8 +982,8 @@ status_t IPCThreadState::waitForResponse(Parcel *reply, status_t *acquireResult)
         switch (cmd) {
         case BR_ONEWAY_SPAM_SUSPECT:
             ALOGE("Process seems to be sending too many oneway calls.");
-            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
-                    ANDROID_LOG_ERROR);
+            //            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
+            //                    ANDROID_LOG_ERROR);
             [[fallthrough]];
         case BR_TRANSACTION_COMPLETE:
             if (!reply && !acquireResult) goto finish;
@@ -1120,7 +1121,7 @@ status_t IPCThreadState::talkWithDriver(bool doReceive)
             std::string message = logStream.str();
             ALOGI("%s", message.c_str());
         }
-#if defined(__ANDROID__)
+#if defined(__ANDROID__) || 1
         if (ioctl(mProcess->mDriverFD, BINDER_WRITE_READ, &bwr) >= 0)
             err = NO_ERROR;
         else
