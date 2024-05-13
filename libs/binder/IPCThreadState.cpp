@@ -22,11 +22,6 @@
 #include <binder/BpBinder.h>
 #include <binder/TextOutput.h>
 
-#include <cutils/sched_policy.h>
-#include <utils/CallStack.h>
-#include <utils/Log.h>
-#include <utils/SystemClock.h>
-
 #include <atomic>
 #include <errno.h>
 #include <inttypes.h>
@@ -64,6 +59,39 @@
 // ---------------------------------------------------------------------------
 
 namespace android {
+
+typedef int64_t nsecs_t; // nano-seconds
+
+enum {
+    SYSTEM_TIME_REALTIME = 0,  // system-wide realtime clock
+    SYSTEM_TIME_MONOTONIC = 1, // monotonic time since unspecified starting point
+    SYSTEM_TIME_PROCESS = 2,   // high-resolution per-process clock
+    SYSTEM_TIME_THREAD = 3,    // high-resolution per-thread clock
+    SYSTEM_TIME_BOOTTIME = 4,  // same as SYSTEM_TIME_MONOTONIC, but including CPU suspend time
+};
+
+nsecs_t systemTime(int clock) {
+    //    checkClockId(clock);
+    static constexpr clockid_t clocks[] = {CLOCK_REALTIME, CLOCK_MONOTONIC,
+                                           CLOCK_PROCESS_CPUTIME_ID, CLOCK_THREAD_CPUTIME_ID,
+                                           CLOCK_BOOTTIME};
+    timespec t = {};
+    clock_gettime(clocks[clock], &t);
+    return nsecs_t(t.tv_sec) * 1000000000LL + t.tv_nsec;
+}
+
+static constexpr inline nsecs_t nanoseconds_to_milliseconds(nsecs_t secs) {
+    return secs / 1000000;
+}
+
+int64_t uptimeNanos() {
+    return systemTime(SYSTEM_TIME_MONOTONIC);
+}
+
+int64_t uptimeMillis() // TODO: use std::chrono::steady_clock
+{
+    return nanoseconds_to_milliseconds(uptimeNanos());
+}
 
 // Static const and functions will be optimized out if not used,
 // when LOG_NDEBUG and references in IF_LOG_COMMANDS() are optimized out.
@@ -836,8 +864,9 @@ status_t IPCThreadState::transact(int32_t handle,
         if (mCallRestriction != ProcessState::CallRestriction::NONE) [[unlikely]] {
             if (mCallRestriction == ProcessState::CallRestriction::ERROR_IF_NOT_ONEWAY) {
                 ALOGE("Process making non-oneway call (code: %u) but is restricted.", code);
-                CallStack::logStack("non-oneway call", CallStack::getCurrent(10).get(),
-                    ANDROID_LOG_ERROR);
+                //                CallStack::logStack("non-oneway call",
+                //                CallStack::getCurrent(10).get(),
+                //                    ANDROID_LOG_ERROR);
             } else /* FATAL_IF_NOT_ONEWAY */ {
                 LOG_ALWAYS_FATAL("Process may not make non-oneway calls (code: %u).", code);
             }
@@ -1007,8 +1036,8 @@ status_t IPCThreadState::waitForResponse(Parcel *reply, status_t *acquireResult)
         switch (cmd) {
         case BR_ONEWAY_SPAM_SUSPECT:
             ALOGE("Process seems to be sending too many oneway calls.");
-            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
-                    ANDROID_LOG_ERROR);
+            //            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
+            //                    ANDROID_LOG_ERROR);
             [[fallthrough]];
         case BR_TRANSACTION_COMPLETE:
             if (!reply && !acquireResult) goto finish;

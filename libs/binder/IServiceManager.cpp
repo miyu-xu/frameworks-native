@@ -21,14 +21,11 @@
 #include <inttypes.h>
 #include <unistd.h>
 
-#include <android-base/properties.h>
-#include <android/os/BnServiceCallback.h>
-#include <android/os/IServiceManager.h>
+// #include <android/os/BnServiceCallback.h>
+#include <aidl/android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
-#include <utils/Log.h>
 #include <utils/String8.h>
-#include <utils/SystemClock.h>
 
 #ifndef __ANDROID_VNDK__
 #include <binder/IPermissionController.h>
