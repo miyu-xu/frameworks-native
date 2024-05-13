@@ -24,7 +24,7 @@ ADD binder_sdk.zip /
 RUN unzip -q -d binder_sdk binder_sdk.zip
 
 WORKDIR /binder_sdk
-RUN CC=clang CXX=clang++ cmake -G Ninja -B build .
+RUN CC=clang CXX=clang++ cmake -G Ninja -B build -DBENCHMARK_ENABLE_TESTING:BOOL=OFF .
 RUN cmake --build build
 
 ENTRYPOINT [ \
