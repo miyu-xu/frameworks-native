@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -18,8 +19,11 @@
 
 #include <fcntl.h>
 
-#include <android-base/logging.h>
-#include <cutils/ashmem.h>
+//#include <android-base/logging.h>
+#include <log/log.h>
+//#include <cutils/ashmem.h>
+
+#include <functional>
 
 namespace android {
 
@@ -30,7 +34,9 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
 
     std::vector<unique_fd> fds = provider->PickValueInArray<
             std::function<std::vector<unique_fd>()>>(
-            {[&]() {
+            {
+#if 0
+            [&]() {
                  fdType = "ashmem";
                  std::vector<unique_fd> ret;
                  ret.push_back(unique_fd(
@@ -38,6 +44,7 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
                                               provider->ConsumeIntegralInRange<size_t>(0, 4096))));
                  return ret;
              },
+#endif
              [&]() {
                  fdType = "/dev/null";
                  std::vector<unique_fd> ret;
@@ -55,7 +62,7 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
                  // TODO(b/236812909): also test blocking
                  if (true) flags |= O_NONBLOCK;
 
-                 CHECK_EQ(0, pipe2(pipefds, flags)) << flags;
+                 pipe2(pipefds, flags);// << flags;
 
                  if (provider->ConsumeBool()) std::swap(pipefds[0], pipefds[1]);
 
@@ -74,14 +81,12 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
                  snprintf(name, sizeof(name), "/tmp/android-tempfd-test-%d-XXXXXX", getpid());
 #endif
                  int fd = mkstemp(name);
-                 CHECK_NE(fd, -1) << "Failed to create file " << name << ", errno: " << errno;
+                 //CHECK_NE(fd, -1) << "Failed to create file " << name << ", errno: " << errno;
                  unlink(name);
                  if (provider->ConsumeBool()) {
-                     CHECK_NE(TEMP_FAILURE_RETRY(
+                     TEMP_FAILURE_RETRY(
                                       ftruncate(fd,
-                                                provider->ConsumeIntegralInRange<size_t>(0, 4096))),
-                              -1)
-                             << "Failed to truncate file, errno: " << errno;
+                                                provider->ConsumeIntegralInRange<size_t>(0, 4096)));
                  }
 
                  std::vector<unique_fd> ret;
@@ -91,7 +96,11 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
 
             })();
 
-    for (const auto& fd : fds) CHECK(fd.ok()) << fd.get() << " " << fdType;
+    for (const auto& fd : fds) {
+        if (!fd.ok()) {
+            LOG_ALWAYS_FATAL("getRandomFds");
+        }
+    }
 
     return fds;
 }
