@@ -16,11 +16,11 @@
 
 #include "Access.h"
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <binder/IPCThreadState.h>
-#include <log/log_safetynet.h>
-#include <selinux/android.h>
-#include <selinux/avc.h>
+// #include <log/log_safetynet.h>
+// #include <selinux/android.h>
+// #include <selinux/avc.h>
 
 #include <sstream>
 
@@ -38,7 +38,7 @@ static std::string getPidcon(pid_t pid) {
 
     char* lookup = nullptr;
     if (getpidcon(pid, &lookup) < 0) {
-        LOG(ERROR) << "SELinux: getpidcon(pid=" << pid << ") failed to retrieve pid context";
+        ALOGE("SELinux: getpidcon(pid=%d) failed to retrieve pid context", pid);
         return "";
     }
     std::string result = lookup;
@@ -72,7 +72,7 @@ static int auditCallback(void *data, security_class_t /*cls*/, char *buf, size_t
     const AuditCallbackData* ad = reinterpret_cast<AuditCallbackData*>(data);
 
     if (!ad) {
-        LOG(ERROR) << "No service manager audit data";
+        ALOGE("No service manager audit data");
         return 0;
     }
 
@@ -105,7 +105,7 @@ Access::Access() {
 }
 
 Access::~Access() {
-    freecon(mThisProcessContext);
+    // freecon(mThisProcessContext);
 }
 
 Access::CallingContext Access::getCallingContext() {
@@ -163,7 +163,7 @@ bool Access::actionAllowedFromLookup(const CallingContext& sctx, const std::stri
 #ifdef __ANDROID__
     char *tctx = nullptr;
     if (selabel_lookup(getSehandle(), &tctx, name.c_str(), SELABEL_CTX_ANDROID_SERVICE) != 0) {
-        LOG(ERROR) << "SELinux: No match for " << name << " in service_contexts.\n";
+        ALOGE("SELinux: No match for %s in service_contexts.", name.c_str());
         return false;
     }
 
