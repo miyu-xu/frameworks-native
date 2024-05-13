@@ -20,9 +20,9 @@
 #include <binder/Parcel.h>
 #include <binder/RpcServer.h>
 #include <binder/RpcSession.h>
-#include <cutils/trace.h>
+// #include <cutils/trace.h>
 #include <gtest/gtest.h>
-#include <utils/CallStack.h>
+// #include <utils/CallStack.h>
 
 #include <malloc.h>
 #include <functional>
@@ -126,9 +126,11 @@ __attribute__((warn_unused_result))
 DestructionAction ScopeDisallowMalloc() {
     return OnMalloc([&](size_t bytes) {
         ADD_FAILURE() << "Unexpected allocation: " << bytes;
-        using android::CallStack;
-        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION", CallStack::getCurrent(4 /*ignoreDepth*/).get())
-                  << std::endl;
+        //        using android::CallStack;
+        //        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION",
+        //        CallStack::getCurrent(4 /*ignoreDepth*/).get())
+        //                  << std::endl;
+        std::cout << "UNEXPECTED ALLOCATION" << std::endl;
     });
 }
 
@@ -262,9 +264,11 @@ int main(int argc, char** argv) {
     }
     ::testing::InitGoogleTest(&argc, argv);
 
+#if 0
     // if tracing is enabled, take in one-time cost
     (void)ATRACE_INIT();
     (void)ATRACE_GET_ENABLED_TAGS();
+#endif
 
     return RUN_ALL_TESTS();
 }
