@@ -54,6 +54,9 @@ cc_defaults {
         "ibinder.cpp",
         "libbinder.cpp",
         "parcel.cpp",
+        "persistable_bundle.cpp",
+        "process.cpp",
+        "service_manager.cpp",
         "stability.cpp",
         "status.cpp",
     ],
@@ -92,9 +95,6 @@ cc_library {
     srcs: [
         "ibinder_jni.cpp",
         "parcel_jni.cpp",
-        "persistable_bundle.cpp",
-        "process.cpp",
-        "service_manager.cpp",
     ],
 
     static_libs: [
