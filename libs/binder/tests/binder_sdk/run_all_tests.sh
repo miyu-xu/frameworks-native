@@ -19,6 +19,7 @@
 set -ex
 
 BUILD_DIR=$1
+SERVICEMANAGER_DIR=${BUILD_DIR}/frameworks/native/cmds/servicemanager
 BINDER_DIR=${BUILD_DIR}/frameworks/native/libs/binder
 RED='\033[1;31m'
 GREEN='\033[1;32m'
@@ -29,10 +30,28 @@ if [ ! -d "${BINDER_DIR}" ]; then
     exit -1
 fi
 
-${BINDER_DIR}/tests/binderRpcWireProtocolTest
+${SERVICEMANAGER_DIR}/servicemanager &
+SERVICEMANAGER_PID=$!
+function cleanup {
+    kill $SERVICEMANAGER_PID
+}
+trap cleanup EXIT
 
+${BINDER_DIR}/ndk/tests/binderVendorDoubleLoadTest
+${BINDER_DIR}/ndk/tests/libbinder_ndk_unit_testSdk
+${BINDER_DIR}/tests/RpcTlsUtilsTest
+${BINDER_DIR}/tests/binderClearBufTest
+${BINDER_DIR}/tests/binderDriverInterfaceTestSdk
+${BINDER_DIR}/tests/binderLibTestSdk
+${BINDER_DIR}/tests/binderParcelBenchmark
 # TODO: causes test timeout (runs for 2 minutes)
+#${BINDER_DIR}/tests/binderRpcTest
 #${BINDER_DIR}/tests/binderRpcTestNoKernel
+#${BINDER_DIR}/tests/binderRpcTestSingleThreaded
 #${BINDER_DIR}/tests/binderRpcTestSingleThreadedNoKernel
+${BINDER_DIR}/tests/binderRpcWireProtocolTest
+${BINDER_DIR}/tests/binderStabilityTestSdk
+${BINDER_DIR}/tests/binderThroughputTest
+${BINDER_DIR}/tests/binderUnitTest
 
 echo -e "${GREEN}All tests succeeded${NO_COLOR}"
