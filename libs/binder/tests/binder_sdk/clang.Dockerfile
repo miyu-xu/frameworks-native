@@ -12,4 +12,4 @@ RUN CC=clang CXX=clang++ cmake -G Ninja -B build .
 RUN cmake --build build
 
 WORKDIR /binder_sdk/build/frameworks/native/libs/binder/tests/
-ENTRYPOINT [ "/binder_sdk/build/frameworks/native/libs/binder/tests/binderRpcTestNoKernel" ]
+ENTRYPOINT [ "/binder_sdk/build/frameworks/native/libs/binder/tests/binderRpcTest" ]
