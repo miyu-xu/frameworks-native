@@ -20,18 +20,16 @@
 
 #include <inttypes.h>
 #include <unistd.h>
+#include <chrono>
 #include <condition_variable>
 
-#include <android-base/properties.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
-#include <utils/Log.h>
 #include <utils/String8.h>
-#include <utils/SystemClock.h>
 
-#ifndef __ANDROID_VNDK__
+#if !defined(__ANDROID_VNDK__) && 0
 #include <binder/IPermissionController.h>
 #endif
 
@@ -49,6 +47,8 @@
 #include "Static.h"
 
 namespace android {
+
+using namespace std::chrono_literals;
 
 using AidlRegistrationCallback = IServiceManager::LocalRegistrationCallback;
 
@@ -185,7 +185,7 @@ void setDefaultServiceManager(const sp<IServiceManager>& sm) {
     }
 }
 
-#if !defined(__ANDROID_VNDK__)
+#if !defined(__ANDROID_VNDK__) && 0
 // IPermissionController is not accessible to vendors
 
 bool checkCallingPermission(const String16& permission)
@@ -307,8 +307,8 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 
     const bool isVendorService =
         strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
-    constexpr int64_t timeout = 5000;
-    int64_t startTime = uptimeMillis();
+    constexpr auto timeout = 5s;
+    const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
     if (!gSystemBootCompleted && !isVendorService) {
 #ifdef __ANDROID__
@@ -326,15 +326,16 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
           ProcessState::self()->getDriverName().c_str());
 
     int n = 0;
-    while (uptimeMillis() - startTime < timeout) {
+    while (std::chrono::steady_clock::now() - startTime < timeout) {
         n++;
         usleep(1000*sleepTime);
 
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
+            const auto waitTime = std::chrono::steady_clock::now() - startTime;
             ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIi64 "ms",
                   String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
-                  uptimeMillis() - startTime);
+                  std::chrono::duration_cast<std::chrono::milliseconds>(waitTime).count());
             return svc;
         }
     }
@@ -627,7 +628,7 @@ std::vector<IServiceManager::ServiceDebugInfo> ServiceManagerShim::getServiceDeb
     return ret;
 }
 
-#ifndef __ANDROID__
+#if !defined(__ANDROID__) && 0
 // ServiceManagerShim for host. Implements the old libbinder android::IServiceManager API.
 // The internal implementation of the AIDL interface android::os::IServiceManager calls into
 // on-device service manager.

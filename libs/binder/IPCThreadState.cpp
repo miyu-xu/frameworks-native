@@ -22,11 +22,6 @@
 #include <binder/BpBinder.h>
 #include <binder/TextOutput.h>
 
-#include <cutils/sched_policy.h>
-#include <utils/CallStack.h>
-#include <utils/Log.h>
-#include <utils/SystemClock.h>
-
 #include <atomic>
 #include <errno.h>
 #include <inttypes.h>
@@ -64,6 +59,8 @@
 // ---------------------------------------------------------------------------
 
 namespace android {
+
+using namespace std::chrono_literals;
 
 // Static const and functions will be optimized out if not used,
 // when LOG_NDEBUG and references in IF_LOG_COMMANDS() are optimized out.
@@ -645,8 +642,8 @@ status_t IPCThreadState::getAndExecuteCommand()
         pthread_mutex_lock(&mProcess->mThreadCountLock);
         mProcess->mExecutingThreadsCount++;
         if (mProcess->mExecutingThreadsCount >= mProcess->mMaxThreads &&
-                mProcess->mStarvationStartTimeMs == 0) {
-            mProcess->mStarvationStartTimeMs = uptimeMillis();
+            mProcess->mStarvationStartTime == mProcess->mStarvationStartTime.min()) {
+            mProcess->mStarvationStartTime = std::chrono::steady_clock::now();
         }
         pthread_mutex_unlock(&mProcess->mThreadCountLock);
 
@@ -655,13 +652,16 @@ status_t IPCThreadState::getAndExecuteCommand()
         pthread_mutex_lock(&mProcess->mThreadCountLock);
         mProcess->mExecutingThreadsCount--;
         if (mProcess->mExecutingThreadsCount < mProcess->mMaxThreads &&
-                mProcess->mStarvationStartTimeMs != 0) {
-            int64_t starvationTimeMs = uptimeMillis() - mProcess->mStarvationStartTimeMs;
-            if (starvationTimeMs > 100) {
+            mProcess->mStarvationStartTime != mProcess->mStarvationStartTime.min()) {
+            const auto starvationTime =
+                    std::chrono::steady_clock::now() - mProcess->mStarvationStartTime;
+            if (starvationTime > 100ms) {
                 ALOGE("binder thread pool (%zu threads) starved for %" PRId64 " ms",
-                      mProcess->mMaxThreads, starvationTimeMs);
+                      mProcess->mMaxThreads,
+                      std::chrono::duration_cast<std::chrono::milliseconds>(starvationTime)
+                              .count());
             }
-            mProcess->mStarvationStartTimeMs = 0;
+            mProcess->mStarvationStartTime = mProcess->mStarvationStartTime.min();
         }
 
         // Cond broadcast can be expensive, so don't send it every time a binder
@@ -836,8 +836,9 @@ status_t IPCThreadState::transact(int32_t handle,
         if (mCallRestriction != ProcessState::CallRestriction::NONE) [[unlikely]] {
             if (mCallRestriction == ProcessState::CallRestriction::ERROR_IF_NOT_ONEWAY) {
                 ALOGE("Process making non-oneway call (code: %u) but is restricted.", code);
-                CallStack::logStack("non-oneway call", CallStack::getCurrent(10).get(),
-                    ANDROID_LOG_ERROR);
+                //                CallStack::logStack("non-oneway call",
+                //                CallStack::getCurrent(10).get(),
+                //                    ANDROID_LOG_ERROR);
             } else /* FATAL_IF_NOT_ONEWAY */ {
                 LOG_ALWAYS_FATAL("Process may not make non-oneway calls (code: %u).", code);
             }
@@ -1007,8 +1008,8 @@ status_t IPCThreadState::waitForResponse(Parcel *reply, status_t *acquireResult)
         switch (cmd) {
         case BR_ONEWAY_SPAM_SUSPECT:
             ALOGE("Process seems to be sending too many oneway calls.");
-            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
-                    ANDROID_LOG_ERROR);
+            //            CallStack::logStack("oneway spamming", CallStack::getCurrent().get(),
+            //                    ANDROID_LOG_ERROR);
             [[fallthrough]];
         case BR_TRANSACTION_COMPLETE:
             if (!reply && !acquireResult) goto finish;
