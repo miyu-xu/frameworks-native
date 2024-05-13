@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "198c4297_d7b8276d",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-13T22:12:23Z",
+      "side": 1,
+      "message": "I know, just making this change for consistency.",
+      "parentUuid": "5c50d459_dbb3f265",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "558e34ae_4e1e4a8f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-13T21:32:59Z",
       "side": 1,
       "message": "`noKernel` here is the type of the service we\u0027re connecting to, not the client. Since these are RPC Binder tests, whether the service was built with kernel IPC is orthogonal to whether the client is.\n\nI guess it does make more sense for a non-kernel client to connect to a non-kernel service, since the IPC tests are disabled if either one doesn\u0027t support IPC.",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3220e74_ed39b92b",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-13T22:12:23Z",
+      "side": 1,
+      "message": "Are you sure it is the service? It\u0027s defined in BuildFlags.h depending on `BINDER_WITH_KERNEL_IPC` macro (so local to compilation unit / build target).",
+      "parentUuid": "558e34ae_4e1e4a8f",
       "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
