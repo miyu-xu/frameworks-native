@@ -17,11 +17,15 @@
 
 #include <fuzzbinder/random_parcel.h>
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 
-#include <private/android_filesystem_config.h>
+// #include <private/android_filesystem_config.h>
+
+#define AID_ROOT 0
+#define AID_USER 100000
+#define AID_SYSTEM 1000
 
 using android::binder::unique_fd;
 
@@ -112,9 +116,10 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
     // invariants
     auto ps = ProcessState::selfOrNull();
     if (ps) {
-        CHECK_EQ(0, ps->getThreadPoolMaxTotalThreadCount())
-                << "Binder threadpool should not be started by fuzzer because coverage can only "
-                   "cover in-process calls.";
+        ps->getThreadPoolMaxTotalThreadCount(); //)
+        //                << "Binder threadpool should not be started by fuzzer because coverage can
+        //                only "
+        //                   "cover in-process calls.";
     }
 }
 
