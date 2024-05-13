@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7c005e2_6a195bb5",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-13T23:09:58Z",
+      "side": 1,
+      "message": "Okay, looks like this part is needed indeed.",
+      "parentUuid": "198c4297_d7b8276d",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "558e34ae_4e1e4a8f",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 3
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Yes: `kEnableKernelIpc` marks whether the _client_ supports kernel IPC, and `noKernel` whether the _service_ supports it. The first one is set in `BuildFlags.h`, but is orthogonal to the second value.\n\nThe `noKernel` value determines which service binary the current test suite uses: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/tests/binderRpcTest.cpp;l\u003d266. If the chosen binary doesn\u0027t support the IPC tests, we disable them regardless of `kEnableKernelIpc`.",
       "parentUuid": "d3220e74_ed39b92b",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11cfc24_6b860c60",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-13T23:09:58Z",
+      "side": 1,
+      "message": "Ah, I misread what you said. So we\u0027re testing non-IPC client connecting to IPC-enabled service, ok. And on Trusty you hardcoded this to only connect to non-IPC version.\n\nSo I need some way to configure which tests to run. Maybe `BINDER_TEST_KERNEL_IPC`. Ideally, there would be no hardcoded BINDER_RPC_TO_TRUSTY_TEST but a more flexible version that would be applicable to linux too.",
+      "parentUuid": "0d3befc4_87ae8d9b",
       "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
