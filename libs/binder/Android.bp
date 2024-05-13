@@ -90,6 +90,7 @@ cc_cmake_snapshot {
         "libbinder_sdk",
         "libbinder_sdk_single_threaded",
         "libbinder_ndk_sdk",
+        "binderRpcTest",
         "binderRpcTestNoKernel",
         "fmtlib",
     ],
@@ -104,6 +105,7 @@ cc_cmake_snapshot {
         "-DBINDER_DISABLE_NATIVE_HANDLE",
         "-DBINDER_DISABLE_BLOB",
         "-DBINDER_NO_LIBBASE",
+        "-DBINDER_WITH_KERNEL_IPC",
 
         // from Soong's global.go commonGlobalCflags and noOverrideGlobalCflags
         "-Wno-c99-designator",
@@ -158,6 +160,10 @@ cc_cmake_snapshot {
             mapped_name: "android::libbinder_sdk",
         },
         {
+            android_name: "libbinder_rpc_single_threaded",
+            mapped_name: "android::libbinder_sdk_single_threaded",
+        },
+        {
             android_name: "libbinder_rpc_single_threaded_no_kernel",
             mapped_name: "android::libbinder_sdk_single_threaded",
         },
@@ -184,14 +190,6 @@ cc_cmake_snapshot {
         },
         {
             android_name: "libcutils",
-        },
-
-        // disable tests that don't work outside of Android yet
-        {
-            android_name: "binder_rpc_test_service",
-        },
-        {
-            android_name: "binder_rpc_test_service_single_threaded",
         },
 
         // trusty mocks are artificially triggered and not needed outside of Android build
@@ -547,6 +545,7 @@ cc_defaults {
         "-DBINDER_DISABLE_NATIVE_HANDLE",
         "-DBINDER_DISABLE_BLOB",
         "-DBINDER_NO_LIBBASE",
+        "-DBINDER_WITH_KERNEL_IPC",
     ],
 
     header_libs: [
@@ -567,10 +566,17 @@ cc_defaults {
     shared_libs: [
         "libutils_binder_sdk",
     ],
+    static_libs: [
+        "libbinder_aidl_2-cpp", // TODO: shared should work too
+    ],
 
     srcs: [
+        "IServiceManager.cpp",
+        "IPCThreadState.cpp",
         "OS_non_android_linux.cpp",
         "OS_unix_base.cpp",
+        "ProcessState.cpp",
+        //TODO: what about Static.cpp (and BufferedTextOutput.cpp)
     ],
 
     visibility: [
@@ -789,6 +795,8 @@ aidl_interface {
     local_include_dir: "aidl",
     srcs: [":libbinder_aidl"],
     vendor_available: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     backend: {
         java: {
             enabled: false,
