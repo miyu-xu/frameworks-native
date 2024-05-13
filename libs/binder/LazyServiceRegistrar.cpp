@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "log/log_main.h"
+// #include "log/log_main.h"
 #define LOG_TAG "AidlLazyServiceRegistrar"
 
 #include <binder/LazyServiceRegistrar.h>
@@ -22,7 +22,7 @@
 #include <binder/IServiceManager.h>
 #include <android/os/BnClientCallback.h>
 #include <android/os/IServiceManager.h>
-#include <utils/Log.h>
+// #include <utils/Log.h>
 
 namespace android {
 namespace binder {

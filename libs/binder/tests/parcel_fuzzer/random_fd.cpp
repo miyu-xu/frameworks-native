@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -16,7 +17,7 @@
 
 #include <fuzzbinder/random_fd.h>
 
-#include <cutils/ashmem.h>
+// #include <cutils/ashmem.h>
 #include <log/log.h>
 
 #include <fcntl.h>
@@ -31,7 +32,9 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
 
     std::vector<unique_fd> fds = provider->PickValueInArray<
             std::function<std::vector<unique_fd>()>>(
-            {[&]() {
+            {
+#if 0
+            [&]() {
                  fdType = "ashmem";
                  std::vector<unique_fd> ret;
                  ret.push_back(unique_fd(
@@ -39,6 +42,7 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
                                               provider->ConsumeIntegralInRange<size_t>(0, 4096))));
                  return ret;
              },
+#endif
              [&]() {
                  fdType = "/dev/null";
                  std::vector<unique_fd> ret;

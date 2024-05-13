@@ -21,7 +21,7 @@
 
 #include <binder/IShellCallback.h>
 
-#include <utils/Log.h>
+// #include <utils/Log.h>
 #include <binder/Parcel.h>
 #include <utils/String8.h>
 
