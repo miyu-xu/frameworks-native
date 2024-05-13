@@ -122,12 +122,16 @@ cc_test {
     ],
     test_suites: ["general-tests"],
     require_root: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
 }
 
 aidl_interface {
     name: "IBinderVendorDoubleLoadTest",
     unstable: true,
     vendor: true,
+    host_supported: true,
+    cmake_snapshot_supported: true,
     srcs: [
         "IBinderVendorDoubleLoadTest.aidl",
     ],

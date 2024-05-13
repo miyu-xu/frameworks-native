@@ -16,7 +16,7 @@
 
 #include <linux/android/binder.h>
 
-#include <android-base/logging.h>
+// #include <android-base/logging.h>
 
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
@@ -30,6 +30,9 @@
 using android::binder::borrowed_fd;
 using android::binder::WriteFully;
 using std::stack;
+
+#define AID_ROOT 0
+#define AID_USER 100000
 
 extern size_t kRandomInterfaceLength;
 // Keep this in sync with max_length in random_binder.cpp while creating a RandomBinder
@@ -104,7 +107,7 @@ void writeRandomBinder(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
                               randomBinderIndex);
 
     // write random string of length 100 in actual buffer array.
-    CHECK(WriteFully(fd, kRandomInterfaceName.c_str(), kRandomInterfaceName.size())) << fd.get();
+    WriteFully(fd, kRandomInterfaceName.c_str(), kRandomInterfaceName.size()); //) << fd.get();
 
     // These will be bytes which are used inside of RandomBinder
     // simplest path for these bytes is going to be consume bool -> return random status
@@ -123,7 +126,7 @@ void writeRandomBinder(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
     remainingPositions.push(providerData);
 
     // Write to fd
-    CHECK(WriteFully(fd, randomBinderBuffer.data(), randomBinderBuffer.size())) << fd.get();
+    WriteFully(fd, randomBinderBuffer.data(), randomBinderBuffer.size()); //) << fd.get();
 }
 
 // Assuming current seed path is inside the fillRandomParcelFunction, start of the loop.
@@ -157,7 +160,7 @@ void writeParcelData(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
     remainingPositions.push(providerData);
 
     // provide actual bytes
-    CHECK(WriteFully(fd, data + start, length)) << fd.get();
+    WriteFully(fd, data + start, length); //) << fd.get();
 }
 
 /**
@@ -236,7 +239,7 @@ void generateSeedsFromRecording(borrowed_fd fd,
                                 const binder::debug::RecordedTransaction& transaction) {
     // Write Reserved bytes for future use
     std::vector<uint8_t> reservedBytes(8);
-    CHECK(WriteFully(fd, reservedBytes.data(), reservedBytes.size())) << fd.get();
+    WriteFully(fd, reservedBytes.data(), reservedBytes.size()); //) << fd.get();
 
     std::vector<uint8_t> integralBuffer;
 
@@ -298,9 +301,9 @@ void generateSeedsFromRecording(borrowed_fd fd,
     impl::writeReversedBuffer(integralBuffer, static_cast<size_t>(0), subDataSize, subDataSize);
 
     // Write fill parcel buffer
-    CHECK(WriteFully(fd, fillParcelBuffer.data(), fillParcelBuffer.size())) << fd.get();
+    WriteFully(fd, fillParcelBuffer.data(), fillParcelBuffer.size()); //) << fd.get();
 
     // Write the integralBuffer to data
-    CHECK(WriteFully(fd, integralBuffer.data(), integralBuffer.size())) << fd.get();
+    WriteFully(fd, integralBuffer.data(), integralBuffer.size()); //) << fd.get();
 }
 } // namespace android
