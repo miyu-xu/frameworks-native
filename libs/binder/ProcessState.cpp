@@ -18,16 +18,16 @@
 
 #include <binder/ProcessState.h>
 
-#include <android-base/strings.h>
+// #include <android-base/strings.h>
 #include <binder/BpBinder.h>
 #include <binder/Functional.h>
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 #include <binder/Stability.h>
-#include <cutils/atomic.h>
-#include <utils/AndroidThreads.h>
+// #include <cutils/atomic.h>
+// #include <utils/AndroidThreads.h>
 #include <utils/String8.h>
-#include <utils/Thread.h>
+// #include <utils/Thread.h>
 
 #include "Static.h"
 #include "Utils.h"
@@ -62,13 +62,12 @@ namespace android {
 using namespace android::binder::impl;
 using android::binder::unique_fd;
 
-class PoolThread : public Thread
-{
+// TODO: how about kernel + single threaded?!
+#if 0
+class PoolThread : public std::thread {
 public:
     explicit PoolThread(bool isMain)
-        : mIsMain(isMain)
-    {
-    }
+          : std::thread(&PoolThread::threadLoop, this), mIsMain(isMain) {}
 
 protected:
     virtual bool threadLoop()
@@ -79,6 +78,7 @@ protected:
 
     const bool mIsMain;
 };
+#endif
 
 sp<ProcessState> ProcessState::self()
 {
@@ -207,8 +207,8 @@ bool ProcessState::becomeContextManager()
 {
     std::unique_lock<std::mutex> _l(mLock);
 
-    flat_binder_object obj {
-        .flags = FLAT_BINDER_FLAG_TXN_SECURITY_CTX,
+    flat_binder_object obj{
+            .flags = /*FLAT_BINDER_FLAG_TXN_SECURITY_CTX*/ 0,
     };
 
     int result = ioctl(mDriverFD, BINDER_SET_CONTEXT_MGR_EXT, &obj);
@@ -387,11 +387,13 @@ void ProcessState::expungeHandle(int32_t handle, IBinder* binder)
 }
 
 String8 ProcessState::makeBinderThreadName() {
-    int32_t s = android_atomic_add(1, &mThreadPoolSeq);
+    const auto s = mThreadPoolSeq++;
     pid_t pid = getpid();
 
     std::string_view driverName = mDriverName.c_str();
-    android::base::ConsumePrefix(&driverName, "/dev/");
+    if (driverName.starts_with("/dev/")) {
+        driverName = driverName.substr(5);
+    }
 
     String8 name;
     name.appendFormat("%.*s:%d_%X", static_cast<int>(driverName.length()), driverName.data(), pid,
@@ -399,14 +401,20 @@ String8 ProcessState::makeBinderThreadName() {
     return name;
 }
 
+static void poolThreadFunc(bool isMain) {
+    IPCThreadState::self()->joinThreadPool(isMain);
+}
+
 void ProcessState::spawnPooledThread(bool isMain)
 {
     if (mThreadPoolStarted) {
         String8 name = makeBinderThreadName();
         ALOGV("Spawning new pooled thread, name=%s\n", name.c_str());
-        sp<Thread> t = sp<PoolThread>::make(isMain);
-        t->run(name.c_str());
+        // sp<Thread> t = sp<PoolThread>::make(isMain);
+        std::thread t(poolThreadFunc, isMain);
+        // t->run(name.c_str());
         mKernelStartedThreads++;
+        t.detach();
     }
     // TODO: if startThreadPool is called on another thread after the process
     // starts up, the kernel might think that it already requested those
@@ -505,7 +513,7 @@ status_t ProcessState::enableOnewaySpamDetection(bool enable) {
 }
 
 void ProcessState::giveThreadPoolName() {
-    androidSetThreadName(makeBinderThreadName().c_str());
+    // androidSetThreadName(makeBinderThreadName().c_str());
 }
 
 String8 ProcessState::getDriverName() {

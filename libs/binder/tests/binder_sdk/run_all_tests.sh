@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Copyright (C) 2024 The Android Open Source Project
 #
@@ -14,20 +16,24 @@
 # limitations under the License.
 #
 
-FROM gcc:9
+set -ex
 
-RUN echo 'deb http://deb.debian.org/debian bullseye-backports main' >> /etc/apt/sources.list && \
-    apt-get update -y && \
-    apt-get install -y cmake
+BUILD_DIR=$1
+SERVICEMANAGER_DIR=${BUILD_DIR}/frameworks/native/cmds/servicemanager
 
-ADD binder_sdk.zip /
-RUN unzip -q -d binder_sdk binder_sdk.zip
+if [ ! -d "${SERVICEMANAGER_DIR}" ]; then
+    RED='\033[1;31m'
+    NO_COLOR='\033[0m'
+    echo -e "${RED}Invalid build dir. Please provide it as the first argument.${NO_COLOR}"
+    exit -1
+fi
 
-WORKDIR /binder_sdk
-RUN cmake .
-RUN make -j
+${SERVICEMANAGER_DIR}/servicemanager &
+SERVICEMANAGER_PID=$!
+function cleanup {
+    kill $SERVICEMANAGER_PID
+}
+trap cleanup EXIT
 
-ENTRYPOINT [ \
-    "/bin/bash", \
-    "/binder_sdk/frameworks/native/libs/binder/tests/binder_sdk/run_all_tests.sh", \
-]
+cd $BUILD_DIR
+ctest --parallel 32 --output-on-failure
