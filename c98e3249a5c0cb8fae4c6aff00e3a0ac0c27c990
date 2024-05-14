@@ -46,6 +46,30 @@
       },
       "revId": "c98e3249a5c0cb8fae4c6aff00e3a0ac0c27c990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4d53d7_458d09ff",
+        "filename": "cmds/cmd/fuzzer/cmd_fuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-05-14T21:40:56Z",
+      "side": 1,
+      "message": "strcmp(str.c_str), \"-w\")   works for me.",
+      "parentUuid": "de9a73f7_144df007",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "c98e3249a5c0cb8fae4c6aff00e3a0ac0c27c990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
