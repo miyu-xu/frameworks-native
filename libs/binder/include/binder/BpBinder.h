@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <binder/Common.h>
 #include <binder/IBinder.h>
 #include <binder/RpcThreads.h>
 #include <binder/unique_fd.h>
@@ -38,8 +39,7 @@ class ProcessState;
 using binder_proxy_limit_callback = std::function<void(int)>;
 using binder_proxy_warning_callback = std::function<void(int)>;
 
-class BpBinder : public IBinder
-{
+class LIBBINDER_EXPORTED BpBinder : public IBinder {
 public:
     /**
      * Return value:

@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+#include <binder/Common.h>
 #include <binder/IMemory.h>
 #include <binder/MemoryHeapBase.h>
 
@@ -29,8 +30,7 @@ class SimpleBestFitAllocator;
 
 // ----------------------------------------------------------------------------
 
-class MemoryDealer : public RefBase
-{
+class LIBBINDER_EXPORTED MemoryDealer : public RefBase {
 public:
     explicit MemoryDealer(size_t size, const char* name = nullptr,
             uint32_t flags = 0 /* or bits such as MemoryHeapBase::READ_ONLY */ );

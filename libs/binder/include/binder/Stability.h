@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <binder/Common.h>
 #include <binder/IBinder.h>
 #include <string>
 
@@ -48,7 +49,7 @@ namespace internal {
 // libbinder for regular binder calls, and everything on the system uses the
 // same copy of libbinder.
 
-class Stability final {
+class LIBBINDER_EXPORTED Stability final {
 public:
     // Given a binder interface at a certain stability, there may be some
     // requirements associated with that higher stability level. For instance, a
