@@ -21,6 +21,7 @@
 #include <lib/rand/rand.h>
 #endif
 
+#include <binder/Common.h>
 #include <binder/RpcTransportTipcTrusty.h>
 #include <log/log.h>
 #include <trusty_log.h>
@@ -35,9 +36,9 @@ using android::binder::unique_fd;
 
 namespace android::binder::os {
 
-void trace_begin(uint64_t, const char*) {}
+LIBBINDER_EXPORTED void trace_begin(uint64_t, const char*) {}
 
-void trace_end(uint64_t) {}
+LIBBINDER_EXPORTED void trace_end(uint64_t) {}
 
 uint64_t GetThreadId() {
     return 0;
@@ -92,7 +93,8 @@ ssize_t receiveMessageFromSocket(
 
 } // namespace android::binder::os
 
-int __android_log_print(int prio [[maybe_unused]], const char* tag, const char* fmt, ...) {
+LIBBINDER_EXPORTED int __android_log_print(int prio [[maybe_unused]], const char* tag,
+                                           const char* fmt, ...) {
 #ifdef TRUSTY_USERSPACE
 #define trusty_tlog _tlog
 #define trusty_vtlog _vtlog

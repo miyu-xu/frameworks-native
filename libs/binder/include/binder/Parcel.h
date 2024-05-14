@@ -34,6 +34,7 @@
 #include <utils/String16.h>
 #include <utils/Vector.h>
 
+#include <binder/Common.h>
 #include <binder/IInterface.h>
 #include <binder/Parcelable.h>
 
@@ -60,7 +61,7 @@ class RecordedTransaction;
 }
 }
 
-class Parcel {
+class LIBBINDER_EXPORTED Parcel {
     friend class IPCThreadState;
     friend class RpcState;
 

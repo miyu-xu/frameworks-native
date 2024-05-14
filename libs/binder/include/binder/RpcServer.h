@@ -15,6 +15,7 @@
  */
 #pragma once
 
+#include <binder/Common.h>
 #include <binder/IBinder.h>
 #include <binder/RpcSession.h>
 #include <binder/RpcThreads.h>
@@ -45,7 +46,8 @@ class RpcSocketAddress;
  *     }
  *     server->join();
  */
-class RpcServer final : public virtual RefBase, private RpcSession::EventListener {
+class LIBBINDER_EXPORTED RpcServer final : public virtual RefBase,
+                                           private RpcSession::EventListener {
 public:
     static sp<RpcServer> make(
             std::unique_ptr<RpcTransportCtxFactory> rpcTransportCtxFactory = nullptr);

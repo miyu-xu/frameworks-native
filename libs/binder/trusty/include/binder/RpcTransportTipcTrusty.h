@@ -26,7 +26,7 @@
 namespace android {
 
 // RpcTransportCtxFactory with TLS disabled.
-class RpcTransportCtxFactoryTipcTrusty : public RpcTransportCtxFactory {
+class LIBBINDER_INTERNAL_EXPORTED RpcTransportCtxFactoryTipcTrusty : public RpcTransportCtxFactory {
 public:
     static std::unique_ptr<RpcTransportCtxFactory> make();
 
