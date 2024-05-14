@@ -18,6 +18,7 @@
 
 #include <atomic>
 #include <stdint.h>
+#include <binder/Common.h>
 #include <binder/IBinder.h>
 
 // ---------------------------------------------------------------------------
@@ -27,8 +28,7 @@ namespace internal {
 class Stability;
 }
 
-class BBinder : public IBinder
-{
+class LIBBINDER_EXPORTED BBinder : public IBinder {
 public:
                         BBinder();
 
@@ -142,8 +142,7 @@ private:
 
 // ---------------------------------------------------------------------------
 
-class BpRefBase : public virtual RefBase
-{
+class LIBBINDER_EXPORTED BpRefBase : public virtual RefBase {
 protected:
     explicit                BpRefBase(const sp<IBinder>& o);
     virtual                 ~BpRefBase();
