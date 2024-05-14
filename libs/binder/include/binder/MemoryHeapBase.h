@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include <binder/Common.h>
 #include <binder/IMemory.h>
 
 
@@ -26,8 +27,7 @@ namespace android {
 
 // ---------------------------------------------------------------------------
 
-class MemoryHeapBase : public BnMemoryHeap
-{
+class LIBBINDER_EXPORTED MemoryHeapBase : public BnMemoryHeap {
 public:
     static constexpr auto MEMFD_ALLOW_SEALING_FLAG = 0x00000800;
     enum {
