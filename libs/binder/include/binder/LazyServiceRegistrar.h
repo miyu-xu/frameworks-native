@@ -18,6 +18,7 @@
 
 #include <functional>
 
+#include <binder/Common.h>
 #include <binder/IServiceManager.h>
 #include <binder/Status.h>
 #include <utils/StrongPointer.h>
@@ -41,7 +42,7 @@ class ClientCounterCallback;
  *
  * For more information on init .rc configuration, see system/core/init/README.md
  **/
-class LazyServiceRegistrar {
+class LIBBINDER_EXPORTED LazyServiceRegistrar {
    public:
      static LazyServiceRegistrar& getInstance();
      status_t registerService(const sp<IBinder>& service,

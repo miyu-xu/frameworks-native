@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <binder/Common.h>
 #include <binder/Parcel.h>
 #include <binder/unique_fd.h>
 #include <mutex>
@@ -28,7 +29,7 @@ namespace binder::debug {
 // non-stable format. A detailed description of the recording format can be found in
 // RecordedTransaction.cpp.
 
-class RecordedTransaction {
+class LIBBINDER_EXPORTED RecordedTransaction {
 public:
     // Filled with the first transaction from fd.
 

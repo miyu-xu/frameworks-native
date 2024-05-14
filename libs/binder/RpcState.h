@@ -59,7 +59,7 @@ void rpcMaybeWaitToFlake();
  * Abstracts away management of ref counts and the wire format from
  * RpcSession
  */
-class RpcState {
+class LIBBINDER_INTERNAL_EXPORTED RpcState {
 public:
     RpcState();
     ~RpcState();

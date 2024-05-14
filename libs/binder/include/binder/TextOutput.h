@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <binder/Common.h>
 #include <utils/Errors.h>
 #include <utils/String8.h>
 
@@ -26,7 +27,7 @@
 // ---------------------------------------------------------------------------
 namespace android {
 
-class TextOutput
+class LIBBINDER_EXPORTED TextOutput
 {
 public:
                         TextOutput();
@@ -82,7 +83,7 @@ TextOutput& operator<<(TextOutput& to, const T& val)
 
 TextOutput& operator<<(TextOutput& to, TextOutputManipFunc func);
 
-class TypeCode
+class LIBBINDER_EXPORTED TypeCode
 {
 public:
     inline explicit TypeCode(uint32_t code);
@@ -96,7 +97,7 @@ private:
 
 std::ostream& operator<<(std::ostream& to, const TypeCode& val);
 
-class HexDump
+class LIBBINDER_EXPORTED HexDump
 {
 public:
     HexDump(const void *buf, size_t size, size_t bytesPerLine=16);

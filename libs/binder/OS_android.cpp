@@ -36,11 +36,13 @@ bool report_sysprop_change() {
     return true;
 }
 
-void trace_begin(uint64_t tag, const char* name) {
+// DO NOT SUBMIT: Not sure why these need to be annotated in the .cpp files.
+// Maybe because they are forward declared?
+LIBBINDER_EXPORTED void trace_begin(uint64_t tag, const char* name) {
     atrace_begin(tag, name);
 }
 
-void trace_end(uint64_t tag) {
+LIBBINDER_EXPORTED void trace_end(uint64_t tag) {
     atrace_end(tag);
 }
 

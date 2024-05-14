@@ -15,6 +15,7 @@
  */
 #pragma once
 
+#include <binder/Common.h>
 #include <binder/IBinder.h>
 #include <binder/RpcThreads.h>
 #include <binder/RpcTransport.h>
@@ -54,7 +55,7 @@ constexpr uint32_t RPC_WIRE_PROTOCOL_VERSION_RPC_HEADER_FEATURE_EXPLICIT_PARCEL_
  * Once a binder exists in the session, if all references to all binders are dropped,
  * the session shuts down.
  */
-class RpcSession final : public virtual RefBase {
+class LIBBINDER_EXPORTED RpcSession final : public virtual RefBase {
 public:
     // Create an RpcSession with default configuration (raw sockets).
     static sp<RpcSession> make();

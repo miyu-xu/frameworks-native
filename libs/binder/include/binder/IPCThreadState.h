@@ -17,6 +17,7 @@
 #pragma once
 
 #include <utils/Errors.h>
+#include <binder/Common.h>
 #include <binder/Parcel.h>
 #include <binder/ProcessState.h>
 #include <utils/Vector.h>
@@ -32,7 +33,7 @@ namespace android {
  * Kernel binder thread state. All operations here refer to kernel binder. This
  * object is allocated per-thread.
  */
-class IPCThreadState
+class LIBBINDER_EXPORTED IPCThreadState
 {
 public:
     using CallRestriction = ProcessState::CallRestriction;

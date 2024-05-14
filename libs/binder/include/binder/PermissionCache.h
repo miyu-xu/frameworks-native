@@ -24,6 +24,7 @@
 #include <utils/String16.h>
 #include <utils/Singleton.h>
 #include <utils/SortedVector.h>
+#include <binder/Common.h>
 
 namespace android {
 // ---------------------------------------------------------------------------
@@ -39,7 +40,7 @@ namespace android {
  *
  */
 
-class PermissionCache : Singleton<PermissionCache> {
+class LIBBINDER_EXPORTED PermissionCache : Singleton<PermissionCache> {
     struct Entry {
         String16    name;
         uid_t       uid;
