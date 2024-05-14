@@ -136,7 +136,19 @@ cc_defaults {
         "-Wunused-const-variable",
         "-DANDROID_BASE_UNIQUE_FD_DISABLE_IMPLICIT_CONVERSION",
         "-DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION",
+        // Hide symbols by default and set the BUILDING_LIBBINDER macro so that
+        // the code knows to export them.
+        "-fvisibility=hidden",
+        "-DBUILDING_LIBBINDER",
     ],
+
+    target: {
+        glibc:  {
+            // Don't hide symbols on glibc builds because they use RTTI and
+            // there are issues causing by missing typeinfo symbols.
+            cflags: ["-fvisibility=default" ],
+        }
+    }
 }
 
 cc_defaults {
