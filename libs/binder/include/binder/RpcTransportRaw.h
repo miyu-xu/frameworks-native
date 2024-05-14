@@ -21,12 +21,13 @@
 
 #include <memory>
 
+#include <binder/Common.h>
 #include <binder/RpcTransport.h>
 
 namespace android {
 
 // RpcTransportCtxFactory with TLS disabled.
-class RpcTransportCtxFactoryRaw : public RpcTransportCtxFactory {
+class LIBBINDER_EXPORTED RpcTransportCtxFactoryRaw : public RpcTransportCtxFactory {
 public:
     static std::unique_ptr<RpcTransportCtxFactory> make();
 
