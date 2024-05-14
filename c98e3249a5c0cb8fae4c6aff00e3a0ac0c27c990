@@ -22,6 +22,30 @@
       },
       "revId": "c98e3249a5c0cb8fae4c6aff00e3a0ac0c27c990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9a73f7_144df007",
+        "filename": "cmds/cmd/fuzzer/cmd_fuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2045828
+      },
+      "writtenOn": "2024-05-14T10:30:56Z",
+      "side": 1,
+      "message": "Using `argument \u003d\u003d \"-w\"` for comparison would include any special characters preceding the `\"-w\"` argument, leading to inaccurate comparison results.\nFor Instance: if argument \u003d `\"\\0\\0\\0-w\"` Generated from ConsumeBytesAsString(), it will not match with `\"-w\"`. Due to this, in some cases the `\"-w\"` argument will not be skipped.\n\n\nAlternatively, we could utilize `(strcmp(argument.c_str(), \"-w\") \u003d\u003d 0)`, ensuring that strings like `\"-whatsHappening\"` are not skipped. Additionally, when converting a std::string to a C-String, any special characters are eliminated before comparison, guaranteeing an accurate string match.",
+      "parentUuid": "caced094_36055dd0",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "c98e3249a5c0cb8fae4c6aff00e3a0ac0c27c990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
