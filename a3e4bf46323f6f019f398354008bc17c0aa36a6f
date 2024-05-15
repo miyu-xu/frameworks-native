@@ -69,6 +69,23 @@
       "parentUuid": "a8563085_fc8897bd",
       "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bdfbf1_f8c3be75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897566
+      },
+      "writtenOn": "2024-05-15T07:38:11Z",
+      "side": 1,
+      "message": "This does seem to affect the amount of blur that is applied. Which also lead to failure in BlurTests b/340625902.\n\nI have an internal CL to fix it by having more allowance for the blur that is applied. But I am unsure if that is a valid change or if we should instead revisit this change.",
+      "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
