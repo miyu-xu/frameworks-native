@@ -104,6 +104,24 @@
       "parentUuid": "60bdfbf1_f8c3be75",
       "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587bd88b_8e57b027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870086
+      },
+      "writtenOn": "2024-05-15T08:45:35Z",
+      "side": 1,
+      "message": "Could you please share the relevant fixed change in the bug (b/333002945)? I can\u0027t open the link. Thanks!",
+      "parentUuid": "60bdfbf1_f8c3be75",
+      "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
