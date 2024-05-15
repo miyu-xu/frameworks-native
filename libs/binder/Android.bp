@@ -160,9 +160,7 @@ cc_defaults {
             ],
         },
         android: {
-            lto: {
-                thin: true,
-            },
+            lto_opt: "2",
         },
     },
 

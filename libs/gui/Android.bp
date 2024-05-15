@@ -315,9 +315,7 @@ cc_library_shared {
 
     afdo: true,
 
-    lto: {
-        thin: true,
-    },
+    lto_opt: "2",
 
     cflags: [
         "-Wthread-safety",

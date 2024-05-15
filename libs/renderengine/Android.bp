@@ -124,9 +124,7 @@ cc_library_static {
     include_dirs: [
         "external/skia/src/gpu",
     ],
-    lto: {
-        thin: true,
-    },
+    lto_opt: "2",
 }
 
 cc_library_static {

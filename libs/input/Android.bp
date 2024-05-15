@@ -154,9 +154,7 @@ cc_library_static {
     ],
     generated_sources: ["libinput_cxx_bridge_code"],
 
-    lto: {
-        never: true,
-    },
+    lto_opt: "off",
 
     shared_libs: [
         "libbase",

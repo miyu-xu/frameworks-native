@@ -132,9 +132,7 @@ cc_defaults {
 cc_defaults {
     name: "libsurfaceflinger_production_defaults",
     defaults: ["libsurfaceflinger_defaults"],
-    lto: {
-        thin: true,
-    },
+    lto_opt: "2",
     whole_program_vtables: true, // Requires ThinLTO
     afdo: true,
     // TODO(b/131771163): Fix broken fuzzer support with LTO.

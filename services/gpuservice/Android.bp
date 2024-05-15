@@ -61,9 +61,7 @@ cc_defaults {
     cflags: [
         "-fvisibility=hidden",
     ],
-    lto: {
-        thin: true,
-    },
+    lto_opt: "2",
     whole_program_vtables: true, // Requires ThinLTO
 }
 
