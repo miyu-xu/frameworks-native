@@ -1963,6 +1963,9 @@ Dumpstate::RunStatus Dumpstate::DumpstateDefaultAfterCritical() {
     RunCommand("SDK EXTENSIONS", {SDK_EXT_INFO, "--dump"},
                CommandOptions::WithTimeout(10).Always().DropRoot().Build());
 
+    // Dump UWB UCI logs here because apexdata requires root access
+    ds.AddDir("/data/misc/apexdata/com.android.uwb/log", true);
+
     if (dump_pool_) {
         RETURN_IF_USER_DENIED_CONSENT();
         WaitForTask(std::move(dump_traces));
