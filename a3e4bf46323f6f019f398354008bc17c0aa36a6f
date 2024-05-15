@@ -86,6 +86,24 @@
       "message": "This does seem to affect the amount of blur that is applied. Which also lead to failure in BlurTests b/340625902.\n\nI have an internal CL to fix it by having more allowance for the blur that is applied. But I am unsure if that is a valid change or if we should instead revisit this change.",
       "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf6bdb3_da2ac7df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045544
+      },
+      "writtenOn": "2024-05-15T08:41:50Z",
+      "side": 1,
+      "message": "With the fully correct gaussian blur these CTS tests pass (renderengine tests do not pass and so it was valid to adjust them). The CTS tests are also quite generous in how they use the radius.\n\nSo I don\u0027t think we should change the CTS tests. The \"fixed\" algorithm might be blurring slightly too much now and we could just adjust it down with a scaling factor.\n\nI thought this change was tested with BlurTests though.",
+      "parentUuid": "60bdfbf1_f8c3be75",
+      "revId": "a3e4bf46323f6f019f398354008bc17c0aa36a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
