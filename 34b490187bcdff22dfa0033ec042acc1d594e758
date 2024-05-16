@@ -52,6 +52,24 @@
       "parentUuid": "d261674f_6e2e548b",
       "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17750b1c_0ff9953b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976530
+      },
+      "writtenOn": "2024-05-16T05:03:14Z",
+      "side": 1,
+      "message": "Should I add \"Test: manual\" to the comment in order to merge this patch?",
+      "parentUuid": "9d203ee7_0f0c91a7",
+      "revId": "34b490187bcdff22dfa0033ec042acc1d594e758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
