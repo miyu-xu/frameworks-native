@@ -723,7 +723,7 @@ TEST_F(SafeInterfaceTest, TestIncrementNoCopyNoMove) {
     ASSERT_EQ(a.getValue() + 1, aPlusOne.getValue());
 }
 
-TEST_F(SafeInterfaceTest, TestIncrementParcelableVector) {
+TEST_F(SafeInterfaceTest, TestIncremementParcelableVector) {
     const std::vector<TestParcelable> a{TestParcelable{1}, TestParcelable{2}};
     std::vector<TestParcelable> aPlusOne;
     status_t result = mSafeInterfaceTest->increment(a, &aPlusOne);
