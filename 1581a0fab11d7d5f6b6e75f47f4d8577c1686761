@@ -46,6 +46,30 @@
       },
       "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696ac6d7_ecb88402",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-05-16T19:17:32Z",
+      "side": 1,
+      "message": "I thought you might want to update the counter only after all of the destructor work is done, but I\u0027m not sure the work in this block matters. Up to you.",
+      "parentUuid": "0563027a_2c2f5307",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 5
+      },
+      "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
