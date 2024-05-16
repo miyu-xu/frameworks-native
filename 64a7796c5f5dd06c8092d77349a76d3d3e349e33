@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08508e9f_028da372",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-16T23:36:07Z",
+      "side": 1,
+      "message": "Is it only the two instances of `LIBBINDER_INTERNAL_EXPORTED` or more? Maybe it would make sense to have `libbinder.so` and `libbinder_testable.so`? And two sets of tests (one using public APIs and one unit).",
+      "revId": "64a7796c5f5dd06c8092d77349a76d3d3e349e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
