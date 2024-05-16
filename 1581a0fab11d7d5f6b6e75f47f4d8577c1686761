@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e705c487_7921767d",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-05-16T18:27:20Z",
+      "side": 1,
+      "message": "```suggestion\n    if (ipc) {\n        ipc-\u003eexpungeHandle(binderHandle(), this);\n        ipc-\u003edecWeakHandle(binderHandle());\n    }\n    ATRACE_INT(\"binder_proxies\", numProxies);\n```",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 5
+      },
+      "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
