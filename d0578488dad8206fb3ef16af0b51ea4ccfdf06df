@@ -34,6 +34,24 @@
       "parentUuid": "d455a306_3cdbce90",
       "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8150c84_e4419243",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-16T13:06:12Z",
+      "side": 1,
+      "message": "I do want to fix b/205673378 eventually, but last time I looked at it, I found it to be rather non-trivial and significantly more work than I had expected. It would require the AIDL generator to generate two copies of anything that contains a binder node, which pretty much all of the things that it generates can do.\n\nI want to get around to it eventually, but right now I need to prioritize some Rust Binder driver work. I wonder if we could add another option to the AIDL generator (like how generating async at all is already an option) in a way that makes it easy to transition users one-by-one when I fix the bug?\n\n(Actually transitioning users shouldn\u0027t be difficult — it\u0027s just removing / adding calls to `into_async()` or `into_sync()`. The difficulty is that right now, we would need to update all users simultaneously as the change could otherwise break users.)\n\nYou say \"bugs\" in plural. Are there any other bugs you are worried about?",
+      "parentUuid": "80f1e28c_51443b91",
+      "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
