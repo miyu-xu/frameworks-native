@@ -70,6 +70,24 @@
       "parentUuid": "b8150c84_e4419243",
       "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df750384_fbe87711",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-17T21:21:38Z",
+      "side": 1,
+      "message": "Okay, then I am closing it.\n\nAs for b/293406123, I\u0027m a bit confused. The kernel driver does not support local calls at all, and aosp/2674857 introduced a test that goes through the relevant codepath. So perhaps it\u0027s not actually a bug at all? Whatever the code does, it does not go through the kernel driver.\n\nEither way, b/293406123 doesn\u0027t seem like it has issues with future-compat, since we would not need to change the API to fix it (if it\u0027s a real problem).",
+      "parentUuid": "50cdafbd_8760c663",
+      "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
