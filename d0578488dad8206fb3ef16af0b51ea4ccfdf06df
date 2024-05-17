@@ -88,6 +88,24 @@
       "parentUuid": "50cdafbd_8760c663",
       "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59bd806c_887fa071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T22:01:22Z",
+      "side": 1,
+      "message": "Normally, if you have a binder method like:\n\n```\nclass IFoo { void doSomething(...); }\n```\n\nAnd you have a local instance of it, if you call doSomething, it will directly dispatch to the local instance in-process, without serializing.\n\nThe question I think is, if you have async local client, and sync local server (or vice versa), then will it dispatch a direct call of the implementation when you call the proxy code, whether that has to get executed in the coroutine context or not? The other way this could work without the binder driver is by serializing the call in-process and then dispatching the call in process. If this happens, it would be a waste to serialize it, and we should fix it.\n\nI\u0027m not sure what implications this has on the async API.",
+      "parentUuid": "df750384_fbe87711",
+      "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
