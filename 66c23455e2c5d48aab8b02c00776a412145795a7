@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f9425c_5c4045a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-17T21:17:36Z",
+      "side": 1,
+      "message": "Oh, also, here is the list of symbols that were removed https://paste.googleplex.com/5888714811375616?raw",
+      "parentUuid": "26ecaf12_929544af",
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1079fc8_370c1ec4",
