@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c01fc203_250e7e82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:52:48Z",
+      "side": 1,
+      "message": "Please do a couple ABTD runs on all the real devices you can, since presubmit won\u0027t test them, and they are what would have prebuilts that might reference some real symbols.",
+      "parentUuid": "a7f9425c_5c4045a6",
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1079fc8_370c1ec4",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 13
