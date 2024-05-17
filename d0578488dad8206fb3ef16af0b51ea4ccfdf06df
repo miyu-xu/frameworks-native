@@ -52,6 +52,24 @@
       "parentUuid": "80f1e28c_51443b91",
       "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50cdafbd_8760c663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T20:51:25Z",
+      "side": 1,
+      "message": "For that bug, we can close it then, if it only needs into_async/into_sync. Seems okay for WAI, if you want now.\n\nb/293406123 though is the other one I think could be an issue?",
+      "parentUuid": "b8150c84_e4419243",
+      "revId": "d0578488dad8206fb3ef16af0b51ea4ccfdf06df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
