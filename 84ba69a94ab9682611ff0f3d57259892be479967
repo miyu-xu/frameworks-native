@@ -1,0 +1,1321 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2bb1b45_0ba2efb4",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "can we make these errors harder? They are soft because of backcompat on linkToDeath\n\nAlso, apps will always have a big binder threadpool for the one below, so it won\u0027t cause an issue.",
+      "range": {
+        "startLine": 564,
+        "startChar": 12,
+        "endLine": 564,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f97c5b3_df07f21a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 421,
+                "startChar": 0,
+                "endLine": 423,
+                "endChar": 0
+              },
+              "replacement": "            ALOGE(\"Cannot register a DeathRecipient without any incoming threads. Need to set \"\n                  \"max incoming threads to a value greater than 0 before calling linkToDeath.\");\n"
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 564,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "            ALOGE(\"Cannot register a DeathRecipient without any incoming threads. Need to set \"\n                  \"max incoming threads to a value greater than 0 before calling \"\n                  \"addFrozenStateChangeCallback.\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067a4624_241cc664",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "L562 implies this?",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 33
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c67222_2ca72d71",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "L568 implies this?",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 49
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd76c50a_714166ce",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "nit: can we avoid setting it until it\u0027s setup",
+      "range": {
+        "startLine": 599,
+        "startChar": 23,
+        "endLine": 600,
+        "endChar": 62
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4859616_4e8c4932",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "we can\u0027t get it everywhere? how do we test things still work on kernels without this feature?",
+      "range": {
+        "startLine": 601,
+        "startChar": 42,
+        "endLine": 601,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c393b11f_44ba687b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 601,
+                "startChar": 0,
+                "endLine": 602,
+                "endChar": 0
+              },
+              "replacement": "                        // Avoids logspam if kernel does not support freeze wait\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47166cab_10ca8090",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "does the kernel log in this case? should we make sure it only shows once?",
+      "range": {
+        "startLine": 601,
+        "startChar": 24,
+        "endLine": 602,
+        "endChar": 40
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb51beb7_c15fc39a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "this should be done within IPCThreadState?",
+      "range": {
+        "startLine": 610,
+        "startChar": 0,
+        "endLine": 610,
+        "endChar": 42
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0d3395_016d9dd2",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "these are unrelated types - compare with le",
+      "range": {
+        "startLine": 618,
+        "startChar": 15,
+        "endLine": 618,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1a6c4b13_36553ac9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 467,
+                "startChar": 0,
+                "endLine": 468,
+                "endChar": 0
+              },
+              "replacement": "            return res \u003e\u003d (ssize_t)NO_ERROR ? NO_ERROR : res;\n"
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 618,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": "        return res \u003e\u003d (ssize_t)NO_ERROR ? NO_ERROR : res;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56edca0c_6acaf797",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "-\u003e C++ style casts everywhere",
+      "range": {
+        "startLine": 618,
+        "startChar": 22,
+        "endLine": 618,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "182ff26c_5ed34739",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 618,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": "        return res \u003e\u003d (ssize_t)NO_ERROR ? *NO_ERROR : res;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c17e739_e38dcd58",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 636,
+        "startChar": 16,
+        "endLine": 637,
+        "endChar": 33
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7d4a26_415b8083",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "this one should probably be moved outside the loop?",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 647,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1ceba5ca_449ce10b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 462,
+                "startChar": 0,
+                "endLine": 463,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 506,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 540,
+                "startChar": 0,
+                "endLine": 541,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 610,
+                "startChar": 0,
+                "endLine": 611,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 647,
+                "startChar": 0,
+                "endLine": 648,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d245fc_325ddefa",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "nit: these should always happen together, right next to each other (though for this case it technically doesn\u0027t matter)\n\nYou could abstract it into:\n\n    struct ... {\n        bool mInitialFrozenStateReceived \u003d false;\n        List\u003cwp\u003c...\u003e\u003e\n    }\n\nthen keep a pointer to this, so there is no question about keeping them in sync",
+      "range": {
+        "startLine": 649,
+        "startChar": 20,
+        "endLine": 652,
+        "endChar": 54
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf43c51_d2490e29",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "use RAII",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 17
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cb23ec_f6ff329b",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "nit: I would do one line here, it\u0027s a common situation\n\n     bool stateChanged \u003d !mInitialFrozenStateReceived || (mFrozen !\u003d isFrozen);",
+      "range": {
+        "startLine": 670,
+        "startChar": 9,
+        "endLine": 670,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f520c69c_929cd7b8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 670,
+                "startChar": 0,
+                "endLine": 678,
+                "endChar": 0
+              },
+              "replacement": "    // Had not received the initial state. no_state -\u003e has_a_state\n    // is considered a change.\n    bool stateChanged \u003d !mInitialFrozenStateReceived || (mFrozen !\u003d isFrozen);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0765541_c9fff03a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "if these don\u0027t promote, how do they get cleaned up? the list might grow forever?",
+      "range": {
+        "startLine": 684,
+        "startChar": 59,
+        "endLine": 684,
+        "endChar": 66
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7343025_c780da8f",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "do these get removed in some amortized way? - or see other lifetime comments",
+      "range": {
+        "startLine": 685,
+        "startChar": 16,
+        "endLine": 685,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "328dea63_d9fa7815",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 685,
+                "startChar": 0,
+                "endLine": 688,
+                "endChar": 0
+              },
+              "replacement": "            callback-\u003eonStateChanged(wp\u003cBpBinder\u003e::fromExisting(this), isFrozen);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad09ae69_5d2c9eba",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "please copy death recipient behavior (any other places mObituaries referenced?) - this is done here to avoid leaks",
+      "range": {
+        "startLine": 811,
+        "startChar": 0,
+        "endLine": 822,
+        "endChar": 19
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec4f3d58_eb1fd046",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "note - this is only safe because it\u0027s OBJECT_LIFETIME_WEAK. Always gets me :)",
+      "range": {
+        "startLine": 1542,
+        "startChar": 0,
+        "endLine": 1542,
+        "endChar": 55
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d16067_1ef88813",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "hey - we\u0027ve been unable to add callbacks here for a long time, due to prebuilts freezing these structures. Have you tested on many physical devices? You may want to run abtd runs or avoid changing this as we haven\u0027t before.",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 61,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6696fbfd_f88743e7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/Binder.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "    virtual status_t addPostTransactCallback(const sp\u003cPostTransactCallback\u003e\u0026 callback);\n"
+            },
+            {
+              "path": "libs/binder/include/binder/Binder.h",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    virtual status_t removePostTransactCallback(const wp\u003cPostTransactCallback\u003e\u0026 callback);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc24210_96241465",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "`[[nodiscard]]` on all new functions - they can\u0027t be added to old ones",
+      "range": {
+        "startLine": 73,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c65a267_60670262",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "private and move to PrivateAccessor?\n\nI probably need to do this for all the death notification ones as well",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 45
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a97327_ebdedc5e",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "it\u0027s always been confusing that linkToDeath takes a strong pointer, but it saves a wp\u003c\u003e. Should linkToFreeze take a wp\u003c\u003e for clarity, but fail when it\u0027s strong?",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 37
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d233221_5d245030",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "do we need 8 bytes for these?\n\nAlso, did you add any volatile access? I thought they were all guarded by the lock",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 57
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5d5d9b_80f6d8c0",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same, [[nodiscard]]",
+      "range": {
+        "startLine": 286,
+        "startChar": 12,
+        "endLine": 286,
+        "endChar": 20
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123a3f4e_8038feea",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "yeah - should this be wp, since we hold weak? We can\u0027t change the linkToDeath one?",
+      "range": {
+        "startLine": 287,
+        "startChar": 18,
+        "endLine": 287,
+        "endChar": 20
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c68db2_a07aaf0d",
+        "filename": "libs/binder/include/binder/IPCThreadState.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same [[nodiscard]] on new methods - you can also add it on other private methods if you want",
+      "range": {
+        "startLine": 178,
+        "startChar": 12,
+        "endLine": 179,
+        "endChar": 18
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d7a4961_61e885bb",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "should this be a libbinder API instead? with access(2)?",
+      "range": {
+        "startLine": 301,
+        "startChar": 3,
+        "endLine": 308,
+        "endChar": 9
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f696a39_472b62b8",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "this will not cause the function calling getBinderPid to exit, so it would still continue with a 0 PID and maybe freeze init?",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 31
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8803d7c_7e2ffedb",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "avoid default arg for clarity of test cases\n\n10ms will usually flake in our infra?\n\nCan you wait for up to 500ms? or similar?",
+      "range": {
+        "startLine": 499,
+        "startChar": 70,
+        "endLine": 499,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7ae05f31_24b97331",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderLibTest.cpp",
+              "range": {
+                "startLine": 499,
+                "startChar": 0,
+                "endLine": 500,
+                "endChar": 0
+              },
+              "replacement": "    void ensureFrozenEventReceived(std::chrono::nanoseconds timeout \u003d 100ms) {\n"
+            },
+            {
+              "path": "libs/binder/tests/binderLibTest.cpp",
+              "range": {
+                "startLine": 506,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "    void ensureUnfrozenEventReceived(std::chrono::nanoseconds timeout \u003d 100ms) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b8d19b_1274dd86",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "what if there are more? that would be a bug?",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 52
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1deb49_8864d142",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "ASSERT_TRUE, or it may segfault on the next line",
+      "range": {
+        "startLine": 502,
+        "startChar": 8,
+        "endLine": 502,
+        "endChar": 19
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f2e141_0c492c55",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same, what if there are more?",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 52
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7afb156_9da2d5be",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "provide reason",
+      "range": {
+        "startLine": 875,
+        "startChar": 0,
+        "endLine": 875,
+        "endChar": 21
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c511bd_e4a3758f",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "require it on new ro.vendor.api_level?",
+      "range": {
+        "startLine": 874,
+        "startChar": 0,
+        "endLine": 877,
+        "endChar": 5
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee499f3_6f39c908",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same, sp\u003c*\u003e::make on new code",
+      "range": {
+        "startLine": 878,
+        "startChar": 49,
+        "endLine": 878,
+        "endChar": 52
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275c3e14_84d87a76",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "prefer ASSERT_NE(binder, nullptr) etc.. for log clarity, or ASSERT_THAT, though I don\u0027t like gmock at all :(",
+      "range": {
+        "startLine": 880,
+        "startChar": 0,
+        "endLine": 880,
+        "endChar": 35
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512b8253_61a3258e",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "addServer should be a proxy? or ASSERT_NE(nullptr, binder-\u003elocalBinder()) for clarity?",
+      "range": {
+        "startLine": 881,
+        "startChar": 0,
+        "endLine": 881,
+        "endChar": 93
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00e5bf6_d525fb74",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "why a function here, not above?",
+      "range": {
+        "startLine": 885,
+        "startChar": 9,
+        "endLine": 885,
+        "endChar": 42
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f79d415_0768c731",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same and below",
+      "range": {
+        "startLine": 886,
+        "startChar": 0,
+        "endLine": 886,
+        "endChar": 21
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353d77ce_825a92ca",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "what if it dies before this time, it may freeze another process on the phone?",
+      "range": {
+        "startLine": 898,
+        "startChar": 0,
+        "endLine": 898,
+        "endChar": 23
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5c3bef_2a0f2824",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 903,
+        "startChar": 0,
+        "endLine": 903,
+        "endChar": 44
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a94cd9ef_add38496",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "move this into a method for consistency with other calls, and make sure it, in a locked way, will check there are no additional events from L901 (etc..), and then clear it? otherwise there could be one added during L902 and L903, and we wouldn\u0027t know - same elsewhere",
+      "range": {
+        "startLine": 904,
+        "startChar": 0,
+        "endLine": 904,
+        "endChar": 29
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b9a2e50_fb809189",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "nit: could these get broken into separate test cases to be smaller?",
+      "range": {
+        "startLine": 906,
+        "startChar": 0,
+        "endLine": 906,
+        "endChar": 63
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796c2b6c_351e459f",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "same, and same below",
+      "range": {
+        "startLine": 913,
+        "startChar": 0,
+        "endLine": 913,
+        "endChar": 44
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83046bc_4ec22a4d",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 1005,
+        "startChar": 0,
+        "endLine": 1005,
+        "endChar": 18
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd388a50_80c84567",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 1017,
+        "startChar": 11,
+        "endLine": 1017,
+        "endChar": 16
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f403ab71_3bf57377",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T21:33:37Z",
+      "side": 1,
+      "message": "ASSERT_EQ, to prevent next line segfault",
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
