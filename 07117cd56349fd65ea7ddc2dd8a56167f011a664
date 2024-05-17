@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e297d360_9c39814f",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T20:34:26Z",
+      "side": 1,
+      "message": "Meaning the client may have no kernel mode, but we are testing a server with it or vice-versa?",
+      "parentUuid": "fd7fc561_a6c2e971",
+      "revId": "07117cd56349fd65ea7ddc2dd8a56167f011a664",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "558e34ae_4e1e4a8f",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 3
