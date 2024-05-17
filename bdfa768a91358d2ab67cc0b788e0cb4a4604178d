@@ -16,6 +16,24 @@
       "message": "I saw pre-submit fail.\nAny action need from my side?",
       "revId": "bdfa768a91358d2ab67cc0b788e0cb4a4604178d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dbea6ed_848c2f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-05-17T19:07:39Z",
+      "side": 1,
+      "message": "It hit a merge conflict to internal, no action needed from you",
+      "parentUuid": "70d855e6_58136535",
+      "revId": "bdfa768a91358d2ab67cc0b788e0cb4a4604178d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
