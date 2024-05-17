@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d855e6_58136535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130869
+      },
+      "writtenOn": "2024-05-17T03:15:19Z",
+      "side": 1,
+      "message": "I saw pre-submit fail.\nAny action need from my side?",
+      "revId": "bdfa768a91358d2ab67cc0b788e0cb4a4604178d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
