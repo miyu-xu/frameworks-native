@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068f4951_e7aea226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T20:48:43Z",
+      "side": 1,
+      "message": "lgtm - is this the version you want to go with?",
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1079fc8_370c1ec4",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T20:48:43Z",
+      "side": 1,
+      "message": "nit: file bug for this before submission?",
+      "range": {
+        "startLine": 147,
+        "startChar": 15,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4a86aa_7f274024",
+        "filename": "libs/binder/Debug.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T20:48:43Z",
+      "side": 1,
+      "message": "yup!",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
