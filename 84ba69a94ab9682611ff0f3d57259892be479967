@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac4192fe_97763776",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-17T23:36:41Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll remove this log from the kernel. It doesn\u0027t make sense that userspace is able to spam dmesg. Plus userspace should be able to query the \u003cbinderfs\u003e/features/* to determine if a particular uapi is supported or not.",
+      "parentUuid": "47166cab_10ca8090",
+      "range": {
+        "startLine": 601,
+        "startChar": 24,
+        "endLine": 602,
+        "endChar": 40
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb51beb7_c15fc39a",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 4
