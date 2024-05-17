@@ -70,6 +70,30 @@
       },
       "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202f8bf8_daec6186",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-17T23:54:32Z",
+      "side": 1,
+      "message": "The IPC work itself is pretty trivial and it won\u0027t talk to the kernel. About the most intense thing it could do is create an allocation if Parcel mOut becomes too big.",
+      "parentUuid": "696ac6d7_ecb88402",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 5
+      },
+      "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
