@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ecaf12_929544af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-17T21:15:20Z",
+      "side": 1,
+      "message": "Just made some tweaks:\n\n* Only enabled this for bionic (instead of disabling just for glibc) to match Soong\u0027s RTTI logic\n* Since I\u0027m turning it off for RTTI builds, I removed some more symbols for BBinder and BpRefBase\n\nAssuming TH happy I think this is a good starting point and we can figure out a better solution for RTTI stuff separately.",
+      "parentUuid": "068f4951_e7aea226",
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1079fc8_370c1ec4",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-17T20:48:43Z",
       "side": 1,
       "message": "nit: file bug for this before submission?",
+      "range": {
+        "startLine": 147,
+        "startChar": 15,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6c78d9_695eb82f",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-17T21:15:20Z",
+      "side": 1,
+      "message": "Done  (b/341341056)",
+      "parentUuid": "b1079fc8_370c1ec4",
       "range": {
         "startLine": 147,
         "startChar": 15,
