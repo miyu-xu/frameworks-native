@@ -18,6 +18,7 @@
 
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/scopeguard.h>
 #include <android-base/strings.h>
 #include <binder/BpBinder.h>
 #include <binder/IPCThreadState.h>
@@ -26,6 +27,11 @@
 #include <cutils/android_filesystem_config.h>
 #include <cutils/multiuser.h>
 #include <thread>
+
+#if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
+#include "perfetto/public/te_category_macros.h"
+#include "perfetto/public/te_macros.h"
+#endif // !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 
 #ifndef VENDORSERVICEMANAGER
 #include <vintf/VintfObject.h>
@@ -41,6 +47,30 @@ using ::android::binder::Status;
 using ::android::internal::Stability;
 
 namespace android {
+
+#if defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__)
+#define PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(function_name, arg)
+#define PERFETTO_TRACE_THIS_FUNCTION(function_name)
+#else
+
+PERFETTO_TE_CATEGORIES_DEFINE(PERFETTO_SM_CATEGORIES);
+
+#define PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(function_name, arg)                 \
+    {                                                                             \
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN(#function_name),     \
+                    PERFETTO_TE_ARG_STRING(#arg, arg.c_str()));                   \
+        auto cleanup = android::base::make_scope_guard(                           \
+                []() { PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END()); }); \
+    };
+
+#define PERFETTO_TRACE_THIS_FUNCTION(function_name)                               \
+    {                                                                             \
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN(#function_name));    \
+        auto cleanup = android::base::make_scope_guard(                           \
+                []() { PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END()); }); \
+    };
+
+#endif // !(defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__))
 
 bool is_multiuser_uid_isolated(uid_t uid) {
     uid_t appid = multiuser_get_app_id(uid);
@@ -348,18 +378,24 @@ ServiceManager::~ServiceManager() {
 }
 
 Status ServiceManager::getService(const std::string& name, sp<IBinder>* outBinder) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(getService, name);
+
     *outBinder = tryGetService(name, true);
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }
 
 Status ServiceManager::checkService(const std::string& name, sp<IBinder>* outBinder) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(checkService, name);
+
     *outBinder = tryGetService(name, false);
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }
 
 sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(tryGetService, name);
+
     auto ctx = mAccess->getCallingContext();
 
     sp<IBinder> out;
@@ -398,6 +434,8 @@ sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfN
 }
 
 bool isValidServiceName(const std::string& name) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(isValidServiceName, name);
+
     if (name.size() == 0) return false;
     if (name.size() > 127) return false;
 
@@ -408,11 +446,12 @@ bool isValidServiceName(const std::string& name) {
         if (c >= '0' && c <= '9') continue;
         return false;
     }
-
     return true;
 }
 
 Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder, bool allowIsolated, int32_t dumpPriority) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(addService, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (multiuser_get_app_id(ctx.uid) >= AID_APP) {
@@ -505,6 +544,8 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
 }
 
 Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::string>* outList) {
+    PERFETTO_TRACE_THIS_FUNCTION(listServices);
+
     if (!mAccess->canList(mAccess->getCallingContext())) {
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
@@ -532,6 +573,8 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
 
 Status ServiceManager::registerForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(registerForNotifications, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
@@ -576,8 +619,11 @@ Status ServiceManager::registerForNotifications(
 
     return Status::ok();
 }
+
 Status ServiceManager::unregisterForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(unregisterForNotifications, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
@@ -596,11 +642,12 @@ Status ServiceManager::unregisterForNotifications(
               name.c_str());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Nothing to unregister.");
     }
-
     return Status::ok();
 }
 
 Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(isDeclared, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
@@ -616,6 +663,8 @@ Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
 }
 
 binder::Status ServiceManager::getDeclaredInstances(const std::string& interface, std::vector<std::string>* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(getDeclaredInstances, interface);
+
     auto ctx = mAccess->getCallingContext();
 
     std::vector<std::string> allInstances;
@@ -640,6 +689,8 @@ binder::Status ServiceManager::getDeclaredInstances(const std::string& interface
 
 Status ServiceManager::updatableViaApex(const std::string& name,
                                         std::optional<std::string>* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(updatableViaApex, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
@@ -651,11 +702,14 @@ Status ServiceManager::updatableViaApex(const std::string& name,
 #ifndef VENDORSERVICEMANAGER
     *outReturn = getVintfUpdatableApex(name);
 #endif
+
     return Status::ok();
 }
 
 Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& apexName,
                                          std::vector<std::string>* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(getUpdatableNames, apexName);
+
     auto ctx = mAccess->getCallingContext();
 
     std::vector<std::string> apexUpdatableNames;
@@ -674,12 +728,13 @@ Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& ape
     if (outReturn->size() == 0 && apexUpdatableNames.size() != 0) {
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
-
     return Status::ok();
 }
 
 Status ServiceManager::getConnectionInfo(const std::string& name,
                                          std::optional<ConnectionInfo>* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(getConnectionInfo, name);
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
@@ -697,6 +752,8 @@ Status ServiceManager::getConnectionInfo(const std::string& name,
 void ServiceManager::removeRegistrationCallback(const wp<IBinder>& who,
                                     ServiceCallbackMap::iterator* it,
                                     bool* found) {
+    PERFETTO_TRACE_THIS_FUNCTION(removeRegistrationCallback);
+
     std::vector<sp<IServiceCallback>>& listeners = (*it)->second;
 
     for (auto lit = listeners.begin(); lit != listeners.end();) {
@@ -716,6 +773,8 @@ void ServiceManager::removeRegistrationCallback(const wp<IBinder>& who,
 }
 
 void ServiceManager::binderDied(const wp<IBinder>& who) {
+    PERFETTO_TRACE_THIS_FUNCTION(binderDied);
+
     for (auto it = mNameToService.begin(); it != mNameToService.end();) {
         if (who == it->second.binder) {
             // TODO: currently, this entry contains the state also
@@ -758,6 +817,8 @@ void ServiceManager::tryStartService(const Access::CallingContext& ctx, const st
 
 Status ServiceManager::registerClientCallback(const std::string& name, const sp<IBinder>& service,
                                               const sp<IClientCallback>& cb) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(registerClientCallback, name);
+
     if (cb == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Callback null.");
     }
@@ -918,6 +979,8 @@ void ServiceManager::sendClientCallbackNotifications(const std::string& serviceN
 }
 
 Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IBinder>& binder) {
+    PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(tryUnregisterService, name);
+
     if (binder == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null service.");
     }
@@ -983,6 +1046,7 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
 }
 
 Status ServiceManager::getServiceDebugInfo(std::vector<ServiceDebugInfo>* outReturn) {
+    PERFETTO_TRACE_THIS_FUNCTION(getServiceDebugInfo);
     if (!mAccess->canList(mAccess->getCallingContext())) {
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
