@@ -27,6 +27,9 @@
 #include <cutils/multiuser.h>
 #include <thread>
 
+#include "perfetto/public/te_category_macros.h"
+#include "perfetto/public/te_macros.h"
+
 #ifndef VENDORSERVICEMANAGER
 #include <vintf/VintfObject.h>
 #ifdef __ANDROID_RECOVERY__
@@ -36,6 +39,10 @@
 #endif  // !VENDORSERVICEMANAGER
 
 #include "NameUtil.h"
+
+#define PERFETTO_SM_CATEGORIES(C) C(service_manager, "service_manager", "Service Manager category")
+
+PERFETTO_TE_CATEGORIES_DEFINE(PERFETTO_SM_CATEGORIES);
 
 using ::android::binder::Status;
 using ::android::internal::Stability;
@@ -348,18 +355,26 @@ ServiceManager::~ServiceManager() {
 }
 
 Status ServiceManager::getService(const std::string& name, sp<IBinder>* outBinder) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("getService"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
     *outBinder = tryGetService(name, true);
     // returns ok regardless of result for legacy reasons
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::checkService(const std::string& name, sp<IBinder>* outBinder) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("checkService"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
     *outBinder = tryGetService(name, false);
     // returns ok regardless of result for legacy reasons
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("tryGetService"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
     auto ctx = mAccess->getCallingContext();
 
     sp<IBinder> out;
@@ -370,12 +385,14 @@ sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfN
         if (!service->allowIsolated && is_multiuser_uid_isolated(ctx.uid)) {
             LOG(WARNING) << "Isolated app with UID " << ctx.uid << " requested '" << name
                          << "', but the service is not allowed for isolated apps.";
+            PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
             return nullptr;
         }
         out = service->binder;
     }
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return nullptr;
     }
 
@@ -394,10 +411,14 @@ sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfN
         service->guaranteeClient = true;
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return out;
 }
 
 bool isValidServiceName(const std::string& name) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("isValidServiceName"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     if (name.size() == 0) return false;
     if (name.size() > 127) return false;
 
@@ -406,35 +427,43 @@ bool isValidServiceName(const std::string& name) {
         if (c >= 'a' && c <= 'z') continue;
         if (c >= 'A' && c <= 'Z') continue;
         if (c >= '0' && c <= '9') continue;
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return false;
     }
-
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return true;
 }
 
 Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder, bool allowIsolated, int32_t dumpPriority) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("addService"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
     auto ctx = mAccess->getCallingContext();
 
     if (multiuser_get_app_id(ctx.uid) >= AID_APP) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "App UIDs cannot add services.");
     }
 
     if (!mAccess->canAdd(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
     if (binder == nullptr) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Null binder.");
     }
 
     if (!isValidServiceName(name)) {
         ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
     }
 
 #ifndef VENDORSERVICEMANAGER
     if (!meetsDeclarationRequirements(ctx, binder, name)) {
         // already logged
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "VINTF declaration error.");
     }
 #endif  // !VENDORSERVICEMANAGER
@@ -448,6 +477,7 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
     if (binder->remoteBinder() != nullptr &&
         binder->linkToDeath(sp<ServiceManager>::fromExisting(this)) != OK) {
         ALOGE("%s Could not linkToDeath when adding %s", ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Couldn't linkToDeath.");
     }
 
@@ -501,11 +531,15 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
         }
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::string>* outList) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("listServices"));
+
     if (!mAccess->canList(mAccess->getCallingContext())) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -527,14 +561,19 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
         }
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::registerForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("registerForNotifications"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux");
     }
 
@@ -545,15 +584,18 @@ Status ServiceManager::registerForNotifications(
     // Here, we disallow everything, because the service might not be
     // registered yet.
     if (is_multiuser_uid_isolated(ctx.uid)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "isolated app");
     }
 
     if (!isValidServiceName(name)) {
         ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
     }
 
     if (callback == nullptr) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null callback.");
     }
 
@@ -561,6 +603,7 @@ Status ServiceManager::registerForNotifications(
         IInterface::asBinder(callback)->linkToDeath(
                 sp<ServiceManager>::fromExisting(this))) {
         ALOGE("%s Could not linkToDeath when adding %s", ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Couldn't link to death.");
     }
 
@@ -574,13 +617,19 @@ Status ServiceManager::registerForNotifications(
         callback->onRegistration(name, binder);
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
+
 Status ServiceManager::unregisterForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("unregisterForNotifications"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -594,16 +643,21 @@ Status ServiceManager::unregisterForNotifications(
     if (!found) {
         ALOGE("%s Trying to unregister callback, but none exists %s", ctx.toDebugString().c_str(),
               name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Nothing to unregister.");
     }
-
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("isDeclared"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -612,10 +666,14 @@ Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
 #ifndef VENDORSERVICEMANAGER
     *outReturn = isVintfDeclared(ctx, name);
 #endif
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 binder::Status ServiceManager::getDeclaredInstances(const std::string& interface, std::vector<std::string>* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("getDeclaredInstances"),
+                PERFETTO_TE_ARG_STRING("interface", interface.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     std::vector<std::string> allInstances;
@@ -632,17 +690,23 @@ binder::Status ServiceManager::getDeclaredInstances(const std::string& interface
     }
 
     if (outReturn->size() == 0 && allInstances.size() != 0) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::updatableViaApex(const std::string& name,
                                         std::optional<std::string>* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("updatableViaApex"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -651,11 +715,16 @@ Status ServiceManager::updatableViaApex(const std::string& name,
 #ifndef VENDORSERVICEMANAGER
     *outReturn = getVintfUpdatableApex(name);
 #endif
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
+
     return Status::ok();
 }
 
 Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& apexName,
                                          std::vector<std::string>* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("getUpdatableNames"),
+                PERFETTO_TE_ARG_STRING("apexName", apexName.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     std::vector<std::string> apexUpdatableNames;
@@ -672,17 +741,22 @@ Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& ape
     }
 
     if (outReturn->size() == 0 && apexUpdatableNames.size() != 0) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
-
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::getConnectionInfo(const std::string& name,
                                          std::optional<ConnectionInfo>* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("getConnectionInfo"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     auto ctx = mAccess->getCallingContext();
 
     if (!mAccess->canFind(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -691,12 +765,14 @@ Status ServiceManager::getConnectionInfo(const std::string& name,
 #ifndef VENDORSERVICEMANAGER
     *outReturn = getVintfConnectionInfo(name);
 #endif
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 void ServiceManager::removeRegistrationCallback(const wp<IBinder>& who,
                                     ServiceCallbackMap::iterator* it,
                                     bool* found) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("removeRegistrationCallback"));
     std::vector<sp<IServiceCallback>>& listeners = (*it)->second;
 
     for (auto lit = listeners.begin(); lit != listeners.end();) {
@@ -713,9 +789,12 @@ void ServiceManager::removeRegistrationCallback(const wp<IBinder>& who,
     } else {
         (*it)++;
     }
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
 }
 
 void ServiceManager::binderDied(const wp<IBinder>& who) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("binderDied"));
+
     for (auto it = mNameToService.begin(); it != mNameToService.end();) {
         if (who == it->second.binder) {
             // TODO: currently, this entry contains the state also
@@ -739,6 +818,7 @@ void ServiceManager::binderDied(const wp<IBinder>& who) {
     for (auto it = mNameToClientCallback.begin(); it != mNameToClientCallback.end();) {
         removeClientCallback(who, &it);
     }
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
 }
 
 void ServiceManager::tryStartService(const Access::CallingContext& ctx, const std::string& name) {
@@ -758,6 +838,9 @@ void ServiceManager::tryStartService(const Access::CallingContext& ctx, const st
 
 Status ServiceManager::registerClientCallback(const std::string& name, const sp<IBinder>& service,
                                               const sp<IClientCallback>& cb) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("registerClientCallback"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
+
     if (cb == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Callback null.");
     }
@@ -769,12 +852,16 @@ Status ServiceManager::registerClientCallback(const std::string& name, const sp<
 
     auto serviceIt = mNameToService.find(name);
     if (serviceIt == mNameToService.end()) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
+
         ALOGE("%s Could not add callback for nonexistent service: %s", ctx.toDebugString().c_str(),
               name.c_str());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Service doesn't exist.");
     }
 
     if (serviceIt->second.ctx.debugPid != IPCThreadState::self()->getCallingPid()) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
+
         ALOGW("%s Only a server can register for client callbacks (for %s)",
               ctx.toDebugString().c_str(), name.c_str());
         return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
@@ -782,6 +869,8 @@ Status ServiceManager::registerClientCallback(const std::string& name, const sp<
     }
 
     if (serviceIt->second.binder != service) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
+
         ALOGW("%s Tried to register client callback for %s but a different service is registered "
               "under this name.",
               ctx.toDebugString().c_str(), name.c_str());
@@ -790,6 +879,8 @@ Status ServiceManager::registerClientCallback(const std::string& name, const sp<
 
     if (OK !=
         IInterface::asBinder(cb)->linkToDeath(sp<ServiceManager>::fromExisting(this))) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
+
         ALOGE("%s Could not linkToDeath when adding client callback for %s",
               ctx.toDebugString().c_str(), name.c_str());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Couldn't linkToDeath.");
@@ -810,6 +901,7 @@ Status ServiceManager::registerClientCallback(const std::string& name, const sp<
     // this point, so ignore the return value.
     (void)handleServiceClientCallback(2 /* sm + transaction */, name, false);
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
@@ -918,12 +1010,16 @@ void ServiceManager::sendClientCallbackNotifications(const std::string& serviceN
 }
 
 Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IBinder>& binder) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("tryUnregisterService"),
+                PERFETTO_TE_ARG_STRING("name", name.c_str()));
     if (binder == nullptr) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null service.");
     }
 
     auto ctx = mAccess->getCallingContext();
     if (!mAccess->canAdd(ctx, name)) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -931,12 +1027,14 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
     if (serviceIt == mNameToService.end()) {
         ALOGW("%s Tried to unregister %s, but that service wasn't registered to begin with.",
               ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Service not registered.");
     }
 
     if (serviceIt->second.ctx.debugPid != IPCThreadState::self()->getCallingPid()) {
         ALOGW("%s Only a server can unregister itself (for %s)", ctx.toDebugString().c_str(),
               name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
                                          "Service can only unregister itself.");
     }
@@ -946,6 +1044,7 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
     if (binder != storedBinder) {
         ALOGW("%s Tried to unregister %s, but a different service is registered under this name.",
               ctx.toDebugString().c_str(), name.c_str());
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE,
                                          "Different service registered under this name.");
     }
@@ -972,6 +1071,7 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
         // help reduce thrashing, but we should be able to remove it.
         serviceIt->second.guaranteeClient = true;
 
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE,
                                          "Can't unregister, known client.");
     }
@@ -979,11 +1079,14 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
     ALOGI("%s Unregistering %s", ctx.toDebugString().c_str(), name.c_str());
     mNameToService.erase(name);
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
 Status ServiceManager::getServiceDebugInfo(std::vector<ServiceDebugInfo>* outReturn) {
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_BEGIN("getServiceDebugInfo"));
     if (!mAccess->canList(mAccess->getCallingContext())) {
+        PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
@@ -996,6 +1099,7 @@ Status ServiceManager::getServiceDebugInfo(std::vector<ServiceDebugInfo>* outRet
         outReturn->push_back(std::move(info));
     }
 
+    PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());
     return Status::ok();
 }
 
