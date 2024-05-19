@@ -173,6 +173,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30b898a_ee93ea0c",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-19T18:53:25Z",
+      "side": 1,
+      "message": "\u003e\u003e Shouldn\u0027t this be:\n\u003e\u003e ```\n\u003e\u003e ASurfaceControl* _Nullable* _Nullable* _Nonnull outASurfaceControls\n\u003e\u003e ```\n\u003e\n\u003e Isn\u0027t that what it is in the current patch set?\n\nDon\u0027t know how that got messed up, but the suggestion should have been:\n\n```\nASurfaceControl* _Nonnull* _Nullable* _Nonnull outASurfaceControls\n```\n\nSignifying that if there\u0027s an array of `ASurfaceControl*`s returned, those will all be nonnull pointers (with `*outASurfaceControlsSize` still stating how many one get back).\n\nAs Alec mentions however, it seems that the \"middle\" array pointer will (currently?) always be non-NULL, even though none of it should be dereferenced when `*outASurfaceControlsSize` is `0`.",
+      "parentUuid": "e30bb8ad_cdd8315d",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4dadfae_6a084bda",
@@ -346,6 +364,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "472c105d_5e2d903e",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a9a8ee_511266f8",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-05-19T18:53:25Z",
+      "side": 1,
+      "message": "Can\u0027t see where that link points to, unfortunately.",
+      "parentUuid": "c4d3528c_a13dff6d",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
