@@ -59,6 +59,9 @@ cc_binary {
     init_rc: ["servicemanager.rc"],
     srcs: ["main.cpp"],
     bootstrap: true,
+    shared_libs: [
+        "libperfetto_c",
+    ],
 }
 
 cc_binary {
