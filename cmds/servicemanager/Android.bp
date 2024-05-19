@@ -29,6 +29,7 @@ cc_defaults {
         "liblog",
         "libutils",
         "libselinux",
+        "libperfetto_c",
     ],
 
     target: {
