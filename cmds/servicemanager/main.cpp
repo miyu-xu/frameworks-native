@@ -22,9 +22,20 @@
 #include <sys/timerfd.h>
 #include <utils/Looper.h>
 #include <utils/StrongPointer.h>
+#include "perfetto/public/abi/track_event_abi.h"
+#include "perfetto/public/producer.h"
+#include "perfetto/public/te_category_macros.h"
+#include "perfetto/public/te_macros.h"
+#include "perfetto/public/track_event.h"
 
 #include "Access.h"
 #include "ServiceManager.h"
+
+namespace android {
+#define PERFETTO_SM_CATEGORIES(C) C(service_manager, "service_manager", "Service Manager category")
+
+PERFETTO_TE_CATEGORIES_DEFINE(PERFETTO_SM_CATEGORIES);
+} // namespace android
 
 using ::android::Access;
 using ::android::IPCThreadState;
@@ -131,6 +142,11 @@ int main(int argc, char** argv) {
     }
 
     const char* driver = argc == 2 ? argv[1] : "/dev/binder";
+
+    struct PerfettoProducerInitArgs perfetto_args = {0};
+    perfetto_args.backends = PERFETTO_BACKEND_SYSTEM;
+    PerfettoProducerInit(perfetto_args);
+    PerfettoTeInit();
 
     LOG(INFO) << "Starting sm instance on " << driver;
 
