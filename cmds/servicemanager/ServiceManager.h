@@ -20,6 +20,9 @@
 #include <android/os/IClientCallback.h>
 #include <android/os/IServiceCallback.h>
 
+#include "perfetto/public/te_category_macros.h"
+#include "perfetto/public/te_macros.h"
+
 #include "Access.h"
 
 namespace android {
@@ -28,6 +31,10 @@ using os::ConnectionInfo;
 using os::IClientCallback;
 using os::IServiceCallback;
 using os::ServiceDebugInfo;
+
+#define PERFETTO_SM_CATEGORIES(C) C(service_manager, "service_manager", "Service Manager category")
+
+PERFETTO_TE_CATEGORIES_DECLARE(PERFETTO_SM_CATEGORIES);
 
 class ServiceManager : public os::BnServiceManager, public IBinder::DeathRecipient {
 public:
