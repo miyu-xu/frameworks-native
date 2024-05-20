@@ -94,6 +94,30 @@
       },
       "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05512b07_c85bcaac",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1017430
+      },
+      "writtenOn": "2024-05-20T19:13:47Z",
+      "side": 1,
+      "message": "I\u0027d like to leave this as is because additional work between the dec and the trace increases the chance of an incorrect counter value if the thread is descheduled. it\u0027s unlikely, but I think it\u0027s probably more likely to have poor interleaving if many refs are destroyed in rapid succession from a low priority thread like GC, which is also exactly the case this trace is useful to debug.",
+      "parentUuid": "202f8bf8_daec6186",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 5
+      },
+      "revId": "1581a0fab11d7d5f6b6e75f47f4d8577c1686761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
