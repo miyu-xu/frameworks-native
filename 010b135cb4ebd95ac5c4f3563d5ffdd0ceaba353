@@ -384,6 +384,24 @@
       "parentUuid": "c4d3528c_a13dff6d",
       "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b5efd8_432b64f2",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-05-20T21:30:37Z",
+      "side": 1,
+      "message": "Someone decided it\u0027d be a good idea for the URL bar to rewrite all the public links to the internal equivalent, so any of us copy/pasting AOSP links will make the mistake of pasting the wrong thing now and then. Whenever you see that, just rewrite the host from android-review.git.corp.google.com to android-review.googlesource.com (or just r.android.com/changeid) and it should work. e.g. https://r.android.com/2973726",
+      "parentUuid": "19a9a8ee_511266f8",
+      "revId": "010b135cb4ebd95ac5c4f3563d5ffdd0ceaba353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
