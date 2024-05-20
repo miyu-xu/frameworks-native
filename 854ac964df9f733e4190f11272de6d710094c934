@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1ba3b5_dab5b667",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-20T21:02:11Z",
+      "side": 1,
+      "message": "Wrap this in a `unique_ptr` to avoid having to call `freecon()` in every error case?",
+      "range": {
+        "startLine": 816,
+        "startChar": 10,
+        "endLine": 816,
+        "endChar": 24
+      },
+      "revId": "854ac964df9f733e4190f11272de6d710094c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef8aa24_3392ac5d",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-05-20T21:02:11Z",
+      "side": 1,
+      "message": "Why is this part necessary?  It looks like this is overriding the SELinux context that was assigned by `restorecon_app_data_lazy()`.  Would it perhaps make more sense to make `restorecon_app_data_lazy()` assign the correct context?",
+      "range": {
+        "startLine": 868,
+        "startChar": 15,
+        "endLine": 868,
+        "endChar": 62
+      },
+      "revId": "854ac964df9f733e4190f11272de6d710094c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
