@@ -66,6 +66,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "de194f54_498c7255",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-05-20T18:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69d10b50_d44f5e38",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 67
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "11fa6cf8_75426540",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 6
@@ -100,6 +124,30 @@
       "writtenOn": "2024-05-11T01:22:20Z",
       "side": 1,
       "message": "we should not make two separate versions of this - please only allocate one",
+      "range": {
+        "startLine": 273,
+        "startChar": 28,
+        "endLine": 273,
+        "endChar": 68
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11def624_71cc430e",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-05-20T18:03:24Z",
+      "side": 1,
+      "message": "Isn\u0027t this something that needs to exist?\n\ncreateRpcDelegateServiceManager depends on this function. There needs to be a function which can return an sp\u003cBackendUnifiedServiceManager\u003e from a AidlServiceManager binder, right?",
+      "parentUuid": "7dca9bab_61207676",
       "range": {
         "startLine": 273,
         "startChar": 28,
