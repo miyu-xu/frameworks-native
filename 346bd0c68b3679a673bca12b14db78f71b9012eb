@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a742ec_095fddb2",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-20T18:06:49Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "0d3e254c_5e05082b",
+      "range": {
+        "startLine": 917,
+        "startChar": 53,
+        "endLine": 917,
+        "endChar": 81
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af2abab7_3d977c7c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-10T19:53:42Z",
       "side": 1,
       "message": "Why is the code to delete the package\u0027s storage areas under `FLAG_STORAGE_DE` instead of `FLAG_STORAGE_CE`?",
+      "range": {
+        "startLine": 1454,
+        "startChar": 16,
+        "endLine": 1454,
+        "endChar": 31
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be2f33f2_9d7ad97f",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-20T18:06:49Z",
+      "side": 1,
+      "message": "Ah! Good catch, I think this is just a typo -- I moved it behind the CE storage flag.",
+      "parentUuid": "af2abab7_3d977c7c",
       "range": {
         "startLine": 1454,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5fe3534_3878725d",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-20T18:06:49Z",
+      "side": 1,
+      "message": "Ah good point, much more concise too. You\u0027re right, I dont\u0027 think there\u0027s any need to point out the difference from `destroyUserData` here.",
+      "parentUuid": "aacb550b_1d74c7eb",
+      "range": {
+        "startLine": 1460,
+        "startChar": 51,
+        "endLine": 1462,
+        "endChar": 77
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71b0c5ea_206088cf",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-05-10T19:53:42Z",
       "side": 1,
       "message": "Wrong path is being logged here",
+      "range": {
+        "startLine": 1474,
+        "startChar": 66,
+        "endLine": 1474,
+        "endChar": 83
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0a99e8_44293e7b",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-20T18:06:49Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "71b0c5ea_206088cf",
       "range": {
         "startLine": 1474,
         "startChar": 66,
