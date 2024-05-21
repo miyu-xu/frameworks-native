@@ -156,6 +156,30 @@
       },
       "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "008c210e_583b670a",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T00:08:22Z",
+      "side": 1,
+      "message": "oh - I see it\u0027s okay. Only the shim is made in defaultServiceManager. Thanks!",
+      "parentUuid": "11def624_71cc430e",
+      "range": {
+        "startLine": 273,
+        "startChar": 28,
+        "endLine": 273,
+        "endChar": 68
+      },
+      "revId": "03dfe615b1afb603f5a47d225227bebc0139f6fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
