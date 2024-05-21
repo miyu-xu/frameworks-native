@@ -106,6 +106,24 @@
       "parentUuid": "61d8a47b_4d689a79",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b112c8_465e898f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T21:33:17Z",
+      "side": 1,
+      "message": "I would think we always want to test kernel and non-kernel servers with the non-kernel client, but you seem to be disabling the \"non-kernel client\" \"kernel server\" variant of the test for Android host/device builds, which we do want even though we don\u0027t want them in your environment because kernel support is not there at all.",
+      "parentUuid": "324b3542_0d4727a4",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
