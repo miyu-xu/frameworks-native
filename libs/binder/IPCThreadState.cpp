@@ -25,7 +25,6 @@
 #include <cutils/sched_policy.h>
 #include <utils/CallStack.h>
 #include <utils/Log.h>
-#include <utils/SystemClock.h>
 
 #include <atomic>
 #include <errno.h>
@@ -38,6 +37,7 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
+#include "Utils.h"
 #include "binder_module.h"
 
 #if LOG_NDEBUG
@@ -64,6 +64,8 @@
 // ---------------------------------------------------------------------------
 
 namespace android {
+
+using namespace std::chrono_literals;
 
 // Static const and functions will be optimized out if not used,
 // when LOG_NDEBUG and references in IF_LOG_COMMANDS() are optimized out.
@@ -645,8 +647,8 @@ status_t IPCThreadState::getAndExecuteCommand()
         pthread_mutex_lock(&mProcess->mThreadCountLock);
         mProcess->mExecutingThreadsCount++;
         if (mProcess->mExecutingThreadsCount >= mProcess->mMaxThreads &&
-                mProcess->mStarvationStartTimeMs == 0) {
-            mProcess->mStarvationStartTimeMs = uptimeMillis();
+            mProcess->mStarvationStartTime == mProcess->mStarvationStartTime.min()) {
+            mProcess->mStarvationStartTime = std::chrono::steady_clock::now();
         }
         pthread_mutex_unlock(&mProcess->mThreadCountLock);
 
@@ -655,13 +657,13 @@ status_t IPCThreadState::getAndExecuteCommand()
         pthread_mutex_lock(&mProcess->mThreadCountLock);
         mProcess->mExecutingThreadsCount--;
         if (mProcess->mExecutingThreadsCount < mProcess->mMaxThreads &&
-                mProcess->mStarvationStartTimeMs != 0) {
-            int64_t starvationTimeMs = uptimeMillis() - mProcess->mStarvationStartTimeMs;
-            if (starvationTimeMs > 100) {
-                ALOGE("binder thread pool (%zu threads) starved for %" PRId64 " ms",
-                      mProcess->mMaxThreads, starvationTimeMs);
+            mProcess->mStarvationStartTime != mProcess->mStarvationStartTime.min()) {
+            auto starvationTime = std::chrono::steady_clock::now() - mProcess->mStarvationStartTime;
+            if (starvationTime > 100ms) {
+                ALOGE("binder thread pool (%zu threads) starved for %" PRIu64 " ms",
+                      mProcess->mMaxThreads, to_ms(starvationTime));
             }
-            mProcess->mStarvationStartTimeMs = 0;
+            mProcess->mStarvationStartTime = mProcess->mStarvationStartTime.min();
         }
 
         // Cond broadcast can be expensive, so don't send it every time a binder
