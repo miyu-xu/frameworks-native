@@ -142,6 +142,24 @@
       "parentUuid": "47b112c8_465e898f",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f46a5b2_0e5b96b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T21:39:07Z",
+      "side": 1,
+      "message": "It\u0027s going to be harder to enable it everywhere. Can you disable it just in your case?",
+      "parentUuid": "d14b8d9b_b5d0e375",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
