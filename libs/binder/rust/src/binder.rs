@@ -1043,6 +1043,22 @@ macro_rules! declare_binder_interface {
                 }
 
                 if ibinder.associate_class(<$native as $crate::binder_impl::Remotable>::get_class()) {
+                    let service: std::result::Result<$crate::binder_impl::Binder<$native>, $crate::StatusCode> =
+                        std::convert::TryFrom::try_from(ibinder.clone());
+                    if let Ok(service) = service {
+                        if let Some(async_service) = $native::try_into_local_async(service) {
+                            panic!("Temporary panic to verify that presubmit has a test that hits this codepath.");
+
+                            // We were able to associate with our expected class,
+                            // the service is local, and the local service is async.
+                            return Ok(async_service);
+                        }
+                        // The service is local but not async. Fall back to treating it as a
+                        // remote service. This means that calls to this local service have an
+                        // extra performance cost due to serialization, but async handle to
+                        // non-async server is considered a rare case, so this is okay.
+                    }
+                    // Treat service as remote.
                     return Ok($crate::Strong::new(Box::new(<$proxy as $crate::binder_impl::Proxy>::from_binder(ibinder)?)));
                 }
 
