@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2deaa0_1dd29097",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-21T01:45:14Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "7a1ba3b5_dab5b667",
+      "range": {
+        "startLine": 816,
+        "startChar": 10,
+        "endLine": 816,
+        "endChar": 24
+      },
+      "revId": "854ac964df9f733e4190f11272de6d710094c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ef8aa24_3392ac5d",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-20T21:02:11Z",
       "side": 1,
       "message": "Why is this part necessary?  It looks like this is overriding the SELinux context that was assigned by `restorecon_app_data_lazy()`.  Would it perhaps make more sense to make `restorecon_app_data_lazy()` assign the correct context?",
+      "range": {
+        "startLine": 868,
+        "startChar": 15,
+        "endLine": 868,
+        "endChar": 62
+      },
+      "revId": "854ac964df9f733e4190f11272de6d710094c934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5812b90_5e056d61",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-21T01:45:14Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right this just updates the context and changes the SELinux type to `storage_area_app_dir`. The reason it is called after `restorecon_app_data_lazy()` is because it is just a string replacement of the type on the context, but as I understand it the context is first assigned in `restorecon_app_data_lazy` if the directory was just created. The SELinux type is not part of the `seInfo` parameter, so it can\u0027t be passed directly to `restorecon_app_data_lazy` (and I chose not to change that function since it was pre-existing and used by other code in installd).",
+      "parentUuid": "9ef8aa24_3392ac5d",
       "range": {
         "startLine": 868,
         "startChar": 15,
