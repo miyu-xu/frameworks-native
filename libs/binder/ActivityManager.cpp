@@ -23,9 +23,9 @@
 #include <binder/IServiceManager.h>
 #include <binder/ProcessState.h>
 
-#include <utils/SystemClock.h>
-
 namespace android {
+
+using namespace std::chrono_literals;
 
 ActivityManager::ActivityManager()
 {
@@ -43,15 +43,15 @@ sp<IActivityManager> ActivityManager::getService()
         }
     } else {
         ALOGI("Thread pool not started. Polling for activity service.");
-        int64_t startTime = 0;
+        auto startTime = std::chrono::steady_clock::now().min();
         while (service == nullptr || !IInterface::asBinder(service)->isBinderAlive()) {
             sp<IBinder> binder = defaultServiceManager()->checkService(String16("activity"));
             if (binder == nullptr) {
                 // Wait for the activity service to come back...
-                if (startTime == 0) {
-                    startTime = uptimeMillis();
+                if (startTime == startTime.min()) {
+                    startTime = std::chrono::steady_clock::now();
                     ALOGI("Waiting for activity service");
-                } else if ((uptimeMillis() - startTime) > 1000000) {
+                } else if (std::chrono::steady_clock::now() - startTime > 1000s) { // about 17 min
                     ALOGW("Waiting too long for activity service, giving up");
                     service = nullptr;
                     break;
