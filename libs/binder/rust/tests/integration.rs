@@ -323,6 +323,14 @@ impl<P: binder::BinderAsyncPool> IATest<P> for Binder<BnTest> {
     }
 }
 
+impl BnTest {
+    fn try_into_local_async<P: binder::BinderAsyncPool + 'static>(
+        me: Binder<BnTest>,
+    ) -> Option<binder::Strong<dyn IATest<P>>> {
+        Some(binder::Strong::new(Box::new(me) as _))
+    }
+}
+
 /// Trivial testing binder interface
 pub trait ITestSameDescriptor: Interface {}
 
