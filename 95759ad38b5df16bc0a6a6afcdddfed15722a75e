@@ -160,6 +160,24 @@
       "parentUuid": "d14b8d9b_b5d0e375",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587048b1_82d6ea7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-21T21:41:17Z",
+      "side": 1,
+      "message": "That\u0027s what I\u0027m saying. I would replace kEnableKernelIpc in this change with `BINDER_WITH_KERNEL_IPC_TESTING`. Or with `BINDER_NO_KERNEL_IPC_TESTING`. And `-DBINDER_NO_KERNEL_IPC_TESTING` on my test target.",
+      "parentUuid": "3f46a5b2_0e5b96b9",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
