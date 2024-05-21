@@ -182,7 +182,7 @@ declare_binder_interface! {
         proxy: BpTest {
             x: i32 = 100
         },
-        async: IATest,
+        async: IATest(try_into_local_async),
     }
 }
 
@@ -320,6 +320,14 @@ impl<P: binder::BinderAsyncPool> IATest<P> for Binder<BnTest> {
     fn get_is_handling_transaction(&self) -> binder::BoxFuture<'static, Result<bool, StatusCode>> {
         let res = self.0.get_is_handling_transaction();
         Box::pin(async move { res })
+    }
+}
+
+impl BnTest {
+    fn try_into_local_async<P: binder::BinderAsyncPool + 'static>(
+        me: Binder<BnTest>,
+    ) -> Option<binder::Strong<dyn IATest<P>>> {
+        Some(binder::Strong::new(Box::new(me) as _))
     }
 }
 
