@@ -124,6 +124,24 @@
       "parentUuid": "324b3542_0d4727a4",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14b8d9b_b5d0e375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-21T21:37:34Z",
+      "side": 1,
+      "message": "Correct - I commented on that in the other thread:\n\u003e I was just about to add a new cflag BINDER_WITH_KERNEL_IPC_TESTING but I noticed that kEnableKernelIpc (BINDER_WITH_KERNEL_IPC) is already used for this purpose in BinderRpc.Java.\n\nI can make it disable-able with BINDER_WITH_KERNEL_IPC_TESTING if you think it\u0027s better. Should I modify BinderRpc.Java test as well?",
+      "parentUuid": "47b112c8_465e898f",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
