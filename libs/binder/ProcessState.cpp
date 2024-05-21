@@ -561,7 +561,7 @@ ProcessState::ProcessState(const char* driver)
         mMaxThreads(DEFAULT_MAX_BINDER_THREADS),
         mCurrentThreads(0),
         mKernelStartedThreads(0),
-        mStarvationStartTimeMs(0),
+        mStarvationStartTime(std::chrono::time_point<std::chrono::steady_clock>::min()),
         mForked(false),
         mThreadPoolStarted(false),
         mThreadPoolSeq(1),
