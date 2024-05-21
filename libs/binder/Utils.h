@@ -18,6 +18,7 @@
 
 #include <stddef.h>
 #include <sys/uio.h>
+#include <chrono>
 #include <cstdint>
 #include <optional>
 
@@ -112,5 +113,11 @@ struct Span {
 // Hex values are printed in order, e.g. 0xDEAD will result in 'adde' because
 // Android is little-endian.
 std::string HexString(const void* bytes, size_t len);
+
+// Converts any std::chrono duration to string in milliseconds
+template <class Rep, class Period>
+std::string to_string_ms(std::chrono::duration<Rep, Period> duration) {
+    return std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(duration).count());
+}
 
 }   // namespace android
