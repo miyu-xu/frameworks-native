@@ -22,6 +22,7 @@
 
 #include <pthread.h>
 
+#include <chrono>
 #include <mutex>
 
 // ---------------------------------------------------------------------------
@@ -176,7 +177,7 @@ private:
     // Current number of pooled threads inside the thread pool.
     size_t mKernelStartedThreads;
     // Time when thread pool was emptied
-    int64_t mStarvationStartTimeMs;
+    std::chrono::time_point<std::chrono::steady_clock> mStarvationStartTime;
 
     mutable std::mutex mLock; // protects everything below.
 
