@@ -20,6 +20,7 @@
 
 #include <inttypes.h>
 #include <unistd.h>
+#include <chrono>
 #include <condition_variable>
 
 #include <android-base/properties.h>
@@ -29,7 +30,6 @@
 #include <binder/Parcel.h>
 #include <utils/Log.h>
 #include <utils/String8.h>
-#include <utils/SystemClock.h>
 
 #ifndef __ANDROID_VNDK__
 #include <binder/IPermissionController.h>
@@ -49,6 +49,8 @@
 #include "Static.h"
 
 namespace android {
+
+using namespace std::chrono_literals;
 
 using AidlRegistrationCallback = IServiceManager::LocalRegistrationCallback;
 
@@ -150,7 +152,6 @@ sp<IServiceManager> defaultServiceManager()
     std::call_once(gSmOnce, []() {
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
         /* wait for service manager */ {
-            using std::literals::chrono_literals::operator""s;
             using android::base::WaitForProperty;
             while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
                 ALOGE("Waited for servicemanager.ready for a second, waiting another...");
@@ -214,16 +215,17 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid, bool logP
     pc = gPermissionController;
     gPermissionControllerLock.unlock();
 
-    int64_t startTime = 0;
+    auto startTime = std::chrono::steady_clock::now().min();
 
     while (true) {
         if (pc != nullptr) {
             bool res = pc->checkPermission(permission, pid, uid);
             if (res) {
-                if (startTime != 0) {
-                    ALOGI("Check passed after %d seconds for %s from uid=%d pid=%d",
-                          (int)((uptimeMillis() - startTime) / 1000), String8(permission).c_str(),
-                          uid, pid);
+                if (startTime != startTime.min()) {
+                    const auto waitTime = std::chrono::steady_clock::now() - startTime;
+                    ALOGI("Check passed after %lld seconds for %s from uid=%d pid=%d",
+                          std::chrono::duration_cast<std::chrono::seconds>(waitTime).count(),
+                          String8(permission).c_str(), uid, pid);
                 }
                 return res;
             }
@@ -249,8 +251,8 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid, bool logP
         sp<IBinder> binder = defaultServiceManager()->checkService(_permission);
         if (binder == nullptr) {
             // Wait for the permission controller to come back...
-            if (startTime == 0) {
-                startTime = uptimeMillis();
+            if (startTime == startTime.min()) {
+                startTime = std::chrono::steady_clock::now();
                 ALOGI("Waiting to check permission %s from uid=%d pid=%d",
                       String8(permission).c_str(), uid, pid);
             }
@@ -307,8 +309,8 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 
     const bool isVendorService =
         strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
-    constexpr int64_t timeout = 5000;
-    int64_t startTime = uptimeMillis();
+    constexpr auto timeout = 5s;
+    const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
     if (!gSystemBootCompleted && !isVendorService) {
 #ifdef __ANDROID__
@@ -326,15 +328,16 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
           ProcessState::self()->getDriverName().c_str());
 
     int n = 0;
-    while (uptimeMillis() - startTime < timeout) {
+    while (std::chrono::steady_clock::now() - startTime < timeout) {
         n++;
         usleep(1000*sleepTime);
 
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
-            ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIi64 "ms",
+            const auto waitTime = std::chrono::steady_clock::now() - startTime;
+            ALOGI("Waiting for service '%s' on '%s' successful after waiting %lldms",
                   String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
-                  uptimeMillis() - startTime);
+                  std::chrono::duration_cast<std::chrono::milliseconds>(waitTime).count());
             return svc;
         }
     }
@@ -438,7 +441,6 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
             // that another thread serves the callback, and we never get a
             // command, so we hang indefinitely.
             std::unique_lock<std::mutex> lock(waiter->mMutex);
-            using std::literals::chrono_literals::operator""s;
             waiter->mCv.wait_for(lock, 1s, [&] {
                 return waiter->mBinder != nullptr;
             });
