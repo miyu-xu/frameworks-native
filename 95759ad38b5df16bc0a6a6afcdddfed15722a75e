@@ -178,6 +178,24 @@
       "parentUuid": "3f46a5b2_0e5b96b9",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9197b93_d6b9e760",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T21:42:07Z",
+      "side": 1,
+      "message": "right -- BINDER_NO_KERNEL_IPC_TESTING",
+      "parentUuid": "587048b1_82d6ea7e",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
