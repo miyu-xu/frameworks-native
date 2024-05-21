@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f45c91_7f815f29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-21T21:59:21Z",
+      "side": 1,
+      "message": "I\u0027ve split the Android.bp changes into https://r.android.com/3096103 so that conflict prone part of the CL can go in right away and is less likely to be reverted.\n\nOpened a blocking comment on that CL to run these tests.",
+      "parentUuid": "04e92f35_1791d774",
+      "revId": "66c23455e2c5d48aab8b02c00776a412145795a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1079fc8_370c1ec4",
