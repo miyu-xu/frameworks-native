@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <linux/wait.h>
 #define LOG_TAG "dumpstate"
 
 #include "DumpstateUtil.h"
@@ -24,6 +25,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include <array>
 #include <vector>
 
 #include <android-base/file.h>
@@ -43,65 +45,6 @@ namespace {
 
 static constexpr const char* kSuPath = "/system/xbin/su";
 
-static bool waitpid_with_timeout(pid_t pid, int timeout_ms, int* status) {
-    sigset_t child_mask, old_mask;
-    sigemptyset(&child_mask);
-    sigaddset(&child_mask, SIGCHLD);
-
-    // block SIGCHLD before we check if a process has exited
-    if (sigprocmask(SIG_BLOCK, &child_mask, &old_mask) == -1) {
-        printf("*** sigprocmask failed: %s\n", strerror(errno));
-        return false;
-    }
-
-    // if the child has exited already, handle and reset signals before leaving
-    pid_t child_pid = waitpid(pid, status, WNOHANG);
-    if (child_pid != pid) {
-        if (child_pid > 0) {
-            printf("*** Waiting for pid %d, got pid %d instead\n", pid, child_pid);
-            sigprocmask(SIG_SETMASK, &old_mask, nullptr);
-            return false;
-        }
-    } else {
-        sigprocmask(SIG_SETMASK, &old_mask, nullptr);
-        return true;
-    }
-
-    // wait for a SIGCHLD
-    timespec ts;
-    ts.tv_sec = MSEC_TO_SEC(timeout_ms);
-    ts.tv_nsec = (timeout_ms % 1000) * 1000000;
-    int ret = TEMP_FAILURE_RETRY(sigtimedwait(&child_mask, nullptr, &ts));
-    int saved_errno = errno;
-
-    // Set the signals back the way they were.
-    if (sigprocmask(SIG_SETMASK, &old_mask, nullptr) == -1) {
-        printf("*** sigprocmask failed: %s\n", strerror(errno));
-        if (ret == 0) {
-            return false;
-        }
-    }
-    if (ret == -1) {
-        errno = saved_errno;
-        if (errno == EAGAIN) {
-            errno = ETIMEDOUT;
-        } else {
-            printf("*** sigtimedwait failed: %s\n", strerror(errno));
-        }
-        return false;
-    }
-
-    child_pid = waitpid(pid, status, WNOHANG);
-    if (child_pid != pid) {
-        if (child_pid != -1) {
-            printf("*** Waiting for pid %d, got pid %d instead\n", pid, child_pid);
-        } else {
-            printf("*** waitpid failed: %s\n", strerror(errno));
-        }
-        return false;
-    }
-    return true;
-}
 }  // unnamed namespace
 
 CommandOptions CommandOptions::DEFAULT = CommandOptions::WithTimeout(10).Build();
@@ -267,34 +210,31 @@ int RunCommandToFd(int fd, const std::string& title, const std::vector<std::stri
         MYLOGE("No arguments on RunCommandToFd(%s)\n", title.c_str());
         return -1;
     }
+    std::string timeout_secs = std::to_string(options.Timeout());
+    std::string sigkill_secs = std::to_string(options.Timeout() + 5);
 
-    int size = full_command.size() + 1;  // null terminated
-    int starting_index = 0;
-    if (options.PrivilegeMode() == SU_ROOT) {
-        starting_index = 2;  // "su" "root"
-        size += starting_index;
-    }
+    std::array<const char*, 6> timeout_command = {
+        "timeout", "-s", "TERM", timeout_secs.c_str(), "-k", sigkill_secs.c_str()
+    };
 
     std::vector<const char*> args;
-    args.resize(size);
+    args.reserve(full_command.size() + timeout_command.size() + 3);
 
-    std::string command_string;
     if (options.PrivilegeMode() == SU_ROOT) {
-        args[0] = kSuPath;
-        command_string += kSuPath;
-        args[1] = "root";
-        command_string += " root ";
+      args.push_back(kSuPath);
+      args.push_back("root");
     }
-    for (size_t i = 0; i < full_command.size(); i++) {
-        args[i + starting_index] = full_command[i].data();
-        command_string += args[i + starting_index];
-        if (i != full_command.size() - 1) {
-            command_string += " ";
-        }
-    }
-    args[size - 1] = nullptr;
 
+    args.insert(args.end(), timeout_command.begin(), timeout_command.end());
+
+    for (auto& arg : full_command) {
+      args.push_back(arg.c_str());
+    }
+
+    std::string command_string = android::base::Join(args, " ");
     const char* command = command_string.c_str();
+
+    args.push_back(nullptr);
 
     if (options.PrivilegeMode() == SU_ROOT && PropertiesHelper::IsUserBuild()) {
         dprintf(fd, "Skipping '%s' on user build.\n", command);
@@ -396,33 +336,15 @@ int RunCommandToFd(int fd, const std::string& title, const std::vector<std::stri
 
     /* handle parent case */
     int status;
-    bool ret = waitpid_with_timeout(pid, options.TimeoutInMs(), &status);
-
+    pid_t waited_pid = waitpid(pid, &status, 0);
     uint64_t elapsed = Nanotime() - start;
-    if (!ret) {
-        if (errno == ETIMEDOUT) {
-            if (!silent)
-                dprintf(fd, "*** command '%s' timed out after %.3fs (killing pid %d)\n", command,
+
+    if (waited_pid == -1) {
+        if (!silent)
+            dprintf(fd, "*** command '%s': Error after %.4fs (pid %d)\n", command,
                         static_cast<float>(elapsed) / NANOS_PER_SEC, pid);
-            MYLOGE("*** command '%s' timed out after %.3fs (killing pid %d)\n", command,
-                   static_cast<float>(elapsed) / NANOS_PER_SEC, pid);
-        } else {
-            if (!silent)
-                dprintf(fd, "*** command '%s': Error after %.4fs (killing pid %d)\n", command,
-                        static_cast<float>(elapsed) / NANOS_PER_SEC, pid);
-            MYLOGE("command '%s': Error after %.4fs (killing pid %d)\n", command,
-                   static_cast<float>(elapsed) / NANOS_PER_SEC, pid);
-        }
-        kill(pid, SIGTERM);
-        if (!waitpid_with_timeout(pid, 5000, nullptr)) {
-            kill(pid, SIGKILL);
-            if (!waitpid_with_timeout(pid, 5000, nullptr)) {
-                if (!silent)
-                    dprintf(fd, "could not kill command '%s' (pid %d) even with SIGKILL.\n",
-                            command, pid);
-                MYLOGE("could not kill command '%s' (pid %d) even with SIGKILL.\n", command, pid);
-            }
-        }
+        MYLOGE("command '%s': Error after %.4fs (pid %d)\n", command,
+                static_cast<float>(elapsed) / NANOS_PER_SEC, pid);
         return -1;
     }
 
