@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37dfce11_e2bf428b",
+        "filename": "libs/binder/ActivityManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-21T22:13:19Z",
+      "side": 1,
+      "message": "@smoreland@google.com: should this be 1s?",
+      "range": {
+        "startLine": 54,
+        "startChar": 74,
+        "endLine": 54,
+        "endChar": 98
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "17549755_328054c9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ActivityManager.cpp",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "                } else if (std::chrono::steady_clock::now() - startTime \u003e 1s) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "97dc0071defec23245dc47f02975ae75ce0f4d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
