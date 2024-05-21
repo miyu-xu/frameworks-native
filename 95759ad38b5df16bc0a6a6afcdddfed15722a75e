@@ -88,6 +88,24 @@
       "parentUuid": "96113d5c_516b3d0e",
       "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324b3542_0d4727a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-21T21:27:45Z",
+      "side": 1,
+      "message": "My thinking: libbinder (with IPC) is buildable for host. Since both `binder_rpc_test_service_no_kernel` and `binder_rpc_test_service` are buildable here, this test on host can execute both targets. And since RPC test isn\u0027t testing IPC, it would pass on both. No?",
+      "parentUuid": "61d8a47b_4d689a79",
+      "revId": "95759ad38b5df16bc0a6a6afcdddfed15722a75e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
