@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163a38b6_f2324e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-22T16:28:29Z",
+      "side": 1,
+      "message": "Nice, thanks!",
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5c8dc4_b12192bf",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-22T16:28:29Z",
+      "side": 1,
+      "message": "If we put something like\n\n```\nauto cleanup \u003d android::base::make_scope_guard([](){\n  PERFETTO_TE(service_manager, PERFETTO_TE_SLICE_END());\n});\n```\n\nhere we can avoid putting the slice end before all the returns.\n\nSame for all the other places below with multiple returns.\n\nI feel like it improves maintainability.",
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d723fd35_355b07fa",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-22T16:28:29Z",
+      "side": 1,
+      "message": "This will:\n* Create a thread\n* Connect to perfetto (which requires the SElinux permission)\n\nDo we want to do it in every circumstance? Specifically:\n\n1. For /system/bin/servicemanager.\n2. What about for the vendor service manager?\n3. What about the hwservice manager?\n4. What about the `servicemanager.recovery`?\n\nFor 1, we obviously want to connect and we\u0027re changing SELinux rules. Good.\n\nFor 2 and 3, SELinux should prevent it from connecting to perfetto. I would either make the SELinux change or avoid initialization (it\u0027s fine to execute the PERFETTO_TE macros without initialization, they will be noops).\n\nFor 4, I\u0027m not sure how servicemanager.recovery is used. Is perfetto `traced` running in that context?",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 47
+      },
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
