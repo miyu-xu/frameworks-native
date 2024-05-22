@@ -17,7 +17,51 @@
 #define LOG_TAG "dumpstate"
 #define ATRACE_TAG ATRACE_TAG_ALWAYS
 
+<<<<<<< PATCH SET (88412c Avoid duplicated file in bugreport.zip.)
+#include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <inttypes.h>
+#include <libgen.h>
+#include <limits.h>
+#include <math.h>
+#include <poll.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/mount.h>
+#include <sys/poll.h>
+#include <sys/prctl.h>
+#include <sys/resource.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <stdarg.h>
+#include <string.h>
+#include <sys/capability.h>
+#include <sys/inotify.h>
+#include <sys/klog.h>
+#include <time.h>
+#include <unistd.h>
+
+#include <chrono>
+#include <cmath>
+#include <fstream>
+#include <functional>
+#include <future>
+#include <memory>
+#include <numeric>
+#include <regex>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
+#include <ziparchive/zip_error.h>
+=======
 #include "dumpstate.h"
+>>>>>>> BASE      (a0f9b7 Merge "Change binderRpcTest to use 'activity' for a Java tes)
 
 #include <aidl/android/hardware/dumpstate/IDumpstateDevice.h>
 #include <android-base/file.h>
@@ -865,6 +909,12 @@ status_t Dumpstate::AddZipEntryFromFd(const std::string& entry_name, int fd,
     size_t flags = ZipWriter::kCompress | ZipWriter::kDefaultCompression;
     int32_t err = zip_writer_->StartEntryWithTime(valid_name.c_str(), flags,
                                                   get_mtime(fd, ds.now_));
+    if (err == kDuplicateEntry) {
+        // Ignore duplicate entry.
+        MYLOGD("Ignore duplicated entry: %s\n", valid_name.c_str());
+        return OK;
+    }
+
     if (err != 0) {
         MYLOGE("zip_writer_->StartEntryWithTime(%s): %s\n", valid_name.c_str(),
                ZipWriter::ErrorCodeString(err));
