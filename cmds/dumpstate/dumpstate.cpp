@@ -57,6 +57,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <ziparchive/zip_error.h>
 
 #include <aidl/android/hardware/dumpstate/IDumpstateDevice.h>
 #include <android_app_admin_flags.h>
@@ -864,6 +865,12 @@ status_t Dumpstate::AddZipEntryFromFd(const std::string& entry_name, int fd,
     size_t flags = ZipWriter::kCompress | ZipWriter::kDefaultCompression;
     int32_t err = zip_writer_->StartEntryWithTime(valid_name.c_str(), flags,
                                                   get_mtime(fd, ds.now_));
+    if (err == kDuplicateEntry) {
+        // Ignore duplicate entry.
+        MYLOGD("Ignore duplicated entry: %s\n", valid_name.c_str());
+        return OK;
+    }
+
     if (err != 0) {
         MYLOGE("zip_writer_->StartEntryWithTime(%s): %s\n", valid_name.c_str(),
                ZipWriter::ErrorCodeString(err));
