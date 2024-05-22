@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51e7e86_4e1cf774",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746367
+      },
+      "writtenOn": "2024-05-22T14:05:46Z",
+      "side": 1,
+      "message": "Hello, Could you please check if this is an reasonable optimization?",
+      "revId": "b640f8508637b53f8423133bf01fc09cd7b266b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
