@@ -22,6 +22,30 @@
       },
       "revId": "3c8b1a453687819ac0e5cf152cdb4a6a2141e327",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a897153a_d841b78b",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1941275
+      },
+      "writtenOn": "2024-05-22T17:50:26Z",
+      "side": 1,
+      "message": "Added the const.\n\nIIUC, it\u0027s copying an existing dir on device to a bugreport when capturing one.\nThe logs are managed by the UWB core rust library.\nThe max size is 1MB each, and we\u0027re rotating 8 files at a time (quoting from b/277599310#comment4).",
+      "parentUuid": "87d1c9c9_22f5de0c",
+      "range": {
+        "startLine": 1967,
+        "startChar": 14,
+        "endLine": 1967,
+        "endChar": 55
+      },
+      "revId": "3c8b1a453687819ac0e5cf152cdb4a6a2141e327",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
