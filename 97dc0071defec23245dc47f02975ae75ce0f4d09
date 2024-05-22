@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0056ae_6e710d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-22T03:18:13Z",
+      "side": 1,
+      "message": "std::chrono ugly? How dare you! :)\n\nBut seriously, I\u0027m a fanatical proponent of using C++ APIs in C++ code. Also, std::chrono already showed its superiority in this very change (see the bug in ActivityManager.cpp). At last, std::time_t can\u0027t hold milliseconds and we already have an (ugly) wrapper around clock_gettime in libutils - which I\u0027m migrating from here.",
+      "parentUuid": "40326654_bb689baf",
+      "revId": "97dc0071defec23245dc47f02975ae75ce0f4d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37dfce11_e2bf428b",
