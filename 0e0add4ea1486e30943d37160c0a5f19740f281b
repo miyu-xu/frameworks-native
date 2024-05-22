@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36149319_7d9f54f8",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-22T21:07:54Z",
+      "side": 1,
+      "message": "This case is much harder to handle, and I don\u0027t think it\u0027s important to handle the case where you have an async handle to a local non-async server. If you\u0027re using async, you\u0027re probably also doing so for the server.",
+      "range": {
+        "startLine": 1056,
+        "startChar": 0,
+        "endLine": 1059,
+        "endChar": 87
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92225320_7867f57e",
+        "filename": "libs/binder/rust/tests/integration.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-22T21:07:54Z",
+      "side": 1,
+      "message": "Seems like this is missing a few more changes like this one, but I\u0027ll open this up for review now anyway. I\u0027m out for Lund Linux conf for the rest of this week, and will fix it up next week.",
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
