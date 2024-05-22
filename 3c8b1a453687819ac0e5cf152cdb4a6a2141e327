@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d1c9c9_22f5de0c",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-05-22T11:56:32Z",
+      "side": 1,
+      "message": "nit: please create a const for this\n\nCurious: the function seems to be simply creating a dir, is this true? If so who puts the logs in this, and what is the expected size of these logs?",
+      "range": {
+        "startLine": 1967,
+        "startChar": 14,
+        "endLine": 1967,
+        "endChar": 55
+      },
+      "revId": "3c8b1a453687819ac0e5cf152cdb4a6a2141e327",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
