@@ -16,6 +16,24 @@
       "message": "this is only used for logging. how about we return an int and let the log formatter turn it into a string?\n\nthe extra formatting and `std::string` code here is probably the cause of the minor binary size increase",
       "revId": "93ef6a27fdd5abf7a70d98e5c8a78154c0d65239",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a60d81b_0f0cab57",
+        "filename": "libs/binder/Utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-23T20:41:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998a2b2d_f9d4763c",
+      "revId": "93ef6a27fdd5abf7a70d98e5c8a78154c0d65239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
