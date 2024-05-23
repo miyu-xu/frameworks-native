@@ -4452,12 +4452,48 @@ bool SurfaceFlinger::latchBuffers() {
     return !mLayersWithQueuedFrames.empty() && newDataLatched;
 }
 
+void SurfaceFlinger::logSampledLayers() const {
+    static_cast<void>(mScheduler->schedule([&] {
+        ALOGE("Dumping on-screen layers.");
+        mLayerHierarchyBuilder.dumpLayerSample(mLayerHierarchyBuilder.getHierarchy());
+        ALOGE("Dumping off-screen layers.");
+        mLayerHierarchyBuilder.dumpLayerSample(mLayerHierarchyBuilder.getOffscreenHierarchy());
+    }));
+}
+
+bool recentlyDumped() {
+    // Refer to MTK code.
+    static Mutex lock;
+    static nsecs_t threshold = static_cast<nsecs_t>(
+            base::GetIntProperty("debug.sf.add_layer_fail_log_threshold_ms", 10000));
+    static nsecs_t lasttime = 0;
+
+    Mutex::Autolock _l(lock);
+    nsecs_t now = systemTime();
+    nsecs_t elapsed_time_ms = ns2ms(now - lasttime);
+    if (lasttime != 0 && elapsed_time_ms < threshold) {
+        ALOGE("AddClientLayer already dumped %" PRId64 "(ms) before", elapsed_time_ms);
+        return true;
+    } else {
+        lasttime = now;
+    }
+    return false;
+}
+
 status_t SurfaceFlinger::addClientLayer(LayerCreationArgs& args, const sp<IBinder>& handle,
                                         const sp<Layer>& layer, const wp<Layer>& parent,
                                         uint32_t* outTransformHint) {
     if (mNumLayers >= MAX_LAYERS) {
+        if (recentlyDumped()) return NO_MEMORY;
+
         ALOGE("AddClientLayer failed, mNumLayers (%zu) >= MAX_LAYERS (%zu)", mNumLayers.load(),
               MAX_LAYERS);
+
+        if (mLayerLifecycleManagerEnabled) {
+            logSampledLayers();
+            return NO_MEMORY;
+        }
+
         static_cast<void>(mScheduler->schedule([=] {
             ALOGE("Dumping layer keeping > 20 children alive:");
             bool leakingParentLayerFound = false;

@@ -1161,6 +1161,8 @@ private:
         return doDump(fd, args, asProto);
     }
 
+    void logSampledLayers() const;
+
     static mat4 calculateColorMatrix(float saturation);
 
     void updateColorMatrixLocked();
