@@ -4601,8 +4601,30 @@ status_t SurfaceFlinger::addClientLayer(LayerCreationArgs& args, const sp<IBinde
                                         const sp<Layer>& layer, const wp<Layer>& parent,
                                         uint32_t* outTransformHint) {
     if (mNumLayers >= MAX_LAYERS) {
+        static std::atomic<nsecs_t> lasttime{0};
+        nsecs_t now = systemTime();
+        if (lasttime != 0 && ns2s(now - lasttime.load()) < 10) {
+            ALOGE("AddClientLayer already dumped 10s before");
+            return NO_MEMORY;
+        } else {
+            lasttime = now;
+        }
+
         ALOGE("AddClientLayer failed, mNumLayers (%zu) >= MAX_LAYERS (%zu)", mNumLayers.load(),
               MAX_LAYERS);
+
+        if (mLayerLifecycleManagerEnabled) {
+            static_cast<void>(mScheduler->schedule([&] {
+                ALOGE("Dumping on-screen layers.");
+                mLayerHierarchyBuilder.dumpLayerSample(
+                        mLayerHierarchyBuilder.getHierarchy());
+                ALOGE("Dumping off-screen layers.");
+                mLayerHierarchyBuilder.dumpLayerSample(
+                        mLayerHierarchyBuilder.getOffscreenHierarchy());
+            }));
+            return NO_MEMORY;
+        }
+
         static_cast<void>(mScheduler->schedule([=, this] {
             ALOGE("Dumping layer keeping > 20 children alive:");
             bool leakingParentLayerFound = false;

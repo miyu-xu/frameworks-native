@@ -204,6 +204,7 @@ public:
     const LayerHierarchy& getHierarchy() const;
     const LayerHierarchy& getOffscreenHierarchy() const;
     std::string getDebugString(uint32_t layerId, uint32_t depth = 0) const;
+    void dumpLayerSample(const LayerHierarchy& layerHierarchy) const;
 
 private:
     void onLayerAdded(RequestedLayerState* layer);
@@ -219,6 +220,7 @@ private:
     void onLayerDestroyed(RequestedLayerState* layer);
     void updateMirrorLayer(RequestedLayerState* layer);
     LayerHierarchy* getHierarchyFromId(uint32_t layerId, bool crashOnFailure = true);
+    void logSampledChildren(const LayerHierarchy& hierarchy) const;
 
     std::unordered_map<uint32_t, LayerHierarchy*> mLayerIdToHierarchy;
     std::vector<std::unique_ptr<LayerHierarchy>> mHierarchies;
