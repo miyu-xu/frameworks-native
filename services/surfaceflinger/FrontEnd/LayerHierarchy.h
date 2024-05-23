@@ -204,8 +204,15 @@ public:
     const LayerHierarchy& getHierarchy() const;
     const LayerHierarchy& getOffscreenHierarchy() const;
     std::string getDebugString(uint32_t layerId, uint32_t depth = 0) const;
+    void logSampledOnScreenLayers() const;
+    void logSampledOffScreenLayers() const;
 
 private:
+    static const size_t MAX_CHILDREN_NUM = 20;
+    static const int SAMPLE_VALUE = 13;
+    void logSampledChildren(const LayerHierarchy& hierarchy) const;
+    size_t countNumLayers(const LayerHierarchy& hierarchy) const;
+
     void onLayerAdded(RequestedLayerState* layer);
     void attachToParent(LayerHierarchy*);
     void detachFromParent(LayerHierarchy*);

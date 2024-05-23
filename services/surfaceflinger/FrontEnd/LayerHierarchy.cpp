@@ -18,6 +18,8 @@
 #undef LOG_TAG
 #define LOG_TAG "SurfaceFlinger"
 
+#include <android-base/logging.h>
+
 #include "LayerHierarchy.h"
 #include "LayerLog.h"
 #include "SwapErase.h"
@@ -427,6 +429,75 @@ LayerHierarchy* LayerHierarchyBuilder::getHierarchyFromId(uint32_t layerId, bool
     };
 
     return it->second;
+}
+
+void LayerHierarchyBuilder::logSampledChildren(const LayerHierarchy& hierarchy) const {
+    LOG(ERROR) << "Dumping random sampling of child layers.";
+    int sampleSize = static_cast<int>(hierarchy.mChildren.size() / 100 + 1);
+    for (const auto& [child, variant]: hierarchy.mChildren) {
+        if (rand() % sampleSize == 0) {
+            LOG(ERROR) << "Child Layer: " << *(child->mLayer);
+        }
+    }
+}
+
+void LayerHierarchyBuilder::logSampledOnScreenLayers() const {
+    LOG(ERROR) << "Dumping layer keeping > " << MAX_CHILDREN_NUM << " children alive:";
+    // Root.mLayer is nullptr so that it will be skipped while traversing.
+    if (mRoot.mChildren.size() > MAX_CHILDREN_NUM) {
+        LOG(ERROR) << "ROOT has " << mRoot.mChildren.size() << " children";
+        logSampledChildren(mRoot);
+    }
+    mRoot.traverse([&] (const LayerHierarchy& hierarchy, const auto& _path) -> bool {
+        if (hierarchy.mChildren.size() <= MAX_CHILDREN_NUM) {
+            return true;
+        }
+        // mLayer is ensured to be non-null. See LayerHierarchy::traverse.
+        const auto* layer = hierarchy.mLayer;
+        const auto childrenCount = hierarchy.mChildren.size();
+        LOG(ERROR) << "Layer " << *layer << " has " << childrenCount << " children";
+
+        const auto* parent = hierarchy.mParent;
+        while (parent != nullptr) {
+            if (!parent->mLayer) break;
+            LOG(ERROR) << "Parent Layer: " << *(parent->mLayer);
+            parent = parent->mParent;
+        }
+
+        logSampledChildren(hierarchy);
+        // Stop traversing.
+        return false;
+    });
+    const auto numLayers = countNumLayers(mRoot);
+    LOG(ERROR) << "Dumping random sampling of on-screen layers. total: " << numLayers;
+    mRoot.traverse([&]
+            (const LayerHierarchy& hierarchy, const auto& _path) -> bool {
+        if ((rand() % static_cast<int>(MAX_CHILDREN_NUM) == SAMPLE_VALUE) && hierarchy.mLayer) {
+            LOG(ERROR) << "Layer: " << *(hierarchy.mLayer);
+        }
+        return true;
+    });
+}
+
+void LayerHierarchyBuilder::logSampledOffScreenLayers() const {
+    const auto numLayers = countNumLayers(mOffscreenRoot);
+    LOG(ERROR) << "Dumping random sampling of off-screen layers. total: " << numLayers;
+    mOffscreenRoot.traverse([&]
+            (const LayerHierarchy& hierarchy, const auto& _path) -> bool {
+        if ((rand() % static_cast<int>(MAX_CHILDREN_NUM) == SAMPLE_VALUE) && hierarchy.mLayer) {
+            LOG(ERROR) << "Offscreen Layer: " << *(hierarchy.mLayer);
+        }
+        return true;
+    });
+}
+
+size_t LayerHierarchyBuilder::countNumLayers(const LayerHierarchy& hierarchy) const {
+    size_t numLayers = 0;
+    hierarchy.traverse([&] (const LayerHierarchy& hierarchy, const auto& _path) -> bool {
+        if (hierarchy.mLayer) numLayers++;
+        return true;
+    });
+    return numLayers;
 }
 
 const LayerHierarchy::TraversalPath LayerHierarchy::TraversalPath::ROOT =
