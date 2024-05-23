@@ -98,6 +98,30 @@
       },
       "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5217d47_069311a3",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-05-23T15:57:39Z",
+      "side": 1,
+      "message": "I think the only case we are really interested in for this (for now) is #1",
+      "parentUuid": "045b48fb_27ce6ad1",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 47
+      },
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
