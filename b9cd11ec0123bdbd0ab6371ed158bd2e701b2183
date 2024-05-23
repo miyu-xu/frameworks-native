@@ -122,6 +122,30 @@
       },
       "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60692112_427ce897",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-23T17:53:43Z",
+      "side": 1,
+      "message": "\u003e I think the only case we are really interested in for this (for now) is #1\n\nGreat!\n\nThen maybe we can ifdef out everything in the vendor case and avoid the dependency, so that we don\u0027t have to make libperfetto_c vendor_available.\n\nFor hwservice, we don\u0027t need to do anything. It looks like we don\u0027t need to to anything, it\u0027s separate copy of the source code.\n\nFor `servicemanager.recovery`, I\u0027d still like to understand if it\u0027s really a separate binary.",
+      "parentUuid": "e5217d47_069311a3",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 47
+      },
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
