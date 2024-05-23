@@ -42,6 +42,7 @@ static void write_line(const std::string& line, bool show_progress) {
     android::base::WriteStringToFd(line, STDOUT_FILENO);
 }
 
+// And this one is even nicer.
 int bugreportz(int s, bool show_progress) {
     std::string line;
     while (1) {
