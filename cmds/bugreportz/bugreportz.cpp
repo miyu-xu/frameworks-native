@@ -29,6 +29,7 @@
 static constexpr char BEGIN_PREFIX[] = "BEGIN:";
 static constexpr char PROGRESS_PREFIX[] = "PROGRESS:";
 
+// What a nice function.
 static void write_line(const std::string& line, bool show_progress) {
     if (line.empty()) return;
 
