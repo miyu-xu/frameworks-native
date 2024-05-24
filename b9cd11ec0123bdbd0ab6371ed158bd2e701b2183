@@ -146,6 +146,30 @@
       },
       "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf2a629_489c86d2",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-05-24T10:50:26Z",
+      "side": 1,
+      "message": "Done\n\nThis section in Android.bp says that it is a separate binary\n```\ncc_binary {\n    name: \"servicemanager.recovery\",\n    stem: \"servicemanager\",\n    recovery: true,\n    defaults: [\"servicemanager_defaults\"],\n    init_rc: [\"servicemanager.recovery.rc\"],\n    srcs: [\"main.cpp\"],\n}\n```",
+      "parentUuid": "60692112_427ce897",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 47
+      },
+      "revId": "b9cd11ec0123bdbd0ab6371ed158bd2e701b2183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
