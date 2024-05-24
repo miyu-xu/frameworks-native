@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb5e04c_d365b7b0",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-24T12:23:58Z",
+      "side": 1,
+      "message": "Sorry, I just realized that for compatibility reasons it\u0027s better to use `PERFETTO_PRODUCER_INIT_ARGS_INIT()`.\n\n(I\u0027ll update the example, my bad!)",
+      "range": {
+        "startLine": 40,
+        "startChar": 52,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "433826bb_ce2147a8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/main.cpp",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": "    struct PerfettoProducerInitArgs perfetto_args \u003d PERFETTO_PRODUCER_INIT_ARGS_INIT();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5a3e0fb27247c265694ea0ee75a34bcb5dea46f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
