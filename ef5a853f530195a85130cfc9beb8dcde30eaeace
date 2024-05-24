@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a93a0e_cae95a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-24T18:02:31Z",
+      "side": 1,
+      "message": "Can you set `aidl: { generate_traces: true }` on users of libbinder_aidl instead? We can auto-generate these, should not have to manually implement them.",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
