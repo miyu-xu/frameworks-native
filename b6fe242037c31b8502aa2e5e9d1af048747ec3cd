@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3f51184_87b082da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-05-25T02:33:42Z",
+      "side": 1,
+      "message": "Would it be worth it to also stringify the BC_* command?",
+      "revId": "b6fe242037c31b8502aa2e5e9d1af048747ec3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
