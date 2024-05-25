@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51854b8e_492025cf",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 23
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-25T01:06:08Z",
+      "side": 1,
+      "message": "this can be found from traversing the Soong graph? - do we need this?",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 10
+      },
+      "revId": "3bd7900a8fe614c2bafddda25aca4f302eff851a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
