@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66238ec0_bbd8f09f",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2024-05-25T01:40:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36504b21_40bdbe23",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "91bbe029efc01bc33dc62a454448c5d13c665870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e2d1746_169b469a",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-25T01:26:19Z",
       "side": 1,
       "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "91bbe029efc01bc33dc62a454448c5d13c665870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83952ce_373beff8",
+        "filename": "libs/binder/tests/binderPersistableBundleTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2024-05-25T01:40:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2d1746_169b469a",
       "range": {
         "startLine": 2,
         "startChar": 17,
