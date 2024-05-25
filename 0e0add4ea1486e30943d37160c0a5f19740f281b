@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16d9d0aa_a0577b2e",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-25T01:14:29Z",
+      "side": 1,
+      "message": "it verifies the actual types match? we\u0027re sure it\u0027s safe?",
+      "range": {
+        "startLine": 1052,
+        "startChar": 46,
+        "endLine": 1052,
+        "endChar": 81
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36149319_7d9f54f8",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 2
@@ -14,6 +37,30 @@
       "writtenOn": "2024-05-22T21:07:54Z",
       "side": 1,
       "message": "This case is much harder to handle, and I don\u0027t think it\u0027s important to handle the case where you have an async handle to a local non-async server. If you\u0027re using async, you\u0027re probably also doing so for the server.",
+      "range": {
+        "startLine": 1056,
+        "startChar": 0,
+        "endLine": 1059,
+        "endChar": 87
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24194a1a_1af52b1f",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-25T01:14:29Z",
+      "side": 1,
+      "message": "it\u0027s okay - it\u0027s similar to C++\u003c-\u003eJava cost.",
+      "parentUuid": "36149319_7d9f54f8",
       "range": {
         "startLine": 1056,
         "startChar": 0,
