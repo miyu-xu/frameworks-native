@@ -16,6 +16,52 @@
       "message": "Upstream from Meta! Thanks in advance for reviewing 😊",
       "revId": "91bbe029efc01bc33dc62a454448c5d13c665870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36504b21_40bdbe23",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-25T01:26:19Z",
+      "side": 1,
+      "message": "can you add the new test into here instead? It will also run on host and in our CI without additional configuration.",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "91bbe029efc01bc33dc62a454448c5d13c665870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2d1746_169b469a",
+        "filename": "libs/binder/tests/binderPersistableBundleTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-25T01:26:19Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "91bbe029efc01bc33dc62a454448c5d13c665870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
