@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b6efb58_da19deef",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-25T08:19:12Z",
+      "side": 1,
+      "message": "Well ... if this is wrong, then the existing code (line 983) for creating a synchronous handle is also wrong.",
+      "parentUuid": "16d9d0aa_a0577b2e",
+      "range": {
+        "startLine": 1052,
+        "startChar": 46,
+        "endLine": 1052,
+        "endChar": 81
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36149319_7d9f54f8",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 2
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "it\u0027s okay - it\u0027s similar to C++\u003c-\u003eJava cost.",
       "parentUuid": "36149319_7d9f54f8",
+      "range": {
+        "startLine": 1056,
+        "startChar": 0,
+        "endLine": 1059,
+        "endChar": 87
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36a591d_9c49dc66",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-25T08:19:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24194a1a_1af52b1f",
       "range": {
         "startLine": 1056,
         "startChar": 0,
