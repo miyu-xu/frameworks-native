@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8f2e16_9cb72cd9",
+        "filename": "services/surfaceflinger/FrontEnd/LayerHierarchy.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20ffa8f6_2c0ec5ee",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 0
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eed10c6_e7d62c99",
@@ -99,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "099eab21_149414c1",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4462,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eed10c6_e7d62c99",
+      "range": {
+        "startLine": 4462,
+        "startChar": 31,
+        "endLine": 4462,
+        "endChar": 55
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fff7b636_c578937c",
@@ -112,6 +160,30 @@
       "writtenOn": "2024-05-23T23:42:12Z",
       "side": 1,
       "message": "nit, system will crash if we run out of layers, so it think its fine to keep dumping this or even LOG_ALWAYS_FATAL instead",
+      "range": {
+        "startLine": 4490,
+        "startChar": 0,
+        "endLine": 4490,
+        "endChar": 47
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a13bd8_5d0aad8e",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4490,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "I think this time interval check is quite useful. In practice, frequent dumps often lead to a decrease in the readability of logcat. The reason why the previous design did not immediately kill SF, I speculate, is because there is a small probability that SF may recover, for example, in cases where SurfaceControl is not released in time. If the thread requested by the system_server process to create a layer is a binder thread, it will not crash immediately during an OOR. I suggest that we maintain the original design and add this time protection.",
+      "parentUuid": "fff7b636_c578937c",
       "range": {
         "startLine": 4490,
         "startChar": 0,
@@ -145,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3511d920_a6862f97",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4494,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bfb0664_6c3f56e0",
+      "range": {
+        "startLine": 4494,
+        "startChar": 45,
+        "endLine": 4494,
+        "endChar": 74
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b29794c1_bbd3fbbe",
@@ -158,6 +254,30 @@
       "writtenOn": "2024-05-23T23:42:12Z",
       "side": 1,
       "message": "nit i would remove this since it unlikely to be used. --frontend contains a superset and if we are in a failed state, we will crash soon.",
+      "range": {
+        "startLine": 6147,
+        "startChar": 0,
+        "endLine": 6147,
+        "endChar": 78
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "473a0ffc_1c7acece",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6147,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b29794c1_bbd3fbbe",
       "range": {
         "startLine": 6147,
         "startChar": 0,

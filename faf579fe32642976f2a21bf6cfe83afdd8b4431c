@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b8d529_c6752f44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-05-27T09:52:24Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch. Please review again.",
+      "revId": "faf579fe32642976f2a21bf6cfe83afdd8b4431c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
