@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c020e7_5310281b",
+        "filename": "libs/binder/tests/binder_sdk/clang.Dockerfile",
+        "patchSetId": 24
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-28T18:28:09Z",
+      "side": 1,
+      "message": "TODO: remove BREAKHERE tag before merging",
+      "range": {
+        "startLine": 15,
+        "startChar": 89,
+        "endLine": 15,
+        "endChar": 98
+      },
+      "revId": "fc309a601cbeede2438bbbedeba4b7b9440e2560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
