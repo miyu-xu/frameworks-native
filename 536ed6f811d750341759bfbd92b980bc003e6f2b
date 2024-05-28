@@ -196,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f204fd09_0ca23077",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4490,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-05-28T21:18:41Z",
+      "side": 1,
+      "message": "In that case, lets inline the function and simplify the logic, you can use an atomic instead of locking the access, you can hardcode the threshold to 10seconds.",
+      "parentUuid": "52a13bd8_5d0aad8e",
+      "range": {
+        "startLine": 4490,
+        "startChar": 0,
+        "endLine": 4490,
+        "endChar": 47
+      },
+      "revId": "536ed6f811d750341759bfbd92b980bc003e6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bfb0664_6c3f56e0",
         "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
         "patchSetId": 1
