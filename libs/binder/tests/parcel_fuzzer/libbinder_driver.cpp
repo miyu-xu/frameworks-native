@@ -60,6 +60,8 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
         IPCThreadState::self()->restoreCallingIdentity(maybeSetUid);
     }
 
+    std::vector<Parcel*> parcels;
+
     while (provider.remaining_bytes() > 0) {
         // Most of the AIDL services will have small set of transaction codes.
         // TODO(b/295942369) : Add remaining transact codes from IBinder.h
@@ -72,10 +74,10 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
                            IBinder::SYSPROPS_TRANSACTION, IBinder::EXTENSION_TRANSACTION,
                            IBinder::TWEET_TRANSACTION, IBinder::LIKE_TRANSACTION});
         uint32_t flags = provider.ConsumeIntegral<uint32_t>();
-        Parcel data;
+        Parcel* data = new Parcel();
         // for increased fuzz coverage
-        data.setEnforceNoDataAvail(false);
-        data.setServiceFuzzing();
+        data->setEnforceNoDataAvail(false);
+        data->setServiceFuzzing();
 
         sp<IBinder> target = options.extraBinders.at(
                 provider.ConsumeIntegralInRange<size_t>(0, options.extraBinders.size() - 1));
@@ -89,13 +91,14 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
 
         std::vector<uint8_t> subData = provider.ConsumeBytes<uint8_t>(
                 provider.ConsumeIntegralInRange<size_t>(0, provider.remaining_bytes()));
-        fillRandomParcel(&data, FuzzedDataProvider(subData.data(), subData.size()), &options);
+        fillRandomParcel(data, FuzzedDataProvider(subData.data(), subData.size()), &options);
+        parcels.push_back(data);
 
         Parcel reply;
         // for increased fuzz coverage
         reply.setEnforceNoDataAvail(false);
         reply.setServiceFuzzing();
-        (void)target->transact(code, data, &reply, flags);
+        (void)target->transact(code, *data, &reply, flags);
 
         // feed back in binders and fds that are returned from the service, so that
         // we can fuzz those binders, and use the fds and binders to feed back into
@@ -108,6 +111,11 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
             options.extraFds.push_back(unique_fd(dup(retFds[i])));
         }
     }
+
+    for (Parcel* p : parcels) {
+        delete p;
+    }
+    parcels.clear();
 
     // invariants
     auto ps = ProcessState::selfOrNull();
