@@ -16,6 +16,24 @@
       "message": "Can you set `aidl: { generate_traces: true }` on users of libbinder_aidl instead? We can auto-generate these, should not have to manually implement them.",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fcad5b9_4dca24a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-05-28T10:34:25Z",
+      "side": 1,
+      "message": "The pros of using libperfetto_c instead of autogenerating the aidls are the following:\n1) libperfetto_C uses less system resource than atrace and the trace size is smaller. (@ddproietto@google.com says it shouldn\u0027t be a big concern either ways though)\n2) This allows us to know which service name is being passed in the parameters to the functions. This is something we would be interested in understanding the system better.\n\nWDYT?",
+      "parentUuid": "03a93a0e_cae95a4a",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
