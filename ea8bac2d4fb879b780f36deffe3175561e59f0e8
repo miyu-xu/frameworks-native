@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c71204b_748c3b16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2024-05-28T14:46:40Z",
+      "side": 1,
+      "message": "Hi reviewers,\n\nWe plan on using rust binder across multiple upcoming APEXes - unfortunately, it is not feasible for us to enumerate specific names. Please take a look if it is acceptable to expose binder libraries to all APEXes.",
+      "revId": "ea8bac2d4fb879b780f36deffe3175561e59f0e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
