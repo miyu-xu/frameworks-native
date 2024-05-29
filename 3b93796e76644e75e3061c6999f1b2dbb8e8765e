@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299cbe82_524dbae5",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-29T15:39:27Z",
+      "side": 1,
+      "message": "Turns out that presubmit passed even though we have this assert 😞\n\nI\u0027ll get a test added for this.",
+      "revId": "3b93796e76644e75e3061c6999f1b2dbb8e8765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
