@@ -210,6 +210,30 @@
       },
       "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0db6d7_a2956f3b",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 2957,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-29T15:29:18Z",
+      "side": 1,
+      "message": "Good point! I\u0027ve added the storage areas to the stats in the `FLAG_USE_QUOTA` case too. Not resolving in case we iterate on the setup.",
+      "parentUuid": "1192d358_f7084ffd",
+      "range": {
+        "startLine": 2957,
+        "startChar": 16,
+        "endLine": 2957,
+        "endChar": 30
+      },
+      "revId": "346bd0c68b3679a673bca12b14db78f71b9012eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
