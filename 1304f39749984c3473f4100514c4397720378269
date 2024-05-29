@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0223dfa3_32fabe45",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "no need to support",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 100
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b32fc095_5c92ff87",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "this should be a soft dependency, the hard dependency should be on being able to hook mallocs?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 92
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "919c2c7b_4049916c",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "fine to cut",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 81
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda21897_92adba93",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "definitely should be cut (and Static.cpp should be excluded as well)",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 94
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee7777b_d56d1225",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "fine to cut",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 75
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866f6dcf_4ee7d7fe",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "we might want this to be able to test AIDL fully in the new env",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 70
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3152b387_7dee8b3e",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "would we support this later?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f27a6310_133445ec",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-29T22:53:16Z",
+      "side": 1,
+      "message": "would we support this later?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 64
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
