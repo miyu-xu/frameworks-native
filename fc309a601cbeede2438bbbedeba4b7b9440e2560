@@ -22,6 +22,30 @@
       },
       "revId": "fc309a601cbeede2438bbbedeba4b7b9440e2560",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c233499_da8f035f",
+        "filename": "libs/binder/tests/binder_sdk/clang.Dockerfile",
+        "patchSetId": 24
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:27:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c020e7_5310281b",
+      "range": {
+        "startLine": 15,
+        "startChar": 89,
+        "endLine": 15,
+        "endChar": 98
+      },
+      "revId": "fc309a601cbeede2438bbbedeba4b7b9440e2560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
