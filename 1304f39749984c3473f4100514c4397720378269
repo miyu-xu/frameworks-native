@@ -70,6 +70,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832d3e9a_93d564cd",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "919c2c7b_4049916c",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 81
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda21897_92adba93",
@@ -93,6 +117,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3889f2a5_41e6e8d7",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dda21897_92adba93",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 94
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ee7777b_d56d1225",
@@ -106,6 +154,30 @@
       "writtenOn": "2024-05-29T22:53:16Z",
       "side": 1,
       "message": "fine to cut",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 75
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc309a7e_f263a246",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ee7777b_d56d1225",
       "range": {
         "startLine": 110,
         "startChar": 0,
@@ -162,6 +234,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "482c35bc_929ecf19",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:53:30Z",
+      "side": 1,
+      "message": "I can try if I have time.",
+      "parentUuid": "3152b387_7dee8b3e",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f27a6310_133445ec",
@@ -175,6 +271,30 @@
       "writtenOn": "2024-05-29T22:53:16Z",
       "side": 1,
       "message": "would we support this later?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 64
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f405d8_c049f6c7",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T20:53:30Z",
+      "side": 1,
+      "message": "Everything\u0027s possible, just not sure if Rust on Linux is on a list of priorities for SDV.\n\n@skeys@google.com: Is native Rust support (contrary to interfacing with Rust over C bindings) something that:\n- you don\u0027t need\n- you\u0027d like to have, but not a big deal\n- would be very useful\n- is absolutely necessary and Linux IPC Binder won\u0027t be useable at all without it",
+      "parentUuid": "f27a6310_133445ec",
       "range": {
         "startLine": 119,
         "startChar": 0,
