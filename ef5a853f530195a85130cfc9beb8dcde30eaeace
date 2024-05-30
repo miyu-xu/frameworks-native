@@ -34,6 +34,24 @@
       "parentUuid": "03a93a0e_cae95a4a",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b99e25_c1b1ef84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-30T20:52:34Z",
+      "side": 1,
+      "message": "Can we talk about optimizing or fixing the traces that AIDL generates, rather than implementing things like this on every service?",
+      "parentUuid": "9fcad5b9_4dca24a9",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
