@@ -106,6 +106,24 @@
       "parentUuid": "82083f46_c359c76c",
       "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36897f96_85ebe813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T04:33:05Z",
+      "side": 1,
+      "message": "I was finally able to make TH run this code and indeed it\u0027s not on the build server:\n\n```\ndocker: command not found\n```\n\nLet me try to explore what would it take to have it there. Unless you have suggestions or at least know who to talk to?",
+      "parentUuid": "b607c03a_558f3098",
+      "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
