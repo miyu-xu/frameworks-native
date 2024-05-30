@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a33153ab_f24f5b29",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-30T21:09:15Z",
+      "side": 1,
+      "message": "You\u0027re right. I was able to mostly build it, but... __malloc_hook is deprecated (see https://stackoverflow.com/q/17803456) and not available on more recent clang/linux.\n\nApparently, the correct way to do this now is to define a non-weak malloc/realloc.",
+      "parentUuid": "b32fc095_5c92ff87",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 92
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "919c2c7b_4049916c",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 33
