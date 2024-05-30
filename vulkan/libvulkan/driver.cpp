@@ -39,11 +39,16 @@
 
 #include "android-base/properties.h"
 
+<<<<<<< HEAD   (952de6 Merge "Merge "vkjson: Use Vulkan API version 1.1 on VkJsonGe)
 #include "driver.h"
+=======
+#include <com_android_graphics_libvulkan_flags.h>
+>>>>>>> CHANGE (2a47d3 Implement the VK_KHR_swapchain_mutable_format device extensi)
 #include "stubhal.h"
 
 using namespace android::hardware::configstore;
 using namespace android::hardware::configstore::V1_0;
+using namespace com::android::graphics::libvulkan;
 
 // TODO(b/37049319) Get this from a header once one exists
 extern "C" {
@@ -951,6 +956,67 @@ VkResult EnumerateDeviceExtensionProperties(
                 VK_GOOGLE_DISPLAY_TIMING_SPEC_VERSION});
     }
 
+<<<<<<< HEAD   (952de6 Merge "Merge "vkjson: Use Vulkan API version 1.1 on VkJsonGe)
+=======
+    // Conditionally add VK_EXT_IMAGE_COMPRESSION_CONTROL* if feature and ANB
+    // support is provided by the driver
+    VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
+        swapchainCompFeats = {};
+    swapchainCompFeats.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT;
+    swapchainCompFeats.pNext = nullptr;
+    swapchainCompFeats.imageCompressionControlSwapchain = false;
+    VkPhysicalDeviceImageCompressionControlFeaturesEXT imageCompFeats = {};
+    imageCompFeats.sType =
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT;
+    imageCompFeats.pNext = &swapchainCompFeats;
+    imageCompFeats.imageCompressionControl = false;
+
+    VkPhysicalDeviceFeatures2 feats2 = {};
+    feats2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+    feats2.pNext = &imageCompFeats;
+
+    const auto& driver = GetData(physicalDevice).driver;
+    if (driver.GetPhysicalDeviceFeatures2 ||
+        driver.GetPhysicalDeviceFeatures2KHR) {
+        GetPhysicalDeviceFeatures2(physicalDevice, &feats2);
+    }
+
+    bool anb9 = false;
+    VkResult result =
+        GetAndroidNativeBufferSpecVersion9Support(physicalDevice, anb9);
+
+    if (result != VK_SUCCESS && result != VK_INCOMPLETE) {
+        return result;
+    }
+
+    if (anb9 && imageCompFeats.imageCompressionControl) {
+        loader_extensions.push_back(
+            {VK_EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION_NAME,
+             VK_EXT_IMAGE_COMPRESSION_CONTROL_SPEC_VERSION});
+    }
+    if (anb9 && swapchainCompFeats.imageCompressionControlSwapchain) {
+        loader_extensions.push_back(
+            {VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME,
+             VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION});
+    }
+
+    if (CanSupportSwapchainMaintenance1Extension(physicalDevice)) {
+        loader_extensions.push_back({
+                VK_EXT_SWAPCHAIN_MAINTENANCE_1_EXTENSION_NAME,
+                VK_EXT_SWAPCHAIN_MAINTENANCE_1_SPEC_VERSION});
+    }
+
+    VkPhysicalDeviceProperties2 pDeviceProperties;
+    GetPhysicalDeviceProperties2(physicalDevice, &pDeviceProperties);
+    if (flags::swapchain_mutable_format_ext() &&
+        pDeviceProperties.properties.apiVersion >= VK_API_VERSION_1_2) {
+        loader_extensions.push_back(
+            {VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME,
+             VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION});
+    }
+
+>>>>>>> CHANGE (2a47d3 Implement the VK_KHR_swapchain_mutable_format device extensi)
     // enumerate our extensions first
     if (!pLayerName && pProperties) {
         uint32_t count = std::min(
