@@ -70,6 +70,30 @@
       },
       "revId": "3c8b1a453687819ac0e5cf152cdb4a6a2141e327",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cd6455_d0bd25c8",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-05-30T14:20:14Z",
+      "side": 1,
+      "message": "Hey Nattharat, sorry missed your comment. LGTM!",
+      "parentUuid": "f0a09092_8f904c2d",
+      "range": {
+        "startLine": 1967,
+        "startChar": 14,
+        "endLine": 1967,
+        "endChar": 55
+      },
+      "revId": "3c8b1a453687819ac0e5cf152cdb4a6a2141e327",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
