@@ -277,6 +277,7 @@ cc_defaults {
     ],
 
     cflags: [
+        "-Os",
         "-DBINDER_RPC_SINGLE_THREADED",
         "-DBINDER_ENABLE_LIBLOG_ASSERT",
         "-DBINDER_DISABLE_NATIVE_HANDLE",
