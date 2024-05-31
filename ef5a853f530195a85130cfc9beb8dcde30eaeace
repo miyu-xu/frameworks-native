@@ -88,6 +88,24 @@
       "parentUuid": "d9b5ce3e_abb3b0fa",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589afc74_4ed5c773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-31T15:43:42Z",
+      "side": 1,
+      "message": "\u003e the scope_guard/atrace code to open/close could be standardized (not here) so that\n\nGood point, that can be done. I didn\u0027t get to it because the library is supposed to support C, but we can add an ifdef __cplusplus wrapper.\n\nI\u0027ll send a CL.",
+      "parentUuid": "87584358_a2e59130",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
