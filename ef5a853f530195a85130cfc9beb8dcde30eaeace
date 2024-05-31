@@ -52,6 +52,24 @@
       "parentUuid": "9fcad5b9_4dca24a9",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b5ce3e_abb3b0fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-31T15:16:07Z",
+      "side": 1,
+      "message": "This was on my mind still. A few things:\n1. we can do this here to try it, but it\u0027s not scalable, and we shouldn\u0027t have to manually write stuff like this - there are 1,000s or 10,000s of AIDL implementations, so if it\u0027s better, we should do it everywhere, not just here. AIDL does support logging additional data in a few different ways, but gen_log is the closest to being able to support what you want here.\n2. the scope_guard/atrace code to open/close could be standardized (not here) so that\n3. __func__ or similar should be used instead of having to copy the name everywhere\n\nI\u0027m also curious what the performance difference is between these two. I don\u0027t think (1) is a big difference, but what is the % difference, since on the overall system it adds up a lot?\n\nAlso - if you are okay with getting traces only, maybe add the call to generate traces now? would be nice to see the two formats side-by-side, and that is very low maintenance cost.\n\nbinderDied itself isn\u0027t an AIDL call, but it should be visible in other binder logs.",
+      "parentUuid": "c5b99e25_c1b1ef84",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
