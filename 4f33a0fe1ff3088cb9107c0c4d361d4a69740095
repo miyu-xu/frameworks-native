@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4714cd10_e1fb0c7e",
+        "filename": "libs/binder/TEST_MAPPING",
+        "patchSetId": 28
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2024-05-31T20:11:03Z",
+      "side": 1,
+      "message": "as these are hostside tests (no device needed), it\u0027s better to add `\"host\": true`.",
+      "revId": "4f33a0fe1ff3088cb9107c0c4d361d4a69740095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
