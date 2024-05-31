@@ -16,6 +16,47 @@
       "message": "not submitting until after release is cut",
       "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2670c7a3_cdfc6187",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2024-05-31T14:21:56Z",
+      "side": 1,
+      "message": "I think fetch_add returns the old value? Same for fetch_sub below.",
+      "range": {
+        "startLine": 649,
+        "startChar": 66,
+        "endLine": 649,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3db0202a_f3b9b41c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 649,
+                "startChar": 0,
+                "endLine": 650,
+                "endChar": 0
+              },
+              "replacement": "        size_t newThreadsCount \u003d mProcess-\u003emExecutingThreadsCount.fetch_add(1, std::memory_order_relaxed);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
