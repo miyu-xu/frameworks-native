@@ -16,6 +16,24 @@
       "message": "as these are hostside tests (no device needed), it\u0027s better to add `\"host\": true`.",
       "revId": "4f33a0fe1ff3088cb9107c0c4d361d4a69740095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02b1a39e_361216ea",
+        "filename": "libs/binder/TEST_MAPPING",
+        "patchSetId": 28
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-05-31T20:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4714cd10_e1fb0c7e",
+      "revId": "4f33a0fe1ff3088cb9107c0c4d361d4a69740095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
