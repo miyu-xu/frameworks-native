@@ -70,6 +70,24 @@
       "parentUuid": "c5b99e25_c1b1ef84",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87584358_a2e59130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-05-31T15:42:06Z",
+      "side": 1,
+      "message": "`aidl: { generate_traces: true }` uses systrace. There\u0027s no good way to add additional arguments there. There are privacy and performance problems.\n\nWe could implement another generate_traces: true that uses libperfetto_c, but I see two problems with that:\n\n1. We\u0027re slowly rolling out and closely monitoring the usage of libperfetto_c. I wouldn\u0027t want to have to make libperfetto_c vendor_available immediately, for example.\n2. libperfetto_c tracing has some limitations in terms of the number of threads that we can trace from and the number of processes. Offering this tracing to every AIDL implementation is not going to work well for now.\n\nI don\u0027t see anything wrong with instrumenting just one service we care about, as an experiment.\n\nWDYT?\n\nThanks!",
+      "parentUuid": "d9b5ce3e_abb3b0fa",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
