@@ -31,6 +31,10 @@ enum AServiceManager_AddServiceFlag : uint32_t {
      * not be added with this flag for privacy concerns.
      */
     ADD_SERVICE_ALLOW_ISOLATED = 1,
+    ADD_SERVICE_DUMP_FLAG_PRIORITY_CRITICAL = 2,
+    ADD_SERVICE_DUMP_FLAG_PRIORITY_HIGH = 4,
+    ADD_SERVICE_DUMP_FLAG_PRIORITY_NORMAL = 8,
+    ADD_SERVICE_DUMP_FLAG_PRIORITY_DEFAULT = 16,
 };
 
 /**
