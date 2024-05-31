@@ -81,6 +81,64 @@
       },
       "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ab2b02_609903e1",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-05-31T16:01:30Z",
+      "side": 1,
+      "message": "nit: move `maxThreads` declaration up an use it here?",
+      "range": {
+        "startLine": 650,
+        "startChar": 41,
+        "endLine": 650,
+        "endChar": 52
+      },
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a060788_cd45a6d9",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-05-31T16:01:30Z",
+      "side": 1,
+      "message": "should we still initialize `mOnThreadAvailableWaiting` to 0?",
+      "fixSuggestions": [
+        {
+          "fixId": "ed9f14db_f9f78a06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ProcessState.cpp",
+              "range": {
+                "startLine": 554,
+                "startChar": 0,
+                "endLine": 554,
+                "endChar": 0
+              },
+              "replacement": "        mOnThreadAvailableWaiting(0),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
