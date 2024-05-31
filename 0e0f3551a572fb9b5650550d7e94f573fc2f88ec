@@ -178,6 +178,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89348af9_e376529c",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-05-31T20:34:12Z",
+      "side": 1,
+      "message": "Good point! I forget we can still increase the size of mMaxThreads after we start the threadpool. Also it looks like we can get here with polling and set up the threadpool at any point after.",
+      "parentUuid": "14f8eb63_33e91709",
+      "range": {
+        "startLine": 650,
+        "startChar": 41,
+        "endLine": 650,
+        "endChar": 52
+      },
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a060788_cd45a6d9",
@@ -227,6 +251,24 @@
       "side": 1,
       "message": "I initialize it to zero as part of the field declaration. I can do it here instead if you prefer",
       "parentUuid": "6a060788_cd45a6d9",
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237d1884_5418e312",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-05-31T20:34:12Z",
+      "side": 1,
+      "message": "I didn\u0027t check there, that\u0027s totally fine!",
+      "parentUuid": "429b4f6b_57c6ac8a",
       "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
