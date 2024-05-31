@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c948cb_eaa61699",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-31T20:15:10Z",
+      "side": 1,
+      "message": "whoops! fixed\n\n\u003e (also we should keep a separate bug for mStarvationStartTimeMs for starting when there is only one thread available apparently?)\n\nyou mean when max threads is 1, whenever we are processing a transaction it counts as starvation? it seems like a general problem with it, that it triggers based on hitting the max, not going over it, so you need an oversized thread pool to avoid the starvation warning",
+      "parentUuid": "12267516_56f0d2d0",
+      "range": {
+        "startLine": 649,
+        "startChar": 66,
+        "endLine": 649,
+        "endChar": 75
+      },
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "04ab2b02_609903e1",
@@ -96,6 +120,30 @@
       "writtenOn": "2024-05-31T16:01:30Z",
       "side": 1,
       "message": "nit: move `maxThreads` declaration up an use it here?",
+      "range": {
+        "startLine": 650,
+        "startChar": 41,
+        "endLine": 650,
+        "endChar": 52
+      },
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14f8eb63_33e91709",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-31T20:15:10Z",
+      "side": 1,
+      "message": "I\u0027m thinking that someone could increase mMaxThreads between the two checks and then we wouldn\u0027t correctly detect the end of the starvation period (although it would really be wrong anyways since we should end it as soon as mMaxThreads is bumped up I\u0027d guess)",
+      "parentUuid": "04ab2b02_609903e1",
       "range": {
         "startLine": 650,
         "startChar": 41,
@@ -137,6 +185,24 @@
           ]
         }
       ],
+      "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429b4f6b_57c6ac8a",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-31T20:15:10Z",
+      "side": 1,
+      "message": "I initialize it to zero as part of the field declaration. I can do it here instead if you prefer",
+      "parentUuid": "6a060788_cd45a6d9",
       "revId": "0e0f3551a572fb9b5650550d7e94f573fc2f88ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
