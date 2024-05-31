@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c93ee50_2f74ff43",
+        "filename": "libs/binder/include/binder/ProcessState.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-31T15:43:59Z",
+      "side": 0,
+      "message": "\u003c3 removing inaccurate comments.",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 54
+      },
+      "revId": "afbfd4c28ad6a0e23dd031d2c4ed8a85e5232aa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
