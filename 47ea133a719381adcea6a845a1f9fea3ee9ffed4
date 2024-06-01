@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e210d399_706b7a98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-01T00:41:21Z",
+      "side": 1,
+      "message": "I don\u0027t understand why zygote is not supposed to be traced. It could theoretically be deadlocked or in a weird state? or we don\u0027t have permissions?",
+      "parentUuid": "b0aa8f47_7c12ee49",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "47ea133a719381adcea6a845a1f9fea3ee9ffed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e94bb5cc_c0aabbd6",
