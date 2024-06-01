@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e5d9755_78d2f798",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-01T00:34:05Z",
+      "side": 1,
+      "message": "😊",
+      "range": {
+        "startLine": 464,
+        "startChar": 32,
+        "endLine": 464,
+        "endChar": 36
+      },
+      "revId": "2265ad9dc6d1f88e2b6e62fd097bf95336387398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
