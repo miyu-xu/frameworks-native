@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795637c2_58994a07",
+        "filename": "libs/binder/tests/binder_sdk/binder_sdk_docker_test.sh",
+        "patchSetId": 29
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-01T00:38:35Z",
+      "side": 1,
+      "message": "license on these as well",
+      "revId": "150dcbf3117ee78fae6148388ae39f5a55f574ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

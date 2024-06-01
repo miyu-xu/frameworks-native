@@ -142,6 +142,24 @@
       "parentUuid": "36897f96_85ebe813",
       "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5c5b85_5b81f588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-01T00:38:35Z",
+      "side": 1,
+      "message": "Oh man, we gotta have something.\n\nCan we use \u0027make\u0027 or \u0027cmake\u0027 that Android has without docker and worrying about gcc for now?",
+      "parentUuid": "1f6a8da8_c17dbf27",
+      "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
