@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c4d577_291a20c8",
+        "filename": "cmds/installd/file_parsing.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-06-02T21:00:15Z",
+      "side": 1,
+      "message": "No need for `.c_str()`.",
+      "range": {
+        "startLine": 55,
+        "startChar": 41,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "6d37d880cb47464a7dd1512905027aa45a611b91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
