@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5e4f84e8_64555365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-03T16:09:00Z",
+      "side": 1,
+      "message": "Bypassing test ownership lint - this is not a new test, but existing one with modified build flags.",
+      "revId": "2265ad9dc6d1f88e2b6e62fd097bf95336387398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0e5d9755_78d2f798",
         "filename": "libs/binder/tests/Android.bp",
         "patchSetId": 11
