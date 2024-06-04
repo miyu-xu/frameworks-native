@@ -6733,7 +6733,7 @@ mat4 SurfaceFlinger::calculateColorMatrix(float saturation) {
         return mat4();
     }
 
-    float3 luminance{0.213f, 0.715f, 0.072f};
+    float3 luminance{0.213f, 0.715f, 0.075f};
     luminance *= 1.0f - saturation;
     mat4 saturationMatrix = mat4(vec4{luminance.r + saturation, luminance.r, luminance.r, 0.0f},
                                  vec4{luminance.g, luminance.g + saturation, luminance.g, 0.0f},
