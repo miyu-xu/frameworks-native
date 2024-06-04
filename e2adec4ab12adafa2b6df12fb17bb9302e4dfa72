@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75fd31ce_2b00254d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-04T19:26:23Z",
+      "side": 1,
+      "message": "This change is good to go, but needs one fixup from ag/3101977 - has to wait until Colin comes back from vacation on June 10.",
+      "revId": "e2adec4ab12adafa2b6df12fb17bb9302e4dfa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
