@@ -16,6 +16,24 @@
       "message": "license on these as well",
       "revId": "150dcbf3117ee78fae6148388ae39f5a55f574ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54562258_2eb7395a",
+        "filename": "libs/binder/tests/binder_sdk/binder_sdk_docker_test.sh",
+        "patchSetId": 29
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-04T21:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "795637c2_58994a07",
+      "revId": "150dcbf3117ee78fae6148388ae39f5a55f574ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
