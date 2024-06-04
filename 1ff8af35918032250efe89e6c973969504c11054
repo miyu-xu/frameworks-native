@@ -34,6 +34,24 @@
       "parentUuid": "752c2290_2b80c3cf",
       "revId": "1ff8af35918032250efe89e6c973969504c11054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fd6ffc_40766922",
+        "filename": "libs/binder/liblog_stub/include/android-base/logging.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-04T21:33:40Z",
+      "side": 1,
+      "message": "No? How about EXPECT_LT from gtest? Looking at this change uses of CHECK_* outside of tests are minimal and can be replaced with LOG_ALWAYS_FATAL_IF.\n\nFor other stuff from libbase I only see `android::base::Split`, but I\u0027m sure it\u0027s easily replaceable.",
+      "parentUuid": "00f398b8_730b6c6a",
+      "revId": "1ff8af35918032250efe89e6c973969504c11054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
