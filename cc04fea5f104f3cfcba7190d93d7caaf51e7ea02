@@ -16,6 +16,75 @@
       "message": "(see email, probably should merge 6/15 or so)",
       "revId": "cc04fea5f104f3cfcba7190d93d7caaf51e7ea02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49fb88fe_b061008b",
+        "filename": "libs/binder/include/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-04T17:42:53Z",
+      "side": 1,
+      "message": "same as below, could this be in a private header? instead of exporting to all libbinder users?",
+      "range": {
+        "startLine": 26,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "cc04fea5f104f3cfcba7190d93d7caaf51e7ea02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b33f5867_50350ada",
+        "filename": "libs/binder/include/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-04T17:42:53Z",
+      "side": 1,
+      "message": "does this need to be exposed in the public header? could it be in libs/binder/BackendUnifiedServiceManage.h and then only the Java export function exported (that could be added to IServiceManager.h to avoid an additional file)",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "cc04fea5f104f3cfcba7190d93d7caaf51e7ea02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40868bf5_ce9815a9",
+        "filename": "libs/binder/include/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-04T17:42:53Z",
+      "side": 1,
+      "message": "these will need LIBBINDER_EXPORTED now as well",
+      "range": {
+        "startLine": 67,
+        "startChar": 40,
+        "endLine": 69,
+        "endChar": 47
+      },
+      "revId": "cc04fea5f104f3cfcba7190d93d7caaf51e7ea02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
