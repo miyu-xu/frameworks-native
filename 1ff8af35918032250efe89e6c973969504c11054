@@ -16,6 +16,24 @@
       "message": "@smoreland@google.com: asking before I sink too much time one way or another: There\u0027s a lot of dependency on android-base/logging.h. Do you prefer to add this stub to liblog_stub or migrate (mostly tests) from LOG() and CHECK() to ALOG() (and gtest\u0027s EXPECT where possible)?",
       "revId": "1ff8af35918032250efe89e6c973969504c11054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f398b8_730b6c6a",
+        "filename": "libs/binder/liblog_stub/include/android-base/logging.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-04T21:23:43Z",
+      "side": 1,
+      "message": "There isn\u0027t a good alternative that still gives good error messages to CHECK_LT and friends.\n\nIs there an overall view of what we need from libbase? I would have thought there were other issues as well.",
+      "parentUuid": "752c2290_2b80c3cf",
+      "revId": "1ff8af35918032250efe89e6c973969504c11054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
