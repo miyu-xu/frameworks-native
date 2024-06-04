@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950936fc_9816aad6",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-06-04T15:50:33Z",
+      "side": 1,
+      "message": "nit: change these to left shift one. I think it makes it more obvious that these can be used as part of a bit mask and may lead to few mistakes when adding more enumerators in the future. (The AI-suggested fix looks good).",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b23890f9_8cd6ae97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_manager.h",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "    ADD_SERVICE_ALLOW_ISOLATED \u003d 1 \u003c\u003c 0,\n    ADD_SERVICE_DUMP_FLAG_PRIORITY_CRITICAL \u003d 1 \u003c\u003c 1,\n    ADD_SERVICE_DUMP_FLAG_PRIORITY_HIGH \u003d 1 \u003c\u003c 2,\n    ADD_SERVICE_DUMP_FLAG_PRIORITY_NORMAL \u003d 1 \u003c\u003c 3,\n    ADD_SERVICE_DUMP_FLAG_PRIORITY_DEFAULT \u003d 1 \u003c\u003c 4,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d4c9cd6c66cd19010fd94f6ee56403b91ba11da7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
