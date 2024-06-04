@@ -160,6 +160,24 @@
       "parentUuid": "1f6a8da8_c17dbf27",
       "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c38b5b_bc7dda91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-04T22:34:57Z",
+      "side": 1,
+      "message": "I added binder_sdk_test to build without Docker and it passes locally, but on TreeHugger it fails fast because of missing cmake. I don\u0027t see cmake in Android\u0027s checkout of external/, but I do see it here: http://shortn/_GS8AG3b8Wp",
+      "parentUuid": "3b5c5b85_5b81f588",
+      "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
