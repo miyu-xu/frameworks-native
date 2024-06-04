@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec69251_c1ddef2b",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 2754,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-06-04T02:17:29Z",
+      "side": 1,
+      "message": "Would it be possible to assign the correct quotas to storage areas instead?",
+      "range": {
+        "startLine": 2746,
+        "startChar": 0,
+        "endLine": 2754,
+        "endChar": 9
+      },
+      "revId": "1c5c73ff009d4c264500d3136ebc22718d85020b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
