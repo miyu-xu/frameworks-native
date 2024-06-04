@@ -437,17 +437,17 @@ TEST_P(BinderRpc, ManySessions) {
 }
 
 TEST_P(BinderRpc, OnewayCallDoesNotWait) {
-    constexpr size_t kReallyLongTimeMs = 100;
-    constexpr size_t kSleepMs = kReallyLongTimeMs * 5;
-
-    auto proc = createRpcTestSocketServerProcess({});
-
-    size_t epochMsBefore = epochMillis();
-
-    EXPECT_OK(proc.rootIface->sleepMsAsync(kSleepMs));
-
-    size_t epochMsAfter = epochMillis();
-    EXPECT_LT(epochMsAfter, epochMsBefore + kReallyLongTimeMs);
+    if (serverSingleThreaded()) {
+        GTEST_SKIP() << "This test requires a multi-threaded service";
+    }
+    auto proc = createRpcTestSocketServerProcess({
+            .numThreads = 2,
+    });
+    // If oneway calls waited, then this would block forever.
+    EXPECT_OK(proc.rootIface->blockingSendIntOneway(111));
+    // Let the oneway call finish so that we can shutdown cleanly.
+    int n;
+    EXPECT_OK(proc.rootIface->blockingRecvInt(&n));
 }
 
 TEST_P(BinderRpc, Callbacks) {
