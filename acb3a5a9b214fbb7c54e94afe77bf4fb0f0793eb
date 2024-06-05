@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c735a49f_cfe23519",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-05T02:11:56Z",
+      "side": 1,
+      "message": "how is this possible when the implementation of AServiceManager_addServiceWithFlags only checks if ALLOW_ISOLATED is set in the flag, and then discards any other values set there?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "acb3a5a9b214fbb7c54e94afe77bf4fb0f0793eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
