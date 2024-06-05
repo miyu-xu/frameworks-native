@@ -22,6 +22,30 @@
       },
       "revId": "acb3a5a9b214fbb7c54e94afe77bf4fb0f0793eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "242a4a94_ba985497",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3347719
+      },
+      "writtenOn": "2024-06-05T02:31:58Z",
+      "side": 1,
+      "message": "We checked the allowIsolated parameter first, and we also use dumpFlags to track whether the dump_priority_flag has been set. Both allowIsolated and dumpFlags are different parameters for the addService function. If dumpFlags has the corresponding value of dump_priority_flag, it will take effect in addService.",
+      "parentUuid": "c735a49f_cfe23519",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "acb3a5a9b214fbb7c54e94afe77bf4fb0f0793eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
