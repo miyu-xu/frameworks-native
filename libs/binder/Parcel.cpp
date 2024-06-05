@@ -3036,8 +3036,9 @@ status_t Parcel::continueWrite(size_t desired)
 
     // If shrinking, first adjust for any objects that appear
     // after the new data size.
-    size_t objectsSize =
-            kernelFields ? kernelFields->mObjectsSize : rpcFields->mObjectPositions.size();
+    size_t objectsSize = kernelFields ? kernelFields->mObjectsSize
+            : rpcFields               ? rpcFields->mObjectPositions.size()
+                                      : 0;
     if (desired < mDataSize) {
         if (desired == 0) {
             objectsSize = 0;
@@ -3261,7 +3262,7 @@ void Parcel::initState()
     mDataPos = 0;
     ALOGV("initState Setting data size of %p to %zu", this, mDataSize);
     ALOGV("initState Setting data pos of %p to %zu", this, mDataPos);
-    mVariantFields.emplace<KernelFields>();
+    mVariantFields.emplace<0>();
     mAllowFds = true;
     mDeallocZero = false;
     mOwner = nullptr;
