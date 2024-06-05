@@ -1364,13 +1364,32 @@ private:
         //
         // Boxed to save space. Lazy allocated.
         std::unique_ptr<std::vector<std::variant<binder::unique_fd, binder::borrowed_fd>>> mFds;
+
+        size_t mPadding;
     };
-    std::variant<KernelFields, RpcFields> mVariantFields;
+    // When compiling without Kernel IPC support, swap out `KernelFields` for
+    // an empty type so that the compiler can eliminate the kernel branches.
+#ifdef BINDER_WITH_KERNEL_IPC
+    using FirstVariantType = KernelFields;
+#else
+    using FirstVariantType = std::monostate;
+#endif
+    std::variant<FirstVariantType, RpcFields> mVariantFields;
 
     // Pointer to KernelFields in mVariantFields if present.
-    KernelFields* maybeKernelFields() { return std::get_if<KernelFields>(&mVariantFields); }
-    const KernelFields* maybeKernelFields() const {
+    KernelFields* maybeKernelFields() {
+#ifdef BINDER_WITH_KERNEL_IPC
         return std::get_if<KernelFields>(&mVariantFields);
+#else
+        return nullptr;
+#endif
+    }
+    const KernelFields* maybeKernelFields() const {
+#ifdef BINDER_WITH_KERNEL_IPC
+        return std::get_if<KernelFields>(&mVariantFields);
+#else
+        return nullptr;
+#endif
     }
     // Pointer to RpcFields in mVariantFields if present.
     RpcFields* maybeRpcFields() { return std::get_if<RpcFields>(&mVariantFields); }

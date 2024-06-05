@@ -3261,7 +3261,7 @@ void Parcel::initState()
     mDataPos = 0;
     ALOGV("initState Setting data size of %p to %zu", this, mDataSize);
     ALOGV("initState Setting data pos of %p to %zu", this, mDataPos);
-    mVariantFields.emplace<KernelFields>();
+    mVariantFields.emplace<0>();
     mAllowFds = true;
     mDeallocZero = false;
     mOwner = nullptr;
