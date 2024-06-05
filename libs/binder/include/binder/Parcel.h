@@ -1329,6 +1329,7 @@ private:
     // Fields only needed when parcelling for "kernel Binder".
     struct KernelFields {
         KernelFields() {}
+        // Sorted.
         binder_size_t* mObjects = nullptr;
         size_t mObjectsSize = 0;
         size_t mObjectsCapacity = 0;
@@ -1337,7 +1338,6 @@ private:
         mutable size_t mWorkSourceRequestHeaderPosition = 0;
         mutable bool mRequestHeaderPresent = false;
 
-        mutable bool mObjectsSorted = false;
         mutable bool mFdsKnown = true;
         mutable bool mHasFds = false;
     };

@@ -470,7 +470,6 @@ void Parcel::setDataPosition(size_t pos) const
     mDataPos = pos;
     if (const auto* kernelFields = maybeKernelFields()) {
         kernelFields->mNextObjectHint = 0;
-        kernelFields->mObjectsSorted = false;
     }
 }
 
@@ -823,11 +822,7 @@ status_t Parcel::hasBindersInRange(size_t offset, size_t len, bool* result) cons
             size_t pos = kernelFields->mObjects[i];
             if (pos < offset) continue;
             if (pos + sizeof(flat_binder_object) > offset + len) {
-                if (kernelFields->mObjectsSorted) {
-                    break;
-                } else {
-                    continue;
-                }
+                break;
             }
             const flat_binder_object* flat =
                     reinterpret_cast<const flat_binder_object*>(mData + pos);
@@ -863,11 +858,7 @@ status_t Parcel::hasFileDescriptorsInRange(size_t offset, size_t len, bool* resu
             size_t pos = kernelFields->mObjects[i];
             if (pos < offset) continue;
             if (pos + sizeof(flat_binder_object) > offset + len) {
-                if (kernelFields->mObjectsSorted) {
-                    break;
-                } else {
-                    continue;
-                }
+                break;
             }
             const flat_binder_object* flat =
                     reinterpret_cast<const flat_binder_object*>(mData + pos);
@@ -1587,6 +1578,12 @@ status_t Parcel::writeFileDescriptor(int fd, bool takeOwnership) {
         if (!mAllowFds) {
             return FDS_NOT_ALLOWED;
         }
+        // It is only valid to append objects to the end of the parcel. See
+        // `setDataPosition` comment.
+        if (rpcFields->mObjectPositions.size() > 0 &&
+            mDataPos <= rpcFields->mObjectPositions.back()) {
+            return INVALID_OPERATION;
+        }
         switch (rpcFields->mSession->getFileDescriptorTransportMode()) {
             case RpcSession::FileDescriptorTransportMode::NONE: {
                 return FDS_NOT_ALLOWED;
@@ -1788,6 +1785,13 @@ status_t Parcel::writeObject(const flat_binder_object& val, bool nullMetaData)
     LOG_ALWAYS_FATAL_IF(kernelFields == nullptr, "Can't write flat_binder_object to RPC Parcel");
 
 #ifdef BINDER_WITH_KERNEL_IPC
+    // It is only valid to append objects to the end of the parcel. See
+    // `setDataPosition` comment.
+    if (kernelFields->mObjectsSize > 0 &&
+        mDataPos <= kernelFields->mObjects[kernelFields->mObjectsSize - 1]) {
+        return INVALID_OPERATION;
+    }
+
     const bool enoughData = (mDataPos+sizeof(val)) <= mDataCapacity;
     const bool enoughObjects = kernelFields->mObjectsSize < kernelFields->mObjectsCapacity;
     if (enoughData && enoughObjects) {
@@ -1855,59 +1859,26 @@ status_t Parcel::validateReadData(size_t upperBound) const
 
 #ifdef BINDER_WITH_KERNEL_IPC
     // Don't allow non-object reads on object data
-    if (kernelFields->mObjectsSorted || kernelFields->mObjectsSize <= 1) {
-    data_sorted:
-        // Expect to check only against the next object
-        if (kernelFields->mNextObjectHint < kernelFields->mObjectsSize &&
-            upperBound > kernelFields->mObjects[kernelFields->mNextObjectHint]) {
-            // For some reason the current read position is greater than the next object
-            // hint. Iterate until we find the right object
-            size_t nextObject = kernelFields->mNextObjectHint;
-            do {
-                if (mDataPos < kernelFields->mObjects[nextObject] + sizeof(flat_binder_object)) {
-                    // Requested info overlaps with an object
-                    if (!mServiceFuzzing) {
-                        ALOGE("Attempt to read from protected data in Parcel %p", this);
-                    }
-                    return PERMISSION_DENIED;
+    // Expect to check only against the next object
+    if (kernelFields->mNextObjectHint < kernelFields->mObjectsSize &&
+        upperBound > kernelFields->mObjects[kernelFields->mNextObjectHint]) {
+        // For some reason the current read position is greater than the next object
+        // hint. Iterate until we find the right object
+        size_t nextObject = kernelFields->mNextObjectHint;
+        do {
+            if (mDataPos < kernelFields->mObjects[nextObject] + sizeof(flat_binder_object)) {
+                // Requested info overlaps with an object
+                if (!mServiceFuzzing) {
+                    ALOGE("Attempt to read from protected data in Parcel %p", this);
                 }
-                nextObject++;
-            } while (nextObject < kernelFields->mObjectsSize &&
-                     upperBound > kernelFields->mObjects[nextObject]);
-            kernelFields->mNextObjectHint = nextObject;
-        }
-        return NO_ERROR;
+                return PERMISSION_DENIED;
+            }
+            nextObject++;
+        } while (nextObject < kernelFields->mObjectsSize &&
+                 upperBound > kernelFields->mObjects[nextObject]);
+        kernelFields->mNextObjectHint = nextObject;
     }
-    // Quickly determine if mObjects is sorted.
-    binder_size_t* currObj = kernelFields->mObjects + kernelFields->mObjectsSize - 1;
-    binder_size_t* prevObj = currObj;
-    while (currObj > kernelFields->mObjects) {
-        prevObj--;
-        if(*prevObj > *currObj) {
-            goto data_unsorted;
-        }
-        currObj--;
-    }
-    kernelFields->mObjectsSorted = true;
-    goto data_sorted;
-
-data_unsorted:
-    // Insertion Sort mObjects
-    // Great for mostly sorted lists. If randomly sorted or reverse ordered mObjects become common,
-    // switch to std::sort(mObjects, mObjects + mObjectsSize);
-    for (binder_size_t* iter0 = kernelFields->mObjects + 1;
-         iter0 < kernelFields->mObjects + kernelFields->mObjectsSize; iter0++) {
-        binder_size_t temp = *iter0;
-        binder_size_t* iter1 = iter0 - 1;
-        while (iter1 >= kernelFields->mObjects && *iter1 > temp) {
-            *(iter1 + 1) = *iter1;
-            iter1--;
-        }
-        *(iter1 + 1) = temp;
-    }
-    kernelFields->mNextObjectHint = 0;
-    kernelFields->mObjectsSorted = true;
-    goto data_sorted;
+    return NO_ERROR;
 #else  // BINDER_WITH_KERNEL_IPC
     (void)upperBound;
     return NO_ERROR;
@@ -2741,6 +2712,26 @@ void Parcel::ipcSetDataReference(const uint8_t* data, size_t dataSize, const bin
     mOwner = relFunc;
 
 #ifdef BINDER_WITH_KERNEL_IPC
+    // Insertion Sort mObjects
+    // Great for mostly sorted lists. If randomly sorted or reverse ordered mObjects become common,
+    // switch to std::sort(mObjects, mObjects + mObjectsSize);
+    for (binder_size_t* iter0 = kernelFields->mObjects + 1;
+         iter0 < kernelFields->mObjects + kernelFields->mObjectsSize; iter0++) {
+        binder_size_t temp = *iter0;
+        binder_size_t* iter1 = iter0 - 1;
+        while (iter1 >= kernelFields->mObjects && *iter1 > temp) {
+            *(iter1 + 1) = *iter1;
+            iter1--;
+        }
+        if (iter1 + 1 != iter0) {
+            *(iter1 + 1) = temp;
+        }
+    }
+    // // TODO: std::sort only adds a few hundred bytes to the binary size. switch to it instead?
+    // if (kernelFields->mObjectsSize > 1) {
+    //     std::sort(kernelFields->mObjects, kernelFields->mObjects + kernelFields->mObjectsSize);
+    // }
+
     binder_size_t minOffset = 0;
     for (size_t i = 0; i < kernelFields->mObjectsSize; i++) {
         binder_size_t offset = kernelFields->mObjects[i];
@@ -3011,7 +3002,6 @@ status_t Parcel::restartWrite(size_t desired)
         kernelFields->mObjects = nullptr;
         kernelFields->mObjectsSize = kernelFields->mObjectsCapacity = 0;
         kernelFields->mNextObjectHint = 0;
-        kernelFields->mObjectsSorted = false;
         kernelFields->mHasFds = false;
         kernelFields->mFdsKnown = true;
     } else if (auto* rpcFields = maybeRpcFields()) {
@@ -3123,7 +3113,6 @@ status_t Parcel::continueWrite(size_t desired)
             kernelFields->mObjects = objects;
             kernelFields->mObjectsSize = kernelFields->mObjectsCapacity = objectsSize;
             kernelFields->mNextObjectHint = 0;
-            kernelFields->mObjectsSorted = false;
         }
 
     } else if (mData) {
@@ -3156,7 +3145,6 @@ status_t Parcel::continueWrite(size_t desired)
             }
             kernelFields->mObjectsSize = objectsSize;
             kernelFields->mNextObjectHint = 0;
-            kernelFields->mObjectsSorted = false;
 #else  // BINDER_WITH_KERNEL_IPC
             LOG_ALWAYS_FATAL("Non-zero numObjects for RPC Parcel");
 #endif // BINDER_WITH_KERNEL_IPC
