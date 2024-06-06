@@ -16,8 +16,6 @@
 
 #include "../../../../file.h"
 
-#include <android-base/logging.h>
-
 #include <binder/Binder.h>
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
