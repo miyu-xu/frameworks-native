@@ -16,8 +16,6 @@
 
 #include <linux/android/binder.h>
 
-#include <android-base/logging.h>
-
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
 
@@ -104,7 +102,8 @@ void writeRandomBinder(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
                               randomBinderIndex);
 
     // write random string of length 100 in actual buffer array.
-    CHECK(WriteFully(fd, kRandomInterfaceName.c_str(), kRandomInterfaceName.size())) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, kRandomInterfaceName.c_str(), kRandomInterfaceName.size()),
+                        "WriteFully to %d failed", fd.get());
 
     // These will be bytes which are used inside of RandomBinder
     // simplest path for these bytes is going to be consume bool -> return random status
@@ -123,7 +122,8 @@ void writeRandomBinder(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
     remainingPositions.push(providerData);
 
     // Write to fd
-    CHECK(WriteFully(fd, randomBinderBuffer.data(), randomBinderBuffer.size())) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, randomBinderBuffer.data(), randomBinderBuffer.size()),
+                        "WriteFully to %d failed", fd.get());
 }
 
 // Assuming current seed path is inside the fillRandomParcelFunction, start of the loop.
@@ -157,7 +157,7 @@ void writeParcelData(borrowed_fd fd, vector<uint8_t>& fillParcelBuffer,
     remainingPositions.push(providerData);
 
     // provide actual bytes
-    CHECK(WriteFully(fd, data + start, length)) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, data + start, length), "WriteFully to %d failed", fd.get());
 }
 
 /**
@@ -236,7 +236,8 @@ void generateSeedsFromRecording(borrowed_fd fd,
                                 const binder::debug::RecordedTransaction& transaction) {
     // Write Reserved bytes for future use
     std::vector<uint8_t> reservedBytes(8);
-    CHECK(WriteFully(fd, reservedBytes.data(), reservedBytes.size())) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, reservedBytes.data(), reservedBytes.size()),
+                        "WriteFully to %d failed", fd.get());
 
     std::vector<uint8_t> integralBuffer;
 
@@ -298,9 +299,11 @@ void generateSeedsFromRecording(borrowed_fd fd,
     impl::writeReversedBuffer(integralBuffer, static_cast<size_t>(0), subDataSize, subDataSize);
 
     // Write fill parcel buffer
-    CHECK(WriteFully(fd, fillParcelBuffer.data(), fillParcelBuffer.size())) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, fillParcelBuffer.data(), fillParcelBuffer.size()),
+                        "WriteFully to %d failed", fd.get());
 
     // Write the integralBuffer to data
-    CHECK(WriteFully(fd, integralBuffer.data(), integralBuffer.size())) << fd.get();
+    LOG_ALWAYS_FATAL_IF(!WriteFully(fd, integralBuffer.data(), integralBuffer.size()),
+                        "WriteFully to %d failed", fd.get());
 }
 } // namespace android
