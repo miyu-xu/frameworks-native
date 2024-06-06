@@ -16,6 +16,24 @@
       "message": "i still don\u0027t understand this. can you give me a concrete example of where you\u0027re seeing duplicate entries, and why it\u0027s correct to ignore them? it seems to me that if they\u0027re coming from the file system this can\u0027t happen [because duplicate names aren\u0027t allowed there] and if they\u0027re coming from running a command, we should make sure that everything has a unique name, because otherwise it\u0027s confusing for any human [or machine!] that has to look at the resulting zip file?",
       "revId": "88412c781def6295b7309b86295286e4cf80959e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8449b83_35c5e2ac",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-06-06T16:20:50Z",
+      "side": 1,
+      "message": "or why not try to also rename it right here. It\u0027s nice to have a message in the log that some data was lost, but much better to have that data with a slightly different name (e.g. name + uuid or name + unique number suffix) so the bug still has enough information to fix it",
+      "parentUuid": "4e46d991_3198d9c4",
+      "revId": "88412c781def6295b7309b86295286e4cf80959e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
