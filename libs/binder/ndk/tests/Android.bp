@@ -46,7 +46,10 @@ cc_library_static {
     name: "test_libbinder_ndk_library",
     defaults: ["test_libbinder_ndk_defaults"],
     export_include_dirs: ["include"],
-    shared_libs: ["libbinder_ndk"],
+    shared_libs: [
+        "libbinder_ndk",
+        "liblog",
+    ],
     export_shared_lib_headers: ["libbinder_ndk"],
     srcs: ["iface.cpp"],
 }
@@ -74,6 +77,9 @@ cc_test {
     name: "libbinder_ndk_unit_test",
     defaults: ["test_libbinder_ndk_test_defaults"],
     srcs: ["libbinder_ndk_unit_test.cpp"],
+    shared_libs: [
+        "liblog",
+    ],
     static_libs: [
         "IBinderNdkUnitTest-cpp",
         "IBinderNdkUnitTest-ndk",

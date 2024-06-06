@@ -17,7 +17,6 @@
 #include <IBinderNdkUnitTest.h>
 #include <aidl/BnBinderNdkUnitTest.h>
 #include <aidl/BnEmpty.h>
-#include <android-base/logging.h>
 #include <android/binder_ibinder_jni.h>
 #include <android/binder_ibinder_platform.h>
 #include <android/binder_libbinder.h>
@@ -33,6 +32,7 @@
 #include <binder/IResultReceiver.h>
 #include <binder/IServiceManager.h>
 #include <binder/IShellCallback.h>
+#include <inttypes.h>
 #include <sys/prctl.h>
 #include <sys/socket.h>
 
@@ -60,7 +60,8 @@ constexpr uint64_t kContextTestValue = 0xb4e42fb4d9a1d715;
 class MyTestFoo : public IFoo {
     binder_status_t doubleNumber(int32_t in, int32_t* out) override {
         *out = 2 * in;
-        LOG(INFO) << "doubleNumber (" << in << ") => " << *out;
+        ALOGI("doubleNumber (%" PRId32 ") => %" PRId32, in, *out);
+
         return STATUS_OK;
     }
     binder_status_t die() override {
@@ -108,13 +109,13 @@ class MyBinderNdkUnitTest : public aidl::BnBinderNdkUnitTest {
     }
     static bool activeServicesCallback(bool hasClients, void* context) {
         if (hasClients) {
-            LOG(INFO) << "hasClients, so not unregistering.";
+            ALOGI("hasClients, so not unregistering.");
             return false;
         }
 
         // Unregister all services
         if (!AServiceManager_tryUnregister()) {
-            LOG(INFO) << "Could not unregister service the first time.";
+            ALOGI("Could not unregister service the first time.");
             // Prevent shutdown (test will fail)
             return false;
         }
@@ -124,7 +125,7 @@ class MyBinderNdkUnitTest : public aidl::BnBinderNdkUnitTest {
 
         // Unregister again before shutdown
         if (!AServiceManager_tryUnregister()) {
-            LOG(INFO) << "Could not unregister service the second time.";
+            ALOGI("Could not unregister service the second time.");
             // Prevent shutdown (test will fail)
             return false;
         }
@@ -132,7 +133,7 @@ class MyBinderNdkUnitTest : public aidl::BnBinderNdkUnitTest {
         // Check if the context was passed correctly
         MyBinderNdkUnitTest* service = static_cast<MyBinderNdkUnitTest*>(context);
         if (service->contextTestValue != kContextTestValue) {
-            LOG(INFO) << "Incorrect context value.";
+            ALOGI("Incorrect context value.");
             // Prevent shutdown (test will fail)
             return false;
         }
@@ -156,7 +157,7 @@ int generatedService() {
             AServiceManager_addService(binder.get(), kBinderNdkUnitTestService);
 
     if (exception != EX_NONE) {
-        LOG(FATAL) << "Could not register: " << exception << " " << kBinderNdkUnitTestService;
+        LOG_ALWAYS_FATAL("Could not register: %d %s", exception, kBinderNdkUnitTestService);
     }
 
     ABinderProcess_joinThreadPool();
@@ -174,7 +175,7 @@ int generatedFlaggedService(const AServiceManager_AddServiceFlag flags, const ch
             AServiceManager_addServiceWithFlags(binder.get(), instance, flags);
 
     if (exception != EX_NONE) {
-        LOG(FATAL) << "Could not register: " << exception << " " << instance;
+        LOG_ALWAYS_FATAL("Could not register: %d %s", exception, instance);
     }
 
     ABinderProcess_joinThreadPool();
@@ -186,12 +187,12 @@ int generatedFlaggedService(const AServiceManager_AddServiceFlag flags, const ch
 class MyFoo : public IFoo {
     binder_status_t doubleNumber(int32_t in, int32_t* out) override {
         *out = 2 * in;
-        LOG(INFO) << "doubleNumber (" << in << ") => " << *out;
+        ALOGI("doubleNumber (%" PRId32 ") => %" PRId32, in, *out);
         return STATUS_OK;
     }
 
     binder_status_t die() override {
-        LOG(FATAL) << "IFoo::die called!";
+        LOG_ALWAYS_FATAL("IFoo::die called!");
         return STATUS_UNKNOWN_ERROR;
     }
 };
@@ -201,12 +202,16 @@ void manualService(const char* instance) {
     binder_exception_t exception = (new MyFoo)->addService(instance);
 
     if (exception != EX_NONE) {
-        LOG(FATAL) << "Could not register: " << exception << " " << instance;
+        LOG_ALWAYS_FATAL("Could not register: %d %s", exception, instance);
     }
 }
 int manualPollingService(const char* instance) {
     int fd;
-    CHECK(STATUS_OK == ABinderProcess_setupPolling(&fd));
+    const auto res = ABinderProcess_setupPolling(&fd);
+    if (STATUS_OK != res) {
+        EXPECT_EQ(STATUS_OK, res);
+        abort();
+    }
     manualService(instance);
 
     class Handler : public LooperCallback {
@@ -244,7 +249,7 @@ int lazyService(const char* instance) {
 
     binder_status_t status = AServiceManager_registerLazyService(binder.get(), instance);
     if (status != STATUS_OK) {
-        LOG(FATAL) << "Could not register: " << status << " " << instance;
+        LOG_ALWAYS_FATAL("Could not register: %d %s", status, instance);
     }
 
     ABinderProcess_joinThreadPool();
@@ -479,7 +484,7 @@ TEST(NdkBinder, ForcedPersistenceTest) {
 }
 
 TEST(NdkBinder, ActiveServicesCallbackTest) {
-    LOG(INFO) << "ActiveServicesCallbackTest starting";
+    ALOGI("ActiveServicesCallbackTest starting");
 
     ndk::SpAIBinder binder(AServiceManager_waitForService(kActiveServicesNdkUnitTestService));
     std::shared_ptr<aidl::IBinderNdkUnitTest> service =
@@ -491,7 +496,7 @@ TEST(NdkBinder, ActiveServicesCallbackTest) {
     service = nullptr;
     IPCThreadState::self()->flushCommands();
 
-    LOG(INFO) << "ActiveServicesCallbackTest about to sleep";
+    ALOGI("ActiveServicesCallbackTest about to sleep");
     sleep(kShutdownWaitTime);
 
     ASSERT_FALSE(isServiceRunning(kActiveServicesNdkUnitTestService))
@@ -592,7 +597,7 @@ TEST(NdkBinder, RetrieveNonNdkService) {
 }
 
 void OnBinderDeath(void* cookie) {
-    LOG(ERROR) << "BINDER DIED. COOKIE: " << cookie;
+    ALOGE("BINDER DIED. COOKIE: %p", cookie);
 }
 
 TEST(NdkBinder, LinkToDeath) {

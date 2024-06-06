@@ -106,6 +106,7 @@ cc_library_static {
         "libbinder",
         "libbinder_ndk",
         "libcutils",
+        "liblog",
         "libutils",
     ],
     local_include_dirs: ["include_random_parcel"],
@@ -129,6 +130,7 @@ cc_library {
         "libbinder",
         "libbinder_ndk",
         "libcutils",
+        "liblog",
         "libutils",
     ],
     static_libs: [
@@ -160,6 +162,7 @@ cc_binary_host {
         "libbase",
         "libbinder",
         "libutils",
+        "liblog",
         "libcutils",
     ],
 }

@@ -17,7 +17,6 @@
 
 #include <fuzzbinder/random_parcel.h>
 
-#include <android-base/logging.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
 
@@ -112,9 +111,9 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
     // invariants
     auto ps = ProcessState::selfOrNull();
     if (ps) {
-        CHECK_EQ(0, ps->getThreadPoolMaxTotalThreadCount())
-                << "Binder threadpool should not be started by fuzzer because coverage can only "
-                   "cover in-process calls.";
+        LOG_ALWAYS_FATAL_IF(0 != ps->getThreadPoolMaxTotalThreadCount(),
+                            "Binder threadpool should not be started by fuzzer because coverage "
+                            "can only cover in-process calls.");
     }
 }
 
