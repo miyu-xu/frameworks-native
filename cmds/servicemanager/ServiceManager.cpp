@@ -16,7 +16,6 @@
 
 #include "ServiceManager.h"
 
-#include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <android-base/scopeguard.h>
 #include <android-base/strings.h>
@@ -353,14 +352,14 @@ ServiceManager::~ServiceManager() {
     // this should only happen in tests
 
     for (const auto& [name, callbacks] : mNameToRegistrationCallback) {
-        CHECK(!callbacks.empty()) << name;
+        LOG_ALWAYS_FATAL_IF(callbacks.empty(), "callbacks.empty() for %s", name.c_str());
         for (const auto& callback : callbacks) {
-            CHECK(callback != nullptr) << name;
+            LOG_ALWAYS_FATAL_IF(callback == nullptr, "callback is null for %s", name.c_str());
         }
     }
 
     for (const auto& [name, service] : mNameToService) {
-        CHECK(service.binder != nullptr) << name;
+        LOG_ALWAYS_FATAL_IF(service.binder == nullptr, "callback is null for %s", name.c_str());
     }
 }
 
@@ -391,8 +390,9 @@ sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfN
         service = &(it->second);
 
         if (!service->allowIsolated && is_multiuser_uid_isolated(ctx.uid)) {
-            LOG(WARNING) << "Isolated app with UID " << ctx.uid << " requested '" << name
-                         << "', but the service is not allowed for isolated apps.";
+            ALOGW("Isolated app with UID %ld requested '%s', but the service is not allowed for "
+                  "isolated apps.",
+                  (long)ctx.uid, name.c_str());
             return nullptr;
         }
         out = service->binder;
@@ -413,7 +413,8 @@ sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfN
         // right here is always going to be important for processes serving multiple
         // lazy interfaces.
         service->guaranteeClient = true;
-        CHECK(handleServiceClientCallback(2 /* sm + transaction */, name, false));
+        LOG_ALWAYS_FATAL_IF(!handleServiceClientCallback(2 /* sm + transaction */, name, false),
+                            "handleServiceClientCallback failed");
         service->guaranteeClient = true;
     }
 
@@ -519,7 +520,8 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
         // If someone is currently waiting on the service, notify the service that
         // we're waiting and flush it to the service.
         mNameToService[name].guaranteeClient = true;
-        CHECK(handleServiceClientCallback(2 /* sm + transaction */, name, false));
+        LOG_ALWAYS_FATAL_IF(!handleServiceClientCallback(2 /* sm + transaction */, name, false),
+                            "handleServiceClientCallback failed");
         mNameToService[name].guaranteeClient = true;
 
         for (const sp<IServiceCallback>& cb : it->second) {
@@ -545,7 +547,7 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
         if (service.dumpPriority & dumpPriority) ++toReserve;
     }
 
-    CHECK(outList->empty());
+    LOG_ALWAYS_FATAL_IF(!outList->empty(), "outList is not empty");
 
     outList->reserve(toReserve);
     for (auto const& [name, service] : mNameToService) {
@@ -601,7 +603,7 @@ Status ServiceManager::registerForNotifications(
         const sp<IBinder>& binder = it->second.binder;
 
         // never null if an entry exists
-        CHECK(binder != nullptr) << name;
+        LOG_ALWAYS_FATAL_IF(binder == nullptr, "binder is null for %s", name.c_str());
         callback->onRegistration(name, binder);
     }
 
@@ -948,15 +950,17 @@ void ServiceManager::sendClientCallbackNotifications(const std::string& serviceN
     }
     Service& service = serviceIt->second;
 
-    CHECK_NE(hasClients, service.hasClients) << context;
+    LOG_ALWAYS_FATAL_IF(hasClients == service.hasClients,
+                        "Can't notify about clients - state didn't change when %s", context);
 
     ALOGI("Notifying %s they %s (previously: %s) have clients when %s", serviceName.c_str(),
           hasClients ? "do" : "don't", service.hasClients ? "do" : "don't", context);
 
     auto ccIt = mNameToClientCallback.find(serviceName);
-    CHECK(ccIt != mNameToClientCallback.end())
-            << "sendClientCallbackNotifications could not find callbacks for service when "
-            << context;
+    LOG_ALWAYS_FATAL_IF(ccIt == mNameToClientCallback.end(),
+                        "sendClientCallbackNotifications could not find callbacks for service when "
+                        "%s",
+                        context);
 
     for (const auto& callback : ccIt->second) {
         callback->onClients(service.binder, hasClients);
