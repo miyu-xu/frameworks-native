@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
@@ -144,11 +143,7 @@ private:
 };
 
 int main(int argc, char** argv) {
-    android::base::InitLogging(argv, android::base::KernelLogger);
-
-    if (argc > 2) {
-        LOG(FATAL) << "usage: " << argv[0] << " [binder driver]";
-    }
+    LOG_ALWAYS_FATAL_IF(argc > 2, "usage: %s [binder driver]", argv[0]);
 
     const char* driver = argc == 2 ? argv[1] : "/dev/binder";
 
@@ -156,7 +151,7 @@ int main(int argc, char** argv) {
     android::register_perfetto_te_categories();
 #endif // !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 
-    LOG(INFO) << "Starting sm instance on " << driver;
+    ALOGI("Starting sm instance on %s", driver);
 
     sp<ProcessState> ps = ProcessState::initWithDriver(driver);
     ps->setThreadPoolMaxThreadCount(0);
@@ -166,13 +161,11 @@ int main(int argc, char** argv) {
 
     sp<ServiceManager> manager = sp<ServiceManager>::make(std::make_unique<Access>());
     if (!manager->addService("manager", manager, false /*allowIsolated*/, IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk()) {
-        LOG(ERROR) << "Could not self register servicemanager";
+        ALOGE("Could not self register servicemanager");
     }
 
     IPCThreadState::self()->setTheContextObject(manager);
-    if (!ps->becomeContextManager()) {
-        LOG(FATAL) << "Could not become context manager";
-    }
+    LOG_ALWAYS_FATAL_IF(!ps->becomeContextManager(), "Could not become context manager");
 
     sp<Looper> looper = Looper::prepare(false /*allowNonCallbacks*/);
 
@@ -181,7 +174,7 @@ int main(int argc, char** argv) {
 
 #ifndef VENDORSERVICEMANAGER
     if (!SetProperty("servicemanager.ready", "true")) {
-        LOG(ERROR) << "Failed to set servicemanager ready property";
+        ALOGE("Failed to set servicemanager ready property");
     }
 #endif
 
