@@ -16,7 +16,6 @@
 
 #include <fuzzbinder/random_parcel.h>
 
-#include <android-base/logging.h>
 #include <binder/RpcSession.h>
 #include <binder/RpcTransportRaw.h>
 #include <fuzzbinder/random_binder.h>
@@ -29,15 +28,16 @@ namespace android {
 
 static void fillRandomParcelData(Parcel* p, FuzzedDataProvider&& provider) {
     std::vector<uint8_t> data = provider.ConsumeBytes<uint8_t>(provider.remaining_bytes());
-    CHECK(OK == p->write(data.data(), data.size()));
+    LOG_ALWAYS_FATAL_IF(OK != p->write(data.data(), data.size()), "failed to write");
 }
 
 void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOptions* options) {
-    CHECK_NE(options, nullptr);
+    LOG_ALWAYS_FATAL_IF(options == nullptr, "options are null");
 
     if (provider.ConsumeBool()) {
         auto session = RpcSession::make(RpcTransportCtxFactoryRaw::make());
-        CHECK_EQ(OK, session->addNullDebuggingClient());
+        LOG_ALWAYS_FATAL_IF(OK != session->addNullDebuggingClient(),
+                            "addNullDebuggingClient failed");
         // Set the protocol version so that we don't crash if the session
         // actually gets used. This isn't cheating because the version should
         // always be set if the session init succeeded and we aren't testing the
@@ -64,7 +64,8 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                     size_t toWrite =
                             provider.ConsumeIntegralInRange<size_t>(0, provider.remaining_bytes());
                     std::vector<uint8_t> data = provider.ConsumeBytes<uint8_t>(toWrite);
-                    CHECK(OK == p->write(data.data(), data.size()));
+                    LOG_ALWAYS_FATAL_IF(OK != p->write(data.data(), data.size()),
+                                        "failed to write");
                 },
                 // write FD
                 [&]() {
@@ -78,7 +79,8 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                                 provider.ConsumeIntegralInRange<size_t>(0,
                                                                         options->extraFds.size() -
                                                                                 1));
-                        CHECK(OK == p->writeFileDescriptor(fd.get(), false /*takeOwnership*/));
+                        const auto res = p->writeFileDescriptor(fd.get(), false /*takeOwnership*/);
+                        LOG_ALWAYS_FATAL_IF(OK != res, "writeFileDescriptor failed");
                     } else {
                         // b/260119717 - Adding more FDs can eventually lead to FD limit exhaustion
                         if (options->extraFds.size() > 1000) {
@@ -86,9 +88,9 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                         }
 
                         std::vector<unique_fd> fds = getRandomFds(&provider);
-                        CHECK(OK ==
-                              p->writeFileDescriptor(fds.begin()->release(),
-                                                     true /*takeOwnership*/));
+                        const auto res = p->writeFileDescriptor(fds.begin()->release(),
+                                                                true /*takeOwnership*/);
+                        LOG_ALWAYS_FATAL_IF(OK != res, "writeFileDescriptor failed");
                         options->extraFds.insert(options->extraFds.end(),
                                                  std::make_move_iterator(fds.begin() + 1),
                                                  std::make_move_iterator(fds.end()));
@@ -111,7 +113,8 @@ void fillRandomParcel(Parcel* p, FuzzedDataProvider&& provider, RandomParcelOpti
                     } else {
                         binder = getRandomBinder(&provider);
                     }
-                    CHECK(OK == p->writeStrongBinder(binder));
+                    LOG_ALWAYS_FATAL_IF(OK != p->writeStrongBinder(binder),
+                                        "writeStrongBinder failed");
                 },
         });
 
