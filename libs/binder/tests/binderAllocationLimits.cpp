@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <android-base/logging.h>
 #include <binder/Binder.h>
 #include <binder/Functional.h>
 #include <binder/IServiceManager.h>
@@ -256,7 +255,8 @@ TEST(RpcBinderAllocation, SetupRpcServer) {
 
 int main(int argc, char** argv) {
     if (getenv("LIBC_HOOKS_ENABLE") == nullptr) {
-        CHECK(0 == setenv("LIBC_HOOKS_ENABLE", "1", true /*overwrite*/));
+        LOG_ALWAYS_FATAL_IF(0 != setenv("LIBC_HOOKS_ENABLE", "1", true /*overwrite*/),
+                            "Could't setenv LIBC_HOOKS_ENABLE");
         execv(argv[0], argv);
         return 1;
     }
