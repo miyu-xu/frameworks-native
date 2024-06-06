@@ -35,7 +35,8 @@ class BinderDriverInterfaceTestEnv : public ::testing::Environment {
             uint32_t max_threads = 0;
 
             m_binderFd = open(BINDER_DEV_NAME, O_RDWR | O_NONBLOCK | O_CLOEXEC);
-            ASSERT_GE(m_binderFd, 0);
+            ASSERT_GE(m_binderFd, 0)
+                    << "Failed to open " << BINDER_DEV_NAME << ": " << strerror(errno);
             m_buffer = mmap(nullptr, 64*1024, PROT_READ, MAP_SHARED, m_binderFd, 0);
             ASSERT_NE(m_buffer, (void *)nullptr);
             ret = ioctl(m_binderFd, BINDER_SET_MAX_THREADS, &max_threads);
