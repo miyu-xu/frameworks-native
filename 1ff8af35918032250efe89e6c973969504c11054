@@ -52,6 +52,24 @@
       "parentUuid": "00f398b8_730b6c6a",
       "revId": "1ff8af35918032250efe89e6c973969504c11054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "decaf6da_677f34c4",
+        "filename": "libs/binder/liblog_stub/include/android-base/logging.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-06T00:15:32Z",
+      "side": 1,
+      "message": "Thanks. The log with LOG_ALWAYS_FATAL_IF will not be as nice by default. So please keep that in mind.",
+      "parentUuid": "b2fd6ffc_40766922",
+      "revId": "1ff8af35918032250efe89e6c973969504c11054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
