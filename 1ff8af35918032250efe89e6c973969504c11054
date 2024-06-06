@@ -70,6 +70,24 @@
       "parentUuid": "b2fd6ffc_40766922",
       "revId": "1ff8af35918032250efe89e6c973969504c11054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb6d3a6_9b3c07fa",
+        "filename": "libs/binder/liblog_stub/include/android-base/logging.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-06T23:10:27Z",
+      "side": 1,
+      "message": "https://r.android.com/3118158",
+      "parentUuid": "decaf6da_677f34c4",
+      "revId": "1ff8af35918032250efe89e6c973969504c11054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
