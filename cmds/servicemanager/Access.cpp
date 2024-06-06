@@ -16,7 +16,6 @@
 
 #include "Access.h"
 
-#include <android-base/logging.h>
 #include <binder/IPCThreadState.h>
 #include <log/log_safetynet.h>
 #include <selinux/android.h>
@@ -38,7 +37,7 @@ static std::string getPidcon(pid_t pid) {
 
     char* lookup = nullptr;
     if (getpidcon(pid, &lookup) < 0) {
-        LOG(ERROR) << "SELinux: getpidcon(pid=" << pid << ") failed to retrieve pid context";
+        ALOGE("SELinux: getpidcon(pid=%ld) failed to retrieve pid context", (long)pid);
         return "";
     }
     std::string result = lookup;
@@ -59,7 +58,7 @@ static struct selabel_handle* getSehandle() {
             : selinux_android_service_context_handle();
     }
 
-    CHECK(gSehandle != nullptr);
+    LOG_ALWAYS_FATAL_IF(gSehandle == nullptr, "gSehandle is null");
     return gSehandle;
 }
 
@@ -72,7 +71,7 @@ static int auditCallback(void *data, security_class_t /*cls*/, char *buf, size_t
     const AuditCallbackData* ad = reinterpret_cast<AuditCallbackData*>(data);
 
     if (!ad) {
-        LOG(ERROR) << "No service manager audit data";
+        ALOGE("No service manager audit data");
         return 0;
     }
 
@@ -98,9 +97,9 @@ Access::Access() {
     cb.func_log = kIsVendor ? selinux_vendor_log_callback : selinux_log_callback;
     selinux_set_callback(SELINUX_CB_LOG, cb);
 
-    CHECK(selinux_status_open(true /*fallback*/) >= 0);
+    LOG_ALWAYS_FATAL_IF(selinux_status_open(true /*fallback*/) < 0, "selinux_status_open failed");
 
-    CHECK(getcon(&mThisProcessContext) == 0);
+    LOG_ALWAYS_FATAL_IF(getcon(&mThisProcessContext) != 0, "getcon failed");
 #endif
 }
 
@@ -163,7 +162,7 @@ bool Access::actionAllowedFromLookup(const CallingContext& sctx, const std::stri
 #ifdef __ANDROID__
     char *tctx = nullptr;
     if (selabel_lookup(getSehandle(), &tctx, name.c_str(), SELABEL_CTX_ANDROID_SERVICE) != 0) {
-        LOG(ERROR) << "SELinux: No match for " << name << " in service_contexts.\n";
+        ALOGE("SELinux: No match for %s in service_contexts.", name.c_str());
         return false;
     }
 
