@@ -16,7 +16,6 @@
 
 #include "../../FileUtils.h"
 
-#include <android-base/logging.h>
 #include <binder/RecordedTransaction.h>
 #include <binder/unique_fd.h>
 
