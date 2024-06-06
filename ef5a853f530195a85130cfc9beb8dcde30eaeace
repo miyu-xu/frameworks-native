@@ -124,6 +124,24 @@
       "parentUuid": "589afc74_4ed5c773",
       "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f8c01f_dfbe7ec7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-06T10:48:34Z",
+      "side": 1,
+      "message": "I\u0027ve opened https://b.corp.google.com/issues/345404808 to track a general improved AIDL tracing.\n\nI submitted https://r.android.com/3112141, that provides a macro to do scoped tracing:\n\n```\nPERFETTO_TE_SCOPED(service_manager, \"function_name\", ...)\n```\n\nThanks!",
+      "parentUuid": "2af00fd9_3a8405bf",
+      "revId": "ef5a853f530195a85130cfc9beb8dcde30eaeace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
