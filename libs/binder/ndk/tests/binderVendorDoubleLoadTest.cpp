@@ -17,7 +17,6 @@
 #include <BnBinderVendorDoubleLoadTest.h>
 #include <aidl/BnBinderVendorDoubleLoadTest.h>
 #include <aidl/android/os/IServiceManager.h>
-#include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <android/binder_ibinder.h>
@@ -30,7 +29,6 @@
 #include <binder/Stability.h>
 #include <binder/Status.h>
 #include <gtest/gtest.h>
-
 #include <sys/prctl.h>
 
 using namespace android;
@@ -149,8 +147,12 @@ int main(int argc, char** argv) {
 
         // REMOTE SERVERS
         std::shared_ptr<NdkServer> ndkServer = SharedRefBase::make<NdkServer>();
-        CHECK(STATUS_OK == AServiceManager_addService(ndkServer->asBinder().get(),
-                                                      kRemoteNdkServerName.c_str()));
+        const auto res = AServiceManager_addService(ndkServer->asBinder().get(),
+                                                    kRemoteNdkServerName.c_str());
+        if (res != STATUS_OK) {
+            EXPECT_EQ(STATUS_OK, res);
+            exit(1);
+        }
 
         // OR sleep forever or whatever, it doesn't matter
         IPCThreadState::self()->joinThreadPool(true);
@@ -163,8 +165,12 @@ int main(int argc, char** argv) {
 
     // LOCAL SERVERS
     std::shared_ptr<NdkServer> ndkServer = SharedRefBase::make<NdkServer>();
-    CHECK(STATUS_OK ==
-          AServiceManager_addService(ndkServer->asBinder().get(), kLocalNdkServerName.c_str()));
+    const auto res =
+            AServiceManager_addService(ndkServer->asBinder().get(), kLocalNdkServerName.c_str());
+    if (res != STATUS_OK) {
+        EXPECT_EQ(STATUS_OK, res);
+        exit(1);
+    }
 
     return RUN_ALL_TESTS();
 }
