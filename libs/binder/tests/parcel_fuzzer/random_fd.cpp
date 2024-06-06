@@ -16,10 +16,11 @@
 
 #include <fuzzbinder/random_fd.h>
 
-#include <fcntl.h>
-
-#include <android-base/logging.h>
 #include <cutils/ashmem.h>
+#include <log/log.h>
+
+#include <fcntl.h>
+#include <functional>
 
 namespace android {
 
@@ -55,7 +56,7 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
                  // TODO(b/236812909): also test blocking
                  if (true) flags |= O_NONBLOCK;
 
-                 CHECK_EQ(0, pipe2(pipefds, flags)) << flags;
+                 LOG_ALWAYS_FATAL_IF(0 != pipe2(pipefds, flags), "pipe2 failed for %d", flags);
 
                  if (provider->ConsumeBool()) std::swap(pipefds[0], pipefds[1]);
 
@@ -73,25 +74,26 @@ std::vector<unique_fd> getRandomFds(FuzzedDataProvider* provider) {
 #else
                  snprintf(name, sizeof(name), "/tmp/android-tempfd-test-%d-XXXXXX", getpid());
 #endif
-                 int fd = mkstemp(name);
-                 CHECK_NE(fd, -1) << "Failed to create file " << name << ", errno: " << errno;
+                 unique_fd fd(mkstemp(name));
+                 LOG_ALWAYS_FATAL_IF(!fd.ok(), "Failed to create file %s, errno: %d", name, errno);
                  unlink(name);
                  if (provider->ConsumeBool()) {
-                     CHECK_NE(TEMP_FAILURE_RETRY(
-                                      ftruncate(fd,
-                                                provider->ConsumeIntegralInRange<size_t>(0, 4096))),
-                              -1)
-                             << "Failed to truncate file, errno: " << errno;
+                     const auto res = TEMP_FAILURE_RETRY(
+                             ftruncate(fd.get(),
+                                       provider->ConsumeIntegralInRange<size_t>(0, 4096)));
+                     LOG_ALWAYS_FATAL_IF(-1 == res, "Failed to truncate file, errno: %d", errno);
                  }
 
                  std::vector<unique_fd> ret;
-                 ret.push_back(unique_fd(fd));
+                 ret.emplace_back(std::move(fd));
                  return ret;
              }
 
             })();
 
-    for (const auto& fd : fds) CHECK(fd.ok()) << fd.get() << " " << fdType;
+    for (const auto& fd : fds) {
+        LOG_ALWAYS_FATAL_IF(!fd.ok(), "%d %s", fd.get(), fdType);
+    }
 
     return fds;
 }

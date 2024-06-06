@@ -17,7 +17,6 @@
 
 #include <fuzzbinder/random_parcel.h>
 
-#include <android-base/logging.h>
 #include <binder/IInterface.h>
 #include <binder/IServiceManager.h>
 

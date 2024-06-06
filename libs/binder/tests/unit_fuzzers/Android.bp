@@ -136,6 +136,7 @@ cc_fuzz {
                 "libcutils",
                 "libutils",
                 "libbase",
+                "liblog",
                 "libbinder",
             ],
             static_libs: ["libbinder_random_parcel"],
