@@ -16,6 +16,90 @@
       "message": "I had to enable this test instead of the other RPC test because the other one is hitting 1 minute timeout (I\u0027ll try to fix it too, but I need something to run in the meantime).",
       "revId": "8e3ce7aefc1ed6a326db364cd45e22ccec6adee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "befc8013_2be3f611",
+        "filename": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-07T00:37:29Z",
+      "side": 1,
+      "message": "do we need to copy paste this?",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a2cf4214_6c9786bc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cbinder/tests/Utils.h\u003e\n"
+            },
+            {
+              "path": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "8e3ce7aefc1ed6a326db364cd45e22ccec6adee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3cd158e_5706a391",
+        "filename": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-07T00:37:29Z",
+      "side": 1,
+      "message": "suggest:\n\n```\n#ifdef __ANDROID__\nbool isRelease \u003d GetProp...\n#else\nbool isRelease \u003d true;\n#endif\n\nEXPECT_FALSE(isRelease)...\n```",
+      "range": {
+        "startLine": 274,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "8e3ce7aefc1ed6a326db364cd45e22ccec6adee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
