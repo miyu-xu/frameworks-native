@@ -124,6 +124,30 @@
       },
       "revId": "8e3ce7aefc1ed6a326db364cd45e22ccec6adee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2bbaaaa_e0ae9ed2",
+        "filename": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-07T03:36:34Z",
+      "side": 1,
+      "message": "Sounds good, but will it be possible to run and pass this test mid-release from main branch? In other words - will libbinder taken from aosp main at any time be compile-able with RPC_WIRE_PROTOCOL_VERSION set to a frozen value?",
+      "parentUuid": "a3cd158e_5706a391",
+      "range": {
+        "startLine": 274,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "8e3ce7aefc1ed6a326db364cd45e22ccec6adee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
