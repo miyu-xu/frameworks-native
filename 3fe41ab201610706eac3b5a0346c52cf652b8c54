@@ -16,6 +16,24 @@
       "message": "Also running the build of the target that originally broke and caused the revert: https://android-build.corp.google.com/builds/abtd/run/L49700030004480462",
       "revId": "3fe41ab201610706eac3b5a0346c52cf652b8c54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f887cb_c08c8f67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-06-10T23:05:37Z",
+      "side": 1,
+      "message": "Failed because it\u0027s missing multiple libui/libnativewindow topics and likely more.\n\nSubmitted the changes internally instead. This CL can cherry picked to AOSP now that the internal build failures are fixed.",
+      "parentUuid": "a2f1f9de_3952159e",
+      "revId": "3fe41ab201610706eac3b5a0346c52cf652b8c54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
