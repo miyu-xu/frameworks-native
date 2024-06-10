@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "041c7c76_f67c5ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-06-10T21:42:40Z",
+      "side": 1,
+      "message": "LGTM. I remember trying `cc_binary` and couldn\u0027t get it working, don\u0027t remember why exactly but if `multilib` fixes it that\u0027s great.",
+      "revId": "09a867e13381988b2b26688c865af1109521a78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
