@@ -52,6 +52,24 @@
       "parentUuid": "4198bb34_5ad07b6f",
       "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20cf20f4_cc7d0131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 54
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-06-11T23:27:38Z",
+      "side": 1,
+      "message": "Definitely opposed to having them in TEST_MAPPING, but I\u0027m also concerned about adding the cmake prebuilts to the main manifest, as that is going to bloat everyone\u0027s checkouts.  I have no objection to having the script and a dockerfile in the tree.",
+      "parentUuid": "4198bb34_5ad07b6f",
+      "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
