@@ -53,6 +53,34 @@ binder_exception_t AServiceManager_addServiceWithFlags(AIBinder* binder, const c
     return PruneException(exception);
 }
 
+binder_exception_t AServiceManager_injectAccessorWithFlags(
+        AServiceManager_generateAccessor generateAccessor, const char* instance,
+        const AServiceManager_AddServiceFlag flags) {
+    if (generateAccessor == nullptr || instance == nullptr) {
+        return EX_ILLEGAL_ARGUMENT;
+    }
+
+    std::function<sp<IBinder>(const String16& name)> generate =
+            [generateAccessor](const String16& name) -> sp<IBinder> {
+        AIBinder* binder = generateAccessor(String8(name).c_str());
+        if (binder == nullptr) {
+            ALOGI("generateAccessor returned nullptr");
+            return nullptr;
+        }
+        ALOGI("generateAccessor returned nonnull");
+        return nullptr;
+        // This is a pure virtual function somehow?
+        // return binder->getBinder();
+    };
+
+    sp<IServiceManager> sm = defaultServiceManager();
+    // TODO flags!
+    (void)flags;  // create a shared method FlagsToDumpFlags
+    sm->injectAccessorWithFlags(instance, generate, false, 0);
+    ;
+
+    return EX_NONE;
+}
 AIBinder* AServiceManager_checkService(const char* instance) {
     if (instance == nullptr) {
         return nullptr;
