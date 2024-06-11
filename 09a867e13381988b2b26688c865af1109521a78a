@@ -39,6 +39,30 @@
       },
       "revId": "09a867e13381988b2b26688c865af1109521a78a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71796eed_54e0d244",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T03:28:54Z",
+      "side": 1,
+      "message": "iIt means we\u0027re not testing 32bit libbinder + test on 64bit targets.\n\nIf I don\u0027t have this line, the test will ask for 32bit test service (the one I swiched from cc_test to cc_binary). If I do `compile_multilib: both` for the test service, it will fail because it will try to squeeze two same-named binaries into a single `bin` folder.",
+      "parentUuid": "49751656_61f12a7e",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 30
+      },
+      "revId": "09a867e13381988b2b26688c865af1109521a78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
