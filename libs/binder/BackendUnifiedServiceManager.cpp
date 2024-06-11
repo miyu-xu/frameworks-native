@@ -30,7 +30,7 @@ sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
     return mTheRealServiceManager;
 }
 binder::Status BackendUnifiedServiceManager::getService(const ::std::string& name,
-                                                        sp<IBinder>* _aidl_return) {
+                                                        android::os::Service* _aidl_return) {
     return mTheRealServiceManager->getService(name, _aidl_return);
 }
 binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
