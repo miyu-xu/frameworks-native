@@ -88,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18346641_648e7941",
+        "filename": "libs/binder/tests/binder_sdk/binder_sdk_docker_test.sh",
+        "patchSetId": 51
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T17:10:09Z",
+      "side": 1,
+      "message": "The test checks if vsock_loopback is loaded, not whether is present in the system. This check is necessary for the check from line 39 to work correctly (otherwise, if the module is absent, modprobe will pass as if it was loaded).",
+      "parentUuid": "7d032e67_17f456d1",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "4ba63ed632f9735344b66335378736ee1c6aa731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed99033d_96a185aa",
@@ -111,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "012b5e1f_e1893e06",
+        "filename": "libs/binder/tests/binder_sdk/binder_sdk_docker_test.sh",
+        "patchSetId": 51
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T17:10:09Z",
+      "side": 1,
+      "message": "I\u0027m checking if it\u0027s ran manually or non-interactive on the line 27 - this check won\u0027t run in infra.",
+      "parentUuid": "ed99033d_96a185aa",
+      "range": {
+        "startLine": 41,
+        "startChar": 13,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "4ba63ed632f9735344b66335378736ee1c6aa731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dab7ebec_bd8d1053",
@@ -124,6 +172,30 @@
       "writtenOn": "2024-06-11T00:48:38Z",
       "side": 1,
       "message": "do we need this relative path?",
+      "range": {
+        "startLine": 22,
+        "startChar": 23,
+        "endLine": 22,
+        "endChar": 53
+      },
+      "revId": "4ba63ed632f9735344b66335378736ee1c6aa731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecceb71_447b6d6c",
+        "filename": "libs/binder/tests/binder_sdk/run_all_tests.sh",
+        "patchSetId": 51
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T17:10:09Z",
+      "side": 1,
+      "message": "This is necessary to point to tests (in the build dir, not current dir). But after I merge aosp/3123791 this won\u0027t be necessary anymore.",
+      "parentUuid": "dab7ebec_bd8d1053",
       "range": {
         "startLine": 22,
         "startChar": 23,
