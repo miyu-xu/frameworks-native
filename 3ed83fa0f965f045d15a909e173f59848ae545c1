@@ -104,6 +104,30 @@
       ],
       "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2294422e_4ef7f2c5",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T20:25:27Z",
+      "side": 1,
+      "message": "This can be handled on Linux by forcing boot sequence for example. Let\u0027s discuss, but this change is just hacked up to make it work - I\u0027m forking out actual changes out of this one (already did logging and std::chrono which shrank this one down).",
+      "parentUuid": "069f8500_f4ec3dcf",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 5
+      },
+      "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -237,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbdda09c_60e0358d",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T20:25:27Z",
+      "side": 1,
+      "message": "I briefly tried, but there is a couple challenges:\n- the aidl modules it requires are using some niche soong features (imports, mixing up cpp and aidl, declaring aidl modules somewhere else than sources are)\n- this test is Python based\n- it has some Java dependencies too",
+      "parentUuid": "866f6dcf_4ee7d7fe",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 70
+      },
+      "revId": "1304f39749984c3473f4100514c4397720378269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3152b387_7dee8b3e",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 33
