@@ -16,6 +16,29 @@
       "message": "LGTM. I remember trying `cc_binary` and couldn\u0027t get it working, don\u0027t remember why exactly but if `multilib` fixes it that\u0027s great.",
       "revId": "09a867e13381988b2b26688c865af1109521a78a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49751656_61f12a7e",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-11T01:00:40Z",
+      "side": 1,
+      "message": "are we not testing 32-bit against 64-bit libbinder? we really should. Do you need this line? b/346435108",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 30
+      },
+      "revId": "09a867e13381988b2b26688c865af1109521a78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
