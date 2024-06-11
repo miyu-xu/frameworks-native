@@ -1229,6 +1229,7 @@ status_t RpcState::validateParcel(const sp<RpcSession>& session, const Parcel& p
     if (rpcFields->mFds && !rpcFields->mFds->empty()) {
         switch (session->getFileDescriptorTransportMode()) {
             case RpcSession::FileDescriptorTransportMode::NONE:
+                ALOGI("FDS_NOT_ALLOWED #9");
                 *errorMsg =
                         "Parcel has file descriptors, but no file descriptor transport is enabled";
                 return FDS_NOT_ALLOWED;

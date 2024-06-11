@@ -556,6 +556,23 @@ binder_status_t AIBinder_dump(AIBinder* binder, int fd, const char** args, uint3
     return PruneStatusT(status);
 }
 
+binder_status_t AIBinder_setRpcClient(AIBinder* binder, int fd, AIBinder* keepAliveBinder) {
+    if (binder == nullptr) {
+        return STATUS_UNEXPECTED_NULL;
+    }
+    ALOGE("Trying to setRpcClient with fd: %d", fd);
+    if (binder->getBinder() == nullptr) {
+        ALOGE("Trying to setRpcClient, but binder->getBinder() is null!");
+    }
+
+    // TODO clearly document the ownership of this FD!
+    status_t status = binder->getBinder()->setRpcClientDebug(
+            android::binder::unique_fd(fd),
+            keepAliveBinder ? keepAliveBinder->getBinder() : nullptr);
+    ALOGE("setRpcClient returned: %s", statusToString(status).c_str());
+    return PruneStatusT(status);
+}
+
 binder_status_t AIBinder_linkToDeath(AIBinder* binder, AIBinder_DeathRecipient* recipient,
                                      void* cookie) {
     if (binder == nullptr || recipient == nullptr) {

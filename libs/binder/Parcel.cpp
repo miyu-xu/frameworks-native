@@ -607,6 +607,7 @@ status_t Parcel::appendFrom(const Parcel* parcel, size_t offset, size_t len) {
                     flat->cookie = 1;
                     kernelFields->mHasFds = kernelFields->mFdsKnown = true;
                     if (!mAllowFds) {
+                        ALOGI("FDS_NOT_ALLOWED #6");
                         err = FDS_NOT_ALLOWED;
                     }
                 }
@@ -655,6 +656,7 @@ status_t Parcel::appendFrom(const Parcel* parcel, size_t offset, size_t len) {
                 }
 
                 if (!mAllowFds) {
+                    ALOGI("FDS_NOT_ALLOWED #1");
                     return FDS_NOT_ALLOWED;
                 }
 
@@ -1585,10 +1587,12 @@ status_t Parcel::writeFileDescriptor(int fd, bool takeOwnership) {
             fdVariant = borrowed_fd(fd);
         }
         if (!mAllowFds) {
+            ALOGI("FDS_NOT_ALLOWED #2");
             return FDS_NOT_ALLOWED;
         }
         switch (rpcFields->mSession->getFileDescriptorTransportMode()) {
             case RpcSession::FileDescriptorTransportMode::NONE: {
+                ALOGI("FDS_NOT_ALLOWED #3");
                 return FDS_NOT_ALLOWED;
             }
             case RpcSession::FileDescriptorTransportMode::UNIX:
@@ -1730,7 +1734,10 @@ status_t Parcel::writeBlob(size_t len, bool mutableCopy, WritableBlob* outBlob)
 status_t Parcel::writeDupImmutableBlobFileDescriptor(int fd)
 {
     // Must match up with what's done in writeBlob.
-    if (!mAllowFds) return FDS_NOT_ALLOWED;
+    if (!mAllowFds) {
+        ALOGI("FDS_NOT_ALLOWED #4");
+        return FDS_NOT_ALLOWED;
+    }
     status_t status = writeInt32(BLOB_ASHMEM_IMMUTABLE);
     if (status) return status;
     return writeDupFileDescriptor(fd);
@@ -1798,6 +1805,7 @@ restart_write:
         if (val.hdr.type == BINDER_TYPE_FD) {
             if (!mAllowFds) {
                 // fail before modifying our object index
+                ALOGI("FDS_NOT_ALLOWED #5");
                 return FDS_NOT_ALLOWED;
             }
             kernelFields->mHasFds = kernelFields->mFdsKnown = true;

@@ -24,6 +24,7 @@
 __BEGIN_DECLS
 
 enum AServiceManager_AddServiceFlag : uint32_t {
+    ADD_SERVICE_NONE = 0,
     /**
      * This allows processes with AID_ISOLATED to get the binder of the service added.
      *
@@ -64,6 +65,37 @@ __attribute__((warn_unused_result)) binder_exception_t AServiceManager_addServic
 __attribute__((warn_unused_result)) binder_exception_t AServiceManager_addServiceWithFlags(
         AIBinder* binder, const char* instance, const AServiceManager_AddServiceFlag flags)
         __INTRODUCED_IN(34);
+
+/**
+ * FIXME update docs
+ * This function is executed on death receipt. See AIBinder_linkToDeath/AIBinder_unlinkToDeath.
+ *
+ * Available since API level 29.
+ *
+ * \param cookie the cookie passed to AIBinder_linkToDeath.
+ */
+typedef AIBinder* (*AServiceManager_generateAccessor)(const char* instance)
+        __INTRODUCED_IN(34);  // FIXME change this to 36!
+                              //
+/**
+ * FIXME update docs
+ * This registers the service with the default service manager under this instance name. This does
+ * not take ownership of binder.
+ *
+ * WARNING: when using this API across an APEX boundary, do not use with unstable
+ * AIDL services. TODO(b/139325195)
+ *
+ * \param binder object to register globally with the service manager.
+ * \param instance identifier of the service. This will be used to lookup the service.
+ * \param flags an AServiceManager_AddServiceFlag enum to denote how the service should be added.
+ *
+ * \return EX_NONE on success.
+ */
+__attribute__((warn_unused_result)) binder_exception_t AServiceManager_injectAccessorWithFlags(
+        AServiceManager_generateAccessor generateAccessor, const char* instance,
+        const AServiceManager_AddServiceFlag flags)
+        __INTRODUCED_IN(34);  // FIXME change this to 36! 34 now to be able to
+                              // work on AOSP
 
 /**
  * Gets a binder object with this specific instance name. Will return nullptr immediately if the

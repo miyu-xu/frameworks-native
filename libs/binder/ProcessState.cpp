@@ -428,6 +428,7 @@ status_t ProcessState::setThreadPoolMaxThreadCount(size_t maxThreads) {
         result = -errno;
         ALOGE("Binder ioctl to set max threads failed: %s", strerror(-result));
     }
+    ALOGI("asdf threadPoolMax is %zu", mMaxThreads);
     return result;
 }
 

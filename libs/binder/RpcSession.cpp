@@ -188,8 +188,14 @@ status_t RpcSession::setupInetClient(const char* addr, unsigned int port) {
 }
 
 status_t RpcSession::setupPreconnectedClient(unique_fd fd, std::function<unique_fd()>&& request) {
+    if (!fd.ok()) {
+        ALOGE("the fd is immediately invalid?");
+    } else {
+        ALOGE("the fd is immediately OK");
+    }
     return setupClient([&](const std::vector<uint8_t>& sessionId, bool incoming) -> status_t {
         if (!fd.ok()) {
+            ALOGE("the initial fd in setupPreconnectedClient is not OK for some reason.");
             fd = request();
             if (!fd.ok()) return BAD_VALUE;
         }
@@ -197,6 +203,7 @@ status_t RpcSession::setupPreconnectedClient(unique_fd fd, std::function<unique_
 
         RpcTransportFd transportFd(std::move(fd));
         status_t status = initAndAddConnection(std::move(transportFd), sessionId, incoming);
+        ALOGE("invalidating the first FD");
         fd = unique_fd(); // Explicitly reset after move to avoid analyzer warning.
         return status;
     });
@@ -941,6 +948,7 @@ status_t RpcSession::ExclusiveConnection::find(const sp<RpcSession>& session, Co
                              "RpcSession::setMaxOutgoingConnections "
                              "for this client or RpcServer::setMaxThreads for the corresponding "
                              "server"));
+            LOG_ALWAYS_FATAL("where is this happenign?");
             return WOULD_BLOCK;
         }
 

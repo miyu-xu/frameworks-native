@@ -331,6 +331,32 @@ impl<T: AsNative<sys::AIBinder>> IBinderInternal for T {
         status_result(status)
     }
 
+    // TODO need to add param: , mut keep_alive_binder: SpIBinder
+    fn set_rpc_client<F: AsRawFd>(
+        &mut self,
+        fp: &F,
+        mut keep_alive_binder: SpIBinder,
+    ) -> Result<()> {
+        // Safety: `SpIBinder` guarantees that `self` always contains a
+        // valid pointer to an `AIBinder`. `AsRawFd` guarantees that the
+        // file descriptor parameter is always be a valid open file. The
+        // `args` pointer parameter is a valid pointer to an array of C
+        // strings that will outlive the call since `args` lives for the
+        // whole function scope.
+        //
+        // This call does not affect ownership of its binder pointer
+        // parameter and does not take ownership of the file or args array
+        // parameters.
+        let status = unsafe {
+            sys::AIBinder_setRpcClient(
+                self.as_native_mut(),
+                fp.as_raw_fd(),
+                keep_alive_binder.as_native_mut(),
+            )
+        };
+        status_result(status)
+    }
+
     fn get_extension(&mut self) -> Result<Option<SpIBinder>> {
         let mut out = ptr::null_mut();
         // Safety: `SpIBinder` guarantees that `self` always contains a
