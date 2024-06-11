@@ -1,0 +1,92 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711fbd8c_b5d45149",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 62
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-11T01:04:27Z",
+      "side": 1,
+      "message": ":",
+      "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "069f8500_f4ec3dcf",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-11T01:04:27Z",
+      "side": 1,
+      "message": "properties are actually required to handle a race during startup - might need more discussion",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f8071d9f_eb9b332b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/main.cpp",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "#include \u003candroid-base/properties.h\u003e\n"
+            },
+            {
+              "path": "cmds/servicemanager/main.cpp",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "using ::android::base::SetProperty;\n"
+            },
+            {
+              "path": "cmds/servicemanager/main.cpp",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "cmds/servicemanager/main.cpp",
+              "range": {
+                "startLine": 155,
+                "startChar": 0,
+                "endLine": 156,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
