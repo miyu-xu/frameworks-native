@@ -63,6 +63,30 @@
       },
       "revId": "09a867e13381988b2b26688c865af1109521a78a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de3f1db_19ebe55a",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T17:15:52Z",
+      "side": 1,
+      "message": "The alternative would be to add _32 suffix to 32bit service and add logic to the test to invoke _32 service from _32 test (we never tested 32bit service binary vs 64bit client). Since 32bit service + 32bit client is tested on 32bit targets, I think it\u0027s not a big deal to not test it on 64bit targets.",
+      "parentUuid": "71796eed_54e0d244",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 30
+      },
+      "revId": "09a867e13381988b2b26688c865af1109521a78a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
