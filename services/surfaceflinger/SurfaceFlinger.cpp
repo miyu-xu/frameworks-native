@@ -8164,8 +8164,8 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                                                 dimInGammaSpaceForEnhancedScreenshots,
                                         .isProtected = isProtected});
 
-        base::StringPrintf("%.2fadb", colorSaturation);
         const float colorSaturation = grayscale ? 0 : 1;
+        base::StringPrintf("%.2fadb", colorSaturation);
         compositionengine::CompositionRefreshArgs
                 refreshArgs{.outputs = {output},
                             .layers = std::move(layerFEs),
