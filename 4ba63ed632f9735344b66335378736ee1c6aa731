@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caefade5_4d93253f",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 51
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T03:26:04Z",
+      "side": 1,
+      "message": "I just looked up which one is your team and it was the one. What\u0027s AVF?",
+      "parentUuid": "aa8c1ce5_736741cf",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "4ba63ed632f9735344b66335378736ee1c6aa731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d032e67_17f456d1",
@@ -123,6 +147,30 @@
       "writtenOn": "2024-06-11T00:48:38Z",
       "side": 1,
       "message": "you could split into two separate tests to keep coverage/orthogonality?\n\nbinder_sdk_test_no_kernel\nbinder_sdk_test_single_threaded_no_kernel",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 56
+      },
+      "revId": "4ba63ed632f9735344b66335378736ee1c6aa731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b64a34_c3751607",
+        "filename": "libs/binder/tests/binder_sdk/run_all_tests.sh",
+        "patchSetId": 51
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-11T03:26:04Z",
+      "side": 1,
+      "message": "No need to! :) I just need to merge aosp/3123791 and cmake test will run them all concurrently. I checked and all tests combined run just few ms longer than the slowest one:\nhttps://paste.googleplex.com/5284156837986304\nhttps://paste.googleplex.com/5357389150945280",
+      "parentUuid": "adf8cff1_f6031fdf",
       "range": {
         "startLine": 34,
         "startChar": 0,
