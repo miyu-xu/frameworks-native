@@ -69,10 +69,15 @@ impl RpcServer {
         // Plus the binder objects are threadsafe.
         // The server takes ownership of the socket FD.
         unsafe {
-            Self::checked_from_ptr(binder_rpc_unstable_bindgen::ARpcServer_newBoundSocket(
-                service,
-                socket_fd.into_raw_fd(),
-            ))
+            let server =
+                Self::checked_from_ptr(binder_rpc_unstable_bindgen::ARpcServer_newBoundSocket(
+                    service,
+                    socket_fd.into_raw_fd(),
+                ))?;
+            server.set_supported_file_descriptor_transport_modes(&[
+                FileDescriptorTransportMode::Unix,
+            ]);
+            Ok(server)
         }
     }
 

@@ -634,11 +634,6 @@ status_t BBinder::setRpcClientDebug(const Parcel& data) {
         ALOGW("setRpcClientDebug disallowed because kernel binder is not enabled");
         return INVALID_OPERATION;
     }
-    uid_t uid = IPCThreadState::self()->getCallingUid();
-    if (uid != kUidRoot) {
-        ALOGE("%s: not allowed because client %" PRIu32 " is not root", __PRETTY_FUNCTION__, uid);
-        return PERMISSION_DENIED;
-    }
     status_t status;
     bool hasSocketFd;
     unique_fd clientFd;

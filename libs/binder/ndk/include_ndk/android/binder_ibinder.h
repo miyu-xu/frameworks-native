@@ -322,6 +322,20 @@ binder_status_t AIBinder_dump(AIBinder* binder, int fd, const char** args, uint3
         __INTRODUCED_IN(29);
 
 /**
+ * TODO docs + 34 -> 36 for introduced in
+ *
+ * Available since API level 34.
+ *
+ * \param binder the binder to set up the RpcService for this client
+ * \param fd the socket FD to setup the RpcServer with
+ * \param keepAliveBinder the binder for keeping the connection alive
+ *
+ * \return STATUS_OK if server set up succeeds
+ */
+binder_status_t AIBinder_setRpcClient(AIBinder* binder, int fd, AIBinder* keepAliveBinder)
+        __INTRODUCED_IN(34);
+
+/**
  * Registers for notifications that the associated binder is dead. The same death recipient may be
  * associated with multiple different binders. If the binder is local, then no death recipient will
  * be given (since if the local process dies, then no recipient will exist to receive a

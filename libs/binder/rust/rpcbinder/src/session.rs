@@ -117,6 +117,8 @@ impl RpcSessionRef {
             }
         };
 
+        // FIXME can this be move out to a higher level?
+        self.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
         // SAFETY: AIBinder returned by ARpcSession_setupUnixDomainClient has correct
         // reference count, and the ownership can safely be taken by new_spibinder.
         let service = unsafe {

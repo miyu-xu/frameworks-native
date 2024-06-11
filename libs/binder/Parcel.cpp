@@ -1589,6 +1589,8 @@ status_t Parcel::writeFileDescriptor(int fd, bool takeOwnership) {
         }
         switch (rpcFields->mSession->getFileDescriptorTransportMode()) {
             case RpcSession::FileDescriptorTransportMode::NONE: {
+                ALOGI("FDS_NOT_ALLOWED are not allowed. Both the service and the clients must set "
+                      "the FileDescriptorTransportMode and agree on the support.");
                 return FDS_NOT_ALLOWED;
             }
             case RpcSession::FileDescriptorTransportMode::UNIX:

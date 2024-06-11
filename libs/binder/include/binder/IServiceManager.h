@@ -142,6 +142,11 @@ public:
     virtual status_t unregisterForNotifications(const String16& name,
                                                 const sp<LocalRegistrationCallback>& callback) = 0;
 
+    virtual status_t injectAccessorWithFlags(
+            const std::string& name,
+            std::function<sp<IBinder>(const String16& name)> generateAccessor,
+            bool allowIsolated = false, int dumpsysFlags = DUMP_FLAG_PRIORITY_DEFAULT);
+
     struct ServiceDebugInfo {
         std::string name;
         int pid;

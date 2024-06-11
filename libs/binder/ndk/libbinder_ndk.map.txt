@@ -159,6 +159,8 @@ LIBBINDER_NDK34 { # introduced=UpsideDownCake
     AServiceManager_registerForServiceNotifications; # systemapi llndk
     AServiceManager_NotificationRegistration_delete; # systemapi llndk
     AServiceManager_addServiceWithFlags; # systemapi llndk
+    AServiceManager_injectAccessorWithFlags; # systemapi llndk
+    AIBinder_setRpcClient; # systemapi llndk
 };
 
 LIBBINDER_NDK35 { # introduced=VanillaIceCream
