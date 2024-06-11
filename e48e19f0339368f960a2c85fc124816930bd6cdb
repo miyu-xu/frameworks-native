@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de674e4c_90463a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 54
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-06-11T23:18:00Z",
+      "side": 1,
+      "message": "I don\u0027t think this can be in a platform test.  This is going to be a constant source of unpredictable breakages to all of the infrastructure teams.  For example, we update the toolchain and add new cflags that are required for the new toolchain, those flags may break whatever toolchain your tests are using.\n\nThis is a niche use case that can\u0027t slow down platform velocity.  If you want tests in CI I think you need a separate branch with tests that won\u0027t cause reverts in the main branch when they break.",
+      "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
