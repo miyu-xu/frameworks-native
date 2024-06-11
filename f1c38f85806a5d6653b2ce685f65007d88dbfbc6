@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa54d14e_dfa37b63",
+        "filename": "libs/binder/tests/binderRpcWireProtocolTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-11T01:15:43Z",
+      "side": 1,
+      "message": "nit: this should also say - in release configuration these days, but it\u0027s okay",
+      "range": {
+        "startLine": 278,
+        "startChar": 79,
+        "endLine": 278,
+        "endChar": 95
+      },
+      "revId": "f1c38f85806a5d6653b2ce685f65007d88dbfbc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
