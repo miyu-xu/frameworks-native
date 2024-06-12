@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4aa3e0_e3cd7f1d",
+        "filename": "cmds/atrace/atrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-12T17:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31e4e314_81214273",
+      "range": {
+        "startLine": 71,
+        "startChar": 62,
+        "endLine": 71,
+        "endChar": 82
+      },
+      "revId": "5eece1746360298b78866c6d9cfdd9f3c01bba8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22492136_ff81d9fd",
@@ -146,6 +170,30 @@
           ]
         }
       ],
+      "revId": "5eece1746360298b78866c6d9cfdd9f3c01bba8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25714869_78f8a2e1",
+        "filename": "cmds/atrace/atrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-12T17:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22492136_ff81d9fd",
+      "range": {
+        "startLine": 1134,
+        "startChar": 25,
+        "endLine": 1134,
+        "endChar": 45
+      },
       "revId": "5eece1746360298b78866c6d9cfdd9f3c01bba8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
