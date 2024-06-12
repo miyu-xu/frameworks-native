@@ -70,6 +70,24 @@
       "parentUuid": "4198bb34_5ad07b6f",
       "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6650192_be0a3f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 54
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-12T16:21:11Z",
+      "side": 1,
+      "message": "Just had an idea: would it make a difference if we added this test to postsubmit, but mark it as flaky (even though it\u0027s not)? This way it shouldn\u0027t cause reverts.\n\nA form of this test has been drafted for a year now (aosp/2652448) and it only broke once or twice over that past year, so I would think it shouldn\u0027t really break \"constantly\".",
+      "parentUuid": "20cf20f4_cc7d0131",
+      "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
