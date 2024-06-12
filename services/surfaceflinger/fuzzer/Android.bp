@@ -28,7 +28,14 @@ package {
 cc_defaults {
     name: "surfaceflinger_fuzz_defaults",
     static_libs: [
-        "libc++fs",
+        "android.hardware.graphics.composer@2.1-resources",
+        "libgmock",
+        "libgui_mocks",
+        "libgmock_ndk",
+        "libgmock_main",
+        "libgtest_ndk_c++",
+        "libgmock_main_ndk",
+        "librenderengine_mocks",
         "libsurfaceflinger_common",
     ],
     srcs: [
