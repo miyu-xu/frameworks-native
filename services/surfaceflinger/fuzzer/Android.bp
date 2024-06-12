@@ -28,7 +28,28 @@ package {
 cc_defaults {
     name: "surfaceflinger_fuzz_defaults",
     static_libs: [
+<<<<<<< PATCH SET (3a8341 libc++fs is part of libc++ now.)
+        "android.hardware.graphics.composer@2.1-resources",
+        "libgmock",
+        "libgui_mocks",
+        "libgmock_ndk",
+        "libgmock_main",
+        "libgtest_ndk_c++",
+        "libgmock_main_ndk",
+        "librenderengine_mocks",
+||||||| BASE
+        "android.hardware.graphics.composer@2.1-resources",
         "libc++fs",
+        "libgmock",
+        "libgui_mocks",
+        "libgmock_ndk",
+        "libgmock_main",
+        "libgtest_ndk_c++",
+        "libgmock_main_ndk",
+        "librenderengine_mocks",
+=======
+        "libc++fs",
+>>>>>>> BASE      (bad4c6 Merge "Exclude setting code maps from APEX" into main)
         "libsurfaceflinger_common",
     ],
     srcs: [
