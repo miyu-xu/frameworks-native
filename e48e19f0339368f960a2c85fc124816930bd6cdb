@@ -88,6 +88,24 @@
       "parentUuid": "20cf20f4_cc7d0131",
       "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac1042c_77d65bbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 54
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2024-06-12T16:51:54Z",
+      "side": 1,
+      "message": "I don\u0027t think marking as flaky is sufficient to prevent reverts, any infrastructure that notices a transition from 100% green to 100% red is going to trigger revert flows.\n\nThe infrastructure teams are already struggling to land updates, we can\u0027t take any additional non-standard loads.",
+      "parentUuid": "f6650192_be0a3f9b",
+      "revId": "e48e19f0339368f960a2c85fc124816930bd6cdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
