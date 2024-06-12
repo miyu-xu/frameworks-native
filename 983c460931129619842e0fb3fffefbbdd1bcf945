@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2cff0df_9b88818a",
+        "filename": "cmds/atrace/atrace.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2024-06-12T19:44:46Z",
+      "side": 1,
+      "message": "out of curiosity why this is a different function which is 400  lines away from the only place that calls it? The caller is 8 lines long, and this is other 4 lines. Why are they not folded together? To me it introduces unnecessary hops while reading code, for no good reasons",
+      "range": {
+        "startLine": 605,
+        "startChar": 12,
+        "endLine": 605,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "10b2a8e7_1ce4b309",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/atrace/atrace.cpp",
+              "range": {
+                "startLine": 605,
+                "startChar": 0,
+                "endLine": 606,
+                "endChar": 0
+              },
+              "replacement": "static bool setPreferSdkProperty(bool preferSdk)\n"
+            },
+            {
+              "path": "cmds/atrace/atrace.cpp",
+              "range": {
+                "startLine": 607,
+                "startChar": 0,
+                "endLine": 608,
+                "endChar": 0
+              },
+              "replacement": "    std::string value \u003d preferSdk ? \"1\" : \"\";\n"
+            },
+            {
+              "path": "cmds/atrace/atrace.cpp",
+              "range": {
+                "startLine": 941,
+                "startChar": 0,
+                "endLine": 942,
+                "endChar": 0
+              },
+              "replacement": "    return setPreferSdkProperty(true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "983c460931129619842e0fb3fffefbbdd1bcf945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9fc47b_3c1970d3",
+        "filename": "cmds/atrace/atrace.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2024-06-12T19:44:46Z",
+      "side": 1,
+      "message": "TIL about the # modifier",
+      "range": {
+        "startLine": 607,
+        "startChar": 52,
+        "endLine": 607,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b2b35693_b696cb1a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/atrace/atrace.cpp",
+              "range": {
+                "startLine": 607,
+                "startChar": 0,
+                "endLine": 608,
+                "endChar": 0
+              },
+              "replacement": "    std::string value \u003d android::base::StringPrintf(\"%\" PRIx64, tags);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "983c460931129619842e0fb3fffefbbdd1bcf945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
