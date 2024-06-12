@@ -178,6 +178,24 @@
       "parentUuid": "3b5c5b85_5b81f588",
       "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2c7968_e4597d35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-12T21:43:25Z",
+      "side": 1,
+      "message": "I made it working without docker after all. The last change needed for this is aosp/3114122.",
+      "parentUuid": "d8c38b5b_bc7dda91",
+      "revId": "f02893e42cf186082f6c869b84915773ec63e6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
