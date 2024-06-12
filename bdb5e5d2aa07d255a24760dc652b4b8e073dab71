@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5384154_80beb5b0",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2740,
+      "author": {
+        "id": 1970741
+      },
+      "writtenOn": "2024-06-12T19:42:08Z",
+      "side": 1,
+      "message": "ship it",
+      "range": {
+        "startLine": 2738,
+        "startChar": 1,
+        "endLine": 2740,
+        "endChar": 78
+      },
+      "revId": "bdb5e5d2aa07d255a24760dc652b4b8e073dab71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
