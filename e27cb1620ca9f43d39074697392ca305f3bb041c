@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da82aff5_97b7113b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-13T10:36:48Z",
+      "side": 1,
+      "message": "@smoreland@google.com Can you review this and let me know if this is okay to submit.\n\nAlso shall we wait for next week to submit this?",
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
