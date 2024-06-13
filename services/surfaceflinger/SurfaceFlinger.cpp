@@ -8056,11 +8056,11 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
     {
         Mutex::Autolock lock(mStateLock);
         const DisplayDevice* display = nullptr;
-        if (parent) {
-            display = findDisplay([layerStack = parent->getLayerStack()](const auto& display) {
-                          return display.getLayerStack() == layerStack;
-                      }).get();
-        }
+        // if (parent) {
+        display = findDisplay([layerStack = parent->getLayerStack()](const auto& display) {
+                      return display.getLayerStack() == layerStack;
+                  }).get();
+        // }
 
         if (display == nullptr) {
             display = renderArea->getDisplayDevice().get();
