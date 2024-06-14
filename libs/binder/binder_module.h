@@ -32,4 +32,22 @@
 #include <linux/android/binder.h>
 #include <sys/ioctl.h>
 
+#if defined(ANDROID) || defined(__BIONIC__)
+#define HAS_FLAT_BINDER_FLAG_INHERIT_RT 1
+#define HAS_FLAT_BINDER_FLAG_SCHED_POLICY 1
+#else
+#include <linux/version.h>
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 3, 0)
+enum { BR_TRANSACTION_PENDING_FROZEN = _IO('r', 20) };
+#endif
+enum flat_binder_object_shifts {
+    FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT = 9,
+};
+
+// INHERIT_RT and SCHED_POLICY is only in Android common kernel and hasn't been pushed to upstream.
+#define HAS_FLAT_BINDER_FLAG_INHERIT_RT 0
+#define HAS_FLAT_BINDER_FLAG_SCHED_POLICY 0
+#endif // defined(ANDROID) || defined(__BIONIC__)
+
 #endif // _BINDER_MODULE_H_
