@@ -41,10 +41,12 @@
 #include <new>
 #include <vector>
 
+#include <com_android_graphics_libvulkan_flags.h>
 #include "stubhal.h"
 
 using namespace android::hardware::configstore;
 using namespace android::hardware::configstore::V1_0;
+using namespace com::android::graphics::libvulkan;
 
 extern "C" android_namespace_t* android_get_exported_namespace(const char*);
 
@@ -685,6 +687,7 @@ void CreateInfoWrapper::FilterExtension(const char* name) {
             case ProcHook::KHR_incremental_present:
             case ProcHook::KHR_shared_presentable_image:
             case ProcHook::KHR_swapchain:
+            case ProcHook::KHR_swapchain_mutable_format:
             case ProcHook::EXT_hdr_metadata:
             case ProcHook::EXT_swapchain_maintenance1:
             case ProcHook::ANDROID_external_memory_android_hardware_buffer:
@@ -737,6 +740,7 @@ void CreateInfoWrapper::FilterExtension(const char* name) {
                 break;
             case ProcHook::ANDROID_external_memory_android_hardware_buffer:
             case ProcHook::KHR_external_fence_fd:
+            case ProcHook::KHR_swapchain_mutable_format:
             case ProcHook::EXTENSION_UNKNOWN:
                 // Extensions we don't need to do anything about at this level
                 break;
@@ -1240,6 +1244,15 @@ VkResult EnumerateDeviceExtensionProperties(
         loader_extensions.push_back({
                 VK_EXT_SWAPCHAIN_MAINTENANCE_1_EXTENSION_NAME,
                 VK_EXT_SWAPCHAIN_MAINTENANCE_1_SPEC_VERSION});
+    }
+
+    VkPhysicalDeviceProperties2 pDeviceProperties;
+    GetPhysicalDeviceProperties2(physicalDevice, &pDeviceProperties);
+    if (flags::swapchain_mutable_format_ext() &&
+        pDeviceProperties.properties.apiVersion >= VK_API_VERSION_1_2) {
+        loader_extensions.push_back(
+            {VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION_NAME,
+             VK_KHR_SWAPCHAIN_MUTABLE_FORMAT_SPEC_VERSION});
     }
 
     // enumerate our extensions first

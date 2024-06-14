@@ -68,6 +68,20 @@ static uint64_t convertGralloc1ToBufferUsage(uint64_t producerUsage,
     return merged;
 }
 
+static const void* traverse_pnext_chain(const void* pNext,
+                                        VkStructureType targetSType) {
+    while (pNext) {
+        const VkBaseInStructure* baseOutStructure =
+            (const VkBaseInStructure*)pNext;
+        if (baseOutStructure->sType == targetSType) {
+            return pNext;
+        }
+
+        pNext = baseOutStructure->pNext;
+    }
+    return nullptr;
+}
+
 const VkSurfaceTransformFlagsKHR kSupportedTransforms =
     VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR |
     VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR |
@@ -1475,6 +1489,12 @@ static VkResult getProducerUsage(const VkDevice& device,
             .flags = create_protected_swapchain ? VK_IMAGE_CREATE_PROTECTED_BIT : 0u,
         };
 
+        // If supporting mutable format swapchain add the mutable format flag
+        if (create_info->flags & VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR) {
+            image_format_info.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+            image_format_info.flags |= VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR;
+        }
+
         VkAndroidHardwareBufferUsageANDROID ahb_usage;
         ahb_usage.sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID;
         ahb_usage.pNext = nullptr;
@@ -2016,6 +2036,37 @@ VkResult CreateSwapchainKHR(VkDevice device,
         .pQueueFamilyIndices = create_info->pQueueFamilyIndices,
     };
 
+    VkImageFormatListCreateInfo extra_mutable_formats = {
+        .sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR,
+    };
+    VkImageFormatListCreateInfo* extra_mutable_formats_ptr;
+    if (create_info->flags & VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR) {
+        image_create.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+        image_create.flags |= VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR;
+
+        // Look through the pNext chain for a VkImageFormatListCreateInfo
+        // struct. if one is found AND the appropriate extensions are enabled,
+        // create a VkImageFormatListCreateInfo structure to pass on to
+        // VkImageCreateInfo
+        const VkImageFormatListCreateInfo* format_list =
+            reinterpret_cast<const VkImageFormatListCreateInfo*>(
+                traverse_pnext_chain(
+                    create_info,
+                    VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO));
+        if (format_list && format_list->viewFormatCount > 0 &&
+            format_list->pViewFormats) {
+            extra_mutable_formats.viewFormatCount =
+                format_list->viewFormatCount;
+            extra_mutable_formats.pViewFormats = format_list->pViewFormats;
+            extra_mutable_formats_ptr = &extra_mutable_formats;
+        } else {
+            ALOGE(
+                "VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR was set during "
+                "swapchain creation but no valid VkImageFormatListCreateInfo "
+                "was found in the pNext chain");
+        }
+    }
+
     // Note: don't do deferred allocation for shared present modes. There's only one buffer
     // involved so very little benefit.
     if ((create_info->flags & VK_SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT) &&
@@ -2025,7 +2076,7 @@ VkResult CreateSwapchainKHR(VkDevice device,
         // AcquireNextImage.
         VkImageSwapchainCreateInfoKHR image_swapchain_create = {
             .sType = VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR,
-            .pNext = nullptr,
+            .pNext = extra_mutable_formats_ptr,
             .swapchain = HandleFromSwapchain(swapchain),
         };
         image_create.pNext = &image_swapchain_create;
@@ -2075,7 +2126,13 @@ VkResult CreateSwapchainKHR(VkDevice device,
             image_native_buffer.usage3 = img.buffer->usage;
             image_native_buffer.ahb =
                 ANativeWindowBuffer_getHardwareBuffer(img.buffer.get());
-            image_create.pNext = &image_native_buffer;
+
+            if (extra_mutable_formats_ptr) {
+                extra_mutable_formats_ptr->pNext = &image_native_buffer;
+                image_create.pNext = extra_mutable_formats_ptr;
+            } else {
+                image_create.pNext = &image_native_buffer;
+            }
 
             ATRACE_BEGIN("CreateImage");
             result =
