@@ -311,7 +311,11 @@ status_t Parcel::flattenBinder(const sp<IBinder>& binder) {
                 obj.flags |= FLAT_BINDER_FLAG_TXN_SECURITY_CTX;
             }
             if (local->isInheritRt()) {
+#if HAS_FLAT_BINDER_FLAG_INHERIT_RT
                 obj.flags |= FLAT_BINDER_FLAG_INHERIT_RT;
+#else
+                LOG_ALWAYS_FATAL("INHERIT_RT flag not supported");
+#endif
             }
             obj.hdr.type = BINDER_TYPE_BINDER;
             obj.binder = reinterpret_cast<uintptr_t>(local->getWeakRefs());
