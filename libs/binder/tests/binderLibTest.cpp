@@ -1163,14 +1163,20 @@ TEST_F(BinderLibTest, SchedPolicySet) {
     EXPECT_THAT(server->transact(BINDER_LIB_TEST_GET_SCHEDULING_POLICY, data, &reply),
                 StatusEq(NO_ERROR));
 
-    int policy = reply.readInt32();
-    int priority = reply.readInt32();
+    [[maybe_unused]] int policy = reply.readInt32();
+    [[maybe_unused]] int priority = reply.readInt32();
 
+#if HAS_FLAT_BINDER_FLAG_SCHED_POLICY
     EXPECT_EQ(kSchedPolicy, policy & (~SCHED_RESET_ON_FORK));
     EXPECT_EQ(kSchedPriority, priority);
+#endif
 }
 
 TEST_F(BinderLibTest, InheritRt) {
+#if !HAS_FLAT_BINDER_FLAG_INHERIT_RT
+    GTEST_SKIP() << "INHERIT_RT flag not supported";
+#endif
+
     sp<IBinder> server = addServer();
     ASSERT_TRUE(server != nullptr);
 
@@ -2093,7 +2099,9 @@ int run_server(int index, int readypipefd, bool usePoll)
 
         testService->setMinSchedulerPolicy(kSchedPolicy, kSchedPriority);
 
+#if HAS_FLAT_BINDER_FLAG_INHERIT_RT
         testService->setInheritRt(true);
+#endif
 
         /*
          * Normally would also contain functionality as well, but we are only
