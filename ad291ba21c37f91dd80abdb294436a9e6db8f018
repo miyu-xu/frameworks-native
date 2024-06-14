@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d101e3cf_027cc5f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-06-14T12:40:47Z",
+      "side": 1,
+      "message": "Presubmit bypassed because already flaky or preexisting failures. See details in https://screenshot.googleplex.com/6z3ntbM4t4ZrGts",
+      "revId": "ad291ba21c37f91dd80abdb294436a9e6db8f018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
