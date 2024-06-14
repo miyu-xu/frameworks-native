@@ -16,6 +16,24 @@
       "message": "Try without it, I already moved this code off std::format.",
       "revId": "e9eefa8757fc2d6d3bc74b395845d409bb7caf11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bae06bc2_99da555b",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-06-14T23:33:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ea6a44e_0dc8ae53",
+      "revId": "e9eefa8757fc2d6d3bc74b395845d409bb7caf11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
