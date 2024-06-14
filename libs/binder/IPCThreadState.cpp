@@ -1532,6 +1532,7 @@ void IPCThreadState::threadDestructor(void *st)
 status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, uint32_t *sync_received,
                                               uint32_t *async_received)
 {
+#if HAS_FREEZE_INFO
     int ret = 0;
     binder_frozen_status_info info = {};
     info.pid = pid;
@@ -1544,16 +1545,19 @@ status_t IPCThreadState::getProcessFreezeInfo(pid_t pid, uint32_t *sync_received
     *async_received = info.async_recv;
 
     return ret;
+#else
+    return -ENOSYS;
+#endif
 }
 
 status_t IPCThreadState::freeze(pid_t pid, bool enable, uint32_t timeout_ms) {
+#if HAS_FREEZE_INFO
     struct binder_freeze_info info;
     int ret = 0;
 
     info.pid = pid;
     info.enable = enable;
     info.timeout_ms = timeout_ms;
-
 
 #if defined(__ANDROID__)
     if (ioctl(self()->mProcess->mDriverFD, BINDER_FREEZE, &info) < 0)
@@ -1565,9 +1569,13 @@ status_t IPCThreadState::freeze(pid_t pid, bool enable, uint32_t timeout_ms) {
     // Call again to poll for completion.
     //
     return ret;
+#else
+    return -ENOSYS;
+#endif
 }
 
 void IPCThreadState::logExtendedError() {
+#if HAS_EXTENDED_ERROR
     struct binder_extended_error ee = {.command = BR_OK};
 
     if (!ProcessState::isDriverFeatureEnabled(ProcessState::DriverFeature::EXTENDED_ERROR))
@@ -1582,6 +1590,7 @@ void IPCThreadState::logExtendedError() {
 
     ALOGE_IF(ee.command != BR_OK, "Binder transaction failure. id: %d, BR_*: %d, error: %d (%s)",
              ee.id, ee.command, ee.param, strerror(-ee.param));
+#endif
 }
 
 void IPCThreadState::freeBuffer(const uint8_t* data, size_t /*dataSize*/,

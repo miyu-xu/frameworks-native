@@ -1152,6 +1152,12 @@ TEST_F(BinderLibTest, WorkSourcePropagatedForAllFollowingBinderCalls)
 }
 
 TEST_F(BinderLibTest, SchedPolicySet) {
+#if HAS_FLAT_BINDER_FLAG_SCHED_POLICY
+    static constexpr bool hasSchedPolicy = true;
+#else
+    static constexpr bool hasSchedPolicy = false;
+#endif
+
     sp<IBinder> server = addServer();
     ASSERT_TRUE(server != nullptr);
 
@@ -1162,18 +1168,30 @@ TEST_F(BinderLibTest, SchedPolicySet) {
     int policy = reply.readInt32();
     int priority = reply.readInt32();
 
-    EXPECT_EQ(kSchedPolicy, policy & (~SCHED_RESET_ON_FORK));
-    EXPECT_EQ(kSchedPriority, priority);
+    EXPECT_EQ(hasSchedPolicy ? kSchedPolicy : 0, policy & (~SCHED_RESET_ON_FORK));
+    EXPECT_EQ(hasSchedPolicy ? kSchedPriority : 0, priority);
 }
 
 TEST_F(BinderLibTest, InheritRt) {
+#if HAS_FLAT_BINDER_FLAG_INHERIT_RT
+    static constexpr bool hasInheritRt = true;
+#else
+    static constexpr bool hasInheritRt = false;
+#endif
+
     sp<IBinder> server = addServer();
     ASSERT_TRUE(server != nullptr);
 
     const struct sched_param param {
         .sched_priority = kSchedPriorityMore,
     };
-    EXPECT_EQ(0, sched_setscheduler(getpid(), SCHED_RR, &param));
+    auto res = sched_setscheduler(getpid(), SCHED_RR, &param);
+#ifndef __ANDROID__
+    if (res != 0 && errno == EPERM) {
+        GTEST_SKIP() << "sched_setscheduler not permitted, can't test INHERIT_RT";
+    }
+#endif
+    EXPECT_EQ(0, res) << "sched_setscheduler failed: " << strerror(errno);
 
     Parcel data, reply;
     EXPECT_THAT(server->transact(BINDER_LIB_TEST_GET_SCHEDULING_POLICY, data, &reply),
@@ -1182,8 +1200,8 @@ TEST_F(BinderLibTest, InheritRt) {
     int policy = reply.readInt32();
     int priority = reply.readInt32();
 
-    EXPECT_EQ(kSchedPolicy, policy & (~SCHED_RESET_ON_FORK));
-    EXPECT_EQ(kSchedPriorityMore, priority);
+    EXPECT_EQ(hasInheritRt ? kSchedPolicy : 0, policy & (~SCHED_RESET_ON_FORK));
+    EXPECT_EQ(hasInheritRt ? kSchedPriorityMore : 0, priority);
 }
 
 TEST_F(BinderLibTest, VectorSent) {
@@ -2089,7 +2107,9 @@ int run_server(int index, int readypipefd, bool usePoll)
 
         testService->setMinSchedulerPolicy(kSchedPolicy, kSchedPriority);
 
+#if HAS_FLAT_BINDER_FLAG_INHERIT_RT
         testService->setInheritRt(true);
+#endif
 
         /*
          * Normally would also contain functionality as well, but we are only
