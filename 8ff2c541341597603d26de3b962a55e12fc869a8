@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e87c489c_89f8cbba",
+        "filename": "libs/binder/binder_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-15T00:13:51Z",
+      "side": 1,
+      "message": "`__ANDROID__`? or no? is that why the `__BIONIC__` check is also needed - maybe can remove that?",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbaddd6_187705d0",
+        "filename": "libs/binder/binder_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-15T00:13:51Z",
+      "side": 1,
+      "message": "These are in the Android common kernel, not in upstream kernel, which is why it\u0027s an option (not reflected in commit message).\n\nCan we do ifdef for these or similar instead? Do we need to tie it to Android (even though that should be true today?)\n\nifdef FLAT_BINDER_FLAG_INHERIT_RT?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f8e4b137_f3a0e72c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/binder_module.h",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "#if defined(ANDROID) || defined(__BIONIC__) || defined(__ANDROID__)\n"
+            },
+            {
+              "path": "libs/binder/binder_module.h",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "#endif // defined(ANDROID) || defined(__BIONIC__) || defined(__ANDROID__)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ecd0192_88402611",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-15T00:13:51Z",
+      "side": 1,
+      "message": "you can expect them at other values in the else case here, but any reason why inheritRt causes abort, and this one we silently ignore?",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1172,
+        "endChar": 6
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72bcba48_37ad61e6",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-15T00:13:51Z",
+      "side": 1,
+      "message": "nit: still test but with EXPECT_DEATH?",
+      "range": {
+        "startLine": 1177,
+        "startChar": 0,
+        "endLine": 1177,
+        "endChar": 52
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
