@@ -65,9 +65,6 @@ public:
     static bool isSameSurface(
             const sp<SurfaceControl>& lhs, const sp<SurfaceControl>& rhs);
 
-    // Reparent off-screen and release. This is invoked by the destructor.
-    void destroy();
-
     // disconnect any api that's connected
     void        disconnect();
 
