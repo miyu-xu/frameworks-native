@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8932a5be_3322dbda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-06-17T17:46:58Z",
+      "side": 1,
+      "message": "Thanks Hu, this has now been merged internally. You can submit this to aosp. please add a Merged-In clause to the commit message.\n\n\n```\nTest: atest inputflinger_tests\nMerged-In: I13574a77896583bb0062bab17395d27585315e6b\nChange-Id: I13574a77896583bb0062bab17395d27585315e6b\n```",
+      "revId": "b58e062c725c9081c0daf6d175bc781ce276ce5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
