@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "76ee1eee_9817c723",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e21cf629_f5e1d846",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "da82aff5_97b7113b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -77,6 +101,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a58863_58c60db0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e6cf1c35_72d98bec",
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c080610_3e7f36a5",
@@ -90,6 +132,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "remove: it should get this from servicemanager_defaults",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12664496_d088ed8f",
+        "filename": "cmds/servicemanager/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c080610_3e7f36a5",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -170,6 +236,54 @@
           ]
         }
       ],
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50752e58_7506ac52",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df1c240_b51dd171",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 45
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56faaac9_5892bf1c",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba88718_e800f71d",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 17
+      },
       "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -268,6 +382,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "250c6704_6e67f426",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "I guess we can resolve this comment",
+      "parentUuid": "382be881_9d5c53ae",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa4b7608_65ba0615",
@@ -317,6 +455,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c307d827_2100c4f6",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done. I\u0027ve added VA_ARGS to the macro and made the changes that are required in the code. As mentioned by Daniele, the macro is required for `#if defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__)`\n\nLet me know if this is okay",
+      "parentUuid": "a031cf40_af193ea5",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 36
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "040a9022_aaf1b238",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 15
@@ -328,6 +490,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "unrelated change (makes backporting harder)",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 1
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a80648_35ec57c0",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040a9022_aaf1b238",
       "range": {
         "startLine": 441,
         "startChar": 0,
@@ -361,6 +547,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8982d3b_87455fe8",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90abaa91_8ffb6a9d",
+      "range": {
+        "startLine": 613,
+        "startChar": 1,
+        "endLine": 615,
+        "endChar": 17
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fa90d13_9d57bebe",
@@ -384,6 +594,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf88b73_9de6d7f6",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa90d13_9d57bebe",
+      "range": {
+        "startLine": 636,
+        "startChar": 5,
+        "endLine": 638,
+        "endChar": 1
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e548bc51_fdfb8c09",
@@ -397,6 +631,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 695,
+        "startChar": 14,
+        "endLine": 699,
+        "endChar": 1
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b68c9a2_1c8eb446",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e548bc51_fdfb8c09",
       "range": {
         "startLine": 695,
         "startChar": 14,
@@ -454,6 +712,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd45be3_0dc35b8a",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9701fc74_2c5821b9",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7394d83_dfadf183",
@@ -477,6 +759,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd808ba3_5cca28db",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7394d83_dfadf183",
+      "range": {
+        "startLine": 38,
+        "startChar": 54,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a4e41e_82f870bc",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7394d83_dfadf183",
+      "range": {
+        "startLine": 38,
+        "startChar": 54,
+        "endLine": 38,
+        "endChar": 69
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1febb54_c6abdf8a",
@@ -490,6 +820,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "style: \u0027\u003c\u0027 for headers from other files",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 10
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57093dc_a6c01ed1",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1febb54_c6abdf8a",
       "range": {
         "startLine": 31,
         "startChar": 9,
@@ -565,6 +919,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb2d06d_b26bae39",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3efbf88d_4a218dfd",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44fdbc62_e398c5d2",
@@ -578,6 +956,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "nit: prefer static function for a case like this (sadly, this saves a small amount of memory too)",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0e3586_ec500330",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44fdbc62_e398c5d2",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -625,6 +1027,30 @@
       "side": 1,
       "message": "Interesting point.\n\nI think",
       "parentUuid": "260c3faf_0cde655b",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a6638d_efd9457e",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-17T19:15:14Z",
+      "side": 1,
+      "message": "@ddiproietto@google.com let me know if I should wait for a cl from your end or if you think this is an appropriate way to use the library.",
+      "parentUuid": "48cf5d42_c5870cac",
       "range": {
         "startLine": 39,
         "startChar": 0,
