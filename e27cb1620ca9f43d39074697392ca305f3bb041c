@@ -125,6 +125,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ba88718_e800f71d",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "Nit: let\u0027s not use the `PERFETTO_` prefix for this macro. That prefix is reserved:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/perfetto/include/README.md;l\u003d68;drc\u003d92a03235d082c4be139c19ddcff3ac7e8844762a\n\nMaybe something like `SM_PERFETTO_...`?",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9d6f7ad2_74bc4de7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "#define PERFETTO_TRACE_THIS_FUNCTION_WITH_ARG(function_name, arg) \\\n    PERFETTO_INTERNAL_ADD_LITERAL_STRING_FOR_CATEGORY(PERFETTO_SM_CATEGORIES, #function_name); \\\n    PERFETTO_INTERNAL_ADD_LITERAL_STRING_FOR_CATEGORY(PERFETTO_SM_CATEGORIES, #arg); \\\n    PERFETTO_INTERNAL_ADD_LITERAL_STRING_FOR_CATEGORY(PERFETTO_SM_CATEGORIES, arg.c_str()); \\\n    PERFETTO_INTERNAL_ADD_TO_SLICE(PERFETTO_SM_CATEGORIES, function_name); \\\n    PERFETTO_INTERNAL_ADD_TO_SLICE(PERFETTO_SM_CATEGORIES, arg); \\\n    PERFETTO_INTERNAL_ADD_TO_SLICE(PERFETTO_SM_CATEGORIES, arg.c_str());\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "    PERFETTO_INTERNAL_ADD_LITERAL_STRING_FOR_CATEGORY(PERFETTO_SM_CATEGORIES, #function_name); \\\n    PERFETTO_INTERNAL_ADD_TO_SLICE(PERFETTO_SM_CATEGORIES, function_name);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d64a4805_57246248",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 15
@@ -171,6 +222,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "382be881_9d5c53ae",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "\u003e I assume the reason not is that we might have multiple types of traces?\n\nCorrect, the idea is that you can have multiple types of events on each file, and you might want to control them with different categories.",
+      "parentUuid": "d64a4805_57246248",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e97c099_1057c5b2",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "This is a variable. If you mistype it, you\u0027ll get a compiler error.",
+      "parentUuid": "0c6462d5_fc3b640f",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa4b7608_65ba0615",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 15
@@ -182,6 +281,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "btw, you can use __VA_ARGS__ to have a single macro that may support 1-9 args\n\nAnyway, if you define the right macro in the perfetto headers, I don\u0027t think we should need any macro defined here. The function bodies could say exactly:\n\n```\n    PERFETO_TRACE_FUNC(SM_TAG, arg);\n```\n\nor\n\n```\n    PERFETO_SM_TRACE_FUNC(SM_TAG);\n```\n\nor\n\n```\n    PERFETO_SM_TRACE_FUNC(SM_TAG, arg1, arg2);\n```\n\nwithout any macros defined per client. We should have that (this is a lot to maintain separately).",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 36
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a031cf40_af193ea5",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "This is a matter of personal preference :-), but I don\u0027t think these macros should be in the library:\n\n* I don\u0027t want to have a maintain a special macro in the library just to trace __func__\n* Putting the macro in the library assumes the TRACE_TAG design, which I don\u0027t think we should go for.\n* We still need a macro in this file anyway. `#if defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__)`, the macro needs to be a noop.",
+      "parentUuid": "aa4b7608_65ba0615",
       "range": {
         "startLine": 62,
         "startChar": 8,
@@ -309,6 +432,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9701fc74_2c5821b9",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "Right. \"te_macros.h\" is not needed nor used here",
+      "parentUuid": "124c06d3_8f9f9722",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7394d83_dfadf183",
         "filename": "cmds/servicemanager/ServiceManager.h",
         "patchSetId": 15
@@ -396,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3efbf88d_4a218dfd",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "You should be able to remove \"track_event_abi.h\" (included by \"track_event.h\"), and \"te_macros.h\" (not used here).\n\n* \"te_category_macros.h\" is already included by \"ServiceManager.h\", but I\u0027d still include it here, since we\u0027re using one of the macros.\n* \"producer.h\" is required for PerfettoProducerInit\n* \"track_event.h\" is required for PerfettoTeInit\n\n\u003e same for this - it\u0027s a lot of headers. Does every client need so many?\n\nIn general yes, multiple headers are required the idea is roughly:\n\n* In the main file of a process, you need to connect to perfetto. That lives in its own header (\"producer.h\")\n* In the main file of a process, you need to register the data sources that you\u0027re using. In this case, we\u0027re only using simple track event instrumentation, that requires \"track_event.h\" and \"te_category_macros.h\"\n* Every other file that\u0027s instrumented could only use \"te_macros.h\". We don\u0027t want to include \"producer.h\" from every file.",
+      "parentUuid": "a7041933_121aaaa2",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44fdbc62_e398c5d2",
         "filename": "cmds/servicemanager/main.cpp",
         "patchSetId": 15
@@ -430,6 +601,30 @@
       "writtenOn": "2024-06-15T02:30:40Z",
       "side": 1,
       "message": "nit: does everyone need to define this? Can\u0027t be one-line config in main file?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48cf5d42_c5870cac",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-06-17T11:00:41Z",
+      "side": 1,
+      "message": "Interesting point.\n\nI think",
+      "parentUuid": "260c3faf_0cde655b",
       "range": {
         "startLine": 39,
         "startChar": 0,
