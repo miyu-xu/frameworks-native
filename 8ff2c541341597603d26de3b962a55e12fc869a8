@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "004c3c18_3667f406",
+        "filename": "libs/binder/binder_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-17T23:06:04Z",
+      "side": 1,
+      "message": "I tried `__ANDROID__`, but it fails to build on linux_glibc_x86 (it has `ANDROID` defined, but not `__ANDROID__`). Bionic always has these declared (because it\u0027s built against local headers).\n\nI used both to play it safe - require these new flags always when built against Android build tree.",
+      "parentUuid": "e87c489c_89f8cbba",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cbaddd6_187705d0",
@@ -75,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b10ea5dc_1cc55a01",
+        "filename": "libs/binder/binder_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-17T23:06:04Z",
+      "side": 1,
+      "message": "Added a comment about common vs upstream. BTW - do you know why these hasn\u0027t been pushed to upstream?\n\n`FLAT_BINDER_FLAG_INHERIT_RT` is an enum value, not macro - preprocessor don\u0027t know about it.",
+      "parentUuid": "2cbaddd6_187705d0",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ecd0192_88402611",
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d942cf2_77656900",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-17T23:06:04Z",
+      "side": 1,
+      "message": "Added checking in the else case.",
+      "parentUuid": "1ecd0192_88402611",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1172,
+        "endChar": 6
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72bcba48_37ad61e6",
@@ -111,6 +183,30 @@
       "writtenOn": "2024-06-15T00:13:51Z",
       "side": 1,
       "message": "nit: still test but with EXPECT_DEATH?",
+      "range": {
+        "startLine": 1177,
+        "startChar": 0,
+        "endLine": 1177,
+        "endChar": 52
+      },
+      "revId": "8ff2c541341597603d26de3b962a55e12fc869a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57577fdc_91ee1d9b",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-17T23:06:04Z",
+      "side": 1,
+      "message": "Halfway done - still testing, but can\u0027t expect death here:\n1. setInheritRt is done in the common test code, not in InheritRt\n2. even if I do a specific test for crashing on setInheritRt, EXPECT_DEATH won\u0027t work properly here - this test suite makes use of threads and gtest don\u0027t like it",
+      "parentUuid": "72bcba48_37ad61e6",
       "range": {
         "startLine": 1177,
         "startChar": 0,
