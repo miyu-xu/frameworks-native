@@ -22,6 +22,30 @@
       },
       "revId": "ea84289d64d0e7aab32a9d2d92dbd3101947d4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3efea1d_9ea6f100",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-17T22:16:27Z",
+      "side": 1,
+      "message": "It is, but it\u0027s binding that port after it\u0027s closed (the tester socket is unique_ft).",
+      "parentUuid": "e6fe5426_baa6834d",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 80
+      },
+      "revId": "ea84289d64d0e7aab32a9d2d92dbd3101947d4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
