@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51cda62_900c40ad",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T19:43:17Z",
+      "side": 1,
+      "message": "fwiw - you could also get rid of this (SNIFAE to pull out the .c_str if you wanted)",
+      "range": {
+        "startLine": 368,
+        "startChar": 27,
+        "endLine": 368,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c25b4139_283e61c1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 369,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 376,
+                "startChar": 0,
+                "endLine": 377,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 384,
+                "startChar": 0,
+                "endLine": 385,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 442,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 564,
+                "startChar": 0,
+                "endLine": 565,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 612,
+                "startChar": 0,
+                "endLine": 613,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 637,
+                "startChar": 0,
+                "endLine": 638,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 654,
+                "startChar": 0,
+                "endLine": 655,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 680,
+                "startChar": 0,
+                "endLine": 681,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 698,
+                "startChar": 0,
+                "endLine": 699,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 723,
+                "startChar": 0,
+                "endLine": 724,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 807,
+                "startChar": 0,
+                "endLine": 808,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 969,
+                "startChar": 0,
+                "endLine": 970,
+                "endChar": 0
+              },
+              "replacement": "    SM_PERFETTO_TRACE_FUNC();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ade9f1ab181f61da17a562e9c6d7bc2306ee58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
