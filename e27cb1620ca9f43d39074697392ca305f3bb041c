@@ -1083,6 +1083,30 @@
       },
       "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5b7090_b866c9a6",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T19:44:32Z",
+      "side": 1,
+      "message": "If you\u0027re going to scale up this tracing, it\u0027s better to have one line (or ideally zero lines) of config. Otherwise, it really can balloon.",
+      "parentUuid": "c4a6638d_efd9457e",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "e27cb1620ca9f43d39074697392ca305f3bb041c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
