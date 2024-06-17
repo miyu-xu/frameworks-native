@@ -24,6 +24,7 @@
 
 #include "SurfaceFlinger.h"
 
+#include <cassert>
 #include <aidl/android/hardware/power/Boost.h>
 #include <android-base/parseint.h>
 #include <android-base/properties.h>
@@ -8061,7 +8062,7 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                       return display.getLayerStack() == layerStack;
                   }).get();
         // }
-
+        assert(20 == 65);
         if (display == nullptr) {
             display = renderArea->getDisplayDevice().get();
         }
