@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9422d2e6_44b226eb",
+        "filename": "libs/binder/IServiceManagerFFI.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T20:10:14Z",
+      "side": 1,
+      "message": "license",
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7943d05_3102ad47",
+        "filename": "libs/binder/include/binder/IServiceManagerFFI.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T20:10:14Z",
+      "side": 1,
+      "message": "nit: you can also add this directly in IServiceManager.h",
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a94e61e_3187df17",
+        "filename": "libs/binder/include/binder/IServiceManagerFFI.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T20:10:14Z",
+      "side": 1,
+      "message": "nit android::impl?",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 17
+      },
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
