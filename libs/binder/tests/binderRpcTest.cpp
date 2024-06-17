@@ -141,9 +141,25 @@ static std::string allocateSocketAddress() {
     return ret;
 };
 
-static unsigned int allocateVsockPort() {
-    static unsigned int vsockPort = 34567;
-    return vsockPort++;
+static unsigned allocateVsockPort() {
+    unique_fd socket_fd(TEMP_FAILURE_RETRY(socket(AF_VSOCK, SOCK_STREAM | SOCK_CLOEXEC, 0)));
+    EXPECT_TRUE(socket_fd.ok()) << "allocateVsockPort: can't create vsock port " << strerror(errno);
+
+    sockaddr_vm addr = {
+            .svm_family = AF_VSOCK,
+            .svm_port = VMADDR_PORT_ANY,
+            .svm_cid = VMADDR_CID_LOCAL,
+    };
+    auto addr_sa = reinterpret_cast<sockaddr*>(&addr);
+
+    auto res = TEMP_FAILURE_RETRY(bind(socket_fd.get(), addr_sa, sizeof(addr)));
+    EXPECT_EQ(0, res) << "allocateVsockPort: bind failed " << strerror(errno);
+
+    socklen_t len = sizeof(addr);
+    res = getsockname(socket_fd.get(), addr_sa, &len);
+    EXPECT_NE(-1, res) << "allocateVsockPort: getsockname failed " << strerror(errno);
+
+    return addr.svm_port;
 }
 
 static unique_fd initUnixSocket(std::string addr) {
