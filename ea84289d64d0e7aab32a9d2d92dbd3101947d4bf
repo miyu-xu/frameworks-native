@@ -118,6 +118,30 @@
       },
       "revId": "ea84289d64d0e7aab32a9d2d92dbd3101947d4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3e927e_54eec2fe",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-17T23:27:41Z",
+      "side": 1,
+      "message": "Right. If you want to keep the race, I\u0027d put a big warning sign here not to copy this method. Such assignment would only be okay for tests (not real use).\n\nThat being said, concurrent support is not there today. If we want to add it, we better use the kernel APIs to get the port and leave it open. Far easier to fix now than to let it break - up to you.",
+      "parentUuid": "e9c10d2b_43d4a905",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 80
+      },
+      "revId": "ea84289d64d0e7aab32a9d2d92dbd3101947d4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
