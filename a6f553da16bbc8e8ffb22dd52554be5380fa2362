@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1270f02b_b6dd7460",
+        "filename": "libs/binder/IServiceManagerFFI.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-18T13:46:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9422d2e6_44b226eb",
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7943d05_3102ad47",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c185d3_a10343c2",
+        "filename": "libs/binder/include/binder/IServiceManagerFFI.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-18T13:46:20Z",
+      "side": 1,
+      "message": "When I do that, it breaks some tests as they cannot find android/os/IServiceManager",
+      "parentUuid": "d7943d05_3102ad47",
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a94e61e_3187df17",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-06-17T20:10:14Z",
       "side": 1,
       "message": "nit android::impl?",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 17
+      },
+      "revId": "a6f553da16bbc8e8ffb22dd52554be5380fa2362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "524495a4_e4b3e4ad",
+        "filename": "libs/binder/include/binder/IServiceManagerFFI.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-18T13:46:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a94e61e_3187df17",
       "range": {
         "startLine": 20,
         "startChar": 10,
