@@ -170,6 +170,30 @@
       ],
       "revId": "5ade9f1ab181f61da17a562e9c6d7bc2306ee58c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14de6e8c_406986d0",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-18T19:10:00Z",
+      "side": 1,
+      "message": "I would like to keep it as is. It allows it to be used with other data type if needed.",
+      "parentUuid": "e51cda62_900c40ad",
+      "range": {
+        "startLine": 368,
+        "startChar": 27,
+        "endLine": 368,
+        "endChar": 49
+      },
+      "revId": "5ade9f1ab181f61da17a562e9c6d7bc2306ee58c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
