@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99ec0829_7dd4d413",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "unrelated change to linkToDeath?",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea6328c_e1c07071",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "LOG_ALWAYS_FATAL here as well (you\u0027ll never get a callback if this is zero, and you should setup the threadpool earlier anyway)",
+      "range": {
+        "startLine": 578,
+        "startChar": 12,
+        "endLine": 578,
+        "endChar": 17
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aaca956_8e35ebea",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "cannot add virtual functions",
+      "range": {
+        "startLine": 53,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -587,6 +587,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5359a611_c99dc99a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c17e739_e38dcd58",
+      "range": {
+        "startLine": 636,
+        "startChar": 16,
+        "endLine": 637,
+        "endChar": 33
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f7d4a26_415b8083",
@@ -900,6 +924,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0709fd63_e8e5d2c8",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "You can delete each callback from the list in onFrozenStateChanged (or similar functions), if it fails to promote. Otherwise, it\u0027s easy to write client code which causes this to leak, even though the callback appears deleted if you look at the behavior of when a callback is made.",
+      "parentUuid": "3eca2d73_3b12d865",
+      "range": {
+        "startLine": 684,
+        "startChar": 59,
+        "endLine": 684,
+        "endChar": 66
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7343025_c780da8f",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 4
@@ -1086,6 +1134,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "837ff5de_f49cad4a",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "Any prebuilt which uses libbinder CPP will fail. Would be great if there are none, but I find it really unlikely due to tv/wear downstream.\n\nCan you create a separate change that creates a placeholder method here? You can merge it, and see the impact independently from this change? That will be easy to merge/revert if necessary, and we can get that out of the way quickly.",
+      "parentUuid": "ff23ea61_0704de0f",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 61,
+        "endChar": 27
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "adc24210_96241465",
         "filename": "libs/binder/include/binder/BpBinder.h",
         "patchSetId": 4
@@ -1168,6 +1240,30 @@
       "side": 1,
       "message": "onFrozenStateChanged could only get a \"const\" IBinder if it\u0027s accessed through PrivateAccessor. But onFrozenStateChanged needs to provide a non-const IBinder to JavaFrozenStateChangeCallback.onStateChanged() and transitively to javaObjectForIBinder() because javaObjectForIBinder deals with nativeData-\u003emObject which is non-const.\n\nAny advice on how to resolve this?",
       "parentUuid": "6c65a267_60670262",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 45
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e950ae_c3f7f519",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "You can make a non-const version of getPrivateAccessor.",
+      "parentUuid": "9798b962_1597cc42",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -1450,6 +1546,30 @@
       "side": 1,
       "message": "cgroup freeze is not a binder feature if I understand correctly.\n\nAre are suggesting to create an API to check whether IPCThreadState::self()-\u003efreeze() is supported? That feature is not introduced in this change.",
       "parentUuid": "4d7a4961_61e885bb",
+      "range": {
+        "startLine": 301,
+        "startChar": 3,
+        "endLine": 308,
+        "endChar": 9
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5164091_22fc5cb3",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "600e84bf_3ac9a17e",
       "range": {
         "startLine": 301,
         "startChar": 3,
@@ -2089,6 +2209,30 @@
       "side": 1,
       "message": "It might. Though that process would be unfrozen shortly.\n\nHow would you suggest to address this?",
       "parentUuid": "353d77ce_825a92ca",
+      "range": {
+        "startLine": 898,
+        "startChar": 0,
+        "endLine": 898,
+        "endChar": 23
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe45f2cd_61ad7731",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-18T01:10:52Z",
+      "side": 1,
+      "message": "Maybe add a few: `EXPECT_EQ(OK, binder-pingBinder())` to check it\u0027s alive? it will work for this case.",
+      "parentUuid": "28b2ab38_1e12ecba",
       "range": {
         "startLine": 898,
         "startChar": 0,
