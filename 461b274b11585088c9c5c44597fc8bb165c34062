@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b06cfa5_23a004cd",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1962150
+      },
+      "writtenOn": "2024-06-20T10:27:40Z",
+      "side": 1,
+      "message": "Hi @alecmouri@google.com @domlaskowski@google.com I wonder if instead of this, desiredModeSpecs would configure SF with 60hz physical refresh rate, would it work?",
+      "revId": "461b274b11585088c9c5c44597fc8bb165c34062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
