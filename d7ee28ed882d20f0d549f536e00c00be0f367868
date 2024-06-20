@@ -16,6 +16,51 @@
       "message": "I would add \n\nFlag: com.android.binder.flags.use_client_side_cache",
       "revId": "d7ee28ed882d20f0d549f536e00c00be0f367868",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ee42d5b_da01bdec",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-06-20T22:39:05Z",
+      "side": 1,
+      "message": "Maybe instead of this namespace declaration, declare the static method that wraps ``use_client_side_cache()`` if ``__ANDROID_RECOVERY__`` is not defined, and whilch returns false if it is defined.  Then you can remove the ifdefs that are in the middle of the code?",
+      "fixSuggestions": [
+        {
+          "fixId": "2c55710a_8531acb4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "    if (com::android::binder::flags::use_client_side_cache()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d7ee28ed882d20f0d549f536e00c00be0f367868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
