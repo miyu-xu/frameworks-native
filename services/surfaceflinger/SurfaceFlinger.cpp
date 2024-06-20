@@ -2696,7 +2696,7 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
         if (display->isVirtual()) {
             const Fps refreshRate = display->getAdjustedRefreshRate();
 
-            if (!refreshRate.isValid() ||
+            if (!refreshRate.isValid() || display->physicalRefreshRate() ||
                 mScheduler->isVsyncInPhase(pacesetterTarget.frameBeginTime(), refreshRate)) {
                 refreshArgs.outputs.push_back(display->getCompositionDisplay());
             }

@@ -78,7 +78,7 @@ class DisplayDevice : public RefBase {
 public:
     constexpr static float sDefaultMinLumiance = 0.0;
     constexpr static float sDefaultMaxLumiance = 500.0;
-    enum { eReceivesInput = 0x01 };
+    enum { eReceivesInput = 0x01 , ePhysicalRefreshRate = 0x02 };
 
     explicit DisplayDevice(DisplayDeviceCreationArgs& args);
 
@@ -119,6 +119,7 @@ public:
     const Rect& getOrientedDisplaySpaceRect() const;
     ui::LayerStack getLayerStack() const;
     bool receivesInput() const { return mFlags & eReceivesInput; }
+    bool physicalRefreshRate() const { return mFlags & ePhysicalRefreshRate; }
 
     DisplayId getId() const;
 
