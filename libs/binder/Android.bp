@@ -21,6 +21,24 @@ package {
     default_applicable_licenses: ["frameworks_native_license"],
 }
 
+aconfig_declarations {
+    name: "libbinder_aconfig_flags",
+    package: "com.android.binder.flags",
+    container: "system",
+    srcs: ["libbinder_flags.aconfig"],
+}
+
+cc_aconfig_library {
+    name: "aconfig_libbinder_flags_c_lib",
+    aconfig_declarations: "libbinder_aconfig_flags",
+    host_supported: true,
+    vendor_available: true,
+    mode: "test",
+    shared: {
+        enabled: false,
+    },
+}
+
 cc_library_headers {
     name: "libbinder_headers_base",
     export_include_dirs: ["include"],
@@ -440,6 +458,7 @@ cc_defaults {
         ":libbinder_aidl",
         ":libbinder_device_interface_sources",
     ],
+    whole_static_libs: ["aconfig_libbinder_flags_c_lib"],
     target: {
         vendor: {
             exclude_srcs: [
@@ -461,6 +480,9 @@ cc_defaults {
             exclude_shared_libs: [
                 "libapexsupport",
                 "libvndksupport",
+            ],
+            exclude_static_libs: [
+                "aconfig_libbinder_flags_c_lib",
             ],
         },
         native_bridge: {
