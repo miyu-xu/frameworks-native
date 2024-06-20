@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5baea005_a156e172",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-06-20T22:26:19Z",
+      "side": 1,
+      "message": "I would add \n\nFlag: com.android.binder.flags.use_client_side_cache",
+      "revId": "d7ee28ed882d20f0d549f536e00c00be0f367868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
