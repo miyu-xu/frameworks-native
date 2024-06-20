@@ -1,0 +1,10 @@
+package: "com.android.binder.flags"
+container: "system"
+
+flag {
+  name: "use_client_side_cache"
+  namespace: "system_performance"
+  description: "This flag controls if we cache any calls to service manager"
+  bug: "333854840"
+  is_fixed_read_only: true
+}
