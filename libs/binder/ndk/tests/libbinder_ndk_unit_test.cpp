@@ -735,7 +735,7 @@ TEST(NdkBinder, RequestedSidWorks) {
 }
 
 TEST(NdkBinder, SentAidlBinderCanBeDestroyed) {
-    static volatile bool destroyed = false;
+    static std::atomic_bool destroyed = false;
     static std::mutex dMutex;
     static std::condition_variable cv;
 
@@ -765,7 +765,7 @@ TEST(NdkBinder, SentAidlBinderCanBeDestroyed) {
     {
         using namespace std::chrono_literals;
         std::unique_lock<std::mutex> lk(dMutex);
-        cv.wait_for(lk, 1s, [] { return destroyed; });
+        cv.wait_for(lk, 1s, [] { return destroyed.load(); });
     }
 
     EXPECT_TRUE(destroyed);
