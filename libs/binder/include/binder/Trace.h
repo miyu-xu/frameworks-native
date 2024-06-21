@@ -20,6 +20,7 @@
 
 #if __has_include(<cutils/trace.h>)
 #include <cutils/trace.h>
+#define BINDER_HAS_TRACE 1
 #endif
 
 #include <binder/Common.h>
@@ -30,6 +31,12 @@
 #endif
 #else
 #define ATRACE_TAG_AIDL (1 << 24)
+#endif
+
+#ifdef BINDER_HAS_TRACE
+#define BINDER_TRACE_INIT() ATRACE_INIT()
+#else
+#define BINDER_TRACE_INIT()
 #endif
 
 namespace android {
