@@ -34,6 +34,7 @@
 #include <binder/IShellCallback.h>
 #include <inttypes.h>
 #include <sys/prctl.h>
+#include <sys/socket.h>
 
 #include <chrono>
 #include <condition_variable>

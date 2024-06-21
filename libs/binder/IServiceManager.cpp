@@ -28,7 +28,6 @@
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
-#include <utils/Log.h>
 #include <utils/String8.h>
 
 #ifndef __ANDROID_VNDK__
