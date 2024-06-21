@@ -19,7 +19,6 @@
 #include <android-base/logging.h>
 #include <android-base/properties.h>
 #include <android-base/scopeguard.h>
-#include <android-base/strings.h>
 #include <binder/BpBinder.h>
 #include <binder/IPCThreadState.h>
 #include <binder/ProcessState.h>
