@@ -21,6 +21,11 @@
 
 #include <android/log.h>
 
+// avoid LOG_INFO and LOG_DEBUG conflict versus syslog.h
+#include <syslog.h>
+#undef LOG_INFO
+#undef LOG_DEBUG
+
 extern "C" {
 
 #ifndef ANDROID_LOG_STUB_MIN_PRIORITY
