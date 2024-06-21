@@ -16,6 +16,24 @@
       "message": "Hi @alecmouri@google.com @domlaskowski@google.com I wonder if instead of this, desiredModeSpecs would configure SF with 60hz physical refresh rate, would it work?",
       "revId": "461b274b11585088c9c5c44597fc8bb165c34062",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf62d22_db626116",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2699,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-06-21T18:46:23Z",
+      "side": 1,
+      "message": "I think this needs more thought. There\u0027s use-cases where apps reroute the virtual display output back into their layout (I believe flutter does this).\n\nSo we (probably) don\u0027t want to throttle the physical screen. It probably makes more sense to create a VirtualDisplay with X refresh rate, where X is not allowed to be too large.",
+      "parentUuid": "1b06cfa5_23a004cd",
+      "revId": "461b274b11585088c9c5c44597fc8bb165c34062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
