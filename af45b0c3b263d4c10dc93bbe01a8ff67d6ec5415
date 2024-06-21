@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7646ecb_479af4cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 75
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-21T23:54:59Z",
+      "side": 1,
+      "message": "Current rough TODO list for distilling this change to separate fixes:\n- gtest_skip explanation 1\n- BINDER_RPC_DEV_SERVERS 1\n- android strings.h conversion to std 1\n- android threads conversion to std 1\n- missing callstack 2\n- missing perfetto 2\n- ashmem 3\n- ifdef android 5\n- missing include properties 4\n- missing include android_filesystem_config 4\n- broken tests 4\n- missing/disabled selinux 2\n- missing include llndk versioning 1\n- missing jni 1",
+      "revId": "af45b0c3b263d4c10dc93bbe01a8ff67d6ec5415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
