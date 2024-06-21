@@ -321,7 +321,7 @@ const String16& BpBinder::getInterfaceDescriptor() const
 
 bool BpBinder::isBinderAlive() const
 {
-    return mAlive != 0;
+    return mAlive;
 }
 
 status_t BpBinder::pingBinder()
@@ -403,7 +403,7 @@ status_t BpBinder::transact(
                   data.dataSize(), String8(mDescriptorCache).c_str(), code);
         }
 
-        if (status == DEAD_OBJECT) mAlive = 0;
+        if (status == DEAD_OBJECT) mAlive = false;
 
         return status;
     }
@@ -525,7 +525,7 @@ void BpBinder::sendObituary()
     ALOGV("Sending obituary for proxy %p handle %d, mObitsSent=%s\n", this, binderHandle(),
           mObitsSent ? "true" : "false");
 
-    mAlive = 0;
+    mAlive = false;
     if (mObitsSent) return;
 
     mLock.lock();
@@ -541,7 +541,7 @@ void BpBinder::sendObituary()
         }
         mObituaries = nullptr;
     }
-    mObitsSent = 1;
+    mObitsSent = true;
     mLock.unlock();
 
     ALOGV("Reporting death of proxy %p for %zu recipients\n",

@@ -34,6 +34,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include <atomic>
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -88,9 +89,13 @@ class SpAIBinder {
      * Takes ownership of one strong refcount of binder
      */
     void set(AIBinder* binder) {
-        AIBinder* old = *const_cast<AIBinder* volatile*>(&mBinder);
+        // Casting non-atomic address to std::atomic is the same trick cutils
+        // to_atomic_int_least32_t uses. To be replaced with std::atomic_ref once libc++ catches up.
+        std::atomic<AIBinder*>* current = reinterpret_cast<std::atomic<AIBinder*>*>(&mBinder);
+
+        AIBinder* old = current->load();
         if (old != nullptr) AIBinder_decStrong(old);
-        if (old != *const_cast<AIBinder* volatile*>(&mBinder)) {
+        if (old != current->load()) {
             __assert(__FILE__, __LINE__, "Race detected.");
         }
         mBinder = binder;
