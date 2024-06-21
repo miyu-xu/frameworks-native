@@ -17,8 +17,6 @@
 #include <BnBinderVendorDoubleLoadTest.h>
 #include <aidl/BnBinderVendorDoubleLoadTest.h>
 #include <aidl/android/os/IServiceManager.h>
-#include <android-base/properties.h>
-#include <android-base/strings.h>
 #include <android/binder_ibinder.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
@@ -32,9 +30,6 @@
 #include <sys/prctl.h>
 
 using namespace android;
-using ::android::base::EndsWith;
-using ::android::base::GetProperty;
-using ::android::base::Split;
 using ::android::binder::Status;
 using ::android::internal::Stability;
 using ::ndk::ScopedAStatus;
