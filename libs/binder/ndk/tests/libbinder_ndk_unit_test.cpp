@@ -70,21 +70,21 @@ class MyTestFoo : public IFoo {
 };
 
 class MyBinderNdkUnitTest : public aidl::BnBinderNdkUnitTest {
-    ndk::ScopedAStatus repeatInt(int32_t in, int32_t* out) {
+    ndk::ScopedAStatus repeatInt(int32_t in, int32_t* out) override {
         *out = in;
         return ndk::ScopedAStatus::ok();
     }
-    ndk::ScopedAStatus takeInterface(const std::shared_ptr<aidl::IEmpty>& empty) {
+    ndk::ScopedAStatus takeInterface(const std::shared_ptr<aidl::IEmpty>& empty) override {
         (void)empty;
         return ndk::ScopedAStatus::ok();
     }
-    ndk::ScopedAStatus forceFlushCommands() {
+    ndk::ScopedAStatus forceFlushCommands() override {
         // warning: this is assuming that libbinder_ndk is using the same copy
         // of libbinder that we are.
         android::IPCThreadState::self()->flushCommands();
         return ndk::ScopedAStatus::ok();
     }
-    ndk::ScopedAStatus getsRequestedSid(bool* out) {
+    ndk::ScopedAStatus getsRequestedSid(bool* out) override {
         const char* sid = AIBinder_getCallingSid();
         std::cout << "Got security context: " << (sid ?: "null") << std::endl;
         *out = sid != nullptr;
@@ -98,11 +98,11 @@ class MyBinderNdkUnitTest : public aidl::BnBinderNdkUnitTest {
         fsync(out);
         return STATUS_OK;
     }
-    ndk::ScopedAStatus forcePersist(bool persist) {
+    ndk::ScopedAStatus forcePersist(bool persist) override {
         AServiceManager_forceLazyServicesPersist(persist);
         return ndk::ScopedAStatus::ok();
     }
-    ndk::ScopedAStatus setCustomActiveServicesCallback() {
+    ndk::ScopedAStatus setCustomActiveServicesCallback() override {
         AServiceManager_setActiveServicesCallback(activeServicesCallback, this);
         return ndk::ScopedAStatus::ok();
     }
@@ -430,7 +430,7 @@ TEST(NdkBinder, GetDeclaredInstances) {
     // At the time of writing this test, there is no good interface guaranteed
     // to be on all devices. Cuttlefish has light, so this will generally test
     // things.
-    EXPECT_EQ(count, hasLight ? 1 : 0);
+    EXPECT_EQ(count, hasLight ? 1u : 0u);
 }
 
 TEST(NdkBinder, GetLazyService) {
@@ -520,7 +520,7 @@ void LambdaOnDeath(void* cookie) {
     // may reference other cookie members
 
     (*funcs->onDeath)();
-};
+}
 void LambdaOnUnlink(void* cookie) {
     auto funcs = static_cast<DeathRecipientCookie*>(cookie);
     (*funcs->onUnlink)();
@@ -528,7 +528,7 @@ void LambdaOnUnlink(void* cookie) {
     // may reference other cookie members
 
     delete funcs;
-};
+}
 TEST(NdkBinder, DeathRecipient) {
     using namespace std::chrono_literals;
 
@@ -884,7 +884,7 @@ std::string shellCmdToString(sp<IBinder> unitTestService, const std::vector<cons
     sp<MyResultReceiver> resultReceiver = new MyResultReceiver();
 
     Vector<String16> argsVec;
-    for (int i = 0; i < args.size(); i++) {
+    for (size_t i = 0; i < args.size(); i++) {
         argsVec.add(String16(args[i]));
     }
     status_t error = IBinder::shellCommand(unitTestService, inFd[0], outFd[0], errFd[0], argsVec,
