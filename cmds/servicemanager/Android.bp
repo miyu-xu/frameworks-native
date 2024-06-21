@@ -29,7 +29,6 @@ cc_defaults {
         "liblog",
         "libutils",
         "libselinux",
-        "libperfetto_c",
     ],
 
     target: {
@@ -49,13 +48,7 @@ cc_defaults {
             enabled: false,
         },
         vendor: {
-            exclude_shared_libs: [
-                "libvintf",
-                "libperfetto_c",
-            ],
-        },
-        recovery: {
-            exclude_shared_libs: ["libperfetto_c"],
+            exclude_shared_libs: ["libvintf"],
         },
     },
 }
