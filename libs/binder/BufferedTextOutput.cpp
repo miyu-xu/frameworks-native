@@ -16,7 +16,6 @@
 
 #include "BufferedTextOutput.h"
 
-#include <cutils/atomic.h>
 #include <utils/Log.h>
 #include <utils/RefBase.h>
 #include <utils/Vector.h>
@@ -24,6 +23,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <atomic>
 
 #include "Debug.h"
 #include "Static.h"
@@ -90,9 +90,9 @@ struct BufferedTextOutput::ThreadState
 
 static pthread_mutex_t gMutex = PTHREAD_MUTEX_INITIALIZER;
 
-static volatile int32_t gSequence = 0;
+static std::atomic_int32_t gSequence = 0;
 
-static volatile int32_t gFreeBufferIndex = -1;
+static std::atomic_int32_t gFreeBufferIndex = -1;
 
 static int32_t allocBufferIndex()
 {
@@ -104,7 +104,6 @@ static int32_t allocBufferIndex()
         res = gFreeBufferIndex;
         gFreeBufferIndex = gTextBuffers[res];
         gTextBuffers.editItemAt(res) = -1;
-
     } else {
         res = gTextBuffers.size();
         gTextBuffers.add(-1);
@@ -126,14 +125,11 @@ static void freeBufferIndex(int32_t idx)
 // ---------------------------------------------------------------------------
 
 BufferedTextOutput::BufferedTextOutput(uint32_t flags)
-    : mFlags(flags)
-    , mSeq(android_atomic_inc(&gSequence))
-    , mIndex(allocBufferIndex())
-{
+      : mFlags(flags), mSeq(gSequence++), mIndex(allocBufferIndex()) {
     mGlobalState = new BufferState(mSeq);
     if (mGlobalState) mGlobalState->incStrong(this);
 }
-    
+
 BufferedTextOutput::~BufferedTextOutput()
 {
     if (mGlobalState) mGlobalState->decStrong(this);
