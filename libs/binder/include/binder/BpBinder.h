@@ -21,6 +21,7 @@
 #include <binder/RpcThreads.h>
 #include <binder/unique_fd.h>
 
+#include <atomic>
 #include <map>
 #include <optional>
 #include <unordered_map>
@@ -196,12 +197,12 @@ private:
     bool isDescriptorCached() const;
 
     mutable RpcMutex mLock;
-    volatile int32_t mAlive;
-    volatile int32_t mObitsSent;
+    std::atomic_bool mAlive;
+    std::atomic_bool mObitsSent;
+    int32_t mTrackedUid;
     Vector<Obituary>* mObituaries;
     ObjectManager mObjects;
     mutable String16 mDescriptorCache;
-    int32_t mTrackedUid;
 
     static RpcMutex sTrackingLock;
     static std::unordered_map<int32_t, uint32_t> sTrackingMap;
