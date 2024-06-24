@@ -88,6 +88,7 @@ struct BufferedTextOutput::ThreadState
     Vector<sp<BufferedTextOutput::BufferState> > states;
 };
 
+// TODO: replace with std::mutex
 static pthread_mutex_t gMutex = PTHREAD_MUTEX_INITIALIZER;
 
 static std::atomic_int32_t gSequence = 0;

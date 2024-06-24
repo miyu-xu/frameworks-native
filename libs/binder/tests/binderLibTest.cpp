@@ -373,6 +373,7 @@ class BinderLibTestEvent
             pthread_mutex_unlock(&m_waitMutex);
         };
     private:
+        // TODO: replace with std::mutex and std::condition_variable
         pthread_mutex_t m_waitMutex;
         pthread_cond_t m_waitCond;
         bool m_eventTriggered;

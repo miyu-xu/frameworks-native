@@ -206,9 +206,10 @@ public:
     // side.
     LIBBINDER_EXPORTED static const int32_t kUnsetWorkSource = -1;
 
+    ~IPCThreadState();
+
 private:
     IPCThreadState();
-    ~IPCThreadState();
 
     status_t sendReply(const Parcel& reply, uint32_t flags);
     status_t waitForResponse(Parcel* reply, status_t* acquireResult = nullptr);
