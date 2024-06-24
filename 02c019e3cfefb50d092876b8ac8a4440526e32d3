@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5f06aa_eb8b11cc",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-06-24T16:26:54Z",
+      "side": 1,
+      "message": "Out of curiosity, when is this header not available?",
+      "fixSuggestions": [
+        {
+          "fixId": "c8ecbe39_59fae72e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d852de67_4602fc1b",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-06-24T16:26:54Z",
+      "side": 1,
+      "message": "Why is this conditional different from the conditional at line 38?",
+      "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
