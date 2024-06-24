@@ -20,7 +20,6 @@
 #include <utils/RefBase.h>
 #include <utils/Vector.h>
 
-#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <atomic>
@@ -88,7 +87,7 @@ struct BufferedTextOutput::ThreadState
     Vector<sp<BufferedTextOutput::BufferState> > states;
 };
 
-static pthread_mutex_t gMutex = PTHREAD_MUTEX_INITIALIZER;
+static std::mutex gMutex;
 
 static std::atomic_int32_t gSequence = 0;
 
@@ -97,9 +96,8 @@ static std::atomic_int32_t gFreeBufferIndex = -1;
 static int32_t allocBufferIndex()
 {
     int32_t res = -1;
-    
-    pthread_mutex_lock(&gMutex);
-    
+    std::scoped_lock lock(gMutex);
+
     if (gFreeBufferIndex >= 0) {
         res = gFreeBufferIndex;
         gFreeBufferIndex = gTextBuffers[res];
@@ -109,17 +107,14 @@ static int32_t allocBufferIndex()
         gTextBuffers.add(-1);
     }
 
-    pthread_mutex_unlock(&gMutex);
-    
     return res;
 }
 
 static void freeBufferIndex(int32_t idx)
 {
-    pthread_mutex_lock(&gMutex);
+    std::scoped_lock lock(gMutex);
     gTextBuffers.editItemAt(idx) = gFreeBufferIndex;
     gFreeBufferIndex = idx;
-    pthread_mutex_unlock(&gMutex);
 }
 
 // ---------------------------------------------------------------------------
