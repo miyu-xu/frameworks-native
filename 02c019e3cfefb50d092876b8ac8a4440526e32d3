@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8baef298_25d9b4f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-06-24T18:15:53Z",
+      "side": 1,
+      "message": "I believe my open comments should not block the commit.  Good job on getting the flags working!",
+      "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b5f06aa_eb8b11cc",
