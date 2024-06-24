@@ -376,6 +376,7 @@ public:
         if (vm == nullptr) return;
 
         char threadName[16];
+        // TODO: move to thread_local
         if (0 != pthread_getname_np(pthread_self(), threadName, sizeof(threadName))) {
             constexpr const char* defaultThreadName = "UnknownRpcSessionThread";
             memcpy(threadName, defaultThreadName,

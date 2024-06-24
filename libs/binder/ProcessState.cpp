@@ -130,6 +130,7 @@ sp<ProcessState> ProcessState::init(const char* driver, bool requireDefault) {
         // otherwise this would race with creating it, and there could be the
         // possibility of an invalid gProcess object forked by another thread
         // before these are installed
+        // TODO: what about this one?
         int ret = pthread_atfork(ProcessState::onFork, ProcessState::parentPostFork,
                                  ProcessState::childPostFork);
         LOG_ALWAYS_FATAL_IF(ret != 0, "pthread_atfork error %s", strerror(ret));
