@@ -24,16 +24,15 @@
 
 #include <utils/CallStack.h>
 
-#include <atomic>
 #include <errno.h>
 #include <inttypes.h>
-#include <pthread.h>
 #include <sched.h>
 #include <signal.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <atomic>
 
 #include "Utils.h"
 #include "binder_module.h"
@@ -112,6 +111,11 @@ static const char *kCommandStrings[] = {
 };
 
 static const int64_t kWorkSourcePropagatedBitIndex = 32;
+
+static size_t printableThreadId() {
+    static std::hash<std::thread::id> hasher;
+    return hasher(std::this_thread::get_id());
+}
 
 static const char* getReturnString(uint32_t cmd)
 {
@@ -285,23 +289,13 @@ static const void* printCommand(std::ostream& out, const void* _cmd) {
     return cmd;
 }
 
-LIBBINDER_IGNORE("-Wzero-as-null-pointer-constant")
-static pthread_mutex_t gTLSMutex = PTHREAD_MUTEX_INITIALIZER;
-LIBBINDER_IGNORE_END()
-static std::atomic<bool> gHaveTLS(false);
-static pthread_key_t gTLS = 0;
+thread_local static std::unique_ptr<IPCThreadState> gThreadLocalState;
 static std::atomic<bool> gShutdown = false;
 static std::atomic<bool> gDisableBackgroundScheduling = false;
 
 IPCThreadState* IPCThreadState::self()
 {
-    if (gHaveTLS.load(std::memory_order_acquire)) {
-restart:
-        const pthread_key_t k = gTLS;
-        IPCThreadState* st = (IPCThreadState*)pthread_getspecific(k);
-        if (st) return st;
-        return new IPCThreadState;
-    }
+    if (gThreadLocalState) return gThreadLocalState.get();
 
     // Racey, heuristic test for simultaneous shutdown.
     if (gShutdown.load(std::memory_order_relaxed)) {
@@ -309,45 +303,20 @@ restart:
         return nullptr;
     }
 
-    pthread_mutex_lock(&gTLSMutex);
-    if (!gHaveTLS.load(std::memory_order_relaxed)) {
-        int key_create_value = pthread_key_create(&gTLS, threadDestructor);
-        if (key_create_value != 0) {
-            pthread_mutex_unlock(&gTLSMutex);
-            ALOGW("IPCThreadState::self() unable to create TLS key, expect a crash: %s\n",
-                    strerror(key_create_value));
-            return nullptr;
-        }
-        gHaveTLS.store(true, std::memory_order_release);
-    }
-    pthread_mutex_unlock(&gTLSMutex);
-    goto restart;
+    struct make_unique_enabler : public IPCThreadState {};
+    gThreadLocalState = std::make_unique<make_unique_enabler>();
+    return gThreadLocalState.get();
 }
 
 IPCThreadState* IPCThreadState::selfOrNull()
 {
-    if (gHaveTLS.load(std::memory_order_acquire)) {
-        const pthread_key_t k = gTLS;
-        IPCThreadState* st = (IPCThreadState*)pthread_getspecific(k);
-        return st;
-    }
-    return nullptr;
+    return gThreadLocalState.get();
 }
 
 void IPCThreadState::shutdown()
 {
     gShutdown.store(true, std::memory_order_relaxed);
-
-    if (gHaveTLS.load(std::memory_order_acquire)) {
-        // XXX Need to wait for all thread pool threads to exit!
-        IPCThreadState* st = (IPCThreadState*)pthread_getspecific(gTLS);
-        if (st) {
-            delete st;
-            pthread_setspecific(gTLS, nullptr);
-        }
-        pthread_key_delete(gTLS);
-        gHaveTLS.store(false, std::memory_order_release);
-    }
+    gThreadLocalState.reset();
 }
 
 void IPCThreadState::disableBackgroundScheduling(bool disable)
@@ -733,7 +702,7 @@ void IPCThreadState::processPostWriteDerefs()
 
 void IPCThreadState::joinThreadPool(bool isMain)
 {
-    LOG_THREADPOOL("**** THREAD %p (PID %d) IS JOINING THE THREAD POOL\n", (void*)pthread_self(),
+    LOG_THREADPOOL("**** THREAD %zu (PID %d) IS JOINING THE THREAD POOL\n", printableThreadId(),
                    getpid());
     mProcess->mCurrentThreads++;
     mOut.writeInt32(isMain ? BC_ENTER_LOOPER : BC_REGISTER_LOOPER);
@@ -757,8 +726,8 @@ void IPCThreadState::joinThreadPool(bool isMain)
         }
     } while (result != -ECONNREFUSED && result != -EBADF);
 
-    LOG_THREADPOOL("**** THREAD %p (PID %d) IS LEAVING THE THREAD POOL err=%d\n",
-        (void*)pthread_self(), getpid(), result);
+    LOG_THREADPOOL("**** THREAD %zu (PID %d) IS LEAVING THE THREAD POOL err=%d\n",
+                   printableThreadId(), getpid(), result);
 
     mOut.writeInt32(BC_EXIT_LOOPER);
     mIsLooper = false;
@@ -818,7 +787,7 @@ status_t IPCThreadState::transact(int32_t handle,
 
     IF_LOG_TRANSACTIONS() {
         std::ostringstream logStream;
-        logStream << "BC_TRANSACTION thr " << (void*)pthread_self() << " / hand " << handle
+        logStream << "BC_TRANSACTION thr " << printableThreadId() << " / hand " << handle
                   << " / code " << TypeCode(code) << ": \t" << data << "\n";
         std::string message = logStream.str();
         ALOGI("%s", message.c_str());
@@ -867,7 +836,7 @@ status_t IPCThreadState::transact(int32_t handle,
 
         IF_LOG_TRANSACTIONS() {
             std::ostringstream logStream;
-            logStream << "BR_REPLY thr " << (void*)pthread_self() << " / hand " << handle << ": ";
+            logStream << "BR_REPLY thr " << printableThreadId() << " / hand " << handle << ": ";
             if (reply)
                 logStream << "\t" << *reply << "\n";
             else
@@ -964,7 +933,6 @@ IPCThreadState::IPCThreadState()
         mStrictModePolicy(0),
         mLastTransactionBinderFlags(0),
         mCallRestriction(mProcess->mCallRestriction) {
-    pthread_setspecific(gTLS, this);
     clearCaller();
     mHasExplicitIdentity = false;
     mIn.setDataCapacity(256);
@@ -1390,7 +1358,7 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
             status_t error;
             IF_LOG_TRANSACTIONS() {
                 std::ostringstream logStream;
-                logStream << "BR_TRANSACTION thr " << (void*)pthread_self() << " / obj "
+                logStream << "BR_TRANSACTION thr " << printableThreadId() << " / obj "
                           << tr.target.ptr << " / code " << TypeCode(tr.code) << ": \t" << buffer
                           << "\n"
                           << "Data addr = " << reinterpret_cast<const uint8_t*>(tr.data.ptr.buffer)
@@ -1464,7 +1432,7 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
 
             IF_LOG_TRANSACTIONS() {
                 std::ostringstream logStream;
-                logStream << "BC_REPLY thr " << (void*)pthread_self() << " / obj " << tr.target.ptr
+                logStream << "BC_REPLY thr " << printableThreadId() << " / obj " << tr.target.ptr
                           << ": \t" << reply << "\n";
                 std::string message = logStream.str();
                 ALOGI("%s", message.c_str());
