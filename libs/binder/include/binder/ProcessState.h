@@ -21,8 +21,6 @@
 #include <utils/String16.h>
 #include <utils/String8.h>
 
-#include <pthread.h>
-
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
