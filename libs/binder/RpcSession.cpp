@@ -22,6 +22,7 @@
 #include <inttypes.h>
 #include <netinet/tcp.h>
 #include <poll.h>
+#include <sys/prctl.h>
 #include <unistd.h>
 
 #include <string_view>
@@ -375,11 +376,10 @@ public:
         auto vm = getJavaVM();
         if (vm == nullptr) return;
 
-        char threadName[16];
-        if (0 != pthread_getname_np(pthread_self(), threadName, sizeof(threadName))) {
-            constexpr const char* defaultThreadName = "UnknownRpcSessionThread";
-            memcpy(threadName, defaultThreadName,
-                   std::min<size_t>(sizeof(threadName), strlen(defaultThreadName) + 1));
+        char threadName[16] = {};
+        if (0 != prctl(PR_GET_NAME, threadName)) {
+            constexpr const char defaultThreadName[] = "UnknownRpcThread";
+            strlcpy(threadName, defaultThreadName, sizeof(threadName));
         }
         LOG_RPC_DETAIL("Attaching current thread %s to JVM", threadName);
         JavaVMAttachArgs args;

@@ -15,8 +15,6 @@
  */
 #pragma once
 
-#include <pthread.h>
-
 #include <condition_variable>
 #include <functional>
 #include <memory>
