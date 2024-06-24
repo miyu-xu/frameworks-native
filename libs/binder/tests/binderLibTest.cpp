@@ -16,7 +16,6 @@
 
 #include <errno.h>
 #include <poll.h>
-#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -340,43 +339,25 @@ class BinderLibTestBundle : public Parcel
 class BinderLibTestEvent
 {
     public:
-        BinderLibTestEvent(void)
-            : m_eventTriggered(false)
-        {
-            pthread_mutex_init(&m_waitMutex, nullptr);
-            pthread_cond_init(&m_waitCond, nullptr);
-        }
-        int waitEvent(int timeout_s)
-        {
-            int ret;
-            pthread_mutex_lock(&m_waitMutex);
+        BinderLibTestEvent(void) : m_eventTriggered(false) {}
+        int waitEvent(std::chrono::seconds timeout) {
+            std::unique_lock<std::mutex> lock(m_waitMutex);
             if (!m_eventTriggered) {
-                struct timespec ts;
-                clock_gettime(CLOCK_REALTIME, &ts);
-                ts.tv_sec += timeout_s;
-                pthread_cond_timedwait(&m_waitCond, &m_waitMutex, &ts);
+                m_waitCond.wait_for(lock, timeout);
             }
-            ret = m_eventTriggered ? NO_ERROR : TIMED_OUT;
-            pthread_mutex_unlock(&m_waitMutex);
-            return ret;
+            return m_eventTriggered ? NO_ERROR : TIMED_OUT;
         }
-        pthread_t getTriggeringThread()
-        {
-            return m_triggeringThread;
-        }
+
     protected:
         void triggerEvent(void) {
-            pthread_mutex_lock(&m_waitMutex);
-            pthread_cond_signal(&m_waitCond);
+            std::unique_lock<std::mutex> lock(m_waitMutex);
+            m_waitCond.notify_all();
             m_eventTriggered = true;
-            m_triggeringThread = pthread_self();
-            pthread_mutex_unlock(&m_waitMutex);
         };
     private:
-        pthread_mutex_t m_waitMutex;
-        pthread_cond_t m_waitCond;
-        bool m_eventTriggered;
-        pthread_t m_triggeringThread;
+        std::mutex m_waitMutex;
+        std::condition_variable m_waitCond;
+        std::atomic_bool m_eventTriggered;
 };
 
 class BinderLibTestCallBack : public BBinder, public BinderLibTestEvent
@@ -692,7 +673,7 @@ TEST_F(BinderLibTest, CallBack)
     data.writeStrongBinder(callBack);
     EXPECT_THAT(m_server->transact(BINDER_LIB_TEST_NOP_CALL_BACK, data, &reply, TF_ONE_WAY),
                 StatusEq(NO_ERROR));
-    EXPECT_THAT(callBack->waitEvent(5), StatusEq(NO_ERROR));
+    EXPECT_THAT(callBack->waitEvent(5s), StatusEq(NO_ERROR));
     EXPECT_THAT(callBack->getResult(), StatusEq(NO_ERROR));
 }
 
@@ -727,7 +708,7 @@ TEST_F(BinderLibTest, DeathNotificationStrongRef)
                     StatusEq(OK));
     }
     IPCThreadState::self()->flushCommands();
-    EXPECT_THAT(testDeathRecipient->waitEvent(5), StatusEq(NO_ERROR));
+    EXPECT_THAT(testDeathRecipient->waitEvent(5s), StatusEq(NO_ERROR));
     EXPECT_THAT(sbinder->unlinkToDeath(testDeathRecipient), StatusEq(DEAD_OBJECT));
 }
 
@@ -773,7 +754,7 @@ TEST_F(BinderLibTest, DeathNotificationMultiple)
     }
 
     for (int i = 0; i < clientcount; i++) {
-        EXPECT_THAT(callBack[i]->waitEvent(5), StatusEq(NO_ERROR));
+        EXPECT_THAT(callBack[i]->waitEvent(5s), StatusEq(NO_ERROR));
         EXPECT_THAT(callBack[i]->getResult(), StatusEq(NO_ERROR));
     }
 }
@@ -798,7 +779,7 @@ TEST_F(BinderLibTest, DeathNotificationThread)
     }
 
     /* Make sure it's dead */
-    testDeathRecipient->waitEvent(5);
+    testDeathRecipient->waitEvent(5s);
 
     /* Now, pass the ref to another process and ask that process to
      * call linkToDeath() on it, and wait for a response. This tests
@@ -831,7 +812,7 @@ TEST_F(BinderLibTest, DeathNotificationThread)
                     StatusEq(NO_ERROR));
     }
 
-    EXPECT_THAT(callback->waitEvent(5), StatusEq(NO_ERROR));
+    EXPECT_THAT(callback->waitEvent(5s), StatusEq(NO_ERROR));
     EXPECT_THAT(callback->getResult(), StatusEq(NO_ERROR));
 }
 
@@ -1032,10 +1013,10 @@ TEST_F(BinderLibTest, OnewayQueueing)
 
     // The server will ensure that the two transactions are handled in the expected order;
     // If the ordering is not as expected, an error will be returned through the callbacks.
-    EXPECT_THAT(callBack->waitEvent(2), StatusEq(NO_ERROR));
+    EXPECT_THAT(callBack->waitEvent(2s), StatusEq(NO_ERROR));
     EXPECT_THAT(callBack->getResult(), StatusEq(NO_ERROR));
 
-    EXPECT_THAT(callBack2->waitEvent(2), StatusEq(NO_ERROR));
+    EXPECT_THAT(callBack2->waitEvent(2s), StatusEq(NO_ERROR));
     EXPECT_THAT(callBack2->getResult(), StatusEq(NO_ERROR));
 }
 
@@ -1703,10 +1684,7 @@ public:
             m_nextServerId(id + 1),
             m_serverStartRequested(false),
             m_callback(nullptr),
-            m_exitOnDestroy(exitOnDestroy) {
-        pthread_mutex_init(&m_serverWaitMutex, nullptr);
-        pthread_cond_init(&m_serverWaitCond, nullptr);
-    }
+            m_exitOnDestroy(exitOnDestroy) {}
     ~BinderLibTestService() {
         if (m_exitOnDestroy) exit(EXIT_SUCCESS);
     }
@@ -1737,13 +1715,12 @@ public:
 
                 if (m_id != 0) return INVALID_OPERATION;
 
-                pthread_mutex_lock(&m_serverWaitMutex);
+                std::unique_lock<std::mutex> lock(m_serverWaitMutex);
                 if (m_serverStartRequested) {
                     m_serverStartRequested = false;
                     m_serverStarted = binder;
-                    pthread_cond_signal(&m_serverWaitCond);
+                    m_serverWaitCond.notify_all();
                 }
-                pthread_mutex_unlock(&m_serverWaitMutex);
                 return NO_ERROR;
             }
             case BINDER_LIB_TEST_ADD_POLL_SERVER:
@@ -1754,7 +1731,7 @@ public:
                 if (m_id != 0) {
                     return INVALID_OPERATION;
                 }
-                pthread_mutex_lock(&m_serverWaitMutex);
+                std::unique_lock<std::mutex> lock(m_serverWaitMutex);
                 if (m_serverStartRequested) {
                     ret = -EBUSY;
                 } else {
@@ -1762,16 +1739,13 @@ public:
                     m_serverStartRequested = true;
                     bool usePoll = code == BINDER_LIB_TEST_ADD_POLL_SERVER;
 
-                    pthread_mutex_unlock(&m_serverWaitMutex);
+                    lock.unlock();
                     ret = start_server_process(serverid, usePoll);
-                    pthread_mutex_lock(&m_serverWaitMutex);
+                    lock.lock();
                 }
                 if (ret > 0) {
                     if (m_serverStartRequested) {
-                        struct timespec ts;
-                        clock_gettime(CLOCK_REALTIME, &ts);
-                        ts.tv_sec += 5;
-                        ret = pthread_cond_timedwait(&m_serverWaitCond, &m_serverWaitMutex, &ts);
+                        m_serverWaitCond.wait_for(lock, 5s);
                     }
                     if (m_serverStartRequested) {
                         m_serverStartRequested = false;
@@ -1786,7 +1760,6 @@ public:
                     m_serverStartRequested = false;
                     ret = UNKNOWN_ERROR;
                 }
-                pthread_mutex_unlock(&m_serverWaitMutex);
                 return ret;
             }
             case BINDER_LIB_TEST_USE_CALLING_GUARD_TRANSACTION: {
@@ -1923,7 +1896,7 @@ public:
                     return BAD_VALUE;
                 }
                 ret = target->linkToDeath(testDeathRecipient);
-                if (ret == NO_ERROR) ret = testDeathRecipient->waitEvent(5);
+                if (ret == NO_ERROR) ret = testDeathRecipient->waitEvent(5s);
                 data2.writeInt32(ret);
                 callback->transact(BINDER_LIB_TEST_CALL_BACK, data2, &reply2);
                 return NO_ERROR;
@@ -1990,9 +1963,12 @@ public:
                 return NO_ERROR;
             }
             case BINDER_LIB_TEST_GET_SCHEDULING_POLICY: {
-                int policy = 0;
+                int policy = sched_getscheduler(0);
+                if (policy == -1) {
+                    return UNKNOWN_ERROR;
+                }
                 sched_param param;
-                if (0 != pthread_getschedparam(pthread_self(), &policy, &param)) {
+                if (0 != sched_getparam(0, &param)) {
                     return UNKNOWN_ERROR;
                 }
                 reply->writeInt32(policy);
@@ -2077,8 +2053,8 @@ public:
 private:
     int32_t m_id;
     int32_t m_nextServerId;
-    pthread_mutex_t m_serverWaitMutex;
-    pthread_cond_t m_serverWaitCond;
+    std::mutex m_serverWaitMutex;
+    std::condition_variable m_serverWaitCond;
     bool m_serverStartRequested;
     sp<IBinder> m_serverStarted;
     sp<IBinder> m_strongRef;

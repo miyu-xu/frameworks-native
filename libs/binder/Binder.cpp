@@ -28,7 +28,6 @@
 #include <binder/RecordedTransaction.h>
 #include <binder/RpcServer.h>
 #include <binder/unique_fd.h>
-#include <pthread.h>
 
 #include <inttypes.h>
 #include <stdio.h>
