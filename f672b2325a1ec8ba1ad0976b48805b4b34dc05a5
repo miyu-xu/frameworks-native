@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd4db13_34f55367",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-25T21:49:36Z",
+      "side": 1,
+      "message": "@smoreland@google.com: I\u0027m getting a clang-format fixup here when uploading this change. Should I:\n1. let clang-format do what it wants (reduce indentation), what would make the style of the file inconsistent (it\u0027s weird anyway)\n2. add `clang-format off` at the top of the file\n3. reformat entire file in a separate change\n4. continue pushing changes with `--no-verify`",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 41
+      },
+      "revId": "f672b2325a1ec8ba1ad0976b48805b4b34dc05a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
