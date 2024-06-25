@@ -311,6 +311,10 @@ void setDefaultServiceManager(const sp<IServiceManager>& sm) {
     }
 }
 
+sp<IServiceManager> getServiceManagerShimFromAidlServiceManager(sp<AidlServiceManager> sm) {
+    return sp<CppBackendShim>::make(sp<BackendUnifiedServiceManager>::make(sm));
+}
+
 std::weak_ptr<AccessorProvider> addAccessorProvider(RpcAccessorProvider&& providerCallback) {
     std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
     std::shared_ptr<AccessorProvider> provider =

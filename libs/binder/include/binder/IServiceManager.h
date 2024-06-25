@@ -24,6 +24,7 @@
 #include <utils/String16.h>
 #include <utils/Vector.h>
 #include <optional>
+#include <android/os/IServiceManager.h>
 
 namespace android {
 
@@ -160,6 +161,11 @@ LIBBINDER_EXPORTED sp<IServiceManager> defaultServiceManager();
  * called first, setDefaultServiceManager() will abort.
  */
 LIBBINDER_EXPORTED void setDefaultServiceManager(const sp<IServiceManager>& sm);
+
+/**
+ * Encapsulate an AidlServiceManager in a CppBackendShim. Only used for testing.
+ */
+LIBBINDER_EXPORTED sp<IServiceManager> getServiceManagerShimFromAidlServiceManager(sp<os::IServiceManager> sm);
 
 template<typename INTERFACE>
 sp<INTERFACE> waitForService(const String16& name) {
