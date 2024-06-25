@@ -18,8 +18,69 @@
 #include <android/os/BnServiceManager.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
+#include <map>
+#include <memory>
 
 namespace android {
+
+class BinderCacheWithInvalidation
+      : public std::enable_shared_from_this<BinderCacheWithInvalidation> {
+    class BinderInvalidation : public IBinder::DeathRecipient {
+    public:
+        BinderInvalidation(std::weak_ptr<BinderCacheWithInvalidation> cache, std::string key)
+              : mCache(cache), mKey(key) {}
+
+        void binderDied(const wp<IBinder>& who) override {
+            sp<IBinder> binder = who.promote();
+            if (std::shared_ptr<BinderCacheWithInvalidation> cache = mCache.lock()) {
+                cache->removeItem(mKey, binder);
+            } else {
+                ALOGE("Binder Cache pointer expired");
+            }
+        }
+
+    private:
+        std::weak_ptr<BinderCacheWithInvalidation> mCache;
+        std::string mKey;
+    };
+
+public:
+    sp<IBinder> getItem(const std::string& key) const {
+        std::unique_lock<std::mutex> lock(mCacheMutex);
+        if (auto it = mCache.find(key); it != mCache.end()) {
+            return it->second;
+        }
+        return nullptr;
+    }
+
+    bool removeItem(const std::string& key, const sp<IBinder>& who) {
+        std::unique_lock<std::mutex> lock(mCacheMutex);
+        if (auto it = mCache.find(key); it != mCache.end()) {
+            if (it->second == who) {
+                mCache.erase(key);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void addItem(const std::string& key, const sp<IBinder>& item) {
+        sp<BinderInvalidation> deathRecipient =
+                sp<BinderInvalidation>::make(shared_from_this(), std::string(key));
+        status_t status = item->linkToDeath(deathRecipient);
+        if (status != android::OK) {
+            ALOGE("Failed to linkToDeath. Error: %d", status);
+        }
+        std::unique_lock<std::mutex> lock(mCacheMutex);
+        mCache[key] = item;
+    }
+
+    bool isClientSideCachingEnabled(const std::string& service_name);
+
+private:
+    std::map<std::string, sp<IBinder>> mCache;
+    mutable std::mutex mCacheMutex;
+};
 
 class BackendUnifiedServiceManager : public android::os::BnServiceManager {
 public:
@@ -60,8 +121,11 @@ public:
     IBinder* onAsBinder() override { return IInterface::asBinder(mTheRealServiceManager).get(); }
 
 private:
+    BinderCacheWithInvalidation mCacheForGetService;
     sp<os::IServiceManager> mTheRealServiceManager;
     void toBinderService(const os::Service& in, os::Service* _out);
+    bool updateCache(const std::string& service_name, const os::Service& service);
+    bool returnIfCached(const std::string& service_name, os::Service* _out);
 };
 
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
