@@ -64,6 +64,7 @@ cc_test {
         "binderParcelUnitTest.cpp",
         "binderBinderUnitTest.cpp",
         "binderStatusUnitTest.cpp",
+        "binderCacheUnitTest.cpp",
         "binderMemoryHeapBaseUnitTest.cpp",
         "binderRecordedTransactionTest.cpp",
         "binderPersistableBundleTest.cpp",
@@ -73,6 +74,10 @@ cc_test {
         "libcutils",
         "libutils",
     ],
+    static_libs: [
+        "libfakeservicemanager",
+    ],
+    defaults: ["libbinder_client_cache_flag"],
     test_suites: ["general-tests"],
 }
 
