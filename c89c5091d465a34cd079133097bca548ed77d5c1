@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5982d84_ef05744e",
+        "filename": "opengl/libs/EGL/egl_display.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-06-25T22:24:58Z",
+      "side": 1,
+      "message": "Is it ok to write mExtensionString without refLock below held?",
+      "fixSuggestions": [
+        {
+          "fixId": "4dd02e1b_7bfb8c49",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "opengl/libs/EGL/egl_display.cpp",
+              "range": {
+                "startLine": 395,
+                "startChar": 0,
+                "endLine": 396,
+                "endChar": 0
+              },
+              "replacement": "    { // scope for lock\n        std::lock_guard\u003cstd::mutex\u003e _l(lock);\n        mExtensionString \u003d mergeExtensionStrings(extensionStrings);\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c89c5091d465a34cd079133097bca548ed77d5c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
