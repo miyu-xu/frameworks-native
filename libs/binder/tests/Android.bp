@@ -64,15 +64,22 @@ cc_test {
         "binderParcelUnitTest.cpp",
         "binderBinderUnitTest.cpp",
         "binderStatusUnitTest.cpp",
+        "binderCacheUnitTest.cpp",
+        ":backendUnifiedServiceManager_srcs",
         "binderMemoryHeapBaseUnitTest.cpp",
         "binderRecordedTransactionTest.cpp",
         "binderPersistableBundleTest.cpp",
     ],
     shared_libs: [
+        "liblog",
         "libbinder",
         "libcutils",
         "libutils",
     ],
+    static_libs: [
+        "libfakeservicemanager",
+    ],
+    defaults: ["libbinder_client_cache_flag"],
     test_suites: ["general-tests"],
 }
 
