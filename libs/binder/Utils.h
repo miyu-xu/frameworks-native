@@ -71,6 +71,17 @@
     LIBBINDER_PRAGMA_FOR_COMPILER(diagnostic ignored warning_flag)
 #define LIBBINDER_IGNORE_END() LIBBINDER_PRAGMA_FOR_COMPILER(diagnostic pop)
 
+#if __has_attribute(no_destroy)
+#define LIBBINDER_HAS_NO_DESTROY 1
+#define LIBBINDER_NO_DESTROY [[no_destroy]]
+#elif __has_cpp_attribute(clang::no_destroy)
+#define LIBBINDER_HAS_NO_DESTROY 1
+#define LIBBINDER_NO_DESTROY [[clang::no_destroy]]
+#else
+#define LIBBINDER_HAS_NO_DESTROY 0
+#define LIBBINDER_NO_DESTROY
+#endif
+
 namespace android {
 
 /**

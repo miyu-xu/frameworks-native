@@ -19,6 +19,8 @@
 #include <android-base/properties.h>
 #endif
 
+#include "Utils.h"
+
 namespace android {
 
 using AidlServiceManager = android::os::IServiceManager;
@@ -88,8 +90,8 @@ binder::Status BackendUnifiedServiceManager::getServiceDebugInfo(
     return mTheRealServiceManager->getServiceDebugInfo(_aidl_return);
 }
 
-[[clang::no_destroy]] static std::once_flag gUSmOnce;
-[[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
+LIBBINDER_NO_DESTROY static std::once_flag gUSmOnce;
+LIBBINDER_NO_DESTROY static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
     std::call_once(gUSmOnce, []() {

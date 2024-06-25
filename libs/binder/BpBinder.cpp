@@ -612,7 +612,7 @@ BpBinder::~BpBinder() {
 
     ALOGV("Destroying BpBinder %p handle %d\n", this, binderHandle());
 
-    IPCThreadState* ipc = IPCThreadState::self();
+    IPCThreadState* ipc = IPCThreadState::selfOrNull();
 
     if (mTrackedUid >= 0) {
         RpcMutexUniqueLock _l(sTrackingLock);
@@ -672,7 +672,7 @@ void BpBinder::onLastStrongRef(const void* /*id*/) {
     IF_ALOGV() {
         printRefs();
     }
-    IPCThreadState* ipc = IPCThreadState::self();
+    IPCThreadState* ipc = IPCThreadState::selfOrNull();
     if (ipc) ipc->decStrongHandle(binderHandle());
 
     mLock.lock();
