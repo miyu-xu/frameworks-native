@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <chrono>
 #include <condition_variable>
+#include <shared_mutex>
 
 #include <android-base/properties.h>
 #include <android/os/BnServiceCallback.h>
@@ -31,6 +32,9 @@
 #include <binder/Parcel.h>
 #include <utils/Log.h>
 #include <utils/String8.h>
+#include <utils/SystemClock.h>
+#include <unordered_map>
+#include <unordered_set>
 
 #ifndef __ANDROID_VNDK__
 #include <binder/IPermissionController.h>
@@ -54,6 +58,8 @@
 #include "Static.h"
 #include "Utils.h"
 
+#include <ClientSideCacheList.h>
+
 namespace android {
 
 using namespace std::chrono_literals;
@@ -64,6 +70,8 @@ using AidlServiceManager = android::os::IServiceManager;
 using android::binder::Status;
 
 static bool get_flag_use_client_side_cache() {
+    return false;
+// This is due to the aconfig flags not being supported for Android Recovery and Native Bridge.
 #if defined(__ANDROID_RECOVERY__) || defined(__ANDROID_NATIVE_BRIDGE__)
     return false;
 #else
@@ -87,6 +95,39 @@ const String16& IServiceManager::getInterfaceDescriptor() const {
 }
 IServiceManager::IServiceManager() {}
 IServiceManager::~IServiceManager() {}
+
+class String16ToIBinderCache {
+public:
+    String16ToIBinderCache() {}
+    std::optional<sp<IBinder>> getItem(const String16& key) {
+        const std::u16string_view key_str = key;
+        std::shared_lock lock(mMutex);
+        if (auto it = mCache.find(key_str); it != mCache.end()) {
+            return it->second;
+        }
+        return std::nullopt;
+    }
+    void removeItem(const String16& key) {
+        std::u16string_view key_str = key;
+        std::unique_lock lock(mMutex);
+        internal_erase(key_str);
+    }
+    void addItem(const String16 key, sp<IBinder> item) {
+        std::u16string key_str((std::u16string_view(key)));
+        std::unique_lock lock(mMutex);
+        mCacheStorage.insert(key_str);
+        mCache[std::u16string_view(key_str)] = item;
+    }
+
+private:
+    void internal_erase(std::u16string_view s) {
+        mCache.erase(s);
+        mCacheStorage.erase(std::u16string(s));
+    }
+    std::unordered_map<std::u16string_view, sp<IBinder>> mCache;
+    std::unordered_set<std::u16string> mCacheStorage;
+    std::shared_mutex mMutex;
+};
 
 // From the old libbinder IServiceManager interface to IServiceManager.
 class ServiceManagerShim : public IServiceManager
@@ -133,6 +174,7 @@ public:
 
 protected:
     sp<BackendUnifiedServiceManager> mUnifiedServiceManager;
+    mutable String16ToIBinderCache mCacheForGetService;
     // AidlRegistrationCallback -> services that its been registered for
     // notifications.
     using LocalRegistrationAndWaiter =
@@ -296,13 +338,22 @@ ServiceManagerShim::ServiceManagerShim(const sp<AidlServiceManager>& impl) {
 sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 {
     if (get_flag_use_client_side_cache()) {
-        ALOGW("libbinder getService Cache enabled");
+        std::optional<sp<IBinder>> item = mCacheForGetService.getItem(name);
+        if (item.has_value() && (*item)->isBinderAlive()) {
+            return *item;
+        }
     }
     static bool gSystemBootCompleted = false;
 
     sp<IBinder> svc = checkService(name);
-    if (svc != nullptr) return svc;
-
+    if (svc != nullptr) {
+        if (get_flag_use_client_side_cache()) {
+            if (ClientSideCacheList::allow_client_side_caching(name)) {
+                mCacheForGetService.addItem(name, svc);
+            }
+        }
+        return svc;
+    }
     const bool isVendorService =
         strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
     constexpr auto timeout = 5s;
@@ -334,6 +385,11 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
             ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIu64 "ms",
                   String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
                   to_ms(waitTime));
+            if (get_flag_use_client_side_cache()) {
+                if (ClientSideCacheList::allow_client_side_caching(name)) {
+                    mCacheForGetService.addItem(name, svc);
+                }
+            }
             return svc;
         }
     }
@@ -343,9 +399,22 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 
 sp<IBinder> ServiceManagerShim::checkService(const String16& name) const
 {
+    if (get_flag_use_client_side_cache()) {
+        std::optional<sp<IBinder>> item = mCacheForGetService.getItem(name);
+        if (item.has_value() && (*item)->isBinderAlive()) {
+            return *item;
+        }
+    }
+
     sp<IBinder> ret;
     if (!mUnifiedServiceManager->checkService(String8(name).c_str(), &ret).isOk()) {
         return nullptr;
+    }
+
+    if (get_flag_use_client_side_cache()) {
+        if (ClientSideCacheList::allow_client_side_caching(name)) {
+            mCacheForGetService.addItem(name, ret);
+        }
     }
     return ret;
 }
