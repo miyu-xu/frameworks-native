@@ -1787,7 +1787,11 @@ Dumpstate::RunStatus Dumpstate::dumpstate() {
 
     DumpFile("BINDER FAILED TRANSACTION LOG", binder_logs_dir + "/failed_transaction_log");
     DumpFile("BINDER TRANSACTION LOG", binder_logs_dir + "/transaction_log");
-    DumpFile("BINDER TRANSACTIONS", binder_logs_dir + "/transactions");
+    const std::string buildType = android::base::GetProperty("ro.build.type", "user");
+    const bool isUserdebugOrEng = buildType == "userdebug" || buildType == "eng";
+    if (isUserdebugOrEng) {
+        DumpFile("BINDER TRANSACTIONS", binder_logs_dir + "/transactions");
+    }
     DumpFile("BINDER STATS", binder_logs_dir + "/stats");
     DumpFile("BINDER STATE", binder_logs_dir + "/state");
 

@@ -16,6 +16,7 @@
 
 #include <android-base/logging.h>
 #include <android-base/parseint.h>
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <binder/Binder.h>
 #include <sys/types.h>
@@ -200,6 +201,10 @@ status_t getBinderClientPids(BinderDebugContext context, pid_t pid, pid_t servic
 }
 
 status_t getBinderTransactions(pid_t pid, std::string& transactionsOutput) {
+    const std::string buildType = android::base::GetProperty("ro.build.type", "user");
+    const bool isUserdebugOrEng = buildType == "userdebug" || buildType == "eng";
+    if (!isUserdebugOrEng) return PERMISSION_DENIED;
+
     std::ifstream ifs("/dev/binderfs/binder_logs/transactions");
     if (!ifs.is_open()) {
         ifs.open("/d/binder/transactions");
