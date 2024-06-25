@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f9427e6_040bdc58",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-25T23:39:45Z",
+      "side": 1,
+      "message": "Instead of printing anything related to std::thread::get_id, print gettid(2). The Linux thread ID (or whatever is chosen at the OS layer) would be meaningful in other contexts too. The hash will give you uniqueness (sometimes), but it\u0027s just not very useful.",
+      "parentUuid": "51f21e43_bb97571a",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "abca827720e9306c688229e5e8f22911f3d4b049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "248546ca_2db19112",
         "filename": "libs/binder/IPCThreadState.cpp",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Because IPCThreadState constructor is private and std::make_unique doesn\u0027t have access to it.",
       "parentUuid": "248546ca_2db19112",
+      "range": {
+        "startLine": 306,
+        "startChar": 11,
+        "endLine": 306,
+        "endChar": 30
+      },
+      "revId": "abca827720e9306c688229e5e8f22911f3d4b049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea514cd0_4c42f32c",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-25T23:39:45Z",
+      "side": 1,
+      "message": "Oh - nice - I see.",
+      "parentUuid": "68a9af38_ea0ce8ff",
       "range": {
         "startLine": 306,
         "startChar": 11,
