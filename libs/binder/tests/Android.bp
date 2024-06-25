@@ -51,6 +51,35 @@ cc_test {
     ],
 }
 
+cc_test {
+    name: "binderCacheUnitTest",
+    host_supported: true,
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+    srcs: [
+        "binderCacheUnitTest.cpp",
+        ":backendUnifiedServiceManager_srcs",
+    ],
+    shared_libs: [
+        "liblog",
+        "libbinder",
+        "libcutils",
+        "libutils",
+    ],
+    static_libs: [
+        "libfakeservicemanager",
+    ],
+    defaults: ["libbinder_client_cache_flag"],
+    test_suites: [
+        "device-tests",
+        "vts",
+    ],
+    require_root: true,
+}
+
 // unit test only, which can run on host and doesn't use /dev/binder
 cc_test {
     name: "binderUnitTest",
