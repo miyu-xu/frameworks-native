@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "290b9189_9cb947ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-06-25T19:48:40Z",
+      "side": 1,
+      "message": "Is this the best way to follow the sepolicy rules for `user` builds so we don\u0027t produce denials?\nAnd I think this will have to be cherrypicked to 24q3 because it causes `CtsSecurityHostTestCases` to fail on `user` builds",
+      "revId": "df6c5631feff5045b77629fa1b6b900e42511f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
