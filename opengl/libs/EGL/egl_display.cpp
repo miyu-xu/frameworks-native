@@ -385,12 +385,6 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
         if (minor != nullptr) *minor = cnx->minor;
     }
 
-    { // scope for refLock
-        std::unique_lock<std::mutex> _l(refLock);
-        eglIsInitialized = true;
-        refCond.notify_all();
-    }
-
     auto mergeExtensionStrings = [](const std::vector<std::string>& strings) {
         std::ostringstream combinedStringStream;
         std::copy(strings.begin(), strings.end(),
@@ -399,6 +393,13 @@ EGLBoolean egl_display_t::initialize(EGLint* major, EGLint* minor) {
         return gBuiltinExtensionString + combinedStringStream.str();
     };
     mExtensionString = mergeExtensionStrings(extensionStrings);
+
+    { // scope for refLock
+        std::unique_lock<std::mutex> _l(refLock);
+        eglIsInitialized = true;
+        refCond.notify_all();
+    }
+
     return EGL_TRUE;
 }
 
