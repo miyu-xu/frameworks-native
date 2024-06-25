@@ -17,12 +17,20 @@
 
 #include <android/os/IAccessor.h>
 #include <binder/RpcSession.h>
+#include <unordered_map>
+#include <unordered_set>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
 #endif
 
 namespace android {
+
+#ifdef LIBBINDER_CLIENT_CACHE
+constexpr bool kUseCache = true;
+#else
+constexpr bool kUseCache = false;
+#endif
 
 using AidlServiceManager = android::os::IServiceManager;
 using IAccessor = android::os::IAccessor;
@@ -44,8 +52,23 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
 binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
                                                           os::Service* _out) {
     os::Service service;
+    if (kUseCache) {
+        sp<IBinder> item = mCacheForGetService.getItem(name);
+        if (item != nullptr && item->isBinderAlive()) {
+            *_out = os::Service::make<os::Service::Tag::binder>(item);
+            return binder::Status::ok();
+        }
+    }
+
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
     toBinderService(service, _out);
+    if (kUseCache) {
+        sp<IBinder> binder = _out->get<os::Service::Tag::binder>();
+        if (binder && mCacheForGetService.isClientSideCachingEnabled(name) &&
+            binder->isBinderAlive()) {
+            mCacheForGetService.addItem(name, binder);
+        }
+    }
     return status;
 }
 

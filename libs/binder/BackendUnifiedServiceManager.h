@@ -18,8 +18,90 @@
 #include <android/os/BnServiceManager.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
+#include <unordered_map>
+#include <unordered_set>
 
 namespace android {
+
+static std::unordered_set<std::string> static_cache_list = {
+        std::string("permissionmgr"),
+        std::string("legacy_permission"),
+        std::string("media.resource_manager"),
+};
+
+class BinderCacheWithInvalidation {
+    class BinderInvalidation : public IBinder::DeathRecipient {
+    public:
+        BinderInvalidation(std::unordered_map<std::string, sp<IBinder>>& cache, std::mutex& lock,
+                           const std::string& key)
+              : mCache(cache), mLock(lock), mKey(key) {}
+
+        void binderDied(const android::wp<android::IBinder>& who) override {
+            sp<IBinder> binder = who.promote();
+            std::unique_lock<std::mutex> lock(mLock);
+            if (auto it = mCache.find(mKey); it != mCache.end()) {
+                if (it->second == binder) {
+                    mCache.erase(mKey);
+                }
+            }
+        }
+
+    private:
+        std::unordered_map<std::string, sp<IBinder>>& mCache;
+        std::mutex& mLock;
+        std::string mKey;
+    };
+
+public:
+    sp<IBinder> getItem(const std::string& key) const {
+        std::unique_lock<std::mutex> lock(mCacheMutex);
+        if (auto it = mCache.find(key); it != mCache.end()) {
+            return it->second;
+        }
+        return nullptr;
+    }
+
+    void addItem(const std::string& key, const sp<IBinder>& item) {
+        std::string key_u16str = std::string(key);
+        {
+            std::unique_lock<std::mutex> lock(mCacheMutex);
+            mCache[key_u16str] = item;
+        }
+        sp<BinderInvalidation> deathRecipient =
+                sp<BinderInvalidation>::make(mCache, mCacheMutex, key_u16str);
+        status_t status = item->linkToDeath(deathRecipient);
+        if (status != android::OK) {
+            ALOGE("Failed to linkToDeath. Error: %d", status);
+            std::unique_lock<std::mutex> lock(mCacheMutex);
+            mCache.erase(key_u16str);
+        }
+    }
+
+    bool isClientSideCachingEnabled(const std::string& service_name) {
+        if (ProcessState::self()->getThreadPoolMaxTotalThreadCount() <= 0) {
+            return false;
+        }
+        return isClientSideCachingEnabledStatic(service_name) ||
+                isClientSideCachingEnabledDynamic(service_name);
+    }
+
+    void addToDynamicAllowList(const std::string& service_name) {
+        mDynamicAllowCacheList.insert(service_name);
+    }
+
+private:
+    static bool isClientSideCachingEnabledStatic(const std::string& service_name) {
+        return static_cache_list.contains(service_name);
+    }
+
+    bool isClientSideCachingEnabledDynamic(const std::string& service_name) {
+        return mDynamicAllowCacheList.contains(service_name);
+    }
+
+    std::unordered_map<std::string, sp<IBinder>> mCache;
+    mutable std::mutex mCacheMutex;
+    std::unordered_set<std::string> mDynamicAllowCacheList;
+};
 
 class BackendUnifiedServiceManager : public android::os::BnServiceManager {
 public:
@@ -59,6 +141,7 @@ public:
     IBinder* onAsBinder() override { return IInterface::asBinder(mTheRealServiceManager).get(); }
 
 private:
+    BinderCacheWithInvalidation mCacheForGetService;
     sp<os::IServiceManager> mTheRealServiceManager;
     void toBinderService(const os::Service& in, os::Service* _out);
 };
