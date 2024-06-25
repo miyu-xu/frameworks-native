@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f21e43_bb97571a",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-25T20:03:23Z",
+      "side": 1,
+      "message": "It\u0027s not printable nor even cast-able: https://stackoverflow.com/q/61203655",
+      "parentUuid": "025627b3_3d18e493",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "abca827720e9306c688229e5e8f22911f3d4b049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "248546ca_2db19112",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-25T20:00:13Z",
       "side": 1,
       "message": "why is this needed?",
+      "range": {
+        "startLine": 306,
+        "startChar": 11,
+        "endLine": 306,
+        "endChar": 30
+      },
+      "revId": "abca827720e9306c688229e5e8f22911f3d4b049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68a9af38_ea0ce8ff",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-25T20:03:23Z",
+      "side": 1,
+      "message": "Because IPCThreadState constructor is private and std::make_unique doesn\u0027t have access to it.",
+      "parentUuid": "248546ca_2db19112",
       "range": {
         "startLine": 306,
         "startChar": 11,
