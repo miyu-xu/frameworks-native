@@ -24,11 +24,92 @@
 
 namespace android {
 
+#ifdef LIBBINDER_CLIENT_CACHE
+constexpr bool kUseCache = true;
+#else
+constexpr bool kUseCache = false;
+#endif
+
 using AidlServiceManager = android::os::IServiceManager;
 using IAccessor = android::os::IAccessor;
 
+static const char* kStaticCachableList[] = {
+        "audio",
+        "carrier_config",
+        "virtualdevice",
+        "time_detector",
+        "activity",
+        "power",
+        "isub",
+        "performance_hint",
+        "permission_checker",
+        "media.player",
+        "media.extractor",
+        "phone",
+        "location",
+        "statscompanion",
+        "nfc",
+        "package_native",
+        "media.metrics",
+        "role",
+        "device_policy",
+        "android.system.suspend.ISystemSuspend/default",
+        "permission",
+        "netd_listener",
+        "android.hardware.thermal.IThermal/default",
+        "android.hardware.power.IPower/default",
+        "android.frameworks.stats.IStats/default",
+        "legacy_permission",
+        "media.resource_manager",
+        "permissionmgr",
+};
+
+bool BinderCacheWithInvalidation::isClientSideCachingEnabled(const std::string& serviceName) {
+    if (ProcessState::self()->getThreadPoolMaxTotalThreadCount() <= 0) {
+        ALOGW("Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be "
+              "implemented. serviceName: %s",
+              serviceName.c_str());
+        return false;
+    }
+    for (const char* name : kStaticCachableList) {
+        if (name == serviceName) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void BackendUnifiedServiceManager::updateCache(const std::string& serviceName,
+                                               const os::Service& service) {
+    if (!kUseCache) {
+        return;
+    }
+    if (service.getTag() == os::Service::Tag::binder) {
+        sp<IBinder> binder = service.get<os::Service::Tag::binder>();
+        if (binder && mCacheForGetService->isClientSideCachingEnabled(serviceName) &&
+            binder->isBinderAlive()) {
+            mCacheForGetService->setItem(serviceName, binder);
+        }
+    }
+}
+
+bool BackendUnifiedServiceManager::returnIfCached(const std::string& serviceName,
+                                                  os::Service* _out) {
+    if (!kUseCache) {
+        return false;
+    }
+    sp<IBinder> item = mCacheForGetService->getItem(serviceName);
+    if (item != nullptr && item->isBinderAlive()) {
+        *_out = os::Service::make<os::Service::Tag::binder>(item);
+        return true;
+    }
+    return false;
+}
+
 BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
-      : mTheRealServiceManager(impl) {}
+      : mTheRealServiceManager(impl) {
+    mCacheForGetService = std::make_shared<BinderCacheWithInvalidation>();
+}
 
 sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
     return mTheRealServiceManager;
@@ -44,17 +125,26 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
 
 binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& name,
                                                          os::Service* _out) {
+    if (returnIfCached(name, _out)) {
+        return binder::Status::ok();
+    }
     os::Service service;
     binder::Status status = mTheRealServiceManager->getService2(name, &service);
     toBinderService(service, _out);
+    updateCache(name, service);
     return status;
 }
 
 binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
                                                           os::Service* _out) {
     os::Service service;
+    if (returnIfCached(name, _out)) {
+        return binder::Status::ok();
+    }
+
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
     toBinderService(service, _out);
+    updateCache(name, service);
     return status;
 }
 
