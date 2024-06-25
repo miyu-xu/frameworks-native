@@ -143,8 +143,8 @@ protected:
     }
 };
 
-[[clang::no_destroy]] static std::once_flag gSmOnce;
-[[clang::no_destroy]] static sp<IServiceManager> gDefaultServiceManager;
+[[no_destroy]] static std::once_flag gSmOnce;
+[[no_destroy]] static sp<IServiceManager> gDefaultServiceManager;
 
 sp<IServiceManager> defaultServiceManager()
 {
