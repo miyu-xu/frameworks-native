@@ -20,6 +20,7 @@
 #include <utils/Vector.h>
 #include <utils/String16.h>
 #include <optional>
+#include <android/os/IServiceManager.h>
 
 namespace android {
 
