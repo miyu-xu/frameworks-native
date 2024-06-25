@@ -472,17 +472,25 @@ libbinder_client_cache_config {
     },
 }
 
+filegroup {
+    name: "backendUnifiedServiceManager_srcs",
+    srcs: ["BackendUnifiedServiceManager.cpp"],
+    visibility: [
+        ":__subpackages__",
+    ],
+}
+
 cc_defaults {
     name: "libbinder_kernel_defaults",
     defaults: ["libbinder_client_cache_flag"],
     srcs: [
         "BufferedTextOutput.cpp",
-        "BackendUnifiedServiceManager.cpp",
         "IPCThreadState.cpp",
         "IServiceManager.cpp",
         "IServiceManagerFFI.cpp",
         "ProcessState.cpp",
         "Static.cpp",
+        ":backendUnifiedServiceManager_srcs",
         ":libbinder_aidl",
         ":libbinder_device_interface_sources",
     ],
