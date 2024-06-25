@@ -443,6 +443,7 @@ cc_defaults {
     srcs: [
         "BufferedTextOutput.cpp",
         "BackendUnifiedServiceManager.cpp",
+        "ClientSideCacheList.cpp",
         "IPCThreadState.cpp",
         "IServiceManager.cpp",
         "IServiceManagerFFI.cpp",
