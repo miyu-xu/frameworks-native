@@ -472,6 +472,11 @@ libbinder_client_cache_config {
     },
 }
 
+filegroup {
+    name: "backendUnifiedServiceManager_srcs",
+    srcs: ["BackendUnifiedServiceManager.cpp"],
+}
+
 cc_defaults {
     name: "libbinder_kernel_defaults",
     defaults: ["libbinder_client_cache_flag"],
