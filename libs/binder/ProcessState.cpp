@@ -94,8 +94,8 @@ sp<ProcessState> ProcessState::selfOrNull()
     return init(nullptr, false /*requireDefault*/);
 }
 
-[[clang::no_destroy]] static sp<ProcessState> gProcess;
-[[clang::no_destroy]] static std::mutex gProcessMutex;
+[[no_destroy]] static sp<ProcessState> gProcess;
+[[no_destroy]] static std::mutex gProcessMutex;
 
 static void verifyNotForked(bool forked) {
     LOG_ALWAYS_FATAL_IF(forked, "libbinder ProcessState can not be used after fork");
@@ -114,7 +114,7 @@ sp<ProcessState> ProcessState::init(const char* driver, bool requireDefault) {
         return gProcess;
     }
 
-    [[clang::no_destroy]] static std::once_flag gProcessOnce;
+    [[no_destroy]] static std::once_flag gProcessOnce;
     std::call_once(gProcessOnce, [&](){
         if (access(driver, R_OK) == -1) {
             ALOGE("Binder driver %s is unavailable. Using /dev/binder instead.", driver);
@@ -136,6 +136,7 @@ sp<ProcessState> ProcessState::init(const char* driver, bool requireDefault) {
 
         std::lock_guard<std::mutex> l(gProcessMutex);
         gProcess = sp<ProcessState>::make(driver);
+        gProcess->incStrong(nullptr); // gProcess is marked no_destroy, but let's make sure
     });
 
     if (requireDefault) {
