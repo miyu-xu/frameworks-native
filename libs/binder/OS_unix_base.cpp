@@ -85,7 +85,7 @@ ssize_t sendMessageOnSocket(const RpcTransportFd& socket, iovec* iovs, int niovs
         }
         const size_t fdsByteSize = sizeof(int) * ancillaryFds->size();
 
-        alignas(struct cmsghdr) char msgControlBuf[CMSG_SPACE(sizeof(int) * kMaxFdsPerMsg)];
+        alignas(struct cmsghdr) char msgControlBuf[CMSG_SPACE(sizeof(int) * kMaxFdsPerMsg)] = {};
 
         msghdr msg{
                 .msg_iov = iovs,
