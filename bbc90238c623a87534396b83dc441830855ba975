@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1cacf7_55ca102c",
+        "filename": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-25T23:07:21Z",
+      "side": 1,
+      "message": "Added a couple test cases. There are also a few tests in binderLibTest.cpp.",
+      "parentUuid": "44805c94_6aa0a211",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 62
+      },
+      "revId": "bbc90238c623a87534396b83dc441830855ba975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0f15729_26c937b7",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "bbc90238c623a87534396b83dc441830855ba975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae15afbc_383e9e8d",
+        "filename": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-25T23:07:21Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "d0f15729_26c937b7",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 411,
+        "endChar": 57
+      },
       "revId": "bbc90238c623a87534396b83dc441830855ba975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
