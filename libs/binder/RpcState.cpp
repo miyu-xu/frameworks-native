@@ -44,8 +44,8 @@ using android::binder::unique_fd;
 
 #if RPC_FLAKE_PRONE
 void rpcMaybeWaitToFlake() {
-    [[clang::no_destroy]] static std::random_device r;
-    [[clang::no_destroy]] static RpcMutex m;
+    LIBBINDER_NO_DESTROY static std::random_device r;
+    LIBBINDER_NO_DESTROY static RpcMutex m;
     unsigned num;
     {
         RpcMutexLockGuard lock(m);
