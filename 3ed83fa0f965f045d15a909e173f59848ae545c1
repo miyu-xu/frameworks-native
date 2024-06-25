@@ -128,6 +128,30 @@
       },
       "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a4e798_a27adcf0",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-25T22:17:39Z",
+      "side": 1,
+      "message": "Okay, I think I have an idea:\n1. wrap `android::base::GetProperty` into `android::binder::os::GetProperty`\n2. in `OS_unix_base.cpp`, hardcode most properties (such as `ro.debuggable`) based on build flags\n3. provide custom implementation of `servicemanager.ready` to actually communicate cross-process\n\n@smoreland@google.com, WDYT?",
+      "parentUuid": "2294422e_4ef7f2c5",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 5
+      },
+      "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
