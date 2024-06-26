@@ -16,6 +16,23 @@
       "message": "lg, but let\u0027s wait 24-48hr to submit in case there is any testing issue that needs a revert",
       "revId": "3716f6520a16f8d4cf1cd582fa4a999d56e1cd75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f17b6458_6998e63e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-06-26T20:17:50Z",
+      "side": 1,
+      "message": "How can I build the Linux binder IPC locally so that I can ensure I don\u0027t break it next time?",
+      "revId": "3716f6520a16f8d4cf1cd582fa4a999d56e1cd75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
