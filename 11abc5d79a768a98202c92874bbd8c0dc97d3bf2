@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "883d3e7c_51fcda9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-06-26T17:51:11Z",
+      "side": 1,
+      "message": "discussing via email",
+      "parentUuid": "7fa14de2_1bb694cf",
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abbc5b55_8b5281e4",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d944b00b_4098b4f5",
+        "filename": "libs/binder/include/binder/Functional.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-06-26T17:51:11Z",
+      "side": 1,
+      "message": "it is used in `RpcServer::establishConnection`",
+      "parentUuid": "abbc5b55_8b5281e4",
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e85fdb86_8962b275",
@@ -66,6 +102,24 @@
       "writtenOn": "2024-06-26T16:47:18Z",
       "side": 1,
       "message": "Why not just move make_scope_guard code to scope_guard constructor (and drop make_scope_guard)? Then you will be able to make `f` private.",
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d01a6b_303e83da",
+        "filename": "libs/binder/include/binder/Functional.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-06-26T17:51:11Z",
+      "side": 1,
+      "message": "historically C++ couldn\u0027t deduce the template type argument for constructors, so this `make_*` pattern became common. i know there is some support for it now, but it was semi discouraged in google3 (http://go/totw/184) so i haven\u0027t looked closely at it\n\nmade the field private at the cost of some more boilerplate. i\u0027m open to switching to using ctor later to trim the boilerplate down\n\n(had to add some `inline` keywords to keep the same binary size)",
+      "parentUuid": "e85fdb86_8962b275",
       "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
