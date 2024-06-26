@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c86936f_bdd9bcf9",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "99ec0829_7dd4d413",
+      "range": {
+        "startLine": 467,
+        "startChar": 14,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea6328c_e1c07071",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f251b67_316b2add",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea6328c_e1c07071",
+      "range": {
+        "startLine": 578,
+        "startChar": 12,
+        "endLine": 578,
+        "endChar": 17
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aaca956_8e35ebea",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-06-18T01:10:52Z",
       "side": 1,
       "message": "cannot add virtual functions",
+      "range": {
+        "startLine": 53,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "72802965a88210a21cc12efa3bb2d712e52c8bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5cf7fac_663ed9a7",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Ack. Created a separate change as suggested in the other comment.",
+      "parentUuid": "7aaca956_8e35ebea",
       "range": {
         "startLine": 53,
         "startChar": 3,

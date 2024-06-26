@@ -946,6 +946,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac95d84_bb2dc662",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0709fd63_e8e5d2c8",
+      "range": {
+        "startLine": 684,
+        "startChar": 59,
+        "endLine": 684,
+        "endChar": 66
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7343025_c780da8f",
@@ -983,6 +1007,30 @@
           ]
         }
       ],
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd215d2_fab3f525",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7343025_c780da8f",
+      "range": {
+        "startLine": 685,
+        "startChar": 16,
+        "endLine": 685,
+        "endChar": 35
+      },
       "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1180,6 +1228,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b662d501_9e68cdbb",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Created a separate change. aosp/3142056",
+      "parentUuid": "b9b3d4d7_85c70524",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 61,
+        "endChar": 27
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adc24210_96241465",
@@ -1288,6 +1360,30 @@
       "side": 1,
       "message": "You can make a non-const version of getPrivateAccessor.",
       "parentUuid": "9798b962_1597cc42",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 45
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff003886_564ad153",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31e950ae_c3f7f519",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -2257,6 +2353,30 @@
       "side": 1,
       "message": "Maybe add a few: `EXPECT_EQ(OK, binder-pingBinder())` to check it\u0027s alive? it will work for this case.",
       "parentUuid": "28b2ab38_1e12ecba",
+      "range": {
+        "startLine": 898,
+        "startChar": 0,
+        "endLine": 898,
+        "endChar": 23
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56cbe3bc_3901a2a9",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-06-26T01:52:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe45f2cd_61ad7731",
       "range": {
         "startLine": 898,
         "startChar": 0,
