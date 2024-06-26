@@ -51,6 +51,24 @@
       "parentUuid": "f17b6458_6998e63e",
       "revId": "3716f6520a16f8d4cf1cd582fa4a999d56e1cd75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d51bf81a_81c6c973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-26T20:53:09Z",
+      "side": 1,
+      "message": "The RPC one is buildable with `atest --host binder_sdk_test`, but IPC is WIP so you can\u0027t do it yet without cherry-picks (and breaking it is fine until I fully land it).",
+      "parentUuid": "b919b677_c7c4bf30",
+      "revId": "3716f6520a16f8d4cf1cd582fa4a999d56e1cd75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
