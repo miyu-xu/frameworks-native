@@ -16,6 +16,58 @@
       "message": "hey - is it possible to add a script or a test that could allow us to make these types of insights when further changes are made to libbinder? Otherwise I think it may grow over time.",
       "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbc5b55_8b5281e4",
+        "filename": "libs/binder/include/binder/Functional.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-26T16:47:18Z",
+      "side": 1,
+      "message": "Do we need release implementation here? It may lead to inconsistencies/mistakes.",
+      "fixSuggestions": [
+        {
+          "fixId": "17f69e75_1257e731",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/Functional.h",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85fdb86_8962b275",
+        "filename": "libs/binder/include/binder/Functional.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-26T16:47:18Z",
+      "side": 1,
+      "message": "Why not just move make_scope_guard code to scope_guard constructor (and drop make_scope_guard)? Then you will be able to make `f` private.",
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

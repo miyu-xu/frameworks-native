@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd7bc69_89c2fc7b",
+        "filename": "libs/binder/include/binder/Functional.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-26T16:47:18Z",
+      "side": 0,
+      "message": "Don\u0027t we want to keep this check?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 25
+      },
+      "revId": "f8ec3975ab092b828e1b7c71ec504a7415c29203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
