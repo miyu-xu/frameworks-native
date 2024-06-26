@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fa14de2_1bb694cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-26T16:08:25Z",
+      "side": 1,
+      "message": "hey - is it possible to add a script or a test that could allow us to make these types of insights when further changes are made to libbinder? Otherwise I think it may grow over time.",
+      "revId": "11abc5d79a768a98202c92874bbd8c0dc97d3bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
