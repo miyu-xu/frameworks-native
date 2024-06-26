@@ -2752,6 +2752,8 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
 
     refreshArgs.devOptForceClientComposition = mDebugDisableHWC;
 
+    // testing
+
     if (mDebugFlashDelay != 0) {
         refreshArgs.devOptForceClientComposition = true;
         refreshArgs.devOptFlashDirtyRegionsDelay = std::chrono::milliseconds(mDebugFlashDelay);
