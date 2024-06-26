@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e39a5ad_61f3d0cb",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-26T21:16:29Z",
+      "side": 1,
+      "message": "Ah, I misread your comment. Done.",
+      "parentUuid": "7f9427e6_040bdc58",
+      "range": {
+        "startLine": 115,
+        "startChar": 14,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "abca827720e9306c688229e5e8f22911f3d4b049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "248546ca_2db19112",
