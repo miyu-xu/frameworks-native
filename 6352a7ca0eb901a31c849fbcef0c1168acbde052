@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c50fb9_94e35406",
+        "filename": "libs/binder/include/binder/Trace.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:04:50Z",
+      "side": 1,
+      "message": "This define and macro is getting exposed to a lot of other places. Can we put the logic for this directly into the test? Nothing else should care about calling it as it\u0027s called implicitly.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dc9b06ed_aa2365cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/Trace.h",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "6352a7ca0eb901a31c849fbcef0c1168acbde052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5acdef_1eafefcf",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:04:50Z",
+      "side": 1,
+      "message": "you may also be able to do something like \"GetRemoteBinder()-\u003egetInterfaceDescriptor()\" or similar and say \"make a transaction to cover any fixed-costs such as tracing\"",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a540701f_aab41805",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderAllocationLimits.cpp",
+              "range": {
+                "startLine": 265,
+                "startChar": 0,
+                "endLine": 267,
+                "endChar": 0
+              },
+              "replacement": "    // make a transaction for any fixed-costs such as tracing\n    GetRemoteBinder()-\u003egetInterfaceDescriptor();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6352a7ca0eb901a31c849fbcef0c1168acbde052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
