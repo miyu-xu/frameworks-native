@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe3e28c_dac3e0bc",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T21:57:15Z",
+      "side": 1,
+      "message": "between log and syslog.h?\n\nCan this be fixed in android/log.h and/or syslog.h instead?",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
