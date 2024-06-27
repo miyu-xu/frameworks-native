@@ -34,6 +34,24 @@
       "parentUuid": "43fa1e0a_e5f9b5a0",
       "revId": "6cb390bc4c62892f9a52a70484d02c98a73fb376",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef56fd9_fb5141a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:52:00Z",
+      "side": 1,
+      "message": "maybe drop it for now until we have commitment for this feature",
+      "parentUuid": "1045f7cf_e095d2f2",
+      "revId": "6cb390bc4c62892f9a52a70484d02c98a73fb376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
