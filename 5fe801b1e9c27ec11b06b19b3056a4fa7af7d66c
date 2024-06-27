@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385dabbe_2ab05686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-06-27T00:06:00Z",
+      "side": 1,
+      "message": "I am running Presubmit just to have that in place.\n\nBUT, while I\u0027m pretty sure this CL \"causes\" b/349657329, it is very possible that this bug is due to device code, and this CL just exposes the issue with the device code.\n\nSince it\u0027s device specific, we can discuss in more detail on b/349657329.  But rest assured, I\u0027m not pushing to ram this revert through ASAP, until after I\u0027ve done more investigation.",
+      "revId": "5fe801b1e9c27ec11b06b19b3056a4fa7af7d66c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
