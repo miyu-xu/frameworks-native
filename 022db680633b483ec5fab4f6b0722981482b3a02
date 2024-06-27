@@ -56,6 +56,30 @@
       },
       "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfe8635_b9a254ce",
+        "filename": "libs/binder/RpcServer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T23:34:06Z",
+      "side": 1,
+      "message": "I like auto, but I can change this line to `status_t` if you want.",
+      "parentUuid": "251646ba_9ff1b621",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 8
+      },
+      "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
