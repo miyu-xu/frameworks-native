@@ -848,7 +848,7 @@ VKAPI_ATTR void* DefaultReallocate(void*,
     // changes, or if this code is copied into some other project, this should
     // probably have a heuristic to allocate-copy-free when doing so will save
     // "enough" space.
-    size_t old_size = ptr ? malloc_usable_size(ptr) : 0;
+    size_t old_size = 0;
     if (size <= old_size)
         return ptr;
 
