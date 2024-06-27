@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b0c1cf_e2641d8b",
+        "filename": "libs/binder/BufferedTextOutput.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:51:04Z",
+      "side": 1,
+      "message": "nit: use scope_lock or lock_guard if you don\u0027t need unlock?",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 20
+      },
+      "revId": "e16c3d07790a88b3d91b1404b58d0d9c1e3d3da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e65050e_f66e53fc",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:51:04Z",
+      "side": 1,
+      "message": "it doesn\u0027t need the +1?",
+      "range": {
+        "startLine": 379,
+        "startChar": 27,
+        "endLine": 379,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c5f2c898_83f64649",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/RpcSession.cpp",
+              "range": {
+                "startLine": 379,
+                "startChar": 0,
+                "endLine": 380,
+                "endChar": 0
+              },
+              "replacement": "        char threadName[16] \u003d {};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e16c3d07790a88b3d91b1404b58d0d9c1e3d3da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
