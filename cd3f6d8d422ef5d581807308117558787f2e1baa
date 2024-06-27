@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45da7b0_82ebbffa",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-06-27T21:23:13Z",
+      "side": 1,
+      "message": "you know this line is commented out, right? :-)",
+      "revId": "cd3f6d8d422ef5d581807308117558787f2e1baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
