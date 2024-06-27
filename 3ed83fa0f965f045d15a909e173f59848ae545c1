@@ -152,6 +152,30 @@
       },
       "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b8dc81_55beb79f",
+        "filename": "cmds/servicemanager/main.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:37:07Z",
+      "side": 1,
+      "message": "let\u0027s chat about the need for kernel support, I\u0027d really like to get binder SDK 100% first, and I don\u0027t understand why we are doing this yet.",
+      "parentUuid": "f1a4e798_a27adcf0",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 5
+      },
+      "revId": "3ed83fa0f965f045d15a909e173f59848ae545c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
