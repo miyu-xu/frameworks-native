@@ -22,6 +22,30 @@
       },
       "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "797475fe_558a848e",
+        "filename": "libs/binder/ndk/include_ndk/android/persistable_bundle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:01:53Z",
+      "side": 1,
+      "message": "(also wow - I read all of this - really one comment only - thanks)",
+      "parentUuid": "d962b1f1_fb8363cd",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
