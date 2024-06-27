@@ -68,6 +68,30 @@
       },
       "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd9dbd7_e1dc2a71",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T22:45:22Z",
+      "side": 1,
+      "message": "No, rather in cases where no_destroy is silently not supported.\n\n`incStrong` has no cost there, no side effects if no_destroy works as expected, so I guess it\u0027s a good compromise?",
+      "parentUuid": "67fc19e2_092eb099",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 91
+      },
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
