@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b79a6e_b4b35ea7",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1593,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "nit: split out and merge now - it\u0027s a good change",
+      "range": {
+        "startLine": 1592,
+        "startChar": 20,
+        "endLine": 1593,
+        "endChar": 57
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "172eeead_25267a8b",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "nodiscard here as well (will hit a warning)",
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ea2c1b_2abf4e45",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "avoid defaults",
+      "range": {
+        "startLine": 148,
+        "startChar": 30,
+        "endLine": 148,
+        "endChar": 85
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4a9bcb_64a0c8c2",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "same as modules/virtualization CL - may want a higher level API here (keep accessor implementation as an implementation detail of libbinder)\n\nAlso - note http://go/apis-native-and-idl and policy against using binder in API surfaces. It doesn\u0027t technically apply here as this is a platform API, but it will apply when AVF becomes updatable (and this will need to be systemapi), which we want to enable for the official servicemanagement APIs.",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "41873279_8f9637e9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_manager.h",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_manager.h",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": " * WARNING: when using this API across an APEX boundary, do not use with unstable\n * AIDL services. TODO(b/139325195)\n *\n"
+            },
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_manager.h",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "__attribute__((warn_unused_result)) binder_exception_t AServiceManager_registerLazyServiceWithFlags(\n        AIBinder* binder, const char* instance, const AServiceManager_AddServiceFlag flags)\n        __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a2ef58_e0e562da",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "err - this is in include_platform, so it should be in LIBBINDER_NDK_PLATFORM",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 62
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f094fb6_9c2b1dca",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "and yeah, 100% split this out.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 44
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c046f6b_5a029276",
+        "filename": "libs/binder/ndk/service_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:32:26Z",
+      "side": 1,
+      "message": "flags + isolated should only affect the registration of an interface that will be dumped? Since we\u0027re getting one (not registering it to be dumped) should it matter?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "13c5ce58_a6556626",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/service_manager.cpp",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "    bool allowIsolated \u003d flags \u0026 AServiceManager_AddServiceFlag::ADD_SERVICE_ALLOW_ISOLATED;\n    sm-\u003einjectAccessorWithFlags(instance, generate, allowIsolated, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
