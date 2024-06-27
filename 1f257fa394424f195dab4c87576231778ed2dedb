@@ -16,6 +16,24 @@
       "message": "no... ? why? this would need strong perf tests to support.",
       "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d3485f_453b9e80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T22:43:13Z",
+      "side": 1,
+      "message": "Because volatile is used incorrectly there. It\u0027s a common old misconception to use volatile for variables shared between threads. It sometimes work, but can fail in very unpredictable ways.",
+      "parentUuid": "720ecc82_e40ea702",
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
