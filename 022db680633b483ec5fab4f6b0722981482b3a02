@@ -16,6 +16,46 @@
       "message": "Bravo!",
       "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa0ab83_7d746d17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T23:29:53Z",
+      "side": 1,
+      "message": "Changes ABI but should be okay.",
+      "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251646ba_9ff1b621",
+        "filename": "libs/binder/RpcServer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T23:29:53Z",
+      "side": 1,
+      "message": "i \u003c/3 auto, though C++ typedef is not much better.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 8
+      },
+      "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
