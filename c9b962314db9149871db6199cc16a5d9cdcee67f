@@ -22,6 +22,30 @@
       },
       "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eebea1de_35f979be",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T22:06:36Z",
+      "side": 1,
+      "message": "You mean to change android/log.h API? https://source.corp.google.com/search?q\u003d%22ALOG(LOG_INFO%22%20case:yes\u0026sq\u003d\n\nOr to change Bionic syslog.h API? https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:bionic/libc/include/syslog.h\n\nHonestly, I have no idea why didn\u0027t it blew up earlier.",
+      "parentUuid": "ffe3e28c_dac3e0bc",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
