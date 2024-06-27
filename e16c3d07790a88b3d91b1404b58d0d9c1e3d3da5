@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f47bc23_05b44642",
+        "filename": "libs/binder/BufferedTextOutput.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T23:23:02Z",
+      "side": 1,
+      "message": "Ha, I\u0027ve just started a nice read about std::scoped_lock, std::unique_lock and std::lock_guard. I\u0027ll dive deeper and update.",
+      "parentUuid": "74b0c1cf_e2641d8b",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 20
+      },
+      "revId": "e16c3d07790a88b3d91b1404b58d0d9c1e3d3da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e65050e_f66e53fc",
         "filename": "libs/binder/RpcSession.cpp",
         "patchSetId": 9
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "e16c3d07790a88b3d91b1404b58d0d9c1e3d3da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb3b3fd_f9ed4d36",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-27T23:23:02Z",
+      "side": 1,
+      "message": "Ah, I misread pthread_getname_np/PR_GET_NAME docs. Will remove the +1.",
+      "parentUuid": "5e65050e_f66e53fc",
+      "range": {
+        "startLine": 379,
+        "startChar": 27,
+        "endLine": 379,
+        "endChar": 30
+      },
       "revId": "e16c3d07790a88b3d91b1404b58d0d9c1e3d3da5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
