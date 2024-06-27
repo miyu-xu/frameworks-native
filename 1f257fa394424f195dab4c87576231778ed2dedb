@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e8508e8_d6b94c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:47:49Z",
+      "side": 1,
+      "message": "I see. The thread sequencing is incorrect, but the boolean usage is correct (you can use it where tearing doesn\u0027t matter, value is set but never unsent).\n\nThough, if it\u0027s not causing an issue, I\u0027d ask to focus on landing SDK/binder SDK.\n\nMaybe we can do this though - saving space on mAlive/mObitsSent is nice, though maybe mTrackedUid should be moved up to save even more per BpBinder, due to packing.",
+      "parentUuid": "f2fbc82d_984355de",
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6e58d8e_7695d12c",
         "filename": "libs/binder/ndk/include_cpp/android/binder_auto_utils.h",
         "patchSetId": 8
