@@ -34,6 +34,47 @@
       "parentUuid": "720ecc82_e40ea702",
       "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fbc82d_984355de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:44:18Z",
+      "side": 1,
+      "message": "okay - actually we apparently don\u0027t use volatile that much here, atomic_bool is okay as well. I\u0027m still confused why this is needed though.",
+      "parentUuid": "720ecc82_e40ea702",
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e58d8e_7695d12c",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_auto_utils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:44:18Z",
+      "side": 1,
+      "message": "this check obviously really should just be okay with volatile? why does it matter?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 94
+      },
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
