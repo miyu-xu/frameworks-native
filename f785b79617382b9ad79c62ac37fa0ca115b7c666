@@ -34,6 +34,23 @@
       "parentUuid": "1504773c_db499f96",
       "revId": "f785b79617382b9ad79c62ac37fa0ca115b7c666",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82255cf3_ab9a0473",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-06-28T20:38:34Z",
+      "side": 1,
+      "message": "I have no objections to relanding this with the testing that\u0027s been done, but smoreland@ is the expert in this area who should +2 this.",
+      "revId": "f785b79617382b9ad79c62ac37fa0ca115b7c666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
