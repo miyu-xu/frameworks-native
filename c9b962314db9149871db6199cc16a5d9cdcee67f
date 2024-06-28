@@ -70,6 +70,30 @@
       },
       "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aa75daa_d9aeea8d",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-28T23:42:58Z",
+      "side": 1,
+      "message": "(this happens periodically - see here: https://cs.android.com/search?q\u003d%22undef%20LOG_INFO%22\u0026sq\u003d it has blown up, just everybody kept on doing this instead of fixing it for some reason?)",
+      "parentUuid": "5784205e_76b25719",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
