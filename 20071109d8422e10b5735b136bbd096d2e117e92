@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3bab39_c5fa5f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-28T00:10:37Z",
+      "side": 1,
+      "message": "Hi - every test I could run on this, it seemed to pass: b/338097747#comment12\n\nYou can try merging this if you want, I think it may break downstream, but if it doesn\u0027t we could fix a number of things. Or go with the other suggested approach mentioned in the bug, it\u0027s guaranteed to work",
+      "revId": "20071109d8422e10b5735b136bbd096d2e117e92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
