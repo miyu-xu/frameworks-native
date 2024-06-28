@@ -94,6 +94,30 @@
       },
       "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a74ff0d_bfdeb3e2",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-28T23:43:21Z",
+      "side": 1,
+      "message": "and by - this happens periodically - I mean a name conflict like this, I\u0027ve never seen this case",
+      "parentUuid": "1aa75daa_d9aeea8d",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
