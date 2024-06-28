@@ -80,6 +80,30 @@
       },
       "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c424205c_b281dc1e",
+        "filename": "libs/binder/RpcServer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-06-28T14:42:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7cfe8635_b9a254ce",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 8
+      },
+      "revId": "022db680633b483ec5fab4f6b0722981482b3a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
