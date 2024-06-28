@@ -46,6 +46,30 @@
       },
       "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5784205e_76b25719",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-28T23:42:11Z",
+      "side": 1,
+      "message": "right! 😄",
+      "parentUuid": "eebea1de_35f979be",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
