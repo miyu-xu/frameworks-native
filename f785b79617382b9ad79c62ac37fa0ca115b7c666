@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1504773c_db499f96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-06-28T20:30:15Z",
+      "side": 1,
+      "message": "i\u0027m still testing this. will resolve when i\u0027ve verified it works",
+      "revId": "f785b79617382b9ad79c62ac37fa0ca115b7c666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
