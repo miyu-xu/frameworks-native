@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5c2cf51_8f1ba5a9",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T23:07:50Z",
+      "side": 1,
+      "message": "Ah, this was probably a misunderstanding of IPCThreadState from my side. Aren\u0027t these BpBinders destroyed on shutdown anyway (so there\u0027s no need to re-create IPCThreadState/ProcessState to whack them individually)?",
+      "parentUuid": "ee85a6bd_46ed521a",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 55
+      },
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eec4e629_59324419",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 8
