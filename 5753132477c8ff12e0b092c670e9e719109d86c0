@@ -175,6 +175,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c31cc3e8_37f7960c",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-01T20:35:42Z",
+      "side": 1,
+      "message": "This callback could return a socket FD that it releases ownership of, and we can have a simple local implementation of IAccessor that can provide the FD when needed to reuse the code (or some other way in libbinder).",
+      "parentUuid": "c60dfd05_6bdad123",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 16
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21a2ef58_e0e562da",
         "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
         "patchSetId": 3
