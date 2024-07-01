@@ -70,6 +70,30 @@
       },
       "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b2ea04_b6dc8e9b",
+        "filename": "libs/binder/ndk/include_ndk/android/persistable_bundle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T21:00:50Z",
+      "side": 1,
+      "message": "It\u0027s impossible to tell whether the users that this file use persistable bundle or not (except it\u0027s likely that they do not now since NDK persistable bundle is new, this will become less true in the future).\n\nWhich users specifically don\u0027t need this, and can we update them so that we don\u0027t undefine these attributes? It will be much harder to enable these attributes later.",
+      "parentUuid": "1a4a5d94_bdee6837",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
