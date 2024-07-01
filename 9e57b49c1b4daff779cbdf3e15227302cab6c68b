@@ -118,6 +118,30 @@
       },
       "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f30e244_c639c67e",
+        "filename": "libs/binder/ndk/include_ndk/android/persistable_bundle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T21:34:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "958fded2_efa2d1cd",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
