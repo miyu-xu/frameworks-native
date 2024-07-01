@@ -92,6 +92,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23b0e036_0226ac2d",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T23:21:56Z",
+      "side": 1,
+      "message": "All of these changes are strictly related to (Kernel) Binder SDK. Found this one because it was crashing tests on exit. I\u0027ll probably look into this again later following your other request over email.",
+      "parentUuid": "cdb79bd5_9ad4dbe2",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 55
+      },
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eec4e629_59324419",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 8
