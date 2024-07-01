@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd096e3c_3df2fff5",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:09:45Z",
+      "side": 1,
+      "message": "on how - maybe we could add \u0027IServiceManager.h addAccessor method\u0027 next to addService which doesn\u0027t expose the underlying type?\n\n(it may be okay to expose only IAccessor, but we\u0027d want to avoid exposing the other types)\n\nbut we should use a C/C++/Rust ABI for this to make it possible to use this in libbinder_ndk directly (moving away from libbinder_rpc_unstable)",
+      "parentUuid": "61251280_acee3128",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6cec80c_d122f82e",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 14
