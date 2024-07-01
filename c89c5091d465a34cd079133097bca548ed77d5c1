@@ -34,6 +34,24 @@
       ],
       "revId": "c89c5091d465a34cd079133097bca548ed77d5c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f7ca19_ca15bc0d",
+        "filename": "opengl/libs/EGL/egl_display.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1940280
+      },
+      "writtenOn": "2024-07-01T11:07:51Z",
+      "side": 1,
+      "message": "No it\u0027s not. I have moved this into the scope of the lock",
+      "parentUuid": "b5982d84_ef05744e",
+      "revId": "c89c5091d465a34cd079133097bca548ed77d5c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
