@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6c370b_1e4feb6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T22:14:11Z",
+      "side": 1,
+      "message": "It\u0027s causing a warning and this change is also dropping cutils atomic.h dependency (added to the commit message).\n\nMoved mTrackedUid up.",
+      "parentUuid": "9e8508e8_d6b94c96",
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6e58d8e_7695d12c",
@@ -85,6 +103,30 @@
       "writtenOn": "2024-06-27T22:44:18Z",
       "side": 1,
       "message": "this check obviously really should just be okay with volatile? why does it matter?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 94
+      },
+      "revId": "1f257fa394424f195dab4c87576231778ed2dedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf575d7_0813b152",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_auto_utils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T22:14:11Z",
+      "side": 1,
+      "message": "All `std::atomic_ref` does here (or reinterpret_cast into std::atomic) is to insert memory barriers around variable access.",
+      "parentUuid": "b6e58d8e_7695d12c",
       "range": {
         "startLine": 94,
         "startChar": 0,
