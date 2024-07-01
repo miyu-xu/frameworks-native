@@ -118,6 +118,30 @@
       },
       "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f72b52b_e446991d",
+        "filename": "libs/binder/liblog_stub/include/log/log.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T21:03:44Z",
+      "side": 1,
+      "message": "Ouch. I could try changing Bionic API, but this is also failing when built with regular linux includes.\n\nsyslog.h introduced these LOG_INFO/LOG_DEBUG macros sometime between \u002782 and \u002793, while Android came in much later with its cutils log.h around \u002705. I don\u0027t see feasible changing either of these APIs.",
+      "parentUuid": "2a74ff0d_bfdeb3e2",
+      "range": {
+        "startLine": 24,
+        "startChar": 47,
+        "endLine": 24,
+        "endChar": 56
+      },
+      "revId": "c9b962314db9149871db6199cc16a5d9cdcee67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
