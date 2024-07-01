@@ -33,6 +33,24 @@
       "message": "This is a generated file, you shouldn\u0027t need to modify this.",
       "revId": "e90ea026fa883759e8f05944b24225ace1685d30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64801da2_c55e53be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1098333
+      },
+      "writtenOn": "2024-07-01T18:54:27Z",
+      "side": 1,
+      "message": "Tom, I suggest looking at the upstream Khronos header file to see if this extension was added, and if so, to merge in the upstream header into what we have in the Android source tree.\n\nBackground: While the upstream file is auto-generated, I see manual changes that have been done.  I did a major update of this file in 2017, after Khronos changed their generator and did a major change of this/other headers.  IIRC I pulled down all of the headers, but had to do some manual changes in order for Android to compile.  I see some other manual changes that have been done since.  It would be nice to keep the Android copy of this header as close as possible to the generated upstream file.  AFAICT there is not automated process to keep this file in sync with the upstream file.  Thus, my request to look upstream and merge.",
+      "parentUuid": "85d0178c_984f0d9c",
+      "revId": "e90ea026fa883759e8f05944b24225ace1685d30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
