@@ -68,6 +68,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdb79bd5_9ad4dbe2",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:18:11Z",
+      "side": 1,
+      "message": "In terms of lifetime, BpBinder \u003e IPCThreadState \u003e ProcessState, but IPCThreadState may be shutdown any time.\n\nSo two cases this may be needed:\n- if IPCThreadState is shut down, to prevent leak (currently it leaks in OOM case only, which is funny but okay)\n- if an object is deleted on a separate thread where IPCThreadState hasn\u0027t been started yet (e.g. looper, etc..) then this change would cause it to leak across processes - that could be hard to catch.\n\nI really would appreciate if you would minimize unrelated changes. It\u0027s very tight on time.",
+      "parentUuid": "a5c2cf51_8f1ba5a9",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 55
+      },
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eec4e629_59324419",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 8
