@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee85a6bd_46ed521a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T22:33:26Z",
+      "side": 1,
+      "message": "wait - thinking more - why is this an issue?\n\nIt might be the case that:\n- IPCThreadState::shutdown is called\n- then BpBinder is destroyed\n\nwe want it to recreate IPCThreadState in this case so that we still delete it, otherwise there is a leak.",
+      "range": {
+        "startLine": 615,
+        "startChar": 0,
+        "endLine": 615,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "50b9323b_d85f6751",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 615,
+                "startChar": 0,
+                "endLine": 616,
+                "endChar": 0
+              },
+              "replacement": "    IPCThreadState* ipc \u003d IPCThreadState::self();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eec4e629_59324419",
         "filename": "libs/binder/BpBinder.cpp",
         "patchSetId": 8
@@ -38,6 +79,30 @@
       "side": 1,
       "message": "I don\u0027t understand this one - move where?",
       "parentUuid": "eec4e629_59324419",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 14
+      },
+      "revId": "7cb2aba91b83cb5f76d193dcba7e4fa724e18057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bcf64e_fcfdfeb1",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T22:33:26Z",
+      "side": 1,
+      "message": "Definition of ipc, nit",
+      "parentUuid": "9c61267e_0676abc9",
       "range": {
         "startLine": 639,
         "startChar": 0,
