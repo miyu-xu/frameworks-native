@@ -94,6 +94,30 @@
       },
       "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958fded2_efa2d1cd",
+        "filename": "libs/binder/ndk/include_ndk/android/persistable_bundle.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-01T21:22:48Z",
+      "side": 1,
+      "message": "I\u0027m not fully following your comment. I\u0027m just disabling these attributes for gcc.\n\n_Nullable is present in clang (but not as a macro) and absent in gcc. I\u0027m defining-these-out in not-clang (read: gcc), which means all binder_ndk (not binder_ndk_sdk) users, no? I don\u0027t see the problem about enabling these (on gcc?) later.",
+      "parentUuid": "d6b2ea04_b6dc8e9b",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "9e57b49c1b4daff779cbdf3e15227302cab6c68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
