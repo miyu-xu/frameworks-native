@@ -1,0 +1,325 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71dba61b_9cdba824",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "does VINTF guarantee there can only be one?\n\nEven if so - there may be multiple accessors with GRF when partitions are combined - we would need to through an error in this case still, since it\u0027s ambiguous (or add a vts_treble_vintf_vendor_test case for it instead?)",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 51
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c30476_0d1bbd0e",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "we should check for permissions to get the accessor as well?",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f125ff_3fa5ef40",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "I use \u0027asdf\u0027 personally ;p",
+      "range": {
+        "startLine": 379,
+        "startChar": 25,
+        "endLine": 379,
+        "endChar": 30
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61251280_acee3128",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "avoid sharing here - it should remain an implementation detail of libbinder",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6cec80c_d122f82e",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "we\u0027ll need to move this implementation into the unified backend service manager backend Parth added for it to work in Java as well",
+      "range": {
+        "startLine": 144,
+        "startChar": 19,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe3241d_d1a36e10",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "563bb75f_63db47d3",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "how can we make sure this class is only implemented inside of libbinder and related libraries, so that we are free to change it as more things are needed?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bcc1027_ab151ce5",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "maybe also call it \u0027addConnection\u0027 to be explicit that each call doesn\u0027t get an exclusive connection?\n\nnit: mention expected to be called multiple times,",
+      "range": {
+        "startLine": 26,
+        "startChar": 19,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b01ac2c_ec6ccd9d",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "nit: we may want to return multiple? (ParcelFileDescriptor[]) - we could change RPC binder to request multiple at the same time, it will avoid the number of binder calls needed to setup, wdyt? you could make it \u0027PFD[] addConnections(int num);\u0027\n\nThough, we\u0027d also need to change RPC binder APIs - we might want this as a follow-up",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2392153c_0bbe6d6d",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "nit: are there any APIs we would want to add for debugging?",
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fc466b_99f79cd4",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "this API should also return Service?",
+      "range": {
+        "startLine": 73,
+        "startChar": 14,
+        "endLine": 73,
+        "endChar": 21
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe06cc6_53a61d9e",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "how do notifications work with accessors? Are there any special cases? They are used to implement waitForService, so we may need to change it to give a notification to the client when an accessor for that service is registered as well, though that makes permissions complicated - maybe instead registerForNotification also requests for the accessor permissions?",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201af1d1_22814a70",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-01T23:04:35Z",
+      "side": 1,
+      "message": "this is outside of the RPC binder code - we should follow PrivateAccessor pattern for this - or, just make setSessionSpecificRoot public - that\u0027s okay (just needs a comment)",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a7c90a3_301c9fa5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/RpcSession.h",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/include/binder/RpcSession.h",
+              "range": {
+                "startLine": 229,
+                "startChar": 0,
+                "endLine": 230,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
