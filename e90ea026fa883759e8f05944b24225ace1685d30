@@ -16,6 +16,23 @@
       "message": "I\u0027m having a lot of trouble figuring out where I should be submitting this change. I would expect it to the be the same as https://gerrit.khronos.org/c/vk-gl-cts/... but I don\u0027t have access to any https://gerrit.khronos.org/c/EGL repo. Can anyone give some guidance?",
       "revId": "e90ea026fa883759e8f05944b24225ace1685d30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d0178c_984f0d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1267775
+      },
+      "writtenOn": "2024-07-01T15:34:52Z",
+      "side": 1,
+      "message": "This is a generated file, you shouldn\u0027t need to modify this.",
+      "revId": "e90ea026fa883759e8f05944b24225ace1685d30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
