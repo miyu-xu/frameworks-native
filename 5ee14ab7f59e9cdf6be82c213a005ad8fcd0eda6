@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfc63e7_95de307c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "Hi, I just completed a rebase of everything today (lots of changes after the service manager backend unification work) and only addressed some of the comments. I\u0027ll continue working on this tomorrow.",
+      "revId": "5ee14ab7f59e9cdf6be82c213a005ad8fcd0eda6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

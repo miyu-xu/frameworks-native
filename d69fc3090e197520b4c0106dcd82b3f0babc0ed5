@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55f60113_ca3adb0b",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "We definitely need to add a check somewhere. However, it may not be in VINTF, as the current XML parser in VINTF does not appear to have the necessary support. I checked that we can also have multiple tags other fields for name or fqname, and VINTF parsing still works correctly.\n\nI\u0027ll add a test in vts_treble_vintf_vendor_test. Should I add the test to a particular file?",
+      "parentUuid": "71dba61b_9cdba824",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 51
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49c30476_0d1bbd0e",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 14
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "we should check for permissions to get the accessor as well?",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 46
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cafcd525_676b46e1",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "The permission for the caller to call `accessorName` is checked in the call `tryGetService` itself, I added a check here to ensure that the caller also has the permission to call `name` itself.",
+      "parentUuid": "49c30476_0d1bbd0e",
       "range": {
         "startLine": 376,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "I use \u0027asdf\u0027 personally ;p",
+      "range": {
+        "startLine": 379,
+        "startChar": 25,
+        "endLine": 379,
+        "endChar": 30
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5feaed9_4a0feaee",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "that\u0027s fast to type too ;)",
+      "parentUuid": "21f125ff_3fa5ef40",
       "range": {
         "startLine": 379,
         "startChar": 25,
@@ -119,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "616d5f75_6657dc56",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "I\u0027ll put IAccessor in a new namespace \"android.os.accessor\" to separate it from other AIDLs in \"android.os\" and make \"android.os.accessor\" public so everyone can provide their own implementation of Accessor. wdyt?",
+      "parentUuid": "bd096e3c_3df2fff5",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6cec80c_d122f82e",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 14
@@ -130,6 +226,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "we\u0027ll need to move this implementation into the unified backend service manager backend Parth added for it to work in Java as well",
+      "range": {
+        "startLine": 144,
+        "startChar": 19,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f26b841_5a8e26e9",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6cec80c_d122f82e",
       "range": {
         "startLine": 144,
         "startChar": 19,
@@ -153,6 +273,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e5b171_9d33c701",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe3241d_d1a36e10",
       "range": {
         "startLine": 2,
         "startChar": 17,
@@ -342,6 +486,30 @@
           ]
         }
       ],
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b59c4a3_79dc81e7",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-02T15:22:09Z",
+      "side": 1,
+      "message": "Done. Made it public.",
+      "parentUuid": "201af1d1_22814a70",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 30
+      },
       "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
