@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "005478e6_53e3907c",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-02T14:42:41Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "4b6efb58_da19deef",
+      "range": {
+        "startLine": 1052,
+        "startChar": 46,
+        "endLine": 1052,
+        "endChar": 81
+      },
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36149319_7d9f54f8",
@@ -132,6 +156,24 @@
       "writtenOn": "2024-05-22T21:07:54Z",
       "side": 1,
       "message": "Seems like this is missing a few more changes like this one, but I\u0027ll open this up for review now anyway. I\u0027m out for Lund Linux conf for the rest of this week, and will fix it up next week.",
+      "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da00c05f_cdfddc9e",
+        "filename": "libs/binder/rust/tests/integration.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-02T14:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92225320_7867f57e",
       "revId": "0e0add4ea1486e30943d37160c0a5f19740f281b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

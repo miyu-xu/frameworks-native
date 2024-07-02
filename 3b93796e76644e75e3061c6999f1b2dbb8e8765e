@@ -16,6 +16,24 @@
       "message": "Turns out that presubmit passed even though we have this assert 😞\n\nI\u0027ll get a test added for this.",
       "revId": "3b93796e76644e75e3061c6999f1b2dbb8e8765e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae05f48f_a5d042d7",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-07-02T14:42:41Z",
+      "side": 1,
+      "message": "Done.\n```\n---- tests::reassociate_rust_binder_async stderr ----\nthread \u0027main\u0027 panicked at frameworks/native/libs/binder/rust/tests/integration.rs:179:1:\nTemporary panic to verify that presubmit has a test that hits this codepath.\n```",
+      "parentUuid": "299cbe82_524dbae5",
+      "revId": "3b93796e76644e75e3061c6999f1b2dbb8e8765e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
