@@ -34,6 +34,24 @@
       "parentUuid": "a45da7b0_82ebbffa",
       "revId": "cd3f6d8d422ef5d581807308117558787f2e1baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "180466cf_8e5dfa36",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1933443
+      },
+      "writtenOn": "2024-07-02T01:47:08Z",
+      "side": 1,
+      "message": "Yes, this line is commented out.\nWe uncomment this line when using \u0027ALOGV\u0027, and comment it all other times.",
+      "parentUuid": "7e44a994_f5e69868",
+      "revId": "cd3f6d8d422ef5d581807308117558787f2e1baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
