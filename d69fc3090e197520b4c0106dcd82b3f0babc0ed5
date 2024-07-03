@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dab6645_e657c3ea",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-03T00:15:26Z",
+      "side": 1,
+      "message": "Yup!",
+      "parentUuid": "55f60113_ca3adb0b",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 51
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49c30476_0d1bbd0e",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 14
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "I\u0027ll put IAccessor in a new namespace \"android.os.accessor\" to separate it from other AIDLs in \"android.os\" and make \"android.os.accessor\" public so everyone can provide their own implementation of Accessor. wdyt?",
       "parentUuid": "bd096e3c_3df2fff5",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67081be1_8ef282e0",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-03T00:15:26Z",
+      "side": 1,
+      "message": "I think splitting it into a separate aidl_interface probably makes sense, but I\u0027m wondering if we can keep it unstable like IServiceManager and other interfaces here.\n\nCould we pass the connection information directly into libbinder and setup and manage the RpcServer* and RpcSession objects directly in libbinder?\n\nI have mentioned this to Devin, and we should chat soon, but one reason is that currently each RpcServer has its own RpcSession and each RpcSession has its own threadpool. We\u0027re going to need to change this so that we can combine the threadpools from different RpcServer objects and potentially merge these threadpools with the libbinder threadpool.\n\nBy managing these objects internally inside libbinder, we would:\n- avoid using libbinder_rpc_unstable (this can go away, so we can make AVF updatable or use this logic in updatable clients, which is not possible in the current implementation)\n- make it possible to combine threadpools and RpcServer instances moving forward\n- make it possible to revise IAccessor over time\n\nThe flow would be the exact same, but the logic for RPC servers would be lifted into libbinder itself.",
+      "parentUuid": "616d5f75_6657dc56",
       "range": {
         "startLine": 766,
         "startChar": 0,
