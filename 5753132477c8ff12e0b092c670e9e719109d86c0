@@ -244,6 +244,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a6effc_b8803d94",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-03T00:23:07Z",
+      "side": 1,
+      "message": "Oh. I think we actually need more build system support, if we were going to differentiate this. llndk things and binder_libbinder.h are both in include_platform. So, we rely on linker errors and stub libraries to make sure it works, but if we made a mistake or put a constant in the header, it would still be exposed. We should probably have include_llnk and include_systemapi to split those out, but yeah, probably more complexity than it is worth.",
+      "parentUuid": "7f7fa69f_8da40eab",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 62
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f094fb6_9c2b1dca",
