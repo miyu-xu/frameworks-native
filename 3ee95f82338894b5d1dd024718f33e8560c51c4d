@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5b8c81b_4b57841c",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-03T23:01:23Z",
+      "side": 1,
+      "message": "`RpcTransportRaw` sets `errno \u003d EINVAL` and returns -1. We should stay consistent with that.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4565ae1_a9c9409f",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-03T23:01:23Z",
+      "side": 1,
+      "message": "Same here: probably should return `EINVAL` or `EBADFD`.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "042c1bfd_db2e8e1b",
         "filename": "libs/binder/include_trusty/binder/RpcTransportTipcAndroid.h",
         "patchSetId": 2
