@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd2823b1_ebd4ab4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-03T13:44:33Z",
+      "side": 1,
+      "message": "I couldn\u0027t get Flags to work with recovery or native bridge.\n\nSo I added #if defines to make it compile. Let me know if there is a better way",
+      "revId": "5bff35ce2ea3bdee784fb74230b209a6742650ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
