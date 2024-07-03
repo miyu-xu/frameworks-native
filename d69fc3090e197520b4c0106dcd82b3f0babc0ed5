@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "178f4339_72532ac6",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-03T15:50:58Z",
+      "side": 1,
+      "message": "\u003e Could we pass the connection information directly into libbinder and setup and manage the RpcServer* and RpcSession objects directly in libbinder?\n\nThat requires giving every client the ability to connect to any sockets we support.\n\nRight now, we have the ability for microdroid_manager, virtmgr, etc. to remain the only processes that are allowed to set up these connections. I think that\u0027s valuable as it keeps these actions restricted and allows us to move change the transport underneath the client without having to explicitly add permissions for it to connect to the different types of sockets.\n\nI do think it would be good (necessary?) to be able to set \"global\" threadpool settings like we do with IPCThreadState. Same control would be needed with FD support. This does require special code in the clients though, so maybe we have more realistic defaults so the majority of clients don\u0027t need to explicity set them. (incoming threads 2, FD support for socket types that we know support it like UDS).",
+      "parentUuid": "67081be1_8ef282e0",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6cec80c_d122f82e",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 14
@@ -380,6 +404,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18aa276e_8edd232e",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-03T15:50:58Z",
+      "side": 1,
+      "message": "I think we specifically want others to implement this because there are so many different use cases and unique steps to do to go from \"instance_name\" to socket FD.\n\nIf they aren\u0027t implementing this interface directly, I think they will still need to implement other interface(s) that this implementation uses - reach out to authmgr for permission/attestation in trusty case, reaching out to another service to get a dynamic port number (virtmgr in VM to host case) and transport type which might be a dynamic decision (UDS/VSOCK/INET).\n\nAnd if we do that, we end up requirement permissions to connect to the sockets in all of the client processes (other comment thread).",
+      "parentUuid": "563bb75f_63db47d3",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bcc1027_ab151ce5",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 14
@@ -414,6 +462,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "nit: we may want to return multiple? (ParcelFileDescriptor[]) - we could change RPC binder to request multiple at the same time, it will avoid the number of binder calls needed to setup, wdyt? you could make it \u0027PFD[] addConnections(int num);\u0027\n\nThough, we\u0027d also need to change RPC binder APIs - we might want this as a follow-up",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d26fcdf_7b2f2a5f",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-03T15:50:58Z",
+      "side": 1,
+      "message": "I like that, as the IAccessor impl could effectively control the number of MaxIncomingThreads that way.\n\n1) Are the connected FDs are the heavy part of the connections? Or is it the threads when we start them per connection?\n\nIf we ended up moving to dynamic threading/connections for the sessions is it going to be bad to have 4 FDs (the max the accessor decided on) before starting the threads for them?\n\n2) If we had 4 FDs from IFoo and 4 FDs from IBar, we can still share 4 threads (in the future if/when we implement shared threadpools)? Is it possible to have fewer threads than FDs for the same IFoo interface in that case?",
+      "parentUuid": "8b01ac2c_ec6ccd9d",
       "range": {
         "startLine": 32,
         "startChar": 4,
