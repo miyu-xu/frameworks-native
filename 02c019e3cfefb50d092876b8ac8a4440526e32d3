@@ -63,6 +63,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef71c1f9_80539f98",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-03T13:43:12Z",
+      "side": 1,
+      "message": "My bad. I changed it.",
+      "parentUuid": "2b5f06aa_eb8b11cc",
+      "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d852de67_4602fc1b",
@@ -76,6 +94,24 @@
       "writtenOn": "2024-06-24T16:26:54Z",
       "side": 1,
       "message": "Why is this conditional different from the conditional at line 38?",
+      "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e0d56f_f47b6e3f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-03T13:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d852de67_4602fc1b",
       "revId": "02c019e3cfefb50d092876b8ac8a4440526e32d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
