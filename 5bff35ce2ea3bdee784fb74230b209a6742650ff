@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d338f877_f683a08b",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-03T16:48:38Z",
+      "side": 1,
+      "message": "(the alternative which we\u0027ve been using in low level things like RELEASE_AIDL_USE_UNFROZEN, is to pass the flag value in through soong and set a C flag)",
+      "parentUuid": "c7e36f74_fc6332d6",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 57
+      },
+      "revId": "5bff35ce2ea3bdee784fb74230b209a6742650ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74eea993_a4196398",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 6
