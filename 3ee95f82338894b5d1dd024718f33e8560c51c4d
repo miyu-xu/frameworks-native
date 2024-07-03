@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042c1bfd_db2e8e1b",
+        "filename": "libs/binder/include_trusty/binder/RpcTransportTipcAndroid.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-03T22:58:34Z",
+      "side": 1,
+      "message": "The maximum on the Trusty side is 8.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1cd5d0_ba4ae9c6",
+        "filename": "libs/binder/include_trusty/binder/RpcTransportTipcAndroid.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-03T22:58:34Z",
+      "side": 1,
+      "message": "Regardless of the value, it should probably be something like `constexpr size_t kMaxTrustyShms \u003d 8;` instead of a macro.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
