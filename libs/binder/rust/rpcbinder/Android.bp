@@ -31,6 +31,7 @@ rust_library {
     ],
     apex_available: [
         "//apex_available:platform",
+        "//apex_available:anyapex",
         "com.android.compos",
         "com.android.uwb",
         "com.android.virt",
@@ -59,6 +60,7 @@ rust_library {
     ],
     apex_available: [
         "//apex_available:platform",
+        "//apex_available:anyapex",
         "com.android.compos",
         "com.android.uwb",
         "com.android.virt",
@@ -92,6 +94,7 @@ rust_bindgen {
     ],
     apex_available: [
         "//apex_available:platform",
+        "//apex_available:anyapex",
         "com.android.compos",
         "com.android.uwb",
         "com.android.virt",
