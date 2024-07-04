@@ -29,6 +29,7 @@
 #include <thread>
 
 #if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
+#include "perfetto/public/protos/trace/android/android_track_event.pzc.h"
 #include "perfetto/public/te_category_macros.h"
 #include "perfetto/public/te_macros.h"
 #endif // !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
@@ -56,6 +57,12 @@ PERFETTO_TE_CATEGORIES_DEFINE(PERFETTO_SM_CATEGORIES);
 
 #define SM_PERFETTO_TRACE_FUNC(...) \
     PERFETTO_TE_SCOPED(servicemanager, PERFETTO_TE_SLICE_BEGIN(__func__) __VA_OPT__(, ) __VA_ARGS__)
+
+constexpr auto kProtoServiceName =
+        perfetto_protos_AndroidTrackEvent_binder_service_name_field_number;
+constexpr auto kProtoInterfaceName =
+        perfetto_protos_AndroidTrackEvent_binder_interface_name_field_number;
+constexpr auto kProtoApexName = perfetto_protos_AndroidTrackEvent_apex_name_field_number;
 
 #endif // !(defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__))
 
@@ -384,7 +391,8 @@ ServiceManager::~ServiceManager() {
 }
 
 Status ServiceManager::getService(const std::string& name, os::Service* outService) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     *outService = tryGetService(name, true);
     // returns ok regardless of result for legacy reasons
@@ -392,7 +400,8 @@ Status ServiceManager::getService(const std::string& name, os::Service* outServi
 }
 
 Status ServiceManager::checkService(const std::string& name, os::Service* outService) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     *outService = tryGetService(name, false);
     // returns ok regardless of result for legacy reasons
@@ -417,7 +426,8 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
 }
 
 sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNotFound) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -457,7 +467,8 @@ sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNo
 }
 
 bool isValidServiceName(const std::string& name) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     if (name.size() == 0) return false;
     if (name.size() > 127) return false;
@@ -474,7 +485,8 @@ bool isValidServiceName(const std::string& name) {
 }
 
 Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder, bool allowIsolated, int32_t dumpPriority) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -597,7 +609,8 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
 
 Status ServiceManager::registerForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -648,7 +661,8 @@ Status ServiceManager::registerForNotifications(
 }
 Status ServiceManager::unregisterForNotifications(
         const std::string& name, const sp<IServiceCallback>& callback) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -674,7 +688,8 @@ Status ServiceManager::unregisterForNotifications(
 }
 
 Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -692,7 +707,8 @@ Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
 }
 
 binder::Status ServiceManager::getDeclaredInstances(const std::string& interface, std::vector<std::string>* outReturn) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("interface", interface.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoInterfaceName, interface.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -720,7 +736,8 @@ binder::Status ServiceManager::getDeclaredInstances(const std::string& interface
 
 Status ServiceManager::updatableViaApex(const std::string& name,
                                         std::optional<std::string>* outReturn) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -739,7 +756,8 @@ Status ServiceManager::updatableViaApex(const std::string& name,
 
 Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& apexName,
                                          std::vector<std::string>* outReturn) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("apexName", apexName.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoApexName, apexName.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -765,7 +783,8 @@ Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& ape
 
 Status ServiceManager::getConnectionInfo(const std::string& name,
                                          std::optional<ConnectionInfo>* outReturn) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
@@ -850,7 +869,8 @@ void ServiceManager::tryStartService(const Access::CallingContext& ctx, const st
 
 Status ServiceManager::registerClientCallback(const std::string& name, const sp<IBinder>& service,
                                               const sp<IClientCallback>& cb) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     if (cb == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Callback null.");
@@ -1012,7 +1032,8 @@ void ServiceManager::sendClientCallbackNotifications(const std::string& serviceN
 }
 
 Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IBinder>& binder) {
-    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
+    SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     if (binder == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null service.");
