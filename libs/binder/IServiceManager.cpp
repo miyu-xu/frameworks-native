@@ -283,6 +283,9 @@ ServiceManagerShim::ServiceManagerShim(const sp<AidlServiceManager>& impl) {
 // complexity, this could be attempted.
 sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 {
+#ifdef LIBBINDER_CLIENT_CACHE
+    ALOGI("LIBBINDER_CLIENT_CACHE enabled");
+#endif
     static bool gSystemBootCompleted = false;
 
     sp<IBinder> svc = checkService(name);

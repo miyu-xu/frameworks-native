@@ -451,6 +451,11 @@ cc_defaults {
         ":libbinder_aidl",
         ":libbinder_device_interface_sources",
     ],
+    product_variables: {
+        release_libbinder_client_cache: {
+            cflags: ["-DLIBBINDER_CLIENT_CACHE"],
+        },
+    },
     target: {
         vendor: {
             exclude_srcs: [
