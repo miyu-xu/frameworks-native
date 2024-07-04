@@ -271,6 +271,14 @@ void* openDeclaredPassthroughHal(const String16& interface, const String16& inst
 
 #endif //__ANDROID_VNDK__
 
+static bool isClientCacheEnabled() {
+#ifdef LIBBINDER_CLIENT_CACHE
+    return true;
+#else
+    return false;
+#endif
+}
+
 // ----------------------------------------------------------------------
 
 ServiceManagerShim::ServiceManagerShim(const sp<AidlServiceManager>& impl) {
@@ -283,6 +291,9 @@ ServiceManagerShim::ServiceManagerShim(const sp<AidlServiceManager>& impl) {
 // complexity, this could be attempted.
 sp<IBinder> ServiceManagerShim::getService(const String16& name) const
 {
+    if (isClientCacheEnabled()) {
+        ALOGI("LIBBINDER_CLIENT_CACHE enabled");
+    }
     static bool gSystemBootCompleted = false;
 
     sp<IBinder> svc = checkService(name);
