@@ -42,6 +42,7 @@
 #include <trusty/tipc.h>
 #endif // BINDER_RPC_TO_TRUSTY_TEST
 
+#include "../RpcWireFormat.h"
 #include "../Utils.h"
 #include "binderRpcTestCommon.h"
 #include "binderRpcTestFixture.h"
@@ -1032,14 +1033,15 @@ TEST_P(BinderRpc, SendMaxFiles) {
         GTEST_SKIP() << "Would fail trivially (which is tested by BinderRpc::SendFiles)";
     }
 
+    auto transportMode = RpcSession::FileDescriptorTransportMode::UNIX;
     auto proc = createRpcTestSocketServerProcess({
-            .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::UNIX,
-            .serverSupportedFileDescriptorTransportModes =
-                    {RpcSession::FileDescriptorTransportMode::UNIX},
+            .clientFileDescriptorTransportMode = transportMode,
+            .serverSupportedFileDescriptorTransportModes = {transportMode},
     });
 
+    size_t maxFds = getRpcTransportModeMaxFds(transportMode);
     std::vector<android::os::ParcelFileDescriptor> files;
-    for (int i = 0; i < 253; i++) {
+    for (size_t i = 0; i < maxFds; i++) {
         files.emplace_back(android::os::ParcelFileDescriptor(mockFileDescriptor("a")));
     }
 
@@ -1049,7 +1051,7 @@ TEST_P(BinderRpc, SendMaxFiles) {
 
     std::string result;
     EXPECT_TRUE(ReadFdToString(out.get(), &result));
-    EXPECT_EQ(result, std::string(253, 'a'));
+    EXPECT_EQ(result, std::string(maxFds, 'a'));
 }
 
 TEST_P(BinderRpc, SendTooManyFiles) {
@@ -1057,14 +1059,15 @@ TEST_P(BinderRpc, SendTooManyFiles) {
         GTEST_SKIP() << "Would fail trivially (which is tested by BinderRpc::SendFiles)";
     }
 
+    auto transportMode = RpcSession::FileDescriptorTransportMode::UNIX;
     auto proc = createRpcTestSocketServerProcess({
-            .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::UNIX,
-            .serverSupportedFileDescriptorTransportModes =
-                    {RpcSession::FileDescriptorTransportMode::UNIX},
+            .clientFileDescriptorTransportMode = transportMode,
+            .serverSupportedFileDescriptorTransportModes = {transportMode},
     });
 
+    size_t maxFds = getRpcTransportModeMaxFds(transportMode);
     std::vector<android::os::ParcelFileDescriptor> files;
-    for (int i = 0; i < 254; i++) {
+    for (size_t i = 0; i < maxFds + 1; i++) {
         files.emplace_back(android::os::ParcelFileDescriptor(mockFileDescriptor("a")));
     }
 
