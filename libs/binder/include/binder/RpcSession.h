@@ -110,6 +110,20 @@ public:
         TRUSTY = 2,
     };
 
+    static size_t getTransportModeMaxFds(FileDescriptorTransportMode mode) {
+        switch (mode) {
+            case FileDescriptorTransportMode::NONE:
+                return 0;
+            case FileDescriptorTransportMode::UNIX:
+                return 253;
+            case FileDescriptorTransportMode::TRUSTY:
+                // Keep this in sync with trusty_ipc.h!!!
+                // We could import that file here on Trusty, but it's not
+                // available on Android
+                return 8;
+        }
+    }
+
     /**
      * Set the transport for sending and receiving file descriptors.
      */
