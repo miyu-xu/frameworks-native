@@ -17,8 +17,6 @@
 #include "binderRpcTestCommon.h"
 
 using namespace android;
-using android::binder::mockFileDescriptor;
-using android::binder::ReadFdToString;
 using android::binder::unique_fd;
 
 class MyBinderRpcTestAndroid : public MyBinderRpcTestBase {
@@ -55,23 +53,6 @@ public:
         if constexpr (kEnableKernelIpc) {
             (void)IPCThreadState::self()->getCallingPid();
         }
-        return Status::ok();
-    }
-
-    Status echoAsFile(const std::string& content, android::os::ParcelFileDescriptor* out) override {
-        out->reset(mockFileDescriptor(content));
-        return Status::ok();
-    }
-
-    Status concatFiles(const std::vector<android::os::ParcelFileDescriptor>& files,
-                       android::os::ParcelFileDescriptor* out) override {
-        std::string acc;
-        for (const auto& file : files) {
-            std::string result;
-            LOG_ALWAYS_FATAL_IF(!ReadFdToString(file.get(), &result));
-            acc.append(result);
-        }
-        out->reset(mockFileDescriptor(acc));
         return Status::ok();
     }
 
