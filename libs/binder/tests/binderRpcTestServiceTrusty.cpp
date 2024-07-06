@@ -89,6 +89,10 @@ int main(void) {
         if (!serverInfo.server->setProtocolVersion(serverVersion)) {
             return EXIT_FAILURE;
         }
+        serverInfo.server->setSupportedFileDescriptorTransportModes({
+                RpcSession::FileDescriptorTransportMode::NONE,
+                RpcSession::FileDescriptorTransportMode::TRUSTY,
+        });
         serverInfo.server->setPerSessionRootObject(
                 [=](wp<RpcSession> /*session*/, const void* /*addrPtr*/, size_t /*len*/) {
                     auto service = sp<MyBinderRpcTestTrusty>::make();
