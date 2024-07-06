@@ -136,14 +136,22 @@ public:
 
     // Whether the test params support sending FDs in parcels.
     bool supportsFdTransport() const {
-        if (socketType() == SocketType::TIPC) {
-            // Trusty does not support file descriptors yet
-            return false;
-        }
+#ifdef BINDER_RPC_TO_TRUSTY_TEST
+        // Android to Trusty does not support FDs yet
+        return false;
+#endif
         return clientVersion() >= 1 && serverVersion() >= 1 && rpcSecurity() != RpcSecurity::TLS &&
                 (socketType() == SocketType::PRECONNECTED || socketType() == SocketType::UNIX ||
                  socketType() == SocketType::UNIX_BOOTSTRAP ||
-                 socketType() == SocketType::UNIX_RAW);
+                 socketType() == SocketType::UNIX_RAW || socketType() == SocketType::TIPC);
+    }
+
+    RpcSession::FileDescriptorTransportMode fdTransportMode() const {
+        if (socketType() == SocketType::TIPC) {
+            return RpcSession::FileDescriptorTransportMode::TRUSTY;
+        }
+        return supportsFdTransport() ? RpcSession::FileDescriptorTransportMode::UNIX
+                                     : RpcSession::FileDescriptorTransportMode::NONE;
     }
 
     void SetUp() override {
