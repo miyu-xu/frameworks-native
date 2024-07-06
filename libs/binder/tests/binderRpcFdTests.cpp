@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <signal.h>
+
 #include "binderRpcTestCommon.h"
 #include "binderRpcTestFixture.h"
 
@@ -23,7 +25,7 @@ namespace android {
 
 TEST_P(BinderRpc, FileDescriptorTransportRejectNone) {
     if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
+        GTEST_SKIP() << "Trusty services always accept NONE transport";
     }
 
     auto proc = createRpcTestSocketServerProcess({
@@ -42,10 +44,6 @@ TEST_P(BinderRpc, FileDescriptorTransportRejectNone) {
 }
 
 TEST_P(BinderRpc, FileDescriptorTransportRejectUnix) {
-    if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
-    }
-
     auto proc = createRpcTestSocketServerProcess({
             .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::UNIX,
             .serverSupportedFileDescriptorTransportModes =
@@ -53,12 +51,15 @@ TEST_P(BinderRpc, FileDescriptorTransportRejectUnix) {
             .allowConnectFailure = true,
     });
     EXPECT_TRUE(proc.proc->sessions.empty()) << "session connections should have failed";
+
+#ifndef __TRUSTY__
     proc.proc->terminate();
     proc.proc->setCustomExitStatusCheck([](int wstatus) {
         EXPECT_TRUE(WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGTERM)
                 << "server process failed incorrectly: " << WaitStatusToString(wstatus);
     });
     proc.expectAlreadyShutdown = true;
+#endif
 }
 
 TEST_P(BinderRpc, FileDescriptorTransportOptionalUnix) {
