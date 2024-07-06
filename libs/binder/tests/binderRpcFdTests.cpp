@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <signal.h>
+
 #include "../OS.h"
 
 #include "binderRpcTestCommon.h"
@@ -25,7 +27,7 @@ namespace android {
 
 TEST_P(BinderRpc, FileDescriptorTransportRejectNone) {
     if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
+        GTEST_SKIP() << "Trusty services always accept NONE transport";
     }
 
     auto proc = createRpcTestSocketServerProcess({
@@ -45,7 +47,7 @@ TEST_P(BinderRpc, FileDescriptorTransportRejectNone) {
 
 TEST_P(BinderRpc, FileDescriptorTransportRejectUnix) {
     if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
+        GTEST_SKIP() << "Trusty services never accept UNIX transport";
     }
 
     auto proc = createRpcTestSocketServerProcess({
@@ -64,10 +66,6 @@ TEST_P(BinderRpc, FileDescriptorTransportRejectUnix) {
 }
 
 TEST_P(BinderRpc, FileDescriptorTransportOptionalUnix) {
-    if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
-    }
-
     auto proc = createRpcTestSocketServerProcess({
             .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::NONE,
             .serverSupportedFileDescriptorTransportModes =
@@ -81,14 +79,10 @@ TEST_P(BinderRpc, FileDescriptorTransportOptionalUnix) {
 }
 
 TEST_P(BinderRpc, ReceiveFile) {
-    if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
-    }
-
+    auto transportMode = fdTransportMode();
     auto proc = createRpcTestSocketServerProcess({
-            .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::UNIX,
-            .serverSupportedFileDescriptorTransportModes =
-                    {RpcSession::FileDescriptorTransportMode::UNIX},
+            .clientFileDescriptorTransportMode = transportMode,
+            .serverSupportedFileDescriptorTransportModes = {transportMode},
     });
 
     android::os::ParcelFileDescriptor out;
@@ -105,14 +99,10 @@ TEST_P(BinderRpc, ReceiveFile) {
 }
 
 TEST_P(BinderRpc, SendFiles) {
-    if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
-    }
-
+    auto transportMode = fdTransportMode();
     auto proc = createRpcTestSocketServerProcess({
-            .clientFileDescriptorTransportMode = RpcSession::FileDescriptorTransportMode::UNIX,
-            .serverSupportedFileDescriptorTransportModes =
-                    {RpcSession::FileDescriptorTransportMode::UNIX},
+            .clientFileDescriptorTransportMode = transportMode,
+            .serverSupportedFileDescriptorTransportModes = {transportMode},
     });
 
     std::vector<android::os::ParcelFileDescriptor> files;
@@ -139,7 +129,7 @@ TEST_P(BinderRpc, SendMaxFiles) {
         GTEST_SKIP() << "Would fail trivially (which is tested by BinderRpc::SendFiles)";
     }
 
-    auto transportMode = RpcSession::FileDescriptorTransportMode::UNIX;
+    auto transportMode = fdTransportMode();
     auto proc = createRpcTestSocketServerProcess({
             .clientFileDescriptorTransportMode = transportMode,
             .serverSupportedFileDescriptorTransportModes = {transportMode},
@@ -165,7 +155,7 @@ TEST_P(BinderRpc, SendTooManyFiles) {
         GTEST_SKIP() << "Would fail trivially (which is tested by BinderRpc::SendFiles)";
     }
 
-    auto transportMode = RpcSession::FileDescriptorTransportMode::UNIX;
+    auto transportMode = fdTransportMode();
     auto proc = createRpcTestSocketServerProcess({
             .clientFileDescriptorTransportMode = transportMode,
             .serverSupportedFileDescriptorTransportModes = {transportMode},
@@ -184,7 +174,7 @@ TEST_P(BinderRpc, SendTooManyFiles) {
 
 TEST_P(BinderRpc, AppendInvalidFd) {
     if (socketType() == SocketType::TIPC) {
-        GTEST_SKIP() << "File descriptor tests not supported on Trusty (yet)";
+        GTEST_SKIP() << "dupFileDescriptor not supported on Trusty stderr";
     }
 
     auto proc = createRpcTestSocketServerProcess({
