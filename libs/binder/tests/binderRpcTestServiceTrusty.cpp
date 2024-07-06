@@ -45,8 +45,6 @@ public:
         // restart_on_exit
         exit(EXIT_SUCCESS);
     }
-
-    // TODO(b/242940548): implement echoAsFile and concatFiles
 };
 
 struct ServerInfo {
@@ -89,6 +87,10 @@ int main(void) {
         if (!serverInfo.server->setProtocolVersion(serverVersion)) {
             return EXIT_FAILURE;
         }
+        serverInfo.server->setSupportedFileDescriptorTransportModes({
+                RpcSession::FileDescriptorTransportMode::NONE,
+                RpcSession::FileDescriptorTransportMode::TRUSTY,
+        });
         serverInfo.server->setPerSessionRootObject(
                 [=](wp<RpcSession> /*session*/, const void* /*addrPtr*/, size_t /*len*/) {
                     auto service = sp<MyBinderRpcTestTrusty>::make();
