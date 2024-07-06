@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "../OS.h"
+
 #include "binderRpcTestCommon.h"
 #include "binderRpcTestFixture.h"
 
@@ -194,7 +196,8 @@ TEST_P(BinderRpc, AppendInvalidFd) {
                     {RpcSession::FileDescriptorTransportMode::UNIX},
     });
 
-    int badFd = fcntl(STDERR_FILENO, F_DUPFD_CLOEXEC, 0);
+    int badFd;
+    ASSERT_EQ(OK, binder::os::dupFileDescriptor(STDERR_FILENO, &badFd));
     ASSERT_NE(badFd, -1);
 
     // Close the file descriptor so it becomes invalid for dup
