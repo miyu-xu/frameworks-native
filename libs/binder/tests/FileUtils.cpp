@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 
+#include <binder/RpcThreads.h>
+#include <log/log.h>
+
+#include "../FdUtils.h"
 #include "FileUtils.h"
+
+#if defined(__linux__)
+#include <signal.h>
+#endif
 
 #ifdef BINDER_NO_LIBBASE
 
@@ -97,3 +105,27 @@ std::string GetExecutableDirectory() {
 } // namespace android::binder
 
 #endif // BINDER_NO_LIBBASE
+
+namespace android {
+
+// Create an FD that returns `contents` when read.
+binder::unique_fd mockFileDescriptor(std::string contents) {
+#if defined(__linux__)
+    binder::unique_fd readFd, writeFd;
+    LOG_ALWAYS_FATAL_IF(!binder::Pipe(&readFd, &writeFd), "%s", strerror(errno));
+    RpcMaybeThread([writeFd = std::move(writeFd), contents = std::move(contents)]() {
+        signal(SIGPIPE, SIG_IGN); // ignore possible SIGPIPE from the write
+        if (!binder::WriteStringToFd(contents, writeFd)) {
+            int savedErrno = errno;
+            LOG_ALWAYS_FATAL_IF(EPIPE != savedErrno, "mockFileDescriptor write failed: %s",
+                                strerror(savedErrno));
+        }
+    }).detach();
+    return readFd;
+#else
+    LOG_ALWAYS_FATAL("Called mockFileDescriptor on non-Linux OS");
+    return {};
+#endif
+}
+
+} // namespace android
