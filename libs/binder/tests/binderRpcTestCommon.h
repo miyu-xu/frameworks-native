@@ -147,6 +147,16 @@ static inline std::string PrintToString(SocketType socketType) {
     }
 }
 
+static inline std::string WaitStatusToString(int wstatus) {
+    if (WIFEXITED(wstatus)) {
+        return "exit status " + std::to_string(WEXITSTATUS(wstatus));
+    }
+    if (WIFSIGNALED(wstatus)) {
+        return "term signal " + std::to_string(WTERMSIG(wstatus));
+    }
+    return "unexpected state " + std::to_string(wstatus);
+}
+
 static inline size_t epochMillis() {
     using std::chrono::duration_cast;
     using std::chrono::milliseconds;

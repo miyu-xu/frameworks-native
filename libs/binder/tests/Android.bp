@@ -270,6 +270,7 @@ cc_defaults {
     compile_multilib: "first",
 
     srcs: [
+        "binderRpcFdTests.cpp",
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcUniversalTests.cpp",
@@ -524,6 +525,7 @@ cc_test {
     ],
 
     srcs: [
+        "binderRpcFdTests.cpp",
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcUniversalTests.cpp",
