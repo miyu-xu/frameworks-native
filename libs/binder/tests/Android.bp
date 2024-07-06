@@ -464,6 +464,7 @@ cc_binary {
     ],
 
     srcs: [
+        "FileUtilsTrusty.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcTestTrusty.cpp",
         "binderRpcUniversalTests.cpp",
