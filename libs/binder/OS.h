@@ -33,7 +33,20 @@ status_t setNonBlocking(borrowed_fd fd);
 
 status_t getRandomBytes(uint8_t* data, size_t size);
 
+#ifdef __TRUSTY__
+// defined in trusty/OS.cpp
 status_t dupFileDescriptor(int oldFd, int* newFd);
+#else
+inline status_t dupFileDescriptor(int oldFd, int* newFd) {
+    int ret = fcntl(oldFd, F_DUPFD_CLOEXEC, 0);
+    if (ret < 0) {
+        return -errno;
+    }
+
+    *newFd = ret;
+    return OK;
+}
+#endif
 
 std::unique_ptr<RpcTransportCtxFactory> makeDefaultRpcTransportCtxFactory();
 
