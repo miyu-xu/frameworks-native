@@ -58,6 +58,7 @@ using namespace std::chrono_literals;
 using namespace std::placeholders;
 using android::binder::borrowed_fd;
 using android::binder::GetExecutableDirectory;
+using android::binder::mockFileDescriptor;
 using android::binder::ReadFdToString;
 using android::binder::unique_fd;
 using testing::AssertionFailure;
