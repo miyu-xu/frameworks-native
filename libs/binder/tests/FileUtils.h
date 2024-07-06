@@ -47,3 +47,9 @@ std::string GetExecutableDirectory();
 } // namespace android::binder
 
 #endif // BINDER_NO_LIBBASE
+
+namespace android::binder {
+
+unique_fd mockFileDescriptor(std::string contents);
+
+} // namespace android::binder
