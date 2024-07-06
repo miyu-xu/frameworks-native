@@ -23,6 +23,7 @@ MANIFEST := $(LOCAL_DIR)/manifest.json
 MODULE_SRCS := \
 	$(LIBBINDER_TESTS_DIR)/binderRpcTestCommon.cpp \
 	$(LIBBINDER_TESTS_DIR)/binderRpcTestServiceTrusty.cpp \
+	$(LIBBINDER_TESTS_DIR)/FileUtilsTrusty.cpp \
 
 MODULE_LIBRARY_DEPS := \
 	frameworks/native/libs/binder/trusty \

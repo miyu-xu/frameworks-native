@@ -460,14 +460,21 @@ public:
 
     Status useKernelBinderCallingId() override { return Status::fromStatusT(UNKNOWN_TRANSACTION); }
 
-    Status echoAsFile(const std::string& /*content*/,
-                      android::os::ParcelFileDescriptor* /*out*/) override {
-        return Status::fromStatusT(UNKNOWN_TRANSACTION);
+    Status echoAsFile(const std::string& content, android::os::ParcelFileDescriptor* out) override {
+        out->reset(binder::mockFileDescriptor(content));
+        return Status::ok();
     }
 
-    Status concatFiles(const std::vector<android::os::ParcelFileDescriptor>& /*files*/,
-                       android::os::ParcelFileDescriptor* /*out*/) override {
-        return Status::fromStatusT(UNKNOWN_TRANSACTION);
+    Status concatFiles(const std::vector<android::os::ParcelFileDescriptor>& files,
+                       android::os::ParcelFileDescriptor* out) override {
+        std::string acc;
+        for (const auto& file : files) {
+            std::string result;
+            LOG_ALWAYS_FATAL_IF(!binder::ReadFdToString(file.get(), &result));
+            acc.append(result);
+        }
+        out->reset(binder::mockFileDescriptor(acc));
+        return Status::ok();
     }
 
     Status blockingSendFdOneway(const android::os::ParcelFileDescriptor& /*fd*/) override {

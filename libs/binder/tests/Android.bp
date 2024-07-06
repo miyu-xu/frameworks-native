@@ -463,6 +463,7 @@ cc_binary {
         "binderRpcUniversalTests.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcTestTrusty.cpp",
+        "FileUtilsTrusty.cpp",
     ],
 
     shared_libs: [
