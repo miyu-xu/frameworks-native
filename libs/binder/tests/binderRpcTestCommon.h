@@ -236,21 +236,6 @@ static inline std::unique_ptr<RpcTransportCtxFactory> newTlsFactory(
             LOG_ALWAYS_FATAL("Unknown RpcSecurity %d", static_cast<int>(rpcSecurity));
     }
 }
-
-// Create an FD that returns `contents` when read.
-static inline binder::unique_fd mockFileDescriptor(std::string contents) {
-    binder::unique_fd readFd, writeFd;
-    LOG_ALWAYS_FATAL_IF(!binder::Pipe(&readFd, &writeFd), "%s", strerror(errno));
-    RpcMaybeThread([writeFd = std::move(writeFd), contents = std::move(contents)]() {
-        signal(SIGPIPE, SIG_IGN); // ignore possible SIGPIPE from the write
-        if (!android::binder::WriteStringToFd(contents, writeFd)) {
-            int savedErrno = errno;
-            LOG_ALWAYS_FATAL_IF(EPIPE != savedErrno, "mockFileDescriptor write failed: %s",
-                                strerror(savedErrno));
-        }
-    }).detach();
-    return readFd;
-}
 #endif // __TRUSTY__
 
 // A threadsafe channel where writes block until the value is read.

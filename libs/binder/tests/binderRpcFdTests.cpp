@@ -19,6 +19,7 @@
 
 #include "../RpcWireFormat.h"
 
+using android::binder::mockFileDescriptor;
 using android::binder::ReadFdToString;
 
 namespace android {

@@ -18,6 +18,8 @@
 
 #include "../file.h"
 
+#include <binder/unique_fd.h>
+
 #ifndef BINDER_NO_LIBBASE
 
 namespace android::binder {
@@ -27,8 +29,6 @@ using android::base::WriteStringToFd;
 } // namespace android::binder
 
 #else // BINDER_NO_LIBBASE
-
-#include <binder/unique_fd.h>
 
 #include <string_view>
 
@@ -47,3 +47,9 @@ std::string GetExecutableDirectory();
 } // namespace android::binder
 
 #endif // BINDER_NO_LIBBASE
+
+namespace android::binder {
+
+unique_fd mockFileDescriptor(std::string contents);
+
+} // namespace android::binder
