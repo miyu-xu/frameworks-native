@@ -17,6 +17,7 @@
 #include "binderRpcTestCommon.h"
 
 using namespace android;
+using android::binder::mockFileDescriptor;
 using android::binder::ReadFdToString;
 using android::binder::unique_fd;
 
