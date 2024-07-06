@@ -307,6 +307,7 @@ cc_defaults {
     ],
 
     srcs: [
+        "binderRpcFdTests.cpp",
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcUniversalTests.cpp",
@@ -564,6 +565,7 @@ cc_test {
     ],
 
     srcs: [
+        "binderRpcFdTests.cpp",
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcUniversalTests.cpp",
