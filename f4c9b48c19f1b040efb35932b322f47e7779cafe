@@ -22,6 +22,30 @@
       },
       "revId": "f4c9b48c19f1b040efb35932b322f47e7779cafe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7926884_6cb5d4be",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-08T22:06:00Z",
+      "side": 1,
+      "message": "I don\u0027t think it should since this is only going to be the case for RPC binder with a connection that doesn\u0027t work at all.\n\nI don\u0027t see these logs on a boot of Cuttlefish or when starting AVF apps.",
+      "parentUuid": "2cdffc4c_4a5dcc05",
+      "range": {
+        "startLine": 1588,
+        "startChar": 32,
+        "endLine": 1589,
+        "endChar": 35
+      },
+      "revId": "f4c9b48c19f1b040efb35932b322f47e7779cafe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
