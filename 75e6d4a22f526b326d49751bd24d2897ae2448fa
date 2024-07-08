@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a8e60b_3d246ee5",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-07-08T18:33:07Z",
+      "side": 1,
+      "message": "I\u0027d minimize the number of conditionally compiled lines.  This could be done as a static boolean method, or even a module-wide method, in which the return value depends on the #define.  (The AI suggestion is pretty good!)",
+      "fixSuggestions": [
+        {
+          "fixId": "79e52c0c_02f5796d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 274,
+                "startChar": 0,
+                "endLine": 274,
+                "endChar": 0
+              },
+              "replacement": "static bool isClientCacheEnabled() {\n#ifdef LIBBINDER_CLIENT_CACHE\n    return true;\n#else\n    return false;\n#endif\n}\n\n"
+            },
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 286,
+                "startChar": 0,
+                "endLine": 289,
+                "endChar": 0
+              },
+              "replacement": "    if (isClientCacheEnabled()) {\n        ALOGI(\"LIBBINDER_CLIENT_CACHE enabled\");\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
