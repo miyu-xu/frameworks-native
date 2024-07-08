@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6b0cae_9c4dbda0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2024-07-08T18:43:13Z",
+      "side": 1,
+      "message": "LGTM.  The comment can be deferred, since it is code that will be completely changed anyway.",
+      "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a8e60b_3d246ee5",
