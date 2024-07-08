@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e725a25_0a161b94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-08T19:51:49Z",
+      "side": 1,
+      "message": "Why is this a build flag instead of a normal aconfig flag? This flag is needed to \"safely\" change the run-time behavior following the Trunk Stable guidelines?\n\ngo/android-aconfig",
+      "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54a8e60b_3d246ee5",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 1
@@ -77,6 +94,47 @@
       "side": 1,
       "message": "Fix applied.",
       "parentUuid": "54a8e60b_3d246ee5",
+      "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cf4b5b_d88fead9",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-08T19:51:49Z",
+      "side": 1,
+      "message": "I don\u0027t see the fix applied.",
+      "parentUuid": "0b027efc_c4855263",
+      "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed71885_63ee27de",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-08T19:51:49Z",
+      "side": 1,
+      "message": "What is this for? Is there supposed to be another CL in this topic? Can we wait to use the flag until we have code to hide behind it?",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 44
+      },
       "revId": "75e6d4a22f526b326d49751bd24d2897ae2448fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
