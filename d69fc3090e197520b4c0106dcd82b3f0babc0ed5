@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f4728b8_39e640bb",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "Done. I added this check to libvintf and tested it.",
+      "parentUuid": "7dab6645_e657c3ea",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 51
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49c30476_0d1bbd0e",
@@ -287,6 +311,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1d8c70e_88d8c23c",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "I split it into a separate aidl_interface.\n\n\u003e but I\u0027m wondering if we can keep it unstable like IServiceManager and other interfaces here.\n\nIf we provide an `accessor_launcher` binary as planned (http://b/346674270#comment9), IAccessor does not need to be stable. It will just serve as an internal contract between the libbinder and (AVF + others relevant parties)\n\n\u003e Right now, we have the ability for microdroid_manager, virtmgr, etc. to remain the only processes that are allowed to set up these connections. I think that\u0027s valuable as it keeps these actions restricted...\n\n+1. Currently only virtmgr is allowed to connect to an listening socket in the VM and it\u0027s better to keep this enforcement.",
+      "parentUuid": "67081be1_8ef282e0",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6cec80c_d122f82e",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 14
@@ -426,6 +474,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f060b685_99b74583",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "+1. I only made the interface \"android.os.accessor\" available to the virt apex for now. We can add other users later when needed.",
+      "parentUuid": "563bb75f_63db47d3",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bcc1027_ab151ce5",
@@ -439,6 +511,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "maybe also call it \u0027addConnection\u0027 to be explicit that each call doesn\u0027t get an exclusive connection?\n\nnit: mention expected to be called multiple times,",
+      "range": {
+        "startLine": 26,
+        "startChar": 19,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ed01a6_28860d3e",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bcc1027_ab151ce5",
       "range": {
         "startLine": 26,
         "startChar": 19,
@@ -498,6 +594,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2dfcb01e_1f1788e8",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "With the current API, even I return multiple FDs here, still only one will be used by the caller in `BackendUnifiedServiceManager::getService`. I would prefer to introduce this change later together with the binder API change in another patch.",
+      "parentUuid": "8b01ac2c_ec6ccd9d",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2392153c_0bbe6d6d",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 14
@@ -509,6 +629,24 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "nit: are there any APIs we would want to add for debugging?",
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e76c3a00_4c7dff7c",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "Actually I plan to add APIs for debugging in a different patch so the current one could just focus on making the whole flow work. I added a TODO here.",
+      "parentUuid": "2392153c_0bbe6d6d",
       "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -536,6 +674,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25dcce24_4459b802",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06fc466b_99f79cd4",
+      "range": {
+        "startLine": 73,
+        "startChar": 14,
+        "endLine": 73,
+        "endChar": 21
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe06cc6_53a61d9e",
@@ -549,6 +711,30 @@
       "writtenOn": "2024-07-01T23:04:35Z",
       "side": 1,
       "message": "how do notifications work with accessors? Are there any special cases? They are used to implement waitForService, so we may need to change it to give a notification to the client when an accessor for that service is registered as well, though that makes permissions complicated - maybe instead registerForNotification also requests for the accessor permissions?",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aafe3c4_0b3b144c",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T12:00:04Z",
+      "side": 1,
+      "message": "I\u0027ve added the accessor permission here. However, I think the notification would require a few more changes to make it work properly. Would you mind if I handle this in a separate cl?\n\nThe changes I have in mind are:\n\n- Change the `IServiceCallback#onRegistration(name, binder)` method to `IServiceCallback#onRegistration(name, Service)`.\n- Add a new API called \"ServiceManager_addAccessor\" all along the pipeline.\n  - In `addAccessor`, I\u0027ll call IServiceCallback#onRegistration(name, Service#accessor) to notify the caller.\n  - In the original `addService`, we call `call IServiceCallback#onRegistration(name, Service#binder)`\n\nWhen a caller invokes \"waitForService(serviceName)\", `BackendUnifiedServiceManager` will set up the RPC binder upon receiving Service#accessor in `onRegistration`.",
+      "parentUuid": "bfe06cc6_53a61d9e",
       "range": {
         "startLine": 88,
         "startChar": 6,
