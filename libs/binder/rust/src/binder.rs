@@ -202,6 +202,9 @@ pub trait IBinderInternal: IBinder {
     /// Dump this object to the given file handle
     fn dump<F: AsRawFd>(&mut self, fp: &F, args: &[&str]) -> Result<()>;
 
+    /// Request the service to set up an APC server for this client
+    fn set_rpc_client<F: AsRawFd>(&mut self, fp: &F, keep_alive_binder: SpIBinder) -> Result<()>;
+
     /// Get a new interface that exposes additional extension functionality, if
     /// available.
     fn get_extension(&mut self) -> Result<Option<SpIBinder>>;
