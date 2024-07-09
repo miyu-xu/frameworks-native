@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80e49ba6_832eb3a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097570
+      },
+      "writtenOn": "2024-07-09T20:15:36Z",
+      "side": 1,
+      "message": "Please let me know if it\u0027s the wrong spot to remove the stale time record, but this seems to do the trick for TvtsJankHostTestCases. I chose this spot after noticing in my perfetto trace that all duplicate \"setBuffer\" had a \"callReleaseBufferCallback\" as part of their \"releasePreviousBuffer\" (while the \"releasePreviousBuffer\" for non-duplicate \"setBuffer\" didn\u0027t)",
+      "revId": "4c56808323cb418c03949572206968b421438176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
