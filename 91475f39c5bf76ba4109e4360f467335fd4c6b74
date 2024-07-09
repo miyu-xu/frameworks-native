@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e35581_72d3e6f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-09T22:19:36Z",
+      "side": 1,
+      "message": "This will work for a flag here, thanks! Do you have an implementation of the cache as well?",
+      "revId": "91475f39c5bf76ba4109e4360f467335fd4c6b74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
