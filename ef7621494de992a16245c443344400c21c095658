@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6335798_84e9886f",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-09T20:02:48Z",
+      "side": 1,
+      "message": "```suggestion\n    LOG_ALWAYS_FATAL_IF(len \u003c static_cast\u003csocklen_t\u003e(sizeof(serverAddr)),\n```\n\nsocklen_t doesn\u0027t have to be signed, does it? And if it is (and may be negative here for any reason), then it\u0027s safer to cast sizeof here.\n\nPlease try the suggested edit.",
+      "range": {
+        "startLine": 1171,
+        "startChar": 24,
+        "endLine": 1171,
+        "endChar": 76
+      },
+      "revId": "ef7621494de992a16245c443344400c21c095658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
