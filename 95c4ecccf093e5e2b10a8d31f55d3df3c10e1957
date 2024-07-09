@@ -16,6 +16,23 @@
       "message": "Testing it locally with an app that sets desiredPresentTime such that SF latches two buffers in the same frame",
       "revId": "95c4ecccf093e5e2b10a8d31f55d3df3c10e1957",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa63a77_59c33001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2024-07-09T20:46:20Z",
+      "side": 1,
+      "message": "Thanks for the contribution and making Android better!",
+      "revId": "95c4ecccf093e5e2b10a8d31f55d3df3c10e1957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
