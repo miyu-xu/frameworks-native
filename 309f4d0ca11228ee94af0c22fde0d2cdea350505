@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b79980_ddfff726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-09T18:34:34Z",
+      "side": 1,
+      "message": "nit: should we mention that a user may want to use `pingBinder()` if they want to see if the binder is currently alive?",
+      "revId": "309f4d0ca11228ee94af0c22fde0d2cdea350505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
