@@ -1364,6 +1364,10 @@ void SurfaceFlinger::finalizeDisplayModeChange(DisplayDevice& display) {
     if (pendingModeOpt->emitEvent) {
         dispatchDisplayModeChangeEvent(displayId, activeMode);
     }
+
+    // Start receiving vsync samples now when mode changed
+    mScheduler->resyncToHardwareVsync(displayId, true /* allowToEnable */,
+                                      activeMode.modePtr.get());
 }
 
 void SurfaceFlinger::dropModeRequest(const sp<DisplayDevice>& display) {
