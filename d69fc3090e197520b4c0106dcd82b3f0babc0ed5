@@ -500,6 +500,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d03f397c_43b9b91a",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T00:12:43Z",
+      "side": 1,
+      "message": "It should be entirely external to libbinder or entirely internal. I\u0027ve chatted with Devin a bit about this, and we should chat, but it\u0027s not a change in architecture - just a change in where things are.\n\nCan you consider http://go/apis-native-and-idl - libbinder_ndk is already a native API, so we should not add to part of it to be a PL API as well. Let\u0027s chat this week and close this out.\n\nThe implementation of IAccessor should also be in libbinder as well (if not, how will we get rid of libbinder_rpc_unstable later?). This will ensure that libbinder itself knows which FDs it\u0027s opening up and how, and that it can attest them at some level (even if it needs a callback to do something like DICE attestation).",
+      "parentUuid": "f060b685_99b74583",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bcc1027_ab151ce5",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 14
@@ -616,6 +640,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67264545_1532576e",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T00:12:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2dfcb01e_1f1788e8",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2392153c_0bbe6d6d",
@@ -647,6 +695,24 @@
       "side": 1,
       "message": "Actually I plan to add APIs for debugging in a different patch so the current one could just focus on making the whole flow work. I added a TODO here.",
       "parentUuid": "2392153c_0bbe6d6d",
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e326c461_dada5ee7",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T00:12:43Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "e76c3a00_4c7dff7c",
       "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -735,6 +801,30 @@
       "side": 1,
       "message": "I\u0027ve added the accessor permission here. However, I think the notification would require a few more changes to make it work properly. Would you mind if I handle this in a separate cl?\n\nThe changes I have in mind are:\n\n- Change the `IServiceCallback#onRegistration(name, binder)` method to `IServiceCallback#onRegistration(name, Service)`.\n- Add a new API called \"ServiceManager_addAccessor\" all along the pipeline.\n  - In `addAccessor`, I\u0027ll call IServiceCallback#onRegistration(name, Service#accessor) to notify the caller.\n  - In the original `addService`, we call `call IServiceCallback#onRegistration(name, Service#binder)`\n\nWhen a caller invokes \"waitForService(serviceName)\", `BackendUnifiedServiceManager` will set up the RPC binder upon receiving Service#accessor in `onRegistration`.",
       "parentUuid": "bfe06cc6_53a61d9e",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12701260_304dd610",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T00:12:43Z",
+      "side": 1,
+      "message": "Separate CL is great.",
+      "parentUuid": "9aafe3c4_0b3b144c",
       "range": {
         "startLine": 88,
         "startChar": 6,
