@@ -548,6 +548,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50a0e7c8_6942c612",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-10T14:39:21Z",
+      "side": 1,
+      "message": "From our discussion yesterday, Steven suggested something similar.\n\n```\nAAccessor* AAccessor_create();\nAAccessor_delete(AAccessor*);\nAAccessor_registerAddConnection(AAccessor*, int (*addConnection(void*));\n...\n```\nThen I think we could do something like:\n```\n// register the IAccessor with servicemanager?\nAServiceManager_addAccessor(AAccessor*);\n// register it locally when there is no kernel binder\nAServiceManager_injectLocalAccessor(AAccessor*);\n```\n\nBut he really wanted to get rind of `int (*addConnection)(void*)` so libbinder can be responsible for creating the FD and calling `connect()` so libbinder controls everything.\n\nCan we break `int (*addConnection)(void*)` apart into multiple callbacks that can satisfy the requirements? So the IAccessor implementation in libbinder can use these callbacks to get the final FD used with `ParcelFileDescriptor addConnection()`.\n\nLike can we get by with `getConnectionInfo` for when we don\u0027t have the connection info at the time of creating the AAcessor, `attestConnection` for authmgr, etc?",
+      "parentUuid": "a47446f4_8d60742d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bcc1027_ab151ce5",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 14
