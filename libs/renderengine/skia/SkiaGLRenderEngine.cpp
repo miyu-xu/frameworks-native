@@ -28,6 +28,7 @@
 #include <android-base/stringprintf.h>
 #include <gl/GrGLInterface.h>
 #include <include/gpu/ganesh/gl/GrGLDirectContext.h>
+#include <graphicsenv/GpuStatsInfo.h>
 #include <gui/TraceUtils.h>
 #include <sync/sync.h>
 #include <ui/DebugUtils.h>
@@ -466,6 +467,8 @@ EGLContext SkiaGLRenderEngine::createEglContext(EGLDisplay display, EGLConfig co
         contextAttributes.push_back(EGL_PROTECTED_CONTENT_EXT);
         contextAttributes.push_back(EGL_TRUE);
     }
+    contextAttributes.push_back(EGL_TELEMETRY_HINT_ANDROID);
+    contextAttributes.push_back(android::GpuStatsInfo::SKIP_TELEMETRY);
     contextAttributes.push_back(EGL_NONE);
 
     EGLContext context = eglCreateContext(display, config, shareContext, contextAttributes.data());

@@ -937,12 +937,16 @@ EGLContext eglCreateContextImpl(EGLDisplay dpy, EGLConfig config, EGLContext sha
         if (context != EGL_NO_CONTEXT) {
             // figure out if it's a GLESv1 or GLESv2
             int version = egl_connection_t::GLESv1_INDEX;
+            bool isSkiaOrHWUIContext = false;
             if (attrib_list) {
                 while (*attrib_list != EGL_NONE) {
                     GLint attr = *attrib_list++;
                     GLint value = *attrib_list++;
                     if (attr == EGL_CONTEXT_CLIENT_VERSION && (value == 2 || value == 3)) {
                         version = egl_connection_t::GLESv2_INDEX;
+                    } else if (attr == EGL_TELEMETRY_HINT_ANDROID &&
+                               value == android::GpuStatsInfo::SKIP_TELEMETRY) {
+                        isSkiaOrHWUIContext = true;
                     }
                 };
             }
@@ -950,8 +954,10 @@ EGLContext eglCreateContextImpl(EGLDisplay dpy, EGLConfig config, EGLContext sha
                 android::GraphicsEnv::getInstance().setTargetStats(
                         android::GpuStatsInfo::Stats::GLES_1_IN_USE);
             }
-            android::GraphicsEnv::getInstance().setTargetStats(
-                    android::GpuStatsInfo::Stats::CREATED_GLES_CONTEXT);
+            if (!isSkiaOrHWUIContext) {
+                android::GraphicsEnv::getInstance().setTargetStats(
+                        android::GpuStatsInfo::Stats::CREATED_GLES_CONTEXT);
+            }
             egl_context_t* c = new egl_context_t(dpy, context, config, cnx, version);
             return c;
         }

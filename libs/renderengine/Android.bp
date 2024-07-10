@@ -44,6 +44,7 @@ cc_defaults {
         "libui",
         "libutils",
         "libvulkan",
+        "libgraphicsenv",
     ],
 
     static_libs: [
