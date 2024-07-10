@@ -1,0 +1,615 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5d4d3dd_902d2db4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "recommend - `adb shell start` `adb shell stop`\n\ninit_kill_services_test\n\nkilling random processes on the phone\n\nadding additional tests to binderLibTest if possible",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4586c11_b1baa1b1",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "style (everywhere)",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f6aa1c22_53ab8f43",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ClientSideCacheList.cpp",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "const std::unordered_set\u003cstd::u16string\u003e\u0026 getCachelistSet() {\n"
+            },
+            {
+              "path": "libs/binder/ClientSideCacheList.cpp",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "    return getCachelistSet().contains(std::u16string(service_name));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1b8c16_bb0c160f",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "don\u0027t allocate this on the heap, for just 3 things, you can make a C-style string and have it static (in .ro.data) to avoid adding per-process dirty memory for this list. It will be faster.",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a71cf504_601b3286",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ClientSideCacheList.cpp",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cstring\u003e\n"
+            },
+            {
+              "path": "libs/binder/ClientSideCacheList.cpp",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "const std::string\u0026 get_cachelist_set() {\n    static const std::string* cache_list \u003d new std::string(\n            \"permissionmgr\\0legacy_permission\\0media.resource_manager\\0\");\n"
+            },
+            {
+              "path": "libs/binder/ClientSideCacheList.cpp",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "    return get_cachelist_set().find(service_name) !\u003d std::string::npos;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940a96ad_b2de099a",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "nit: unnecessary allocation",
+      "range": {
+        "startLine": 33,
+        "startChar": 45,
+        "endLine": 33,
+        "endChar": 54
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158a68d4_537869e1",
+        "filename": "libs/binder/ClientSideCacheList.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "keep this in IServiceManagement.cpp to keep the implementation small? We probably don\u0027t need 3 new classes for this, it\u0027ll be easy to iterate on at first, and you will also avoid the Android.bp change for now.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261b5289_8405a2ab",
+        "filename": "libs/binder/ClientSideCacheList.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "isClientSideCachingEnabled\n\n(to match libbinder style, also disambiguate this is a getter, not a setter)\n\nAlso - no need for a class here - can just be a function.",
+      "range": {
+        "startLine": 24,
+        "startChar": 16,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ef543cf4_a280a817",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ClientSideCacheList.h",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "bool isClientSideCachingEnabled(std::u16string_view service_name);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bae4410_6b462090",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "this should be crashing because key_str lifetime goes away - you need a view of the object inside of mCacheStorage. In order to dev this if you haven\u0027t used lifetimes before, I\u0027d recommend avoid string-view while working on this, and then get rid of copies once it\u0027s working.",
+      "range": {
+        "startLine": 106,
+        "startChar": 20,
+        "endLine": 106,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c6c5481c_6fb1627b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "        mCache[key_str] \u003d item;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37f9dc9_a53f1e99",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "Unnecessary class - avoid it. You can avoid heap allocating the cache strings anyway (since the cache must be in the cache list), and for complicated usage, you usually want to lock multiple different operations at once (e.g. remove then add), not locking each one",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 2
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f782ea_21fdf6ee",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "Do a locked check first (one reason not to have the internal locks) and make sure the \u0027who\u0027 here is the same one that is cached. You may get calls out of order, if there are multiple death recipients or in some weird cases, and a routine (potentially in another death recipient) may have already updated the internal cache, so you\u0027ll need to make sure you remove this from the cache only if it hasn\u0027t already been removed.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f2e21e7f_8fe1e95a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 125,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "            std::optional\u003csp\u003cIBinder\u003e\u003e item \u003d mInternalCache-\u003egetItem(mKey);\n            if (item.has_value() \u0026\u0026 (*item)-\u003eisBinderAlive()) {\n                mInternalCache-\u003eremoveItem(mKey);\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6099a746_9b7b314e",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "avoid non const* static lifetime raw pointer, make ownership explicit",
+      "range": {
+        "startLine": 129,
+        "startChar": 30,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d956bb10_ebb03202",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "why String16 here and u16string elsewhere?",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f02b90cb_3ce72b48",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 130,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "        std::u16string mKey;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf632ca6_16446bdf",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "sp\u003cIBinder\u003e is usually used for this type (as it can be null itself) - so since \u0027sp\u003c\u003e\u0027 is bad - I\u0027d recommend avoid using optional with it",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ce447ca0_a878a33e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003cIBinder\u003e getItem(const String16\u0026 key) {\n"
+            },
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 402,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003cIBinder\u003e item \u003d mCacheForGetService.getItem(name);\n    if (item !\u003d nullptr \u0026\u0026 item-\u003eisBinderAlive()) {\n        return item;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd0e0ae_d06043a5",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "const\u0026 for sp as well",
+      "range": {
+        "startLine": 136,
+        "startChar": 39,
+        "endLine": 136,
+        "endChar": 40
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b717aa_5941502f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "const\u0026",
+      "range": {
+        "startLine": 136,
+        "startChar": 25,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f94055c_44cf61c5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": "    void addItem(const String16\u0026 key, sp\u003cIBinder\u003e item) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c235e245_cafea926",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "check error, handle error case",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a9b0b2d_3a32fbe4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "        if (Status status \u003d item-\u003elinkToDeath(deathRecipient); !status.isOk()) {\n            ALOGE(\"Failed to linkToDeath for %s: %s\", String8(key).c_str(),\n                  status.toString8().c_str());\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c5591e_70e186b4",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "\u0027getItem\u0027 should be const instead of making this mutable?",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ac09457_d9cad092",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": "    BinderCacheWithInvalidation mCacheForGetService;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876e5d16_9d3bbcfe",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T20:13:06Z",
+      "side": 1,
+      "message": "At the top of the file, put:\n\n```\n#ifdef LIBBINDER_CLIENT_CACHE\nconstexpr bool kUseCache \u003d true;\n#else\nconstexpr bool kUseCache \u003d false;\n#endif\n```\n\nThen use that here, so that more things will be compile tested.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 29
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
