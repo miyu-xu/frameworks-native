@@ -16,6 +16,24 @@
       "message": "nit: should we mention that a user may want to use `pingBinder()` if they want to see if the binder is currently alive?",
       "revId": "309f4d0ca11228ee94af0c22fde0d2cdea350505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b39470_2cefab8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-10T00:46:08Z",
+      "side": 1,
+      "message": "wouldn\u0027t have hurt, but merging this since it\u0027s ready 😊",
+      "parentUuid": "d0b79980_ddfff726",
+      "revId": "309f4d0ca11228ee94af0c22fde0d2cdea350505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
