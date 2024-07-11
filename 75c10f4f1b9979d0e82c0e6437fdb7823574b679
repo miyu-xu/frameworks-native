@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c461cf7_5ba1115e",
+        "filename": "libs/binder/tests/binderRpcTestCommon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-07-11T20:35:19Z",
+      "side": 0,
+      "message": "can\u0027t you just move it outside the `#ifndef __TRUSTY__` block? i thought this file was usable by all OS\u0027s already",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
