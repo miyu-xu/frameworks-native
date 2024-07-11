@@ -299,8 +299,10 @@ enum AHardwareBuffer_UsageFlags {
      */
     AHARDWAREBUFFER_USAGE_SENSOR_DIRECT_DATA    = 1UL << 23,
     /**
-     * The buffer will be used as a shader storage or uniform buffer object.
-     * When this flag is present, the format must be AHARDWAREBUFFER_FORMAT_BLOB.
+     * If format is AHARDWAREBUFFER_FORMAT_BLOB: The buffer will be used as a shader
+     * storage or uniform buffer object.
+     *
+     * If format is any other value: The buffer will be used as a storage image.
      */
     AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER       = 1UL << 24,
     /**
@@ -458,8 +460,7 @@ void AHardwareBuffer_describe(const AHardwareBuffer* _Nonnull buffer,
  * than waiting on the fence and then calling this function.
  *
  * The \a usage parameter may only specify AHARDWAREBUFFER_USAGE_CPU_*.
- * If set, then outVirtualAddress is filled with the address of the
- * buffer in virtual memory. The flags must also be compatible with
+ * The flags must also be compatible with
  * usage flags specified at buffer creation: if a read flag is passed,
  * the buffer must have been created with
  * AHARDWAREBUFFER_USAGE_CPU_READ_RARELY or
@@ -471,6 +472,9 @@ void AHardwareBuffer_describe(const AHardwareBuffer* _Nonnull buffer,
  * the area specified by rect. If rect is NULL, the caller may modify
  * the contents of the entire buffer. The content of the buffer outside
  * of the specified rect is NOT modified by this call.
+ *
+ * If successful, then outVirtualAddress is filled with the address of
+ * the buffer in virtual memory.
  *
  * It is legal for several different threads to lock a buffer for read
  * access; none of the threads are blocked.
