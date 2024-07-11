@@ -22,6 +22,9 @@
       // flaky on mixed gsi builds
       "options": [
         {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
+        },
+        {
           "exclude-filter": "android.graphics.cts.CameraGpuTest#testCameraImageCaptureAndRendering"
         },
         {

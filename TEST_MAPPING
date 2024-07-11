@@ -17,6 +17,9 @@
       "options": [
         {
           "include-filter": "android.graphics.cts.VulkanPreTransformTest"
+        },
+        {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
         }
       ]
     }
