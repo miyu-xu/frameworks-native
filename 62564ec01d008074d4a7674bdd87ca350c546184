@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0730e2a_6b2167ff",
+        "filename": "libs/binder/tests/FileUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-11T18:11:42Z",
+      "side": 1,
+      "message": "How about not defining `mockFileDescriptor` outside of linux at all? I mean moving this ifdef one line earlier.\n\nThis way you\u0027ll get error at link time, not runtime.",
+      "revId": "62564ec01d008074d4a7674bdd87ca350c546184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052649ea_3cd965d6",
+        "filename": "libs/binder/tests/FileUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-07-11T18:11:42Z",
+      "side": 1,
+      "message": "Why not `android::binder`?",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4777ec49_56b6afb1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/FileUtils.h",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "namespace android::binder {\n"
+            },
+            {
+              "path": "libs/binder/tests/FileUtils.h",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "unique_fd mockFileDescriptor(std::string contents);\n"
+            },
+            {
+              "path": "libs/binder/tests/FileUtils.h",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "} // namespace android::binder\n"
+            }
+          ]
+        }
+      ],
+      "revId": "62564ec01d008074d4a7674bdd87ca350c546184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
