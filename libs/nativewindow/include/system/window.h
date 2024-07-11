@@ -854,6 +854,10 @@ static inline int native_window_set_scaling_mode(
  * connects an API to this window. only one API can be connected at a time.
  * Returns -EINVAL if for some reason the window cannot be connected, which
  * can happen if it's connected to some other API.
+ *
+ * While an API is connected to the window, other callers should not attempt
+ * to modify any properties of the window except those explicitly noted as
+ * being available while an API is connected. Otherwise, undefined results occur.
  */
 static inline int native_window_api_connect(
         struct ANativeWindow* window, int api)
