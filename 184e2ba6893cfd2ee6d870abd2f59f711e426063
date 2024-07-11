@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6910a989_1ea7bc7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-07-11T20:33:12Z",
+      "side": 1,
+      "message": "is this only needed for tests? if so, can you put it in an internal header instead?\n\ni have two concerns:\n\n1. i don\u0027t think clients should be using this, so it shouldn\u0027t be in the public API\n2. i don\u0027t think we should have separate maxes. if you move a service to be behind TIPC, then suddenly it might break because of the FD limit and need to be reworked. we might want to use the min of the two limit always to avoid this. or change the protocol so that it splits the FDs into multiple messages so that there is no limit",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "184e2ba6893cfd2ee6d870abd2f59f711e426063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
