@@ -22,6 +22,30 @@
       },
       "revId": "184e2ba6893cfd2ee6d870abd2f59f711e426063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f637b9c8_1c60f8fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-11T23:37:24Z",
+      "side": 1,
+      "message": "\u003e change the protocol so that it splits the FDs into multiple messages so that there is no limit\n\nI like this approach a lot. Clients shouldn\u0027t need to know that they can only send 8 or 253 or whatever other limit other transports might have (could be 4 or 6 or who knows). When we add buffer sharing to vsock, that might have its own arbitrary limit.\n\nThe tipc transport already breaks down messages, I\u0027ll see if it can be added to the UDS transport as well.",
+      "parentUuid": "6910a989_1ea7bc7a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "184e2ba6893cfd2ee6d870abd2f59f711e426063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
