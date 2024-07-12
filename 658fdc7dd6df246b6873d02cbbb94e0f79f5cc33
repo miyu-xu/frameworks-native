@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb61233_b1d383e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-07-12T16:40:56Z",
+      "side": 1,
+      "message": "Alec, any concerns about removing `const` here? We cannot leave it as-is, but maybe there\u0027s another way we can continue enforcing that we\u0027re not changing the `LayerState`?",
+      "revId": "658fdc7dd6df246b6873d02cbbb94e0f79f5cc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7abe2a_a7970c2c",
+        "filename": "services/surfaceflinger/CompositionEngine/include/compositionengine/impl/planner/Predictor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1012974
+      },
+      "writtenOn": "2024-07-12T16:40:56Z",
+      "side": 1,
+      "message": "You have a bug of build errors, so maybe you\u0027ve already verified that this builds, but isn\u0027t this also a vector of `const` things? Or no - I guess it\u0027s a vector of non-`const` pointers to `const LayerState`?\n\n(This should probably be an `std::span`?)",
+      "range": {
+        "startLine": 95,
+        "startChar": 39,
+        "endLine": 95,
+        "endChar": 76
+      },
+      "revId": "658fdc7dd6df246b6873d02cbbb94e0f79f5cc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
