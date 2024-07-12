@@ -46,6 +46,30 @@
       },
       "revId": "184e2ba6893cfd2ee6d870abd2f59f711e426063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83af8271_f3aecff4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-07-12T00:26:59Z",
+      "side": 1,
+      "message": "I wouldn\u0027t jump on it right away. It is going to require a protocol version bump. I think we can just have the limits hidden for now and know that we can remove them later.",
+      "parentUuid": "f637b9c8_1c60f8fe",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "184e2ba6893cfd2ee6d870abd2f59f711e426063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
