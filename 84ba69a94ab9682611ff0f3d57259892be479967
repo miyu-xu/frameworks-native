@@ -1252,6 +1252,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46c1456_f4ba3da6",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-12T02:18:54Z",
+      "side": 1,
+      "message": "Made these non-virtual similar to how getExtension works.",
+      "parentUuid": "b662d501_9e68cdbb",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 61,
+        "endChar": 27
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adc24210_96241465",

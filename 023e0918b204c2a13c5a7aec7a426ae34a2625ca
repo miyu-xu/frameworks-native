@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d329a2b2_96da1161",
+        "filename": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-12T02:18:54Z",
+      "side": 1,
+      "message": "Guarded theses behind ProcessState::DriverFeature::FREEZE_NOTIFICATION.",
+      "range": {
+        "startLine": 366,
+        "startChar": 34,
+        "endLine": 366,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2bbf877d_cfe89300",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "#include \"android-base/properties.h\"\n"
+            },
+            {
+              "path": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+              "range": {
+                "startLine": 366,
+                "startChar": 0,
+                "endLine": 367,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(BinderDriverInterfaceTest, RequestFreezeNotification) {\n    if (!android::base::GetBoolProperty(\"ro.vendor.binder_driver_feature_freeze_notification\", false)) {\n        GTEST_SKIP() \u003c\u003c \"Kernel does not support freeze notification\";\n    }\n"
+            },
+            {
+              "path": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+              "range": {
+                "startLine": 445,
+                "startChar": 0,
+                "endLine": 446,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(BinderDriverInterfaceTest, OverwritePendingFreezeNotification) {\n    if (!android::base::GetBoolProperty(\"ro.vendor.binder_driver_feature_freeze_notification\", false)) {\n        GTEST_SKIP() \u003c\u003c \"Kernel does not support freeze notification\";\n    }\n"
+            },
+            {
+              "path": "libs/binder/tests/binderDriverInterfaceTest.cpp",
+              "range": {
+                "startLine": 502,
+                "startChar": 0,
+                "endLine": 503,
+                "endChar": 0
+              },
+              "replacement": "TEST_F(BinderDriverInterfaceTest, ResendFreezeNotification) {\n    if (!android::base::GetBoolProperty(\"ro.vendor.binder_driver_feature_freeze_notification\", false)) {\n        GTEST_SKIP() \u003c\u003c \"Kernel does not support freeze notification\";\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "023e0918b204c2a13c5a7aec7a426ae34a2625ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
