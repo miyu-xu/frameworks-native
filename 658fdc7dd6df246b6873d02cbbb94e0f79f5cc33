@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d44d0b_ef7c03c7",
+        "filename": "services/surfaceflinger/CompositionEngine/include/compositionengine/impl/planner/Predictor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2024-07-12T23:20:10Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s a vector of non-`const` pointers to `const LayerState`.",
+      "parentUuid": "7d7abe2a_a7970c2c",
+      "range": {
+        "startLine": 95,
+        "startChar": 39,
+        "endLine": 95,
+        "endChar": 76
+      },
+      "revId": "658fdc7dd6df246b6873d02cbbb94e0f79f5cc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1ccf648_ecc4e17b",
@@ -96,6 +120,30 @@
           ]
         }
       ],
+      "revId": "658fdc7dd6df246b6873d02cbbb94e0f79f5cc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e9a317_277f8dd4",
+        "filename": "services/surfaceflinger/CompositionEngine/include/compositionengine/impl/planner/Predictor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2024-07-12T23:20:10Z",
+      "side": 1,
+      "message": "The advice I\u0027m familiar with is to avoid const data members in C++:\n\n - https://quuxplusone.github.io/blog/2022/01/23/dont-const-all-the-things/#data-members-never-const\n - https://lesleylai.info/en/const-and-reference-member-variables/\n\nThe OutputLayerState class already has const data members, and LayerState contains OutputLayerState, so LayerStack is already restricted in some ways (i.e. no assignment, no swap, no moving-from).\n\nLayerStack doesn\u0027t contain LayerState directly but instead contains `std::vector\u003cLayerState\u003e`, so LayerStack still has swap and move-assignment, but not copy-assignment. Making mLayers const will disable swap and assignment for the LayerStack class, which also disables them for classes containing LayerStack (i.e. the Prediction and PromotionCandidate classes).\n\nMaking PromotionCandidate non-assignable causes a compile error in Predictor::promoteIfCandidate:\n\n```\n    auto candidateEntry \u003d getCandidateEntryByHash(predictionHash);\n    ...\n    mCandidates.erase(candidateEntry);\n```\n\ncandidateEntry is an iterator, and it is used to erase an entry from `std::deque\u003cPromotionCandidate\u003e mCandidates`. Erasing an entry shifts the remaining entries by one swap, which apparently needs swap or assignment.\n\nBuild error: https://paste.googleplex.com/5496974050852864\n\n`error: object of type \u0027android::compositionengine::impl::planner::Predictor::PromotionCandidate\u0027 cannot be assigned because its copy assignment operator is implicitly deleted`",
+      "parentUuid": "f1ccf648_ecc4e17b",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 36
+      },
       "revId": "658fdc7dd6df246b6873d02cbbb94e0f79f5cc33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
