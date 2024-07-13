@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455877ff_e75f1cfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3530698
+      },
+      "writtenOn": "2024-07-13T01:03:21Z",
+      "side": 1,
+      "message": "Lim Ching Kong",
+      "revId": "42640747fd3647a45a406441d5746dcb20edb2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
