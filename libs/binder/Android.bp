@@ -450,8 +450,31 @@ cc_library_shared {
     ],
 }
 
+soong_config_module_type {
+    name: "libbinder_client_cache_config",
+    module_type: "cc_defaults",
+    config_namespace: "libbinder",
+    bool_variables: ["release_libbinder_client_cache"],
+    properties: [
+        "cflags",
+    ],
+}
+
+libbinder_client_cache_config {
+    name: "libbinder_client_cache_flag",
+    soong_config_variables: {
+        release_libbinder_client_cache: {
+            cflags: ["-DENABLE_CLIENT_CACHE"],
+            conditions_default: {
+                cflags: ["-DNO_ENABLE_CLIENT_CACHE"], 
+            }
+        }
+    },
+}
+        
 cc_defaults {
     name: "libbinder_kernel_defaults",
+    defaults: ["libbinder_client_cache_flag"],
     srcs: [
         "BufferedTextOutput.cpp",
         "BackendUnifiedServiceManager.cpp",
