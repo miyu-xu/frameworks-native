@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75c26998_1c8f8c5c",
+        "filename": "libs/binder/tests/FileUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-16T00:59:24Z",
+      "side": 1,
+      "message": "I thought it would break host builds, but apparently it doesn\u0027t.",
+      "parentUuid": "f0730e2a_6b2167ff",
+      "revId": "62564ec01d008074d4a7674bdd87ca350c546184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "052649ea_3cd965d6",
@@ -75,6 +93,30 @@
           ]
         }
       ],
+      "revId": "62564ec01d008074d4a7674bdd87ca350c546184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8b0fc8_b21c88a0",
+        "filename": "libs/binder/tests/FileUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-16T00:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "052649ea_3cd965d6",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 17
+      },
       "revId": "62564ec01d008074d4a7674bdd87ca350c546184",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
