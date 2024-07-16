@@ -22,6 +22,30 @@
       },
       "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af31b7fc_f7058ca0",
+        "filename": "libs/binder/tests/binderRpcTestCommon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-16T00:48:53Z",
+      "side": 0,
+      "message": "We want one implementation for Linux, and a different one for Trusty.\n\nOne alternative could be to provide both implementations here, but I think it\u0027s better for portability to just move the code to an OS-specific file (https://r.android.com/3159851 adds `FileUtilsTrusty.cpp`).",
+      "parentUuid": "5c461cf7_5ba1115e",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
