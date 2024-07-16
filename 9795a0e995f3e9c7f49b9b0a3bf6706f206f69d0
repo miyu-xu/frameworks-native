@@ -34,6 +34,24 @@
       "parentUuid": "42e1e569_d9e5587c",
       "revId": "9795a0e995f3e9c7f49b9b0a3bf6706f206f69d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53acd05a_d482ceff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746367
+      },
+      "writtenOn": "2024-07-16T01:56:33Z",
+      "side": 1,
+      "message": "Yes, If BBQ has been updated to a new instance for the same SurfaceControl, it is possible to present expired buffers here. For more detail see: \n\nhttps://issuetracker.google.com/issues/353332587",
+      "parentUuid": "0bf7e5be_eb97fdc3",
+      "revId": "9795a0e995f3e9c7f49b9b0a3bf6706f206f69d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

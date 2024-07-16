@@ -33,6 +33,24 @@
       "message": "generally looks good to me. what release are you targeting? do you have a bug id?",
       "revId": "4f5fed93248cec699c407f516090334a247a98ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bf58e4_5998dcf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746367
+      },
+      "writtenOn": "2024-07-16T01:56:33Z",
+      "side": 1,
+      "message": "I have created an issue and uploaded the commit message, see: https://issuetracker.google.com/issues/353332587\n\nMy target release is the main branch of Android U, and if this CL looks good, I will cherry-pick it to my internal branches once it has been merged.",
+      "parentUuid": "68a32c69_7b5ae98c",
+      "revId": "4f5fed93248cec699c407f516090334a247a98ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
