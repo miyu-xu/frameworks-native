@@ -333,6 +333,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a173a5e5_1544a4bf",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 14
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:15:04Z",
+      "side": 1,
+      "message": "Discussed offline yesterday. I\u0027ll close this issue and Devin can make this module completely private to libbinder in a subsequent cl http://b/353492849.",
+      "parentUuid": "b1d8c70e_88d8c23c",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 769,
+        "endChar": 14
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6cec80c_d122f82e",
@@ -560,6 +584,30 @@
       "side": 1,
       "message": "From our discussion yesterday, Steven suggested something similar.\n\n```\nAAccessor* AAccessor_create();\nAAccessor_delete(AAccessor*);\nAAccessor_registerAddConnection(AAccessor*, int (*addConnection(void*));\n...\n```\nThen I think we could do something like:\n```\n// register the IAccessor with servicemanager?\nAServiceManager_addAccessor(AAccessor*);\n// register it locally when there is no kernel binder\nAServiceManager_injectLocalAccessor(AAccessor*);\n```\n\nBut he really wanted to get rind of `int (*addConnection)(void*)` so libbinder can be responsible for creating the FD and calling `connect()` so libbinder controls everything.\n\nCan we break `int (*addConnection)(void*)` apart into multiple callbacks that can satisfy the requirements? So the IAccessor implementation in libbinder can use these callbacks to get the final FD used with `ParcelFileDescriptor addConnection()`.\n\nLike can we get by with `getConnectionInfo` for when we don\u0027t have the connection info at the time of creating the AAcessor, `attestConnection` for authmgr, etc?",
       "parentUuid": "a47446f4_8d60742d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efbae1f_56d92cc9",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:15:04Z",
+      "side": 1,
+      "message": "As discussed offline, I\u0027ll close the comment thread here. Devin can continue to work on the API issue in b/353492849.",
+      "parentUuid": "50a0e7c8_6942c612",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -873,6 +921,30 @@
       "side": 1,
       "message": "Separate CL is great.",
       "parentUuid": "9aafe3c4_0b3b144c",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "d69fc3090e197520b4c0106dcd82b3f0babc0ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c61469b1_c61f5c38",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:15:04Z",
+      "side": 1,
+      "message": "Added a TODO to handle in a separate cl http://b/351790282.",
+      "parentUuid": "12701260_304dd610",
       "range": {
         "startLine": 88,
         "startChar": 6,
