@@ -2746,6 +2746,10 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
         mDrawingState.colorMatrixChanged = false;
     }
 
+    refreshArgs.colorTransformMatrix =
+            mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                 vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
+
     refreshArgs.devOptForceClientComposition = mDebugDisableHWC;
 
     if (mDebugFlashDelay != 0) {
@@ -8331,12 +8335,19 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                                         .isProtected = isProtected});
 
         const float colorSaturation = grayscale ? 0 : 1;
+        base::StringPrintf("%.2fadb", colorSaturation);
+        const mat4 colorMatrix = mat4(
+            vec4{1.0f, 0.0f, 0.0f, 0.0f},
+            vec4{0.0f, -1.0f, 0.0f, 0.0f},
+            vec4{0.0f, 0.0f, -1.0f, 0.0f},
+            vec4{0.0f, 1.0f, 1.0f, 1.0f}
+            );
         compositionengine::CompositionRefreshArgs refreshArgs{
                 .outputs = {output},
                 .layers = std::move(layerFEs),
                 .updatingOutputGeometryThisFrame = true,
                 .updatingGeometryThisFrame = true,
-                .colorTransformMatrix = calculateColorMatrix(colorSaturation),
+                .colorTransformMatrix = colorMatrix,
         };
         compositionEngine->present(refreshArgs);
 
