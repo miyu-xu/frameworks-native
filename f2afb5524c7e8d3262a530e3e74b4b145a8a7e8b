@@ -1,0 +1,538 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b08ad7b_37e18035",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "we should try to promote it before this point, it may be deleted here with wp",
+      "range": {
+        "startLine": 585,
+        "startChar": 24,
+        "endLine": 585,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d0421a85_53aafd52",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 585,
+                "startChar": 0,
+                "endLine": 587,
+                "endChar": 0
+              },
+              "replacement": "    const sp\u003cFrozenStateChangeCallback\u003e strongCallback \u003d callback.promote();\n    LOG_ALWAYS_FATAL_IF(strongCallback \u003d\u003d nullptr,\n                        \"addFrozenStateChangeCallback(): callback must be non-NULL and not \"\n                        \"already promoted\");\n"
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 615,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": "            strongCallback-\u003eonStateChanged(wp\u003cBpBinder\u003e::fromExisting(this), mFrozen-\u003eisFrozen);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10bb473_5e0b5792",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "Where is the corresponding decWeak for this? It will leak the BpBinder, no (OBJECT_LIFETIME_WEAK)?",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 49
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5481ce6_1752158a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "sometimes, the process will be frozen, then unfrozen, and then a new callback will be added. In this case, you get an \u0027is not frozen\u0027 notification as soon as you register the callback, and in other cases you won\u0027t get a notification until it is frozen.\n\nCan you make this behavior consistent, and also the same behavior if the kernel module is there (probably never get the initial \u0027is not frozen\u0027 notification but perhaps ALWAYS get the \u0027is not frozen\u0027 notification if you want)?",
+      "range": {
+        "startLine": 614,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 44
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b03a1b4_07619d76",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "so the null case should also be considered an error",
+      "range": {
+        "startLine": 616,
+        "startChar": 0,
+        "endLine": 616,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dfc7ee19_07dedcbd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 616,
+                "startChar": 0,
+                "endLine": 617,
+                "endChar": 0
+              },
+              "replacement": "            if (strongCallback !\u003d nullptr)\n"
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 618,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67790309_c0647648",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "nit: check error to remove callback if it\u0027s added from another process and it\u0027s dead?",
+      "range": {
+        "startLine": 617,
+        "startChar": 32,
+        "endLine": 617,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "924621f4_b839d05f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 617,
+                "startChar": 0,
+                "endLine": 618,
+                "endChar": 0
+              },
+              "replacement": "                if (strongCallback-\u003eonStateChanged(wp\u003cBpBinder\u003e::fromExisting(this),\n                                                   mFrozen-\u003eisFrozen) !\u003d OK) {\n                    return INVALID_OPERATION;\n                }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbe095d_32a823ab",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "`|| isRpcBinder` here as well, and add a test?",
+      "range": {
+        "startLine": 629,
+        "startChar": 26,
+        "endLine": 629,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9bc14025_6cbb260e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 629,
+                "startChar": 0,
+                "endLine": 630,
+                "endChar": 0
+              },
+              "replacement": "    if (!kEnableKernelIpc || isRpcBinder()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01641d3_28ffbd8d",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "I think this is intended to be covered by L629?",
+      "range": {
+        "startLine": 643,
+        "startChar": 0,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c7cc2637_7f4a6d99",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 643,
+                "startChar": 0,
+                "endLine": 644,
+                "endChar": 0
+              },
+              "replacement": "                    if constexpr (!kEnableKernelIpc) {\n                        LOG_ALWAYS_FATAL(\"Binder kernel driver disabled at build time\");\n                        return INVALID_OPERATION;\n                    } else {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ba91b1_42f3e211",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "`|| is RpcBinder()`?",
+      "range": {
+        "startLine": 666,
+        "startChar": 26,
+        "endLine": 666,
+        "endChar": 30
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac004b51_bc8a0376",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "we need to call \u0027removeFrozenStateChangeCallback\u0027 as well here on IPCThreadState, or there would be a leak of the kernel objects, right?",
+      "range": {
+        "startLine": 835,
+        "startChar": 0,
+        "endLine": 835,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d55cd87e_ad794cb2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 822,
+                "startChar": 0,
+                "endLine": 826,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BpBinder.cpp",
+              "range": {
+                "startLine": 834,
+                "startChar": 0,
+                "endLine": 836,
+                "endChar": 0
+              },
+              "replacement": "    if (mFrozen !\u003d nullptr) {\n        if (!isRpcBinder()) {\n            if constexpr (kEnableKernelIpc) {\n                status_t status \u003d\n                        IPCThreadState::self()\n                                -\u003eremoveFrozenStateChangeCallback(binderHandle(), this);\n                if (status !\u003d NO_ERROR) {\n                    ALOGE(\"Unexpected error from \"\n                          \"IPCThreadState.removeFrozenStateChangeCallback: %s. \"\n                          \"%p handle %d\\n\",\n                          statusToString(status).c_str(), this, binderHandle());\n                }\n            }\n        }\n        delete mFrozen;\n        mFrozen \u003d nullptr;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc50b4c_f1cb0976",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "nit: do we need to store this twice, could we store it in isDriverFeatureEnabled?",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 1000,
+        "endChar": 99
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "93522ec8_8775e08f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 986,
+                "startChar": 0,
+                "endLine": 989,
+                "endChar": 0
+              },
+              "replacement": "    if (!mProcess-\u003eisDriverFeatureEnabled(ProcessState::DriverFeature::FREEZE_NOTIFICATION)) {\n"
+            },
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 999,
+                "startChar": 0,
+                "endLine": 1002,
+                "endChar": 0
+              },
+              "replacement": "    if (!mProcess-\u003eisDriverFeatureEnabled(ProcessState::DriverFeature::FREEZE_NOTIFICATION)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0324cb33_c9d81220",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "and if this is the corresponding decWeak, could we keep everything in IPCThreadState here. How de we know they\u0027re lined up exactly - is the kernel guaranteed to do it for every add?",
+      "range": {
+        "startLine": 1555,
+        "startChar": 0,
+        "endLine": 1555,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8e9725a5_9af08811",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 1542,
+                "startChar": 0,
+                "endLine": 1543,
+                "endChar": 0
+              },
+              "replacement": "            proxy-\u003egetWeakRefs()-\u003edecWeak(mProcess.get());\n"
+            },
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 1555,
+                "startChar": 0,
+                "endLine": 1556,
+                "endChar": 0
+              },
+              "replacement": "            proxy-\u003egetWeakRefs()-\u003edecWeak(mProcess.get());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870116fe_f4f2a4fa",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "nit: any reason to use raw pointer here, vs unique_ptr? I think Vector\u003c\u003e usage is old.",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "343811df_0ffe31a4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BpBinder.h",
+              "range": {
+                "startLine": 224,
+                "startChar": 0,
+                "endLine": 225,
+                "endChar": 0
+              },
+              "replacement": "    FrozenStateChange mFrozen;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421af651_1fddb42f",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "nit: new line for consistency",
+      "range": {
+        "startLine": 261,
+        "startChar": 13,
+        "endLine": 262,
+        "endChar": 13
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788549d9_8e3e2dd8",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-18T17:14:30Z",
+      "side": 1,
+      "message": "(meaning \u0027frozen, unfrozen\u0027 might just be \u0027unfrozen\u0027?)",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 264,
+        "endChar": 13
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
