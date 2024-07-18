@@ -16,6 +16,139 @@
       "message": "Hi Steven and Devin, could you please review this cl again? I added TODO for the unfinished tasks based on our discussion yesterday.",
       "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34fdecd_3f7682d4",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T21:50:59Z",
+      "side": 1,
+      "message": "Should we also be checking for accessor permissions in these other methods too? All places we currently call `canFind`?",
+      "range": {
+        "startLine": 699,
+        "startChar": 4,
+        "endLine": 701,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "55086cf8_b14372c4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 663,
+                "startChar": 0,
+                "endLine": 663,
+                "endChar": 0
+              },
+              "replacement": "\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n\n    std::optional\u003cstd::string\u003e accessorName;\n#ifndef VENDORSERVICEMANAGER\n    accessorName \u003d getVintfAccessorName(name);\n#endif\n    if (accessorName.has_value()) {\n        if (!mAccess-\u003ecanFind(ctx, *accessorName)) {\n            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied.\");\n        }\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "734cc81c_aae4544d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T21:50:59Z",
+      "side": 1,
+      "message": "nit: rename to accessorBinder?",
+      "range": {
+        "startLine": 58,
+        "startChar": 24,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0f7f877d_962b3f42",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "            sp\u003cIBinder\u003e accessorBinder \u003d in.get\u003cos::Service::Tag::accessor\u003e();\n            sp\u003cIAccessor\u003e accessor \u003d interface_cast\u003cIAccessor\u003e(accessorBinder);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "            session-\u003esetSessionSpecificRoot(accessorBinder);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aae7d02_708406da",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T21:50:59Z",
+      "side": 1,
+      "message": "do we ever use this accessor? Can we drop this call because the `accessor` is captured in the `request` std::function which is attached to the RpcSession already?",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c6c3da32_372c5f4c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
