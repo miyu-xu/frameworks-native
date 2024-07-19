@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0e04bf_78c9cfd8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-07-19T22:49:04Z",
+      "side": 1,
+      "message": "Please include some unit tests! Thanks!",
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c071b403_61a39c53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-07-19T22:49:04Z",
+      "side": 1,
+      "message": "Please put this behind a libgui flag for roll-out. I think it\u0027s big enough to count as a new feature.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c1ea2e_899b2fca",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-07-19T22:49:04Z",
+      "side": 1,
+      "message": "You\u0027ll want to save this value in core value at connect time to dramatically reduce binder calls, as we do in needsReleaseNotify.",
+      "range": {
+        "startLine": 67,
+        "startChar": 37,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bad592_feeafd76",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-07-19T22:49:04Z",
+      "side": 1,
+      "message": "[nit]perhaps `useReleaseNotifyV2()`?",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 32
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972522d4_9acdc186",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-07-19T22:49:04Z",
+      "side": 1,
+      "message": "These changes should be reflected in the binder Bn/Bp classes as well",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
