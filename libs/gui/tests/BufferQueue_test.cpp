@@ -1257,6 +1257,57 @@ TEST_F(BufferQueueTest, TestConsumerDetachProducerListener) {
     ASSERT_TRUE(result == WOULD_BLOCK || result == TIMED_OUT || result == INVALID_OPERATION);
 }
 
+#if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_CONSUMER_ATTACH_CALLBACK)
+struct BufferAttachedListener : public BnProducerListener {
+public:
+    BufferAttachedListener() : mAttached(0) {}
+    virtual ~BufferAttachedListener() = default;
+
+    virtual void onBufferReleased() {}
+    virtual bool needsReleaseNotify() { return true; }
+    virtual void onBufferAttached() {
+        ++mAttached;
+    }
+    virtual bool needsAttachNotify() { return true; }
+
+    int getNumAttached() const { return mAttached; }
+private:
+    int mAttached;
+};
+
+TEST_F(BufferQueueTest, TestConsumerAttachProducerListener) {
+    createBufferQueue();
+    sp<MockConsumer> mc(new MockConsumer);
+    ASSERT_EQ(OK, mConsumer->consumerConnect(mc, true));
+    IGraphicBufferProducer::QueueBufferOutput output;
+    sp<BufferAttachedListener> pl(new BufferAttachedListener);
+    ASSERT_EQ(OK, mProducer->connect(pl, NATIVE_WINDOW_API_CPU, true, &output));
+    ASSERT_EQ(OK, mProducer->setDequeueTimeout(0));
+    ASSERT_EQ(OK, mConsumer->setMaxAcquiredBufferCount(1));
+
+    sp<Fence> fence = Fence::NO_FENCE;
+    sp<GraphicBuffer> buffer = nullptr;
+
+    int slot;
+    status_t result = OK;
+
+    ASSERT_EQ(OK, mProducer->setMaxDequeuedBufferCount(1));
+
+    result = mProducer->dequeueBuffer(&slot, &fence, 0, 0, 0,
+                                      GRALLOC_USAGE_SW_READ_RARELY, nullptr, nullptr);
+    ASSERT_EQ(IGraphicBufferProducer::BUFFER_NEEDS_REALLOCATION, result);
+    ASSERT_EQ(OK, mProducer->requestBuffer(slot, &buffer));
+    ASSERT_EQ(OK, mProducer->detachBuffer(slot));
+
+    // Check # of attach is zero.
+    ASSERT_EQ(0, pl->getNumAttached());
+
+    // Attach a buffer and check the callback was called.
+    ASSERT_EQ(OK, mConsumer->attachBuffer(&slot, buffer));
+    ASSERT_EQ(1, pl->getNumAttached());
+}
+#endif
+
 TEST_F(BufferQueueTest, TestStaleBufferHandleSentAfterDisconnect) {
     createBufferQueue();
     sp<MockConsumer> mc(new MockConsumer);
