@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8e5913_3cd900a8",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done. Added the promote right after LOG_ALWAYS_FATAL_IF(callback \u003d\u003d nullptr,...) since we still need to first check that callback itself is not null before promoting it.",
+      "parentUuid": "3b08ad7b_37e18035",
+      "range": {
+        "startLine": 585,
+        "startChar": 24,
+        "endLine": 585,
+        "endChar": 32
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c10bb473_5e0b5792",
@@ -75,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d01088_50ed87b7",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "In IPCThreadState (see the other comment).",
+      "parentUuid": "c10bb473_5e0b5792",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 49
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5481ce6_1752158a",
@@ -88,6 +136,30 @@
       "writtenOn": "2024-07-18T17:14:30Z",
       "side": 1,
       "message": "sometimes, the process will be frozen, then unfrozen, and then a new callback will be added. In this case, you get an \u0027is not frozen\u0027 notification as soon as you register the callback, and in other cases you won\u0027t get a notification until it is frozen.\n\nCan you make this behavior consistent, and also the same behavior if the kernel module is there (probably never get the initial \u0027is not frozen\u0027 notification but perhaps ALWAYS get the \u0027is not frozen\u0027 notification if you want)?",
+      "range": {
+        "startLine": 614,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 44
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98ad76e_aae2364a",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "The behavior is already consistent. When the kernel receives BC_REQUEST_FREEZE_NOTIFICATION, it immediately delivers the current state to the callback. This usually covers the first callback that\u0027s registered. For callbacks that are later registered, they also get the latest state immediately from the code here.\n\nIf the kernel module is not there, no initial state is delivered. \u003cmFrozen\u003e would always be null.",
+      "parentUuid": "d5481ce6_1752158a",
       "range": {
         "startLine": 614,
         "startChar": 0,
@@ -149,6 +221,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb565bb_f852a966",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b03a1b4_07619d76",
+      "range": {
+        "startLine": 616,
+        "startChar": 0,
+        "endLine": 616,
+        "endChar": 44
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67790309_c0647648",
@@ -186,6 +282,30 @@
           ]
         }
       ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b073666_b330ceb7",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67790309_c0647648",
+      "range": {
+        "startLine": 617,
+        "startChar": 32,
+        "endLine": 617,
+        "endChar": 46
+      },
       "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -231,6 +351,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d966741b_7c9dcae6",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done. Now using LOG_ALWAYS_FATAL_IF. Also added a test.",
+      "parentUuid": "bdbe095d_32a823ab",
+      "range": {
+        "startLine": 629,
+        "startChar": 26,
+        "endLine": 629,
+        "endChar": 44
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e01641d3_28ffbd8d",
@@ -272,6 +416,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c44e78_77f7c5ed",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "e01641d3_28ffbd8d",
+      "range": {
+        "startLine": 643,
+        "startChar": 0,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44ba91b1_42f3e211",
@@ -285,6 +453,30 @@
       "writtenOn": "2024-07-18T17:14:30Z",
       "side": 1,
       "message": "`|| is RpcBinder()`?",
+      "range": {
+        "startLine": 666,
+        "startChar": 26,
+        "endLine": 666,
+        "endChar": 30
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "258d4805_dcb4ad7b",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44ba91b1_42f3e211",
       "range": {
         "startLine": 666,
         "startChar": 26,
@@ -346,6 +538,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14643e8_d1fd31c6",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac004b51_bc8a0376",
+      "range": {
+        "startLine": 835,
+        "startChar": 0,
+        "endLine": 835,
+        "endChar": 22
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dc50b4c_f1cb0976",
@@ -393,6 +609,30 @@
           ]
         }
       ],
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f815b4_f27d6aa5",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dc50b4c_f1cb0976",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 1000,
+        "endChar": 99
+      },
       "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -448,6 +688,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16159117_64fa024e",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done. Moved incWeak into IPCThreadState::addFrozenStateChangeCallback.\n\nYes, with the latest round of changes I believe now decWeak is guaranteed to happen. Every addFrozenStateChangeCallback is guaranteed to be followed by a removeFrozenStateChangeCallback, either by the caller or from BpBinder::onLastStrongRef(). removeFrozenStateChangeCallback would then lead to a BR_CLEAR_FREEZE_NOTIFICATION_DONE from the kernel.",
+      "parentUuid": "0324cb33_c9d81220",
+      "range": {
+        "startLine": 1555,
+        "startChar": 0,
+        "endLine": 1555,
+        "endChar": 49
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "870116fe_f4f2a4fa",
@@ -489,6 +753,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee24504_7c3a3c3b",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "870116fe_f4f2a4fa",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "421af651_1fddb42f",
@@ -512,6 +800,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ff2a73_ef9e7cbc",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "421af651_1fddb42f",
+      "range": {
+        "startLine": 261,
+        "startChar": 13,
+        "endLine": 262,
+        "endChar": 13
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "788549d9_8e3e2dd8",
@@ -525,6 +837,30 @@
       "writtenOn": "2024-07-18T17:14:30Z",
       "side": 1,
       "message": "(meaning \u0027frozen, unfrozen\u0027 might just be \u0027unfrozen\u0027?)",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 264,
+        "endChar": 13
+      },
+      "revId": "f2afb5524c7e8d3262a530e3e74b4b145a8a7e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d48a840_308efabb",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "788549d9_8e3e2dd8",
       "range": {
         "startLine": 263,
         "startChar": 7,

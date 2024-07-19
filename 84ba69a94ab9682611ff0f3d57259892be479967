@@ -147,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd8bde00_480f9870",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52c65273_7ecea2bd",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 33
+      },
+      "revId": "84ba69a94ab9682611ff0f3d57259892be479967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9c67222_2ca72d71",
