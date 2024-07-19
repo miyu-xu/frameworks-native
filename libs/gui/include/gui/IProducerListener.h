@@ -44,7 +44,7 @@ public:
     //
     // This is called without any lock held and can be called concurrently by
     // multiple threads.
-    virtual void onBufferReleased() = 0; // Asynchronous
+    virtual void onBufferReleased(int /*slot*/) {} // Asynchronous
     virtual bool needsReleaseNotify() = 0;
     // onBuffersFreed is called from IGraphicBufferConsumer::discardFreeBuffers
     // to notify the producer that certain free buffers are discarded by the consumer.
