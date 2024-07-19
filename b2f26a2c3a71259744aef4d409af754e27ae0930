@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e895041c_084d3bf4",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-19T13:16:13Z",
+      "side": 1,
+      "message": "That\u0027s a good idea. Done.",
+      "parentUuid": "d34fdecd_3f7682d4",
+      "range": {
+        "startLine": 699,
+        "startChar": 4,
+        "endLine": 701,
+        "endChar": 5
+      },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "734cc81c_aae4544d",
@@ -110,6 +134,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8d5e06_58229810",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-19T13:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "734cc81c_aae4544d",
+      "range": {
+        "startLine": 58,
+        "startChar": 24,
+        "endLine": 58,
+        "endChar": 27
+      },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aae7d02_708406da",
@@ -147,6 +195,30 @@
           ]
         }
       ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e131da_5de17fc9",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-19T13:16:13Z",
+      "side": 1,
+      "message": "I don\u0027t think we can drop this call. Although the `accessor` is captured within the `request` callback, the callback is only used in the `setupPreconnectedClient` function. `RpcSession` never saves it [1]. So, the callback and `accessor` will be discarded once the current `toBinderService` function ends if we don\u0027t have this line.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/RpcSession.cpp;l\u003d190;drc\u003d639490b9ec6535cda7f24403237355c941e9fcb2",
+      "parentUuid": "9aae7d02_708406da",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 49
+      },
       "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
