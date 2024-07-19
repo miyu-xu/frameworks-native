@@ -20,6 +20,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ff2d2d8_05868ce9",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "nit: mention specifically for accessor here",
+      "range": {
+        "startLine": 626,
+        "startChar": 81,
+        "endLine": 626,
+        "endChar": 82
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa6d6008_a9955526",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 626,
+                "startChar": 0,
+                "endLine": 627,
+                "endChar": 0
+              },
+              "replacement": "            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied for accessor.\");\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 674,
+                "startChar": 0,
+                "endLine": 675,
+                "endChar": 0
+              },
+              "replacement": "            return Status::fromExceptionCode(Status::EX_SECURITY, \"SELinux denied for accessor.\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a546c65_dfb94623",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "soame",
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d34fdecd_3f7682d4",
         "filename": "cmds/servicemanager/ServiceManager.cpp",
         "patchSetId": 20
@@ -79,6 +147,64 @@
         "endLine": 701,
         "endChar": 5
       },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179444be_b4a09ac4",
+        "filename": "cmds/servicemanager/test_sm.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "can you add additional tests for the accessor as well? okay to follow-up",
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c63893_1e1bd499",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "log error in default case?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2a20a249_13d7cc3d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 80,
+                "endChar": 0
+              },
+              "replacement": "        default:\n            ALOGE(\"Unknown service type: %d\", in.getTag());\n            break;\n"
+            }
+          ]
+        }
+      ],
       "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -219,6 +345,133 @@
         "endLine": 77,
         "endChar": 49
       },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3c7703_a2d95fbd",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "handle default case as well (also with abort)",
+      "range": {
+        "startLine": 147,
+        "startChar": 16,
+        "endLine": 147,
+        "endChar": 23
+      },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c765ee0_bb6dffea",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "prefer to log fatal here - it means the code has become inconsistent with itself",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 75
+      },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c79fc8_1ac41fb6",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "I actually like this implementation for realGetService as well - instead of the logs etc - since it will abort here. You might use it above as well instead of the switch, since it\u0027s concise and has the right behavior.",
+      "range": {
+        "startLine": 347,
+        "startChar": 11,
+        "endLine": 347,
+        "endChar": 43
+      },
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5869a64_ad1dc504",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "I would abort if:\n- mSessionSpecificRootObject is already set\n- mServer !\u003d nullptr (otherwise a server might accidentally override this, and that would be nasty)",
+      "range": {
+        "startLine": 805,
+        "startChar": 4,
+        "endLine": 805,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4211d7bb_090a9ec4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/RpcSession.cpp",
+              "range": {
+                "startLine": 805,
+                "startChar": 0,
+                "endLine": 805,
+                "endChar": 0
+              },
+              "replacement": "    LOG_ALWAYS_FATAL_IF(mSessionSpecificRootObject !\u003d nullptr,\n                        \"Session specific root object already set\");\n    LOG_ALWAYS_FATAL_IF(mForServer !\u003d nullptr,\n                        \"Session specific root object cannot be set for a server\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c3b6ff_b44e00c4",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:14:23Z",
+      "side": 1,
+      "message": "nit: this will also need to be LIBBINDER_EXPORTED",
       "revId": "b2f26a2c3a71259744aef4d409af754e27ae0930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
