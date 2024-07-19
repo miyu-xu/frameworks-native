@@ -79,7 +79,7 @@ status_t BufferQueueConsumer::acquireBuffer(BufferItem* outBuffer,
         nsecs_t expectedPresent, uint64_t maxFrameNumber) {
     ATRACE_CALL();
 
-    int numDroppedBuffers = 0;
+    std::list<int> droppedBuffers;
     sp<IProducerListener> listener;
     {
         std::unique_lock<std::mutex> lock(mCore->mMutex);
@@ -196,7 +196,7 @@ status_t BufferQueueConsumer::acquireBuffer(BufferItem* outBuffer,
                     if (mCore->mBufferReleasedCbEnabled) {
                         listener = mCore->mConnectedProducerListener;
                     }
-                    ++numDroppedBuffers;
+                    droppedBuffers.push_back(front->mSlot);
                 }
 
                 mCore->mQueue.erase(front);
@@ -305,8 +305,14 @@ status_t BufferQueueConsumer::acquireBuffer(BufferItem* outBuffer,
     }
 
     if (listener != nullptr) {
-        for (int i = 0; i < numDroppedBuffers; ++i) {
-            listener->onBufferReleased();
+        while (!droppedBuffers.empty()) {
+            int slot = droppedBuffers.front();
+            droppedBuffers.pop_front();
+            if (listener->releaseNotifyV2()) {
+                listener->onBufferReleasedV2(slot);
+            } else {
+                listener->onBufferReleased();
+            }
         }
     }
 
@@ -461,6 +467,7 @@ status_t BufferQueueConsumer::releaseBuffer(int slot, uint64_t frameNumber,
     }
 
     sp<IProducerListener> listener;
+    int releasedSlot = -1;
     { // Autolock scope
         std::lock_guard<std::mutex> lock(mCore->mMutex);
 
@@ -500,6 +507,7 @@ status_t BufferQueueConsumer::releaseBuffer(int slot, uint64_t frameNumber,
 
         if (mCore->mBufferReleasedCbEnabled) {
             listener = mCore->mConnectedProducerListener;
+            releasedSlot = slot;
         }
         BQ_LOGV("releaseBuffer: releasing slot %d", slot);
 
@@ -509,7 +517,11 @@ status_t BufferQueueConsumer::releaseBuffer(int slot, uint64_t frameNumber,
 
     // Call back without lock held
     if (listener != nullptr) {
-        listener->onBufferReleased();
+        if (listener->releaseNotifyV2()) {
+            listener->onBufferReleasedV2(releasedSlot);
+        } else {
+            listener->onBufferReleased();
+        }
     }
 
     return NO_ERROR;

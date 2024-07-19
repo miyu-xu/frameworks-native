@@ -55,6 +55,16 @@ public:
     // This is called without any lock held and can be called concurrently by
     // multiple threads.
     virtual void onBufferDetached(int /*slot*/) {} // Asynchronous
+
+    // onBufferReleasedV2 is called from IGraphicBufferConsumer::releaseBuffer to
+    // notify the producer that a new buffer is free and ready to be dequeued.
+    //
+    // This is called instead of onBufferReleased() if releaseNotifyV2() returns
+    // true.(needsReleaseNotify() should return true also.)
+    // This is called without any lock held and can be called concurrently by
+    // multiple threads.
+    virtual void onBufferReleasedV2(int /*slot*/) {}
+    virtual bool releaseNotifyV2() { return false; }
 };
 
 #ifndef NO_BINDER
