@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b126bc_e12c0c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-07-19T08:50:14Z",
+      "side": 1,
+      "message": "Also updated the code to use an enum for the state (rather than a boolean) per comment on the other change for frameworks/base.",
+      "revId": "bfb45d0bc7a943302c27ae3e8bd8584e0dce3b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
