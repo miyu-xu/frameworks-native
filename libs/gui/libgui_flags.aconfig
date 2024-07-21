@@ -16,3 +16,11 @@ flag {
   bug: "310927247"
   is_fixed_read_only: true
 }
+
+flag {
+  name: "bq_release_callback_v2"
+  namespace: "core_graphics"
+  description: "Controls IProducerLIstener to use release callback version 2"
+  bug: "353202582"
+  is_fixed_read_only: true
+}
