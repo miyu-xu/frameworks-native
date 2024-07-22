@@ -79,7 +79,13 @@ struct TransactionState {
     template <typename Visitor>
     void traverseStatesWithBuffers(Visitor&& visitor) const {
         for (const auto& state : states) {
-            if (state.state.hasBufferChanges() && state.externalTexture && state.state.surface) {
+            if (state.state.hasBufferChanges() && state.state.surface) {
+                // We still need to update flushState.bufferLayersReadyToPresent if externalTexture
+                // is null since it might block transaction queue by barriers after this frame
+                // number.
+                if (!state.externalTexture) {
+                    ALOGW("ExternalTexture is null, maybe cached it failed?");
+                }
                 visitor(state.state);
             }
         }
