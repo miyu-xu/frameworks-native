@@ -961,7 +961,8 @@ public:
     // BnTransactionCompletedListener overrides
     void onTransactionCompleted(ListenerStats stats) override;
     void onReleaseBuffer(ReleaseCallbackId, sp<Fence> releaseFence,
-                         uint32_t currentMaxAcquiredBufferCount) override;
+                         uint32_t currentMaxAcquiredBufferCount,
+                         bool uncacheBuffer = false) override;
 
     void removeReleaseBufferCallback(const ReleaseCallbackId& callbackId);
 
