@@ -45,6 +45,30 @@
       },
       "revId": "7c166e19051768edfa7c098c8be1f635f429f819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75062242_52af4216",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-22T17:05:50Z",
+      "side": 1,
+      "message": "Yeah, agree, though I might keep it as-is. I didn\u0027t want to indent the code that was already using unique_lock.",
+      "parentUuid": "b9256088_cc61964c",
+      "range": {
+        "startLine": 375,
+        "startChar": 4,
+        "endLine": 375,
+        "endChar": 16
+      },
+      "revId": "7c166e19051768edfa7c098c8be1f635f429f819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
