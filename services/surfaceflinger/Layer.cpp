@@ -3235,6 +3235,20 @@ bool Layer::setBuffer(std::shared_ptr<renderengine::ExternalTexture>& buffer,
         resetDrawingStateBufferInfo();
         setTransactionFlags(eTransactionNeeded);
         mDrawingState.bufferSurfaceFrameTX = nullptr;
+        // If buffer is null but frame number has changed, it most likely means that client does
+        // setBuffer(carry a barrier) -> cacheBuffers(by IPC delivery) -> unsetBuffer -> setBuffer,
+        // and reused the same buffer in both of two setBuffer, if the first setBuffer cached
+        // buffer successfully, and the second setBuffer will do cache-hit, but SF did not do
+        // anything for this buffer, finally it will cause SF get a null ExternalTexture instance
+        // from ClientCache.
+        // In this case we need to update barrier frame number to prevent from transaction queue
+        // blocking.
+        if (frameNumberChanged) {
+            mDrawingState.barrierFrameNumber =
+                    std::max(frameNumber, mDrawingState.barrierFrameNumber);
+            ALOGI("Update barrierFrameNumber of (%s) to %" PRIu64, getDebugName(),
+                  mDrawingState.barrierFrameNumber);
+        }
         setFrameTimelineVsyncForBufferlessTransaction(info, postTime);
         return true;
     } else {
