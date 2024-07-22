@@ -112,6 +112,12 @@ void TransactionHandler::popTransactionFromPending(std::vector<TransactionState>
     readyToApplyTransaction.traverseStatesWithBuffers([&](const layer_state_t& state) {
         const bool frameNumberChanged =
                 state.bufferData->flags.test(BufferData::BufferDataChange::frameNumberChanged);
+        // We still need to update flushState.bufferLayersReadyToPresent if externalTexture is
+        // null since it might block transaction queue by barriers after this frame number.
+        if (!state.externalTexture) {
+            ALOGW("ExternalTexture is null, maybe catched it failed?");
+        }
+
         if (frameNumberChanged) {
             flushState.bufferLayersReadyToPresent.emplace_or_replace(state.surface.get(),
                                                                      state.bufferData->frameNumber);

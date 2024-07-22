@@ -79,7 +79,7 @@ struct TransactionState {
     template <typename Visitor>
     void traverseStatesWithBuffers(Visitor&& visitor) const {
         for (const auto& state : states) {
-            if (state.state.hasBufferChanges() && state.externalTexture && state.state.surface) {
+            if (state.state.hasBufferChanges() && state.state.surface) {
                 visitor(state.state);
             }
         }
