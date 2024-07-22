@@ -316,7 +316,8 @@ public:
         callRemoteAsync<decltype(&ITransactionCompletedListener::
                                          onReleaseBuffer)>(Tag::ON_RELEASE_BUFFER, callbackId,
                                                            releaseFence,
-                                                           currentMaxAcquiredBufferCount);
+                                                           currentMaxAcquiredBufferCount,
+                                                           uncacheBuffer);
     }
 
     void onTransactionQueueStalled(const String8& reason) override {

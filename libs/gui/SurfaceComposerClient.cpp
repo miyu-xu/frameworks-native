@@ -210,6 +210,120 @@ JankDataListener::~JankDataListener() {
 
 // ---------------------------------------------------------------------------
 
+void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId);
+
+/**
+ * We use the BufferCache to reduce the overhead of exchanging GraphicBuffers with
+ * the server. If we were to simply parcel the GraphicBuffer we would pay two overheads
+ *     1. Cost of sending the FD
+ *     2. Cost of importing the GraphicBuffer with the mapper in the receiving process.
+ * To ease this cost we implement the following scheme of caching buffers to integers,
+ * or said-otherwise, naming them with integers. This is the scheme known as slots in
+ * the legacy BufferQueue system.
+ *     1. When sending Buffers to SurfaceFlinger we look up the Buffer in the cache.
+ *     2. If there is a cache-hit we remove the Buffer from the Transaction and instead
+ *        send the cached integer.
+ *     3. If there is a cache miss, we cache the new buffer and send the integer
+ *        along with the Buffer, SurfaceFlinger on it's side creates a new cache
+ *        entry, and we use the integer for further communication.
+ * A few details about lifetime:
+ *     1. The cache evicts by LRU. The server side cache is keyed by BufferCache::getToken
+ *        which is per process Unique. The server side cache is larger than the client side
+ *        cache so that the server will never evict entries before the client.
+ *     2. When the client evicts an entry it notifies the server via an uncacheBuffer
+ *        transaction.
+ *     3. The client only references the Buffers by ID, and uses buffer->addDeathCallback
+ *        to auto-evict destroyed buffers.
+ */
+class BufferCache : public Singleton<BufferCache> {
+public:
+    BufferCache() : token(new BBinder()) {}
+
+    sp<IBinder> getToken() {
+        return IInterface::asBinder(TransactionCompletedListener::getIInstance());
+    }
+
+    status_t getCacheId(const sp<GraphicBuffer>& buffer, uint64_t* cacheId) {
+        std::lock_guard<std::mutex> lock(mMutex);
+
+        auto itr = mBuffers.find(buffer->getId());
+        if (itr == mBuffers.end()) {
+            return BAD_VALUE;
+        }
+        itr->second = getCounter();
+        *cacheId = buffer->getId();
+        return NO_ERROR;
+    }
+
+    uint64_t cache(const sp<GraphicBuffer>& buffer,
+                   std::optional<client_cache_t>& outUncacheBuffer) {
+        std::lock_guard<std::mutex> lock(mMutex);
+
+        if (mBuffers.size() >= BUFFER_CACHE_MAX_SIZE) {
+            outUncacheBuffer = findLeastRecentlyUsedBuffer();
+            mBuffers.erase(outUncacheBuffer->id);
+        }
+
+        buffer->addDeathCallback(removeDeadBufferCallback, nullptr);
+
+        mBuffers[buffer->getId()] = getCounter();
+        return buffer->getId();
+    }
+
+    void uncache(uint64_t cacheId) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        if (mBuffers.erase(cacheId)) {
+            SurfaceComposerClient::doUncacheBufferTransaction(cacheId);
+        }
+    }
+
+    void uncacheOnly(uint64_t cacheId) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        if (!mBuffers.erase(cacheId)) {
+            ALOGE("Failed to uncache buffer %" PRIu64, cacheId);
+        }
+    }
+
+private:
+    client_cache_t findLeastRecentlyUsedBuffer() REQUIRES(mMutex) {
+        auto itr = mBuffers.begin();
+        uint64_t minCounter = itr->second;
+        auto minBuffer = itr;
+        itr++;
+
+        while (itr != mBuffers.end()) {
+            uint64_t counter = itr->second;
+            if (counter < minCounter) {
+                minCounter = counter;
+                minBuffer = itr;
+            }
+            itr++;
+        }
+
+        return {.token = getToken(), .id = minBuffer->first};
+    }
+
+    uint64_t getCounter() REQUIRES(mMutex) {
+        static uint64_t counter = 0;
+        return counter++;
+    }
+
+    std::mutex mMutex;
+    std::map<uint64_t /*Cache id*/, uint64_t /*counter*/> mBuffers GUARDED_BY(mMutex);
+
+    // Used by ISurfaceComposer to identify which process is sending the cached buffer.
+    sp<IBinder> token;
+};
+
+ANDROID_SINGLETON_STATIC_INSTANCE(BufferCache);
+
+void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId) {
+    // GraphicBuffer id's are used as the cache ids.
+    BufferCache::getInstance().uncache(graphicBufferId);
+}
+
+// ---------------------------------------------------------------------------
+
 // TransactionCompletedListener does not use ANDROID_SINGLETON_STATIC_INSTANCE because it needs
 // to be able to return a sp<> to its instance to pass to SurfaceFlinger.
 // ANDROID_SINGLETON_STATIC_INSTANCE only allows a reference to an instance.
@@ -518,7 +632,8 @@ void TransactionCompletedListener::removeQueueStallListener(void* id) {
 
 void TransactionCompletedListener::onReleaseBuffer(ReleaseCallbackId callbackId,
                                                    sp<Fence> releaseFence,
-                                                   uint32_t currentMaxAcquiredBufferCount) {
+                                                   uint32_t currentMaxAcquiredBufferCount,
+                                                   bool uncacheBuffer) {
     ReleaseBufferCallback callback;
     {
         std::scoped_lock<std::mutex> lock(mMutex);
@@ -529,6 +644,13 @@ void TransactionCompletedListener::onReleaseBuffer(ReleaseCallbackId callbackId,
               callbackId.to_string().c_str());
         return;
     }
+
+    if (uncacheBuffer && currentMaxAcquiredBufferCount == UINT_MAX) {
+        ALOGI("Uncache buffer (%" PRIu64 ", %" PRIu64 ")", callbackId.bufferId,
+              callbackId.framenumber);
+        BufferCache::getInstance().uncacheOnly(callbackId.bufferId);
+    }
+
     std::optional<uint32_t> optionalMaxAcquiredBufferCount =
             currentMaxAcquiredBufferCount == UINT_MAX
             ? std::nullopt
@@ -593,113 +715,6 @@ void TransactionCompletedListener::onTrustedPresentationChanged(int id,
         std::tie(tpc, context) = it->second;
     }
     tpc(context, presentedWithinThresholds);
-}
-
-// ---------------------------------------------------------------------------
-
-void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId);
-
-/**
- * We use the BufferCache to reduce the overhead of exchanging GraphicBuffers with
- * the server. If we were to simply parcel the GraphicBuffer we would pay two overheads
- *     1. Cost of sending the FD
- *     2. Cost of importing the GraphicBuffer with the mapper in the receiving process.
- * To ease this cost we implement the following scheme of caching buffers to integers,
- * or said-otherwise, naming them with integers. This is the scheme known as slots in
- * the legacy BufferQueue system.
- *     1. When sending Buffers to SurfaceFlinger we look up the Buffer in the cache.
- *     2. If there is a cache-hit we remove the Buffer from the Transaction and instead
- *        send the cached integer.
- *     3. If there is a cache miss, we cache the new buffer and send the integer
- *        along with the Buffer, SurfaceFlinger on it's side creates a new cache
- *        entry, and we use the integer for further communication.
- * A few details about lifetime:
- *     1. The cache evicts by LRU. The server side cache is keyed by BufferCache::getToken
- *        which is per process Unique. The server side cache is larger than the client side
- *        cache so that the server will never evict entries before the client.
- *     2. When the client evicts an entry it notifies the server via an uncacheBuffer
- *        transaction.
- *     3. The client only references the Buffers by ID, and uses buffer->addDeathCallback
- *        to auto-evict destroyed buffers.
- */
-class BufferCache : public Singleton<BufferCache> {
-public:
-    BufferCache() : token(new BBinder()) {}
-
-    sp<IBinder> getToken() {
-        return IInterface::asBinder(TransactionCompletedListener::getIInstance());
-    }
-
-    status_t getCacheId(const sp<GraphicBuffer>& buffer, uint64_t* cacheId) {
-        std::lock_guard<std::mutex> lock(mMutex);
-
-        auto itr = mBuffers.find(buffer->getId());
-        if (itr == mBuffers.end()) {
-            return BAD_VALUE;
-        }
-        itr->second = getCounter();
-        *cacheId = buffer->getId();
-        return NO_ERROR;
-    }
-
-    uint64_t cache(const sp<GraphicBuffer>& buffer,
-                   std::optional<client_cache_t>& outUncacheBuffer) {
-        std::lock_guard<std::mutex> lock(mMutex);
-
-        if (mBuffers.size() >= BUFFER_CACHE_MAX_SIZE) {
-            outUncacheBuffer = findLeastRecentlyUsedBuffer();
-            mBuffers.erase(outUncacheBuffer->id);
-        }
-
-        buffer->addDeathCallback(removeDeadBufferCallback, nullptr);
-
-        mBuffers[buffer->getId()] = getCounter();
-        return buffer->getId();
-    }
-
-    void uncache(uint64_t cacheId) {
-        std::lock_guard<std::mutex> lock(mMutex);
-        if (mBuffers.erase(cacheId)) {
-            SurfaceComposerClient::doUncacheBufferTransaction(cacheId);
-        }
-    }
-
-private:
-    client_cache_t findLeastRecentlyUsedBuffer() REQUIRES(mMutex) {
-        auto itr = mBuffers.begin();
-        uint64_t minCounter = itr->second;
-        auto minBuffer = itr;
-        itr++;
-
-        while (itr != mBuffers.end()) {
-            uint64_t counter = itr->second;
-            if (counter < minCounter) {
-                minCounter = counter;
-                minBuffer = itr;
-            }
-            itr++;
-        }
-
-        return {.token = getToken(), .id = minBuffer->first};
-    }
-
-    uint64_t getCounter() REQUIRES(mMutex) {
-        static uint64_t counter = 0;
-        return counter++;
-    }
-
-    std::mutex mMutex;
-    std::map<uint64_t /*Cache id*/, uint64_t /*counter*/> mBuffers GUARDED_BY(mMutex);
-
-    // Used by ISurfaceComposer to identify which process is sending the cached buffer.
-    sp<IBinder> token;
-};
-
-ANDROID_SINGLETON_STATIC_INSTANCE(BufferCache);
-
-void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId) {
-    // GraphicBuffer id's are used as the cache ids.
-    BufferCache::getInstance().uncache(graphicBufferId);
 }
 
 // ---------------------------------------------------------------------------
@@ -942,7 +957,13 @@ void SurfaceComposerClient::Transaction::releaseBufferIfOverwriting(const layer_
                 ->mReleaseCallbackThread
                 .addReleaseCallback(state.bufferData->generateReleaseCallbackId(), fence);
     } else {
-        listener->onReleaseBuffer(state.bufferData->generateReleaseCallbackId(), fence, UINT_MAX);
+        // If a buffer that has been cached but not synced to SF is released from a remote
+        // process, we need to uncache it to prevent SF from getting a null texture buffer, which
+        // will lead to frame loss.
+        bool uncacheBuffer =
+                state.bufferData->flags.test(BufferData::BufferDataChange::cachedBufferChanged);
+        listener->onReleaseBuffer(state.bufferData->generateReleaseCallbackId(), fence, UINT_MAX,
+                                  uncacheBuffer);
     }
 }
 

@@ -50,7 +50,7 @@ bool ClientCache::getBuffer(const client_cache_t& cacheId,
 
     auto bufItr = processBuffers.find(id);
     if (bufItr == processBuffers.end()) {
-        ALOGE_AND_TRACE("ClientCache::getBuffer - invalid buffer id");
+        ALOGE_AND_TRACE("ClientCache::getBuffer - invalid buffer id: %" PRIu64, id);
         return false;
     }
 
@@ -153,7 +153,7 @@ std::shared_ptr<renderengine::ExternalTexture> ClientCache::get(const client_cac
 
     ClientCacheBuffer* buf = nullptr;
     if (!getBuffer(cacheId, &buf)) {
-        ALOGE("failed to get buffer, could not retrieve buffer");
+        ALOGE("failed to get buffer, could not retrieve buffer, id: %" PRIu64, cacheId.id);
         return nullptr;
     }
 
