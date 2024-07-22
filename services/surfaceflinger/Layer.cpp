@@ -3198,6 +3198,8 @@ void Layer::resetDrawingStateBufferInfo() {
     mDrawingState.producerId = 0;
     mDrawingState.frameNumber = 0;
     mDrawingState.previousFrameNumber = 0;
+    mDrawingState.barrierProducerId = 0;
+    mDrawingState.barrierFrameNumber = 0;
     mDrawingState.releaseBufferListener = nullptr;
     mDrawingState.buffer = nullptr;
     mDrawingState.acquireFence = sp<Fence>::make(-1);
