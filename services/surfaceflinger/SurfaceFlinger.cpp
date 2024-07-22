@@ -5121,6 +5121,10 @@ status_t SurfaceFlinger::setTransactionState(
                                                      layerName.c_str(), transactionId);
             if (resolvedState.externalTexture) {
                 resolvedState.state.bufferData->buffer = resolvedState.externalTexture->getBuffer();
+            } else {
+                ALOGW("ExternalTexture of bufferData (%s) is null",
+                      resolvedState.state.bufferData->generateReleaseCallbackId()
+                              .to_string().c_str());
             }
             mBufferCountTracker.increment(resolvedState.state.surface->localBinder());
         }
