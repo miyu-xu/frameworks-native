@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cbcb722_dc873649",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e0e04bf_78c9cfd8",
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c071b403_61a39c53",
@@ -37,6 +55,47 @@
         "endLine": 13,
         "endChar": 19
       },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "624b55f0_5ab51949",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c071b403_61a39c53",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b1b46a_ad596bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "moved to internal main ag/28425733",
       "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -87,6 +146,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "360976a8_d4c761d2",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66bad592_feeafd76",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 32
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bfafb6_f62e6973",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01c1ea2e_899b2fca",
+      "range": {
+        "startLine": 67,
+        "startChar": 37,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "972522d4_9acdc186",
@@ -100,6 +207,30 @@
       "writtenOn": "2024-07-19T22:49:04Z",
       "side": 1,
       "message": "These changes should be reflected in the binder Bn/Bp classes as well",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "39b6fc6aad6e3304d87a07708298335beb4aa2cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6b2092_b278ac17",
+        "filename": "libs/gui/include/gui/IProducerListener.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-07-22T09:25:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "972522d4_9acdc186",
       "range": {
         "startLine": 66,
         "startChar": 0,
