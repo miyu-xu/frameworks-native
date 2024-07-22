@@ -389,7 +389,7 @@ status_t GraphicBuffer::lockAsync(uint64_t inProducerUsage, uint64_t inConsumerU
     }
 
     const uint64_t usage = static_cast<uint64_t>(
-            android_convertGralloc1To0Usage(inProducerUsage, inConsumerUsage));
+            ANDROID_NATIVE_UNSIGNED_CAST(android_convertGralloc1To0Usage(inProducerUsage, inConsumerUsage)));
 
     auto result = getBufferMapper().lock(handle, usage, rect, base::unique_fd{fenceFd});
 
