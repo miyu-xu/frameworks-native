@@ -1277,9 +1277,9 @@ private:
     // never removed, so take precedence over external and virtual displays.
     //
     // May be read from any thread, but must only be written from the main thread.
-    ui::DisplayMap<wp<IBinder>, const sp<DisplayDevice>> mDisplays GUARDED_BY(mStateLock);
+    ui::DisplayMap<wp<IBinder>, const sp<DisplayDevice>> mDisplays;
 
-    display::PhysicalDisplays mPhysicalDisplays GUARDED_BY(mStateLock);
+    display::PhysicalDisplays mPhysicalDisplays;
 
     // The inner or outer display for foldables, assuming they have mutually exclusive power states.
     // Atomic because writes from onActiveDisplayChangedLocked are not always under mStateLock, but

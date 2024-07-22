@@ -498,7 +498,7 @@ private:
     // The display modes of the active display. The DisplayModeIterators below are pointers into
     // this container, so must be invalidated whenever the DisplayModes change. The Policy below
     // is also dependent, so must be reset as well.
-    DisplayModes mDisplayModes GUARDED_BY(mLock);
+    DisplayModes mDisplayModes;
 
     // Set of supported display refresh rates for easy lookup
     // when FrameRateOverride::AppOverrideNativeRefreshRates is in use.
