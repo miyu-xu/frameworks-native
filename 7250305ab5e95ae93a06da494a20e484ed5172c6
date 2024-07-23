@@ -16,6 +16,24 @@
       "message": "We do want to keep these annotations, so I\u0027ve uploaded ag/28448048 as an alternative fix, and look into the remaining warnings.",
       "revId": "7250305ab5e95ae93a06da494a20e484ed5172c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18aad81_5ca9193c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-07-23T17:36:19Z",
+      "side": 1,
+      "message": "We should be returning `mDisplayModes` by value. Mind updating this CL?",
+      "parentUuid": "79f33973_ffbcbcd0",
+      "revId": "7250305ab5e95ae93a06da494a20e484ed5172c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
