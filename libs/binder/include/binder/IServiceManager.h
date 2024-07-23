@@ -24,6 +24,32 @@
 namespace android {
 
 // ----------------------------------------------------------------------
+typedef std::function<void(const String16& name, sockaddr* outAddr, size_t addrSize)>
+        RpcSocketAddressProvider;
+
+/**
+ * Register an accessor provider for the service manager APIs.
+ *
+ * \param provider the callback that generates Accessors.
+ * \param onDelete the callback that is used to delete the object that the
+ *        void* data points to.
+ */
+[[nodiscard]] LIBBINDER_EXPORTED status_t
+addAccessorProvider(std::function<sp<IBinder>(const String16& name)>&& provider,
+                    std::function<void()>&& onDelete);
+
+/**
+ * Creat an Accessor associated with a service that can create a socket connection based
+ * on the connection info from the supplied RpcSocketAddressProvider.
+ *
+ * \param instance name of the service that this Accessor is associated with
+ * \param connectionInfoProvider a callback that returns connection info for
+ *        connecting to the service.
+ * \return the binder of the IAccessor implementation from libbinder
+ */
+LIBBINDER_EXPORTED sp<IBinder> createAccessor(const String16& instance,
+                                              RpcSocketAddressProvider&& connectionInfoProvider,
+                                              std::function<void()>&& onDelete);
 
 /**
  * Service manager for C++ services.
