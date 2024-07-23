@@ -159,6 +159,13 @@ LIBBINDER_NDK34 { # introduced=UpsideDownCake
     AServiceManager_registerForServiceNotifications; # systemapi llndk
     AServiceManager_NotificationRegistration_delete; # systemapi llndk
     AServiceManager_addServiceWithFlags; # systemapi llndk
+    ARpc_addAccessorProvider; # systemapi llndk
+    ARpc_Accessor_new; # systemapi llndk
+    ARpc_Accessor_delete; # systemapi llndk
+    ARpc_Accessor_asBinder; # systemapi llndk
+    ARpc_Accessor_fromBinder; # systemapi llndk
+    ARpc_ConnectionInfo_new; # systemapi llndk
+    ARpc_ConnectionInfo_delete; # systemapi llndk
 };
 
 LIBBINDER_NDK35 { # introduced=VanillaIceCream

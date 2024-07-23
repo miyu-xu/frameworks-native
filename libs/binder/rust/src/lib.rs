@@ -111,7 +111,7 @@ pub use crate::binder_async::{BinderAsyncPool, BoxFuture};
 pub use binder::{BinderFeatures, FromIBinder, IBinder, Interface, Strong, Weak};
 pub use error::{ExceptionCode, IntoBinderResult, Status, StatusCode};
 pub use parcel::{ParcelFileDescriptor, Parcelable, ParcelableHolder};
-pub use proxy::{DeathRecipient, SpIBinder, WpIBinder};
+pub use proxy::{Accessor, ConnectionInfo, DeathRecipient, SpIBinder, WpIBinder};
 #[cfg(not(trusty))]
 pub use service::{
     add_service, check_interface, check_service, force_lazy_services_persist,
