@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d5344b_dab814fb",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-23T22:08:42Z",
+      "side": 1,
+      "message": "can you un-auto these? it seems like they\u0027re getting pulled from auto-generated files as well. Are they still going into .ro.data?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 89
+      },
+      "revId": "b8f4fc020055724c741a6e0d72d0f50a3dc1a745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
