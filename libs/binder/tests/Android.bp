@@ -267,7 +267,7 @@ cc_defaults {
     defaults: [
         "binderRpcTest_common_defaults",
     ],
-    compile_multilib: "first",
+    compile_multilib: "both",
 
     srcs: [
         "binderRpcTest.cpp",
