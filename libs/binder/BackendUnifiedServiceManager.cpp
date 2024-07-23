@@ -46,7 +46,7 @@ binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& na
                                                          os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->getService2(name, &service);
-    toBinderService(service, _out);
+    toBinderService(name, service, _out);
     return status;
 }
 
@@ -54,13 +54,29 @@ binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& n
                                                           os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
-    toBinderService(service, _out);
+    toBinderService(name, service, _out);
     return status;
 }
 
-void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
+void BackendUnifiedServiceManager::toBinderService(const ::std::string& name, const os::Service& in,
+                                                   os::Service* _out) {
     switch (in.getTag()) {
         case os::Service::Tag::binder: {
+            if (in.get<os::Service::Tag::binder>() == nullptr) {
+                // failed to find a service. Check to see if we have any local
+                // injected Accessors for this service.
+                os::Service accessor;
+                binder::Status status = getInjectedAccessor(name, &accessor);
+                if (status.isOk()) {
+                    ALOGI("Found local injected service for %s, will attempt to create connection",
+                          name.c_str());
+                    // Call this again using the accesor Service to get the real
+                    // service's binder into _out
+                    toBinderService(name, accessor, _out);
+                    return;
+                }
+            }
+
             *_out = in;
             break;
         }
@@ -73,12 +89,14 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
                 break;
             }
             auto request = [=] {
-                os::ParcelFileDescriptor fd;
-                binder::Status ret = accessor->addConnection(&fd);
-                if (ret.isOk()) {
-                    return base::unique_fd(fd.release());
+                std::optional<os::ParcelFileDescriptor> fd;
+                String16 error;
+                binder::Status ret = accessor->addConnection(&fd, &error);
+                if (ret.isOk() && fd) {
+                    return base::unique_fd(fd->release());
                 } else {
-                    ALOGE("Failed to connect to RpcSession: %s", ret.toString8().c_str());
+                    ALOGE("Failed to connect to RpcSession: %s with error string: ",
+                          ret.toString8().c_str(), String8(error).c_str());
                     return base::unique_fd(-1);
                 }
             };
