@@ -33,6 +33,7 @@ use std::ffi::{c_void, CString};
 use std::fmt;
 use std::mem;
 use std::os::fd::AsRawFd;
+use std::os::raw::c_char;
 use std::ptr;
 use std::sync::Arc;
 
@@ -702,6 +703,184 @@ impl Drop for DeathRecipient {
     }
 }
 
+/// Rust wrapper around ARpc_Accessor objects.
+///
+/// The cookie in this struct represents an `Arc<F>` for the owned callback.
+/// This struct owns a ref-count of it
+///
+/// Dropping the `Accessor` will drop the underlying object and the binder it owns.
+#[repr(C)]
+pub struct Accessor {
+    accessor: *mut sys::ARpc_Accessor,
+    cookie: *mut c_void,
+    // TODO need to understand what this is for. How will we handle multiple
+    // cookies in the future for callbacks for verifying the established connection?
+    vtable: &'static AccessorVtable,
+}
+
+/// TODO change to sockaddr
+pub struct ConnectionInfo {
+    // TODO is it "rusty" to have a simple struct like this?
+    /// port number
+    pub port: u32,
+    /// cid number...
+    pub cid: u32,
+}
+
+struct AccessorVtable {
+    // TODO why is this eneeded?
+    //cookie_incr_refcount: unsafe extern "C" fn(*mut c_void),
+    cookie_decr_refcount: unsafe extern "C" fn(*mut c_void),
+}
+
+/// Safety: A `Accessor` is a wrapper around `ARpc_Accessor` and
+/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
+/// `ARpc_Accessor` is threadsafe, this structure is too.
+unsafe impl Send for Accessor {}
+
+/// Safety: A `Accessor` is a wrapper around `AIBinder_Accessor` and
+/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
+/// `ARpc_Accessor` is threadsafe, this structure is too.
+unsafe impl Sync for Accessor {}
+
+impl Accessor {
+    /// Create a new accessor that will call the given callback when its
+    /// connection info is required.
+    /// TODO need to be able to pass in the connection info through a void*
+    /// for the callback I think.
+    pub fn new<F>(instance: &str, callback: F) -> Accessor
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        let callback: *const F = Arc::into_raw(Arc::new(callback));
+        let inst = CString::new(instance).unwrap();
+        let cookie = callback as *mut c_void;
+
+        // Safety: `cookie_incr_refcount` points to
+        // `Self::cookie_incr_refcount`, and `self.cookie` is the cookie for an
+        // Arc<F>.
+        unsafe {
+            // TODO is this incr needed?
+            Self::cookie_incr_refcount::<F>(cookie);
+        }
+
+        // Safety: The function pointer is a valid connection_ifno callback.
+        //
+        // This call returns an owned `ARpc_Accessor` pointer which
+        // must be destroyed via `ARpc_Accessor_delete` when no longer
+        // needed.
+        let accessor = unsafe {
+            sys::ARpc_Accessor_new(inst.as_ptr(), Some(Self::connection_info::<F>), cookie)
+        };
+
+        Accessor {
+            accessor,
+            cookie: callback as *mut c_void,
+            vtable: &AccessorVtable { cookie_decr_refcount: Self::cookie_decr_refcount::<F> },
+        }
+    }
+
+    /// Get the underlying binder for this Accessor for when it needs to be either
+    /// registered with service manager or sent to another process.
+    pub fn as_binder(&self) -> Option<SpIBinder> {
+        log::info!("Trying to get the accessor binder!");
+        // Safety: `ARpc_Accessor_asBinder` returns either a null pointer or a
+        // valid pointer to an owned `AIBinder`. Either of these values is safe to
+        // pass to `SpIBinder::from_raw`.
+        unsafe { SpIBinder::from_raw(sys::ARpc_Accessor_asBinder(self.accessor)) }
+    }
+
+    /// Callback invoked from C++ when the connection info is needed.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the caller must hold a ref-count to it.
+    unsafe extern "C" fn connection_info<F>(
+        _instance: *const c_char,
+        cookie: *mut c_void,
+    ) -> *mut binder_ndk_sys::ARpc_ConnectionInfo
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        if cookie.is_null() {
+            log::info!("cookie is null in connection_info...");
+        } else {
+            log::info!("good cookie in connection_info...");
+        }
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        let callback = unsafe { (cookie as *const F).as_ref().unwrap() };
+
+        log::info!("Unwrapped the the cookie as a callback...");
+        // TODO handle failure?
+        let con_info = callback().unwrap();
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        unsafe { sys::ARpc_ConnectionInfo_new(con_info.port, con_info.cid) }
+    }
+
+    /// Callback that decrements the ref-count.
+    /// This is invoked from C++ when a binder is unlinked.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the owner must give up a ref-count to it.
+    unsafe extern "C" fn cookie_decr_refcount<F>(cookie: *mut c_void)
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        drop(unsafe { Arc::from_raw(cookie as *const F) });
+    }
+
+    /// Callback that increments the ref-count.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the owner must handle the created ref-count properly.
+    unsafe extern "C" fn cookie_incr_refcount<F>(cookie: *mut c_void)
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        let arc = mem::ManuallyDrop::new(unsafe { Arc::from_raw(cookie as *const F) });
+        mem::forget(Arc::clone(&arc));
+    }
+}
+
+/// Safety: A `Accessor` is always constructed with a valid raw pointer to
+/// an `ARpc_Accessor`, so it is always type-safe to extract this
+/// pointer.
+unsafe impl AsNative<sys::ARpc_Accessor> for Accessor {
+    fn as_native(&self) -> *const sys::ARpc_Accessor {
+        self.accessor
+    }
+
+    fn as_native_mut(&mut self) -> *mut sys::ARpc_Accessor {
+        self.accessor
+    }
+}
+
+impl Drop for Accessor {
+    fn drop(&mut self) {
+        log::info!("Dropping accessor binder!");
+        // Safety: `self.accessor` is always a valid, owned
+        // `ARpc_Accessor` pointer returned by
+        // `ARpc_Accessor_new` when `self` was created. This delete
+        // method can only be called once when `self` is dropped.
+        unsafe {
+            sys::ARpc_Accessor_delete(self.accessor);
+        }
+
+        // Safety: We own a ref-count to the cookie, and so does every linked
+        // binder. This call gives up our ref-count. The linked binders should
+        // already have given up their ref-count, or should do so shortly.
+        unsafe {
+            (self.vtable.cookie_decr_refcount)(self.cookie);
+        }
+    }
+}
 /// Generic interface to remote binder objects.
 ///
 /// Corresponds to the C++ `BpInterface` class.

@@ -24,6 +24,15 @@
 namespace android {
 
 // ----------------------------------------------------------------------
+// TODO share this object and use sockaddr
+class RpcConnectionInfo {
+public:
+    RpcConnectionInfo(uint32_t port, uint32_t cid) : port(port), cid(cid) {}
+
+    uint32_t port;
+    uint32_t cid;
+    RpcConnectionInfo() = delete;
+};
 
 /**
  * Service manager for C++ services.
@@ -141,6 +150,14 @@ public:
 
     virtual status_t unregisterForNotifications(const String16& name,
                                                 const sp<LocalRegistrationCallback>& callback) = 0;
+
+    virtual status_t addAccessorProvider(std::function<sp<IBinder>(const String16& name)> provider);
+    virtual sp<IBinder> getAccessor(
+            const String16& instance,
+            std::function<std::optional<RpcConnectionInfo>(const String16& name)>
+                    connectionInfoProvider,
+            void* data);
+    virtual status_t addAccessorBinder(const String16& instance, sp<IBinder> accessor);
 
     struct ServiceDebugInfo {
         std::string name;

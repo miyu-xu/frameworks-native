@@ -51,6 +51,7 @@ cc_defaults {
     ],
 
     srcs: [
+        "binder_rpc.cpp",
         "ibinder.cpp",
         "libbinder.cpp",
         "parcel.cpp",

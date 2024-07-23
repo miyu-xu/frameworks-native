@@ -74,6 +74,8 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
                 }
             };
             auto session = RpcSession::make();
+            // TODOasdf try to remove this again and see if it's still an issue
+            session->setMaxOutgoingConnections(4);
             session->setupPreconnectedClient(base::unique_fd{}, request);
             session->setSessionSpecificRoot(accessorBinder);
             *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
