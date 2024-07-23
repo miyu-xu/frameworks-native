@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0609c415_bfd54aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-07-23T21:51:08Z",
+      "side": 1,
+      "message": "I moved the function to `RpcWireFormat`, it\u0027s ready for review.",
+      "revId": "171d3a5da31188593780c32e281bbc87e6dadc94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
