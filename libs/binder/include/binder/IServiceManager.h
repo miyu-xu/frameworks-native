@@ -24,6 +24,14 @@
 namespace android {
 
 // ----------------------------------------------------------------------
+typedef std::function<void(const String16& name, sockaddr* outAddr, size_t addrSize)>
+        RpcSocketAddressProvider;
+
+[[nodiscard]] LIBBINDER_EXPORTED status_t
+addAccessorProvider(std::function<sp<IBinder>(const String16& name)>&& provider);
+
+LIBBINDER_EXPORTED sp<IBinder> createAccessor(const String16& instance,
+                                              RpcSocketAddressProvider&& connectionInfoProvider);
 
 /**
  * Service manager for C++ services.
