@@ -17,13 +17,54 @@
 #pragma once
 #include <binder/Common.h>
 #include <binder/IInterface.h>
-#include <utils/Vector.h>
+#include <sys/socket.h>
 #include <utils/String16.h>
+#include <utils/Vector.h>
 #include <optional>
 
 namespace android {
 
 // ----------------------------------------------------------------------
+typedef std::function<void(const String16& name, sockaddr* outAddr, size_t addrSize)>
+        RpcSocketAddressProvider;
+
+/**
+ * Register an accessor provider for the service manager APIs.
+ *
+ * \param provider the callback that generates Accessors.
+ * \param onDelete the callback that is used to delete the object that the
+ *        void* data points to.
+ */
+[[nodiscard]] LIBBINDER_EXPORTED status_t
+addAccessorProvider(std::function<sp<IBinder>(const String16& name)>&& provider,
+                    std::function<void()>&& onDelete);
+
+/**
+ * Creat an Accessor associated with a service that can create a socket connection based
+ * on the connection info from the supplied RpcSocketAddressProvider.
+ *
+ * \param instance name of the service that this Accessor is associated with
+ * \param connectionInfoProvider a callback that returns connection info for
+ *        connecting to the service.
+ * \return the binder of the IAccessor implementation from libbinder
+ */
+LIBBINDER_EXPORTED sp<IBinder> createAccessor(const String16& instance,
+                                              RpcSocketAddressProvider&& connectionInfoProvider,
+                                              std::function<void()>&& onDelete);
+
+/**
+ * Check to make sure this binder is the expected binder that is an IAccessor
+ * associated with a specific instance.
+ *
+ * This helper function exists to avoid adding the IAccessor type to
+ * libbinder_ndk.
+ *
+ * \param instance name of the service that this Accessor should be associated with
+ * \param binder to validate
+ *
+ * \return OK if the binder is an IAccessor for `instance`
+ */
+LIBBINDER_EXPORTED status_t validateAccessor(const String16& instance, sp<IBinder> binder);
 
 /**
  * Service manager for C++ services.
