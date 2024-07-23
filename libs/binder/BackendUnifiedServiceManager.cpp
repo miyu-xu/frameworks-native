@@ -73,12 +73,14 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
                 break;
             }
             auto request = [=] {
-                os::ParcelFileDescriptor fd;
-                binder::Status ret = accessor->addConnection(&fd);
-                if (ret.isOk()) {
-                    return base::unique_fd(fd.release());
+                std::optional<os::ParcelFileDescriptor> fd;
+                String16 error;
+                binder::Status ret = accessor->addConnection(&fd, &error);
+                if (ret.isOk() && fd) {
+                    return base::unique_fd(fd->release());
                 } else {
-                    ALOGE("Failed to connect to RpcSession: %s", ret.toString8().c_str());
+                    ALOGE("Failed to connect to RpcSession: %s with error string: ",
+                          ret.toString8().c_str(), String8(error).c_str());
                     return base::unique_fd(-1);
                 }
             };
