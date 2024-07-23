@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d520c66e_bf67687d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-07-23T20:16:40Z",
+      "side": 1,
+      "message": "Nit: These are now handled by the other CL, so delete.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 0
+      },
+      "revId": "d25c7b44c85a1ff80ed72402864811ea4999abb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a15f5b64_4992df50",
+        "filename": "services/surfaceflinger/Scheduler/RefreshRateSelector.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-07-23T20:16:40Z",
+      "side": 1,
+      "message": "Nit: This `const` is no longer needed.",
+      "range": {
+        "startLine": 307,
+        "startChar": 4,
+        "endLine": 307,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85986714_8472fee5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/surfaceflinger/Scheduler/RefreshRateSelector.h",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 308,
+                "endChar": 0
+              },
+              "replacement": "    DisplayModes displayModes() const {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d25c7b44c85a1ff80ed72402864811ea4999abb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
