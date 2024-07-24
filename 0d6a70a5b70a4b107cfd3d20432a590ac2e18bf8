@@ -75,6 +75,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8eb9aa_a8031ba5",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4586c11_b1baa1b1",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 59
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb1b8c16_bb0c160f",
@@ -138,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36c78f86_0f5daa4b",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "I have changed it to static map in IServiceManager.cpp for now.\n\nThe plan is that all the services from SystemServiceRegistry.java. Considering that it\u0027ll be large, what\u0027s your opinion on the exact location on memory?\n\nframeworks/base/core/java/android/app/SystemServiceRegistry.java",
+      "parentUuid": "fb1b8c16_bb0c160f",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "940a96ad_b2de099a",
         "filename": "libs/binder/ClientSideCacheList.cpp",
         "patchSetId": 4
@@ -149,6 +197,30 @@
       "writtenOn": "2024-07-10T20:13:06Z",
       "side": 1,
       "message": "nit: unnecessary allocation",
+      "range": {
+        "startLine": 33,
+        "startChar": 45,
+        "endLine": 33,
+        "endChar": 54
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1afede4_635613b8",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "940a96ad_b2de099a",
       "range": {
         "startLine": 33,
         "startChar": 45,
@@ -172,6 +244,30 @@
       "writtenOn": "2024-07-10T20:13:06Z",
       "side": 1,
       "message": "keep this in IServiceManagement.cpp to keep the implementation small? We probably don\u0027t need 3 new classes for this, it\u0027ll be easy to iterate on at first, and you will also avoid the Android.bp change for now.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77688ad_8000194b",
+        "filename": "libs/binder/ClientSideCacheList.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "158a68d4_537869e1",
       "range": {
         "startLine": 22,
         "startChar": 6,
@@ -223,6 +319,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1651e11_642883db",
+        "filename": "libs/binder/ClientSideCacheList.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "261b5289_8405a2ab",
+      "range": {
+        "startLine": 24,
+        "startChar": 16,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bae4410_6b462090",
@@ -264,6 +384,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7036559_704eaefb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bae4410_6b462090",
+      "range": {
+        "startLine": 106,
+        "startChar": 20,
+        "endLine": 106,
+        "endChar": 34
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f37f9dc9_a53f1e99",
@@ -277,6 +421,30 @@
       "writtenOn": "2024-07-10T20:13:06Z",
       "side": 1,
       "message": "Unnecessary class - avoid it. You can avoid heap allocating the cache strings anyway (since the cache must be in the cache list), and for complicated usage, you usually want to lock multiple different operations at once (e.g. remove then add), not locking each one",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 2
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9600345e_b8a57b14",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f37f9dc9_a53f1e99",
       "range": {
         "startLine": 86,
         "startChar": 0,
@@ -328,6 +496,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "515247b3_b9110a95",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12f782ea_21fdf6ee",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 45
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6099a746_9b7b314e",
@@ -341,6 +533,30 @@
       "writtenOn": "2024-07-10T20:13:06Z",
       "side": 1,
       "message": "avoid non const* static lifetime raw pointer, make ownership explicit",
+      "range": {
+        "startLine": 129,
+        "startChar": 30,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1d2ad0_8c4f7877",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Using a reference instead. Does that work? I am making the assumption that the ServiceMangerShim which owns this cache will outlive the BinderInvalidation objects.\n\n\nOr should I use android::sp instead?",
+      "parentUuid": "6099a746_9b7b314e",
       "range": {
         "startLine": 129,
         "startChar": 30,
@@ -392,6 +608,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c95b179_3286a85d",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "d956bb10_ebb03202",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 16
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf632ca6_16446bdf",
@@ -439,6 +679,30 @@
           ]
         }
       ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65d1027_db65d3e5",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf632ca6_16446bdf",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 30
+      },
       "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -507,6 +771,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a50e8e_690cbea5",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16b717aa_5941502f",
+      "range": {
+        "startLine": 136,
+        "startChar": 25,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a05de2c_b06a8c6b",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cd0e0ae_d06043a5",
+      "range": {
+        "startLine": 136,
+        "startChar": 39,
+        "endLine": 136,
+        "endChar": 40
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c235e245_cafea926",
@@ -544,6 +856,30 @@
           ]
         }
       ],
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175bc869_c1783110",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Acknowledged. I\u0027m removing the binder from the cache if link to death fails.",
+      "parentUuid": "c235e245_cafea926",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 25
+      },
       "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -591,6 +927,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caef79de_cee96d1f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Ack on making getItem const.\n\nBut what about addItem, the const function ServiceManagerShim::checkService also needs to add the new IBinder to the cache.\n\nIt feels wrong to make that const. Which is why I wanted to make this mutable instead.\n\nWhich is better according to you?",
+      "parentUuid": "70c5591e_70e186b4",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 190,
+        "endChar": 11
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "876e5d16_9d3bbcfe",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 4
@@ -602,6 +962,30 @@
       "writtenOn": "2024-07-10T20:13:06Z",
       "side": 1,
       "message": "At the top of the file, put:\n\n```\n#ifdef LIBBINDER_CLIENT_CACHE\nconstexpr bool kUseCache \u003d true;\n#else\nconstexpr bool kUseCache \u003d false;\n#endif\n```\n\nThen use that here, so that more things will be compile tested.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 29
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4821f0_d6637780",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-24T17:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "876e5d16_9d3bbcfe",
       "range": {
         "startLine": 398,
         "startChar": 0,
