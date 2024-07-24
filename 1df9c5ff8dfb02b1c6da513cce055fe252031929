@@ -34,6 +34,23 @@
       "parentUuid": "0056b8a7_c04b51a9",
       "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d56aa71_f641c4cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-24T21:47:30Z",
+      "side": 1,
+      "message": "does it still work to adb sync and run these tests, as well as atest?",
+      "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
