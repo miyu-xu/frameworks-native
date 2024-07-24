@@ -51,6 +51,24 @@
       "message": "does it still work to adb sync and run these tests, as well as atest?",
       "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ee680b_5ff50fde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-07-24T22:09:29Z",
+      "side": 1,
+      "message": "\u003e as well as atest\n\nFrom my local testing, `atest` didn\u0027t appear to reproduce the original bug.  So this being odd under `atest` might not be a blocker?",
+      "parentUuid": "3d56aa71_f641c4cc",
+      "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
