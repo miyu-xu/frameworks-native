@@ -34,6 +34,24 @@
       "parentUuid": "4b8b2c6c_f714a62b",
       "revId": "e6421e05468623249988f293b74e2dcc99e50867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb373dad_65605836",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-07-24T18:50:26Z",
+      "side": 1,
+      "message": "Using https://android-build.corp.google.com/artifact/pending/P78080144/test_suites_arm64-trunk_staging/latest/view/android-vts.zip (presubmit from Patch Set 5), I got a successful local run of the `binderRpcTestNoKernelAtAll` VTS module.",
+      "parentUuid": "88290ef6_19995334",
+      "revId": "e6421e05468623249988f293b74e2dcc99e50867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
