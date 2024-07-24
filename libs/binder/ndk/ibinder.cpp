@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+#include <android/binder_context.h>
 #include <android/binder_ibinder.h>
 #include <android/binder_ibinder_platform.h>
-#include <android/binder_libbinder.h>
 #include "ibinder_internal.h"
 
 #include <android/binder_stability.h>
@@ -74,12 +74,12 @@ AIBinder::AIBinder(const AIBinder_Class* clazz) : mClazz(clazz) {}
 AIBinder::~AIBinder() {}
 
 std::optional<bool> AIBinder::associateClassInternal(const AIBinder_Class* clazz,
-                                                     const String16& newDescriptor, bool set) {
+                                                     const String8& newDescriptor, bool set) {
     std::lock_guard<std::mutex> lock(mClazzMutex);
     if (mClazz == clazz) return true;
 
     if (mClazz != nullptr) {
-        const String16& currentDescriptor = mClazz->getInterfaceDescriptor();
+        String8 currentDescriptor(mClazz->getInterfaceDescriptor());
         if (newDescriptor == currentDescriptor) {
             LOG(ERROR) << __func__ << ": Class descriptors '" << currentDescriptor
                        << "' match during associateClass, but they are different class objects. "
@@ -88,7 +88,8 @@ std::optional<bool> AIBinder::associateClassInternal(const AIBinder_Class* clazz
             LOG(ERROR) << __func__
                        << ": Class cannot be associated on object which already has a class. "
                           "Trying to associate to '"
-                       << newDescriptor << "' but already set to '" << currentDescriptor << "'.";
+                       << newDescriptor.c_str() << "' but already set to '"
+                       << currentDescriptor.c_str() << "'.";
         }
 
         // always a failure because we know mClazz != clazz
@@ -98,7 +99,6 @@ std::optional<bool> AIBinder::associateClassInternal(const AIBinder_Class* clazz
     if (set) {
         // if this is a local object, it's not one known to libbinder_ndk
         mClazz = clazz;
-        return true;
     }
 
     return {};
@@ -107,27 +107,27 @@ std::optional<bool> AIBinder::associateClassInternal(const AIBinder_Class* clazz
 bool AIBinder::associateClass(const AIBinder_Class* clazz) {
     if (clazz == nullptr) return false;
 
-    const String16& newDescriptor = clazz->getInterfaceDescriptor();
+    String8 newDescriptor(clazz->getInterfaceDescriptor());
 
     auto result = associateClassInternal(clazz, newDescriptor, false);
     if (result.has_value()) return *result;
 
     CHECK(asABpBinder() != nullptr);  // ABBinder always has a descriptor
 
-    const String16& descriptor = getBinder()->getInterfaceDescriptor();
+    String8 descriptor(getBinder()->getInterfaceDescriptor());
     if (descriptor != newDescriptor) {
         if (getBinder()->isBinderAlive()) {
-            LOG(ERROR) << __func__ << ": Expecting binder to have class '" << newDescriptor
-                       << "' but descriptor is actually '" << descriptor << "'.";
+            LOG(ERROR) << __func__ << ": Expecting binder to have class '" << newDescriptor.c_str()
+                       << "' but descriptor is actually '" << descriptor.c_str() << "'.";
         } else {
             // b/155793159
-            LOG(ERROR) << __func__ << ": Cannot associate class '" << newDescriptor
+            LOG(ERROR) << __func__ << ": Cannot associate class '" << newDescriptor.c_str()
                        << "' to dead binder.";
         }
         return false;
     }
 
-    return associateClassInternal(clazz, newDescriptor, true).value();
+    return associateClassInternal(clazz, newDescriptor, true).value_or(true);
 }
 
 ABBinder::ABBinder(const AIBinder_Class* clazz, void* userData)
@@ -181,7 +181,7 @@ status_t ABBinder::onTransact(transaction_code_t code, const Parcel& data, Parce
 
         binder_status_t status = getClass()->onTransact(this, code, &in, &out);
         return PruneStatusT(status);
-    } else if (code == SHELL_COMMAND_TRANSACTION && getClass()->handleShellCommand != nullptr) {
+    } else if (code == SHELL_COMMAND_TRANSACTION) {
         int in = data.readFileDescriptor();
         int out = data.readFileDescriptor();
         int err = data.readFileDescriptor();
@@ -301,34 +301,13 @@ AIBinder* AIBinder_Weak_promote(AIBinder_Weak* weakBinder) {
     return binder.get();
 }
 
-AIBinder_Weak* AIBinder_Weak_clone(const AIBinder_Weak* weak) {
-    if (weak == nullptr) {
-        return nullptr;
-    }
-
-    return new AIBinder_Weak{weak->binder};
-}
-
-bool AIBinder_lt(const AIBinder* lhs, const AIBinder* rhs) {
-    if (lhs == nullptr || rhs == nullptr) return lhs < rhs;
-
-    return const_cast<AIBinder*>(lhs)->getBinder() < const_cast<AIBinder*>(rhs)->getBinder();
-}
-
-bool AIBinder_Weak_lt(const AIBinder_Weak* lhs, const AIBinder_Weak* rhs) {
-    if (lhs == nullptr || rhs == nullptr) return lhs < rhs;
-
-    return lhs->binder < rhs->binder;
-}
-
 AIBinder_Class::AIBinder_Class(const char* interfaceDescriptor, AIBinder_Class_onCreate onCreate,
                                AIBinder_Class_onDestroy onDestroy,
                                AIBinder_Class_onTransact onTransact)
     : onCreate(onCreate),
       onDestroy(onDestroy),
       onTransact(onTransact),
-      mInterfaceDescriptor(interfaceDescriptor),
-      mWideInterfaceDescriptor(interfaceDescriptor) {}
+      mInterfaceDescriptor(interfaceDescriptor) {}
 
 AIBinder_Class* AIBinder_Class_define(const char* interfaceDescriptor,
                                       AIBinder_Class_onCreate onCreate,
@@ -354,12 +333,6 @@ void AIBinder_Class_setHandleShellCommand(AIBinder_Class* clazz,
     CHECK(clazz != nullptr) << "setHandleShellCommand requires non-null clazz";
 
     clazz->handleShellCommand = handleShellCommand;
-}
-
-const char* AIBinder_Class_getDescriptor(const AIBinder_Class* clazz) {
-    CHECK(clazz != nullptr) << "getDescriptor requires non-null clazz";
-
-    return clazz->getInterfaceDescriptorUtf8();
 }
 
 void AIBinder_DeathRecipient::TransferDeathRecipient::binderDied(const wp<IBinder>& who) {
@@ -394,7 +367,7 @@ void AIBinder_DeathRecipient::pruneDeadTransferEntriesLocked() {
                            mDeathRecipients.end());
 }
 
-binder_status_t AIBinder_DeathRecipient::linkToDeath(const sp<IBinder>& binder, void* cookie) {
+binder_status_t AIBinder_DeathRecipient::linkToDeath(sp<IBinder> binder, void* cookie) {
     CHECK(binder != nullptr);
 
     std::lock_guard<std::mutex> l(mDeathRecipientsMutex);
@@ -413,7 +386,7 @@ binder_status_t AIBinder_DeathRecipient::linkToDeath(const sp<IBinder>& binder, 
     return STATUS_OK;
 }
 
-binder_status_t AIBinder_DeathRecipient::unlinkToDeath(const sp<IBinder>& binder, void* cookie) {
+binder_status_t AIBinder_DeathRecipient::unlinkToDeath(sp<IBinder> binder, void* cookie) {
     CHECK(binder != nullptr);
 
     std::lock_guard<std::mutex> l(mDeathRecipientsMutex);
@@ -638,7 +611,7 @@ binder_status_t AIBinder_transact(AIBinder* binder, transaction_code_t code, APa
         return STATUS_UNKNOWN_TRANSACTION;
     }
 
-    constexpr binder_flags_t kAllFlags = FLAG_PRIVATE_VENDOR | FLAG_ONEWAY | FLAG_CLEAR_BUF;
+    constexpr binder_flags_t kAllFlags = FLAG_PRIVATE_VENDOR | FLAG_ONEWAY;
     if ((flags & ~kAllFlags) != 0) {
         LOG(ERROR) << __func__ << ": Unrecognized flags sent: " << flags;
         return STATUS_BAD_VALUE;

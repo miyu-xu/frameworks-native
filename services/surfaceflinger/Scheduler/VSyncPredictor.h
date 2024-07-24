@@ -52,10 +52,11 @@ public:
      */
     void setPeriod(nsecs_t period) final;
 
-    /* Query if the model is in need of more samples to make a prediction.
+    /* Query if the model is in need of more samples to make a prediction at timePoint.
+     * \param [in] timePoint    The timePoint to inquire of.
      * \return  True, if model would benefit from more samples, False if not.
      */
-    bool needsMoreSamples() const final;
+    bool needsMoreSamples(nsecs_t timePoint) const;
 
     std::tuple<nsecs_t /* slope */, nsecs_t /* intercept */> getVSyncPredictionModel() const;
 

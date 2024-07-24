@@ -135,7 +135,7 @@ static const void* printBinderTransactionData(TextOutput& out, const void* data)
         out << "target.ptr=" << btd->target.ptr;
     }
     out << " (cookie " << btd->cookie << ")" << endl
-        << "code=" << TypeCode(btd->code) << ", flags=" << (void*)(uint64_t)btd->flags << endl
+        << "code=" << TypeCode(btd->code) << ", flags=" << (void*)(long)btd->flags << endl
         << "data=" << btd->data.ptr.buffer << " (" << (void*)btd->data_size
         << " bytes)" << endl
         << "offsets=" << btd->data.ptr.offsets << " (" << (void*)btd->offsets_size
@@ -150,7 +150,7 @@ static const void* printReturnCommand(TextOutput& out, const void* _cmd)
     uint32_t code = (uint32_t)*cmd++;
     size_t cmdIndex = code & 0xff;
     if (code == BR_ERROR) {
-        out << "BR_ERROR: " << (void*)(uint64_t)(*cmd++) << endl;
+        out << "BR_ERROR: " << (void*)(long)(*cmd++) << endl;
         return cmd;
     } else if (cmdIndex >= N) {
         out << "Unknown reply: " << code << endl;
@@ -177,21 +177,21 @@ static const void* printReturnCommand(TextOutput& out, const void* _cmd)
         case BR_DECREFS: {
             const int32_t b = *cmd++;
             const int32_t c = *cmd++;
-            out << ": target=" << (void*)(uint64_t)b << " (cookie " << (void*)(uint64_t)c << ")";
+            out << ": target=" << (void*)(long)b << " (cookie " << (void*)(long)c << ")";
         } break;
 
         case BR_ATTEMPT_ACQUIRE: {
             const int32_t p = *cmd++;
             const int32_t b = *cmd++;
             const int32_t c = *cmd++;
-            out << ": target=" << (void*)(uint64_t)b << " (cookie " << (void*)(uint64_t)c
+            out << ": target=" << (void*)(long)b << " (cookie " << (void*)(long)c
                 << "), pri=" << p;
         } break;
 
         case BR_DEAD_BINDER:
         case BR_CLEAR_DEATH_NOTIFICATION_DONE: {
             const int32_t c = *cmd++;
-            out << ": death cookie " << (void*)(uint64_t)c;
+            out << ": death cookie " << (void*)(long)c;
         } break;
 
         default:
@@ -232,7 +232,7 @@ static const void* printCommand(TextOutput& out, const void* _cmd)
 
         case BC_FREE_BUFFER: {
             const int32_t buf = *cmd++;
-            out << ": buffer=" << (void*)(uint64_t)buf;
+            out << ": buffer=" << (void*)(long)buf;
         } break;
 
         case BC_INCREFS:
@@ -247,7 +247,7 @@ static const void* printCommand(TextOutput& out, const void* _cmd)
         case BC_ACQUIRE_DONE: {
             const int32_t b = *cmd++;
             const int32_t c = *cmd++;
-            out << ": target=" << (void*)(uint64_t)b << " (cookie " << (void*)(uint64_t)c << ")";
+            out << ": target=" << (void*)(long)b << " (cookie " << (void*)(long)c << ")";
         } break;
 
         case BC_ATTEMPT_ACQUIRE: {
@@ -260,12 +260,12 @@ static const void* printCommand(TextOutput& out, const void* _cmd)
         case BC_CLEAR_DEATH_NOTIFICATION: {
             const int32_t h = *cmd++;
             const int32_t c = *cmd++;
-            out << ": handle=" << h << " (death cookie " << (void*)(uint64_t)c << ")";
+            out << ": handle=" << h << " (death cookie " << (void*)(long)c << ")";
         } break;
 
         case BC_DEAD_BINDER_DONE: {
             const int32_t c = *cmd++;
-            out << ": death cookie " << (void*)(uint64_t)c;
+            out << ": death cookie " << (void*)(long)c;
         } break;
 
         default:
@@ -486,30 +486,15 @@ void IPCThreadState::flushCommands()
     }
 }
 
-bool IPCThreadState::flushIfNeeded()
-{
-    if (mIsLooper || mServingStackPointer != nullptr) {
-        return false;
-    }
-    // In case this thread is not a looper and is not currently serving a binder transaction,
-    // there's no guarantee that this thread will call back into the kernel driver any time
-    // soon. Therefore, flush pending commands such as BC_FREE_BUFFER, to prevent them from getting
-    // stuck in this thread's out buffer.
-    flushCommands();
-    return true;
-}
-
 void IPCThreadState::blockUntilThreadAvailable()
 {
     pthread_mutex_lock(&mProcess->mThreadCountLock);
-    mProcess->mWaitingForThreads++;
     while (mProcess->mExecutingThreadsCount >= mProcess->mMaxThreads) {
         ALOGW("Waiting for thread to be free. mExecutingThreadsCount=%lu mMaxThreads=%lu\n",
                 static_cast<unsigned long>(mProcess->mExecutingThreadsCount),
                 static_cast<unsigned long>(mProcess->mMaxThreads));
         pthread_cond_wait(&mProcess->mThreadCountDecrement, &mProcess->mThreadCountLock);
     }
-    mProcess->mWaitingForThreads--;
     pthread_mutex_unlock(&mProcess->mThreadCountLock);
 }
 
@@ -549,12 +534,7 @@ status_t IPCThreadState::getAndExecuteCommand()
             }
             mProcess->mStarvationStartTimeMs = 0;
         }
-
-        // Cond broadcast can be expensive, so don't send it every time a binder
-        // call is processed. b/168806193
-        if (mProcess->mWaitingForThreads > 0) {
-            pthread_cond_broadcast(&mProcess->mThreadCountDecrement);
-        }
+        pthread_cond_broadcast(&mProcess->mThreadCountDecrement);
         pthread_mutex_unlock(&mProcess->mThreadCountLock);
     }
 
@@ -617,7 +597,6 @@ void IPCThreadState::joinThreadPool(bool isMain)
 
     mOut.writeInt32(isMain ? BC_ENTER_LOOPER : BC_REGISTER_LOOPER);
 
-    mIsLooper = true;
     status_t result;
     do {
         processPendingDerefs();
@@ -640,7 +619,6 @@ void IPCThreadState::joinThreadPool(bool isMain)
         (void*)pthread_self(), getpid(), result);
 
     mOut.writeInt32(BC_EXIT_LOOPER);
-    mIsLooper = false;
     talkWithDriver(false);
 }
 
@@ -651,7 +629,6 @@ status_t IPCThreadState::setupPolling(int* fd)
     }
 
     mOut.writeInt32(BC_ENTER_LOOPER);
-    flushCommands();
     *fd = mProcess->mDriverFD;
     return 0;
 }
@@ -754,11 +731,9 @@ void IPCThreadState::incStrongHandle(int32_t handle, BpBinder *proxy)
     LOG_REMOTEREFS("IPCThreadState::incStrongHandle(%d)\n", handle);
     mOut.writeInt32(BC_ACQUIRE);
     mOut.writeInt32(handle);
-    if (!flushIfNeeded()) {
-        // Create a temp reference until the driver has handled this command.
-        proxy->incStrong(mProcess.get());
-        mPostWriteStrongDerefs.push(proxy);
-    }
+    // Create a temp reference until the driver has handled this command.
+    proxy->incStrong(mProcess.get());
+    mPostWriteStrongDerefs.push(proxy);
 }
 
 void IPCThreadState::decStrongHandle(int32_t handle)
@@ -766,7 +741,6 @@ void IPCThreadState::decStrongHandle(int32_t handle)
     LOG_REMOTEREFS("IPCThreadState::decStrongHandle(%d)\n", handle);
     mOut.writeInt32(BC_RELEASE);
     mOut.writeInt32(handle);
-    flushIfNeeded();
 }
 
 void IPCThreadState::incWeakHandle(int32_t handle, BpBinder *proxy)
@@ -774,11 +748,9 @@ void IPCThreadState::incWeakHandle(int32_t handle, BpBinder *proxy)
     LOG_REMOTEREFS("IPCThreadState::incWeakHandle(%d)\n", handle);
     mOut.writeInt32(BC_INCREFS);
     mOut.writeInt32(handle);
-    if (!flushIfNeeded()) {
-        // Create a temp reference until the driver has handled this command.
-        proxy->getWeakRefs()->incWeak(mProcess.get());
-        mPostWriteWeakDerefs.push(proxy->getWeakRefs());
-    }
+    // Create a temp reference until the driver has handled this command.
+    proxy->getWeakRefs()->incWeak(mProcess.get());
+    mPostWriteWeakDerefs.push(proxy->getWeakRefs());
 }
 
 void IPCThreadState::decWeakHandle(int32_t handle)
@@ -786,7 +758,6 @@ void IPCThreadState::decWeakHandle(int32_t handle)
     LOG_REMOTEREFS("IPCThreadState::decWeakHandle(%d)\n", handle);
     mOut.writeInt32(BC_DECREFS);
     mOut.writeInt32(handle);
-    flushIfNeeded();
 }
 
 status_t IPCThreadState::attemptIncStrongHandle(int32_t handle)
@@ -842,7 +813,6 @@ IPCThreadState::IPCThreadState()
       mServingStackPointer(nullptr),
       mWorkSource(kUnsetWorkSource),
       mPropagateWorkSource(false),
-      mIsLooper(false),
       mStrictModePolicy(0),
       mLastTransactionBinderFlags(0),
       mCallRestriction(mProcess->mCallRestriction)
@@ -925,21 +895,21 @@ status_t IPCThreadState::waitForResponse(Parcel *reply, status_t *acquireResult)
                             tr.data_size,
                             reinterpret_cast<const binder_size_t*>(tr.data.ptr.offsets),
                             tr.offsets_size/sizeof(binder_size_t),
-                            freeBuffer);
+                            freeBuffer, this);
                     } else {
                         err = *reinterpret_cast<const status_t*>(tr.data.ptr.buffer);
                         freeBuffer(nullptr,
                             reinterpret_cast<const uint8_t*>(tr.data.ptr.buffer),
                             tr.data_size,
                             reinterpret_cast<const binder_size_t*>(tr.data.ptr.offsets),
-                            tr.offsets_size/sizeof(binder_size_t));
+                            tr.offsets_size/sizeof(binder_size_t), this);
                     }
                 } else {
                     freeBuffer(nullptr,
                         reinterpret_cast<const uint8_t*>(tr.data.ptr.buffer),
                         tr.data_size,
                         reinterpret_cast<const binder_size_t*>(tr.data.ptr.offsets),
-                        tr.offsets_size/sizeof(binder_size_t));
+                        tr.offsets_size/sizeof(binder_size_t), this);
                     continue;
                 }
             }
@@ -1107,7 +1077,7 @@ status_t IPCThreadState::writeTransactionData(int32_t cmd, uint32_t binderFlags,
 
 sp<BBinder> the_context_object;
 
-void IPCThreadState::setTheContextObject(const sp<BBinder>& obj)
+void IPCThreadState::setTheContextObject(sp<BBinder> obj)
 {
     the_context_object = obj;
 }
@@ -1213,7 +1183,7 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
                 reinterpret_cast<const uint8_t*>(tr.data.ptr.buffer),
                 tr.data_size,
                 reinterpret_cast<const binder_size_t*>(tr.data.ptr.offsets),
-                tr.offsets_size/sizeof(binder_size_t), freeBuffer);
+                tr.offsets_size/sizeof(binder_size_t), freeBuffer, this);
 
             const void* origServingStackPointer = mServingStackPointer;
             mServingStackPointer = &origServingStackPointer; // anything on the stack
@@ -1274,26 +1244,12 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
             if ((tr.flags & TF_ONE_WAY) == 0) {
                 LOG_ONEWAY("Sending reply to %d!", mCallingPid);
                 if (error < NO_ERROR) reply.setError(error);
-
-                constexpr uint32_t kForwardReplyFlags = TF_CLEAR_BUF;
-                sendReply(reply, (tr.flags & kForwardReplyFlags));
+                sendReply(reply, 0);
             } else {
-                if (error != OK) {
-                    alog << "oneway function results for code " << tr.code
-                         << " on binder at "
-                         << reinterpret_cast<void*>(tr.target.ptr)
-                         << " will be dropped but finished with status "
-                         << statusToString(error);
-
-                    // ideally we could log this even when error == OK, but it
-                    // causes too much logspam because some manually-written
-                    // interfaces have clients that call methods which always
-                    // write results, sometimes as oneway methods.
-                    if (reply.dataSize() != 0) {
-                         alog << " and reply parcel size " << reply.dataSize();
-                    }
-
-                    alog << endl;
+                if (error != OK || reply.dataSize() != 0) {
+                    alog << "oneway function results will be dropped but finished with status "
+                         << statusToString(error)
+                         << " and parcel size " << reply.dataSize() << endl;
                 }
                 LOG_ONEWAY("NOT sending reply to %d!", mCallingPid);
             }
@@ -1412,7 +1368,7 @@ status_t IPCThreadState::freeze(pid_t pid, bool enable, uint32_t timeout_ms) {
 void IPCThreadState::freeBuffer(Parcel* parcel, const uint8_t* data,
                                 size_t /*dataSize*/,
                                 const binder_size_t* /*objects*/,
-                                size_t /*objectsSize*/)
+                                size_t /*objectsSize*/, void* /*cookie*/)
 {
     //ALOGI("Freeing parcel %p", &parcel);
     IF_LOG_COMMANDS() {
@@ -1423,7 +1379,6 @@ void IPCThreadState::freeBuffer(Parcel* parcel, const uint8_t* data,
     IPCThreadState* state = self();
     state->mOut.writeInt32(BC_FREE_BUFFER);
     state->mOut.writePointer((uintptr_t)data);
-    state->flushIfNeeded();
 }
 
 } // namespace android

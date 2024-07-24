@@ -38,27 +38,22 @@ namespace android {
 
 struct RenderEngineTest : public ::testing::Test {
     static void SetUpTestSuite() {
-        renderengine::RenderEngineCreationArgs reCreationArgs =
-            renderengine::RenderEngineCreationArgs::Builder()
-                .setPixelFormat(static_cast<int>(ui::PixelFormat::RGBA_8888))
-                .setImageCacheSize(1)
-                .setUseColorManagerment(false)
-                .setEnableProtectedContext(false)
-                .setPrecacheToneMapperShaderOnly(false)
-                .setSupportsBackgroundBlur(true)
-                .setContextPriority(renderengine::RenderEngine::ContextPriority::MEDIUM)
-                .build();
-        sRE = renderengine::gl::GLESRenderEngine::create(reCreationArgs);
-
-        reCreationArgs.useColorManagement = true;
-        sRECM = renderengine::gl::GLESRenderEngine::create(reCreationArgs);
+        sRE = renderengine::gl::GLESRenderEngine::create(
+                renderengine::RenderEngineCreationArgs::Builder()
+                    .setPixelFormat(static_cast<int>(ui::PixelFormat::RGBA_8888))
+                    .setImageCacheSize(1)
+                    .setUseColorManagerment(false)
+                    .setEnableProtectedContext(false)
+                    .setPrecacheToneMapperShaderOnly(false)
+                    .setSupportsBackgroundBlur(true)
+                    .setContextPriority(renderengine::RenderEngine::ContextPriority::MEDIUM)
+        .build());
     }
 
     static void TearDownTestSuite() {
         // The ordering here is important - sCurrentBuffer must live longer
         // than RenderEngine to avoid a null reference on tear-down.
         sRE = nullptr;
-        sRECM = nullptr;
         sCurrentBuffer = nullptr;
     }
 
@@ -86,10 +81,6 @@ struct RenderEngineTest : public ::testing::Test {
         }
         for (uint32_t texName : mTexNames) {
             sRE->deleteTextures(1, &texName);
-            EXPECT_FALSE(sRE->isTextureNameKnownForTesting(texName));
-        }
-        for (uint32_t texName : mTexNamesCM) {
-            sRECM->deleteTextures(1, &texName);
         }
     }
 
@@ -259,13 +250,9 @@ struct RenderEngineTest : public ::testing::Test {
 
     void invokeDraw(renderengine::DisplaySettings settings,
                     std::vector<const renderengine::LayerSettings*> layers,
-                    sp<GraphicBuffer> buffer,
-                    bool useColorManagement = false) {
+                    sp<GraphicBuffer> buffer) {
         base::unique_fd fence;
-        status_t status = useColorManagement ?
-                          sRECM ->drawLayers(settings, layers, buffer->getNativeBuffer(), true,
-                                             base::unique_fd(), &fence) :
-                          sRE->drawLayers(settings, layers, buffer->getNativeBuffer(), true,
+        status_t status = sRE->drawLayers(settings, layers, buffer->getNativeBuffer(), true,
                                           base::unique_fd(), &fence);
         sCurrentBuffer = buffer;
 
@@ -277,11 +264,7 @@ struct RenderEngineTest : public ::testing::Test {
 
         ASSERT_EQ(NO_ERROR, status);
         if (layers.size() > 0) {
-            if (useColorManagement) {
-                ASSERT_TRUE(sRECM->isFramebufferImageCachedForTesting(buffer->getId()));
-            } else {
-                ASSERT_TRUE(sRE->isFramebufferImageCachedForTesting(buffer->getId()));
-            }
+            ASSERT_TRUE(sRE->isFramebufferImageCachedForTesting(buffer->getId()));
         }
     }
 
@@ -336,19 +319,10 @@ struct RenderEngineTest : public ::testing::Test {
     void fillBufferLayerTransform();
 
     template <typename SourceVariant>
-    void fillBufferWithColorTransform(bool useColorManagement = false);
+    void fillBufferWithColorTransform();
 
     template <typename SourceVariant>
     void fillBufferColorTransform();
-
-    template <typename SourceVariant>
-    void fillBufferColorTransformCM();
-
-    template <typename SourceVariant>
-    void fillBufferWithColorTransformZeroLayerAlpha();
-
-    template <typename SourceVariant>
-    void fillBufferColorTransformZeroLayerAlpha();
 
     template <typename SourceVariant>
     void fillRedBufferWithRoundedCorners();
@@ -389,8 +363,6 @@ struct RenderEngineTest : public ::testing::Test {
     // For now, exercise the GL backend directly so that some caching specifics
     // can be tested without changing the interface.
     static std::unique_ptr<renderengine::gl::GLESRenderEngine> sRE;
-    // renderengine object with Color Management enabled
-    static std::unique_ptr<renderengine::gl::GLESRenderEngine> sRECM;
     // Dumb hack to avoid NPE in the EGL driver: the GraphicBuffer needs to
     // be freed *after* RenderEngine is destroyed, so that the EGL image is
     // destroyed first.
@@ -399,17 +371,14 @@ struct RenderEngineTest : public ::testing::Test {
     sp<GraphicBuffer> mBuffer;
 
     std::vector<uint32_t> mTexNames;
-    std::vector<uint32_t> mTexNamesCM;
 };
 
 std::unique_ptr<renderengine::gl::GLESRenderEngine> RenderEngineTest::sRE = nullptr;
-std::unique_ptr<renderengine::gl::GLESRenderEngine> RenderEngineTest::sRECM = nullptr;
-
 sp<GraphicBuffer> RenderEngineTest::sCurrentBuffer = nullptr;
 
 struct ColorSourceVariant {
     static void fillColor(renderengine::LayerSettings& layer, half r, half g, half b,
-                          RenderEngineTest* /*fixture*/, bool /*useColorManagement*/ = false) {
+                          RenderEngineTest* /*fixture*/) {
         layer.source.solidColor = half3(r, g, b);
     }
 };
@@ -437,17 +406,11 @@ struct ForceOpaqueBufferVariant {
 template <typename OpaquenessVariant>
 struct BufferSourceVariant {
     static void fillColor(renderengine::LayerSettings& layer, half r, half g, half b,
-                          RenderEngineTest* fixture,
-                          bool useColorManagement = false) {
+                          RenderEngineTest* fixture) {
         sp<GraphicBuffer> buf = RenderEngineTest::allocateSourceBuffer(1, 1);
         uint32_t texName;
-        if (useColorManagement) {
-            fixture->sRECM->genTextures(1, &texName);
-            fixture->mTexNamesCM.push_back(texName);
-        } else {
-            fixture->sRE->genTextures(1, &texName);
-            fixture->mTexNames.push_back(texName);
-        }
+        fixture->sRE->genTextures(1, &texName);
+        fixture->mTexNames.push_back(texName);
 
         uint8_t* pixels;
         buf->lock(GRALLOC_USAGE_SW_READ_OFTEN | GRALLOC_USAGE_SW_WRITE_OFTEN,
@@ -677,46 +640,7 @@ void RenderEngineTest::fillBufferLayerTransform() {
 }
 
 template <typename SourceVariant>
-void RenderEngineTest::fillBufferWithColorTransform(bool useColorManagement) {
-    renderengine::DisplaySettings settings;
-    settings.physicalDisplay = fullscreenRect();
-    settings.clip = Rect(1, 1);
-
-    std::vector<const renderengine::LayerSettings*> layers;
-
-    renderengine::LayerSettings layer;
-    layer.geometry.boundaries = Rect(1, 1).toFloatRect();
-    SourceVariant::fillColor(layer, 0.5f, 0.25f, 0.125f, this, useColorManagement);
-    layer.alpha = 1.0f;
-
-    // construct a fake color matrix
-    // annihilate green and blue channels
-    settings.colorTransform = mat4::scale(vec4(0.9f, 0, 0, 1));
-    // set red channel to red + green
-    layer.colorTransform = mat4(1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-
-    layer.alpha = 1.0f;
-    layer.geometry.boundaries = Rect(1, 1).toFloatRect();
-
-    layers.push_back(&layer);
-
-    invokeDraw(settings, layers, mBuffer, useColorManagement);
-}
-
-template <typename SourceVariant>
-void RenderEngineTest::fillBufferColorTransform() {
-    fillBufferWithColorTransform<SourceVariant>();
-    expectBufferColor(fullscreenRect(), 172, 0, 0, 255, 1);
-}
-
-template <typename SourceVariant>
-void RenderEngineTest::fillBufferColorTransformCM() {
-    fillBufferWithColorTransform<SourceVariant>(true);
-    expectBufferColor(fullscreenRect(), 126, 0, 0, 255, 1);
-}
-
-template <typename SourceVariant>
-void RenderEngineTest::fillBufferWithColorTransformZeroLayerAlpha() {
+void RenderEngineTest::fillBufferWithColorTransform() {
     renderengine::DisplaySettings settings;
     settings.physicalDisplay = fullscreenRect();
     settings.clip = Rect(1, 1);
@@ -726,15 +650,15 @@ void RenderEngineTest::fillBufferWithColorTransformZeroLayerAlpha() {
     renderengine::LayerSettings layer;
     layer.geometry.boundaries = Rect(1, 1).toFloatRect();
     SourceVariant::fillColor(layer, 0.5f, 0.25f, 0.125f, this);
-    layer.alpha = 0;
+    layer.alpha = 1.0f;
 
     // construct a fake color matrix
-    // simple inverse color
-    settings.colorTransform = mat4(-1, 0, 0, 0,
-                                   0, -1, 0, 0,
-                                   0, 0, -1, 0,
-                                   1, 1, 1, 1);
+    // annihilate green and blue channels
+    settings.colorTransform = mat4::scale(vec4(1, 0, 0, 1));
+    // set red channel to red + green
+    layer.colorTransform = mat4(1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 
+    layer.alpha = 1.0f;
     layer.geometry.boundaries = Rect(1, 1).toFloatRect();
 
     layers.push_back(&layer);
@@ -743,9 +667,9 @@ void RenderEngineTest::fillBufferWithColorTransformZeroLayerAlpha() {
 }
 
 template <typename SourceVariant>
-void RenderEngineTest::fillBufferColorTransformZeroLayerAlpha() {
-    fillBufferWithColorTransformZeroLayerAlpha<SourceVariant>();
-    expectBufferColor(fullscreenRect(), 0, 0, 0, 0);
+void RenderEngineTest::fillBufferColorTransform() {
+    fillBufferWithColorTransform<SourceVariant>();
+    expectBufferColor(fullscreenRect(), 191, 0, 0, 255);
 }
 
 template <typename SourceVariant>
@@ -1148,15 +1072,7 @@ TEST_F(RenderEngineTest, drawLayers_fillBufferLayerTransform_colorSource) {
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransform_colorSource) {
-    fillBufferColorTransform<ColorSourceVariant>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformCM_colorSource) {
-    fillBufferColorTransformCM<ColorSourceVariant>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformZeroLayerAlpha_colorSource) {
-    fillBufferColorTransformZeroLayerAlpha<ColorSourceVariant>();
+    fillBufferLayerTransform<ColorSourceVariant>();
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferRoundedCorners_colorSource) {
@@ -1212,15 +1128,7 @@ TEST_F(RenderEngineTest, drawLayers_fillBufferLayerTransform_opaqueBufferSource)
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransform_opaqueBufferSource) {
-    fillBufferColorTransform<BufferSourceVariant<ForceOpaqueBufferVariant>>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformCM_opaqueBufferSource) {
-    fillBufferColorTransformCM<BufferSourceVariant<ForceOpaqueBufferVariant>>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformZeroLayerAlpha_opaqueBufferSource) {
-    fillBufferColorTransformZeroLayerAlpha<BufferSourceVariant<ForceOpaqueBufferVariant>>();
+    fillBufferLayerTransform<BufferSourceVariant<ForceOpaqueBufferVariant>>();
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferRoundedCorners_opaqueBufferSource) {
@@ -1276,15 +1184,7 @@ TEST_F(RenderEngineTest, drawLayers_fillBufferLayerTransform_bufferSource) {
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransform_bufferSource) {
-    fillBufferColorTransform<BufferSourceVariant<RelaxOpaqueBufferVariant>>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformCM_bufferSource) {
-    fillBufferColorTransformCM<BufferSourceVariant<RelaxOpaqueBufferVariant>>();
-}
-
-TEST_F(RenderEngineTest, drawLayers_fillBufferColorTransformZeroLayerAlpha_bufferSource) {
-    fillBufferColorTransformZeroLayerAlpha<BufferSourceVariant<RelaxOpaqueBufferVariant>>();
+    fillBufferLayerTransform<BufferSourceVariant<RelaxOpaqueBufferVariant>>();
 }
 
 TEST_F(RenderEngineTest, drawLayers_fillBufferRoundedCorners_bufferSource) {
@@ -1524,44 +1424,10 @@ TEST_F(RenderEngineTest, cleanupPostRender_cleansUpOnce) {
     if (fd >= 0) {
         sync_wait(fd, -1);
     }
+
     // Only cleanup the first time.
-    EXPECT_TRUE(sRE->cleanupPostRender(
-            renderengine::RenderEngine::CleanupMode::CLEAN_OUTPUT_RESOURCES));
-    EXPECT_FALSE(sRE->cleanupPostRender(
-            renderengine::RenderEngine::CleanupMode::CLEAN_OUTPUT_RESOURCES));
-}
-
-TEST_F(RenderEngineTest, cleanupPostRender_whenCleaningAll_replacesTextureMemory) {
-    renderengine::DisplaySettings settings;
-    settings.physicalDisplay = fullscreenRect();
-    settings.clip = fullscreenRect();
-
-    std::vector<const renderengine::LayerSettings*> layers;
-    renderengine::LayerSettings layer;
-    layer.geometry.boundaries = fullscreenRect().toFloatRect();
-    BufferSourceVariant<ForceOpaqueBufferVariant>::fillColor(layer, 1.0f, 0.0f, 0.0f, this);
-    layer.alpha = 1.0;
-    layers.push_back(&layer);
-
-    base::unique_fd fence;
-    sRE->drawLayers(settings, layers, mBuffer->getNativeBuffer(), true, base::unique_fd(), &fence);
-
-    const int fd = fence.get();
-    if (fd >= 0) {
-        sync_wait(fd, -1);
-    }
-
-    uint64_t bufferId = layer.source.buffer.buffer->getId();
-    uint32_t texName = layer.source.buffer.textureName;
-    EXPECT_TRUE(sRE->isImageCachedForTesting(bufferId));
-    EXPECT_EQ(bufferId, sRE->getBufferIdForTextureNameForTesting(texName));
-
-    EXPECT_TRUE(sRE->cleanupPostRender(renderengine::RenderEngine::CleanupMode::CLEAN_ALL));
-
-    // Now check that our view of memory is good.
-    EXPECT_FALSE(sRE->isImageCachedForTesting(bufferId));
-    EXPECT_EQ(std::nullopt, sRE->getBufferIdForTextureNameForTesting(bufferId));
-    EXPECT_TRUE(sRE->isTextureNameKnownForTesting(texName));
+    EXPECT_TRUE(sRE->cleanupPostRender());
+    EXPECT_FALSE(sRE->cleanupPostRender());
 }
 
 } // namespace android

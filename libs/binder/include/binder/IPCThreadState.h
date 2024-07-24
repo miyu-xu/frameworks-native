@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef ANDROID_IPC_THREAD_STATE_H
+#define ANDROID_IPC_THREAD_STATE_H
 
 #include <utils/Errors.h>
 #include <binder/Parcel.h>
@@ -110,7 +111,6 @@ public:
             status_t            setupPolling(int* fd);
             status_t            handlePolledCommands();
             void                flushCommands();
-            bool                flushIfNeeded();
 
             void                joinThreadPool(bool isMain = true);
             
@@ -147,7 +147,7 @@ public:
             void                blockUntilThreadAvailable();
 
             // Service manager registration
-            void                setTheContextObject(const sp<BBinder>& obj);
+            void                setTheContextObject(sp<BBinder> obj);
 
             // WARNING: DO NOT USE THIS API
             //
@@ -186,8 +186,9 @@ private:
     static  void                threadDestructor(void *st);
     static  void                freeBuffer(Parcel* parcel,
                                            const uint8_t* data, size_t dataSize,
-                                           const binder_size_t* objects, size_t objectsSize);
-
+                                           const binder_size_t* objects, size_t objectsSize,
+                                           void* cookie);
+    
     const   sp<ProcessState>    mProcess;
             Vector<BBinder*>    mPendingStrongDerefs;
             Vector<RefBase::weakref_type*> mPendingWeakDerefs;
@@ -205,7 +206,6 @@ private:
             int32_t             mWorkSource;
             // Whether the work source should be propagated.
             bool                mPropagateWorkSource;
-            bool                mIsLooper;
             int32_t             mStrictModePolicy;
             int32_t             mLastTransactionBinderFlags;
             CallRestriction     mCallRestriction;
@@ -214,3 +214,5 @@ private:
 } // namespace android
 
 // ---------------------------------------------------------------------------
+
+#endif // ANDROID_IPC_THREAD_STATE_H

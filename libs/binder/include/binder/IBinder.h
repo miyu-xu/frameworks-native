@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef ANDROID_IBINDER_H
+#define ANDROID_IBINDER_H
 
 #include <utils/Errors.h>
 #include <utils/RefBase.h>
@@ -62,10 +63,6 @@ public:
 
         // Corresponds to TF_ONE_WAY -- an asynchronous call.
         FLAG_ONEWAY             = 0x00000001,
-
-        // Corresponds to TF_CLEAR_BUF -- clear transaction buffers after call
-        // is made
-        FLAG_CLEAR_BUF          = 0x00000020,
 
         // Private userspace flag for transaction which is being requested from
         // a vendor context.
@@ -256,3 +253,5 @@ private:
 } // namespace android
 
 // ---------------------------------------------------------------------------
+
+#endif // ANDROID_IBINDER_H

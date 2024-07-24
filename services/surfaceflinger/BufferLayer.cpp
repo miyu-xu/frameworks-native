@@ -176,14 +176,7 @@ std::optional<compositionengine::LayerFE::LayerSettings> BufferLayer::prepareCli
         if (!holes.isEmpty()) {
             targetSettings.clearRegion.orSelf(holes);
         }
-
-        if (mSidebandStream != nullptr) {
-            // For surfaceview of tv sideband, there is no activeBuffer
-            // in bufferqueue, we need return LayerSettings.
-            return result;
-        } else {
-            return std::nullopt;
-        }
+        return std::nullopt;
     }
     bool blackOutLayer = (isProtected() && !targetSettings.supportsProtectedContent) ||
             (isSecure() && !targetSettings.isSecure);

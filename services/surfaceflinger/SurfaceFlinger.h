@@ -109,6 +109,10 @@ namespace renderengine {
 class RenderEngine;
 } // namespace renderengine
 
+namespace dvr {
+class VrFlinger;
+} // namespace dvr
+
 enum {
     eTransactionNeeded = 0x01,
     eTraversalNeeded = 0x02,
@@ -794,7 +798,8 @@ private:
     // The following thread safety rules apply when accessing mHwc, either
     // directly or via getHwComposer():
     //
-    // 1. When recreating mHwc, acquire mStateLock. Recreating mHwc must only be
+    // 1. When recreating mHwc, acquire mStateLock. We currently recreate mHwc
+    //    only when switching into and out of vr. Recreating mHwc must only be
     //    done on the main thread.
     //
     // 2. When accessing mHwc on the main thread, it's not necessary to acquire
@@ -847,7 +852,7 @@ private:
     /* ------------------------------------------------------------------------
      * VSync
      */
-    nsecs_t getVsyncPeriodFromHWC() const REQUIRES(mStateLock);
+    nsecs_t getVsyncPeriod() const REQUIRES(mStateLock);
 
     // Sets the refresh rate by switching active configs, if they are available for
     // the desired refresh rate.
@@ -977,6 +982,14 @@ private:
     }
 
     void onFrameRateFlexibilityTokenReleased();
+
+    /* ------------------------------------------------------------------------
+     * VrFlinger
+     */
+    void resetDisplayState() REQUIRES(mStateLock);
+
+    // Check to see if we should handoff to vr flinger.
+    void updateVrFlinger();
 
     void updateColorMatrixLocked();
 
@@ -1162,6 +1175,9 @@ private:
     // to mWindowManager or mInputFlinger
     std::atomic<bool> mBootFinished = false;
 
+    std::unique_ptr<dvr::VrFlinger> mVrFlinger;
+    std::atomic<bool> mVrFlingerRequestsDisplay = false;
+    static bool useVrFlinger;
     std::thread::id mMainThreadId = std::this_thread::get_id();
 
     DisplayColorSetting mDisplayColorSetting = DisplayColorSetting::kEnhanced;

@@ -40,7 +40,6 @@ ndk_library {
 
 cc_library {
     name: "libnativewindow",
-    llndk_stubs: "libnativewindow.llndk",
     export_include_dirs: [
         "include",
         "include-private",
@@ -96,7 +95,7 @@ cc_library {
 }
 
 llndk_library {
-    name: "libnativewindow.llndk",
+    name: "libnativewindow",
     symbol_file: "libnativewindow.map.txt",
     unversioned: true,
     export_include_dirs: ["include"],

@@ -25,7 +25,6 @@ import xml.etree.ElementTree as element_tree
 _BLOCKED_EXTENSIONS = [
     'VK_EXT_acquire_xlib_display',
     'VK_EXT_direct_mode_display',
-    'VK_EXT_directfb_surface',
     'VK_EXT_display_control',
     'VK_EXT_display_surface_counter',
     'VK_EXT_full_screen_exclusive',
@@ -303,12 +302,12 @@ def init_proc(name, f):
   else:
     f.write('INIT_PROC(')
 
-  if name in _OPTIONAL_COMMANDS:
+  if name in version_dict and version_dict[name] == 'VK_VERSION_1_1':
     f.write('false, ')
-  elif version_dict[name] == 'VK_VERSION_1_0':
-    f.write('true, ')
+  elif name in _OPTIONAL_COMMANDS:
+    f.write('false, ')
   else:
-    f.write('false, ')
+    f.write('true, ')
 
   if is_instance_dispatched(name):
     f.write('instance, ')
@@ -377,7 +376,7 @@ def parse_vulkan_registry():
 
   for exts in root.iter('extensions'):
     for extension in exts:
-      apiversion = 'VK_VERSION_1_0'
+      apiversion = ''
       if extension.tag == 'extension':
         extname = extension.get('name')
         for req in extension:
@@ -388,7 +387,8 @@ def parse_vulkan_registry():
               cmd_name = commands.get('name')
               if cmd_name not in extension_dict:
                 extension_dict[cmd_name] = extname
-                version_dict[cmd_name] = apiversion
+                if apiversion:
+                  version_dict[cmd_name] = apiversion
 
   for feature in root.iter('feature'):
     apiversion = feature.get('name')

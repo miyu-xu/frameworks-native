@@ -41,21 +41,6 @@ cc_test {
         "liblogwrap",
     ],
     test_config: "installd_cache_test.xml",
-
-    product_variables: {
-        arc: {
-            exclude_srcs: [
-                "QuotaUtils.cpp",
-            ],
-            static_libs: [
-                "libarcdiskquota",
-                "arc_services_aidl",
-            ],
-            cflags: [
-                "-DUSE_ARC",
-            ],
-        },
-    },
 }
 
 cc_test {
@@ -81,21 +66,6 @@ cc_test {
         "liblogwrap",
     ],
     test_config: "installd_service_test.xml",
-
-    product_variables: {
-        arc: {
-            exclude_srcs: [
-                "QuotaUtils.cpp",
-            ],
-            static_libs: [
-                "libarcdiskquota",
-                "arc_services_aidl",
-            ],
-            cflags: [
-                "-DUSE_ARC",
-            ],
-        },
-    },
 }
 
 cc_test {
@@ -123,21 +93,6 @@ cc_test {
         "libz",
     ],
     test_config: "installd_dexopt_test.xml",
-
-    product_variables: {
-        arc: {
-            exclude_srcs: [
-                "QuotaUtils.cpp",
-            ],
-            static_libs: [
-                "libarcdiskquota",
-                "arc_services_aidl",
-            ],
-            cflags: [
-                "-DUSE_ARC",
-            ],
-        },
-    },
 }
 
 cc_test {

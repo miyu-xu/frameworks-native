@@ -51,7 +51,6 @@ public:
 
     void setPeriod(nsecs_t) final {}
     void resetModel() final {}
-    bool needsMoreSamples() const final { return false; }
     void dump(std::string&) const final {}
 
 private:
@@ -87,7 +86,6 @@ public:
 
     void setPeriod(nsecs_t) final {}
     void resetModel() final {}
-    bool needsMoreSamples() const final { return false; }
     void dump(std::string&) const final {}
 
 private:

@@ -676,6 +676,8 @@ struct OutputLayerWriteStateToHWCTest : public OutputLayerTest {
     static constexpr Hwc2::IComposerClient::BlendMode kBlendMode =
             static_cast<Hwc2::IComposerClient::BlendMode>(41);
     static constexpr float kAlpha = 51.f;
+    static constexpr uint32_t kType = 61u;
+    static constexpr uint32_t kAppId = 62u;
     static constexpr ui::Dataspace kDataspace = static_cast<ui::Dataspace>(71);
     static constexpr int kSupportedPerFrameMetadata = 101;
     static constexpr int kExpectedHwcSlot = 0;
@@ -709,6 +711,8 @@ struct OutputLayerWriteStateToHWCTest : public OutputLayerTest {
 
         mLayerFEState.blendMode = kBlendMode;
         mLayerFEState.alpha = kAlpha;
+        mLayerFEState.type = kType;
+        mLayerFEState.appId = kAppId;
         mLayerFEState.colorTransform = kColorTransform;
         mLayerFEState.color = kColor;
         mLayerFEState.surfaceDamage = kSurfaceDamage;
@@ -742,6 +746,7 @@ struct OutputLayerWriteStateToHWCTest : public OutputLayerTest {
 
         EXPECT_CALL(*mHwcLayer, setBlendMode(kBlendMode)).WillOnce(Return(kError));
         EXPECT_CALL(*mHwcLayer, setPlaneAlpha(kAlpha)).WillOnce(Return(kError));
+        EXPECT_CALL(*mHwcLayer, setInfo(kType, kAppId)).WillOnce(Return(kError));
     }
 
     void expectPerFrameCommonCalls(SimulateUnsupported unsupported = SimulateUnsupported::None) {

@@ -1,8 +1,6 @@
 cc_library_shared {
     name: "libvr_hwc-hal",
 
-    system_ext_specific: true,
-
     srcs: [
         "impl/vr_hwc.cpp",
         "impl/vr_composer_client.cpp",
@@ -99,7 +97,6 @@ cc_library_static {
 
 cc_binary {
     name: "vr_hwc",
-    system_ext_specific: true,
     vintf_fragments: ["manifest_vr_hwc.xml"],
     srcs: [
         "vr_hardware_composer_service.cpp",

@@ -835,8 +835,6 @@ std::optional<base::unique_fd> Output::composeSurfaces(
             needsProtected == renderEngine.isProtected()) {
             mRenderSurface->setProtected(needsProtected);
         }
-    } else if (!outputState.isSecure && renderEngine.isProtected()) {
-        renderEngine.useProtectedContext(false);
     }
 
     base::unique_fd fd;

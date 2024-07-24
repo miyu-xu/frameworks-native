@@ -815,6 +815,10 @@ std::future<status_t> HWComposer::setDisplayBrightness(DisplayId displayId, floa
             });
 }
 
+bool HWComposer::isUsingVrComposer() const {
+    return getComposer()->isUsingVrComposer();
+}
+
 status_t HWComposer::setAutoLowLatencyMode(DisplayId displayId, bool on) {
     RETURN_IF_INVALID_DISPLAY(displayId, BAD_INDEX);
     const auto error = mDisplayData[displayId].hwcDisplay->setAutoLowLatencyMode(on);
@@ -879,6 +883,11 @@ std::optional<hal::HWDisplayId> HWComposer::fromPhysicalDisplayId(DisplayId disp
 
 bool HWComposer::shouldIgnoreHotplugConnect(hal::HWDisplayId hwcDisplayId,
                                             bool hasDisplayIdentificationData) const {
+    if (isUsingVrComposer() && mInternalHwcDisplayId) {
+        ALOGE("Ignoring connection of external display %" PRIu64 " in VR mode", hwcDisplayId);
+        return true;
+    }
+
     if (mHasMultiDisplaySupport && !hasDisplayIdentificationData) {
         ALOGE("Ignoring connection of display %" PRIu64 " without identification data",
               hwcDisplayId);

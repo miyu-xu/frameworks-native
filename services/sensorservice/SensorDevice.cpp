@@ -153,18 +153,12 @@ void SensorDevice::initializeSensorList() {
                                     SensorDeviceUtils::defaultResolutionForType(sensor.type);
                         }
 
-                        // Some sensors don't have a default resolution and will be left at 0.
-                        // Don't crash in this case since CTS will verify that devices don't go to
-                        // production with a resolution of 0.
-                        if (sensor.resolution != 0) {
-                            double promotedResolution = sensor.resolution;
-                            double promotedMaxRange = sensor.maxRange;
-                            if (fmod(promotedMaxRange, promotedResolution) != 0) {
-                                ALOGW("%s's max range %f is not a multiple of the resolution %f",
-                                        sensor.name, sensor.maxRange, sensor.resolution);
-                                SensorDeviceUtils::quantizeValue(
-                                        &sensor.maxRange, promotedResolution);
-                            }
+                        double promotedResolution = sensor.resolution;
+                        double promotedMaxRange = sensor.maxRange;
+                        if (fmod(promotedMaxRange, promotedResolution) != 0) {
+                            ALOGW("%s's max range %f is not a multiple of the resolution %f",
+                                    sensor.name, sensor.maxRange, sensor.resolution);
+                            SensorDeviceUtils::quantizeValue(&sensor.maxRange, promotedResolution);
                         }
                     }
 
