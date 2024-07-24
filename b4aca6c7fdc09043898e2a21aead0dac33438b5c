@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f6fa69_f6dee70c",
+        "filename": "libs/cputimeinstate/testtimeinstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-07-24T23:54:03Z",
+      "side": 1,
+      "message": "FYI: per godbolt.org x86_64 gcc 14.1 -O2 optimizes this to \u0027sum \u003d 0\u0027",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 585,
+        "endChar": 5
+      },
+      "revId": "b4aca6c7fdc09043898e2a21aead0dac33438b5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
