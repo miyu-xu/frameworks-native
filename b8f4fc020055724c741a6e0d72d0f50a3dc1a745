@@ -46,6 +46,30 @@
       },
       "revId": "b8f4fc020055724c741a6e0d72d0f50a3dc1a745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d1ceef_c01c2cdb",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1896186
+      },
+      "writtenOn": "2024-07-24T10:22:14Z",
+      "side": 1,
+      "message": "\u003e can you un-auto these?\n\nGood point. Done, thanks!\n\n\u003e Are they still going into .ro.data?\n\nThey shouldn\u0027t. They\u0027re all enums inlined in a header.",
+      "parentUuid": "42288e49_4c4ea249",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 89
+      },
+      "revId": "b8f4fc020055724c741a6e0d72d0f50a3dc1a745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
