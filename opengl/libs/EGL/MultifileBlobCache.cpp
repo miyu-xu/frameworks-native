@@ -342,6 +342,22 @@ void MultifileBlobCache::set(const void* key, EGLsizeiANDROID keySize, const voi
 
     std::string fullPath = mMultifileDirName + "/" + std::to_string(entryHash);
 
+    // If the cache already contains this entry, we need to update first
+    if (contains(entryHash)) {
+        ALOGV("SET: Cache already contains %u, removing it from hotcache and updating sizes",
+              entryHash);
+
+        // It must be removed from hot cache before we replace it
+        removeFromHotCache(entryHash);
+
+        // Look up the existing size (this must be done before trackEntry)
+        size_t oldFileSize = getFileSize(entryHash);
+        ALOGV("SET: Replacing %u. Old size (%lu) New size (%lu)", entryHash, oldFileSize, fileSize);
+
+        // Then decrement the cache
+        decreaseTotalCacheSize(oldFileSize);
+    }
+
     // Track the size and access time for quick recall
     trackEntry(entryHash, valueSize, fileSize, time(0));
 
@@ -640,6 +656,10 @@ MultifileEntryStats MultifileBlobCache::getEntryStats(uint32_t entryHash) {
     return mEntryStats[entryHash];
 }
 
+size_t MultifileBlobCache::getFileSize(uint32_t entryHash) {
+    return mEntryStats[entryHash].fileSize;
+}
+
 void MultifileBlobCache::increaseTotalCacheSize(size_t fileSize) {
     mTotalCacheSize += fileSize;
     mTotalCacheEntries++;
@@ -697,10 +717,6 @@ bool MultifileBlobCache::addToHotCache(uint32_t newEntryHash, int newFd, uint8_t
 bool MultifileBlobCache::removeFromHotCache(uint32_t entryHash) {
     if (mHotCache.find(entryHash) != mHotCache.end()) {
         ALOGV("HOTCACHE(REMOVE): Removing %u from hot cache", entryHash);
-
-        // Wait for all the files to complete writing so our hot cache is accurate
-        ALOGV("HOTCACHE(REMOVE): Waiting for work to complete for %u", entryHash);
-        waitForWorkComplete();
 
         ALOGV("HOTCACHE(REMOVE): Closing hot cache entry for %u", entryHash);
         MultifileHotCache entry = mHotCache[entryHash];
