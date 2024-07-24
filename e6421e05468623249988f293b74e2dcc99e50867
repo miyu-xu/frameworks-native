@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8b2c6c_f714a62b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-07-24T15:36:08Z",
+      "side": 1,
+      "message": "Looking inside the android-vts.zip from https://android-build.corp.google.com/artifact/submitted/12128552/test_suites_arm64-trunk_staging/latest/view/android-vts.zip (git_main-throttled-nightly from yesterday), I see:\n\n```\n./android-vts/testcases/binderRpcTestNoKernelAtAll/arm64/binderRpcTestNoKernelAtAll\n```\n\nLooking inside the android-vts.zip from https://android-build.corp.google.com/artifact/pending/P78031322/test_suites_arm64-trunk_staging/latest/view/android-vts.zip (presubmit build of this CL), I see:\n\n```\n./android-vts/testcases/binderRpcTestNoKernelAtAll/arm/binderRpcTestNoKernelAtAll32\n./android-vts/testcases/binderRpcTestNoKernelAtAll/arm64/binderRpcTestNoKernelAtAll64\n```\n\nSo that\u0027s promising.\n\nUsing a mokey_go32-trunk_staging-userdebug device, a local attempt at `./android-vts/tools/vts-tradefed run vts --module binderRpcTestNoKernelAtAll` fails with the git_main-throttled-nightly VTS due to \"Failed to find any native test in directory /data/local/tmp/binderRpcTestNoKernelAtAll\", which is what we\u0027d expect.\n\nTrying this new VTS, though, I do start running the test, but it soon aborts with:\n\n```\n07-24 09:29:22.698  8563  8563 F binderRpcTestNoKernelAtAll32: execl(\u0027/data/local/tmp/binderRpcTestNoKernelAtAll/arm/binder_rpc_test_service_no_kernel\u0027, _, 4, 5) should not return at all, but it returned -1: No such file or directory\nAssertion failed: !android::binder::ReadFully(fd, \u0026length, sizeof(length))\n07-24 09:29:22.790  8552  8552 F binderRpcTestNoKernelAtAll32: Assertion failed: !android::binder::ReadFully(fd, \u0026length, sizeof(length))\n```\n\nLooking at the presubmit failures like https://android-build.corp.google.com/test_investigate/invocation/I45000010299275492/test/TR96929382870216336/?itab\u003dartifacts\u0026blocking\u003dblocking\u0026status\u003dnone , it seems they\u0027re failing with the same issue.\n\nSo I don\u0027t think this is a mokey-specific issue.  Hopefully folks who know these tests better might be able to quickly see what\u0027s going wrong.",
+      "revId": "e6421e05468623249988f293b74e2dcc99e50867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
