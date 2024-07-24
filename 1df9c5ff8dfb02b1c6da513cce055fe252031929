@@ -69,6 +69,24 @@
       "parentUuid": "3d56aa71_f641c4cc",
       "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e9361a_b6ae062a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-24T22:10:02Z",
+      "side": 1,
+      "message": "Yes, `adb sync \u0026\u0026 adb shell ./data/nativetest64/binderRpcTest/binderRpcTest64` and `atest binderRpcTest` both work. The suffix is `32` in `/data/nativetest/...`",
+      "parentUuid": "3d56aa71_f641c4cc",
+      "revId": "1df9c5ff8dfb02b1c6da513cce055fe252031929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
