@@ -26,13 +26,19 @@
 
 #pragma once
 
+#include <android/binder_parcel.h>
+#if defined(__ANDROID_VENDOR__)
+#include <android/llndk-versioning.h>
+#else
+#if !defined(__INTRODUCED_IN_LLNDK)
+#define __INTRODUCED_IN_LLNDK(level) __attribute__((annotate("introduced_in_llndk=" #level)))
+#endif
+#endif  // __ANDROID_VENDOR__
+#include <android/binder_status.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
-
-#include <android/binder_parcel.h>
-#include <android/binder_status.h>
 
 __BEGIN_DECLS
 
@@ -217,6 +223,33 @@ typedef binder_status_t (*AIBinder_onDump)(AIBinder* binder, int fd, const char*
  * \param onDump function to call when an instance of this binder class is being dumped.
  */
 void AIBinder_Class_setOnDump(AIBinder_Class* clazz, AIBinder_onDump onDump) __INTRODUCED_IN(29);
+
+/**
+ * Associates a mapping of transaction codes(transact_code_t) to function names for the given class.
+
+ * Trace messages will use the provided names instead of bare integer codes when set. If not set by
+ * this function, trace messages will only be identified by the bare code. This should be called one
+ * time during clazz initialization. clazz and transactionCodeToFunctionMap should have same
+ * lifetime. Resetting/clearing the transactionCodeToFunctionMap is not allowed.
+ *
+ *
+ * Available since API level 36.
+ *
+ * \param clazz class which should use this dump function
+ * \param transactionCodeToFunctionMap array of function names indexed by transaction code.
+ * Transaction codes start from 1, functions with transaction code 1 will correspond to index 0 in
+ * transactionCodeToFunctionMap. When defining methods, transaction codes are expected to be
+ * contiguous, and this is required for maximum memory efficiency.
+ * You can use nullptr if certain transaction codes are not used. Lifetime should be same as clazz.
+ * \param length number of elements in the transactionCodeToFunctionMap
+ *
+ * \return true if setting codeToFunction to clazz is successful. return false if clazz or
+ * codeToFunction is nullptr.
+ */
+void AIBinder_Class_setTransactionCodeToFunctionNameMap(AIBinder_Class* clazz,
+                                                        const char** transactionCodeToFunctionMap,
+                                                        size_t length) __INTRODUCED_IN(36)
+        __INTRODUCED_IN_LLNDK(202504);
 
 /**
  * This tells users of this class not to use a transaction header. By default, libbinder_ndk users
