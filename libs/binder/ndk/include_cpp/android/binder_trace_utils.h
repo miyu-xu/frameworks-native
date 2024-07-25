@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,19 @@
  */
 #pragma once
 
-#if __has_include(<lk/compiler.h>)
-#include <lk/compiler.h>
+#include <android/binder_api_level.h>
+#include <android/trace.h>
 
-/* Alias the bionic macros to the ones from lk/compiler.h */
-#define __BEGIN_DECLS __BEGIN_CDECLS
-#define __END_DECLS __END_CDECLS
+struct ScopedTrace {
+    inline ScopedTrace(const char* name) {
+        if API_LEVEL_AT_LEAST (36, 202504) {
+            ATrace_beginSection(name);
+        }
+    }
 
-#else // __has_include(<lk/compiler.h>)
-#include_next <sys/cdefs.h>
-#endif
-
-#if defined(__INTRODUCED_IN)
-#undef __INTRODUCED_IN
-#define __INTRODUCED_IN(x) /* nothing on Trusty */
-#endif
+    inline ~ScopedTrace() {
+        if API_LEVEL_AT_LEAST (36, 202504) {
+            ATrace_endSection();
+        }
+    }
+};

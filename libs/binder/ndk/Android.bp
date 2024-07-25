@@ -106,11 +106,13 @@ cc_library {
         "libbinder",
         "liblog",
         "libutils",
+        "libcutils",
     ],
 
     header_libs: [
         "libvendorsupport_llndk_headers",
         "jni_headers",
+        "libandroid_aidltrace",
     ],
     export_header_lib_headers: [
         "libvendorsupport_llndk_headers",
@@ -200,6 +202,7 @@ cc_library {
 
     header_libs: [
         "libbinder_trusty_ndk_headers",
+        "libandroid_aidltrace",
     ],
     export_header_lib_headers: [
         "libbinder_trusty_ndk_headers",
