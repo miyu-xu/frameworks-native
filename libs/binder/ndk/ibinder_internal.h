@@ -139,6 +139,12 @@ struct AIBinder_Class {
     // This must be a String16 since BBinder virtual getInterfaceDescriptor returns a reference to
     // one.
     const ::android::String16 mWideInterfaceDescriptor;
+
+   public:
+    // Array which holds names of the functions
+    const char** codeToFunction = nullptr;
+    // Size of codeToFunction array
+    size_t functionCount = 0;
 };
 
 // Ownership is like this (when linked to death):
