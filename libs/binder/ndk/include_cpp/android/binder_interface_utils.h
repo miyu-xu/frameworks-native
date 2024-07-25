@@ -30,6 +30,17 @@
 #include <android/binder_auto_utils.h>
 #include <android/binder_ibinder.h>
 
+#if defined(__ANDROID_VENDOR__)
+#include <android/llndk-versioning.h>
+#elif !defined(API_LEVEL_AT_LEAST)
+#if defined(__BIONIC__)
+#define API_LEVEL_AT_LEAST(sdk_api_level, vendor_api_level) \
+    (__builtin_available(android sdk_api_level, *))
+#else
+#define API_LEVEL_AT_LEAST(sdk_api_level, vendor_api_level) (true)
+#endif  // __BIONIC__
+#endif  // __ANDROID_VENDOR__
+
 #if __has_include(<android/binder_shell.h>)
 #include <android/binder_shell.h>
 #define HAS_BINDER_SHELL_COMMAND
@@ -164,7 +175,8 @@ class ICInterface : public SharedRefBase {
      * Helper method to create a class
      */
     static inline AIBinder_Class* defineClass(const char* interfaceDescriptor,
-                                              AIBinder_Class_onTransact onTransact);
+                                              AIBinder_Class_onTransact onTransact,
+                                              const char** codeToFunction, size_t functionCount);
 
    private:
     class ICInterfaceData {
@@ -253,7 +265,8 @@ std::shared_ptr<ICInterface> ICInterface::asInterface(AIBinder* binder) {
 }
 
 AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
-                                         AIBinder_Class_onTransact onTransact) {
+                                         AIBinder_Class_onTransact onTransact,
+                                         const char** codeToFunction, size_t functionCount) {
     AIBinder_Class* clazz = AIBinder_Class_define(interfaceDescriptor, ICInterfaceData::onCreate,
                                                   ICInterfaceData::onDestroy, onTransact);
     if (clazz == nullptr) {
@@ -272,6 +285,10 @@ AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
         AIBinder_Class_setHandleShellCommand(clazz, ICInterfaceData::handleShellCommand);
     }
 #endif
+
+    if API_LEVEL_AT_LEAST (36, 202504) {
+        AIBinder_Class_setCodeMap(clazz, codeToFunction, functionCount);
+    }
     return clazz;
 }
 

@@ -26,13 +26,19 @@
 
 #pragma once
 
+#include <android/binder_parcel.h>
+#if defined(__ANDROID_VENDOR__)
+#include <android/llndk-versioning.h>
+#else
+#if !defined(__INTRODUCED_IN_LLNDK)
+#define __INTRODUCED_IN_LLNDK(level) __attribute__((annotate("introduced_in_llndk=" #level)))
+#endif
+#endif  // __ANDROID_VENDOR__
+#include <android/binder_status.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
-
-#include <android/binder_parcel.h>
-#include <android/binder_status.h>
 
 __BEGIN_DECLS
 
@@ -217,6 +223,24 @@ typedef binder_status_t (*AIBinder_onDump)(AIBinder* binder, int fd, const char*
  * \param onDump function to call when an instance of this binder class is being dumped.
  */
 void AIBinder_Class_setOnDump(AIBinder_Class* clazz, AIBinder_onDump onDump) __INTRODUCED_IN(29);
+
+/**
+ * This associates codeToFunction array with clazz which will be used in tracing
+ *
+ * If this isn't set, Code of transaction along with interface name will be traced
+ *
+ * Available since API level 36.
+ *
+ * \param clazz - class which should use this dump function
+ * \param codeToFunction - array of function names
+ * \param functionCount - size of codeToFunction
+ *
+ * \return true if setting codeToFunction to clazz is successful. return false if clazz or
+ * codeToFunction is nullptr.
+ */
+bool AIBinder_Class_setCodeMap(AIBinder_Class* clazz, const char** codeToFunction,
+                               size_t functionCount) __INTRODUCED_IN(36)
+        __INTRODUCED_IN_LLNDK(202504);
 
 /**
  * This tells users of this class not to use a transaction header. By default, libbinder_ndk users
