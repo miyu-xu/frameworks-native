@@ -164,7 +164,8 @@ class ICInterface : public SharedRefBase {
      * Helper method to create a class
      */
     static inline AIBinder_Class* defineClass(const char* interfaceDescriptor,
-                                              AIBinder_Class_onTransact onTransact);
+                                              AIBinder_Class_onTransact onTransact,
+                                              const char** codeToFunction, size_t functionCount);
 
    private:
     class ICInterfaceData {
@@ -253,7 +254,8 @@ std::shared_ptr<ICInterface> ICInterface::asInterface(AIBinder* binder) {
 }
 
 AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
-                                         AIBinder_Class_onTransact onTransact) {
+                                         AIBinder_Class_onTransact onTransact,
+                                         const char** codeToFunction, size_t functionCount) {
     AIBinder_Class* clazz = AIBinder_Class_define(interfaceDescriptor, ICInterfaceData::onCreate,
                                                   ICInterfaceData::onDestroy, onTransact);
     if (clazz == nullptr) {
@@ -272,6 +274,14 @@ AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
         AIBinder_Class_setHandleShellCommand(clazz, ICInterfaceData::handleShellCommand);
     }
 #endif
+
+#ifdef __ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__
+    if (__builtin_available(android 36, *)) {
+#else
+    if (__ANDROID_API__ >= 36) {
+#endif
+        AIBinder_Class_setCodeMap(clazz, codeToFunction, functionCount);
+    }
     return clazz;
 }
 
