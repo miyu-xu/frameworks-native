@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #include <android/binder_ibinder.h>
 #include <android/binder_ibinder_platform.h>
 #include <android/binder_stability.h>
 #include <android/binder_status.h>
+#include <binder/Functional.h>
 #include <binder/IPCThreadState.h>
 #include <binder/IResultReceiver.h>
+#include <cutils/trace.h>
 #if __has_include(<private/android_filesystem_config.h>)
 #include <private/android_filesystem_config.h>
 #endif
@@ -40,6 +41,18 @@ using ::android::statusToString;
 using ::android::String16;
 using ::android::String8;
 using ::android::wp;
+using ::android::binder::impl::make_scope_guard;
+using ::android::binder::impl::scope_guard;
+
+// transaction codes for getInterfaceHash and getInterfaceVersion
+static constexpr int kInterfaceVersionCode = 16777214;
+static const char* kInterfaceVersion = "getInterfaceVersion";
+static constexpr int kInterfaceHashCode = 16777213;
+static const char* kInterfaceHash = "getInterfaceHash";
+static const char* kNdkTrace = "AIDL::ndk";
+static const char* kServerTrace = "::server";
+static const char* kClientTrace = "::client";
+static constexpr int kTraceLen = 60;
 
 namespace ABBinderTag {
 
@@ -88,6 +101,38 @@ static std::string SanitizeString(const String16& str) {
         }
     }
     return sanitized;
+}
+
+const std::string getFunctionName(const AIBinder_Class* clazz, transaction_code_t code,
+                                  bool isServer) {
+    std::string trace;
+    // reserve to avoid repeated allocations
+    trace.reserve(kTraceLen);
+    trace += "AIDL::ndk::";
+
+    if (clazz == nullptr) {
+        ALOGE("class associated with binder is null. Class is needed to add trace with interface "
+              "name and function name");
+        return trace;
+    }
+
+    trace += clazz->getInterfaceDescriptorUtf8();
+    trace += "::";
+
+    // TODO(b/150155678) - Move getInterfaceHash and getInterfaceVersion to libbinder and remove
+    // hardcoded cases.
+    if (code <= clazz->getFunctionCount() && code >= FIRST_CALL_TRANSACTION) {
+        // Codes have FIRST_CALL_TRANSACTION as added offset. Subtract to access function name
+        trace += clazz->getFunctionName(code);
+    } else if (code == kInterfaceVersionCode) {
+        trace += kInterfaceVersion;
+    } else if (code == kInterfaceHashCode) {
+        trace += kInterfaceHash;
+    } else {
+        trace += std::to_string(code);
+    }
+    trace += isServer ? kServerTrace : kClientTrace;
+    return trace;
 }
 
 bool AIBinder::associateClass(const AIBinder_Class* clazz) {
@@ -203,6 +248,17 @@ status_t ABBinder::dump(int fd, const ::android::Vector<String16>& args) {
 
 status_t ABBinder::onTransact(transaction_code_t code, const Parcel& data, Parcel* reply,
                               binder_flags_t flags) {
+    std::string sectionName;
+    bool tracingEnabled = atrace_enabled_tags & ATRACE_TAG_AIDL;
+    if (tracingEnabled) {
+        sectionName = getFunctionName(getClass(), code, true /*isServer*/);
+        atrace_begin(ATRACE_TAG_AIDL, sectionName.c_str());
+    }
+
+    scope_guard guard = make_scope_guard([&]() {
+        if (tracingEnabled) atrace_end(ATRACE_TAG_AIDL);
+    });
+
     if (isUserCommand(code)) {
         if (getClass()->writeHeader && !data.checkInterface(this)) {
             return STATUS_BAD_TYPE;
@@ -366,6 +422,27 @@ AIBinder_Class::AIBinder_Class(const char* interfaceDescriptor, AIBinder_Class_o
       mInterfaceDescriptor(interfaceDescriptor),
       mWideInterfaceDescriptor(interfaceDescriptor) {}
 
+bool AIBinder_Class::setCodeMap(const char** codeMap, size_t codeMapSize) {
+    mCodeToFunction = codeMap;
+    mFunctionCount = codeMapSize;
+    return true;
+}
+
+const char* AIBinder_Class::getFunctionName(transaction_code_t code) const {
+    if (mCodeToFunction == nullptr) {
+        ALOGE("mCodeToFunction is not set!");
+        return "";
+    }
+
+    if (code > mFunctionCount && code < FIRST_CALL_TRANSACTION) {
+        ALOGE("Function name for requested code not found!");
+        return "";
+    }
+
+    return mCodeToFunction[code - FIRST_CALL_TRANSACTION];
+    ;
+}
+
 AIBinder_Class* AIBinder_Class_define(const char* interfaceDescriptor,
                                       AIBinder_Class_onCreate onCreate,
                                       AIBinder_Class_onDestroy onDestroy,
@@ -383,6 +460,16 @@ void AIBinder_Class_setOnDump(AIBinder_Class* clazz, AIBinder_onDump onDump) {
 
     // this is required to be called before instances are instantiated
     clazz->onDump = onDump;
+}
+
+bool AIBinder_Class_setCodeMap(AIBinder_Class* clazz, const char** codeToFunction,
+                               size_t functionCount) {
+    if (clazz == nullptr || codeToFunction == nullptr) {
+        ALOGE("Valid clazz and codeToFunction are needed to set code to function mapping.");
+        return false;
+    }
+    clazz->setCodeMap(codeToFunction, functionCount);
+    return true;
 }
 
 void AIBinder_Class_disableInterfaceTokenHeader(AIBinder_Class* clazz) {
@@ -686,6 +773,19 @@ static void DestroyParcel(AParcel** parcel) {
 
 binder_status_t AIBinder_transact(AIBinder* binder, transaction_code_t code, AParcel** in,
                                   AParcel** out, binder_flags_t flags) {
+    const AIBinder_Class* clazz = binder ? binder->getClass() : nullptr;
+
+    std::string sectionName;
+    bool tracingEnabled = atrace_enabled_tags & ATRACE_TAG_AIDL;
+    if (tracingEnabled) {
+        sectionName = getFunctionName(clazz, code, false /*isServer*/);
+        atrace_begin(ATRACE_TAG_AIDL, sectionName.c_str());
+    }
+
+    scope_guard guard = make_scope_guard([&]() {
+        if (tracingEnabled) atrace_end(ATRACE_TAG_AIDL);
+    });
+
     if (in == nullptr) {
         ALOGE("%s: requires non-null in parameter", __func__);
         return STATUS_UNEXPECTED_NULL;
