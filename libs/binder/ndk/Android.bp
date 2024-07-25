@@ -95,6 +95,7 @@ cc_library {
         "persistable_bundle.cpp",
         "process.cpp",
         "service_manager.cpp",
+        "trace.cpp",
     ],
 
     static_libs: [
@@ -106,6 +107,7 @@ cc_library {
         "libbinder",
         "liblog",
         "libutils",
+        "libcutils",
     ],
 
     header_libs: [
