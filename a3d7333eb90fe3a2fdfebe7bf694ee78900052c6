@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d59110d_e3169016",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1130869
+      },
+      "writtenOn": "2024-07-25T06:22:52Z",
+      "side": 1,
+      "message": "We met the issue after upgrade to android-14.0.0_r52. I wonder if it can be merged ASAP, or boards with GSI will have issue. Thanks!",
+      "revId": "a3d7333eb90fe3a2fdfebe7bf694ee78900052c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
