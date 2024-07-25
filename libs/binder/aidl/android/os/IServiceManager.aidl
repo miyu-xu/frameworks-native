@@ -62,7 +62,20 @@ interface IServiceManager {
      * Returns null if the service does not exist.
      */
     @UnsupportedAppUsage
-    Service getService(@utf8InCpp String name);
+    @nullable IBinder getService(@utf8InCpp String name);
+
+    /**
+     * Retrieve an existing service called @a name from the
+     * service manager.
+     *
+     * This is the same as checkService (returns immediately) but
+     * exists for legacy purposes.
+     *
+     * Returns an enum Service that can be of different types. The
+     * enum value is null if the service does not exist.
+     */
+    @UnsupportedAppUsage
+    Service getService2(@utf8InCpp String name);
 
     /**
      * Retrieve an existing service called @a name from the service
