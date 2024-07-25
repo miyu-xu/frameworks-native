@@ -266,6 +266,9 @@ cc_defaults {
     name: "libgui-defaults",
     defaults: ["libgui_bufferqueue-defaults"],
     srcs: [":libgui-sources"],
+    cflags: [
+        "-DCOM_ANDROID_GRAPHICS_LIBGUI_FLAGS_BQ_CONSUMER_ATTACH_CALLBACK=true",
+    ],
     static_libs: [
         "libgui_aidl_static",
         "libgui_window_info_static",
@@ -338,6 +341,7 @@ cc_library_static {
 
     cflags: [
         "-DNO_BINDER",
+        "-DCOM_ANDROID_GRAPHICS_LIBGUI_FLAGS_BQ_CONSUMER_ATTACH_CALLBACK=true",
     ],
 
     defaults: ["libgui_bufferqueue-defaults"],
