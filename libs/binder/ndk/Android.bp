@@ -56,6 +56,7 @@ cc_defaults {
         "parcel.cpp",
         "stability.cpp",
         "status.cpp",
+        "binder_trace.cpp",
     ],
 }
 
@@ -106,6 +107,7 @@ cc_library {
         "libbinder",
         "liblog",
         "libutils",
+        "libcutils",
     ],
 
     header_libs: [
@@ -192,6 +194,7 @@ cc_library {
         "parcel.cpp",
         "stability.cpp",
         "status.cpp",
+        "binder_trace.cpp",
     ],
 
     shared_libs: [

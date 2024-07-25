@@ -248,6 +248,12 @@ LIBBINDER_NDK35 { # introduced=VanillaIceCream
     AServiceManager_openDeclaredPassthroughHal; # systemapi llndk=202404
 };
 
+LIBBINDER_NDK36 {
+  global:
+    ABinderTrace_beginSection;
+    ABinderTrace_endSection;
+};
+
 LIBBINDER_NDK_PLATFORM {
   global:
     AParcel_getAllowFds;
