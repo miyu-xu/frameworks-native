@@ -57,10 +57,10 @@ public:
     }
 
     IBinder* onAsBinder() override { return IInterface::asBinder(mTheRealServiceManager).get(); }
+    void toBinderService(const os::Service& in, os::Service* _out);
 
 private:
     sp<os::IServiceManager> mTheRealServiceManager;
-    void toBinderService(const os::Service& in, os::Service* _out);
 };
 
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
