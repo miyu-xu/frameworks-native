@@ -27,38 +27,7 @@ namespace android {
 using AidlServiceManager = android::os::IServiceManager;
 using IAccessor = android::os::IAccessor;
 
-BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
-      : mTheRealServiceManager(impl) {}
-
-sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
-    return mTheRealServiceManager;
-}
-
-binder::Status BackendUnifiedServiceManager::getService(const ::std::string& name,
-                                                        sp<IBinder>* _aidl_return) {
-    os::Service service;
-    binder::Status status = getService2(name, &service);
-    *_aidl_return = service.get<os::Service::Tag::binder>();
-    return status;
-}
-
-binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& name,
-                                                         os::Service* _out) {
-    os::Service service;
-    binder::Status status = mTheRealServiceManager->getService2(name, &service);
-    toBinderService(service, _out);
-    return status;
-}
-
-binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
-                                                          os::Service* _out) {
-    os::Service service;
-    binder::Status status = mTheRealServiceManager->checkService(name, &service);
-    toBinderService(service, _out);
-    return status;
-}
-
-void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
+static void toBinderService(const os::Service& in, os::Service* _out) {
     switch (in.getTag()) {
         case os::Service::Tag::binder: {
             *_out = in;
@@ -94,6 +63,37 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
     }
 }
 
+BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
+      : mTheRealServiceManager(impl) {}
+
+sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
+    return mTheRealServiceManager;
+}
+
+binder::Status BackendUnifiedServiceManager::getService(const ::std::string& name,
+                                                        sp<IBinder>* _aidl_return) {
+    os::Service service;
+    binder::Status status = getService2(name, &service);
+    *_aidl_return = service.get<os::Service::Tag::binder>();
+    return status;
+}
+
+binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& name,
+                                                         os::Service* _out) {
+    os::Service service;
+    binder::Status status = mTheRealServiceManager->getService2(name, &service);
+    toBinderService(service, _out);
+    return status;
+}
+
+binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
+                                                          os::Service* _out) {
+    os::Service service;
+    binder::Status status = mTheRealServiceManager->checkService(name, &service);
+    toBinderService(service, _out);
+    return status;
+}
+
 binder::Status BackendUnifiedServiceManager::addService(const ::std::string& name,
                                                         const sp<IBinder>& service,
                                                         bool allowIsolated, int32_t dumpPriority) {
@@ -103,14 +103,85 @@ binder::Status BackendUnifiedServiceManager::listServices(
         int32_t dumpPriority, ::std::vector<::std::string>* _aidl_return) {
     return mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
 }
+
+binder::Status BackendUnifiedServiceManager::InternalCallback::onRegistration(
+        const std::string& name, const os::Service& service) {
+    os::Service out;
+    toBinderService(service, &out);
+    return binderCallback->onRegistration(name, out.get<os::Service::Tag::binder>());
+}
+
 binder::Status BackendUnifiedServiceManager::registerForNotifications(
-        const ::std::string& name, const sp<os::IServiceCallback>& callback) {
-    return mTheRealServiceManager->registerForNotifications(name, callback);
+        const std::string& name, const sp<os::IServiceCallback>& callback) {
+    ALOGE("aaaa registring callback for service %s", name.c_str());
+    if (callback == nullptr) {
+        return binder::Status::fromExceptionCode(binder::Status::EX_NULL_POINTER, "Null callback.");
+    }
+    if (OK !=
+        IInterface::asBinder(callback)->linkToDeath(
+                sp<BackendUnifiedServiceManager>::fromExisting(this))) {
+        ALOGE("Could not linkToDeath when adding BackendUnifiedServiceManager to %s", name.c_str());
+        return binder::Status::
+                fromExceptionCode(binder::Status::EX_ILLEGAL_STATE,
+                                  "Couldn't link to death for BackendUnifiedServiceManager.");
+    }
+
+    sp<InternalCallback> internalCallback = sp<InternalCallback>::make(callback);
+    mNameToRegistrationCallbacks[name].emplace_back(internalCallback);
+    ALOGE("aaaa registring internal callback for service %s", name.c_str());
+    auto status = mTheRealServiceManager->internalRegisterForNotifications(name, internalCallback);
+    ALOGE("aaaa registring internal callback for service %s status %s", name.c_str(),
+          status.toString8().c_str());
+    return status;
 }
 binder::Status BackendUnifiedServiceManager::unregisterForNotifications(
-        const ::std::string& name, const sp<os::IServiceCallback>& callback) {
-    return mTheRealServiceManager->unregisterForNotifications(name, callback);
+        const std::string& name, const sp<os::IServiceCallback>& callback) {
+    if (callback == nullptr) {
+        return binder::Status::fromExceptionCode(binder::Status::EX_NULL_POINTER, "Null callback.");
+    }
+
+    auto it = mNameToRegistrationCallbacks.find(name);
+    if (it == mNameToRegistrationCallbacks.end()) {
+        ALOGE("Service %s is not registered for notifications", name.c_str());
+        return binder::Status::fromExceptionCode(binder::Status::EX_ILLEGAL_ARGUMENT,
+                                                 "Service not registered for notifications.");
+    }
+    return removeRegistrationCallbacks(IInterface::asBinder(callback), &it);
 }
+
+binder::Status BackendUnifiedServiceManager::removeRegistrationCallbacks(
+        const wp<IBinder>& who, ServiceCallbacksMap::iterator* it) {
+    const auto& name = (*it)->first;
+    auto& listeners = (*it)->second;
+    bool found = false;
+    for (auto listener = listeners.begin(); listener != listeners.end();) {
+        if (IInterface::asBinder(listener->get()->binderCallback) == who) {
+            found = true;
+            if (auto status =
+                        mTheRealServiceManager->internalUnregisterForNotifications(name, *listener);
+                !status.isOk()) {
+                ALOGE("Failed to unregister internal callback for %s: %s", name.c_str(),
+                      status.toString8().c_str());
+                return status;
+            }
+            listener = listeners.erase(listener);
+        } else {
+            ++listener;
+        }
+    }
+    if (listeners.empty()) {
+        *it = mNameToRegistrationCallbacks.erase(*it);
+    } else {
+        (*it)++;
+    }
+    if (!found) {
+        ALOGE("Unable to find the callback to unreigster for service %s", name.c_str());
+        return binder::Status::fromExceptionCode(binder::Status::EX_ILLEGAL_STATE,
+                                                 "Nothing to unregister.");
+    }
+    return binder::Status::ok();
+}
+
 binder::Status BackendUnifiedServiceManager::isDeclared(const ::std::string& name,
                                                         bool* _aidl_return) {
     return mTheRealServiceManager->isDeclared(name, _aidl_return);
@@ -143,6 +214,13 @@ binder::Status BackendUnifiedServiceManager::tryUnregisterService(const ::std::s
 binder::Status BackendUnifiedServiceManager::getServiceDebugInfo(
         ::std::vector<os::ServiceDebugInfo>* _aidl_return) {
     return mTheRealServiceManager->getServiceDebugInfo(_aidl_return);
+}
+
+void BackendUnifiedServiceManager::binderDied(const wp<IBinder>& who) {
+    for (auto it = mNameToRegistrationCallbacks.begin();
+         it != mNameToRegistrationCallbacks.end();) {
+        removeRegistrationCallbacks(who, &it);
+    }
 }
 
 [[clang::no_destroy]] static std::once_flag gUSmOnce;

@@ -18,6 +18,7 @@
 
 #include <android/os/BnServiceManager.h>
 #include <android/os/IClientCallback.h>
+#include <android/os/IInternalServiceCallback.h>
 #include <android/os/IServiceCallback.h>
 
 #if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
@@ -30,6 +31,7 @@ namespace android {
 
 using os::ConnectionInfo;
 using os::IClientCallback;
+using os::IInternalServiceCallback;
 using os::IServiceCallback;
 using os::ServiceDebugInfo;
 
@@ -50,10 +52,24 @@ public:
     binder::Status addService(const std::string& name, const sp<IBinder>& binder,
                               bool allowIsolated, int32_t dumpPriority) override;
     binder::Status listServices(int32_t dumpPriority, std::vector<std::string>* outList) override;
-    binder::Status registerForNotifications(const std::string& name,
-                                            const sp<IServiceCallback>& callback) override;
-    binder::Status unregisterForNotifications(const std::string& name,
-                                              const sp<IServiceCallback>& callback) override;
+    binder::Status registerForNotifications(const std::string&,
+                                            const sp<IServiceCallback>&) override {
+        // IServiceCallback should not be used in ServiceManager as ServiceManager does not build
+        // the requested service when an accessor is registered.
+        return binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    binder::Status unregisterForNotifications(const std::string&,
+                                              const sp<IServiceCallback>&) override {
+        // IServiceCallback should not be used in ServiceManager as ServiceManager does not build
+        // the requested service when an accessor is registered.
+        return binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    binder::Status internalRegisterForNotifications(
+            const std::string& name,
+            const sp<android::os::IInternalServiceCallback>& callback) override;
+    binder::Status internalUnregisterForNotifications(
+            const std::string& name,
+            const sp<android::os::IInternalServiceCallback>& callback) override;
 
     binder::Status isDeclared(const std::string& name, bool* outReturn) override;
     binder::Status getDeclaredInstances(const std::string& interface, std::vector<std::string>* outReturn) override;
@@ -94,7 +110,7 @@ private:
         ~Service();
     };
 
-    using ServiceCallbackMap = std::map<std::string, std::vector<sp<IServiceCallback>>>;
+    using ServiceCallbackMap = std::map<std::string, std::vector<sp<IInternalServiceCallback>>>;
     using ClientCallbackMap = std::map<std::string, std::vector<sp<IClientCallback>>>;
     using ServiceMap = std::map<std::string, Service>;
 

@@ -150,6 +150,18 @@ public:
         // We can't send BpBinder for RPC over regular binder.
         return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
     }
+    android::binder::Status internalRegisterForNotifications(
+            const std::string&,
+            const android::sp<android::os::IInternalServiceCallback>&) override {
+        // We can't send BpBinder for RPC over regular binder.
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status internalUnregisterForNotifications(
+            const std::string&,
+            const android::sp<android::os::IInternalServiceCallback>&) override {
+        // We can't send BpBinder for RPC over regular binder.
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
     android::binder::Status isDeclared(const std::string& name, bool* _aidl_return) override {
         return mImpl->isDeclared(name, _aidl_return);
     }
