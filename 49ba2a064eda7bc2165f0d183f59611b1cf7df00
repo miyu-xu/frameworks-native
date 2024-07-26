@@ -1,0 +1,625 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c9c438_99e7821b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "I think you also want to cache the getService (and getService2) results, not just checkService.\n\nYou might want to add a method like \u0027returnIfCached\u0027 and \u0027updateCache\u0027 if they\u0027re needed in three places.\n\nOtherwise, the caching won\u0027t work for most native users.",
+      "range": {
+        "startLine": 47,
+        "startChar": 52,
+        "endLine": 47,
+        "endChar": 62
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "19098055_4b7e3ec6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "    if (kUseCache) {\n        sp\u003cIBinder\u003e item \u003d mCacheForGetService.getItem(name);\n        if (item !\u003d nullptr \u0026\u0026 item-\u003eisBinderAlive()) {\n            *_out \u003d os::Service::make\u003cos::Service::Tag::binder\u003e(item);\n            return binder::Status::ok();\n        }\n    }\n\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "    if (kUseCache) {\n        sp\u003cIBinder\u003e binder \u003d _out-\u003eget\u003cos::Service::Tag::binder\u003e();\n        if (binder \u0026\u0026 mCacheForGetService.isClientSideCachingEnabled(name) \u0026\u0026\n            binder-\u003eisBinderAlive()) {\n            mCacheForGetService.addItem(name, binder);\n        }\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2482775a_36123d3c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "this will abort if it\u0027s not there - you should check it exists instead",
+      "range": {
+        "startLine": 66,
+        "startChar": 28,
+        "endLine": 66,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "61d78a41_45a0f8ad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "        if (binder !\u003d nullptr \u0026\u0026 mCacheForGetService.isClientSideCachingEnabled(name) \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9557ab93_4dff7779",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "global constant this should be defined in a C++ file, so it is not copied into other translation units.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e3af5ddf_5e33d9a0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": "    bool isClientSideCachingEnabled(const std::string\u0026 service_name);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "    bool isClientSideCachingEnabledStatic(const std::string\u0026 service_name);\n    bool isClientSideCachingEnabledDynamic(const std::string\u0026 service_name);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3ba6d4_bf698ebe",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "can you avoid unordered_set and avoid allocating on the heap? It will be faster with const char** and avoid adding memory to any process that uses libbinder.",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "98af9d19_cadbf831",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "static const char* static_cache_list[] \u003d {\n        \"permissionmgr\",\n        \"legacy_permission\",\n        \"media.resource_manager\",\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "        for (const char* name : static_cache_list) {\n            if (service_name \u003d\u003d name) {\n                return true;\n            }\n        }\n        return false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213ff6fb_93968fdb",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "avoid non-const \u0026",
+      "range": {
+        "startLine": 35,
+        "startChar": 71,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1aa2e9_dfdc0d9a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "avoid non-const \u0026, avoid reference members, use explicit lifetimes (e.g. unique_ptr or shared_ptr, sp or wp).",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 61
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0288569b_400973c6",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "same - lock should be owned in one place. Maybe have wp\u003c\u003e to parent object in order to implement binderDied? or use reference to BackendUnifiedServiceManager?\n\nOtherwise, it\u0027s errorprone in the longterm, because we are assuming the lifetime of these objects. We never want it to be possible for them to be deleted when we\u0027re referencing them.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a585cb30_838b7482",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "        BinderInvalidation(BinderCacheWithInvalidation\u0026 cache, const std::string\u0026 key)\n              : mCache(cache), mKey(key) {}\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "            std::unique_lock\u003cstd::mutex\u003e lock(mCache.mCacheMutex);\n            if (auto it \u003d mCache.mCache.find(mKey); it !\u003d mCache.mCache.end()) {\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "                    mCache.mCache.erase(mKey);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "        BinderCacheWithInvalidation\u0026 mCache;\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "        sp\u003cBinderInvalidation\u003e deathRecipient \u003d sp\u003cBinderInvalidation\u003e::make(*this, key_u16str);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ca5b16_cb31d05d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "avoid storing extra copy of this?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f61d14f4_0c4196e1",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "this is u8, not u16 - avoid copy? there may be some other redundant code here as well",
+      "range": {
+        "startLine": 65,
+        "startChar": 20,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "32dcd529_2765c166",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "            mCache[key] \u003d item;\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 71,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "                sp\u003cBinderInvalidation\u003e::make(mCache, mCacheMutex, key);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "            mCache.erase(key);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd7d30b8_57d66667",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "prefer to avoid adding it to the cache until after it\u0027s setup (rather than adding and then removing it)",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "70832e90_ef65fa1e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "            if (mCache.find(key_u16str) \u003d\u003d mCache.end()) {\n                mCache[key_u16str] \u003d item;\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52bd95c_ec5aa2aa",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "commend this is because linkToDeath can\u0027t be implemented?\n\nmaybe consider adding a log in this case?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 9
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4aa671_890bbaad",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "nit: avoid adding method which is an alias for another method",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5fe784b7_a17a2385",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "        return static_cache_list.contains(service_name) ||\n                mDynamicAllowCacheList.contains(service_name);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ff727d_0d664a32",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-26T18:39:38Z",
+      "side": 1,
+      "message": "do we need this? add later/separately? It\u0027s a lot for code to add this - if possible, we can try to get it added globally. Why do we need this dynamic list?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "53b7e195_f3440441",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "        return isClientSideCachingEnabledStatic(service_name);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "        return service_name \u003d\u003d \"permissionmgr\" || service_name \u003d\u003d \"legacy_permission\" ||\n                service_name \u003d\u003d \"media.resource_manager\";\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
