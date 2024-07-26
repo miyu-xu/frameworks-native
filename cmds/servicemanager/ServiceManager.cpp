@@ -249,25 +249,6 @@ static std::vector<std::string> getVintfUpdatableNames(const std::string& apexNa
     return names;
 }
 
-static std::optional<std::string> getVintfAccessorName(const std::string& name) {
-    AidlName aname;
-    if (!AidlName::fill(name, &aname)) return std::nullopt;
-
-    std::optional<std::string> accessor;
-    forEachManifest([&](const ManifestWithDescription& mwd) {
-        mwd.manifest->forEachInstance([&](const auto& manifestInstance) {
-            if (manifestInstance.format() != vintf::HalFormat::AIDL) return true;
-            if (manifestInstance.package() != aname.package) return true;
-            if (manifestInstance.interface() != aname.iface) return true;
-            if (manifestInstance.instance() != aname.instance) return true;
-            accessor = manifestInstance.accessor();
-            return false; // break (libvintf uses opposite convention)
-        });
-        return false; // continue
-    });
-    return accessor;
-}
-
 static std::optional<ConnectionInfo> getVintfConnectionInfo(const std::string& name) {
     AidlName aname;
     if (!AidlName::fill(name, &aname)) return std::nullopt;
@@ -383,40 +364,23 @@ ServiceManager::~ServiceManager() {
     }
 }
 
-Status ServiceManager::getService(const std::string& name, os::Service* outService) {
+Status ServiceManager::getService(const std::string& name, sp<IBinder>* outBinder) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
 
-    *outService = tryGetService(name, true);
+    *outBinder = tryGetService(name, true);
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }
 
-Status ServiceManager::checkService(const std::string& name, os::Service* outService) {
+Status ServiceManager::checkService(const std::string& name, sp<IBinder>* outBinder) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
 
-    *outService = tryGetService(name, false);
+    *outBinder = tryGetService(name, false);
     // returns ok regardless of result for legacy reasons
     return Status::ok();
 }
 
-os::Service ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
-    std::optional<std::string> accessorName;
-#ifndef VENDORSERVICEMANAGER
-    accessorName = getVintfAccessorName(name);
-#endif
-    if (accessorName.has_value()) {
-        auto ctx = mAccess->getCallingContext();
-        if (!mAccess->canFind(ctx, name)) {
-            return os::Service::make<os::Service::Tag::accessor>(nullptr);
-        }
-        return os::Service::make<os::Service::Tag::accessor>(
-                tryGetBinder(*accessorName, startIfNotFound));
-    } else {
-        return os::Service::make<os::Service::Tag::binder>(tryGetBinder(name, startIfNotFound));
-    }
-}
-
-sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNotFound) {
+sp<IBinder> ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_ARG_STRING("name", name.c_str()));
 
     auto ctx = mAccess->getCallingContext();
@@ -601,11 +565,8 @@ Status ServiceManager::registerForNotifications(
 
     auto ctx = mAccess->getCallingContext();
 
-    // TODO(b/338541373): Implement the notification mechanism for services accessed via
-    // IAccessor.
-    std::optional<std::string> accessorName;
-    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
-        return status;
+    if (!mAccess->canFind(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux");
     }
 
     // note - we could allow isolated apps to get notifications if we
@@ -652,9 +613,8 @@ Status ServiceManager::unregisterForNotifications(
 
     auto ctx = mAccess->getCallingContext();
 
-    std::optional<std::string> accessorName;
-    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
-        return status;
+    if (!mAccess->canFind(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
     bool found = false;
@@ -678,9 +638,8 @@ Status ServiceManager::isDeclared(const std::string& name, bool* outReturn) {
 
     auto ctx = mAccess->getCallingContext();
 
-    std::optional<std::string> accessorName;
-    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
-        return status;
+    if (!mAccess->canFind(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
     *outReturn = false;
@@ -703,10 +662,8 @@ binder::Status ServiceManager::getDeclaredInstances(const std::string& interface
 
     outReturn->clear();
 
-    std::optional<std::string> _accessorName;
     for (const std::string& instance : allInstances) {
-        if (auto status = canFindService(ctx, interface + "/" + instance, &_accessorName);
-            status.isOk()) {
+        if (mAccess->canFind(ctx, interface + "/" + instance)) {
             outReturn->push_back(instance);
         }
     }
@@ -724,9 +681,8 @@ Status ServiceManager::updatableViaApex(const std::string& name,
 
     auto ctx = mAccess->getCallingContext();
 
-    std::optional<std::string> _accessorName;
-    if (auto status = canFindService(ctx, name, &_accessorName); !status.isOk()) {
-        return status;
+    if (!mAccess->canFind(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
     *outReturn = std::nullopt;
@@ -750,9 +706,8 @@ Status ServiceManager::getUpdatableNames([[maybe_unused]] const std::string& ape
 
     outReturn->clear();
 
-    std::optional<std::string> _accessorName;
     for (const std::string& name : apexUpdatableNames) {
-        if (auto status = canFindService(ctx, name, &_accessorName); status.isOk()) {
+        if (mAccess->canFind(ctx, name)) {
             outReturn->push_back(name);
         }
     }
@@ -769,9 +724,8 @@ Status ServiceManager::getConnectionInfo(const std::string& name,
 
     auto ctx = mAccess->getCallingContext();
 
-    std::optional<std::string> _accessorName;
-    if (auto status = canFindService(ctx, name, &_accessorName); !status.isOk()) {
-        return status;
+    if (!mAccess->canFind(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
     }
 
     *outReturn = std::nullopt;
@@ -1075,23 +1029,6 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
     ALOGI("%s Unregistering %s", ctx.toDebugString().c_str(), name.c_str());
     mNameToService.erase(name);
 
-    return Status::ok();
-}
-
-Status ServiceManager::canFindService(const Access::CallingContext& ctx, const std::string& name,
-                                      std::optional<std::string>* accessor) {
-    if (!mAccess->canFind(ctx, name)) {
-        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied for service.");
-    }
-#ifndef VENDORSERVICEMANAGER
-    *accessor = getVintfAccessorName(name);
-#endif
-    if (accessor->has_value()) {
-        if (!mAccess->canFind(ctx, accessor->value())) {
-            return Status::fromExceptionCode(Status::EX_SECURITY,
-                                             "SELinux denied for the accessor of the service.");
-        }
-    }
     return Status::ok();
 }
 
