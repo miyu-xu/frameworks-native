@@ -17,6 +17,7 @@
 package android.os;
 
 import android.os.IClientCallback;
+import android.os.IInternalServiceCallback;
 import android.os.IServiceCallback;
 import android.os.Service;
 import android.os.ServiceDebugInfo;
@@ -107,6 +108,16 @@ interface IServiceManager {
      * Unregisters all requests for notifications for a specific callback.
      */
     void unregisterForNotifications(@utf8InCpp String name, IServiceCallback callback);
+
+    /**
+     * Request a callback when a service is registered.
+     */
+    void internalRegisterForNotifications(@utf8InCpp String name, IInternalServiceCallback callback);
+
+    /**
+     * Unregisters all requests for notifications for a specific callback.
+     */
+    void internalUnregisterForNotifications(@utf8InCpp String name, IInternalServiceCallback callback);
 
     /**
      * Returns whether a given interface is declared on the device, even if it

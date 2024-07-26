@@ -366,8 +366,8 @@ Vector<String16> ServiceManagerShim::listServices(int dumpsysPriority)
 sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
 {
     class Waiter : public android::os::BnServiceCallback {
-        Status onRegistration(const std::string& /*name*/,
-                              const sp<IBinder>& binder) override {
+        Status onRegistration(const std::string& name, const sp<IBinder>& binder) override {
+            ALOGI("aaaa Waiter::onRegistration for '%s'", name.c_str());
             std::unique_lock<std::mutex> lock(mMutex);
             mBinder = binder;
             lock.unlock();
@@ -376,6 +376,7 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
             mCv.notify_one();
             return Status::ok();
         }
+
     public:
         sp<IBinder> mBinder;
         std::mutex mMutex;
@@ -428,7 +429,10 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
             waiter->mCv.wait_for(lock, 1s, [&] {
                 return waiter->mBinder != nullptr;
             });
-            if (waiter->mBinder != nullptr) return waiter->mBinder;
+            if (waiter->mBinder != nullptr) {
+                ALOGI("aaaa found binder for '%s'", name.c_str());
+                return waiter->mBinder;
+            }
         }
 
         ALOGW("Waited one second for %s (is service started? Number of threads started in the "

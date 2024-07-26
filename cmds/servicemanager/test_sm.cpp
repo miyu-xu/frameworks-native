@@ -408,9 +408,9 @@ TEST(Vintf, GetDeclaredInstances_native) {
 }
 
 class CallbackHistorian : public BnServiceCallback {
-    Status onRegistration(const std::string& name, const sp<IBinder>& binder) override {
+    Status onRegistration(const std::string& name, const Service& service) override {
         registrations.push_back(name);
-        binders.push_back(binder);
+        services.push_back(service);
         return Status::ok();
     }
 
@@ -421,7 +421,7 @@ class CallbackHistorian : public BnServiceCallback {
 
 public:
     std::vector<std::string> registrations;
-    std::vector<sp<IBinder>> binders;
+    std::vector<Service> services;
 };
 
 TEST(ServiceNotifications, NoPermissionsRegister) {
@@ -513,7 +513,7 @@ TEST(ServiceNotifications, NoNotification) {
         false /*allowIsolated*/, IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk());
 
     EXPECT_THAT(cb->registrations, ElementsAre());
-    EXPECT_THAT(cb->binders, ElementsAre());
+    EXPECT_THAT(cb->services, ElementsAre());
 }
 
 TEST(ServiceNotifications, GetNotification) {
@@ -528,7 +528,8 @@ TEST(ServiceNotifications, GetNotification) {
         false /*allowIsolated*/, IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk());
 
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf"));
-    EXPECT_THAT(cb->binders, ElementsAre(service));
+    EXPECT_THAT(cb->services.size(), 1);
+    EXPECT_THAT(cb->services.front().get<Service::Tag::binder>(), service);
 }
 
 TEST(ServiceNotifications, GetNotificationForAlreadyRegisteredService) {
@@ -544,7 +545,8 @@ TEST(ServiceNotifications, GetNotificationForAlreadyRegisteredService) {
     EXPECT_TRUE(sm->registerForNotifications("asdfasdf", cb).isOk());
 
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf"));
-    EXPECT_THAT(cb->binders, ElementsAre(service));
+    EXPECT_THAT(cb->services.size(), 1);
+    EXPECT_THAT(cb->services.front().get<Service::Tag::binder>(), service);
 }
 
 TEST(ServiceNotifications, GetMultipleNotification) {
