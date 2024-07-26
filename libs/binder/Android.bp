@@ -792,6 +792,7 @@ filegroup {
     srcs: [
         "aidl/android/os/ConnectionInfo.aidl",
         "aidl/android/os/IClientCallback.aidl",
+        "aidl/android/os/IInternalServiceCallback.aidl",
         "aidl/android/os/IServiceCallback.aidl",
         "aidl/android/os/IServiceManager.aidl",
         "aidl/android/os/Service.aidl",

@@ -21,7 +21,8 @@
 
 namespace android {
 
-class BackendUnifiedServiceManager : public android::os::BnServiceManager {
+class BackendUnifiedServiceManager : public android::os::BnServiceManager,
+                                     public IBinder::DeathRecipient {
 public:
     explicit BackendUnifiedServiceManager(const sp<os::IServiceManager>& impl);
 
@@ -51,6 +52,22 @@ public:
     binder::Status tryUnregisterService(const ::std::string& name,
                                         const sp<IBinder>& service) override;
     binder::Status getServiceDebugInfo(::std::vector<os::ServiceDebugInfo>* _aidl_return) override;
+    binder::Status internalRegisterForNotifications(
+            const std::string&, const sp<os::IInternalServiceCallback>&) override {
+        // IServiceCallback should not be used in ServiceManager as ServiceManager does not build
+        // the requested service when an accessor is registered.
+        return binder::Status::fromExceptionCode(binder::Status::EX_UNSUPPORTED_OPERATION,
+                                                 "internalRegisterForNotifications is not "
+                                                 "supported for BackendUnifiedServiceManager");
+    }
+    binder::Status internalUnregisterForNotifications(
+            const std::string&, const sp<os::IInternalServiceCallback>&) override {
+        // IServiceCallback should not be used in ServiceManager as ServiceManager does not build
+        // the requested service when an accessor is registered.
+        return binder::Status::fromExceptionCode(binder::Status::EX_UNSUPPORTED_OPERATION,
+                                                 "internalUnregisterForNotifications is not "
+                                                 "supported for BackendUnifiedServiceManager");
+    }
 
     // for legacy ABI
     const String16& getInterfaceDescriptor() const override {
@@ -58,10 +75,24 @@ public:
     }
 
     IBinder* onAsBinder() override { return IInterface::asBinder(mTheRealServiceManager).get(); }
+    void binderDied(const wp<IBinder>& who) override;
 
 private:
+    class InternalCallback : public android::os::BnInternalServiceCallback {
+        binder::Status onRegistration(const std::string& name, const os::Service& service) override;
+
+    public:
+        sp<os::IServiceCallback> binderCallback;
+        InternalCallback(const sp<os::IServiceCallback>& callback) : binderCallback(callback) {}
+    };
     sp<os::IServiceManager> mTheRealServiceManager;
-    void toBinderService(const os::Service& in, os::Service* _out);
+
+    using ServiceCallbacksMap = std::map<std::string, std::vector<sp<InternalCallback>>>;
+    ServiceCallbacksMap mNameToRegistrationCallbacks;
+    // removes a callback from mNameToRegistrationCallbacks, removing it if the vector is empty
+    // this updates iterator to the next location
+    binder::Status removeRegistrationCallbacks(const wp<IBinder>& who,
+                                               ServiceCallbacksMap::iterator* it);
 };
 
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
