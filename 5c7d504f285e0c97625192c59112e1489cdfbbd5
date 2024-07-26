@@ -45,6 +45,23 @@
       },
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66dff2d5_fdb9dc96",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-07-26T22:50:46Z",
+      "side": 1,
+      "message": "@danalbert@google.com does this need a `#introduced\u003d` line?",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
