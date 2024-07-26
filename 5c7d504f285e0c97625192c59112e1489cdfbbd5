@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84a28ccf_ae8b8aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "https://g3doc.corp.google.com/company/teams/android-api-council/guidelines/ndk.md?cl\u003dhead#compatibilty-cts",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddec4a2f_d42dd5c5",
         "filename": "libs/binder/ndk/Android.bp",
         "patchSetId": 1
@@ -20,6 +37,40 @@
         "endLine": 59,
         "endChar": 21
       },
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5293491e_4bd880b6",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "go/android-ndk-api-guidelines#well-documented",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b7765d_10192fb5",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "Not part of the NDK.",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -49,6 +100,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70cf21fe_08de1150",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "go/android-ndk-api-guidelines#nullability\n\n(you may want to hold off on that until we know if this is going to stay here or be moved to android/trace.h)",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4066bc37_32578837",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "This should maybe just be an extension of the existing tracing APIs? https://developer.android.com/ndk/reference/group/tracing\n\ne.g. `ATrace_beginSectionWithTag` or something like that. I\u0027ll see if I can figure out who\u0027s responsible for the rest of the NDK tracing API and see what they think.",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d559af_0099e537",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "37",
+      "range": {
+        "startLine": 23,
+        "startChar": 72,
+        "endLine": 23,
+        "endChar": 74
+      },
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66dff2d5_fdb9dc96",
         "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
         "patchSetId": 1
@@ -60,6 +168,23 @@
       "writtenOn": "2024-07-26T22:50:46Z",
       "side": 1,
       "message": "@danalbert@google.com does this need a `#introduced\u003d` line?",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "207aeedd_ccb1f5af",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T22:52:06Z",
+      "side": 1,
+      "message": "The number in the name doesn\u0027t do anything. You need to end this line with `# introduced\u003d37` (and yeah, confusingly 37 and not 36, or so I\u0027m told)",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
