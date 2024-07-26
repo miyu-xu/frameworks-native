@@ -579,7 +579,11 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
 
         for (const sp<IServiceCallback>& cb : it->second) {
             // permission checked in registerForNotifications
-            cb->onRegistration(name, binder);
+            if (accessorName.has_value()) {
+                cb->onRegistration(name, os::Service::make<os::Service::Tag::accessor>(binder));
+            } else {
+                cb->onRegistration(name, os::Service::make<os::Service::Tag::binder>(binder));
+            }
         }
     }
 
@@ -635,8 +639,6 @@ Status ServiceManager::registerForNotifications(
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null callback.");
     }
 
-    // TODO(b/338541373): Implement the notification mechanism for services accessed via
-    // IAccessor.
     std::optional<std::string> accessorName;
     if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
         return status;
@@ -656,7 +658,11 @@ Status ServiceManager::registerForNotifications(
 
         // never null if an entry exists
         CHECK(binder != nullptr) << name;
-        callback->onRegistration(name, binder);
+        if (accessorName.has_value()) {
+            callback->onRegistration(name, os::Service::make<os::Service::Tag::accessor>(binder));
+        } else {
+            callback->onRegistration(name, os::Service::make<os::Service::Tag::binder>(binder));
+        }
     }
 
     return Status::ok();

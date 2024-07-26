@@ -16,6 +16,8 @@
 
 package android.os;
 
+import android.os.Service;
+
 /**
  * @hide
  */
@@ -26,5 +28,5 @@ oneway interface IServiceCallback {
      * @param name the service name that has been registered with
      * @param binder the binder that is registered
      */
-    void onRegistration(@utf8InCpp String name, IBinder binder);
+    void onRegistration(@utf8InCpp String name, in Service binder);
 }
