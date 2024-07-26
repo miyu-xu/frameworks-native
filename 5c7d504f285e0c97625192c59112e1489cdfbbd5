@@ -95,6 +95,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7c871be_abf197dc",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T23:12:24Z",
+      "side": 1,
+      "message": "Yeah (and it looks like it wasn\u0027t included for any reason anyway)",
+      "parentUuid": "0016db5b_03f2f684",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bdf4795_188dd96e",
         "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
         "patchSetId": 1
@@ -211,6 +229,24 @@
       "side": 1,
       "message": "We need a binder-specific API which includes additional binder-specific data, including the AIBinder* itself being traced, and also one that isn\u0027t specific to atrace.\n\nBtw Pawan, the alternative implementation we could do is create the const char** in .ro.data of code \u003c-\u003e method name, and then libbinder_ndk could use that to implement tracing inside of other methods.",
       "parentUuid": "4066bc37_32578837",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed3ae52_5d861e14",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-07-26T23:12:24Z",
+      "side": 1,
+      "message": "If you do need some binder specific data, yeah, that won\u0027t do, but as currently written this is just a different tag.",
+      "parentUuid": "da94a7f3_0db7a661",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
