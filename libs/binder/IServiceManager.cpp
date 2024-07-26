@@ -99,8 +99,9 @@ public:
     public:
         explicit RegistrationWaiter(const sp<AidlRegistrationCallback>& callback)
               : mImpl(callback) {}
-        Status onRegistration(const std::string& name, const sp<IBinder>& binder) override {
-            mImpl->onServiceRegistration(String16(name.c_str()), binder);
+        Status onRegistration(const std::string& name, const os::Service& service) override {
+            mImpl->onServiceRegistration(String16(name.c_str()),
+                                         service.get<Service::Tag::binder>());
             return Status::ok();
         }
 
@@ -366,18 +367,18 @@ Vector<String16> ServiceManagerShim::listServices(int dumpsysPriority)
 sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
 {
     class Waiter : public android::os::BnServiceCallback {
-        Status onRegistration(const std::string& /*name*/,
-                              const sp<IBinder>& binder) override {
+        Status onRegistration(const std::string& /*name*/, const os::Service& service) override {
             std::unique_lock<std::mutex> lock(mMutex);
-            mBinder = binder;
+            *mService = service;
             lock.unlock();
             // Flushing here helps ensure the service's ref count remains accurate
             IPCThreadState::self()->flushCommands();
             mCv.notify_one();
             return Status::ok();
         }
+
     public:
-        sp<IBinder> mBinder;
+        std::optional<os::Service> mService;
         std::mutex mMutex;
         std::condition_variable mCv;
     };
@@ -425,10 +426,12 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
             // that another thread serves the callback, and we never get a
             // command, so we hang indefinitely.
             std::unique_lock<std::mutex> lock(waiter->mMutex);
-            waiter->mCv.wait_for(lock, 1s, [&] {
-                return waiter->mBinder != nullptr;
-            });
-            if (waiter->mBinder != nullptr) return waiter->mBinder;
+            waiter->mCv.wait_for(lock, 1s, [&] { return waiter->mService.has_value(); });
+            if (waiter->mService.has_value()) {
+                os::Service out;
+                mUnifiedServiceManager->toBinderService(waiter->mService.value(), &out);
+                return out.get<Service::Tag::binder>();
+            }
         }
 
         ALOGW("Waited one second for %s (is service started? Number of threads started in the "
