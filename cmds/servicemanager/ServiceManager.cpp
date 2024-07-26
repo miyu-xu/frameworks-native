@@ -582,9 +582,13 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
         CHECK(handleServiceClientCallback(2 /* sm + transaction */, name, false));
         mNameToService[name].guaranteeClient = true;
 
-        for (const sp<IServiceCallback>& cb : it->second) {
+        for (const auto& cb : it->second) {
             // permission checked in registerForNotifications
-            cb->onRegistration(name, binder);
+            if (accessorName.has_value()) {
+                cb->onRegistration(name, os::Service::make<os::Service::Tag::accessor>(binder));
+            } else {
+                cb->onRegistration(name, os::Service::make<os::Service::Tag::binder>(binder));
+            }
         }
     }
 
@@ -619,11 +623,12 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
     return Status::ok();
 }
 
-Status ServiceManager::registerForNotifications(
-        const std::string& name, const sp<IServiceCallback>& callback) {
+Status ServiceManager::internalRegisterForNotifications(
+        const std::string& name, const sp<IInternalServiceCallback>& callback) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
+    ALOGI("bbbb in internalRegisterForNotifications(%s)", name.c_str());
     auto ctx = mAccess->getCallingContext();
 
     // TODO(b/338541373): Implement the notification mechanism for services accessed via
@@ -643,6 +648,7 @@ Status ServiceManager::registerForNotifications(
         return Status::fromExceptionCode(Status::EX_SECURITY, "isolated app");
     }
 
+    ALOGI("aaaa checking isValidServiceName(%s)", name.c_str());
     if (!isValidServiceName(name)) {
         ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
@@ -660,19 +666,23 @@ Status ServiceManager::registerForNotifications(
     }
 
     mNameToRegistrationCallback[name].push_back(callback);
-
+    ALOGI("aaaa preparing mNameToService.find(%s)", name.c_str());
     if (auto it = mNameToService.find(name); it != mNameToService.end()) {
         const sp<IBinder>& binder = it->second.binder;
 
         // never null if an entry exists
         CHECK(binder != nullptr) << name;
-        callback->onRegistration(name, binder);
+        if (accessorName.has_value()) {
+            callback->onRegistration(name, os::Service::make<os::Service::Tag::accessor>(binder));
+        } else {
+            callback->onRegistration(name, os::Service::make<os::Service::Tag::binder>(binder));
+        }
     }
 
     return Status::ok();
 }
-Status ServiceManager::unregisterForNotifications(
-        const std::string& name, const sp<IServiceCallback>& callback) {
+Status ServiceManager::internalUnregisterForNotifications(
+        const std::string& name, const sp<IInternalServiceCallback>& callback) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
@@ -818,7 +828,7 @@ void ServiceManager::removeRegistrationCallback(const wp<IBinder>& who,
                                     bool* found) {
     SM_PERFETTO_TRACE_FUNC();
 
-    std::vector<sp<IServiceCallback>>& listeners = (*it)->second;
+    std::vector<sp<IInternalServiceCallback>>& listeners = (*it)->second;
 
     for (auto lit = listeners.begin(); lit != listeners.end();) {
         if (IInterface::asBinder(*lit) == who) {
