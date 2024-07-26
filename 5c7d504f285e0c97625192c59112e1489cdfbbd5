@@ -187,6 +187,24 @@
       "message": "The number in the name doesn\u0027t do anything. You need to end this line with `# introduced\u003d37` (and yeah, confusingly 37 and not 36, or so I\u0027m told)",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd6966f_bbdb4497",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2024-07-26T22:54:51Z",
+      "side": 1,
+      "message": "It should be 36 now.",
+      "parentUuid": "207aeedd_ccb1f5af",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
