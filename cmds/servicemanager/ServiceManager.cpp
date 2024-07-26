@@ -495,7 +495,8 @@ bool isValidServiceName(const std::string& name) {
     return true;
 }
 
-Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder, bool allowIsolated, int32_t dumpPriority) {
+Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder,
+                                  bool allowIsolated, int32_t dumpPriority) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
@@ -505,17 +506,8 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
         return Status::fromExceptionCode(Status::EX_SECURITY, "App UIDs cannot add services.");
     }
 
-    if (!mAccess->canAdd(ctx, name)) {
-        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
-    }
-
     if (binder == nullptr) {
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Null binder.");
-    }
-
-    if (!isValidServiceName(name)) {
-        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
-        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
     }
 
 #ifndef VENDORSERVICEMANAGER
@@ -524,6 +516,12 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
         return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "VINTF declaration error.");
     }
 #endif  // !VENDORSERVICEMANAGER
+
+    std::optional<std::string> accessorName;
+    // Look up the accessor after validating the service name.
+    if (auto status = canAddService(ctx, name, &accessorName); !status.isOk()) {
+        return status;
+    }
 
     if ((dumpPriority & DUMP_FLAG_PRIORITY_ALL) == 0) {
         ALOGW("%s Dump flag priority is not set when adding %s", ctx.toDebugString().c_str(),
@@ -618,19 +616,12 @@ Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::strin
     return Status::ok();
 }
 
-Status ServiceManager::registerForNotifications(
-        const std::string& name, const sp<IServiceCallback>& callback) {
+Status ServiceManager::registerForNotifications(const std::string& name,
+                                                const sp<IServiceCallback>& callback) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
-
-    // TODO(b/338541373): Implement the notification mechanism for services accessed via
-    // IAccessor.
-    std::optional<std::string> accessorName;
-    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
-        return status;
-    }
 
     // note - we could allow isolated apps to get notifications if we
     // keep track of isolated callbacks and non-isolated callbacks, but
@@ -642,11 +633,6 @@ Status ServiceManager::registerForNotifications(
         return Status::fromExceptionCode(Status::EX_SECURITY, "isolated app");
     }
 
-    if (!isValidServiceName(name)) {
-        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
-        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
-    }
-
     if (callback == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null callback.");
     }
@@ -656,6 +642,11 @@ Status ServiceManager::registerForNotifications(
                 sp<ServiceManager>::fromExisting(this))) {
         ALOGE("%s Could not linkToDeath when adding %s", ctx.toDebugString().c_str(), name.c_str());
         return Status::fromExceptionCode(Status::EX_ILLEGAL_STATE, "Couldn't link to death.");
+    }
+
+    std::optional<std::string> accessorName;
+    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
+        return status;
     }
 
     mNameToRegistrationCallback[name].push_back(callback);
@@ -888,8 +879,9 @@ Status ServiceManager::registerClientCallback(const std::string& name, const sp<
     }
 
     auto ctx = mAccess->getCallingContext();
-    if (!mAccess->canAdd(ctx, name)) {
-        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
+    std::optional<std::string> accessorName;
+    if (auto status = canAddService(ctx, name, &accessorName); !status.isOk()) {
+        return status;
     }
 
     auto serviceIt = mNameToService.find(name);
@@ -1042,18 +1034,21 @@ void ServiceManager::sendClientCallbackNotifications(const std::string& serviceN
     service.hasClients = hasClients;
 }
 
-Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IBinder>& binder) {
+Status ServiceManager::tryUnregisterService(const std::string& serviceName,
+                                            const sp<IBinder>& binder) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
-            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
+            PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, serviceName.c_str())));
 
     if (binder == nullptr) {
         return Status::fromExceptionCode(Status::EX_NULL_POINTER, "Null service.");
     }
 
     auto ctx = mAccess->getCallingContext();
-    if (!mAccess->canAdd(ctx, name)) {
-        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied.");
+    std::optional<std::string> accessorName;
+    if (auto status = canAddService(ctx, serviceName, &accessorName); !status.isOk()) {
+        return status;
     }
+    std::string name = accessorName.value_or(serviceName);
 
     auto serviceIt = mNameToService.find(name);
     if (serviceIt == mNameToService.end()) {
@@ -1110,8 +1105,33 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
     return Status::ok();
 }
 
+Status ServiceManager::canAddService(const Access::CallingContext& ctx, const std::string& name,
+                                     std::optional<std::string>* accessor) {
+    if (!isValidServiceName(name)) {
+        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
+        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
+    }
+    if (!mAccess->canAdd(ctx, name)) {
+        return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied for service.");
+    }
+#ifndef VENDORSERVICEMANAGER
+    *accessor = getVintfAccessorName(name);
+#endif
+    if (accessor->has_value()) {
+        if (!mAccess->canAdd(ctx, accessor->value())) {
+            return Status::fromExceptionCode(Status::EX_SECURITY,
+                                             "SELinux denied for the accessor of the service.");
+        }
+    }
+    return Status::ok();
+}
+
 Status ServiceManager::canFindService(const Access::CallingContext& ctx, const std::string& name,
                                       std::optional<std::string>* accessor) {
+    if (!isValidServiceName(name)) {
+        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
+        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
+    }
     if (!mAccess->canFind(ctx, name)) {
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied for service.");
     }
