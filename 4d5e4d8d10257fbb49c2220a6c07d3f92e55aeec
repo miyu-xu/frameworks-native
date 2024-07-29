@@ -16,6 +16,24 @@
       "message": "Hello, is there any update?",
       "revId": "4d5e4d8d10257fbb49c2220a6c07d3f92e55aeec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18683cf2_e9894e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-07-29T23:17:10Z",
+      "side": 1,
+      "message": "I have attached an alternative path which will not drop buffers in surfaceflinger. There is a small risk associated with dropping the entire state. Please take a look at the patch and let me know if it works with your usecase.",
+      "parentUuid": "1f970653_4b360ec7",
+      "revId": "4d5e4d8d10257fbb49c2220a6c07d3f92e55aeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
