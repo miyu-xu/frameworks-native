@@ -16,6 +16,29 @@
       "message": "Hi Steven, PTAL",
       "revId": "2470e09c75006f1702f8dd397d1b7b8f22321ac4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30cb0ba4_f8d37552",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-29T23:33:46Z",
+      "side": 1,
+      "message": "this check is now happening in several other places where it wasn\u0027t happening before. If this results in different errors, it may become an app compat issue. Can we leave this alone, and fix the bug by itself? If you want to add this check in other places, you should do it in a separate change, but it\u0027s risky.",
+      "range": {
+        "startLine": 1110,
+        "startChar": 3,
+        "endLine": 1113,
+        "endChar": 5
+      },
+      "revId": "2470e09c75006f1702f8dd397d1b7b8f22321ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
