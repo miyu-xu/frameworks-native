@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd3db19_6fd691f4",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-29T23:35:42Z",
+      "side": 1,
+      "message": "Keep the order of these errors/checks the same. It will matter for some clients in some cases, there are too many to change it arbitrarily.",
+      "range": {
+        "startLine": 508,
+        "startChar": 18,
+        "endLine": 515,
+        "endChar": 23
+      },
+      "revId": "d24cf247076f6db6fee43bf3e0e175fa41de24af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
