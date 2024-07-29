@@ -625,13 +625,6 @@ Status ServiceManager::registerForNotifications(
 
     auto ctx = mAccess->getCallingContext();
 
-    // TODO(b/338541373): Implement the notification mechanism for services accessed via
-    // IAccessor.
-    std::optional<std::string> accessorName;
-    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
-        return status;
-    }
-
     // note - we could allow isolated apps to get notifications if we
     // keep track of isolated callbacks and non-isolated callbacks, but
     // this is done since isolated apps shouldn't access lazy services
@@ -642,9 +635,11 @@ Status ServiceManager::registerForNotifications(
         return Status::fromExceptionCode(Status::EX_SECURITY, "isolated app");
     }
 
-    if (!isValidServiceName(name)) {
-        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
-        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
+    // TODO(b/338541373): Implement the notification mechanism for services accessed via
+    // IAccessor.
+    std::optional<std::string> accessorName;
+    if (auto status = canFindService(ctx, name, &accessorName); !status.isOk()) {
+        return status;
     }
 
     if (callback == nullptr) {
@@ -1112,6 +1107,10 @@ Status ServiceManager::tryUnregisterService(const std::string& name, const sp<IB
 
 Status ServiceManager::canFindService(const Access::CallingContext& ctx, const std::string& name,
                                       std::optional<std::string>* accessor) {
+    if (!isValidServiceName(name)) {
+        ALOGE("%s Invalid service name: %s", ctx.toDebugString().c_str(), name.c_str());
+        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT, "Invalid service name.");
+    }
     if (!mAccess->canFind(ctx, name)) {
         return Status::fromExceptionCode(Status::EX_SECURITY, "SELinux denied for service.");
     }
