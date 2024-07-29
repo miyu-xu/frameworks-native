@@ -444,7 +444,6 @@ TEST(GetService, IsolatedCantRegister) {
             .WillOnce(Return(Access::CallingContext{
                     .uid = AID_ISOLATED_START,
             }));
-    EXPECT_CALL(*access, canFind(_, _)).WillOnce(Return(true));
 
     sp<ServiceManager> sm = sp<ServiceManager>::make(std::move(access));
 
