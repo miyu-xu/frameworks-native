@@ -39,6 +39,30 @@
       },
       "revId": "2470e09c75006f1702f8dd397d1b7b8f22321ac4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124e5914_06050607",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-30T07:20:46Z",
+      "side": 1,
+      "message": "I see. Let\u0027s drop this change then.",
+      "parentUuid": "30cb0ba4_f8d37552",
+      "range": {
+        "startLine": 1110,
+        "startChar": 3,
+        "endLine": 1113,
+        "endChar": 5
+      },
+      "revId": "2470e09c75006f1702f8dd397d1b7b8f22321ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
