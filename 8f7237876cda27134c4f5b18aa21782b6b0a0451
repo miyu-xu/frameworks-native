@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b81adc_bec99888",
+        "filename": "libs/gui/libgui_flags.aconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-30T22:16:21Z",
+      "side": 1,
+      "message": "you can add it between these two flags, and no longer need an aosp-main-future change",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "8f7237876cda27134c4f5b18aa21782b6b0a0451",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
