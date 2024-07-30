@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfcdbe4_70f53bcd",
+        "filename": "services/gpuservice/gpuwork/bpfprogs/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-07-30T21:50:26Z",
+      "side": 1,
+      "message": "probably should be prefixed with a space after the //",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "ebd7a005ce10fca3504917cc7f791aadae847960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
