@@ -184,6 +184,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6acc29_516d12e8",
+        "filename": "libs/binder/ClientSideCacheList.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:26:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36c78f86_0f5daa4b",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "940a96ad_b2de099a",
