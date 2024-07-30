@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b911a77e_8adff955",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c9c438_99e7821b",
+      "range": {
+        "startLine": 47,
+        "startChar": 52,
+        "endLine": 47,
+        "endChar": 62
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2482775a_36123d3c",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "885fb7f1_14a39ceb",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2482775a_36123d3c",
+      "range": {
+        "startLine": 66,
+        "startChar": 28,
+        "endLine": 66,
+        "endChar": 67
+      },
       "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -154,6 +202,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7c6f12_f062e5d7",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9557ab93_4dff7779",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 6
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b3ba6d4_bf698ebe",
@@ -205,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6262ac_81ad9c6d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b3ba6d4_bf698ebe",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "213ff6fb_93968fdb",
@@ -228,6 +324,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb7298af_154de949",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "213ff6fb_93968fdb",
+      "range": {
+        "startLine": 35,
+        "startChar": 71,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de1aa2e9_dfdc0d9a",
@@ -241,6 +361,30 @@
       "writtenOn": "2024-07-26T18:39:38Z",
       "side": 1,
       "message": "avoid non-const \u0026, avoid reference members, use explicit lifetimes (e.g. unique_ptr or shared_ptr, sp or wp).",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 61
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb4d15f_af089245",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1aa2e9_dfdc0d9a",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -332,6 +476,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "503ad197_a28b5587",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0288569b_400973c6",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1ca5b16_cb31d05d",
@@ -345,6 +513,30 @@
       "writtenOn": "2024-07-26T18:39:38Z",
       "side": 1,
       "message": "avoid storing extra copy of this?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89aca045_8d4b7e5a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "I wonder if it is worth changing this to a shared_ptr.\n\nThe const string\u0026 are owned by the caller of BackendUnifiedServiceManager.\n\nI can change the\nstd::unordered_map\u003cstd::string, sp\u003cIBinder\u003e\u003e mCache;\nto\nstd::unordered_map\u003cstd::shared_ptr\u003cstd::string\u003e, sp\u003cIBinder\u003e\u003e mCache;\n\nBut if I do that, then I\u0027ll have to create a new shared_ptr for every getItem.",
+      "parentUuid": "a1ca5b16_cb31d05d",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -426,6 +618,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82922be7_e02eeb02",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f61d14f4_0c4196e1",
+      "range": {
+        "startLine": 65,
+        "startChar": 20,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd7d30b8_57d66667",
@@ -467,6 +683,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82926371_69fd6a62",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd7d30b8_57d66667",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 37
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c52bd95c_ec5aa2aa",
@@ -480,6 +720,30 @@
       "writtenOn": "2024-07-26T18:39:38Z",
       "side": 1,
       "message": "commend this is because linkToDeath can\u0027t be implemented?\n\nmaybe consider adding a log in this case?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 9
+      },
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d4c739e_702d21d3",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c52bd95c_ec5aa2aa",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -537,6 +801,30 @@
           ]
         }
       ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac07838a_4d305cfc",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b4aa671_890bbaad",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 5
+      },
       "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -618,6 +906,30 @@
           ]
         }
       ],
+      "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56bf8e74_adc2629b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "I\u0027m removing it from this cl.",
+      "parentUuid": "60ff727d_0d664a32",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 59
+      },
       "revId": "49ba2a064eda7bc2165f0d183f59611b1cf7df00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

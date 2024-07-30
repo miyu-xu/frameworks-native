@@ -591,6 +591,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db11d572_b48416fe",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b1d2ad0_8c4f7877",
+      "range": {
+        "startLine": 129,
+        "startChar": 30,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d956bb10_ebb03202",
@@ -898,6 +922,30 @@
       "side": 1,
       "message": "Acknowledged. I\u0027m removing the binder from the cache if link to death fails.",
       "parentUuid": "c235e245_cafea926",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 25
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0401be45_f69611f8",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-07-30T16:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "175bc869_c1783110",
       "range": {
         "startLine": 139,
         "startChar": 14,
