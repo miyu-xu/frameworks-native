@@ -19,12 +19,9 @@ package {
 bpf {
     name: "gpuWork.o",
     srcs: ["gpuWork.c"],
+    btf: false,
     cflags: [
-        "-Wall",
-        "-Werror",
-        "-Wformat",
         "-Wthread-safety",
-        "-Wunused",
         "-Wunreachable-code",
     ],
 }
