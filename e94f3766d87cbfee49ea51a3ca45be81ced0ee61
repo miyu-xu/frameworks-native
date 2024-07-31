@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d412934_1c9dee0e",
+        "filename": "include/android/asset_manager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2027575
+      },
+      "writtenOn": "2024-07-31T13:44:00Z",
+      "side": 1,
+      "message": "bad code",
+      "range": {
+        "startLine": 218,
+        "startChar": 28,
+        "endLine": 218,
+        "endChar": 38
+      },
+      "revId": "e94f3766d87cbfee49ea51a3ca45be81ced0ee61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
