@@ -87,7 +87,7 @@ public:
         ASSERT_TRUE(lsResult.has_value());
         if (lsResult->exitCode != 0) {
             GTEST_SKIP() << "b/182914638: until feature is fully enabled, skip test on devices "
-                            "without servicedispatcher";
+                            "without servicedispatcher!!";
         }
 
         initHostRpcServiceManagerOnce();
