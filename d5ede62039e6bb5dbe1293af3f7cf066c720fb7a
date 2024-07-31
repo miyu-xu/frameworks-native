@@ -1,0 +1,337 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7917144_d20e48da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "Can you add a test for this as well (in binder unit tests)? I think we should be able to catch the multiple calls to servicemanager, perhaps with fakeservicemanager.\n\nAnyway, if you get a service, and then you add it, and then you get it again, you can tell if the cache is working, because it should still return the original service.",
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b20fcc_500ebe41",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "from earlier change",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecc3133_1802cb9d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "nit: you could check this inside the function, so that checking the flag isn\u0027t duplicated in the code here",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f2715d18_c2f09c76",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "    if (!kUseCache) {\n        return false;\n    }\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "    if (returnIfCached(name, _out)) {\n        return binder::Status::ok();\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "    updateCache(name, service);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "    if (returnIfCached(name, _out)) {\n        return binder::Status::ok();\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "    updateCache(name, service);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d6d23e_b1a38bee",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "this will cause the object to be double-owned, if it\u0027s both used as a class member, as well as with a shared_ptr. So you should make the member of BackendUnifiedServiceManager a shared_ptr.",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 72
+      },
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0680f03c_5cbd5d0e",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "const\u0026 or \u0026\u0026 (otherwise, whether a copy is done is based on the client code, so C++20 style arguments like this should only be done for types without copy constructors)",
+      "range": {
+        "startLine": 30,
+        "startChar": 76,
+        "endLine": 30,
+        "endChar": 88
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c7e4c5c5_98b2ebbd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "        BinderInvalidation(std::weak_ptr\u003cBinderCacheWithInvalidation\u003e cache, const std::string\u0026 key)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4add0a65_c703f7d7",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "nit: ALOGW",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "482d0a32_8af932aa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "                ALOGW(\"Binder Cache pointer expired\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc29277_8599bcce",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "nit: prefer lock_guard when you don\u0027t need to unlock it",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "65b65df7_fb74639a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3980d0b8_392616ab",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "set?",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 12
+      },
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba020ab1_274014ce",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-31T00:00:41Z",
+      "side": 1,
+      "message": "return false in this case (don\u0027t continue to add it)",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
