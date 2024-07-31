@@ -215,6 +215,8 @@ int AAsset_openFileDescriptor64(AAsset* asset, off64_t* outStart, off64_t* outLe
  */
 int AAsset_isAllocated(AAsset* asset);
 
+int AAAsset_isAllocated(AAsset* asset);
+
 
 
 #ifdef __cplusplus
