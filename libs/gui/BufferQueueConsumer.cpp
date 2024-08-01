@@ -20,7 +20,7 @@
 
 #define LOG_TAG "BufferQueueConsumer"
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #if DEBUG_ONLY_CODE
 #define VALIDATE_CONSISTENCY() do { mCore->validateConsistencyLocked(); } while (0)

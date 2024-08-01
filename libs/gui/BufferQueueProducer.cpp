@@ -18,7 +18,7 @@
 
 #define LOG_TAG "BufferQueueProducer"
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #if DEBUG_ONLY_CODE
 #define VALIDATE_CONSISTENCY() do { mCore->validateConsistencyLocked(); } while (0)
@@ -341,9 +341,14 @@ status_t BufferQueueProducer::waitForFreeSlotThenRelock(FreeSlotCaller caller,
                     // If we're calling this from dequeue, prefer free buffers
                     int slot = getFreeBufferLocked();
                     if (slot != BufferQueueCore::INVALID_BUFFER_SLOT) {
+                        ALOGV("got free buffer slot(%d) left buffers(%zu)",
+                              slot, mCore->mFreeBuffers.size());
                         *found = slot;
                     } else if (mCore->mAllowAllocation) {
                         *found = getFreeSlotLocked();
+                        if (*found != BufferQueueCore::INVALID_BUFFER_SLOT) {
+                            ALOGV("got free slot(%d)", slot);
+                        }
                     }
                 } else {
                     // If we're calling this from attach, prefer free slots
