@@ -390,8 +390,8 @@ void ASurfaceTransaction_setColor(ASurfaceTransaction* _Nonnull transaction,
  * properties at once.
  */
 void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
-                                     ASurfaceControl* _Nonnull surface_control, const ARect& source,
-                                     const ARect& destination, int32_t transform)
+                                     ASurfaceControl* _Nonnull surface_control, const ARect* _Nonnull source,
+                                     const ARect* _Nonnull destination, int32_t transform)
         __INTRODUCED_IN(29);
 
 /**
@@ -404,7 +404,7 @@ void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
  * Available since API level 31.
  */
 void ASurfaceTransaction_setCrop(ASurfaceTransaction* _Nonnull transaction,
-                                 ASurfaceControl* _Nonnull surface_control, const ARect& crop)
+                                 ASurfaceControl* _Nonnull surface_control, const ARect* _Nonnull crop)
         __INTRODUCED_IN(31);
 
 /**
