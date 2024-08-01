@@ -390,8 +390,9 @@ void ASurfaceTransaction_setColor(ASurfaceTransaction* _Nonnull transaction,
  * properties at once.
  */
 void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
-                                     ASurfaceControl* _Nonnull surface_control, const ARect& source,
-                                     const ARect& destination, int32_t transform)
+                                     ASurfaceControl* _Nonnull surface_control,
+                                     const ARect* _Nonnull source,
+                                     const ARect* _Nonnull destination, int32_t transform)
         __INTRODUCED_IN(29);
 
 /**
@@ -404,8 +405,66 @@ void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
  * Available since API level 31.
  */
 void ASurfaceTransaction_setCrop(ASurfaceTransaction* _Nonnull transaction,
-                                 ASurfaceControl* _Nonnull surface_control, const ARect& crop)
-        __INTRODUCED_IN(31);
+                                 ASurfaceControl* _Nonnull surface_control,
+                                 const ARect* _Nonnull crop) __INTRODUCED_IN(31);
+
+#if defined(__cplusplus)
+// These APIs were originally written in a C-incompatible form using references
+// instead of pointers. These inline definitions preserve source compatibility
+// for existing callers.
+//
+// The `__INTRODUCED_IN` for each of these looks a bit odd because of the naming
+// (an inline function does not exist in the OS, so there is no OS version where
+// they were added). It could be omitted, but doing so would result in a less
+// clear error message when called incorrectly. Without that attribute, the
+// error message would report an invalid call to the inner function rather than
+// the one the user called directly. The attribute also makes the
+// `__builtin_available` check unnecessary here, since the compiler will require
+// that the call to the inline is already guarded, and won't require repeating
+// that call in this functions.
+
+/**
+ * \param source The sub-rect within the buffer's content to be rendered inside the surface's area
+ * The surface's source rect is clipped by the bounds of its current buffer. The source rect's width
+ * and height must be > 0.
+ *
+ * \param destination Specifies the rect in the parent's space where this surface will be drawn. The
+ * post source rect bounds are scaled to fit the destination rect. The surface's destination rect is
+ * clipped by the bounds of its parent. The destination rect's width and height must be > 0.
+ *
+ * \param transform The transform applied after the source rect is applied to the buffer. This
+ * parameter should be set to 0 for no transform. To specify a transfrom use the
+ * NATIVE_WINDOW_TRANSFORM_* enum.
+ *
+ * Available since API level 29.
+ *
+ * @deprecated Use setCrop, setPosition, setBufferTransform, and setScale instead. Those functions
+ * provide well defined behavior and allows for more control by the apps. It also allows the caller
+ * to set different properties at different times, instead of having to specify all the desired
+ * properties at once.
+ */
+static inline void ASurfaceTransaction_setGeometry(ASurfaceTransaction* _Nonnull transaction,
+                                                   ASurfaceControl* _Nonnull surface_control,
+                                                   const ARect& source, const ARect& destination,
+                                                   int32_t transform) __INTRODUCED_IN(29) {
+    ASurfaceTransaction_setGeometry(transaction, surface_control, &source, &destination, transform);
+}
+
+/**
+ * Bounds the surface and its children to the bounds specified. The crop and buffer size will be
+ * used to determine the bounds of the surface. If no crop is specified and the surface has no
+ * buffer, the surface bounds is only constrained by the size of its parent bounds.
+ *
+ * \param crop The bounds of the crop to apply.
+ *
+ * Available since API level 31.
+ */
+static inline void ASurfaceTransaction_setCrop(ASurfaceTransaction* _Nonnull transaction,
+                                               ASurfaceControl* _Nonnull surface_control,
+                                               const ARect& crop) __INTRODUCED_IN(31) {
+    ASurfaceTransaction_setCrop(transaction, surface_control, &crop);
+}
+#endif
 
 /**
  * Specifies the position in the parent's space where the surface will be drawn.
