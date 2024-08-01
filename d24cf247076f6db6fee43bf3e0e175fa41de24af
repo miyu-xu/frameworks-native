@@ -22,6 +22,30 @@
       },
       "revId": "d24cf247076f6db6fee43bf3e0e175fa41de24af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c51fde_1af70ccf",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-01T12:49:10Z",
+      "side": 1,
+      "message": "Done. Actually, I moved it down a bit (and validated the name) because now this permission check will need to scan all the VINTF manifest. It would be better to do this at the end so that we can avoid unnecessary scan as much as possible.",
+      "parentUuid": "cdd3db19_6fd691f4",
+      "range": {
+        "startLine": 508,
+        "startChar": 18,
+        "endLine": 515,
+        "endChar": 23
+      },
+      "revId": "d24cf247076f6db6fee43bf3e0e175fa41de24af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
