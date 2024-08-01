@@ -22,6 +22,30 @@
       },
       "revId": "9841ac7aafceecd0eb673001977a07501c3e6234",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "253149f1_6a052a0c",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "It was merged, this no longer sits on other CLs.",
+      "parentUuid": "86bba07c_251d691c",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 7
+      },
+      "revId": "9841ac7aafceecd0eb673001977a07501c3e6234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

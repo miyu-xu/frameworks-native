@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d24103c5_6ca1e203",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "I removed this. I missunderstood the default! I thought it was 0, not 10. So this was never needed and my old problem must have been fixed elsewhere.",
+      "parentUuid": "7c962b85_3b074e0d",
+      "range": {
+        "startLine": 78,
+        "startChar": 47,
+        "endLine": 78,
+        "endChar": 48
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0960bdb_311f42fa",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "this shouldn\u0027t change much - maybe use one lock for both, since you do need to operate both on the same thread and get both locks to implement getService",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 27
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3b8a40_27db5d7f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Got rid of gAccessors entirely.\n\nAlso now unlocking when calling the providers to allow providers to get services from other providers without deadlocking.",
+      "parentUuid": "c0960bdb_311f42fa",
       "range": {
         "startLine": 162,
         "startChar": 0,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ce2159_1f0507af",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Good point 😊",
+      "parentUuid": "c752394c_2763f22c",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 19
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9b49b3f_1a0c3370",
@@ -101,6 +173,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "suggest \u0027std::function\u003c...\u003e\u0026\u0026\u0027, in case it\u0027s a large std::function (has a lot of state), we don\u0027t want to copy it",
+      "range": {
+        "startLine": 167,
+        "startChar": 23,
+        "endLine": 167,
+        "endChar": 31
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "509b5e93_04f5e974",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "+100! Done.",
+      "parentUuid": "b9b49b3f_1a0c3370",
       "range": {
         "startLine": 167,
         "startChar": 23,
@@ -152,6 +248,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a650081_a1e866fc",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0d9e3aef_4931a577",
+      "range": {
+        "startLine": 177,
+        "startChar": 33,
+        "endLine": 178,
+        "endChar": 74
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfcdb3f_5d410198",
@@ -175,6 +295,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbcfccc_66d6a309",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Added an RpcSession API for this.",
+      "parentUuid": "4cfcdb3f_5d410198",
+      "range": {
+        "startLine": 194,
+        "startChar": 6,
+        "endLine": 196,
+        "endChar": 100
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd0820ac_be994864",
@@ -188,6 +332,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "see if this goes away after you dynamically assign the ports. I\u0027d expect it to.",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 61
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8dd0fb2_0d78653d",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Not noticing this anymore.",
+      "parentUuid": "dd0820ac_be994864",
       "range": {
         "startLine": 206,
         "startChar": 0,
@@ -239,6 +407,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e2fb85_050b8214",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "The ordering is already forced - vitmgr won\u0027t hand out the connection info until it has set up the RpcServer.",
+      "parentUuid": "868a3f12_6f98b297",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 46
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "612d7583_d9bff55e",
@@ -262,6 +454,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab85f0d1_de8a595c",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "`mGetFd` is gone, and added a FATAL when creating an accessor if connection info callback is not there.",
+      "parentUuid": "612d7583_d9bff55e",
+      "range": {
+        "startLine": 249,
+        "startChar": 7,
+        "endLine": 250,
+        "endChar": 28
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2486a849_598fa272",
@@ -275,6 +491,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "I think we\u0027ll want this for host Android eventually. It should have a somewhat equivalent use there, e.g. in the AAOS case",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 23
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9642b8_cf455ebd",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "And we don\u0027t get sys properties on host?\n\nWe want this `LocalAccessorServiceManager` when there is no service manager process on the system.\n\nI\u0027m also using this incorrectly to avoid ProcessState in this file.\n```\nAbort message: \u0027Binder driver \u00272 (No such file or directory) Opening \u0027/dev/binder\u0027 failed\u0027 could not be opened. Error: /dev/binder. Terminating.\u0027\n```\nShould I check for the presence of /dev/binder instead? Could be in a follow up too. I think that would break an odd case of only having /dev/vndbinder without /dev/binder present, but probably not a problem.",
+      "parentUuid": "2486a849_598fa272",
       "range": {
         "startLine": 260,
         "startChar": 0,
@@ -346,6 +586,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75418af8_b16c08aa",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f59417a9_9e2a51a3",
+      "range": {
+        "startLine": 264,
+        "startChar": 6,
+        "endLine": 264,
+        "endChar": 19
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97e234bc_ec70bb58",
@@ -383,6 +647,30 @@
           ]
         }
       ],
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de1e44f4_57925e9f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97e234bc_ec70bb58",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 29
+      },
       "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -450,6 +738,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a93d2b5_28ab8354",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "I removed all caching in this patch set to simplify things. I think recreating it every time is fine right now and we can add caching later. I can create a bug to follow up with it if you think it\u0027s necessary.",
+      "parentUuid": "0db9bb57_61d40074",
+      "range": {
+        "startLine": 273,
+        "startChar": 28,
+        "endLine": 276,
+        "endChar": 75
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "355c3fdb_397a6516",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 6
@@ -505,6 +817,30 @@
           ]
         }
       ],
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac86b500_8aa4032c",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "355c3fdb_397a6516",
+      "range": {
+        "startLine": 278,
+        "startChar": 42,
+        "endLine": 278,
+        "endChar": 64
+      },
       "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -570,6 +906,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "318d51bb_0455e807",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Ah thanks! I wanted `checked_interface_cast` that makes the IPC check. But, I think it\u0027s fine to do the check on the way into `gAccessors` and we can store IAccessor instead.",
+      "parentUuid": "b58f0a34_d7ed53aa",
+      "range": {
+        "startLine": 281,
+        "startChar": 41,
+        "endLine": 281,
+        "endChar": 55
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec06c3d6_9a442c03",
@@ -583,6 +943,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "how can we use both at once?",
+      "range": {
+        "startLine": 401,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 9
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa50975c_b6db0385",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "I think the current `LocalAccessorServiceManager::getService()` contents could be a fallback path if we don\u0027t find a service from servicemanager.\n\nif not service, then if provider exists try to get Accessor from the provider. We could check the providers before sleeping in waitFor methods.\n\nThen this `LocalAccessorServiceManager` could be even simpler and do nothing at all. (or we could change the shim to not need a default at all).\n\nFor now, this limits the functionality to devices that don\u0027t have service manager, which is nice, but it does limit the functionality of the NDK APIs and makes them difficult to test outside of AVF tests...",
+      "parentUuid": "ec06c3d6_9a442c03",
       "range": {
         "startLine": 401,
         "startChar": 10,
@@ -616,6 +1000,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2274993f_b8892722",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done. \nI was originally thinking those globals would move into IServiceManager object, but this is fine.\nI have no reason for them to polymorphic.",
+      "parentUuid": "848b01ea_07e44bb4",
+      "range": {
+        "startLine": 437,
+        "startChar": 9,
+        "endLine": 440,
+        "endChar": 24
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a08405b9_1965524c",
@@ -629,6 +1037,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "we should only keep wp\u003c\u003e (or no pointers at all) here",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 32
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a48e1b_b7a5734c",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "No pointers at all! Done.",
+      "parentUuid": "a08405b9_1965524c",
       "range": {
         "startLine": 450,
         "startChar": 0,
@@ -662,6 +1094,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c788747_9546fe78",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df51f859_69c1affd",
+      "range": {
+        "startLine": 454,
+        "startChar": 13,
+        "endLine": 454,
+        "endChar": 21
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e42c5f80_6357c804",
@@ -675,6 +1131,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "what is this void* for at this layer?",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 18
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "766a89ac_70a9251d",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "It\u0027s not needed since it\u0027s captured by the std::function. Removed.",
+      "parentUuid": "e42c5f80_6357c804",
       "range": {
         "startLine": 456,
         "startChar": 8,
@@ -708,6 +1188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e4515e_525b85fb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98d78c90_e8c63876",
+      "range": {
+        "startLine": 460,
+        "startChar": 6,
+        "endLine": 460,
+        "endChar": 12
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fa94158_99d20dda",
@@ -721,6 +1225,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "I thought we might have multiple connectionInfoProvider in the process - why is one provided as an argument here, instead of adding it to gAccessorProviders and then calling this function?",
+      "range": {
+        "startLine": 472,
+        "startChar": 12,
+        "endLine": 477,
+        "endChar": 13
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "032a8dd8_396ad1c3",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "We have a `connectionInfoProvider` per `Accessor` object for the `IAccessor::addConnection` implementation to get the connection info to set up the connection and return the FD.",
+      "parentUuid": "6fa94158_99d20dda",
       "range": {
         "startLine": 472,
         "startChar": 12,
@@ -772,6 +1300,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "745a5a35_edcd52f8",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "No longer required here.",
+      "parentUuid": "d07e7748_e157149c",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 59
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f66f66_a7294166",
@@ -785,6 +1337,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "const\u0026",
+      "range": {
+        "startLine": 490,
+        "startChar": 70,
+        "endLine": 490,
+        "endChar": 81
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab4c1445_4331d0cb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f66f66_a7294166",
       "range": {
         "startLine": 490,
         "startChar": 70,
@@ -846,6 +1422,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0db0063_0b19e7c1",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Removed gAccessors. No longer caching these. They always come from an accessorProvider now.\nThe provider could cache if they want to and we could add caching in the future it\u0027s popular.",
+      "parentUuid": "b14e3219_b5712907",
+      "range": {
+        "startLine": 513,
+        "startChar": 8,
+        "endLine": 513,
+        "endChar": 40
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a9e8aeb_f2cd6c0f",
@@ -869,6 +1469,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc671db4_975a8bb2",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done. Thanks, that\u0027s good to know!",
+      "parentUuid": "4a9e8aeb_f2cd6c0f",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3765775_2c9d82cb",
@@ -882,6 +1506,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "nit: this is the composition of two functions, I wouldn\u0027t add it",
+      "range": {
+        "startLine": 41,
+        "startChar": 17,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17dcb01d_d39d7fc6",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3765775_2c9d82cb",
       "range": {
         "startLine": 41,
         "startChar": 17,
@@ -943,6 +1591,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "294329d6_3c1a6807",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done. (this was added because of the bug you pointed out in another comment with immediately dropping the sp\u003cAIBinder\u003e!)",
+      "parentUuid": "19aa6126_ee25576a",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6682104_2a620e33",
@@ -996,6 +1668,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f430d958_93e40f80",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "+1 I think we will want that. I\u0027ll work on that next + documentation for the NDK APIs which should make things easier to understand.",
+      "parentUuid": "b6682104_2a620e33",
+      "range": {
+        "startLine": 72,
+        "startChar": 23,
+        "endLine": 72,
+        "endChar": 27
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abc5fb4_d7952296",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 6
@@ -1007,6 +1703,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "nit: ARpc_Accessor isn\u0027t really nothing at all (it\u0027s a pointer to a binder). Could it be the binder object directly instead?\n\nThat is:\n```\nusing ARpc_Accessor \u003d IAccessor;\n```\n\nThat way, if you get the same accessor out, you\u0027ll have pointer equality for it. Also, you can recover the LocalAccessor if it is a local object.",
+      "range": {
+        "startLine": 107,
+        "startChar": 33,
+        "endLine": 107,
+        "endChar": 47
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3179b133_c91f4356",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "That\u0027s an interesting suggestion! I\u0027ll play around with that and see. I was previously expecting more data/callbacks to be tied to the accessor, but maybe not at this layer.",
+      "parentUuid": "4abc5fb4_d7952296",
       "range": {
         "startLine": 107,
         "startChar": 33,
@@ -1068,6 +1788,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb35d5a0_8df87dc9",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Thank you! This was definitely a problem leading to confusion :) Done.",
+      "parentUuid": "3ac351aa_9b8c5fb3",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 32
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd781efb_9831918a",
@@ -1081,6 +1825,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "smart check for API maintainability :) thank you!",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 5
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c4fa7f_7655d3fa",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fd781efb_9831918a",
       "range": {
         "startLine": 147,
         "startChar": 0,
@@ -1126,6 +1894,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec38bab6_155605e3",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_rpc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1fb605d_74bf5f3c",
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "560588c2_918dc958",
@@ -1167,6 +1953,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "168d4b3f_a0e08c8e",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_rpc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "560588c2_918dc958",
+      "range": {
+        "startLine": 33,
+        "startChar": 75,
+        "endLine": 33,
+        "endChar": 77
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a062b1c_e3b48f34",
@@ -1190,6 +2000,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee8a4b3_2cec2bcc",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a062b1c_e3b48f34",
+      "range": {
+        "startLine": 162,
+        "startChar": 42,
+        "endLine": 162,
+        "endChar": 47
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c9ac99b_65815478",
@@ -1203,6 +2037,30 @@
       "writtenOn": "2024-07-23T22:54:26Z",
       "side": 1,
       "message": "add LIBBINDER_NDK36",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 15
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f82ef65_f5204c49",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c9ac99b_65815478",
       "range": {
         "startLine": 171,
         "startChar": 0,

@@ -65,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a569d53b_8c5cc9d1",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "172eeead_25267a8b",
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ea2c1b_2abf4e45",
@@ -78,6 +96,30 @@
       "writtenOn": "2024-06-27T22:32:26Z",
       "side": 1,
       "message": "avoid defaults",
+      "range": {
+        "startLine": 148,
+        "startChar": 30,
+        "endLine": 148,
+        "endChar": 85
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7914b946_0a266cc8",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f5ea2c1b_2abf4e45",
       "range": {
         "startLine": 148,
         "startChar": 30,
@@ -197,6 +239,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7033301_90475084",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Users now pass connection info into libbinder and libbinder manages the IAccessor impl and creates the FDs.",
+      "parentUuid": "c31cc3e8_37f7960c",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 16
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21a2ef58_e0e562da",
@@ -291,6 +357,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dec8180_baeb5fbe",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f094fb6_9c2b1dca",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 44
+      },
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c046f6b_5a029276",
@@ -328,6 +418,30 @@
           ]
         }
       ],
+      "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d17c93_c9782f09",
+        "filename": "libs/binder/ndk/service_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-01T23:48:47Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "6c046f6b_5a029276",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 60
+      },
       "revId": "5753132477c8ff12e0b092c670e9e719109d86c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
