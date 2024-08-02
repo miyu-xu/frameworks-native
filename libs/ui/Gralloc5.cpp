@@ -950,8 +950,8 @@ status_t Gralloc5Mapper::getDataspace(buffer_handle_t bufferHandle,
 }
 
 status_t Gralloc5Mapper::setDataspace(buffer_handle_t bufferHandle, ui::Dataspace dataspace) const {
-    return setStandardMetadata<StandardMetadataType::DATASPACE>(mMapper, bufferHandle,
-                                                                static_cast<Dataspace>(dataspace));
+    return setStandardMetadata<StandardMetadataType::DATASPACE>(
+            mMapper, bufferHandle, ui::translate(dataspace));
 }
 
 status_t Gralloc5Mapper::getBlendMode(buffer_handle_t bufferHandle,
