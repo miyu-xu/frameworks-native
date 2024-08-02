@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f1a99b_bc27d0b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018606
+      },
+      "writtenOn": "2024-08-02T00:09:41Z",
+      "side": 1,
+      "message": "Hi Alec, please let me know what you think about this change. Since the legacy dataspace values are dropped in the AIDL dataspace definitions, I thought GraphicBufferMapper may be the best place to handle the legacy-to-v0 mappings.",
+      "revId": "0bb3896ff59d7952a593a40ec592a3a10fda3066",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
