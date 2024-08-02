@@ -1692,6 +1692,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d933d045_f1676658",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-02T23:53:45Z",
+      "side": 1,
+      "message": "Done, but right now these provider callbacks live for ever.\n\nWe can provide a removeAccessorProvider, but it would require the caller having some sort of handle to know which one to remove.\n\nWhat can that handle be? The address of the ARpc_AccessorProvider function they pass in is an option, but I imagine we want to support being able to register multiple providers with the same function pointer but different data pointers.\n\nMaybe a unique string to name the provider? That could lead to collision between two different libraries in one process. I think I like using the ARpc_AccessorProvider ptr more than this. I think it\u0027s unlikely that a library will want to reuse the same provider function with different data as that provider should be able to service all instances it knows about.",
+      "parentUuid": "f430d958_93e40f80",
+      "range": {
+        "startLine": 72,
+        "startChar": 23,
+        "endLine": 72,
+        "endChar": 27
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abc5fb4_d7952296",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 6
@@ -1727,6 +1751,30 @@
       "side": 1,
       "message": "That\u0027s an interesting suggestion! I\u0027ll play around with that and see. I was previously expecting more data/callbacks to be tied to the accessor, but maybe not at this layer.",
       "parentUuid": "4abc5fb4_d7952296",
+      "range": {
+        "startLine": 107,
+        "startChar": 33,
+        "endLine": 107,
+        "endChar": 47
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bc8590_8458950e",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-02T23:53:45Z",
+      "side": 1,
+      "message": "I think we might need to do this (and attach callbacks to the binder itself) to handle the case where we send the binder out of the process and libbinder holds a strong ref to it. In that case (and in the future case where libbinder delegates and registers with service manager) I think ARpc_Accessor_delete is not going to be able to delete anything useful. Am I thinking about this correctly?\n\nI\u0027m concerned specifically about the `void* data` that we pass to ARpc_Accessor_new along with the `ARpc_ConnectionInfoProviderUserData_delete` callback that should be responsible for deleting it. `ARpc_ConnectionInfoProviderUserData_delete` can\u0027t be called if the IAccessor implementation is still holding the std::function that has captured `void* data`.",
+      "parentUuid": "3179b133_c91f4356",
       "range": {
         "startLine": 107,
         "startChar": 33,
