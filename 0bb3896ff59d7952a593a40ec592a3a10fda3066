@@ -16,6 +16,24 @@
       "message": "Hi Alec, please let me know what you think about this change. Since the legacy dataspace values are dropped in the AIDL dataspace definitions, I thought GraphicBufferMapper may be the best place to handle the legacy-to-v0 mappings.",
       "revId": "0bb3896ff59d7952a593a40ec592a3a10fda3066",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df1df95_ac413739",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-08-02T19:52:51Z",
+      "side": 1,
+      "message": "I guess I\u0027m not really sure where the legacy dataspace values are coming from. Are they coming from the framework or vendor code?\n\nI would prefer if we didn\u0027t have any of these mappings at all, especially since I think the legacy dataspaces predate the dataspace support in gralloc 4 + 5.",
+      "parentUuid": "b6f1a99b_bc27d0b2",
+      "revId": "0bb3896ff59d7952a593a40ec592a3a10fda3066",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
