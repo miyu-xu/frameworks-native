@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff993043_20b2f683",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T19:19:09Z",
+      "side": 1,
+      "message": "How? I\u0027ve been trying to come up with a way to do that (and actually just DM\u0027d you before seeing this comment). I can do that in the header, sure, but the OS only has the single unmangled symbol. I haven\u0027t come up with a useful way to preserve the reference-based API yet. Symbol versioning is almost what I want, but without a way to backport the new version that\u0027s not useful.\n\nI suppose I could add the reference-based one as an inline for C++. It\u0027d preserve source-compat. That\u0027s maybe worth it in its own right, but this change would scare me a lot less if there were a way to preserve the reference-using definition in the OS.",
+      "parentUuid": "142c0932_5a439887",
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0360267d_e460304c",
