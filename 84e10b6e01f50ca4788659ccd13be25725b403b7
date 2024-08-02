@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be794db8_47181f8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T20:50:15Z",
+      "side": 1,
+      "message": "Latest PS is what enh was actually suggesting as opposed to my misinterpretation of it :) Gets us out of worrying about whether or not we\u0027ve changed the behavior for C++ callers (I\u0027m pretty sure we hadn\u0027t, but now the source and header are actually unchanged when preprocessed in C++ mode).",
+      "revId": "84e10b6e01f50ca4788659ccd13be25725b403b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
