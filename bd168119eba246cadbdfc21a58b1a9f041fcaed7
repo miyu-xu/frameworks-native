@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "142c0932_5a439887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-08-02T12:40:08Z",
+      "side": 1,
+      "message": "did you consider using `#if defined(__cplusplus)` to have the best of both worlds?",
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0360267d_e460304c",
