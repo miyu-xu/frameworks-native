@@ -70,6 +70,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a94696_23a0488b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T20:13:44Z",
+      "side": 1,
+      "message": "Yes. In another comment thread I suggested adding an inline for C++ that\u0027d preserve source compatibility. Added that, though of course now I need to add CTS coverage for it...",
+      "parentUuid": "7cfaa7ae_ef7673b0",
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec7c457_92d9860b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T20:13:44Z",
+      "side": 1,
+      "message": "New inlines need CTS coverage",
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ddf8258_a06c7f27",
@@ -93,6 +128,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "600a85f2_c93a1cda",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T20:13:44Z",
+      "side": 1,
+      "message": "clang-formatted",
+      "parentUuid": "3ddf8258_a06c7f27",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 393,
+        "endChar": 109
+      },
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0027d96_1ac479c5",
@@ -106,6 +165,30 @@
       "writtenOn": "2024-08-02T19:59:59Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nLines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details. See go/ayeaye-long-lines for ayeaye-specific info.",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 103
+      },
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b66a8d4_ee82f152",
+        "filename": "include/android/surface_control.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-02T20:13:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0027d96_1ac479c5",
       "range": {
         "startLine": 407,
         "startChar": 0,
