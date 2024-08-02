@@ -20,6 +20,7 @@
 #include <aidl/android/hardware/graphics/common/ChromaSiting.h>
 #include <aidl/android/hardware/graphics/common/Compression.h>
 #include <aidl/android/hardware/graphics/common/Cta861_3.h>
+#include <aidl/android/hardware/graphics/common/Dataspace.h>
 #include <aidl/android/hardware/graphics/common/Hdr.h>
 #include <aidl/android/hardware/graphics/common/Interlaced.h>
 #include <aidl/android/hardware/graphics/common/PlaneLayout.h>
@@ -80,6 +81,24 @@ inline Cta861_3 translate(const android_cta861_3_metadata& metadata) {
     return Cta861_3{.maxContentLightLevel = metadata.maxContentLightLevel,
                     .maxFrameAverageLightLevel = metadata.maxFrameAverageLightLevel};
 }
+
+#define CASE_HIDL_LEGACY_RETURN_AIDL(name) \
+    case Dataspace::name: return aidl::android::hardware::graphics::common::Dataspace::name
+
+inline aidl::android::hardware::graphics::common::Dataspace translate(Dataspace dataspace) {
+    switch (dataspace) {
+        CASE_HIDL_LEGACY_RETURN_AIDL(SRGB_LINEAR);
+        CASE_HIDL_LEGACY_RETURN_AIDL(SRGB);
+        CASE_HIDL_LEGACY_RETURN_AIDL(JFIF);
+        CASE_HIDL_LEGACY_RETURN_AIDL(BT601_625);
+        CASE_HIDL_LEGACY_RETURN_AIDL(BT601_525);
+        CASE_HIDL_LEGACY_RETURN_AIDL(BT709);
+        default:
+            return static_cast<aidl::android::hardware::graphics::common::Dataspace>(dataspace);
+    }
+}
+
+#undef CASE_HIDL_LEGACY_RETURN_AIDL
 
 }  // namespace ui
 }  // namespace android
