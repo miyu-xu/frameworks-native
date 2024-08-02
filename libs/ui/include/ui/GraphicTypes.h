@@ -81,5 +81,22 @@ inline Cta861_3 translate(const android_cta861_3_metadata& metadata) {
                     .maxFrameAverageLightLevel = metadata.maxFrameAverageLightLevel};
 }
 
+#define CASE_LEGACY_RETURN_V0(name) \
+    case Dataspace::name: return Dataspace::V0_##name
+
+inline Dataspace legacyToV0(Dataspace dataspace) {
+    switch (dataspace) {
+        CASE_LEGACY_RETURN_V0(SRGB_LINEAR);
+        CASE_LEGACY_RETURN_V0(SRGB);
+        CASE_LEGACY_RETURN_V0(JFIF);
+        CASE_LEGACY_RETURN_V0(BT601_625);
+        CASE_LEGACY_RETURN_V0(BT601_525);
+        CASE_LEGACY_RETURN_V0(BT709);
+        default: return dataspace;
+    }
+}
+
+#undef CASE_LEGACY_RETURN_V0
+
 }  // namespace ui
 }  // namespace android

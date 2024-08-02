@@ -680,7 +680,8 @@ status_t Gralloc4Mapper::getDataspace(buffer_handle_t bufferHandle,
 
 status_t Gralloc4Mapper::setDataspace(buffer_handle_t bufferHandle, ui::Dataspace dataspace) const {
     return set(bufferHandle, gralloc4::MetadataType_Dataspace,
-               static_cast<aidl::android::hardware::graphics::common::Dataspace>(dataspace),
+               static_cast<aidl::android::hardware::graphics::common::Dataspace>(
+                       ui::legacyToV0(dataspace)),
                gralloc4::encodeDataspace);
 }
 
