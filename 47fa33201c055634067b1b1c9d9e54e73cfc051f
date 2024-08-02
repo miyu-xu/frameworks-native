@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1421024f_5491ca14",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1156740
+      },
+      "writtenOn": "2024-08-02T00:57:17Z",
+      "side": 1,
+      "message": "This will show how many buffers are dangling inside BQ.",
+      "range": {
+        "startLine": 344,
+        "startChar": 61,
+        "endLine": 344,
+        "endChar": 73
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9e651e86_ecccd079",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/gui/BufferQueueProducer.cpp",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "                        ALOGV(\"got free buffer slot(%d)\", slot);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "47fa33201c055634067b1b1c9d9e54e73cfc051f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
