@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8b9c8a_f17604ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-08-02T21:43:54Z",
+      "side": 1,
+      "message": "Hi Phani, can you help us get the Qualcomm-Review bit on this change?",
+      "revId": "45ccd13dd68b5be72440cbcadb3c5bbe7f71ba4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
