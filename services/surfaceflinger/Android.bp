@@ -36,6 +36,9 @@ cc_defaults {
         "-Wconversion",
         "-DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION",
     ],
+    sanitize: {
+        hwaddress: false,
+    },
 }
 
 cc_defaults {
