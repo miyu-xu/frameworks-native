@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0360267d_e460304c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-08-02T07:46:51Z",
+      "side": 1,
+      "message": "Thanks! Yes this is all that\u0027s remaining to make this API work from C 👌",
+      "revId": "bd168119eba246cadbdfc21a58b1a9f041fcaed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
