@@ -146,9 +146,9 @@ binder::Status BackendUnifiedServiceManager::getServiceDebugInfo(
 }
 
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
-[[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
+[[clang::no_destroy]] static sp<AidlServiceManager> gUnifiedServiceManager;
 
-sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
+sp<AidlServiceManager> getBackendUnifiedServiceManager() {
     std::call_once(gUSmOnce, []() {
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
         /* wait for service manager */ {
@@ -160,18 +160,16 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
         }
 #endif
 
-        sp<AidlServiceManager> sm = nullptr;
-        while (sm == nullptr) {
-            sm = interface_cast<AidlServiceManager>(
+        gUnifiedServiceManager = nullptr;
+        while (gUnifiedServiceManager == nullptr) {
+            gUnifiedServiceManager = interface_cast<AidlServiceManager>(
                     ProcessState::self()->getContextObject(nullptr));
-            if (sm == nullptr) {
+            if (gUnifiedServiceManager == nullptr) {
                 ALOGE("Waiting 1s on context object on %s.",
                       ProcessState::self()->getDriverName().c_str());
                 sleep(1);
             }
         }
-
-        gUnifiedServiceManager = sp<BackendUnifiedServiceManager>::make(sm);
     });
 
     return gUnifiedServiceManager;

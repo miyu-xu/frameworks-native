@@ -64,6 +64,6 @@ private:
     void toBinderService(const os::Service& in, os::Service* _out);
 };
 
-sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
+sp<os::IServiceManager> getBackendUnifiedServiceManager();
 
 } // namespace android
