@@ -91,6 +91,7 @@ LIBBINDER_NDK { # introduced=29
     AStatus_newOk;
     ABinderProcess_joinThreadPool; # systemapi llndk
     ABinderProcess_setThreadPoolMaxThreadCount; # systemapi llndk
+    ABinderProcess_getThreadPoolMaxTotalThreadCount; # systemapi llndk
     ABinderProcess_startThreadPool; # systemapi llndk
     AServiceManager_addService; # systemapi llndk
     AServiceManager_checkService; # systemapi llndk
