@@ -979,6 +979,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4bf468a_14aaa98e",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-05T21:19:34Z",
+      "side": 1,
+      "message": "I made a change to use both here since it\u0027s going to be needed to fully test the NDK APIs on a device that _has_ kernel binder and the servicemanager process.",
+      "parentUuid": "aa50975c_b6db0385",
+      "range": {
+        "startLine": 401,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 9
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848b01ea_07e44bb4",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 6
