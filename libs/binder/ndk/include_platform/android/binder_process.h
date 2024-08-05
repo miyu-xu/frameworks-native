@@ -54,6 +54,7 @@ void ABinderProcess_startThreadPool(void);
  * function should be responsible for configuring the threadpool for the entire application.
  */
 bool ABinderProcess_setThreadPoolMaxThreadCount(uint32_t numThreads);
+void ABinderProcess_getThreadPoolMaxTotalThreadCount();
 /**
  * Check if the threadpool has already been started.
  * This tells whether someone in the process has called ABinderProcess_startThreadPool. Usually,
