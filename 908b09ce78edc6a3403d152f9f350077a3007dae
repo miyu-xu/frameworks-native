@@ -16,6 +16,24 @@
       "message": "Is there anything that would have problems if",
       "revId": "908b09ce78edc6a3403d152f9f350077a3007dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d450f0b_8cd96e6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-05T21:45:21Z",
+      "side": 1,
+      "message": "truncated comment?",
+      "parentUuid": "1a454507_306b60a7",
+      "revId": "908b09ce78edc6a3403d152f9f350077a3007dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
