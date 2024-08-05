@@ -159,7 +159,6 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
             }
         }
 #endif
-
         sp<AidlServiceManager> sm = nullptr;
         while (sm == nullptr) {
             sm = interface_cast<AidlServiceManager>(
