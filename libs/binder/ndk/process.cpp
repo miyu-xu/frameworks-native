@@ -29,6 +29,9 @@ void ABinderProcess_startThreadPool(void) {
 bool ABinderProcess_setThreadPoolMaxThreadCount(uint32_t numThreads) {
     return ProcessState::self()->setThreadPoolMaxThreadCount(numThreads) == 0;
 }
+void ABinderProcess_getThreadPoolMaxTotalThreadCount() {
+    ProcessState::self()->getThreadPoolMaxTotalThreadCount();
+}
 bool ABinderProcess_isThreadPoolStarted(void) {
     return ProcessState::self()->isThreadPoolStarted();
 }

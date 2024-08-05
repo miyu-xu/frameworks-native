@@ -935,7 +935,19 @@ TEST(NdkBinder_ScopedAResource, Release) {
 }
 
 int main(int argc, char* argv[]) {
-    ::testing::InitGoogleTest(&argc, argv);
+    (void)argc;
+    (void)argv;
+    // ::testing::InitGoogleTest(&argc, argv);
+
+    std::thread([] {
+        for (;;) {
+            ABinderProcess_getThreadPoolMaxTotalThreadCount();
+        }
+    }).detach();
+    usleep(10);
+    ABinderProcess_startThreadPool();
+    usleep(10);
+    return 0;
 
     if (fork() == 0) {
         prctl(PR_SET_PDEATHSIG, SIGHUP);
