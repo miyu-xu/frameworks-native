@@ -34,6 +34,24 @@
       "parentUuid": "1a454507_306b60a7",
       "revId": "908b09ce78edc6a3403d152f9f350077a3007dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c560be_27b590c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-05T21:49:03Z",
+      "side": 1,
+      "message": "Ooops yeah! I was wondering if anything was going to have a problem if it has slightly old info on the number of threads.\n\nThen I looked at the code calling this function and decided it was fine and didn\u0027t need to comment.\n\nI forgot to do the \"delete the unfinished draft comment\" step after that. 😊",
+      "parentUuid": "3d450f0b_8cd96e6f",
+      "revId": "908b09ce78edc6a3403d152f9f350077a3007dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
