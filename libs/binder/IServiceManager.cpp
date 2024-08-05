@@ -82,7 +82,7 @@ IServiceManager::~IServiceManager() {}
 class ServiceManagerShim : public IServiceManager
 {
 public:
-    explicit ServiceManagerShim (const sp<AidlServiceManager>& impl);
+    explicit ServiceManagerShim(const sp<BackendUnifiedServiceManager>& impl);
 
     sp<IBinder> getService(const String16& name) const override;
     sp<IBinder> checkService(const String16& name) const override;
@@ -278,9 +278,8 @@ void* openDeclaredPassthroughHal(const String16& interface, const String16& inst
 
 // ----------------------------------------------------------------------
 
-ServiceManagerShim::ServiceManagerShim(const sp<AidlServiceManager>& impl) {
-    mUnifiedServiceManager = sp<BackendUnifiedServiceManager>::make(impl);
-}
+ServiceManagerShim::ServiceManagerShim(const sp<BackendUnifiedServiceManager>& impl)
+      : mUnifiedServiceManager(impl) {}
 
 // This implementation could be simplified and made more efficient by delegating
 // to waitForService. However, this changes the threading structure in some
@@ -621,7 +620,7 @@ class ServiceManagerHostShim : public ServiceManagerShim {
 public:
     ServiceManagerHostShim(const sp<AidlServiceManager>& impl,
                            const RpcDelegateServiceManagerOptions& options)
-          : ServiceManagerShim(impl), mOptions(options) {}
+          : ServiceManagerShim(sp<BackendUnifiedServiceManager>::make(impl)), mOptions(options) {}
     // ServiceManagerShim::getService is based on checkService, so no need to override it.
     sp<IBinder> checkService(const String16& name) const override {
         return getDeviceService({String8(name).c_str()}, mOptions);
