@@ -189,7 +189,7 @@ private:
 
     bool mForked;
     std::atomic_bool mThreadPoolStarted;
-    volatile int32_t mThreadPoolSeq;
+    std::atomic_int32_t mThreadPoolSeq;
 
     CallRestriction mCallRestriction;
 };

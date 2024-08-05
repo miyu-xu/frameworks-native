@@ -24,7 +24,6 @@
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 #include <binder/Stability.h>
-#include <cutils/atomic.h>
 #include <utils/AndroidThreads.h>
 #include <utils/String8.h>
 #include <utils/Thread.h>
@@ -387,7 +386,7 @@ void ProcessState::expungeHandle(int32_t handle, IBinder* binder)
 }
 
 String8 ProcessState::makeBinderThreadName() {
-    int32_t s = android_atomic_add(1, &mThreadPoolSeq);
+    int32_t s = mThreadPoolSeq.fetch_add(1, std::memory_order_release);
     pid_t pid = getpid();
 
     std::string_view driverName = mDriverName.c_str();
