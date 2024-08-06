@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7951aa5_c69c0eee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2024-08-06T20:03:25Z",
+      "side": 1,
+      "message": "Ping for review. This is a nop, and shouldn\u0027t affect anything.",
+      "revId": "be8acf7f4c2b01433c28b858c4ecda65132a1e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
