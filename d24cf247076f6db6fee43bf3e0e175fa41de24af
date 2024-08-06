@@ -46,6 +46,30 @@
       },
       "revId": "d24cf247076f6db6fee43bf3e0e175fa41de24af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb82a4f4_ea54f8a5",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-06T22:48:43Z",
+      "side": 1,
+      "message": "If this causes a performance problem, we can create a faster way to lookup services.",
+      "parentUuid": "82c51fde_1af70ccf",
+      "range": {
+        "startLine": 508,
+        "startChar": 18,
+        "endLine": 515,
+        "endChar": 23
+      },
+      "revId": "d24cf247076f6db6fee43bf3e0e175fa41de24af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
