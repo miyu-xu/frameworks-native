@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eace7656_ef4d4de3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Added here: https://android-review.git.corp.google.com/c/platform/cts/+/3208671",
+      "parentUuid": "84a28ccf_ae8b8aff",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddec4a2f_d42dd5c5",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b677967_9c44691b",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddec4a2f_d42dd5c5",
+      "range": {
+        "startLine": 59,
+        "startChar": 9,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5293491e_4bd880b6",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-07-26T22:52:06Z",
       "side": 1,
       "message": "go/android-ndk-api-guidelines#well-documented",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0604ae_c5dc061a",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5293491e_4bd880b6",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -107,6 +167,24 @@
       "side": 1,
       "message": "Yeah (and it looks like it wasn\u0027t included for any reason anyway)",
       "parentUuid": "0016db5b_03f2f684",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fcbc447_f6fb6917",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7c871be_abf197dc",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -251,6 +329,66 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8eadd00_6d864428",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70cf21fe_08de1150",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d1e97f_bf52dc76",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bdf4795_188dd96e",
+      "range": {
+        "startLine": 23,
+        "startChar": 31,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a292cb7_1d976717",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eed3ae52_5d861e14",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66dff2d5_fdb9dc96",
@@ -299,6 +437,42 @@
       "side": 1,
       "message": "It should be 36 now.",
       "parentUuid": "207aeedd_ccb1f5af",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f856cf_48555476",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66dff2d5_fdb9dc96",
+      "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b2b5ed_bbc2a857",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-06T18:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bd6966f_bbdb4497",
       "revId": "5c7d504f285e0c97625192c59112e1489cdfbbd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
