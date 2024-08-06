@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02e3d21_c27957e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2024-08-06T20:18:28Z",
+      "side": 1,
+      "message": "I thought these comments fit better in a code review comment rather than the commit message:\n\n * There doesn\u0027t *seem* to be a better fix:\n   https://stackoverflow.com/a/21915740\n\n * Use `struct std::hash\u003c...\u003e` rather than reopen namespace std:\n   https://quuxplusone.github.io/blog/2021/10/27/dont-reopen-namespace-std/",
+      "revId": "bb01a640caadc9b85ed522d25480322e48da499e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
