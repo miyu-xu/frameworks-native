@@ -16,6 +16,7 @@
 #include "BackendUnifiedServiceManager.h"
 
 #include <android/os/IAccessor.h>
+#include <android/os/ServiceWithCacheInfo.h>
 #include <binder/RpcSession.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
@@ -26,6 +27,14 @@ namespace android {
 
 using AidlServiceManager = android::os::IServiceManager;
 using IAccessor = android::os::IAccessor;
+
+os::ServiceWithCacheInfo createServiceWithCacheInfo(const sp<IBinder>& binder,
+                                                    bool isClientSideCacheable) {
+    os::ServiceWithCacheInfo serviceWithCache{};
+    serviceWithCache.service = binder;
+    serviceWithCache.isClientSideCacheable = isClientSideCacheable;
+    return serviceWithCache;
+}
 
 BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
       : mTheRealServiceManager(impl) {}
@@ -38,7 +47,8 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
                                                         sp<IBinder>* _aidl_return) {
     os::Service service;
     binder::Status status = getService2(name, &service);
-    *_aidl_return = service.get<os::Service::Tag::binder>();
+    *_aidl_return = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
+    ;
     return status;
 }
 
@@ -60,7 +70,7 @@ binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& n
 
 void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
     switch (in.getTag()) {
-        case os::Service::Tag::binder: {
+        case os::Service::Tag::serviceWithCacheInfo: {
             *_out = in;
             break;
         }
@@ -69,7 +79,8 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
             sp<IAccessor> accessor = interface_cast<IAccessor>(accessorBinder);
             if (accessor == nullptr) {
                 ALOGE("Service#accessor doesn't have accessor. VM is maybe starting...");
-                *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
+                *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                        createServiceWithCacheInfo(nullptr, false));
                 break;
             }
             auto request = [=] {
@@ -85,7 +96,8 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
             auto session = RpcSession::make();
             session->setupPreconnectedClient(base::unique_fd{}, request);
             session->setSessionSpecificRoot(accessorBinder);
-            *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
+            *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                    createServiceWithCacheInfo(session->getRootObject(), false));
             break;
         }
         default: {
