@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7699f4d5_59f1a05f",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T00:50:54Z",
+      "side": 1,
+      "message": "mFrozen should be created earlier to avoid the add/remove, so you don\u0027t need to add it then remove it. Only add it once you create the FrozenStateChange.",
+      "range": {
+        "startLine": 597,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 94
+      },
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c25794f_8a5606eb",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T00:50:54Z",
+      "side": 1,
+      "message": "nice :)",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "20d9834a_75e45e83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ProcessState.cpp",
+              "range": {
+                "startLine": 494,
+                "startChar": 0,
+                "endLine": 495,
+                "endChar": 0
+              },
+              "replacement": "    // Use static variable to cache the results. If the feature is not\n    // supported, the static variable will be initialized to false.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b827890_98004e3a",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T00:50:54Z",
+      "side": 1,
+      "message": "nit: maybe use enum class?",
+      "range": {
+        "startLine": 203,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 12
+      },
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
