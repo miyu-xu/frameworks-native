@@ -147,6 +147,14 @@ public:
         int pid;
     };
     virtual std::vector<ServiceDebugInfo> getServiceDebugInfo() = 0;
+
+    /**
+     * Register a service
+     */
+    virtual status_t addService2(const String16& name, const sp<IBinder>& service,
+                                 bool allowIsolated = false,
+                                 int dumpsysPriority = DUMP_FLAG_PRIORITY_DEFAULT,
+                                 bool enableClientSideCache = false) = 0;
 };
 
 LIBBINDER_EXPORTED sp<IServiceManager> defaultServiceManager();

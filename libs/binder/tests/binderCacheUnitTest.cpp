@@ -61,7 +61,10 @@ public:
 
     binder::Status checkService(const ::std::string& name, os::Service* _out) override {
         sp<IBinder> binder = innerSm.getService(String16(name.c_str()));
-        *_out = os::Service::make<os::Service::Tag::binder>(binder);
+        os::ServiceWithCacheInfo serviceWithCache{};
+        serviceWithCache.service = binder;
+        serviceWithCache.isClientSideCacheable = false;
+        *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(serviceWithCache);
         return binder::Status::ok();
     }
 
@@ -90,8 +93,8 @@ public:
     void checkService(const std::string& kCachedServiceName, sp<IBinder>* _out) {
         os::Service service;
         EXPECT_OK(mBusm->checkService(kCachedServiceName, &service));
-        ASSERT_EQ(os::Service::Tag::binder, service.getTag());
-        *_out = service.get<os::Service::Tag::binder>();
+        ASSERT_EQ(os::Service::Tag::serviceWithCacheInfo, service.getTag());
+        *_out = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
     }
 
     void cacheAndConfirmCacheHit(const sp<IBinder>& binder1, const sp<IBinder>& binder2) {

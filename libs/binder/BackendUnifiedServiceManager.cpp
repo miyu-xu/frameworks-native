@@ -16,6 +16,7 @@
 #include "BackendUnifiedServiceManager.h"
 
 #include <android/os/IAccessor.h>
+#include <android/os/ServiceWithCacheInfo.h>
 #include <binder/RpcSession.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
@@ -81,6 +82,14 @@ static const char* kStaticCachableList[] = {
         "webviewupdate",
 };
 
+os::ServiceWithCacheInfo createServiceWithCacheInfo(const sp<IBinder>& binder,
+                                                    bool isClientSideCacheable) {
+    os::ServiceWithCacheInfo serviceWithCache{};
+    serviceWithCache.service = binder;
+    serviceWithCache.isClientSideCacheable = isClientSideCacheable;
+    return serviceWithCache;
+}
+
 bool BinderCacheWithInvalidation::isClientSideCachingEnabled(const std::string& serviceName) {
     if (ProcessState::self()->getThreadPoolMaxTotalThreadCount() <= 0) {
         ALOGW("Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be "
@@ -101,9 +110,13 @@ binder::Status BackendUnifiedServiceManager::updateCache(const std::string& serv
     if (!kUseCache) {
         return binder::Status::ok();
     }
-    if (service.getTag() == os::Service::Tag::binder) {
-        sp<IBinder> binder = service.get<os::Service::Tag::binder>();
-        if (binder && mCacheForGetService->isClientSideCachingEnabled(serviceName) &&
+    if (service.getTag() == os::Service::Tag::serviceWithCacheInfo) {
+        sp<IBinder> binder = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
+        bool isClientSideCacheable =
+                service.get<os::Service::Tag::serviceWithCacheInfo>()->isClientSideCacheable;
+        if (binder &&
+            (mCacheForGetService->isClientSideCachingEnabled(serviceName) ||
+             isClientSideCacheable) &&
             binder->isBinderAlive()) {
             return mCacheForGetService->setItem(serviceName, binder);
         }
@@ -119,7 +132,8 @@ bool BackendUnifiedServiceManager::returnIfCached(const std::string& serviceName
     sp<IBinder> item = mCacheForGetService->getItem(serviceName);
     // TODO(b/363177618): Enable caching for binders which are always null.
     if (item != nullptr && item->isBinderAlive()) {
-        *_out = os::Service::make<os::Service::Tag::binder>(item);
+        *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                createServiceWithCacheInfo(item, true));
         return true;
     }
     return false;
@@ -138,7 +152,8 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
                                                         sp<IBinder>* _aidl_return) {
     os::Service service;
     binder::Status status = getService2(name, &service);
-    *_aidl_return = service.get<os::Service::Tag::binder>();
+    *_aidl_return = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
+    ;
     return status;
 }
 
@@ -173,7 +188,7 @@ binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& n
 
 void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
     switch (in.getTag()) {
-        case os::Service::Tag::binder: {
+        case os::Service::Tag::serviceWithCacheInfo: {
             *_out = in;
             break;
         }
@@ -182,7 +197,8 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
             sp<IAccessor> accessor = interface_cast<IAccessor>(accessorBinder);
             if (accessor == nullptr) {
                 ALOGE("Service#accessor doesn't have accessor. VM is maybe starting...");
-                *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
+                *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                        createServiceWithCacheInfo(nullptr, false));
                 break;
             }
             auto request = [=] {
@@ -198,7 +214,8 @@ void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Se
             auto session = RpcSession::make();
             session->setupPreconnectedClient(base::unique_fd{}, request);
             session->setSessionSpecificRoot(accessorBinder);
-            *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
+            *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                    createServiceWithCacheInfo(session->getRootObject(), false));
             break;
         }
         default: {
@@ -211,6 +228,13 @@ binder::Status BackendUnifiedServiceManager::addService(const ::std::string& nam
                                                         const sp<IBinder>& service,
                                                         bool allowIsolated, int32_t dumpPriority) {
     return mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
+}
+binder::Status BackendUnifiedServiceManager::addService2(const ::std::string& name,
+                                                         const sp<IBinder>& service,
+                                                         bool allowIsolated, int dumpsysPriority,
+                                                         bool enableClientSideCache) {
+    return mTheRealServiceManager->addService2(name, service, allowIsolated, dumpsysPriority,
+                                               enableClientSideCache);
 }
 binder::Status BackendUnifiedServiceManager::listServices(
         int32_t dumpPriority, ::std::vector<::std::string>* _aidl_return) {
