@@ -527,6 +527,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e2fe06b_5d5285e3",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T01:20:37Z",
+      "side": 1,
+      "message": "sys properties can be mocked on the host.\n\n---\n\n/dev/binder might be there independently of servicemanager being installed (and /dev/vndbinder especially and frequently is there even when vndservicemanager is installed).\n\nI think that if you don\u0027t have properties, you might fallback to this, since that, at least for /dev/binder, would be in a VM, and /dev/binder should not be there.",
+      "parentUuid": "aa9642b8_cf455ebd",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 23
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f59417a9_9e2a51a3",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 6
@@ -1015,6 +1039,30 @@
       "side": 1,
       "message": "Now the LocalAccessorServiceManager does nothing at all. We could clean this up and just be tolerant of not having a `mTheRealServiceManager` but that will probably be a bit more involved.\n\nThis solution looks for providers anytime `mTheRealServiceManager-\u003egetService2` returns a null binder. So this fail cases now incurs a little bit of overhead when no providers are injected, which I think is fine, and a bit more overhead with provider present - defined by the injected providers.",
       "parentUuid": "d4bf468a_14aaa98e",
+      "range": {
+        "startLine": 401,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 9
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c68cce4_e95c1b4a",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T01:20:37Z",
+      "side": 1,
+      "message": "(I think we discussed this in person)",
+      "parentUuid": "eb3b9bf0_7970119d",
       "range": {
         "startLine": 401,
         "startChar": 10,
@@ -1764,6 +1812,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63901f1e_ac08d2e5",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T01:20:37Z",
+      "side": 1,
+      "message": "(I think we discussed this in person)",
+      "parentUuid": "d933d045_f1676658",
+      "range": {
+        "startLine": 72,
+        "startChar": 23,
+        "endLine": 72,
+        "endChar": 27
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abc5fb4_d7952296",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 6
@@ -1823,6 +1895,30 @@
       "side": 1,
       "message": "I think we might need to do this (and attach callbacks to the binder itself) to handle the case where we send the binder out of the process and libbinder holds a strong ref to it. In that case (and in the future case where libbinder delegates and registers with service manager) I think ARpc_Accessor_delete is not going to be able to delete anything useful. Am I thinking about this correctly?\n\nI\u0027m concerned specifically about the `void* data` that we pass to ARpc_Accessor_new along with the `ARpc_ConnectionInfoProviderUserData_delete` callback that should be responsible for deleting it. `ARpc_ConnectionInfoProviderUserData_delete` can\u0027t be called if the IAccessor implementation is still holding the std::function that has captured `void* data`.",
       "parentUuid": "3179b133_c91f4356",
+      "range": {
+        "startLine": 107,
+        "startChar": 33,
+        "endLine": 107,
+        "endChar": 47
+      },
+      "revId": "3ea0d97a6f62aed0f659e0046f074ffc9e080cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ae3371c_79f8f0b3",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-07T01:20:37Z",
+      "side": 1,
+      "message": "(I think we discussed this in person)",
+      "parentUuid": "b6bc8590_8458950e",
       "range": {
         "startLine": 107,
         "startChar": 33,
