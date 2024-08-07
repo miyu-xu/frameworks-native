@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b31f7158_d150a758",
+        "filename": "libs/binder/BpBinder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-08-07T15:20:08Z",
+      "side": 1,
+      "message": "That is actually what it was initially but I changed it per your earlier comment: https://screenshot.googleplex.com/73TqRwjn6PDhGyb. addFrozenStateChangeCallback() could fail too and if FrozenStateChange is allocated earlier, it would need to be deleted.\n\nI think we should keep it the way it is now, i.e. call addFrozenStateChangeCallback() first because this is the one that\u0027s more likely to fail, e.g. on devices with older kernels.",
+      "parentUuid": "7699f4d5_59f1a05f",
+      "range": {
+        "startLine": 597,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 94
+      },
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c25794f_8a5606eb",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa78c546_5ecfe3d1",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-08-07T15:20:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c25794f_8a5606eb",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 48
+      },
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b827890_98004e3a",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-08-07T00:50:54Z",
       "side": 1,
       "message": "nit: maybe use enum class?",
+      "range": {
+        "startLine": 203,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 12
+      },
+      "revId": "534d70737b2279416eb2933577f2d58bcfc477b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b7d232_affb8ae6",
+        "filename": "libs/binder/include/binder/IBinder.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1952023
+      },
+      "writtenOn": "2024-08-07T15:20:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b827890_98004e3a",
       "range": {
         "startLine": 203,
         "startChar": 8,
