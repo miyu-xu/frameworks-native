@@ -87,6 +87,8 @@ public:
     sp<IBinder> checkService(const String16& name) const override;
     status_t addService(const String16& name, const sp<IBinder>& service,
                         bool allowIsolated, int dumpsysPriority) override;
+    status_t addService2(const String16& name, const sp<IBinder>& service, bool allowIsolated,
+                         int dumpsysPriority, bool enableClientSideCache) override;
     Vector<String16> listServices(int dumpsysPriority) override;
     sp<IBinder> waitForService(const String16& name16) override;
     bool isDeclared(const String16& name) override;
@@ -143,7 +145,7 @@ protected:
     virtual Status realGetService(const std::string& name, sp<IBinder>* _aidl_return) {
         Service service;
         Status status = mUnifiedServiceManager->getService2(name, &service);
-        *_aidl_return = service.get<Service::Tag::binder>();
+        *_aidl_return = service.get<Service::Tag::serviceWithCacheInfo>()->service;
         return status;
     }
 };
@@ -330,17 +332,29 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
 }
 
 sp<IBinder> CppBackendShim::checkService(const String16& name) const {
-    Service ret;
-    if (!mUnifiedServiceManager->checkService(String8(name).c_str(), &ret).isOk()) {
+    Service service;
+    if (!mUnifiedServiceManager->checkService(String8(name).c_str(), &service).isOk()) {
         return nullptr;
     }
-    return ret.get<Service::Tag::binder>();
+    auto ret = service.get<Service::Tag::serviceWithCacheInfo>();
+    if (!ret.has_value()) {
+        return nullptr;
+    }
+    return ret->service;
 }
 
 status_t CppBackendShim::addService(const String16& name, const sp<IBinder>& service,
                                     bool allowIsolated, int dumpsysPriority) {
     Status status = mUnifiedServiceManager->addService(String8(name).c_str(), service,
                                                        allowIsolated, dumpsysPriority);
+    return status.exceptionCode();
+}
+status_t CppBackendShim::addService2(const String16& name, const sp<IBinder>& service,
+                                     bool allowIsolated, int dumpsysPriority,
+                                     bool enableClientSideCache) {
+    Status status =
+            mUnifiedServiceManager->addService2(String8(name).c_str(), service, allowIsolated,
+                                                dumpsysPriority, enableClientSideCache);
     return status.exceptionCode();
 }
 

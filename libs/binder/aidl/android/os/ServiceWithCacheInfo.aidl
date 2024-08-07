@@ -16,15 +16,18 @@
 
 package android.os;
 
-import android.os.ServiceWithCacheInfo;
-
 /**
- * Service is a union of different service types that can be returned
- * by the internal {@link ServiceManager#getService(name)} API.
+ * Service with information on if it can be cached on the client side.
  *
  * @hide
  */
-union Service {
-    @nullable ServiceWithCacheInfo serviceWithCacheInfo;
-    @nullable IBinder accessor;
+parcelable ServiceWithCacheInfo {
+    /**
+     * IBinder to service
+     */
+    @nullable IBinder service;
+    /**
+     * boolean if the IBinder can be cached by client.
+     */
+    boolean isClientSideCacheable;
 }

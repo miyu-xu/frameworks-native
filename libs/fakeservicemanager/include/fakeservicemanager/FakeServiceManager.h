@@ -41,6 +41,10 @@ public:
                         bool allowIsolated = false,
                         int dumpsysFlags = DUMP_FLAG_PRIORITY_DEFAULT) override;
 
+    status_t addService2(const String16& name, const sp<IBinder>& service,
+                         bool allowIsolated = false, int dumpsysFlags = DUMP_FLAG_PRIORITY_DEFAULT,
+                         bool enableClientSideCache = false) override;
+
     Vector<String16> listServices(int dumpsysFlags = 0) override;
 
     IBinder* onAsBinder() override;
