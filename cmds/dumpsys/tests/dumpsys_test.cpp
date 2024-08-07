@@ -55,6 +55,7 @@ class ServiceManagerMock : public IServiceManager {
     MOCK_CONST_METHOD1(getService, sp<IBinder>(const String16&));
     MOCK_CONST_METHOD1(checkService, sp<IBinder>(const String16&));
     MOCK_METHOD4(addService, status_t(const String16&, const sp<IBinder>&, bool, int));
+    MOCK_METHOD5(addService2, status_t(const String16&, const sp<IBinder>&, bool, int, bool));
     MOCK_METHOD1(listServices, Vector<String16>(int));
     MOCK_METHOD1(waitForService, sp<IBinder>(const String16&));
     MOCK_METHOD1(isDeclared, bool(const String16&));
