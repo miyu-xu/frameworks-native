@@ -432,7 +432,12 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
         return os::Service::make<os::Service::Tag::accessor>(
                 tryGetBinder(*accessorName, startIfNotFound));
     } else {
-        return os::Service::make<os::Service::Tag::binder>(tryGetBinder(name, startIfNotFound));
+        os::ServiceWithCacheInfo serviceWithCache{};
+        serviceWithCache.service = tryGetBinder(name, startIfNotFound);
+        serviceWithCache.isClientSideCacheable = false;
+        os::Service service =
+                os::Service::make<os::Service::Tag::serviceWithCacheInfo>(serviceWithCache);
+        return service;
     }
 }
 
