@@ -150,7 +150,7 @@ protected:
     virtual Status realGetService(const std::string& name, sp<IBinder>* _aidl_return) {
         Service service;
         Status status = mUnifiedServiceManager->getService2(name, &service);
-        *_aidl_return = service.get<Service::Tag::binder>();
+        *_aidl_return = service.get<Service::Tag::serviceWithCacheInfo>()->service;
         return status;
     }
 };
@@ -544,11 +544,15 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
 }
 
 sp<IBinder> CppBackendShim::checkService(const String16& name) const {
-    Service ret;
-    if (!mUnifiedServiceManager->checkService(String8(name).c_str(), &ret).isOk()) {
+    Service service;
+    if (!mUnifiedServiceManager->checkService(String8(name).c_str(), &service).isOk()) {
         return nullptr;
     }
-    return ret.get<Service::Tag::binder>();
+    auto ret = service.get<Service::Tag::serviceWithCacheInfo>();
+    if (!ret.has_value()) {
+        return nullptr;
+    }
+    return ret->service;
 }
 
 status_t CppBackendShim::addService(const String16& name, const sp<IBinder>& service,

@@ -801,6 +801,7 @@ filegroup {
         "aidl/android/os/IServiceManager.aidl",
         "aidl/android/os/Service.aidl",
         "aidl/android/os/ServiceDebugInfo.aidl",
+        "aidl/android/os/ServiceWithCacheInfo.aidl",
         ":libbinder_accessor_aidl",
     ],
     path: "aidl",

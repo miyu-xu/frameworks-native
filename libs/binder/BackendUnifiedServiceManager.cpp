@@ -16,6 +16,7 @@
 #include "BackendUnifiedServiceManager.h"
 
 #include <android/os/IAccessor.h>
+#include <android/os/ServiceWithCacheInfo.h>
 #include <binder/RpcSession.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
@@ -123,7 +124,13 @@ bool BackendUnifiedServiceManager::returnIfCached(const std::string& serviceName
         return true;
     }
     return false;
-}
+    os::ServiceWithCacheInfo createServiceWithCacheInfo(const sp<IBinder>& binder,
+                                                        bool isClientSideCacheable) {
+        os::ServiceWithCacheInfo serviceWithCache{};
+        serviceWithCache.service = binder;
+        serviceWithCache.isClientSideCacheable = isClientSideCacheable;
+        return serviceWithCache;
+    }
 
 BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceManager>& impl)
       : mTheRealServiceManager(impl) {
@@ -138,7 +145,8 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
                                                         sp<IBinder>* _aidl_return) {
     os::Service service;
     binder::Status status = getService2(name, &service);
-    *_aidl_return = service.get<os::Service::Tag::binder>();
+    *_aidl_return = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
+    ;
     return status;
 }
 
@@ -180,8 +188,8 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
                                                              const os::Service& in,
                                                              os::Service* _out) {
     switch (in.getTag()) {
-        case os::Service::Tag::binder: {
-            if (in.get<os::Service::Tag::binder>() == nullptr) {
+        case os::Service::Tag::serviceWithCacheInfo: {
+            if (in.get<os::Service::Tag::serviceWithCacheInfo>().service == nullptr) {
                 // failed to find a service. Check to see if we have any local
                 // injected Accessors for this service.
                 os::Service accessor;
@@ -199,7 +207,6 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
                     return toBinderService(name, accessor, _out);
                 }
             }
-
             *_out = in;
             return binder::Status::ok();
         }
@@ -208,7 +215,8 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
             sp<IAccessor> accessor = interface_cast<IAccessor>(accessorBinder);
             if (accessor == nullptr) {
                 ALOGE("Service#accessor doesn't have accessor. VM is maybe starting...");
-                *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
+                *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                        createServiceWithCacheInfo(nullptr, false));
                 return binder::Status::ok();
             }
             auto request = [=] {
@@ -229,7 +237,8 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
                 return binder::Status::fromStatusT(status);
             }
             session->setSessionSpecificRoot(accessorBinder);
-            *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
+            *_out = os::Service::make<os::Service::Tag::serviceWithCacheInfo>(
+                    createServiceWithCacheInfo(session->getRootObject(), false));
             return binder::Status::ok();
         }
         default: {
