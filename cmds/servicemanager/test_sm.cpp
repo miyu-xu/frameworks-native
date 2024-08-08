@@ -156,7 +156,7 @@ TEST(AddService, OverwriteExistingService) {
 
     Service outA;
     EXPECT_TRUE(sm->getService2("foo", &outA).isOk());
-    EXPECT_EQ(serviceA, outA.get<Service::Tag::binder>());
+    EXPECT_EQ(serviceA, outA.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinderA;
     EXPECT_TRUE(sm->getService("foo", &outBinderA).isOk());
     EXPECT_EQ(serviceA, outBinderA);
@@ -168,7 +168,7 @@ TEST(AddService, OverwriteExistingService) {
 
     Service outB;
     EXPECT_TRUE(sm->getService2("foo", &outB).isOk());
-    EXPECT_EQ(serviceB, outB.get<Service::Tag::binder>());
+    EXPECT_EQ(serviceB, outB.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinderB;
     EXPECT_TRUE(sm->getService("foo", &outBinderB).isOk());
     EXPECT_EQ(serviceB, outBinderB);
@@ -195,7 +195,7 @@ TEST(GetService, HappyHappy) {
 
     Service out;
     EXPECT_TRUE(sm->getService2("foo", &out).isOk());
-    EXPECT_EQ(service, out.get<Service::Tag::binder>());
+    EXPECT_EQ(service, out.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinder;
     EXPECT_TRUE(sm->getService("foo", &outBinder).isOk());
     EXPECT_EQ(service, outBinder);
@@ -206,7 +206,7 @@ TEST(GetService, NonExistant) {
 
     Service out;
     EXPECT_TRUE(sm->getService2("foo", &out).isOk());
-    EXPECT_EQ(nullptr, out.get<Service::Tag::binder>());
+    EXPECT_EQ(nullptr, out.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinder;
     EXPECT_TRUE(sm->getService("foo", &outBinder).isOk());
     EXPECT_EQ(nullptr, outBinder);
@@ -227,7 +227,7 @@ TEST(GetService, NoPermissionsForGettingService) {
     Service out;
     // returns nullptr but has OK status for legacy compatibility
     EXPECT_TRUE(sm->getService2("foo", &out).isOk());
-    EXPECT_EQ(nullptr, out.get<Service::Tag::binder>());
+    EXPECT_EQ(nullptr, out.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinder;
     EXPECT_TRUE(sm->getService("foo", &outBinder).isOk());
     EXPECT_EQ(nullptr, outBinder);
@@ -257,7 +257,7 @@ TEST(GetService, AllowedFromIsolated) {
 
     Service out;
     EXPECT_TRUE(sm->getService2("foo", &out).isOk());
-    EXPECT_EQ(service, out.get<Service::Tag::binder>());
+    EXPECT_EQ(service, out.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinder;
     EXPECT_TRUE(sm->getService("foo", &outBinder).isOk());
     EXPECT_EQ(service, outBinder);
@@ -289,7 +289,7 @@ TEST(GetService, NotAllowedFromIsolated) {
     Service out;
     // returns nullptr but has OK status for legacy compatibility
     EXPECT_TRUE(sm->getService2("foo", &out).isOk());
-    EXPECT_EQ(nullptr, out.get<Service::Tag::binder>());
+    EXPECT_EQ(nullptr, out.get<Service::Tag::serviceWithCacheInfo>()->service);
     sp<IBinder> outBinder;
     EXPECT_TRUE(sm->getService("foo", &outBinder).isOk());
     EXPECT_EQ(nullptr, outBinder);
@@ -563,4 +563,32 @@ TEST(ServiceNotifications, GetMultipleNotification) {
 
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf", "asdfasdf"));
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf", "asdfasdf"));
+}
+
+TEST(ServiceManager, AddService2WithCacheEnable) {
+    std::string name = "testName";
+    sp<IBinder> binder = getBinder();
+    auto sm = getPermissiveServiceManager();
+
+    EXPECT_TRUE(sm->addService2(name, binder, /*allowIsolated =*/false, /*dumpPriority =*/0,
+                                /*enableClientSideCache=*/true)
+                        .isOk());
+    android::os::Service service;
+    EXPECT_TRUE(sm->getService2(name, &service).isOk());
+
+    EXPECT_TRUE(service.get<Service::Tag::serviceWithCacheInfo>()->isClientSideCacheable);
+}
+
+TEST(ServiceManager, AddService2WithCacheDisable) {
+    std::string name = "testName";
+    sp<IBinder> binder = getBinder();
+    auto sm = getPermissiveServiceManager();
+
+    EXPECT_TRUE(sm->addService2(name, binder, /*allowIsolated =*/false, /*dumpPriority =*/0,
+                                /*enableClientSideCache=*/false)
+                        .isOk());
+    android::os::Service service;
+    EXPECT_TRUE(sm->getService2(name, &service).isOk());
+
+    EXPECT_FALSE(service.get<Service::Tag::serviceWithCacheInfo>()->isClientSideCacheable);
 }
