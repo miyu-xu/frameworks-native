@@ -49,6 +49,12 @@ using ::android::internal::Stability;
 
 namespace android {
 
+#ifdef LIBBINDER_CLIENT_CACHE
+constexpr bool kEnableLibbinderClientCache = true;
+#else
+constexpr bool kEnableLibbinderClientCache = false;
+#endif
+
 #if defined(VENDORSERVICEMANAGER) || defined(__ANDROID_RECOVERY__)
 #define SM_PERFETTO_TRACE_FUNC(...)
 #else
@@ -434,7 +440,13 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
     } else {
         os::ServiceWithCacheInfo serviceWithCache{};
         serviceWithCache.service = tryGetBinder(name, startIfNotFound);
-        serviceWithCache.isClientSideCacheable = false;
+        if (kEnableLibbinderClientCache) {
+            serviceWithCache.isClientSideCacheable =
+                    enableClientSideCacheList.contains(name) ? true : false;
+        } else {
+            serviceWithCache.isClientSideCacheable = false;
+        }
+
         os::Service service =
                 os::Service::make<os::Service::Tag::serviceWithCacheInfo>(serviceWithCache);
         return service;
@@ -594,6 +606,15 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
     }
 
     return Status::ok();
+}
+
+Status ServiceManager::addService2(const std::string& name, const sp<IBinder>& binder,
+                                   bool allowIsolated, int dumpPriority,
+                                   bool enableClientSideCache) {
+    if (kEnableLibbinderClientCache && enableClientSideCache) {
+        enableClientSideCacheList.insert(name);
+    }
+    return addService(name, binder, allowIsolated, dumpPriority);
 }
 
 Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::string>* outList) {

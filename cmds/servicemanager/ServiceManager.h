@@ -20,6 +20,8 @@
 #include <android/os/IClientCallback.h>
 #include <android/os/IServiceCallback.h>
 
+#include <set>
+
 #if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 #include "perfetto/public/te_category_macros.h"
 #endif // !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
@@ -49,6 +51,9 @@ public:
     binder::Status checkService(const std::string& name, os::Service* outService) override;
     binder::Status addService(const std::string& name, const sp<IBinder>& binder,
                               bool allowIsolated, int32_t dumpPriority) override;
+    binder::Status addService2(const std::string& name, const sp<IBinder>& binder,
+                               bool allowIsolated, int dumpPriority,
+                               bool enableClientSideCache) override;
     binder::Status listServices(int32_t dumpPriority, std::vector<std::string>* outList) override;
     binder::Status registerForNotifications(const std::string& name,
                                             const sp<IServiceCallback>& callback) override;
@@ -123,6 +128,7 @@ private:
     ServiceMap mNameToService;
     ServiceCallbackMap mNameToRegistrationCallback;
     ClientCallbackMap mNameToClientCallback;
+    std::set<std::string> enableClientSideCacheList;
 
     std::unique_ptr<Access> mAccess;
 };

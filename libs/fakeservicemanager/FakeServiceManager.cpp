@@ -51,6 +51,12 @@ status_t FakeServiceManager::addService(const String16& name, const sp<IBinder>&
     return NO_ERROR;
 }
 
+status_t FakeServiceManager::addService2(const String16& name, const sp<IBinder>& service,
+                                         bool allowIsolated, int dumpsysFlags,
+                                         bool /*enableClientSideCache*/) {
+    return addService(name, service, allowIsolated, dumpsysFlags);
+}
+
 Vector<String16> FakeServiceManager::listServices(int /*dumpsysFlags*/) {
     std::lock_guard<std::mutex> l(mMutex);
 
