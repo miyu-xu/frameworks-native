@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <sys/socket.h>
 #define LOG_TAG "ServiceManagerCppClient"
 
 #include <binder/IServiceManager.h>
@@ -24,14 +25,19 @@
 #include <chrono>
 #include <condition_variable>
 
+#include <FdTrigger.h>
+#include <RpcSocketAddress.h>
 #include <android-base/properties.h>
+#include <android/os/BnAccessor.h>
 #include <android/os/BnServiceCallback.h>
+#include <android/os/BnServiceManager.h>
 #include <android/os/IAccessor.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
+#include <binder/RpcSession.h>
 #include <utils/String8.h>
-
+#include <variant>
 #ifndef __ANDROID_VNDK__
 #include <binder/IPermissionController.h>
 #endif
@@ -149,8 +155,140 @@ protected:
     }
 };
 
+class AccessorProvider {
+public:
+    AccessorProvider(std::function<sp<IBinder>(const String16& name)>&& provider,
+                     std::function<void()>&& onDelete)
+          : mProvider(provider), mOnDelete(onDelete) {}
+    ~AccessorProvider() {
+        if (mOnDelete) {
+            mOnDelete();
+        }
+    }
+    sp<IBinder> provider(const String16& name) { return mProvider(name); }
+
+private:
+    AccessorProvider() = delete;
+
+    std::function<sp<IBinder>(const String16& name)> mProvider;
+    std::function<void()> mOnDelete;
+};
+
+class AccessorProviderEntry {
+public:
+    AccessorProviderEntry(std::shared_ptr<AccessorProvider> provider, void* cookie)
+          : mProvider(provider), mCookie(cookie) {}
+    std::shared_ptr<AccessorProvider> mProvider;
+    void* mCookie;
+
+private:
+    AccessorProviderEntry() = delete;
+};
+
 [[clang::no_destroy]] static std::once_flag gSmOnce;
 [[clang::no_destroy]] static sp<IServiceManager> gDefaultServiceManager;
+[[clang::no_destroy]] static std::mutex gAccessorProvidersMutex;
+[[clang::no_destroy]] static std::vector<AccessorProviderEntry> gAccessorProviders;
+
+class LocalAccessor : public android::os::BnAccessor {
+public:
+    LocalAccessor(const std::string& instance, RpcSocketAddressProvider&& connectionInfoProvider,
+                  std::function<void()>&& onDelete)
+          : mInstance(instance),
+            mConnectionInfoProvider(connectionInfoProvider),
+            mOnDelete(onDelete) {
+        LOG_ALWAYS_FATAL_IF(!mConnectionInfoProvider,
+                            "LocalAccessor object needs a valid connection info provider");
+    }
+
+    ~LocalAccessor() {
+        ALOGI("LocalAccessor for %s being destructed", mInstance.c_str());
+        if (mOnDelete) mOnDelete();
+    }
+
+    ::android::binder::Status addConnection(
+            std::optional<::android::os::ParcelFileDescriptor>* outFd, String16* outErrorMsg) {
+        using android::os::IAccessor;
+        ALOGI("Setting up the client socket connection for %s", mInstance.c_str());
+        sockaddr_storage addrStorage;
+        std::unique_ptr<FdTrigger> trigger = FdTrigger::make();
+        RpcTransportFd fd;
+        mConnectionInfoProvider(String16(mInstance.c_str()),
+                                reinterpret_cast<sockaddr*>(&addrStorage),
+                                sizeof(sockaddr_storage));
+        status_t status = UNKNOWN_ERROR;
+        if (addrStorage.ss_family == AF_VSOCK) {
+            sockaddr_vm* addr = reinterpret_cast<sockaddr_vm*>(&addrStorage);
+            status = RpcSession::singleSocketConnection(VsockSocketAddress(addr->svm_cid,
+                                                                           addr->svm_port),
+                                                        trigger.get(), &fd);
+        } else if (addrStorage.ss_family == AF_UNIX) {
+            sockaddr_un* addr = reinterpret_cast<sockaddr_un*>(&addrStorage);
+            status = RpcSession::singleSocketConnection(UnixSocketAddress(addr->sun_path),
+                                                        trigger.get(), &fd);
+        } else {
+            ALOGE("Unsupported socket family type %d, or the ConnectionInfoProvider failed to find "
+                  "connection information.",
+                  addrStorage.ss_family);
+            status = UNKNOWN_ERROR;
+        }
+        if (status == OK) {
+            ALOGI("Successfully created the client socket connection for %s.", mInstance.c_str());
+            *outFd = os::ParcelFileDescriptor(std::move(fd.fd));
+            return Status::ok();
+        } else {
+            const std::string error = "Failed to connect to socket for " + mInstance +
+                    " with status: " + statusToString(status);
+            ALOGE("%s", error.c_str());
+            *outErrorMsg = String16(error.c_str());
+            return Status::fromServiceSpecificError(IAccessor::ERROR_FAILED_TO_CONNECT_TO_SOCKET);
+        }
+    }
+
+    ::android::binder::Status getInstanceName(String16* instance) {
+        if (instance == nullptr) {
+            return Status::fromExceptionCode(Status::Exception::EX_NULL_POINTER);
+        }
+        *instance = String16(mInstance.c_str());
+        return Status::ok();
+    }
+
+private:
+    LocalAccessor() = delete;
+    std::string mInstance;
+    RpcSocketAddressProvider mConnectionInfoProvider;
+    std::function<void()> mOnDelete;
+};
+
+android::binder::Status getInjectedAccessor(const std::string& name,
+                                            android::os::Service* service) {
+    std::vector<AccessorProviderEntry> copiedProviders;
+    {
+        std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
+        for (const auto& provider : gAccessorProviders) {
+            copiedProviders.push_back(provider);
+        }
+    }
+
+    // Unlocked to call the providers. This requires the providers to be
+    // threadsafe and not contain any references to objects that could be
+    // deleted.
+    for (const auto& provider : copiedProviders) {
+        sp<IBinder> binder = provider.mProvider->provider(String16(name.c_str()));
+        if (binder == nullptr) continue;
+        status_t status = validateAccessor(String16(name.c_str()), binder);
+        if (status != OK) {
+            ALOGE("A provider returned a binder that is not an IAccessor for instance %s. Status: "
+                  "%s",
+                  name.c_str(), statusToString(status).c_str());
+            return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+        }
+        *service = os::Service::make<os::Service::Tag::accessor>(binder);
+        return android::binder::Status::ok();
+    }
+
+    return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+}
 
 sp<IServiceManager> defaultServiceManager()
 {
@@ -171,6 +309,95 @@ void setDefaultServiceManager(const sp<IServiceManager>& sm) {
     if (!called) {
         LOG_ALWAYS_FATAL("setDefaultServiceManager() called after defaultServiceManager().");
     }
+}
+
+std::weak_ptr<AccessorProvider> addAccessorProvider(
+        std::function<sp<IBinder>(const String16& name)>&& providerCallback,
+        std::function<void()>&& onDelete, void* cookie) {
+    std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
+    // make sure this cookie hasn't been used before if it's not null to prevent
+    // double free/user after free
+    if (cookie) {
+        for (const auto& entry : gAccessorProviders) {
+            if (cookie == entry.mCookie) {
+                ALOGE("Attempting to addAccessorProvider with a non-null cookie that is already "
+                      "in-use. This is not allowed as the existing AccessorProvider already owns "
+                      "the cookie object and is responsible for deleting it. Please use a new "
+                      "cookie object for this new AccessorProvider.");
+                return std::weak_ptr<AccessorProvider>();
+            }
+        }
+    }
+
+    std::shared_ptr<AccessorProvider> provider =
+            std::make_shared<AccessorProvider>(std::move(providerCallback), std::move(onDelete));
+    gAccessorProviders.push_back(AccessorProviderEntry(provider, cookie));
+
+    return provider;
+}
+
+status_t removeAccessorProvider(std::weak_ptr<AccessorProvider> wProvider, void* cookie) {
+    std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
+    std::shared_ptr<AccessorProvider> provider = wProvider.lock();
+    if (provider) {
+        size_t sizeBefore = gAccessorProviders.size();
+        gAccessorProviders.erase(std::remove_if(gAccessorProviders.begin(),
+                                                gAccessorProviders.end(),
+                                                [&](AccessorProviderEntry entry) {
+                                                    return entry.mProvider == provider &&
+                                                            entry.mCookie == cookie;
+                                                }),
+                                 gAccessorProviders.end());
+        if (sizeBefore != gAccessorProviders.size()) {
+            return OK;
+        }
+    }
+    ALOGE("Failed to find an AccessorProvider for removeAccessorProvider");
+    return NAME_NOT_FOUND;
+}
+
+status_t validateAccessor(const String16& instance, sp<IBinder> binder) {
+    if (binder == nullptr) {
+        ALOGE("Binder is null");
+        return BAD_VALUE;
+    }
+    sp<IAccessor> accessor = checked_interface_cast<IAccessor>(binder);
+    if (accessor == nullptr) {
+        ALOGE("This binder for %s is not an IAccessor binder", String8(instance).c_str());
+        return BAD_TYPE;
+    }
+    String16 reportedInstance;
+    Status status = accessor->getInstanceName(&reportedInstance);
+    if (status.isOk()) {
+        if (reportedInstance == instance) {
+            return OK;
+        } else {
+            ALOGE("Instance %s doesn't match the Accessor's instance of %s",
+                  String8(instance).c_str(), String8(reportedInstance).c_str());
+            return NAME_NOT_FOUND;
+        }
+    } else {
+        ALOGE("Failed to validate the binder being used to create a new ARpc_Accessor for %s with "
+              "status: %s",
+              String8(instance).c_str(), status.toString8().c_str());
+        return NAME_NOT_FOUND;
+    }
+}
+
+sp<IBinder> createAccessor(const String16& instance,
+                           RpcSocketAddressProvider&& connectionInfoProvider,
+                           std::function<void()>&& onDelete) {
+    // Try to create a new accessor
+    if (!connectionInfoProvider) {
+        ALOGE("Could not find an Accessor for %s and no ConnectionInfoProvider provided to "
+              "create a new one",
+              String8(instance).c_str());
+        return nullptr;
+    }
+    sp<IBinder> binder =
+            sp<LocalAccessor>::make(String8(instance).c_str(), std::move(connectionInfoProvider),
+                                    std::move(onDelete));
+    return binder;
 }
 
 #if !defined(__ANDROID_VNDK__)
