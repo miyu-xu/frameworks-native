@@ -49,6 +49,9 @@ public:
     binder::Status checkService(const std::string& name, os::Service* outService) override;
     binder::Status addService(const std::string& name, const sp<IBinder>& binder,
                               bool allowIsolated, int32_t dumpPriority) override;
+    binder::Status addService2(const std::string& name, const sp<IBinder>& binder,
+                               bool allowIsolated, int dumpPriority,
+                               bool enableClientSideCache) override;
     binder::Status listServices(int32_t dumpPriority, std::vector<std::string>* outList) override;
     binder::Status registerForNotifications(const std::string& name,
                                             const sp<IServiceCallback>& callback) override;
@@ -87,6 +90,7 @@ private:
         bool hasClients = false; // notifications sent on true -> false.
         bool guaranteeClient = false; // forces the client check to true
         Access::CallingContext ctx;   // process that originally registers this
+        bool enableClientSideCaching = false; // Tells libbinder to cache binder
 
         // the number of clients of the service, including servicemanager itself
         ssize_t getNodeStrongRefCount();
@@ -113,6 +117,7 @@ private:
     // this updates the iterator to the next location
     void removeClientCallback(const wp<IBinder>& who, ClientCallbackMap::iterator* it);
 
+    bool isClientSideCacheable(const std::string& name);
     os::Service tryGetService(const std::string& name, bool startIfNotFound);
     sp<IBinder> tryGetBinder(const std::string& name, bool startIfNotFound);
     binder::Status canAddService(const Access::CallingContext& ctx, const std::string& name,

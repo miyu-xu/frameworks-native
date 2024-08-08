@@ -109,6 +109,9 @@ public:
     binder::Status checkService(const ::std::string& name, os::Service* out) override;
     binder::Status addService(const ::std::string& name, const sp<IBinder>& service,
                               bool allowIsolated, int32_t dumpPriority) override;
+    binder::Status addService2(const ::std::string& name, const sp<IBinder>& service,
+                               bool allowIsolated, int dumpsysPriority,
+                               bool enableClientSideCache) override;
     binder::Status listServices(int32_t dumpPriority,
                                 ::std::vector<::std::string>* _aidl_return) override;
     binder::Status registerForNotifications(const ::std::string& name,

@@ -25,7 +25,7 @@ parcelable ServiceWithCacheInfo {
     /**
      * IBinder to service
      */
-    IBinder service;
+    @nullable IBinder service;
     /**
      * boolean if the IBinder can be cached by client.
      */

@@ -419,6 +419,14 @@ Status ServiceManager::checkService(const std::string& name, os::Service* outSer
     return Status::ok();
 }
 
+bool ServiceManager::isClientSideCacheable(const std::string& name) {
+    Service* service = nullptr;
+    if (auto it = mNameToService.find(name); it != mNameToService.end()) {
+        return (it->second).enableClientSideCaching;
+    }
+    return false;
+}
+
 os::Service ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
     std::optional<std::string> accessorName;
 #ifndef VENDORSERVICEMANAGER
@@ -434,7 +442,7 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
     } else {
         os::ServiceWithCacheInfo serviceWithCache{};
         serviceWithCache.service = tryGetBinder(name, startIfNotFound);
-        serviceWithCache.isClientSideCacheable = false;
+        serviceWithCache.isClientSideCacheable = isClientSideCacheable(name);
         os::Service service =
                 os::Service::make<os::Service::Tag::serviceWithCacheInfo>(serviceWithCache);
         return service;
@@ -501,6 +509,12 @@ bool isValidServiceName(const std::string& name) {
 }
 
 Status ServiceManager::addService(const std::string& name, const sp<IBinder>& binder, bool allowIsolated, int32_t dumpPriority) {
+    return addService2(name, binder, allowIsolated, dumpPriority, /*enableClientSideCache=*/false);
+}
+
+Status ServiceManager::addService2(const std::string& name, const sp<IBinder>& binder,
+                                   bool allowIsolated, int dumpPriority,
+                                   bool enableClientSideCaching) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
@@ -578,6 +592,7 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
             .hasClients = prevClients, // see b/279898063, matters if existing callbacks
             .guaranteeClient = false,
             .ctx = ctx,
+            .enableClientSideCaching = enableClientSideCaching,
     };
 
     if (auto it = mNameToRegistrationCallback.find(name); it != mNameToRegistrationCallback.end()) {
