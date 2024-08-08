@@ -589,6 +589,19 @@ status_t RpcSession::setupSocketClient(const RpcSocketAddress& addr) {
 status_t RpcSession::setupOneSocketConnection(const RpcSocketAddress& addr,
                                               const std::vector<uint8_t>& sessionId,
                                               bool incoming) {
+    RpcTransportFd transportFd;
+    status_t status = singleSocketConnection(addr, mShutdownTrigger.get(), &transportFd);
+    if (status == OK) {
+        return initAndAddConnection(std::move(transportFd), sessionId, incoming);
+    } else {
+        return status;
+    }
+}
+
+status_t RpcSession::singleSocketConnection(const RpcSocketAddress& addr,
+                                            FdTrigger* shutdownTrigger, RpcTransportFd* outFd) {
+    LOG_ALWAYS_FATAL_IF(outFd == nullptr,
+                        "There is no reason to call this function without an outFd");
     for (size_t tries = 0; tries < 5; tries++) {
         if (tries > 0) usleep(10000);
 
@@ -620,11 +633,13 @@ status_t RpcSession::setupOneSocketConnection(const RpcSocketAddress& addr,
             if (connErrno == EAGAIN || connErrno == EINPROGRESS) {
                 // For non-blocking sockets, connect() may return EAGAIN (for unix domain socket) or
                 // EINPROGRESS (for others). Call poll() and getsockopt() to get the error.
-                status_t pollStatus = mShutdownTrigger->triggerablePoll(transportFd, POLLOUT);
-                if (pollStatus != OK) {
-                    ALOGE("Could not POLLOUT after connect() on non-blocking socket: %s",
-                          statusToString(pollStatus).c_str());
-                    return pollStatus;
+                if (shutdownTrigger) {
+                    status_t pollStatus = shutdownTrigger->triggerablePoll(transportFd, POLLOUT);
+                    if (pollStatus != OK) {
+                        ALOGE("Could not POLLOUT after connect() on non-blocking socket: %s",
+                              statusToString(pollStatus).c_str());
+                        return pollStatus;
+                    }
                 }
                 // Set connErrno to the errno that connect() would have set if the fd were blocking.
                 socklen_t connErrnoLen = sizeof(connErrno);
@@ -654,7 +669,8 @@ status_t RpcSession::setupOneSocketConnection(const RpcSocketAddress& addr,
         LOG_RPC_DETAIL("Socket at %s client with fd %d", addr.toString().c_str(),
                        transportFd.fd.get());
 
-        return initAndAddConnection(std::move(transportFd), sessionId, incoming);
+        *outFd = std::move(transportFd);
+        return OK;
     }
 
     ALOGE("Ran out of retries to connect to %s", addr.toString().c_str());
