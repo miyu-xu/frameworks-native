@@ -365,26 +365,57 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
         session->setMaxOutgoingConnections(options.numOutgoingConnections);
         session->setFileDescriptorTransportMode(options.clientFileDescriptorTransportMode);
 
+        sockaddr_storage addr{};
+        socklen_t addrLen = 0;
+
         switch (socketType) {
-            case SocketType::PRECONNECTED:
+            case SocketType::PRECONNECTED: {
+                sockaddr_un addr_un{};
+                addr_un.sun_family = AF_UNIX;
+                strcpy(addr_un.sun_path, serverConfig.addr.c_str());
+                addr = *reinterpret_cast<sockaddr_storage*>(&addr_un);
+                addrLen = sizeof(sockaddr_un);
+
                 status = session->setupPreconnectedClient({}, [=]() {
                     return connectTo(UnixSocketAddress(serverConfig.addr.c_str()));
                 });
-                break;
+            } break;
             case SocketType::UNIX_RAW:
-            case SocketType::UNIX:
+            case SocketType::UNIX: {
+                sockaddr_un addr_un{};
+                addr_un.sun_family = AF_UNIX;
+                strcpy(addr_un.sun_path, serverConfig.addr.c_str());
+                addr = *reinterpret_cast<sockaddr_storage*>(&addr_un);
+                addrLen = sizeof(sockaddr_un);
+
                 status = session->setupUnixDomainClient(serverConfig.addr.c_str());
-                break;
+            } break;
             case SocketType::UNIX_BOOTSTRAP:
                 status = session->setupUnixDomainSocketBootstrapClient(
                         unique_fd(dup(bootstrapClientFd.get())));
                 break;
-            case SocketType::VSOCK:
+            case SocketType::VSOCK: {
+                sockaddr_vm addr_vm{
+                        .svm_family = AF_VSOCK,
+                        .svm_port = static_cast<unsigned int>(serverInfo.port),
+                        .svm_cid = VMADDR_CID_LOCAL,
+                };
+                addr = *reinterpret_cast<sockaddr_storage*>(&addr_vm);
+                addrLen = sizeof(sockaddr_vm);
+
                 status = session->setupVsockClient(VMADDR_CID_LOCAL, serverInfo.port);
-                break;
-            case SocketType::INET:
-                status = session->setupInetClient("127.0.0.1", serverInfo.port);
-                break;
+            } break;
+            case SocketType::INET: {
+                const std::string ip_addr = "127.0.0.1";
+                sockaddr_in addr_in{};
+                addr_in.sin_family = AF_INET;
+                addr_in.sin_port = htons(serverInfo.port);
+                inet_aton(ip_addr.c_str(), &addr_in.sin_addr);
+                addr = *reinterpret_cast<sockaddr_storage*>(&addr_in);
+                addrLen = sizeof(sockaddr_in);
+
+                status = session->setupInetClient(ip_addr.c_str(), serverInfo.port);
+            } break;
             case SocketType::TIPC:
                 status = session->setupPreconnectedClient({}, [=]() {
 #ifdef BINDER_RPC_TO_TRUSTY_TEST
@@ -413,7 +444,7 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
             break;
         }
         LOG_ALWAYS_FATAL_IF(status != OK, "Could not connect: %s", statusToString(status).c_str());
-        ret->sessions.push_back({session, session->getRootObject()});
+        ret->sessions.push_back({session, session->getRootObject(), addr, addrLen});
     }
     return ret;
 }
@@ -1126,6 +1157,120 @@ TEST_P(BinderRpc, Fds) {
     }
     ASSERT_EQ(beforeFds, countFds()) << (system("ls -l /proc/self/fd/"), "fd leak?");
 }
+
+// TODO need to add IServiceManager.cpp/.h to libbinder_no_kernel
+#ifdef BINDER_WITH_KERNEL_IPC
+
+static inline bool doesAccessorSupportSocket(SocketType type, bool serverSingleThreaded,
+                                             RpcSecurity rpcSecurity) {
+    // This blocks on android::FdTrigger::triggerablePoll when attempting to set
+    // up the client RpcSession
+    if (serverSingleThreaded) return false;
+    // TLS is not supported right now
+    if (rpcSecurity == RpcSecurity::TLS) return false;
+
+    return type == SocketType::VSOCK || type == SocketType::PRECONNECTED ||
+            type == SocketType::UNIX || type == SocketType::UNIX_RAW || type == SocketType::INET;
+}
+
+TEST_P(BinderRpc, InjectAndGetServiceHappyPath) {
+    if (!doesAccessorSupportSocket(socketType(), serverSingleThreaded(), rpcSecurity()))
+        GTEST_SKIP();
+
+    constexpr size_t kNumThreads = 10;
+    const String16 kInstanceName("super.cool.service/better_than_default");
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    auto receipt = addAccessorProvider([&](const String16& name) -> sp<IBinder> {
+        return createAccessor(name,
+                              [&](const String16& name, sockaddr* outAddr, socklen_t addrSize) {
+                                  if (outAddr == nullptr ||
+                                      addrSize < proc.proc->sessions[0].addrLen) {
+                                      GTEST_FAIL() << "Callback received invalid arguments!";
+                                      return;
+                                  }
+                                  if (name == kInstanceName) {
+                                      if (proc.proc->sessions[0].addr.ss_family == AF_UNIX) {
+                                          sockaddr_un* un = reinterpret_cast<sockaddr_un*>(
+                                                  &proc.proc->sessions[0].addr);
+                                          ALOGE("inside callback: %s", un->sun_path);
+                                      }
+                                      std::memcpy(outAddr, &proc.proc->sessions[0].addr,
+                                                  proc.proc->sessions[0].addrLen);
+                                  }
+                              });
+    });
+
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    sp<IBinderRpcTest> service = checked_interface_cast<IBinderRpcTest>(binder);
+    EXPECT_NE(service, nullptr);
+
+    sp<IBinder> out;
+    EXPECT_OK(service->repeatBinder(binder, &out));
+    EXPECT_EQ(binder, out);
+
+    out.clear();
+    binder.clear();
+    service.clear();
+
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+
+    // Need to give the server some time to delete its RpcSession after our last
+    // reference is dropped, closing the connection.
+    usleep(10000);
+}
+
+TEST_P(BinderRpc, InjectNoAccessorProvided) {
+    if (!doesAccessorSupportSocket(socketType(), serverSingleThreaded(), rpcSecurity()))
+        GTEST_SKIP();
+
+    const String16 kInstanceName("doesnt_matter_nothing_checks");
+
+    bool isProviderDeleted = false;
+
+    auto receipt = addAccessorProvider([&](const String16&) -> sp<IBinder> { return nullptr; });
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    EXPECT_EQ(binder, nullptr);
+
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+}
+
+TEST_P(BinderRpc, InjectNoSockaddrProvided) {
+    if (!doesAccessorSupportSocket(socketType(), serverSingleThreaded(), rpcSecurity()))
+        GTEST_SKIP();
+    constexpr size_t kNumThreads = 10;
+    const String16 kInstanceName("super.cool.service/better_than_default");
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    bool isProviderDeleted = false;
+    bool isAccessorDeleted = false;
+
+    auto receipt = addAccessorProvider([&](const String16& name) -> sp<IBinder> {
+        return createAccessor(name, [&](const String16&, sockaddr*, socklen_t) {
+            // don't fill in outAddr
+        });
+    });
+
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    EXPECT_EQ(binder, nullptr);
+
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+}
+
+#endif // BINDER_WITH_KERNEL_IPC
 
 #ifdef BINDER_RPC_TO_TRUSTY_TEST
 

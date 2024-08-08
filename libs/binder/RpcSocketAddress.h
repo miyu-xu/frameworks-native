@@ -113,4 +113,10 @@ private:
     unsigned int mPort;
 };
 
+/**
+ * Connects to a single socket and produces a RpcTransportFd.
+ */
+status_t singleSocketConnection(const RpcSocketAddress& address, FdTrigger* shutdownTrigger,
+                                RpcTransportFd* outFd);
+
 } // namespace android

@@ -46,7 +46,7 @@ binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& na
                                                          os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->getService2(name, &service);
-    toBinderService(service, _out);
+    toBinderService(name, service, _out);
     return status;
 }
 
@@ -54,13 +54,30 @@ binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& n
                                                           os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
-    toBinderService(service, _out);
+    toBinderService(name, service, _out);
     return status;
 }
 
-void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
+void BackendUnifiedServiceManager::toBinderService(const ::std::string& name, const os::Service& in,
+                                                   os::Service* _out) {
     switch (in.getTag()) {
         case os::Service::Tag::binder: {
+            if (in.get<os::Service::Tag::binder>() == nullptr) {
+                // failed to find a service. Check to see if we have any local
+                // injected Accessors for this service.
+                os::Service accessor;
+                binder::Status status = getInjectedAccessor(name, &accessor);
+                if (status.isOk() && accessor.getTag() == os::Service::Tag::accessor &&
+                    accessor.get<os::Service::Tag::accessor>() != nullptr) {
+                    ALOGI("Found local injected service for %s, will attempt to create connection",
+                          name.c_str());
+                    // Call this again using the accessor Service to get the real
+                    // service's binder into _out
+                    toBinderService(name, accessor, _out);
+                    return;
+                }
+            }
+
             *_out = in;
             break;
         }
