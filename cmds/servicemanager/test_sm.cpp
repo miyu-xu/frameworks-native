@@ -44,6 +44,12 @@ using testing::ElementsAre;
 using testing::NiceMock;
 using testing::Return;
 
+#ifdef LIBBINDER_CLIENT_CACHE
+constexpr bool kEnableLibbinderClientCache = true;
+#else
+constexpr bool kEnableLibbinderClientCache = false;
+#endif
+
 static sp<IBinder> getBinder() {
     class LinkableBinder : public BBinder {
         android::status_t linkToDeath(const sp<DeathRecipient>&, void*, uint32_t) override {
@@ -563,4 +569,39 @@ TEST(ServiceNotifications, GetMultipleNotification) {
 
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf", "asdfasdf"));
     EXPECT_THAT(cb->registrations, ElementsAre("asdfasdf", "asdfasdf"));
+}
+
+TEST(ServiceManager, AddService2WithCacheEnable) {
+    if (!kEnableLibbinderClientCache) {
+        GTEST_SKIP() << "Not valid without LIBBINDER_CLIENT_CACHE flag enabled";
+    }
+
+    std::string name = "testName";
+    sp<IBinder> binder = getBinder();
+    auto sm = getPermissiveServiceManager();
+
+    EXPECT_TRUE(sm->addService2(name, binder, /*allowIsolated =*/false, /*dumpPriority =*/0,
+                                /*enableClientSideCache=*/true)
+                        .isOk());
+    android::os::Service service;
+    EXPECT_TRUE(sm->getService2(name, &service).isOk());
+
+    EXPECT_TRUE(service.get<Service::Tag::serviceWithCacheInfo>()->isClientSideCacheable);
+}
+
+TEST(ServiceManager, AddService2WithCacheDisable) {
+    if (!kEnableLibbinderClientCache) {
+        GTEST_SKIP() << "Not valid without LIBBINDER_CLIENT_CACHE flag enabled";
+    }
+    std::string name = "testName";
+    sp<IBinder> binder = getBinder();
+    auto sm = getPermissiveServiceManager();
+
+    EXPECT_TRUE(sm->addService2(name, binder, /*allowIsolated =*/false, /*dumpPriority =*/0,
+                                /*enableClientSideCache=*/false)
+                        .isOk());
+    android::os::Service service;
+    EXPECT_TRUE(sm->getService2(name, &service).isOk());
+
+    EXPECT_FALSE(service.get<Service::Tag::serviceWithCacheInfo>()->isClientSideCacheable);
 }
