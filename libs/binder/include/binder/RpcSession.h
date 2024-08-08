@@ -226,6 +226,14 @@ public:
      */
     LIBBINDER_EXPORTED void setSessionSpecificRoot(const sp<IBinder>& sessionSpecificRoot);
 
+    /**
+     * Connects to a single socket and produces a RpcTransportFd.
+     * Only useful in libbinder's LocalAccessor.
+     */
+    LIBBINDER_EXPORTED static status_t singleSocketConnection(const RpcSocketAddress& address,
+                                                              FdTrigger* shutdownTrigger,
+                                                              RpcTransportFd* outFd);
+
 private:
     friend sp<RpcSession>;
     friend RpcServer;
