@@ -434,7 +434,8 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
     } else {
         os::ServiceWithCacheInfo serviceWithCache{};
         serviceWithCache.service = tryGetBinder(name, startIfNotFound);
-        serviceWithCache.isClientSideCacheable = false;
+        serviceWithCache.isClientSideCacheable =
+                enableClientSideCacheList.contains(name) ? true : false;
         os::Service service =
                 os::Service::make<os::Service::Tag::serviceWithCacheInfo>(serviceWithCache);
         return service;
@@ -593,6 +594,15 @@ Status ServiceManager::addService(const std::string& name, const sp<IBinder>& bi
     }
 
     return Status::ok();
+}
+
+Status ServiceManager::addService2(const std::string& name, const sp<IBinder>& binder,
+                                   bool allowIsolated, int dumpPriority,
+                                   bool enableClientSideCache) {
+    if (enableClientSideCache) {
+        enableClientSideCacheList.insert(name);
+    }
+    return addService(name, binder, allowIsolated, dumpPriority);
 }
 
 Status ServiceManager::listServices(int32_t dumpPriority, std::vector<std::string>* outList) {
