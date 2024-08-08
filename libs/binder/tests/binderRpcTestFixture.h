@@ -35,6 +35,8 @@ public:
     struct SessionInfo {
         sp<RpcSession> session;
         sp<IBinder> root;
+        sockaddr_storage addr;
+        socklen_t addrLen;
     };
 
     // client session objects associated with other process
