@@ -136,6 +136,13 @@ public:
         // We can't send BpBinder for RPC over regular binder.
         return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
     }
+
+    android::binder::Status addService2(const std::string&, const android::sp<android::IBinder>&,
+                                        bool, int32_t, bool) override {
+        // We can't send BpBinder for RPC over regular binder.
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+
     android::binder::Status listServices(int32_t dumpPriority,
                                          std::vector<std::string>* _aidl_return) override {
         return mImpl->listServices(dumpPriority, _aidl_return);

@@ -94,6 +94,8 @@ public:
     sp<IBinder> checkService(const String16& name) const override;
     status_t addService(const String16& name, const sp<IBinder>& service,
                         bool allowIsolated, int dumpsysPriority) override;
+    status_t addService2(const String16& name, const sp<IBinder>& service, bool allowIsolated,
+                         int dumpsysPriority, bool enableClientSideCache) override;
     Vector<String16> listServices(int dumpsysPriority) override;
     sp<IBinder> waitForService(const String16& name16) override;
     bool isDeclared(const String16& name) override;
@@ -559,6 +561,14 @@ status_t CppBackendShim::addService(const String16& name, const sp<IBinder>& ser
                                     bool allowIsolated, int dumpsysPriority) {
     Status status = mUnifiedServiceManager->addService(String8(name).c_str(), service,
                                                        allowIsolated, dumpsysPriority);
+    return status.exceptionCode();
+}
+status_t CppBackendShim::addService2(const String16& name, const sp<IBinder>& service,
+                                     bool allowIsolated, int dumpsysPriority,
+                                     bool enableClientSideCache) {
+    Status status =
+            mUnifiedServiceManager->addService2(String8(name).c_str(), service, allowIsolated,
+                                                dumpsysPriority, enableClientSideCache);
     return status.exceptionCode();
 }
 

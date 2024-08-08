@@ -94,6 +94,13 @@ interface IServiceManager {
         boolean allowIsolated, int dumpPriority);
 
     /**
+     * Place a new @a service called @a name into the service
+     * manager. Warning: Do NOT enable cache for dynamic services.
+     */
+    void addService2(@utf8InCpp String name, IBinder service,
+        boolean allowIsolated, int dumpPriority, boolean enableClientSideCache);
+
+    /**
      * Return a list of all currently running services.
      */
     @utf8InCpp String[] listServices(int dumpPriority);

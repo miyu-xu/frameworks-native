@@ -86,6 +86,14 @@ public:
                                 int dumpsysFlags = DUMP_FLAG_PRIORITY_DEFAULT) = 0;
 
     /**
+     * Register a service.
+     */
+    virtual status_t addService2(const String16& name, const sp<IBinder>& service,
+                                 bool allowIsolated = false,
+                                 int dumpsysPriority = DUMP_FLAG_PRIORITY_DEFAULT,
+                                 bool enableClientSideCache = false) = 0;
+
+    /**
      * Return list of all existing services.
      */
     // NOLINTNEXTLINE(google-default-arguments)
