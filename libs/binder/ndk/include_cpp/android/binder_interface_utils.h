@@ -231,7 +231,7 @@ class BpCInterface : public INTERFACE {
         return AIBinder_dump(asBinder().get(), fd, args, numArgs);
     }
 
-   private:
+   protected:
     SpAIBinder mBinder;
 };
 
