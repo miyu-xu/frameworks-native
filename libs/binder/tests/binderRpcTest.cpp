@@ -365,6 +365,9 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
         session->setMaxOutgoingConnections(options.numOutgoingConnections);
         session->setFileDescriptorTransportMode(options.clientFileDescriptorTransportMode);
 
+        sockaddr_storage addr{};
+        socklen_t addrLen = 0;
+
         switch (socketType) {
             case SocketType::PRECONNECTED:
                 status = session->setupPreconnectedClient({}, [=]() {
@@ -379,9 +382,17 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
                 status = session->setupUnixDomainSocketBootstrapClient(
                         unique_fd(dup(bootstrapClientFd.get())));
                 break;
-            case SocketType::VSOCK:
+            case SocketType::VSOCK: {
+                sockaddr_vm addr_vm{
+                        .svm_family = AF_VSOCK,
+                        .svm_port = static_cast<unsigned int>(serverInfo.port),
+                        .svm_cid = VMADDR_CID_LOCAL,
+                };
+                addr = *reinterpret_cast<sockaddr_storage*>(&addr_vm);
+                addrLen = sizeof(sockaddr_vm);
+
                 status = session->setupVsockClient(VMADDR_CID_LOCAL, serverInfo.port);
-                break;
+            } break;
             case SocketType::INET:
                 status = session->setupInetClient("127.0.0.1", serverInfo.port);
                 break;
@@ -413,7 +424,7 @@ std::unique_ptr<ProcessSession> BinderRpc::createRpcTestSocketServerProcessEtc(
             break;
         }
         LOG_ALWAYS_FATAL_IF(status != OK, "Could not connect: %s", statusToString(status).c_str());
-        ret->sessions.push_back({session, session->getRootObject()});
+        ret->sessions.push_back({session, session->getRootObject(), addr, addrLen});
     }
     return ret;
 }
@@ -1125,6 +1136,221 @@ TEST_P(BinderRpc, Fds) {
         ASSERT_EQ(OK, proc.rootBinder->pingBinder());
     }
     ASSERT_EQ(beforeFds, countFds()) << (system("ls -l /proc/self/fd/"), "fd leak?");
+}
+
+static inline bool doesAccessorSupportSocket(SocketType type) {
+    return type == SocketType::VSOCK;
+}
+
+TEST_P(BinderRpc, InjectAndGetServiceHappyPath) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+
+    constexpr size_t kNumThreads = 10;
+    const String16 kInstanceName("super.cool.service/better_than_default");
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    bool isProviderDeleted = false;
+    bool isAccessorDeleted = false;
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(&isProviderDeleted);
+    auto receipt = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name,
+                        [&](const String16& name, sockaddr* outAddr, socklen_t addrSize) {
+                            if (outAddr == nullptr || addrSize < proc.proc->sessions[0].addrLen) {
+                                GTEST_FAIL() << "Callback received invalid arguments!";
+                                return;
+                            }
+                            if (name == kInstanceName) {
+                                *outAddr =
+                                        *reinterpret_cast<sockaddr*>(&proc.proc->sessions[0].addr);
+                            }
+                        },
+                        [&]() { isAccessorDeleted = true; });
+            },
+            [&]() { isProviderDeleted = true; }, cookie);
+
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    sp<IBinderRpcTest> service = checked_interface_cast<IBinderRpcTest>(binder);
+    EXPECT_NE(service, nullptr);
+
+    sp<IBinder> out;
+    EXPECT_OK(service->repeatBinder(binder, &out));
+    EXPECT_EQ(binder, out);
+
+    // The provider should stick around
+    EXPECT_FALSE(isProviderDeleted);
+    // The Accessor is attached to the service's binder
+    EXPECT_FALSE(isAccessorDeleted);
+
+    status_t status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+    EXPECT_TRUE(isProviderDeleted);
+
+    out.clear();
+    binder.clear();
+    service.clear();
+
+    EXPECT_TRUE(isAccessorDeleted);
+
+    // TODO why is this necessary? Is something here being leaked?
+    // The test fails in ~BinderRpcTestProcessSession because
+    // remoteCounts.size() [2] != proc->sessions.size() [1]
+    // Is it because we have set up another connection that
+    // BinderRpcTestProcessSession doesn't know about?
+    proc.forceShutdown();
+}
+
+TEST_P(BinderRpc, InjectRemoveWrongCookie) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+
+    constexpr size_t kNumThreads = 10;
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    bool isProviderDeleted = false;
+    bool isAccessorDeleted = false;
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(&isProviderDeleted);
+    auto receipt = addAccessorProvider([&](const String16&) -> sp<IBinder> { return nullptr; },
+                                       [&]() { isProviderDeleted = true; }, cookie);
+
+    EXPECT_FALSE(receipt.expired());
+    EXPECT_FALSE(isProviderDeleted);
+
+    // not the cookie we added the provider with!
+    status_t status = removeAccessorProvider(receipt, reinterpret_cast<void*>(&isAccessorDeleted));
+    EXPECT_TRUE(status != OK);
+    EXPECT_FALSE(isProviderDeleted);
+
+    status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+    EXPECT_TRUE(isProviderDeleted);
+}
+
+TEST_P(BinderRpc, InjectNoAccessorProvided) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+
+    const String16 kInstanceName("doesnt_matter_nothing_checks");
+
+    bool isProviderDeleted = false;
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(&isProviderDeleted);
+    auto receipt = addAccessorProvider([&](const String16&) -> sp<IBinder> { return nullptr; },
+                                       [&]() { isProviderDeleted = true; }, cookie);
+    EXPECT_FALSE(receipt.expired());
+    EXPECT_FALSE(isProviderDeleted);
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    EXPECT_EQ(binder, nullptr);
+
+    status_t status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+    EXPECT_TRUE(isProviderDeleted);
+}
+
+TEST_P(BinderRpc, InjectNoSockaddrProvided) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+    constexpr size_t kNumThreads = 10;
+    const String16 kInstanceName("super.cool.service/better_than_default");
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    bool isProviderDeleted = false;
+    bool isAccessorDeleted = false;
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(&isProviderDeleted);
+    auto receipt = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name,
+                        [&](const String16&, sockaddr*, socklen_t) {
+                            // don't fill in outAddr
+                        },
+                        [&]() { isAccessorDeleted = true; });
+            },
+            [&]() { isProviderDeleted = true; }, cookie);
+
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = defaultServiceManager()->checkService(kInstanceName);
+    EXPECT_EQ(binder, nullptr);
+
+    EXPECT_FALSE(isProviderDeleted);
+    // Accessor is created, tried to get connection info and failed.
+    EXPECT_TRUE(isAccessorDeleted);
+
+    status_t status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+    EXPECT_TRUE(isProviderDeleted);
+}
+
+TEST_P(BinderRpc, InjectAddProviderSameCookieFail) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(1);
+    auto receipt = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name, [&](const String16&, sockaddr*, socklen_t) {}, [&]() {});
+            },
+            [&]() {}, cookie);
+
+    EXPECT_FALSE(receipt.expired());
+
+    auto receipt2 = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name, [&](const String16&, sockaddr*, socklen_t) {}, [&]() {});
+            },
+            [&]() {}, cookie);
+
+    EXPECT_TRUE(receipt2.expired());
+
+    status_t status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+}
+
+TEST_P(BinderRpc, InjectAddProviderDifferentCookieOk) {
+    if (!doesAccessorSupportSocket(socketType())) GTEST_SKIP();
+
+    // cookie for identification only
+    void* cookie = reinterpret_cast<void*>(1);
+    auto receipt = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name, [&](const String16&, sockaddr*, socklen_t) {}, [&]() {});
+            },
+            [&]() {}, cookie);
+
+    EXPECT_FALSE(receipt.expired());
+
+    void* cookie2 = reinterpret_cast<void*>(2);
+    auto receipt2 = addAccessorProvider(
+            [&](const String16& name) -> sp<IBinder> {
+                return createAccessor(
+                        name, [&](const String16&, sockaddr*, socklen_t) {}, [&]() {});
+            },
+            [&]() {}, cookie2);
+
+    EXPECT_FALSE(receipt2.expired());
+
+    status_t status = removeAccessorProvider(receipt, cookie);
+    EXPECT_TRUE(status == OK);
+    status = removeAccessorProvider(receipt2, cookie2);
+    EXPECT_TRUE(status == OK);
 }
 
 #ifdef BINDER_RPC_TO_TRUSTY_TEST
