@@ -9,6 +9,7 @@ package {
 
 cc_defaults {
     name: "servicemanager_defaults",
+    defaults: ["libbinder_client_cache_flag"],
 
     cflags: [
         "-Wall",

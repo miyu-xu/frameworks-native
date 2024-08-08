@@ -252,6 +252,13 @@ binder::Status BackendUnifiedServiceManager::addService(const ::std::string& nam
                                                         bool allowIsolated, int32_t dumpPriority) {
     return mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
 }
+binder::Status BackendUnifiedServiceManager::addService2(const ::std::string& name,
+                                                         const sp<IBinder>& service,
+                                                         bool allowIsolated, int dumpsysPriority,
+                                                         bool enableClientSideCache) {
+    return mTheRealServiceManager->addService2(name, service, allowIsolated, dumpsysPriority,
+                                               enableClientSideCache);
+}
 binder::Status BackendUnifiedServiceManager::listServices(
         int32_t dumpPriority, ::std::vector<::std::string>* _aidl_return) {
     return mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
