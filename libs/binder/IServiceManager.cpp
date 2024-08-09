@@ -291,9 +291,123 @@ android::binder::Status getInjectedAccessor(const std::string& name,
     return android::binder::Status::ok();
 }
 
+class LocalAccessorServiceManager : public android::os::BnServiceManager {
+public:
+    // This will always return an IAccessor instance
+    android::binder::Status getService2(const std::string&, android::os::Service*) override {
+        return Status::ok();
+    }
+
+    android::binder::Status getService(const std::string&, sp<IBinder>*) override {
+        // ummm nothing? Or do we need to call getService2?
+        return android::binder::Status::ok();
+    }
+
+    android::binder::Status checkService(const std::string& name,
+                                         android::os::Service* service) override {
+        return getService2(name, service);
+    }
+    android::binder::Status addService(const std::string&, const android::sp<android::IBinder>&,
+                                       bool, int32_t) override {
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status listServices(int32_t dumpPriority,
+                                         std::vector<std::string>* _aidl_return) override {
+        (void)dumpPriority;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status registerForNotifications(
+            const std::string&, const android::sp<android::os::IServiceCallback>&) override {
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status unregisterForNotifications(
+            const std::string&, const android::sp<android::os::IServiceCallback>&) override {
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status isDeclared(const std::string& name, bool* _aidl_return) override {
+        (void)name;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status getDeclaredInstances(const std::string& iface,
+                                                 std::vector<std::string>* _aidl_return) override {
+        (void)iface;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status updatableViaApex(const std::string& name,
+                                             std::optional<std::string>* _aidl_return) override {
+        (void)name;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status getUpdatableNames(const std::string& apexName,
+                                              std::vector<std::string>* _aidl_return) override {
+        (void)apexName;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status getConnectionInfo(
+            const std::string& name,
+            std::optional<android::os::ConnectionInfo>* _aidl_return) override {
+        (void)name;
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status registerClientCallback(
+            const std::string&, const android::sp<android::IBinder>&,
+            const android::sp<android::os::IClientCallback>&) override {
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status tryUnregisterService(const std::string&,
+                                                 const android::sp<android::IBinder>&) override {
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    android::binder::Status getServiceDebugInfo(
+            std::vector<android::os::ServiceDebugInfo>* _aidl_return) override {
+        (void)_aidl_return;
+        return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+    }
+};
+
+// If service manager isn't installed on this device, we can use the
+// LocalAccessorServiceManager to support the service manager APIs for RPC
+// binder over sockets.
+static bool isSmInstalled() {
+    return android::base::GetBoolProperty("servicemanager.installed", true);
+}
+
 sp<IServiceManager> defaultServiceManager()
 {
     std::call_once(gSmOnce, []() {
+#if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
+        /* wait for service manager */
+        if (isSmInstalled()) {
+            using std::literals::chrono_literals::operator""s;
+            using android::base::WaitForProperty;
+            while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
+                ALOGE("Waited for servicemanager.ready for a second, waiting another...");
+            }
+        } else {
+            ALOGI("servicemanager is not installed, so using a local version.");
+            gDefaultServiceManager =
+                    sp<ServiceManagerShim>::make(sp<LocalAccessorServiceManager>::make());
+            return;
+        }
+#endif
+
+        sp<AidlServiceManager> sm = nullptr;
+        while (sm == nullptr) {
+            sm = interface_cast<AidlServiceManager>(
+                    ProcessState::self()->getContextObject(nullptr));
+            if (sm == nullptr) {
+                ALOGE("Waiting 1s on context object on %s.",
+                      ProcessState::self()->getDriverName().c_str());
+                sleep(1);
+            }
+        }
+
         gDefaultServiceManager = sp<ServiceManagerShim>::make(getBackendUnifiedServiceManager());
     });
 
@@ -501,8 +615,11 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
     sp<IBinder> svc = checkService(name);
     if (svc != nullptr) return svc;
 
-    const bool isVendorService =
-        strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    bool isVendorService = false;
+    if (isSmInstalled()) {
+        isVendorService =
+                strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    }
     constexpr auto timeout = 5s;
     const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
@@ -518,8 +635,12 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
     // retry interval in millisecond; note that vendor services stay at 100ms
     const useconds_t sleepTime = gSystemBootCompleted ? 1000 : 100;
 
-    ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
-          ProcessState::self()->getDriverName().c_str());
+    if (isSmInstalled()) {
+        ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
+              ProcessState::self()->getDriverName().c_str());
+    } else {
+        ALOGI("Waiting for service '%s'...", String8(name).c_str());
+    }
 
     int n = 0;
     while (std::chrono::steady_clock::now() - startTime < timeout) {
@@ -529,9 +650,14 @@ sp<IBinder> ServiceManagerShim::getService(const String16& name) const
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
             const auto waitTime = std::chrono::steady_clock::now() - startTime;
-            ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIu64 "ms",
-                  String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
-                  to_ms(waitTime));
+            if (isSmInstalled()) {
+                ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIi64 "ms",
+                      String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
+                      to_ms(waitTime));
+            } else {
+                ALOGI("Waiting for service '%s' successful after waiting %" PRIi64 "ms",
+                      String8(name).c_str(), to_ms(waitTime));
+            }
             return svc;
         }
     }
@@ -605,7 +731,7 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
     if (Status status = realGetService(name, &out); !status.isOk()) {
         ALOGW("Failed to getService in waitForService for %s: %s", name.c_str(),
               status.toString8().c_str());
-        if (0 == ProcessState::self()->getThreadPoolMaxTotalThreadCount()) {
+        if (isSmInstalled() && 0 == ProcessState::self()->getThreadPoolMaxTotalThreadCount()) {
             ALOGW("Got service, but may be racey because we could not wait efficiently for it. "
                   "Threadpool has 0 guaranteed threads. "
                   "Is the threadpool configured properly? "
@@ -639,9 +765,15 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
             if (waiter->mBinder != nullptr) return waiter->mBinder;
         }
 
-        ALOGW("Waited one second for %s (is service started? Number of threads started in the "
-              "threadpool: %zu. Are binder threads started and available?)",
-              name.c_str(), ProcessState::self()->getThreadPoolMaxTotalThreadCount());
+        if (isSmInstalled()) {
+            ALOGW("Waited one second for %s (is service started? Number of threads started in the "
+                  "threadpool: %zu. Are binder threads started and available?)",
+                  name.c_str(), ProcessState::self()->getThreadPoolMaxTotalThreadCount());
+        } else {
+            ALOGW("Waited one second for %s (is service started? Are binder threads started and "
+                  "available?)",
+                  name.c_str());
+        }
 
         // Handle race condition for lazy services. Here is what can happen:
         // - the service dies (not processed by init yet).
