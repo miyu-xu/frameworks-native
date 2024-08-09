@@ -1326,6 +1326,76 @@ TEST_P(BinderRpcAccessor, InjectNoSockaddrProvided) {
     EXPECT_EQ(status, OK);
 }
 
+class BinderRpcAccessorNoConnection : public ::testing::Test {};
+
+TEST_F(BinderRpcAccessorNoConnection, listServices) {
+    const String16 kInstanceName("super.cool.service/better_than_default");
+    const String16 kInstanceName2("super.cool.service/better_than_default2");
+
+    auto receipt =
+            addAccessorProvider({String8(kInstanceName).c_str(), String8(kInstanceName2).c_str()},
+                                [&](const String16&) -> sp<IBinder> { return nullptr; });
+    EXPECT_FALSE(receipt.expired());
+    Vector<String16> list =
+            defaultServiceManager()->listServices(IServiceManager::DUMP_FLAG_PRIORITY_ALL);
+    bool name1 = false;
+    bool name2 = false;
+    for (auto name : list) {
+        if (name == kInstanceName) name1 = true;
+        if (name == kInstanceName2) name2 = true;
+    }
+    EXPECT_TRUE(name1);
+    EXPECT_TRUE(name2);
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+}
+
+TEST_F(BinderRpcAccessorNoConnection, isDeclared) {
+    const String16 kInstanceName("super.cool.service/better_than_default");
+    const String16 kInstanceName2("non_conformant_name");
+
+    auto receipt =
+            addAccessorProvider({String8(kInstanceName).c_str(), String8(kInstanceName2).c_str()},
+                                [&](const String16&) -> sp<IBinder> { return nullptr; });
+    EXPECT_FALSE(receipt.expired());
+    EXPECT_TRUE(defaultServiceManager()->isDeclared(kInstanceName));
+    // Only correctly formatted names with <interface>/<instance> are considered to be declared
+    EXPECT_FALSE(defaultServiceManager()->isDeclared(kInstanceName2));
+    EXPECT_FALSE(defaultServiceManager()->isDeclared(String16("Blaaah")));
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+}
+
+TEST_F(BinderRpcAccessorNoConnection, getDeclareInstances) {
+    const String16 kInstanceName("super.cool.service.IFoo/better_than_default");
+    const String16 kInstanceName2("super.cool.service.IFoo/better_than_default2");
+    const String16 kInstanceName3("non_conformant_name.instance");
+
+    auto receipt =
+            addAccessorProvider({String8(kInstanceName).c_str(), String8(kInstanceName2).c_str(),
+                                 String8(kInstanceName3).c_str()},
+                                [&](const String16&) -> sp<IBinder> { return nullptr; });
+    EXPECT_FALSE(receipt.expired());
+    Vector<String16> list =
+            defaultServiceManager()->getDeclaredInstances(String16("super.cool.service.IFoo"));
+    bool name1 = false;
+    bool name2 = false;
+    for (auto name : list) {
+        if (name == String16("better_than_default")) name1 = true;
+        if (name == String16("better_than_default2")) name2 = true;
+    }
+    EXPECT_TRUE(name1);
+    EXPECT_TRUE(name2);
+
+    EXPECT_TRUE(
+            defaultServiceManager()->getDeclaredInstances(String16("non_conformant_name")).empty());
+    EXPECT_TRUE(defaultServiceManager()
+                        ->getDeclaredInstances(String16("non_conformant_name.instance"))
+                        .empty());
+    status_t status = removeAccessorProvider(receipt);
+    EXPECT_EQ(status, OK);
+}
+
 constexpr const char* kARpcInstance = "some.instance.name.IFoo/default";
 const char* kARpcSupportedServices[] = {
         kARpcInstance,
