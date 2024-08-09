@@ -27,12 +27,18 @@ use crate::parcel::{
 };
 use crate::sys;
 
+#[cfg(not(any(android_vendor, android_vndk)))]
+use libc::sockaddr;
+#[cfg(not(any(android_vendor, android_vndk)))]
+use nix::sys::socket::{SockaddrLike, UnixAddr, VsockAddr};
 use std::cmp::Ordering;
 use std::convert::TryInto;
 use std::ffi::{c_void, CString};
 use std::fmt;
 use std::mem;
 use std::os::fd::AsRawFd;
+#[cfg(not(any(android_vendor, android_vndk)))]
+use std::os::raw::c_char;
 use std::ptr;
 use std::sync::Arc;
 
@@ -702,6 +708,150 @@ impl Drop for DeathRecipient {
     }
 }
 
+/// Rust wrapper around ARpc_Accessor objects.
+///
+/// Dropping the `Accessor` will drop the underlying object and the binder it owns.
+#[cfg(not(any(android_vendor, android_vndk)))]
+pub struct Accessor {
+    accessor: *mut sys::ARpc_Accessor,
+}
+
+/// Socket connection info required for libbinder to connect to a service.
+#[cfg(not(any(android_vendor, android_vndk)))]
+pub enum ConnectionInfo {
+    /// For vsock connection
+    Vsock(VsockAddr),
+    /// For unix domain socket connection
+    Unix(UnixAddr),
+}
+
+#[cfg(not(any(android_vendor, android_vndk)))]
+/// Safety: A `Accessor` is a wrapper around `ARpc_Accessor` and
+/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
+/// `ARpc_Accessor` is threadsafe, this structure is too.
+unsafe impl Send for Accessor {}
+
+#[cfg(not(any(android_vendor, android_vndk)))]
+/// Safety: A `Accessor` is a wrapper around `AIBinder_Accessor` and
+/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
+/// `ARpc_Accessor` is threadsafe, this structure is too.
+unsafe impl Sync for Accessor {}
+
+#[cfg(not(any(android_vendor, android_vndk)))]
+impl Accessor {
+    /// Create a new accessor that will call the given callback when its
+    /// connection info is required.
+    pub fn new<F>(instance: &str, callback: F) -> Accessor
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        let callback: *mut c_void = Arc::into_raw(Arc::new(callback)) as *mut c_void;
+        let inst = CString::new(instance).unwrap();
+
+        // Safety: The function pointer is a valid connection_info callback.
+        // This call returns an owned `ARpc_Accessor` pointer which
+        // must be destroyed via `ARpc_Accessor_delete` when no longer
+        // needed.
+        // When the underlying ARpc_Accessor is deleted, it will call
+        // the cookie_decr_refcount callback to release its strong ref.
+        let accessor = unsafe {
+            sys::ARpc_Accessor_new(
+                inst.as_ptr(),
+                Some(Self::connection_info::<F>),
+                callback,
+                Some(Self::cookie_decr_refcount::<F>),
+            )
+        };
+
+        Accessor { accessor }
+    }
+
+    /// Get the underlying binder for this Accessor for when it needs to be either
+    /// registered with service manager or sent to another process.
+    pub fn as_binder(&self) -> Option<SpIBinder> {
+        // Safety: `ARpc_Accessor_asBinder` returns either a null pointer or a
+        // valid pointer to an owned `AIBinder`. Either of these values is safe to
+        // pass to `SpIBinder::from_raw`.
+        unsafe { SpIBinder::from_raw(sys::ARpc_Accessor_asBinder(self.accessor)) }
+    }
+
+    /// Callback invoked from C++ when the connection info is needed.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the caller must hold a ref-count to it.
+    unsafe extern "C" fn connection_info<F>(
+        _instance: *const c_char,
+        cookie: *mut c_void,
+    ) -> *mut binder_ndk_sys::ARpc_ConnectionInfo
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        if cookie.is_null() {
+            return ptr::null_mut();
+        }
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        let callback = unsafe { (cookie as *const F).as_ref().unwrap() };
+
+        let connection = callback().unwrap();
+        match connection {
+            ConnectionInfo::Vsock(addr) => {
+                // Safety: The sockaddr is being copied in the NDK API
+                unsafe { sys::ARpc_ConnectionInfo_new(addr.as_ptr(), addr.len()) }
+            }
+            ConnectionInfo::Unix(addr) => {
+                // Safety: The sockaddr is being copied in the NDK API
+                // The cast is from sockaddr_un* to sockaddr*.
+                unsafe {
+                    sys::ARpc_ConnectionInfo_new(addr.as_ptr() as *const sockaddr, addr.len())
+                }
+            }
+        }
+    }
+
+    /// Callback that decrements the ref-count.
+    /// This is invoked from C++ when a binder is unlinked.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the owner must give up a ref-count to it.
+    unsafe extern "C" fn cookie_decr_refcount<F>(cookie: *mut c_void)
+    where
+        F: Fn() -> Option<ConnectionInfo> + Send + Sync + 'static,
+    {
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        unsafe { Arc::decrement_strong_count(cookie as *const F) };
+    }
+}
+
+#[cfg(not(any(android_vendor, android_vndk)))]
+/// Safety: A `Accessor` is always constructed with a valid raw pointer to
+/// an `ARpc_Accessor`, so it is always type-safe to extract this
+/// pointer.
+unsafe impl AsNative<sys::ARpc_Accessor> for Accessor {
+    fn as_native(&self) -> *const sys::ARpc_Accessor {
+        self.accessor
+    }
+
+    fn as_native_mut(&mut self) -> *mut sys::ARpc_Accessor {
+        self.accessor
+    }
+}
+
+#[cfg(not(any(android_vendor, android_vndk)))]
+impl Drop for Accessor {
+    fn drop(&mut self) {
+        // Safety: `self.accessor` is always a valid, owned
+        // `ARpc_Accessor` pointer returned by
+        // `ARpc_Accessor_new` when `self` was created. This delete
+        // method can only be called once when `self` is dropped.
+        unsafe {
+            sys::ARpc_Accessor_delete(self.accessor);
+        }
+    }
+}
 /// Generic interface to remote binder objects.
 ///
 /// Corresponds to the C++ `BpInterface` class.
