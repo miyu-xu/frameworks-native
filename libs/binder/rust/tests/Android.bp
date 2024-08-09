@@ -14,6 +14,8 @@ rust_test {
         "libbinder_rs",
         "libselinux_bindgen",
         "libbinder_tokio_rs",
+        "libnix",
+        "liblog_rust",
         "libtokio",
     ],
     shared_libs: [
@@ -31,6 +33,8 @@ rust_test {
     rustlibs: [
         "libbinder_rs",
         "liblibc",
+        "liblog_rust",
+        "libnix",
     ],
     // For the binaries to be pushed properly as specified in AndroidTest.xml,
     // this cannot be the same as the module name.
@@ -100,7 +104,7 @@ cc_test {
         "libbase",
     ],
     static_libs: [
-        "libbinder_rs_serialization_test"
+        "libbinder_rs_serialization_test",
     ],
     srcs: [
         "serialization.cpp",
@@ -115,8 +119,10 @@ rust_bindgen {
     wrapper_src: "serialization.hpp",
     source_stem: "bindings",
     bindgen_flags: [
-        "--allowlist-type", "Transaction",
-        "--allowlist-var", "TESTDATA_.*",
+        "--allowlist-type",
+        "Transaction",
+        "--allowlist-var",
+        "TESTDATA_.*",
     ],
 
     shared_libs: [
