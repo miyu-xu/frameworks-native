@@ -331,8 +331,9 @@ std::weak_ptr<AccessorProvider> addAccessorProvider(RpcAccessorProvider&& provid
 status_t removeAccessorProvider(std::weak_ptr<AccessorProvider> wProvider) {
     std::shared_ptr<AccessorProvider> provider = wProvider.lock();
     if (provider == nullptr) {
-        ALOGE("The provider supplied to removeAccessorProvider has already been removed.");
-        return NAME_NOT_FOUND;
+        ALOGE("The provider supplied to removeAccessorProvider has already been removed or the "
+              "argument to this function was nullptr.");
+        return BAD_VALUE;
     }
     std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
     size_t sizeBefore = gAccessorProviders.size();
