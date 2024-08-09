@@ -375,6 +375,7 @@ declare_binder_enum! {
 mod tests {
     use selinux_bindgen as selinux_sys;
     use std::ffi::CStr;
+    use std::fmt;
     use std::fs::File;
     use std::process::{Child, Command};
     use std::ptr;
@@ -384,8 +385,8 @@ mod tests {
     use std::time::Duration;
 
     use binder::{
-        BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, SpIBinder, StatusCode,
-        Strong,
+        Accessor, BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, SpIBinder,
+        StatusCode, Strong,
     };
     // Import from impl API for testing only, should not be necessary as long as
     // you are using AIDL.
@@ -906,6 +907,49 @@ mod tests {
             service_ibinder.into_interface().expect("Could not reassociate the generic ibinder");
 
         assert_eq!(service.test().unwrap(), service_name);
+    }
+
+    struct ToBeDeleted {
+        deleted: Arc<AtomicBool>,
+    }
+
+    impl Drop for ToBeDeleted {
+        fn drop(&mut self) {
+            assert!(!self.deleted.load(Ordering::Relaxed));
+            self.deleted.store(true, Ordering::Relaxed);
+        }
+    }
+
+    impl fmt::Display for ToBeDeleted {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            write!(f, "ToDeDeleted")
+        }
+    }
+
+    #[test]
+    fn test_accessor_callback_destruction() {
+        let deleted: Arc<AtomicBool> = Arc::new(AtomicBool::new(false));
+        {
+            let accessor: Accessor;
+            {
+                let helper = ToBeDeleted { deleted: deleted.clone() };
+                let get_connection_info = move || {
+                    // Capture this object so we can see it get destructed
+                    // after the parent scope
+                    log::info!("capture the {helper} object and own its lifetime");
+                    None
+                };
+                accessor = Accessor::new("foo.service", get_connection_info);
+            }
+
+            match accessor.as_binder() {
+                Some(_) => {
+                    assert!(!deleted.load(Ordering::Relaxed));
+                }
+                None => panic!("failed to get that accessor binder"),
+            }
+        }
+        assert!(deleted.load(Ordering::Relaxed));
     }
 
     #[tokio::test]
