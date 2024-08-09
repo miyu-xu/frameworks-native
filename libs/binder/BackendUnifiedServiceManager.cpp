@@ -15,6 +15,8 @@
  */
 #include "BackendUnifiedServiceManager.h"
 
+#include <Utils.h>
+#include <android-base/strings.h>
 #include <android/os/IAccessor.h>
 #include <binder/RpcSession.h>
 
@@ -164,7 +166,7 @@ Status BackendUnifiedServiceManager::getService2(const ::std::string& name, os::
     Status status = mTheRealServiceManager->getService2(name, &service);
 
     if (status.isOk()) {
-        status = toBinderService(name, service, _out);
+        status = toBinderService(service, _out);
         if (status.isOk()) {
             return updateCache(name, service);
         }
@@ -180,7 +182,7 @@ Status BackendUnifiedServiceManager::checkService(const ::std::string& name, os:
 
     Status status = mTheRealServiceManager->checkService(name, &service);
     if (status.isOk()) {
-        status = toBinderService(name, service, _out);
+        status = toBinderService(service, _out);
         if (status.isOk()) {
             return updateCache(name, service);
         }
@@ -188,29 +190,9 @@ Status BackendUnifiedServiceManager::checkService(const ::std::string& name, os:
     return status;
 }
 
-Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
-                                                     const os::Service& in, os::Service* _out) {
+Status BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
     switch (in.getTag()) {
         case os::Service::Tag::binder: {
-            if (in.get<os::Service::Tag::binder>() == nullptr) {
-                // failed to find a service. Check to see if we have any local
-                // injected Accessors for this service.
-                os::Service accessor;
-                Status status = getInjectedAccessor(name, &accessor);
-                if (!status.isOk()) {
-                    *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
-                    return status;
-                }
-                if (accessor.getTag() == os::Service::Tag::accessor &&
-                    accessor.get<os::Service::Tag::accessor>() != nullptr) {
-                    ALOGI("Found local injected service for %s, will attempt to create connection",
-                          name.c_str());
-                    // Call this again using the accessor Service to get the real
-                    // service's binder into _out
-                    return toBinderService(name, accessor, _out);
-                }
-            }
-
             *_out = in;
             return Status::ok();
         }
@@ -302,10 +284,341 @@ Status BackendUnifiedServiceManager::getServiceDebugInfo(
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
 [[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 
+static bool hasOutOfProcessServiceManager() {
+#ifndef BINDER_WITH_KERNEL_IPC
+    return false;
+#else
+#if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
+    return android::base::GetBoolProperty("servicemanager.installed", true);
+#else
+    return true;
+#endif
+#endif // BINDER_WITH_KERNEL_IPC
+}
+
+class LocalAccessorServiceManager : public android::os::BnServiceManager {
+public:
+    Status getService2(const std::string& name, android::os::Service* service) override {
+        os::Service accessor;
+        Status status = getInjectedAccessor(name, &accessor);
+        if (!status.isOk() || accessor.getTag() != os::Service::Tag::accessor ||
+            accessor.get<os::Service::Tag::accessor>() == nullptr) {
+            *service = os::Service::make<os::Service::Tag::binder>(nullptr);
+            return status;
+        }
+        *service = accessor;
+
+        return Status::ok();
+    }
+
+    Status getService(const std::string& name, sp<IBinder>* _aidl_return) override {
+        os::Service service;
+        Status status = getService2(name, &service);
+
+        *_aidl_return = service.get<os::Service::Tag::binder>();
+        return status;
+    }
+    Status checkService(const std::string& name, android::os::Service* service) override {
+        return getService2(name, service);
+    }
+    Status addService(const std::string&, const android::sp<android::IBinder>&, bool,
+                      int32_t) override {
+        return Status::fromExceptionCode(Status::EX_ILLEGAL_ARGUMENT,
+                                         "Cannot add services directly.");
+    }
+    Status listServices(int32_t, std::vector<std::string>* list) override {
+        listInjectedAccessors(list);
+        return Status::ok();
+    }
+    Status registerForNotifications(const std::string&,
+                                    const android::sp<android::os::IServiceCallback>&) override {
+        // TODO does this make sense to have? This would allow services to appear
+        // later and the clients to register to hear about them.
+        return Status::ok();
+    }
+    Status unregisterForNotifications(const std::string&,
+                                      const android::sp<android::os::IServiceCallback>&) override {
+        return Status::ok();
+    }
+    Status isDeclared(const std::string& instance, bool* _aidl_return) override {
+        std::vector<std::string> list;
+        listInjectedAccessors(&list);
+        // Declared instances must have the format
+        // <interface>/instance like foo.bar.ISomething/instance
+        if (std::find(list.begin(), list.end(), instance) != list.end() &&
+            base::Tokenize(instance, "/").size() == 2) {
+            *_aidl_return = true;
+        } else {
+            *_aidl_return = false;
+        }
+        return Status::ok();
+    }
+    Status getDeclaredInstances(const std::string& interface,
+                                std::vector<std::string>* instances) override {
+        std::vector<std::string> list;
+        listInjectedAccessors(&list);
+        for (const auto instance : list) {
+            // Declared instances must have the format
+            // <interface>/instance like foo.bar.ISomething/instance
+            std::vector<std::string> tokens = base::Tokenize(instance, "/");
+            if (tokens.size() == 2 && tokens[0] == interface) {
+                instances->push_back(tokens[1]);
+            }
+        }
+
+        return Status::ok();
+    }
+    Status updatableViaApex(const std::string&, std::optional<std::string>* _aidl_return) override {
+        *_aidl_return = std::nullopt;
+        return Status::ok();
+    }
+    Status getUpdatableNames(const std::string&, std::vector<std::string>*) override {
+        return Status::ok();
+    }
+    Status getConnectionInfo(const std::string&,
+                             std::optional<android::os::ConnectionInfo>* _aidl_return) override {
+        *_aidl_return = std::nullopt;
+        return Status::ok();
+    }
+    Status registerClientCallback(const std::string&, const android::sp<android::IBinder>&,
+                                  const android::sp<android::os::IClientCallback>&) override {
+        return Status::fromStatusT(android::INVALID_OPERATION);
+    }
+    Status tryUnregisterService(const std::string&, const android::sp<android::IBinder>&) override {
+        return Status::ok();
+    }
+    Status getServiceDebugInfo(std::vector<android::os::ServiceDebugInfo>*) override {
+        return Status::ok();
+    }
+};
+
+class MultiServiceManager : public android::os::BnServiceManager {
+public:
+    MultiServiceManager(std::vector<sp<AidlServiceManager>>&& managers) : mManagers(managers) {
+        LOG_ALWAYS_FATAL_IF(managers.empty(), "There must always be at least one service manager");
+        for (const auto& manager : mManagers) {
+            LOG_ALWAYS_FATAL_IF(manager == nullptr, "Don't add invalid managers...");
+        }
+    }
+
+    Status getService2(const std::string& name, android::os::Service* service) override {
+        for (const auto& manager : mManagers) {
+            auto status = manager->getService2(name, service);
+            if (!status.isOk()) return status;
+            switch (service->getTag()) {
+                case os::Service::Tag::binder: {
+                    if (service->get<os::Service::Tag::binder>() != nullptr) {
+                        return status;
+                    }
+                } break;
+                case os::Service::Tag::accessor: {
+                    if (service->get<os::Service::Tag::accessor>() != nullptr) {
+                        return status;
+                    }
+                } break;
+                default: {
+                    LOG_ALWAYS_FATAL("Unknown service type: %d", service->getTag());
+                }
+            }
+        }
+        return Status::ok();
+    }
+
+    Status getService(const std::string& name, sp<IBinder>* service) override {
+        for (const auto& manager : mManagers) {
+            LIBBINDER_IGNORE("-Wdeprecated-declarations");
+            auto status = manager->getService(name, service);
+            LIBBINDER_IGNORE_END();
+            if (!status.isOk()) return status;
+            if (*service != nullptr) {
+                return status;
+            }
+        }
+        return Status::ok();
+    }
+
+    Status checkService(const std::string& name, android::os::Service* service) override {
+        for (const auto& manager : mManagers) {
+            auto status = manager->checkService(name, service);
+            if (!status.isOk()) return status;
+            switch (service->getTag()) {
+                case os::Service::Tag::binder: {
+                    if (service->get<os::Service::Tag::binder>() != nullptr) {
+                        return status;
+                    }
+                } break;
+                case os::Service::Tag::accessor: {
+                    if (service->get<os::Service::Tag::accessor>() != nullptr) {
+                        return status;
+                    }
+                } break;
+                default: {
+                    LOG_ALWAYS_FATAL("Unknown service type: %d", service->getTag());
+                }
+            }
+        }
+        return Status::ok();
+    }
+
+    Status addService(const std::string& name, const android::sp<android::IBinder>& service,
+                      bool allowIsolated, int32_t dumpsysPriority) override {
+        // Return the first error if there were no successful adds.
+        Status firstError = Status::ok();
+        bool success = false;
+        for (const auto& manager : mManagers) {
+            auto status = manager->addService(name, service, allowIsolated, dumpsysPriority);
+            if (!status.isOk()) {
+                if (firstError.isOk()) firstError = status;
+            } else {
+                return Status::ok();
+            }
+        }
+        return firstError;
+    }
+
+    Status listServices(int32_t dumpPriority, std::vector<std::string>* _aidl_return) override {
+        for (const auto& manager : mManagers) {
+            std::vector<std::string> services;
+            auto status = manager->listServices(dumpPriority, &services);
+            if (!status.isOk()) return status;
+            std::move(services.begin(), services.end(), std::back_inserter(*_aidl_return));
+        }
+        return Status::ok();
+    }
+
+    Status registerForNotifications(
+            const std::string& name,
+            const android::sp<android::os::IServiceCallback>& callback) override {
+        for (const auto& manager : mManagers) {
+            auto status = manager->registerForNotifications(name, callback);
+            if (!status.isOk()) return status;
+        }
+        return Status::ok();
+    }
+
+    Status unregisterForNotifications(
+            const std::string& name,
+            const android::sp<android::os::IServiceCallback>& callback) override {
+        Status status;
+        for (const auto& manager : mManagers) {
+            status = manager->unregisterForNotifications(name, callback);
+            if (!status.isOk()) {
+                // Log each failure because we will lose the status value after
+                // trying the next manager
+                ALOGE("Failed to unregister for notifications for %s with status: %s", name.c_str(),
+                      status.toString8().c_str());
+            }
+        }
+        return status;
+    }
+
+    Status isDeclared(const std::string& name, bool* _aidl_return) override {
+        bool isDeclared = false;
+        for (const auto& manager : mManagers) {
+            bool ret = false;
+            auto status = manager->isDeclared(name, &ret);
+            if (!status.isOk()) return status;
+            if (ret) {
+                if (isDeclared) {
+                    ALOGW("Service %s is declared with multiple service managers", name.c_str());
+                }
+                isDeclared = true;
+            }
+        }
+        *_aidl_return = isDeclared;
+        return Status::ok();
+    }
+
+    Status getDeclaredInstances(const std::string& iface,
+                                std::vector<std::string>* _aidl_return) override {
+        for (const auto& manager : mManagers) {
+            std::vector<std::string> services;
+            auto status = manager->getDeclaredInstances(iface, &services);
+            if (!status.isOk()) return status;
+            _aidl_return->insert(_aidl_return->end(), services.begin(), services.end());
+        }
+        return Status::ok();
+    }
+
+    Status updatableViaApex(const std::string& name,
+                            std::optional<std::string>* _aidl_return) override {
+        std::optional<std::string> updatable = std::nullopt;
+        for (const auto& manager : mManagers) {
+            auto status = manager->updatableViaApex(name, &updatable);
+            if (!status.isOk()) return status;
+            if (updatable) {
+                *_aidl_return = updatable;
+                return status;
+            }
+        }
+        *_aidl_return = std::nullopt;
+        return Status::ok();
+    }
+
+    Status getUpdatableNames(const std::string& apexName,
+                             std::vector<std::string>* _aidl_return) override {
+        for (const auto& manager : mManagers) {
+            std::vector<std::string> names;
+            auto status = manager->getUpdatableNames(apexName, &names);
+            if (!status.isOk()) return status;
+            _aidl_return->insert(_aidl_return->end(), names.begin(), names.end());
+        }
+        return Status::ok();
+    }
+
+    Status getConnectionInfo(const std::string& name,
+                             std::optional<android::os::ConnectionInfo>* _aidl_return) override {
+        std::optional<android::os::ConnectionInfo> info = std::nullopt;
+        for (const auto& manager : mManagers) {
+            auto status = manager->getConnectionInfo(name, &info);
+            if (!status.isOk()) return status;
+            if (info) {
+                *_aidl_return = info;
+                return status;
+            }
+        }
+        return Status::ok();
+    }
+
+    Status registerClientCallback(
+            const std::string& name, const android::sp<android::IBinder>& service,
+            const android::sp<android::os::IClientCallback>& callback) override {
+        for (const auto& manager : mManagers) {
+            auto status = manager->registerClientCallback(name, service, callback);
+            // only want one successful registration for a callback
+            if (status.isOk()) return status;
+        }
+        return Status::ok();
+    }
+
+    Status tryUnregisterService(const std::string& name,
+                                const android::sp<android::IBinder>& service) override {
+        for (const auto& manager : mManagers) {
+            auto status = manager->tryUnregisterService(name, service);
+            if (!status.isOk()) return status;
+        }
+        return Status::ok();
+    }
+
+    Status getServiceDebugInfo(std::vector<android::os::ServiceDebugInfo>* _aidl_return) override {
+        for (const auto& manager : mManagers) {
+            std::vector<android::os::ServiceDebugInfo> debug;
+            auto status = manager->getServiceDebugInfo(&debug);
+            if (!status.isOk()) return status;
+            _aidl_return->insert(_aidl_return->end(), debug.begin(), debug.end());
+        }
+        return Status::ok();
+    }
+
+private:
+    std::vector<sp<AidlServiceManager>> mManagers;
+};
+
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
     std::call_once(gUSmOnce, []() {
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
-        /* wait for service manager */ {
+        /* wait for service manager */
+        if (hasOutOfProcessServiceManager()) {
             using std::literals::chrono_literals::operator""s;
             using android::base::WaitForProperty;
             while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
@@ -315,7 +628,7 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
 #endif
 
         sp<AidlServiceManager> sm = nullptr;
-        while (sm == nullptr) {
+        while (hasOutOfProcessServiceManager() && sm == nullptr) {
             sm = interface_cast<AidlServiceManager>(
                     ProcessState::self()->getContextObject(nullptr));
             if (sm == nullptr) {
@@ -324,8 +637,16 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
                 sleep(1);
             }
         }
-
-        gUnifiedServiceManager = sp<BackendUnifiedServiceManager>::make(sm);
+        std::vector<sp<AidlServiceManager>> sms;
+        if (sm) {
+            sms.push_back(sm);
+        } else {
+            ALOGI("There is no kernel binder servicemanager process, so only direct binder RPC "
+                  "service management is supported.");
+        }
+        sms.push_back(sp<LocalAccessorServiceManager>::make());
+        gUnifiedServiceManager = sp<BackendUnifiedServiceManager>::make(
+                sp<MultiServiceManager>::make(std::move(sms)));
     });
 
     return gUnifiedServiceManager;
