@@ -507,8 +507,11 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     sp<IBinder> svc = checkService(name);
     if (svc != nullptr) return svc;
 
-    const bool isVendorService =
-        strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    bool isVendorService = false;
+    if (isSmInstalled()) {
+        isVendorService =
+                strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    }
     constexpr auto timeout = 5s;
     const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
@@ -524,8 +527,12 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     // retry interval in millisecond; note that vendor services stay at 100ms
     const useconds_t sleepTime = gSystemBootCompleted ? 1000 : 100;
 
-    ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
-          ProcessState::self()->getDriverName().c_str());
+    if (isSmInstalled()) {
+        ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
+              ProcessState::self()->getDriverName().c_str());
+    } else {
+        ALOGI("Waiting for service '%s'...", String8(name).c_str());
+    }
 
     int n = 0;
     while (std::chrono::steady_clock::now() - startTime < timeout) {
@@ -535,9 +542,14 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
             const auto waitTime = std::chrono::steady_clock::now() - startTime;
-            ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIu64 "ms",
-                  String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
-                  to_ms(waitTime));
+            if (isSmInstalled()) {
+                ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIi64 "ms",
+                      String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
+                      to_ms(waitTime));
+            } else {
+                ALOGI("Waiting for service '%s' successful after waiting %" PRIi64 "ms",
+                      String8(name).c_str(), to_ms(waitTime));
+            }
             return svc;
         }
     }
@@ -607,7 +619,7 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
     if (Status status = realGetService(name, &out); !status.isOk()) {
         ALOGW("Failed to getService in waitForService for %s: %s", name.c_str(),
               status.toString8().c_str());
-        if (0 == ProcessState::self()->getThreadPoolMaxTotalThreadCount()) {
+        if (isSmInstalled() && 0 == ProcessState::self()->getThreadPoolMaxTotalThreadCount()) {
             ALOGW("Got service, but may be racey because we could not wait efficiently for it. "
                   "Threadpool has 0 guaranteed threads. "
                   "Is the threadpool configured properly? "
@@ -641,9 +653,15 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
             if (waiter->mBinder != nullptr) return waiter->mBinder;
         }
 
-        ALOGW("Waited one second for %s (is service started? Number of threads started in the "
-              "threadpool: %zu. Are binder threads started and available?)",
-              name.c_str(), ProcessState::self()->getThreadPoolMaxTotalThreadCount());
+        if (isSmInstalled()) {
+            ALOGW("Waited one second for %s (is service started? Number of threads started in the "
+                  "threadpool: %zu. Are binder threads started and available?)",
+                  name.c_str(), ProcessState::self()->getThreadPoolMaxTotalThreadCount());
+        } else {
+            ALOGW("Waited one second for %s (is service started? Are binder threads started and "
+                  "available?)",
+                  name.c_str());
+        }
 
         // Handle race condition for lazy services. Here is what can happen:
         // - the service dies (not processed by init yet).
