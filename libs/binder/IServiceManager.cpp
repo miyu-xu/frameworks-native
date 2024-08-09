@@ -166,12 +166,12 @@ public:
             return nullptr;
         }
     }
-    const std::set<std::string>& instances() { return mInstances; }
+    const std::set<std::string>& instances() const { return mInstances; }
 
 private:
     AccessorProvider() = delete;
 
-    std::set<std::string> mInstances;
+    const std::set<std::string> mInstances;
     RpcAccessorProvider mProvider;
 };
 
@@ -299,6 +299,15 @@ android::binder::Status getInjectedAccessor(const std::string& name,
 
     *service = os::Service::make<os::Service::Tag::accessor>(nullptr);
     return android::binder::Status::ok();
+}
+
+void listInjectedAccessors(std::vector<std::string>* list) {
+    if (list == nullptr) return;
+    std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
+    std::for_each(gAccessorProviders.begin(), gAccessorProviders.end(), [list](auto entry) {
+        list->insert(list->end(), entry.mProvider->instances().begin(),
+                     entry.mProvider->instances().end());
+    });
 }
 
 sp<IServiceManager> defaultServiceManager()
@@ -561,8 +570,8 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     sp<IBinder> svc = checkService(name);
     if (svc != nullptr) return svc;
 
-    const bool isVendorService =
-        strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    bool isVendorService = false;
+    isVendorService = strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
     constexpr auto timeout = 5s;
     const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
@@ -589,7 +598,7 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
             const auto waitTime = std::chrono::steady_clock::now() - startTime;
-            ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIu64 "ms",
+            ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIi64 "ms",
                   String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
                   to_ms(waitTime));
             return svc;
