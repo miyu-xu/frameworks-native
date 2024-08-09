@@ -536,20 +536,23 @@ String8 ProcessState::getDriverName() {
     return mDriverName;
 }
 
-static unique_fd open_driver(const char* driver, String8* error) {
+static unique_fd open_driver(const char* driver, String8* error, int* err) {
     auto fd = unique_fd(open(driver, O_RDWR | O_CLOEXEC));
     if (!fd.ok()) {
+        if (err) *err = errno;
         error->appendFormat("%d (%s) Opening '%s' failed", errno, strerror(errno), driver);
         return {};
     }
     int vers = 0;
     int result = ioctl(fd.get(), BINDER_VERSION, &vers);
     if (result == -1) {
+        if (err) *err = errno;
         error->appendFormat("%d (%s) Binder ioctl to obtain version failed", errno,
                             strerror(errno));
         return {};
     }
     if (result != 0 || vers != BINDER_CURRENT_PROTOCOL_VERSION) {
+        if (err) *err = errno;
         error->appendFormat("Binder driver protocol(%d) does not match user space protocol(%d)! "
                             "ioctl() return value: %d",
                             vers, BINDER_CURRENT_PROTOCOL_VERSION, result);
@@ -558,11 +561,13 @@ static unique_fd open_driver(const char* driver, String8* error) {
     size_t maxThreads = DEFAULT_MAX_BINDER_THREADS;
     result = ioctl(fd.get(), BINDER_SET_MAX_THREADS, &maxThreads);
     if (result == -1) {
+        if (err) *err = errno;
         ALOGE("Binder ioctl to set max threads failed: %s", strerror(errno));
     }
     uint32_t enable = DEFAULT_ENABLE_ONEWAY_SPAM_DETECTION;
     result = ioctl(fd.get(), BINDER_ENABLE_ONEWAY_SPAM_DETECTION, &enable);
     if (result == -1) {
+        if (err) *err = errno;
         ALOGE_IF(ProcessState::isDriverFeatureEnabled(
                      ProcessState::DriverFeature::ONEWAY_SPAM_DETECTION),
                  "Binder ioctl to enable oneway spam detection failed: %s", strerror(errno));
@@ -584,7 +589,8 @@ ProcessState::ProcessState(const char* driver)
         mThreadPoolSeq(1),
         mCallRestriction(CallRestriction::NONE) {
     String8 error;
-    unique_fd opened = open_driver(driver, &error);
+    int err = 0;
+    unique_fd opened = open_driver(driver, &error, &err);
 
     if (opened.ok()) {
         // mmap the binder, providing a chunk of virtual address space to receive transactions.
@@ -597,13 +603,12 @@ ProcessState::ProcessState(const char* driver)
             mDriverName.clear();
         }
     }
-
 #ifdef __ANDROID__
-    LOG_ALWAYS_FATAL_IF(!opened.ok(),
-                        "Binder driver '%s' could not be opened. Error: %s. Terminating.",
-                        driver, error.c_str());
+    // Fatal in all cases other than ENOENT when /dev/binder doesn't exist.
+    LOG_ALWAYS_FATAL_IF(!opened.ok() && err != ENOENT,
+                        "Binder driver '%s' could not be opened. Error: %s. Terminating.", driver,
+                        error.c_str());
 #endif
-
     if (opened.ok()) {
         mDriverFD = opened.release();
     }
