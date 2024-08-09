@@ -138,8 +138,7 @@ public:
 private:
     std::shared_ptr<BinderCacheWithInvalidation> mCacheForGetService;
     sp<os::IServiceManager> mTheRealServiceManager;
-    binder::Status toBinderService(const ::std::string& name, const os::Service& in,
-                                   os::Service* _out);
+    binder::Status toBinderService(const os::Service& in, os::Service* _out);
     binder::Status updateCache(const std::string& serviceName, const os::Service& service);
     bool returnIfCached(const std::string& serviceName, os::Service* _out);
 };
@@ -147,5 +146,8 @@ private:
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
 
 android::binder::Status getInjectedAccessor(const std::string& name, android::os::Service* service);
+void listInjectedAccessors(std::vector<std::string>* list);
+
+bool isSmInstalled();
 
 } // namespace android
