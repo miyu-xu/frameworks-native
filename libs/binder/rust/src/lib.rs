@@ -111,6 +111,8 @@ pub use crate::binder_async::{BinderAsyncPool, BoxFuture};
 pub use binder::{BinderFeatures, FromIBinder, IBinder, Interface, Strong, Weak};
 pub use error::{ExceptionCode, IntoBinderResult, Status, StatusCode};
 pub use parcel::{ParcelFileDescriptor, Parcelable, ParcelableHolder};
+#[cfg(not(any(android_vendor, android_vndk)))]
+pub use proxy::{Accessor, ConnectionInfo};
 pub use proxy::{DeathRecipient, SpIBinder, WpIBinder};
 #[cfg(not(trusty))]
 pub use service::{
