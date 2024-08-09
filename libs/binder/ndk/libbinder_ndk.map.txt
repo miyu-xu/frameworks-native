@@ -248,6 +248,18 @@ LIBBINDER_NDK35 { # introduced=VanillaIceCream
     AServiceManager_openDeclaredPassthroughHal; # systemapi llndk=202404
 };
 
+LIBBINDER_NDK36 { # introduced=36
+  global:
+    ARpc_addAccessorProvider; # systemapi
+    ARpc_removeAccessorProvider; # systemapi
+    ARpc_Accessor_new; # systemapi
+    ARpc_Accessor_delete; # systemapi
+    ARpc_Accessor_asBinder; # systemapi
+    ARpc_Accessor_fromBinder; # systemapi
+    ARpc_ConnectionInfo_new; # systemapi
+    ARpc_ConnectionInfo_delete; # systemapi
+};
+
 LIBBINDER_NDK_PLATFORM {
   global:
     AParcel_getAllowFds;
