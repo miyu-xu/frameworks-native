@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6851b988_33767cf7",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-09T23:08:57Z",
+      "side": 1,
+      "message": "Remove this log if we plan on checking when we fail to a service! This is spamming the logs.",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6849c762_e8c4d088",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 290,
+                "startChar": 0,
+                "endLine": 291,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "02e1b90a559c3ea3513a95ab39e60c7d94bed7aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
