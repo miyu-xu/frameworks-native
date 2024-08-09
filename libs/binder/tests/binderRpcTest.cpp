@@ -46,6 +46,13 @@
 #include "binderRpcTestCommon.h"
 #include "binderRpcTestFixture.h"
 
+// TODO need to add IServiceManager.cpp/.h to libbinder_no_kernel
+#ifdef BINDER_WITH_KERNEL_IPC
+#include "android-base/logging.h"
+#include "android/binder_manager.h"
+#include "android/binder_rpc.h"
+#endif // BINDER_WITH_KERNEL_IPC
+
 using namespace std::chrono_literals;
 using namespace std::placeholders;
 using android::binder::borrowed_fd;
@@ -1287,6 +1294,206 @@ TEST_P(BinderRpcAccessor, InjectNoSockaddrProvided) {
 
     status_t status = removeAccessorProvider(receipt);
     EXPECT_EQ(status, OK);
+}
+
+constexpr const char* kARpcInstance = "some.instance.name.IFoo/default";
+
+struct ConnectionInfoData {
+    sockaddr_storage addr;
+    socklen_t len;
+    bool* isDeleted;
+    ~ConnectionInfoData() {
+        if (isDeleted) *isDeleted = true;
+    }
+};
+
+struct AccessorProviderData {
+    sockaddr_storage addr;
+    socklen_t len;
+    bool* isDeleted;
+    ~AccessorProviderData() {
+        if (isDeleted) *isDeleted = true;
+    }
+};
+
+void accessorProviderDataOnDelete(void* data) {
+    delete reinterpret_cast<AccessorProviderData*>(data);
+}
+void infoProviderDataOnDelete(void* data) {
+    delete reinterpret_cast<ConnectionInfoData*>(data);
+}
+
+ABinderRpc_ConnectionInfo* infoProvider(const char* instance, void* cookie) {
+    if (instance == nullptr || cookie == nullptr) return nullptr;
+    ConnectionInfoData* data = reinterpret_cast<ConnectionInfoData*>(cookie);
+    return ABinderRpc_ConnectionInfo_new(reinterpret_cast<const sockaddr*>(&data->addr), data->len);
+}
+
+ABinderRpc_Accessor* getAccessor(const char* instance, void* cookie) {
+    if (instance == nullptr || cookie == nullptr) return nullptr;
+    if (0 != strcmp(instance, kARpcInstance)) return nullptr;
+
+    AccessorProviderData* data = reinterpret_cast<AccessorProviderData*>(cookie);
+
+    ConnectionInfoData* info = new ConnectionInfoData{
+            .addr = data->addr,
+            .len = data->len,
+            .isDeleted = nullptr,
+    };
+
+    return ABinderRpc_Accessor_new(instance, infoProvider, info, infoProviderDataOnDelete);
+}
+
+class BinderARpcNdk : public ::testing::Test {};
+
+TEST_F(BinderARpcNdk, ARpcProviderNewDelete) {
+    bool isDeleted = false;
+
+    AccessorProviderData* data = new AccessorProviderData{{}, 0, &isDeleted};
+
+    ABinderRpc_AccessorProvider* provider =
+            ABinderRpc_registerAccessorProvider(getAccessor, data, accessorProviderDataOnDelete);
+
+    EXPECT_NE(provider, nullptr);
+    EXPECT_FALSE(isDeleted);
+
+    EXPECT_EQ(STATUS_OK, ABinderRpc_unregisterAccessorProvider(provider));
+
+    EXPECT_TRUE(isDeleted);
+}
+
+TEST_F(BinderARpcNdk, ARpcAccessorNewDelete) {
+    bool isDeleted = false;
+
+    ConnectionInfoData* data = new ConnectionInfoData{{}, 0, &isDeleted};
+
+    ABinderRpc_Accessor* accessor =
+            ABinderRpc_Accessor_new("gshoe_service", infoProvider, data, infoProviderDataOnDelete);
+    EXPECT_NE(accessor, nullptr);
+    EXPECT_FALSE(isDeleted);
+
+    ABinderRpc_Accessor_delete(accessor);
+    EXPECT_TRUE(isDeleted);
+}
+
+TEST_F(BinderARpcNdk, ARpcConnectionInfoNewDelete) {
+    sockaddr_vm addr{
+            .svm_family = AF_VSOCK,
+            .svm_port = VMADDR_PORT_ANY,
+            .svm_cid = VMADDR_CID_ANY,
+    };
+
+    ABinderRpc_ConnectionInfo* info =
+            ABinderRpc_ConnectionInfo_new(reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr_vm));
+    EXPECT_NE(info, nullptr);
+
+    ABinderRpc_ConnectionInfo_delete(info);
+}
+
+TEST_F(BinderARpcNdk, ARpcAsFromBinderAsBinder) {
+    bool isDeleted = false;
+
+    ConnectionInfoData* data = new ConnectionInfoData{{}, 0, &isDeleted};
+
+    ABinderRpc_Accessor* accessor =
+            ABinderRpc_Accessor_new("gshoe_service", infoProvider, data, infoProviderDataOnDelete);
+    EXPECT_NE(accessor, nullptr);
+    EXPECT_FALSE(isDeleted);
+
+    {
+        ndk::SpAIBinder binder = ndk::SpAIBinder(ABinderRpc_Accessor_asBinder(accessor));
+        EXPECT_NE(binder.get(), nullptr);
+
+        ABinderRpc_Accessor* accessor2 =
+                ABinderRpc_Accessor_fromBinder("wrong_service_name", binder.get());
+        // The API checks for the expected service name that is associated with
+        // the accessor!
+        EXPECT_EQ(accessor2, nullptr);
+
+        accessor2 = ABinderRpc_Accessor_fromBinder("gshoe_service", binder.get());
+        EXPECT_NE(accessor2, nullptr);
+
+        // this is a new ABinderRpc_Accessor object that wraps the underlying
+        // libbinder object.
+        EXPECT_NE(accessor, accessor2);
+
+        ndk::SpAIBinder binder2 = ndk::SpAIBinder(ABinderRpc_Accessor_asBinder(accessor2));
+        EXPECT_EQ(binder.get(), binder2.get());
+
+        ABinderRpc_Accessor_delete(accessor2);
+    }
+
+    EXPECT_FALSE(isDeleted);
+    ABinderRpc_Accessor_delete(accessor);
+    EXPECT_TRUE(isDeleted);
+}
+
+TEST_F(BinderARpcNdk, ARpcRequireProviderOnDeleteCallback) {
+    EXPECT_EQ(nullptr,
+              ABinderRpc_registerAccessorProvider(getAccessor, reinterpret_cast<void*>(1),
+                                                  nullptr));
+}
+
+TEST_F(BinderARpcNdk, ARpcRequireInfoOnDeleteCallback) {
+    EXPECT_EQ(nullptr,
+              ABinderRpc_Accessor_new("the_best_service_name", infoProvider,
+                                      reinterpret_cast<void*>(1), nullptr));
+}
+
+TEST_F(BinderARpcNdk, ARpcNoDataNoProviderOnDeleteCallback) {
+    ABinderRpc_AccessorProvider* provider =
+            ABinderRpc_registerAccessorProvider(getAccessor, nullptr, nullptr);
+    EXPECT_NE(nullptr, provider);
+    EXPECT_EQ(STATUS_OK, ABinderRpc_unregisterAccessorProvider(provider));
+}
+
+TEST_F(BinderARpcNdk, ARpcNoDataNoInfoOnDeleteCallback) {
+    ABinderRpc_Accessor* accessor =
+            ABinderRpc_Accessor_new("the_best_service_name", infoProvider, nullptr, nullptr);
+    EXPECT_NE(nullptr, accessor);
+    ABinderRpc_Accessor_delete(accessor);
+}
+
+TEST_F(BinderARpcNdk, ARpcDoubleRemoveProvider) {
+    ABinderRpc_AccessorProvider* provider =
+            ABinderRpc_registerAccessorProvider(getAccessor, nullptr, nullptr);
+    EXPECT_NE(nullptr, provider);
+    EXPECT_EQ(STATUS_OK, ABinderRpc_unregisterAccessorProvider(provider));
+    EXPECT_NE(STATUS_OK, ABinderRpc_unregisterAccessorProvider(provider));
+}
+
+TEST_F(BinderARpcNdk, ARpcNullArgs_ConnectionInfo_new) {
+    sockaddr_storage addr;
+    EXPECT_EQ(nullptr, ABinderRpc_ConnectionInfo_new(reinterpret_cast<const sockaddr*>(&addr), 0));
+}
+
+TEST_P(BinderRpcAccessor, ARpcGetService) {
+    constexpr size_t kNumThreads = 10;
+    bool isDeleted = false;
+
+    auto proc = createRpcTestSocketServerProcess({.numThreads = kNumThreads});
+    EXPECT_EQ(OK, proc.rootBinder->pingBinder());
+
+    AccessorProviderData* data =
+            new AccessorProviderData{proc.proc->sessions[0].addr, proc.proc->sessions[0].addrLen,
+                                     &isDeleted};
+
+    ABinderRpc_AccessorProvider* provider =
+            ABinderRpc_registerAccessorProvider(getAccessor, data, accessorProviderDataOnDelete);
+
+    EXPECT_NE(provider, nullptr);
+    EXPECT_FALSE(isDeleted);
+
+    {
+        ndk::SpAIBinder binder = ndk::SpAIBinder(AServiceManager_checkService(kARpcInstance));
+        EXPECT_NE(binder.get(), nullptr);
+        EXPECT_EQ(STATUS_OK, AIBinder_ping(binder.get()));
+    }
+
+    EXPECT_EQ(STATUS_OK, ABinderRpc_unregisterAccessorProvider(provider));
+    EXPECT_TRUE(isDeleted);
+
+    waitForExtraSessionCleanup(proc);
 }
 
 #endif // BINDER_WITH_KERNEL_IPC
