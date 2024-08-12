@@ -15,6 +15,7 @@
  */
 
 #include "fakeservicemanager/FakeServiceManager.h"
+#include <cstdint>
 
 using android::sp;
 using android::FakeServiceManager;
@@ -66,7 +67,7 @@ IBinder* FakeServiceManager::onAsBinder() {
     return nullptr;
 }
 
-sp<IBinder> FakeServiceManager::waitForService(const String16& name) {
+sp<IBinder> FakeServiceManager::waitForService(const String16& name, uint32_t) {
     return checkService(name);
 }
 

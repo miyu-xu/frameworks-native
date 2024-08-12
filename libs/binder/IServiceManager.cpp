@@ -89,7 +89,7 @@ public:
     status_t addService(const String16& name, const sp<IBinder>& service,
                         bool allowIsolated, int dumpsysPriority) override;
     Vector<String16> listServices(int dumpsysPriority) override;
-    sp<IBinder> waitForService(const String16& name16) override;
+    sp<IBinder> waitForService(const String16& name16, uint32_t timeout_ms) override;
     bool isDeclared(const String16& name) override;
     Vector<String16> getDeclaredInstances(const String16& interface) override;
     std::optional<String16> updatableViaApex(const String16& name) override;
@@ -363,7 +363,7 @@ Vector<String16> ServiceManagerShim::listServices(int dumpsysPriority)
     return res;
 }
 
-sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
+sp<IBinder> ServiceManagerShim::waitForService(const String16& name16, uint32_t timeout_ms)
 {
     class Waiter : public android::os::BnServiceCallback {
         Status onRegistration(const std::string& /*name*/,
@@ -408,7 +408,13 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
     }
     if (out != nullptr) return out;
 
+    if (timeout_ms == 0) {
+        ALOGW("Timed out on waitForService for %s after 0ms", name.c_str());
+        return nullptr;
+    }
+
     sp<Waiter> waiter = sp<Waiter>::make();
+    std::chrono::milliseconds remaining_time(timeout_ms);
     if (Status status = mUnifiedServiceManager->registerForNotifications(name, waiter);
         !status.isOk()) {
         ALOGW("Failed to registerForNotifications in waitForService for %s: %s", name.c_str(),
@@ -419,16 +425,20 @@ sp<IBinder> ServiceManagerShim::waitForService(const String16& name16)
 
     while(true) {
         {
+            std::chrono::milliseconds wait_time = std::min(remaining_time, 1000ms);
             // It would be really nice if we could read binder commands on this
             // thread instead of needing a threadpool to be started, but for
             // instance, if we call getAndExecuteCommand, it might be the case
             // that another thread serves the callback, and we never get a
             // command, so we hang indefinitely.
             std::unique_lock<std::mutex> lock(waiter->mMutex);
-            waiter->mCv.wait_for(lock, 1s, [&] {
-                return waiter->mBinder != nullptr;
-            });
+            waiter->mCv.wait_for(lock, wait_time, [&] { return waiter->mBinder != nullptr; });
             if (waiter->mBinder != nullptr) return waiter->mBinder;
+            remaining_time -= wait_time;
+            if (remaining_time == std::chrono::milliseconds::zero()) {
+                ALOGW("Timed out on waitForService for %s after %ums", name.c_str(), timeout_ms);
+                return nullptr;
+            }
         }
 
         ALOGW("Waited one second for %s (is service started? Number of threads started in the "

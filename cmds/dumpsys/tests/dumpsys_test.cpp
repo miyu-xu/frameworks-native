@@ -16,6 +16,7 @@
 
 #include "../dumpsys.h"
 
+#include <cstdint>
 #include <regex>
 #include <vector>
 
@@ -56,7 +57,7 @@ class ServiceManagerMock : public IServiceManager {
     MOCK_CONST_METHOD1(checkService, sp<IBinder>(const String16&));
     MOCK_METHOD4(addService, status_t(const String16&, const sp<IBinder>&, bool, int));
     MOCK_METHOD1(listServices, Vector<String16>(int));
-    MOCK_METHOD1(waitForService, sp<IBinder>(const String16&));
+    MOCK_METHOD2(waitForService, sp<IBinder>(const String16&, uint32_t));
     MOCK_METHOD1(isDeclared, bool(const String16&));
     MOCK_METHOD1(getDeclaredInstances, Vector<String16>(const String16&));
     MOCK_METHOD1(updatableViaApex, std::optional<String16>(const String16&));

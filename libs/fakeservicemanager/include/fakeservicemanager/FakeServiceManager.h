@@ -18,6 +18,7 @@
 
 #include <binder/IServiceManager.h>
 
+#include <cstdint>
 #include <map>
 #include <mutex>
 #include <optional>
@@ -45,7 +46,7 @@ public:
 
     IBinder* onAsBinder() override;
 
-    sp<IBinder> waitForService(const String16& name) override;
+    sp<IBinder> waitForService(const String16& name, uint32_t timeout_ms) override;
 
     bool isDeclared(const String16& name) override;
 

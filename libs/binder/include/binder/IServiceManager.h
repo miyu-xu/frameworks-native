@@ -17,8 +17,10 @@
 #pragma once
 #include <binder/Common.h>
 #include <binder/IInterface.h>
-#include <utils/Vector.h>
 #include <utils/String16.h>
+#include <utils/Vector.h>
+#include <cstdint>
+#include <limits>
 #include <optional>
 
 namespace android {
@@ -92,9 +94,10 @@ public:
     /**
      * Efficiently wait for a service.
      *
-     * Returns nullptr only for permission problem or fatal error.
+     * Returns nullptr only for permission problem, timeout, or fatal error.
      */
-    virtual sp<IBinder> waitForService(const String16& name) = 0;
+    virtual sp<IBinder> waitForService(
+            const String16& name, uint32_t timeout_ms = std::numeric_limits<uint32_t>::max()) = 0;
 
     /**
      * Check if a service is declared (e.g. VINTF manifest).
