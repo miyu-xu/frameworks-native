@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e884d73a_9659d382",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Does this really need to be in the NDK? It appears to be just an LL-NDK header.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b9840f_bcbf2ac2",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Please don\u0027t claim this very generic name for LL-NDK/binder. Something this broadly named belongs in `android/api-level.h` or `android/versioning.h`. Rename `LLNDK_API_LEVEL_AT_LEAST` or something like that.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95444d3_599489fe",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_trace_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Same. Did you actually intend to add this to the NDK? Assuming not. Will review if that was intentional.\n\nWe don\u0027t even have guidelines for C++ reviews (the NDK is all C, so even though this is all inlines that wouldn\u0027t cause ABI problems, it\u0027s not something we have a process for), so if this is really intended for the NDK, it\u0027s going to slow things down a lot. The other C++ stuff that\u0027s in the NDK for binder was added by mistake.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0c6b85_41092e9e",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "go/android-ndk-api-guidelines#well-documented point 6. You left out the group decl",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c3986c_7ef6f013",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Break it up into a summary and the details in a separate paragraph. The first paragraph of the comment shows up in the summary at the top of the page (e.g. https://developer.android.com/ndk/reference/group/apilevels), so should only be a quick summary of what the API does, not the full documentation.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbce7f86_2b2d6f07",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Then how is this API different from `__android_log_print`? It sounds like you\u0027re going to add new behavior later. If that\u0027s the case, YAGNI for now, add the API later when/if it\u0027s actually needed?",
+      "range": {
+        "startLine": 32,
+        "startChar": 91,
+        "endLine": 33,
+        "endChar": 49
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a47cd2_a7c9a63b",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Need @param docs",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e988081_263f670d",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "@michaelwr: shouldn\u0027t LL-NDK be using the same versioning scheme as the rest of the platform?",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b3a9c7f_334a765e",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "Same. Break out the summary/details.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ef387a_aef1ee2a",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-12T22:07:33Z",
+      "side": 1,
+      "message": "I don\u0027t understand what platform release this corresponds to, but this looks like it potentially forces NDK APIs onto an unexpected finalization schedule?\n\n@michaelwr",
+      "range": {
+        "startLine": 254,
+        "startChar": 39,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
