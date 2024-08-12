@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b0d59a_0bc3e340",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-12T10:12:18Z",
+      "side": 1,
+      "message": "init_kill_services_test passes with this change.\n\nAlso added a additional unit tests",
+      "parentUuid": "e5d4d3dd_902d2db4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "0d6a70a5b70a4b107cfd3d20432a590ac2e18bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4586c11_b1baa1b1",
