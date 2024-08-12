@@ -59,20 +59,6 @@ interface IServiceManager {
      * This is the same as checkService (returns immediately) but
      * exists for legacy purposes.
      *
-     * Returns null if the service does not exist.
-     *
-     * @deprecated TODO(b/355394904): Use getService2 instead.
-     */
-    @UnsupportedAppUsage
-    @nullable IBinder getService(@utf8InCpp String name);
-
-    /**
-     * Retrieve an existing service called @a name from the
-     * service manager.
-     *
-     * This is the same as checkService (returns immediately) but
-     * exists for legacy purposes.
-     *
      * Returns an enum Service that can be of different types. The
      * enum value is null if the service does not exist.
      */
@@ -154,4 +140,18 @@ interface IServiceManager {
      * Get debug information for all currently registered services.
      */
     ServiceDebugInfo[] getServiceDebugInfo();
+
+    /**
+     * Retrieve an existing service called @a name from the
+     * service manager.
+     *
+     * This is the same as checkService (returns immediately) but
+     * exists for legacy purposes.
+     *
+     * Returns null if the service does not exist.
+     *
+     * @deprecated TODO(b/355394904): Use getService2 instead.
+     */
+    @UnsupportedAppUsage
+    @nullable IBinder getService(@utf8InCpp String name);
 }
