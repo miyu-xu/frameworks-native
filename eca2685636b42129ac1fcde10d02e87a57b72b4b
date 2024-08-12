@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815ecf22_586940b5",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-12T21:20:50Z",
+      "side": 1,
+      "message": "this change is really dangerous if prebuilts cause this API, but see bug comment. Non-blocking versions of this API are already available, so I\u0027d rather we don\u0027t add a new API (and instead change the one we use) until there is more clarity on some of the other issues leading to this bug.",
+      "range": {
+        "startLine": 100,
+        "startChar": 34,
+        "endLine": 100,
+        "endChar": 92
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "28297db9_a350ce46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManager.h",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "            const String16\u0026 name, uint32_t timeout_ms \u003d std::numeric_limits\u003cuint32_t\u003e::max())\n            [[deprecated(\"use waitForService(name)\")]] \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eca2685636b42129ac1fcde10d02e87a57b72b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
