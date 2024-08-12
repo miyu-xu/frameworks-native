@@ -19,6 +19,7 @@
 #include <android/os/BnServiceManager.h>
 #include <android/os/IClientCallback.h>
 #include <android/os/IServiceCallback.h>
+#include <type_traits>
 
 #if !defined(VENDORSERVICEMANAGER) && !defined(__ANDROID_RECOVERY__)
 #include "perfetto/public/te_category_macros.h"
@@ -126,5 +127,14 @@ private:
 
     std::unique_ptr<Access> mAccess;
 };
+
+// Workaround for b/356858364: Keep `addService` API stable until Android 16 is finalized.
+static_assert(ServiceManager::TRANSACTION_addService ==
+                      android::IBinder::FIRST_CALL_TRANSACTION + 2,
+              "");
+static_assert(std::is_same_v<decltype(&ServiceManager::addService),
+                             binder::Status (android::ServiceManager::*)(
+                                     const std::string&, const sp<IBinder>&, bool, int32_t)>,
+              "");
 
 }  // namespace android
