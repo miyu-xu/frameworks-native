@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b06c4669_e7f22cee",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-12T22:04:48Z",
+      "side": 1,
+      "message": "This is the new API, not the other. Even if we move this and not the other, there are other things that may have changed. Let\u0027s dig into this issue, I\u0027d like to find a supported solution, rather than relying on an unstable API.",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "a28a582475a6d2db30ddcb56b94a32b0cc88bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
