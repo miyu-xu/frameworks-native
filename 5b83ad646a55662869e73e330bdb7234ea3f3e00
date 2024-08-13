@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d9699a_f9e75330",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-13T00:47:59Z",
+      "side": 1,
+      "message": "you need to keep the constructor here and remove the one from servicemanager shim. Otherwise, Java won\u0027t be using the BackendUnifiedServiceManager (since getJavaServicemanagerImplPrivateDoNotUseExceptInTheOnePlaceItIsUsed calls getBackendUnifiedServiceManager).",
+      "range": {
+        "startLine": 151,
+        "startChar": 23,
+        "endLine": 151,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6db72ad3_5a28cfa9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "BackendUnifiedServiceManager::BackendUnifiedServiceManager() {\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 174,
+                "startChar": 0,
+                "endLine": 174,
+                "endChar": 0
+              },
+              "replacement": "}\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 175,
+                "endChar": 0
+              },
+              "replacement": "sp\u003cAidlServiceManager\u003e getBackendUnifiedServiceManager() {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05083591_744c8e70",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-13T00:47:59Z",
+      "side": 1,
+      "message": "use BackendUnifiedServiceManager here",
+      "range": {
+        "startLine": 281,
+        "startChar": 48,
+        "endLine": 281,
+        "endChar": 66
+      },
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34fe9160_38bc3957",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-13T00:47:59Z",
+      "side": 1,
+      "message": "so delete this",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5b2e99c3_2b375803",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 282,
+                "startChar": 0,
+                "endLine": 283,
+                "endChar": 0
+              },
+              "replacement": "    mUnifiedServiceManager \u003d sp\u003cBackendUnifiedServiceManager\u003e::make(impl,\n                                                                    /*isRemote\u003d*/false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
