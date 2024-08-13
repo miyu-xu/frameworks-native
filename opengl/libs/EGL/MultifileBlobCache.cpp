@@ -356,6 +356,30 @@ void MultifileBlobCache::set(const void* key, EGLsizeiANDROID keySize, const voi
 
         // Then decrement the cache
         decreaseTotalCacheSize(oldFileSize);
+
+        // Additionally, if new size is zero, remove it from cache entirely
+        if (valueSize == 0) {
+            ALOGV("SET: New zero size detected for %u, removing entry from cache", entryHash);
+
+            // Track that we're creating a pending task for this entry
+            {
+                // Synchronize access to deferred task status
+                std::lock_guard<std::mutex> lock(mDeferredTaskStatusMutex);
+                // Include buffer to handle the case when multiple tasks are pending for an entry
+                mDeferredTasks.insert(std::make_pair(entryHash, buffer));
+            }
+
+            // Create deferred task to delete from storage
+            ALOGV("SET: Adding delete task to queue.");
+            DeferredTask task(TaskCommand::DeleteFromDisk);
+            task.initDeleteFromDisk(entryHash, fullPath, buffer, fileSize);
+            queueTask(std::move(task));
+
+            // In this scenario, we don't want to re-add the entry
+            ALOGV("SET: Returning early from zero sized value for %u, not adding to cache",
+                  entryHash);
+            return;
+        }
     }
 
     // Track the size and access time for quick recall
@@ -377,9 +401,9 @@ void MultifileBlobCache::set(const void* key, EGLsizeiANDROID keySize, const voi
     // Track that we're creating a pending write for this entry
     // Include the buffer to handle the case when multiple writes are pending for an entry
     {
-        // Synchronize access to deferred write status
-        std::lock_guard<std::mutex> lock(mDeferredWriteStatusMutex);
-        mDeferredWrites.insert(std::make_pair(entryHash, buffer));
+        // Synchronize access to deferred task status
+        std::lock_guard<std::mutex> lock(mDeferredTaskStatusMutex);
+        mDeferredTasks.insert(std::make_pair(entryHash, buffer));
     }
 
     // Create deferred task to write to storage
@@ -450,9 +474,9 @@ EGLsizeiANDROID MultifileBlobCache::get(const void* key, EGLsizeiANDROID keySize
         // Wait for writes to complete if there is an outstanding write for this entry
         bool wait = false;
         {
-            // Synchronize access to deferred write status
-            std::lock_guard<std::mutex> lock(mDeferredWriteStatusMutex);
-            wait = mDeferredWrites.find(entryHash) != mDeferredWrites.end();
+            // Synchronize access to deferred task status
+            std::lock_guard<std::mutex> lock(mDeferredTaskStatusMutex);
+            wait = mDeferredTasks.find(entryHash) != mDeferredTasks.end();
         }
 
         if (wait) {
@@ -869,23 +893,31 @@ void MultifileBlobCache::processTask(DeferredTask& task) {
             ALOGV("DEFERRED: Completed write for: %s", fullPath.c_str());
             close(fd);
 
-            // Erase the entry from mDeferredWrites
-            // Since there could be multiple outstanding writes for an entry, find the matching one
-            {
-                // Synchronize access to deferred write status
-                std::lock_guard<std::mutex> lock(mDeferredWriteStatusMutex);
-                typedef std::multimap<uint32_t, uint8_t*>::iterator entryIter;
-                std::pair<entryIter, entryIter> iterPair = mDeferredWrites.equal_range(entryHash);
-                for (entryIter it = iterPair.first; it != iterPair.second; ++it) {
-                    if (it->second == buffer) {
-                        ALOGV("DEFERRED: Marking write complete for %u at %p", it->first,
-                              it->second);
-                        mDeferredWrites.erase(it);
-                        break;
-                    }
-                }
+            // Erase the entry from mDeferredTasks
+            markTaskComplete(entryHash, buffer);
+            return;
+        }
+        case TaskCommand::DeleteFromDisk: {
+            uint32_t entryHash = task.getEntryHash();
+            std::string& fullPath = task.getFullPath();
+            uint8_t* buffer = task.getBuffer();
+            size_t bufferSize = task.getBufferSize();
+
+            // Delete the file
+            int status = remove(fullPath.c_str());
+            if (status == -1) {
+                ALOGE("DEFERRED: Cache error - failed to delete fullPath: %s, error: %s",
+                      fullPath.c_str(), std::strerror(errno));
+                return;
             }
 
+            ALOGV("DEFERRED: Deleted %s", fullPath.c_str());
+
+            // Erase the entry from mDeferredTasks
+            markTaskComplete(entryHash, buffer);
+
+            // Immediately free the buffer which we only used as a marker
+            delete[] buffer;
             return;
         }
         default: {
@@ -948,6 +980,22 @@ void MultifileBlobCache::queueTask(DeferredTask&& task) {
 void MultifileBlobCache::waitForWorkComplete() {
     std::unique_lock<std::mutex> lock(mWorkerMutex);
     mWorkerIdleCondition.wait(lock, [this] { return (mTasks.empty() && mWorkerThreadIdle); });
+}
+
+void MultifileBlobCache::markTaskComplete(uint32_t entryHash, uint8_t* buffer) {
+    // Synchronize access to deferred task status
+    std::lock_guard<std::mutex> lock(mDeferredTaskStatusMutex);
+    typedef std::multimap<uint32_t, uint8_t*>::iterator entryIter;
+    std::pair<entryIter, entryIter> iterPair = mDeferredTasks.equal_range(entryHash);
+    for (entryIter it = iterPair.first; it != iterPair.second; ++it) {
+        // Since there could be multiple outstanding tasks for an entry, find the matching one
+        // This uses the buffer pointer as unique identifier
+        if (it->second == buffer) {
+            ALOGV("DEFERRED: Marking update complete for %u at %p", it->first, it->second);
+            mDeferredTasks.erase(it);
+            break;
+        }
+    }
 }
 
 }; // namespace android

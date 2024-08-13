@@ -66,6 +66,7 @@ struct MultifileHotCache {
 enum class TaskCommand {
     Invalid = 0,
     WriteToDisk,
+    DeleteFromDisk,
     Exit,
 };
 
@@ -79,6 +80,15 @@ public:
     void initWriteToDisk(uint32_t entryHash, std::string fullPath, uint8_t* buffer,
                          size_t bufferSize) {
         mCommand = TaskCommand::WriteToDisk;
+        mEntryHash = entryHash;
+        mFullPath = std::move(fullPath);
+        mBuffer = buffer;
+        mBufferSize = bufferSize;
+    }
+
+    void initDeleteFromDisk(uint32_t entryHash, std::string fullPath, uint8_t* buffer,
+                            size_t bufferSize) {
+        mCommand = TaskCommand::DeleteFromDisk;
         mEntryHash = entryHash;
         mFullPath = std::move(fullPath);
         mBuffer = buffer;
@@ -167,9 +177,9 @@ private:
 
     // Below are the components used for deferred writes
 
-    // Track whether we have pending writes for an entry
-    std::mutex mDeferredWriteStatusMutex;
-    std::multimap<uint32_t, uint8_t*> mDeferredWrites GUARDED_BY(mDeferredWriteStatusMutex);
+    // Track whether we have pending tasks for an entry
+    std::mutex mDeferredTaskStatusMutex;
+    std::multimap<uint32_t, uint8_t*> mDeferredTasks GUARDED_BY(mDeferredTaskStatusMutex);
 
     // Functions to work through tasks in the queue
     void processTasks();
@@ -181,6 +191,9 @@ private:
 
     // Used by main thread to wait for worker thread to complete all outstanding work.
     void waitForWorkComplete();
+
+    // Used by worker thread to update status
+    void markTaskComplete(uint32_t entryHash, uint8_t* buffer);
 
     std::thread mTaskThread;
     std::queue<DeferredTask> mTasks;

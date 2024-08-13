@@ -552,4 +552,74 @@ TEST_F(MultifileBlobCacheTest, SameKeyDifferentSizes) {
     ASSERT_EQ(firstSize, finalSize);
 }
 
+TEST_F(MultifileBlobCacheTest, SetWithZeroSizeRemovesEntry) {
+    size_t firstSize = mMBC->getTotalSize();
+
+    // New cache should be empty
+    ASSERT_EQ(firstSize, 0);
+
+    // Write a zero sized entry, ensure it hits
+    // This does *not* remove any entries from disk
+    unsigned char buf[4] = {0xee, 0xee, 0xee, 0xee};
+    mMBC->set("abcd", 4, "", 0);
+    ASSERT_EQ(size_t(0), mMBC->get("abcd", 4, buf, 0));
+    ASSERT_EQ(0xee, buf[0]);
+    ASSERT_EQ(0xee, buf[1]);
+    ASSERT_EQ(0xee, buf[2]);
+    ASSERT_EQ(0xee, buf[3]);
+
+    // Grab the new size
+    size_t secondSize = mMBC->getTotalSize();
+
+    // Ensure the size went up
+    ASSERT_GT(secondSize, firstSize);
+
+    // Now write a real value with the same key
+    mMBC->set("abcd", 4, "efgh", 4);
+    ASSERT_EQ(size_t(4), mMBC->get("abcd", 4, buf, 4));
+    ASSERT_EQ('e', buf[0]);
+    ASSERT_EQ('f', buf[1]);
+    ASSERT_EQ('g', buf[2]);
+    ASSERT_EQ('h', buf[3]);
+
+    // Grab the new size
+    size_t thirdSize = mMBC->getTotalSize();
+
+    // Ensure the size went up
+    ASSERT_GT(thirdSize, secondSize);
+
+    // Close the cache so everything writes out
+    mMBC->finish();
+    mMBC.reset();
+
+    // Ensure the cache has a single entry
+    ASSERT_EQ(getCacheEntries().size(), 1);
+
+    // Now open it again
+    mMBC.reset(new MultifileBlobCache(kMaxKeySize, kMaxValueSize, kMaxTotalSize, kMaxTotalEntries,
+                                      &mTempFile->path[0]));
+
+    // Write an empty value for the key.  We want this to delete the file.
+    mMBC->set("abcd", 4, "", 0);
+
+    // Ensure no cache hit
+    ASSERT_EQ(size_t(0), mMBC->get("abcd", 4, buf, 4));
+    ASSERT_EQ('e', buf[0]);
+    ASSERT_EQ('f', buf[1]);
+    ASSERT_EQ('g', buf[2]);
+    ASSERT_EQ('h', buf[3]);
+
+    // Grab the new size
+    size_t fourthSize = mMBC->getTotalSize();
+
+    // Ensure the size goes to zero
+    ASSERT_EQ(fourthSize, 0);
+
+    // Close the cache so everything writes out
+    mMBC->finish();
+
+    // Ensure no files are contained
+    ASSERT_EQ(getCacheEntries().size(), 0);
+}
+
 } // namespace android
