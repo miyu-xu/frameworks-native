@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d27827e2_9fee4968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-13T17:17:38Z",
+      "side": 1,
+      "message": "Note - we are in the process of moving away from this library. Can you sync up with Devin to make sure that path will work for you as well? go/vm-to-host-sm",
+      "revId": "023537ceee3ebfba37cf1a9ac150a0e9110e9d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
