@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569403cb_a3bb38d9",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "when does this ever happen?",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 21
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5609f42f_4ced0ec2",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "so when this happens, it\u0027s creating a separate RpcSession right, which connects to the same RpcServer instance?\n\nI\u0027m actually a bit surprised this works - I\u0027ve never tested this before. We may actually want to validate this (file a bug to ensure RpcSession is lined up with RpcSession on the server side) OR is it creating a new second RpcSession on the server side as well?",
+      "range": {
+        "startLine": 1216,
+        "startChar": 50,
+        "endLine": 1216,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d06818_ee1adf25",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "nit: EXPECT_EQ(status, OK), same on all of these",
+      "range": {
+        "startLine": 1230,
+        "startChar": 0,
+        "endLine": 1230,
+        "endChar": 30
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b333be2_75d1e526",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "specifically, you might do binder -...-\u003e getSession -\u003e shutdown, to force the RpcSession associated with the new client is shutdown.\n\nThough, you may have to wait for it to shutdown.",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "02d33f74_e20fdeef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1233,
+                "startChar": 0,
+                "endLine": 1234,
+                "endChar": 0
+              },
+              "replacement": "    // Force the session to shutdown\n    binder-\u003egetSession()-\u003eshutdownAndWait();\n"
+            },
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1238,
+                "startChar": 0,
+                "endLine": 1245,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ef7e98_82517f25",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "yeah, what is the log from RpcState dump?",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1243,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "83004ae3_b0e746ab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1244,
+                "startChar": 0,
+                "endLine": 1245,
+                "endChar": 0
+              },
+              "replacement": "    proc.proc-\u003eterminate();\n    proc.proc-\u003esetCustomExitStatusCheck([](int wstatus) {\n        EXPECT_TRUE(WIFSIGNALED(wstatus) \u0026\u0026 WTERMSIG(wstatus) \u003d\u003d SIGTERM)\n                \u003c\u003c \"server process failed incorrectly: \" \u003c\u003c WaitStatusToString(wstatus);\n    });\n    proc.expectAlreadyShutdown \u003d true;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0692deae_3cd4468c",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-14T00:18:36Z",
+      "side": 1,
+      "message": "(hey will continue reading these tests later or tomorrow)",
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
