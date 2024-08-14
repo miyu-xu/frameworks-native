@@ -2496,6 +2496,7 @@ void EventHub::openDeviceLocked(const std::string& devicePath) {
         // See if this device has any stylus buttons that we would want to fuse with touch data.
         if (!device->classes.any(InputDeviceClass::TOUCH | InputDeviceClass::TOUCH_MT) &&
             !device->classes.any(InputDeviceClass::ALPHAKEY) &&
+            !device->classes.any(InputDeviceClass::JOYSTICK) &&
             std::any_of(STYLUS_BUTTON_KEYCODES.begin(), STYLUS_BUTTON_KEYCODES.end(),
                         [&](int32_t keycode) { return device->hasKeycodeLocked(keycode); })) {
             device->classes |= InputDeviceClass::EXTERNAL_STYLUS;
