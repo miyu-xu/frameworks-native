@@ -1449,24 +1449,24 @@ TEST_F(ProfileTest, CopySystemProfileFailWrongProfileName) {
 
 class BootProfileTest : public ProfileTest {
   public:
-    std::vector<const std::string> extra_apps_;
-    std::vector<int64_t> extra_ce_data_inodes_;
+      std::vector<std::string> extra_apps_;
+      std::vector<int64_t> extra_ce_data_inodes_;
 
-    virtual void SetUp() {
-        if (base::GetBoolProperty("dalvik.vm.useartservice", false)) {
-            GTEST_SKIP() << "Skipping legacy dexopt tests when ART Service is enabled";
-        }
+      virtual void SetUp() {
+          if (base::GetBoolProperty("dalvik.vm.useartservice", false)) {
+              GTEST_SKIP() << "Skipping legacy dexopt tests when ART Service is enabled";
+          }
 
-        ProfileTest::SetUp();
-        intial_android_profiles_dir = android_profiles_dir;
-        // Generate profiles for some extra apps.
-        // When merging boot profile we split profiles into small groups to avoid
-        // opening a lot of file descriptors at the same time.
-        // (Currently the group size for aggregation is 10)
-        //
-        // To stress test that works fine, create profile for more apps.
-        createAppProfilesForBootMerge(21);
-    }
+          ProfileTest::SetUp();
+          intial_android_profiles_dir = android_profiles_dir;
+          // Generate profiles for some extra apps.
+          // When merging boot profile we split profiles into small groups to avoid
+          // opening a lot of file descriptors at the same time.
+          // (Currently the group size for aggregation is 10)
+          //
+          // To stress test that works fine, create profile for more apps.
+          createAppProfilesForBootMerge(21);
+      }
 
     virtual void TearDown() {
         if (base::GetBoolProperty("dalvik.vm.useartservice", false)) {
