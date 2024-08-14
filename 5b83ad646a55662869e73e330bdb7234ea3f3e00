@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68c3e50_408b554a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-14T14:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3d9699a_f9e75330",
+      "range": {
+        "startLine": 151,
+        "startChar": 23,
+        "endLine": 151,
+        "endChar": 54
+      },
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05083591_744c8e70",
@@ -75,6 +99,30 @@
       "writtenOn": "2024-08-13T00:47:59Z",
       "side": 1,
       "message": "use BackendUnifiedServiceManager here",
+      "range": {
+        "startLine": 281,
+        "startChar": 48,
+        "endLine": 281,
+        "endChar": 66
+      },
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbbbb45_e3894be1",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-14T14:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05083591_744c8e70",
       "range": {
         "startLine": 281,
         "startChar": 48,
@@ -122,6 +170,30 @@
           ]
         }
       ],
+      "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db66fec8_b54889fb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-14T14:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34fe9160_38bc3957",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 74
+      },
       "revId": "5b83ad646a55662869e73e330bdb7234ea3f3e00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
