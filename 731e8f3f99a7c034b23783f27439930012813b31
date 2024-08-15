@@ -16,6 +16,23 @@
       "message": "Please review this fix.",
       "revId": "731e8f3f99a7c034b23783f27439930012813b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8504392_5469b772",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983010
+      },
+      "writtenOn": "2024-08-15T11:52:22Z",
+      "side": 1,
+      "message": "Please review this fix.",
+      "revId": "731e8f3f99a7c034b23783f27439930012813b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
