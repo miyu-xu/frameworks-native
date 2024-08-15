@@ -16,6 +16,23 @@
       "message": "Need to move this up before line 324, that checks is `trimCache()` is required.",
       "revId": "a397927ff26298a920433585c62a9b365fc793c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40341ccf_02ce9e87",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-15T12:53:44Z",
+      "side": 1,
+      "message": "Suggest loggin old/new `valueSize`. This will be more informative when `valueSize` is 0. For this you may use `getEntryStats()` instead of `getFileSize()`.\n\nAfter this you may move this block before line 321.",
+      "revId": "a397927ff26298a920433585c62a9b365fc793c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
