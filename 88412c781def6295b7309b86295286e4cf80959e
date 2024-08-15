@@ -70,6 +70,24 @@
       "parentUuid": "56719bf9_928bbef9",
       "revId": "88412c781def6295b7309b86295286e4cf80959e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8973eb_bd1652c3",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-08-15T21:38:37Z",
+      "side": 1,
+      "message": "I still think that the simplest \"ok\" fix here is to try appending a unique suffix to the file that ended up being a duplicate, just in case when there are multiple teams who can\u0027t figure their naming together",
+      "parentUuid": "7cda77f2_70d4614a",
+      "revId": "88412c781def6295b7309b86295286e4cf80959e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
