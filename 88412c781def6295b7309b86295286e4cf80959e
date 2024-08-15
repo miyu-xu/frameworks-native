@@ -52,6 +52,24 @@
       "parentUuid": "d8449b83_35c5e2ac",
       "revId": "88412c781def6295b7309b86295286e4cf80959e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cda77f2_70d4614a",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-08-15T11:58:52Z",
+      "side": 1,
+      "message": "\u003e This is because we added some other files in some directories and we have to pack them when generating bugreport.\n\nwhy do you \"have to\"? i mean, if they\u0027re in different directories to start with (good!), why do you have to put them in the same directory in the zip file (bad!)? that seems confusing and/or like you\u0027re throwing away information (since i\u0027m assuming these two files in different directories on the device\u0027s filesystem aren\u0027t actually _identical_, otherwise there would be no point).\n\nif you were saying you wanted to make the device\u0027s command-line zip/unzip tools behave more like the traditional desktop ones, with all the UI that lets you choose what to do with duplicates, on a case-by-case basis, that would be more convincingly a good idea. but no-one\u0027s asked for _that_ yet :-)\n\nthis just seems like we\u0027re adding a way to make it easier for people to mistakenly lose data/confuse themselves about _which_ data they actually have in the file. (especially if you imagine multiple teams being responsible for the different copies!)",
+      "parentUuid": "56719bf9_928bbef9",
+      "revId": "88412c781def6295b7309b86295286e4cf80959e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
