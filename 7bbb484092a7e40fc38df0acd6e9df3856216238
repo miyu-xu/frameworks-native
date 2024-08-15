@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0d509e_eaf16cb2",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-15T11:31:03Z",
+      "side": 0,
+      "message": "Unfortunately, need to return check from **patchset 1** and keep the `waitForWorkComplete()` call. Without wait buffer may be used after destruction.\n\nHere is log snippet when using **patchset 2**:\n```\nSET: Add 3630699553 to cache\nSET: Entry 3630699553 new buffer: 0xb400007a79153fd0\nSET: Adding task to queue.\n\nSET: Add 3630699553 to cache\nSET: Entry 3630699553 new buffer: 0xb400007d7c7dd210\nfreeHotCacheEntry: delete[] entry.entryBuffer: 0xb400007a79153fd0\nSET: Replacing 3630699553. Old size (8388652) New size (45)\nSET: Adding task to queue.\n\nWORKER: Task available, waking up.\nDEFERRED: Marking write complete for 3630699553 at 0xb400007a79153fd0 // Accessing deleted memory!\nWORKER: Task available, waking up.\nDEFERRED: Marking write complete for 3630699553 at 0xb400007d7c7dd210\n```\n\nNo such issue in **patchset 1**:\n```\nSET: Add 3630699553 to cache\nSET: Entry 3630699553 new buffer: 0xb4000070290c3fd0\nSET: Adding task to queue.\n\nSET: Add 3630699553 to cache\nSET: Entry 3630699553 new buffer: 0xb40000727e730d90\nHOTCACHE(REMOVE): Waiting for work to complete for 3630699553\n\nWORKER: Task available, waking up.\nDEFERRED: Marking write complete for 3630699553 at 0xb4000070290c3fd0 // OK - accessed before delete\n\nfreeHotCacheEntry: delete[] entry.entryBuffer: 0xb4000070290c3fd0\nSET: Replacing 3630699553. Old size (8388652) New size (45)\nSET: Adding task to queue.\n\n\nWORKER: Task available, waking up.\nDEFERRED: Marking write complete for 3630699553 at 0xb40000727e730d90\n\n```",
+      "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
