@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee01b37_5d008e8f",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-15T12:58:00Z",
+      "side": 1,
+      "message": "I think that we do not need to track `DeleteFromDisk` task.\n\nWithout buffer we can move the whole `if (contains(entryHash))` block before line 321.\n\nPlaces that check for `mDeferredTasks`:\n- `MultifileBlobCache::get()`\n- `MultifileBlobCache::removeFromHotCache()` (assuming previous CL patchset 1)\n\nIn case of `get()` there will be early MISS (`!contains(entryHash)`), since entry is no longer in the cache, so check for `mDeferredTasks` will not be performed. If `set()` non-zero entry again, `mDeferredTasks` will be updated, causing wait for both delete and write.\n\nIn case of `removeFromHotCache()` no need to wait at all, because item not in the hot cache.\n\n---\n\nDuring testing I noticed, that `mDeferredTasks` in `get()` will always be without the entry. This is because in order for the check to happen, the entry must not be in the hot cache. But when entry is removed from the hot cache, we also wait for the task. In other works, it seems impossible to not have entry in the hot cache, but have the deferred task.\n\nAbove means that the only place that really is waiting based on `mDeferredTasks` is `removeFromHotCache()`.",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "875b3877_e478ae5d",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-15T12:58:00Z",
+      "side": 1,
+      "message": "`fileSize` is not used.\n\nIf remove task from tracking, only `fullPath` is required.",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
