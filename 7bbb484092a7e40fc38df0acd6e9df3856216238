@@ -70,6 +70,24 @@
       "parentUuid": "a77918a9_4df6c9c5",
       "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86aa6dd0_4485d036",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:43:44Z",
+      "side": 0,
+      "message": "Actually, your `SameKeyDifferentSizes` test will reproduce the issue.\n\nBecause it is undefined behavior, it may not crash and even work as expected.",
+      "parentUuid": "e229e9e0_3df3c61a",
+      "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
