@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d51e36_8674b09e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-08-16T17:26:45Z",
+      "side": 1,
+      "message": "Thanks Igor, added some thoughts.",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ee01b37_5d008e8f",
@@ -20,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc208ef2_6829304a",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-08-16T17:26:45Z",
+      "side": 1,
+      "message": "The only way to not defer deletion is to block the worker thread until any writes have completed.  If that works for your scenario, we can remove deferred deletion. \n I\u0027d rather not make the worker thread so complex that we remove tasks from it.\n \nIf you have any tests we could add to showcase problems, I think that would help quite a lot in supporting your use case without breaking others.",
+      "parentUuid": "4ee01b37_5d008e8f",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "875b3877_e478ae5d",
         "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
         "patchSetId": 1
@@ -31,6 +66,24 @@
       "writtenOn": "2024-08-15T12:58:00Z",
       "side": 1,
       "message": "`fileSize` is not used.\n\nIf remove task from tracking, only `fullPath` is required.",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d426140_deb86010",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-08-16T17:26:45Z",
+      "side": 1,
+      "message": "If multiple tasks are in flight for a buffer (like we\u0027re writing it twice and then deleting it), we need something more than the path.  Right now we\u0027re using the buffer, which is why it is kept, even though it is empty (other than the header).",
+      "parentUuid": "875b3877_e478ae5d",
       "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
