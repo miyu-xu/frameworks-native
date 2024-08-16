@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7443e32f_38302f8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3550128
+      },
+      "writtenOn": "2024-08-16T23:15:14Z",
+      "side": 1,
+      "message": "Tested with UGD on device/image with VNDK deprecated.",
+      "revId": "3313e0537eda80213649a2fe2d18a41a7390423b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
