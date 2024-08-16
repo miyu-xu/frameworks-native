@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc46d08b_043ffd17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-08-16T17:15:28Z",
+      "side": 1,
+      "message": "Igor, thanks for your review!  Will address and upload again soon.",
+      "revId": "a397927ff26298a920433585c62a9b365fc793c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4637d635_0b7b710b",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-08-15T10:24:27Z",
       "side": 1,
       "message": "Need to move this up before line 324, that checks is `trimCache()` is required.",
+      "revId": "a397927ff26298a920433585c62a9b365fc793c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce43ec09_7a9afee3",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-08-16T17:15:28Z",
+      "side": 1,
+      "message": "Ack, didn\u0027t account for that case, will update.",
+      "parentUuid": "4637d635_0b7b710b",
       "revId": "a397927ff26298a920433585c62a9b365fc793c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
