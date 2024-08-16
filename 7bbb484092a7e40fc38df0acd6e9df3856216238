@@ -34,6 +34,24 @@
       "parentUuid": "ab0d509e_eaf16cb2",
       "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77918a9_4df6c9c5",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T17:53:56Z",
+      "side": 0,
+      "message": "\u003e Do you have any tests you can provide that capture the scenarios you care about?\n\nI just stored two blobs with same key and `maxValueSize` size.\n- first blob allocates memory\n- second blob - removes previous blob from the hot cache and deletes memory.\n\nBut issue will also reproduce even if store blobs with different keys. The key part here is that blobs must be big.\n\n\u003e Ideally we can get both patches in without having to blocking on the worker thread.\n\nI\u0027d like that. But for this need to decouple hot cache from buffer memory.\nSorry, Maybe I understand you incorrectly.",
+      "parentUuid": "e35cb972_0580604a",
+      "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
