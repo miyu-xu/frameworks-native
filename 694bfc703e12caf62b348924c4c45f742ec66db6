@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d8435e0_78e2a039",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:24:54Z",
+      "side": 1,
+      "message": "\u003e The only way to not defer deletion is to block the worker thread until \nany writes have completed.\n\nNo need to wait for write tasks to not defer deletion. This is because when entry is removed from the hot cache, we already wait for all write tasks. In the patch **0005** that I shared, I simply deleted files synchronously. It was `0.361719 ms` for 32 files.\n\nDeferred deletion may be required if hot cache will be decoupled from write tasks.\n\nBut I\u0027m **not suggested to remove** the deferred deletion.\n\nI suggest to remove tracking:\n```// Track that we\u0027re creating a pending task for this entry\n{\n    // Synchronize access to deferred task status\n    std::lock_guard\u003cstd::mutex\u003e lock(mDeferredTaskStatusMutex);\n    // Include buffer to handle the case when multiple tasks are pending for an entry\n    mDeferredTasks.insert(std::make_pair(entryHash, buffer));\n}\n```\n\nSo in order to delete blob you only need to:\n- remove from `mHotCache` (wait for write tasks if needed).\n- remove from `mEntries` and `mEntryStats`.\n- decrease cache size.\n- remove file in the deferred task or synchronously.\n\nTracking of deletion task is not required.",
+      "parentUuid": "cc208ef2_6829304a",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "875b3877_e478ae5d",
         "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
         "patchSetId": 1
@@ -84,6 +102,41 @@
       "side": 1,
       "message": "If multiple tasks are in flight for a buffer (like we\u0027re writing it twice and then deleting it), we need something more than the path.  Right now we\u0027re using the buffer, which is why it is kept, even though it is empty (other than the header).",
       "parentUuid": "875b3877_e478ae5d",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc41d805_dcd83202",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:24:54Z",
+      "side": 1,
+      "message": "Deleting does not require tracking, so does not require buffer.",
+      "parentUuid": "0d426140_deb86010",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bdde16_c4482931",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:24:54Z",
+      "side": 1,
+      "message": "Bug here.\n\nNeed to also erase entries from `mEntries` and `mEntryStats`. Please refer to patch **0001** that I shared. Here I suggest implement `removeEntry()` method and use it before adding new entry.",
       "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
