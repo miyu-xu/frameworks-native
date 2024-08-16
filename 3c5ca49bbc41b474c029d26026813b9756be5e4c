@@ -1,0 +1,721 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9bd8b8_9b7b7691",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "const\u0026",
+      "range": {
+        "startLine": 42,
+        "startChar": 53,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b5d32c82_347c80ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "    static ARpc_Accessor* make(const char\u0026 instance, sp\u003cIBinder\u003e binder) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82372776_c45bf93b",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "nit: no using for this?",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 26
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a3076b_82e4638d",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "nit: prefer style\n\n```\nif (status !\u003d OK) {\n   error ...\n   return nullptr;\n}\nreturn new ...;\n```\n\nwhy:\n- makes error log close to status check\n- scalable with less horizontal space",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e39e6e5d_a2be47e5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "        if (status !\u003d android::OK) {\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "        return new ARpc_Accessor(binder);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60f6e6b_0e024e07",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "if you want to keep these, you could add your own macro, e.g. \u0027LOG_ACCESSOR_DEBUG\u0027 and then define it to be empty sometimes. That way, it\u0027ll be available to log for longer",
+      "range": {
+        "startLine": 56,
+        "startChar": 23,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8de3d6ce_6862fd91",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "    ~ARpc_Accessor() { LOG_ACCESSOR_DEBUG(\"ARpc_Accessor dtor\"); }\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "            LOG_ACCESSOR_DEBUG(\n                    \"The supplied ARpc_AccessorProvider_getAccessor returned nullptr\");\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "                LOG_ACCESSOR_DEBUG(\"The supplied ARpc_ConnectionInfoProvider returned nullptr\");\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 159,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "                LOG_ACCESSOR_DEBUG(\"Connection info provider found AF_VSOCK. family %d, port %d, \"\n                                   \"cid %d\",\n                                   addr-\u003esvm_family, addr-\u003esvm_port, addr-\u003esvm_cid);\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "        LOG_ACCESSOR_DEBUG(\"service manager found an accessor, so returning one now from _new\");\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "        LOG_ACCESSOR_DEBUG(\"service manager did not get us an accessor\");\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 255,
+                "endChar": 0
+              },
+              "replacement": "        LOG_ACCESSOR_DEBUG(\"Arpc_ConnectionInfo_new found AF_VSOCK. family %d, port %d, cid %d\",\n                           vm.svm_family, vm.svm_port, vm.svm_cid);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36285c04_11a3095a",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "const\u0026",
+      "range": {
+        "startLine": 59,
+        "startChar": 18,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85c382b4_3d7dfcae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    ARpc_Accessor(const sp\u003cIBinder\u003e\u0026 accessor) : mAccessorBinder(accessor) {}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb95fe2a_1453504c",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "I think we discussed unique_ptr here?",
+      "range": {
+        "startLine": 98,
+        "startChar": 23,
+        "endLine": 98,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4618befc_af68cf8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "            [provider, data](const String16\u0026 name) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f63f13_f6f68db2",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "do not delete the object if the status failed, also document that it won\u0027t be deleted in that case\n\nsince \u0027mData\u0027 is managed by the code in this layer though (not the layer above), you could also assert that the status is false. It seems it is only possible from bad client behavior.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b06be0eb_88bcf18a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": "    if (status \u003d\u003d android::OK) {\n        delete provider;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39bf9dcc_651131eb",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "use unique_ptr, avoid manually specifying when to delete this",
+      "range": {
+        "startLine": 145,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9a713afa_fc467620",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cmemory\u003e\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 145,
+                "startChar": 0,
+                "endLine": 146,
+                "endChar": 0
+              },
+              "replacement": "            std::unique_ptr\u003cARpc_ConnectionInfo\u003e info(\n                    provider(String8(name).c_str(), data));\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 156,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 168,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb86471_b323c982",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "btw - you said you\u0027d add inet as well?",
+      "range": {
+        "startLine": 150,
+        "startChar": 13,
+        "endLine": 171,
+        "endChar": 16
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa0b6b41_9763fb45",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "you may want to add binderAllocationLimits test for this, to ensure that there aren\u0027t extra copies of the function in some of these layers, as it can be easy to accidentally copy std::function.",
+      "range": {
+        "startLine": 187,
+        "startChar": 21,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6f4288b3_b59caebc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "            android::createAccessor(String16(instance), std::move(generate),\n                                    std::move(onDeleteCb));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac44051f_4c5fb02e",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "note: AIBinder_incStrong works for nullptr as well, so you don\u0027t need if check",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa0c348c_1e68dca9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 211,
+                "startChar": 0,
+                "endLine": 212,
+                "endChar": 0
+              },
+              "replacement": "        AIBinder_incStrong(ptr);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95066b8b_f360e90f",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "can we assert on this case btw?",
+      "range": {
+        "startLine": 212,
+        "startChar": 6,
+        "endLine": 214,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "80f1d89f_1bd0b924",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": "        LOG_ALWAYS_FATAL(\"Failed to lookupOrCreateFromBinder\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "611e6297_8534c07d",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "useful for testing? or if you have the accessor provider in the same process, instead of passing it?",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f1d97f3_48b75241",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 223,
+                "startChar": 0,
+                "endLine": 227,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996b94f3_899e33d1",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 234,
+        "endChar": 5
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95fee9f_068d32ff",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "I think this should be intmax_t, but for this case, prefer \u0027reinterpret_cast\u003csize_t\u003e(socklen)\u0027 so that if it\u0027s negative, you\u0027ll get a large value and you can still figure it out?",
+      "range": {
+        "startLine": 247,
+        "startChar": 52,
+        "endLine": 247,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9d92d001_fdee6aca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 247,
+                "startChar": 0,
+                "endLine": 248,
+                "endChar": 0
+              },
+              "replacement": "            size_t socklen \u003d len \u003c 0 || static_cast\u003cintmax_t\u003e(len) \u003e SIZE_MAX ? 0 : len;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a8f2cf_7a6bb8b3",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "vm",
+      "range": {
+        "startLine": 256,
+        "startChar": 39,
+        "endLine": 256,
+        "endChar": 82
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f2354c_05ebec79",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:26:19Z",
+      "side": 1,
+      "message": "in this case, this binder is leaked (so btw prefer SpAIBinder), if you still see two remote sessions (after forceShutdown), you can sleep before returning from this test case. If that\u0027s the case, there is another API to wait for the session count to go to 0.\n\nOtherwise, you may need to add logic so when the last BpBinder which holds an RpcSession which is created from checkService here, when it is deleted, the refcount on RpcSession should also drop to zero. It may be the case some other code is holding a reference.",
+      "range": {
+        "startLine": 1595,
+        "startChar": 0,
+        "endLine": 1595,
+        "endChar": 67
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
