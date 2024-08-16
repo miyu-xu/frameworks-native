@@ -52,6 +52,24 @@
       "parentUuid": "e35cb972_0580604a",
       "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e229e9e0_3df3c61a",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:38:34Z",
+      "side": 0,
+      "message": "\u003e But issue will also reproduce even if store blobs with different keys.\n\nSorry, above is wrong. To reproduce the issue you need to write blobs with the same key.\n\n\u003e The key part here is that blobs must be big.\n\nThis is also wrong. Blobs may be any non zero size.\n\nTried 64K and reproduced the bug, but this time even got \"signal 11\" crash. With 8MB blobs - no crash)",
+      "parentUuid": "a77918a9_4df6c9c5",
+      "revId": "7bbb484092a7e40fc38df0acd6e9df3856216238",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
