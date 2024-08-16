@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ab7ba7c_0d595b4b",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2028338
+      },
+      "writtenOn": "2024-08-16T18:48:30Z",
+      "side": 1,
+      "message": "\u003e Yeah, if you are okay draining write tasks,\n\nNo, I\u0027m not OK. It is better to defer writes as much as possible.\n\nI also do not want to make delete immediate. I just aying it is possible to make it immediate, since \"draining write tasks\" already happening anyway (in the `removeFromHotCache()`).\n\nI only ask to remove tracking of the delete task from `mDeferredTasks`. This way no need to allocate dummy buffer. There is just no point to track that task (or maybe I do not see one?).",
+      "parentUuid": "728dd000_3cbeee01",
+      "revId": "694bfc703e12caf62b348924c4c45f742ec66db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "875b3877_e478ae5d",
         "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
         "patchSetId": 1
