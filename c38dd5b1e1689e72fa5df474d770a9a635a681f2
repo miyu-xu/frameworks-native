@@ -195,6 +195,80 @@
       "parentUuid": "0692deae_3cd4468c",
       "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35e2913_bfb6be21",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:09:02Z",
+      "side": 1,
+      "message": "yes it is (btw, I might suggest, rather than comments:\n\n```\nconst void* kCookieSame \u003d ...;\nconst void* kCookieDifferent \u003d ...;\n```\n\nor make it \u0027obviously\u0027 different\n\n```\nconst byte* kCookie \u003d ...;\n... add ... kCookie ...;\n... remove ... ~kCookie ...;\n```\n\nthen, the code will be self-documenting).",
+      "range": {
+        "startLine": 1267,
+        "startChar": 0,
+        "endLine": 1267,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c2a29856_1b70a300",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1286,
+                "startChar": 0,
+                "endLine": 1287,
+                "endChar": 0
+              },
+              "replacement": "    const void* cookie \u003d reinterpret_cast\u003cvoid*\u003e(\u0026isProviderDeleted);\n"
+            },
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1337,
+                "startChar": 0,
+                "endLine": 1337,
+                "endChar": 0
+              },
+              "replacement": "\n    // not the cookie we added the provider with!\n    const void* cookieDifferent \u003d reinterpret_cast\u003cvoid*\u003e(\u0026isAccessorDeleted);\n    status \u003d removeAccessorProvider(receipt, cookieDifferent);\n    EXPECT_TRUE(status !\u003d OK);\n    EXPECT_FALSE(isProviderDeleted);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87953839_644966c8",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T16:09:02Z",
+      "side": 1,
+      "message": "will isDeclared return true in this case? I think it ought to - may be one reason to add an entire servicemanager implementation.",
+      "range": {
+        "startLine": 1327,
+        "startChar": 50,
+        "endLine": 1327,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
