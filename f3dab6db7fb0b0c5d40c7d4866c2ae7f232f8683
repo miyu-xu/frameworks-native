@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9ffd7df_95df99c4",
+        "filename": "libs/binder/Status.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-16T00:10:42Z",
+      "side": 1,
+      "message": "I\u0027m afraid this is not actually the right format. frameworks/base/core/java/android/app/AppOpsManager.java writes the number of app ops. It should be something like this, with additional error checks:\n\n```\nint count \u003d readInt32();\nfor (int i \u003d 0; i \u003c count; i++) {\n    readString();\n    readLong();\n}\n\nstatus \u003d readInt32();\n```\n\nWe\u0027ll need to add a test as well that ensures this lines up with future app ops changes.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31bd2ec3_c8ff7559",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/Status.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "    // Skip over fat response headers.  Not used (or propagated) in native code.\n    if (mException \u003d\u003d EX_HAS_REPLY_HEADER) {\n"
+            },
+            {
+              "path": "libs/binder/Status.cpp",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "\n        // And fat response headers are currently only used when there are no\n        // exceptions, so act like there was no error.\n        mException \u003d EX_NONE;\n    }\n\n    if (mException \u003d\u003d EX_HAS_NOTED_APPOPS_REPLY_HEADER) {\n        status \u003d skipUnusedHeader(parcel);\n"
+            },
+            {
+              "path": "libs/binder/Status.cpp",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "        // Read next exception code.\n        status \u003d parcel.readInt32(\u0026mException);\n"
+            },
+            {
+              "path": "libs/binder/Status.cpp",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f3dab6db7fb0b0c5d40c7d4866c2ae7f232f8683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
