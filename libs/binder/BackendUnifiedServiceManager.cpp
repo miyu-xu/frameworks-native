@@ -18,6 +18,7 @@
 #include <android/os/IAccessor.h>
 #include <android/os/ServiceWithCacheInfo.h>
 #include <binder/RpcSession.h>
+#include <binder/Trace.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
@@ -45,6 +46,7 @@ sp<AidlServiceManager> BackendUnifiedServiceManager::getImpl() {
 
 binder::Status BackendUnifiedServiceManager::getService(const ::std::string& name,
                                                         sp<IBinder>* _aidl_return) {
+    binder::ScopedTrace trace(ATRACE_TAG_AIDL, ("getService" + name).c_str());
     os::Service service;
     binder::Status status = getService2(name, &service);
     *_aidl_return = service.get<os::Service::Tag::serviceWithCacheInfo>()->service;
@@ -54,6 +56,7 @@ binder::Status BackendUnifiedServiceManager::getService(const ::std::string& nam
 
 binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& name,
                                                          os::Service* _out) {
+    binder::ScopedTrace trace(ATRACE_TAG_AIDL, ("getService2" + name).c_str());
     os::Service service;
     binder::Status status = mTheRealServiceManager->getService2(name, &service);
     toBinderService(service, _out);
@@ -62,6 +65,7 @@ binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& na
 
 binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& name,
                                                           os::Service* _out) {
+    binder::ScopedTrace trace(ATRACE_TAG_AIDL, ("checkService" + name).c_str());
     os::Service service;
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
     toBinderService(service, _out);
