@@ -16,6 +16,23 @@
       "message": "Tested with UGD on device/image with VNDK deprecated.",
       "revId": "3313e0537eda80213649a2fe2d18a41a7390423b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f16a67_805f306d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-08-17T04:38:24Z",
+      "side": 1,
+      "message": "Tom, Kiyoung -- this is an AOSP cherry-pick of the already landed ag/28824279",
+      "revId": "3313e0537eda80213649a2fe2d18a41a7390423b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
