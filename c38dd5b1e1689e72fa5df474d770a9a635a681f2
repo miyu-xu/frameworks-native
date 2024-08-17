@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c59a2f25_8afc5bc5",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "For all TLS, single threaded, and for socket types we don\u0027t support in this test like `SocketType::UNIX_BOOTSTRAP` (because there is no connection info, just an FD), and `SocketType::TIPC`.",
+      "parentUuid": "569403cb_a3bb38d9",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 21
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5609f42f_4ced0ec2",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 8
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ba8d337_7d954d77",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "\u003e so when this happens, it\u0027s creating a separate RpcSession right, which connects to the same RpcServer instance?\n\nThat is my understanding. Anyone can connect to the socket that the server is listening on. And it seems to work with multiple different clients.\n\nI assumed this was intentional and supported. Otherwise the service would need to setup different servers on different sockets for each potential client, right?",
+      "parentUuid": "5609f42f_4ced0ec2",
+      "range": {
+        "startLine": 1216,
+        "startChar": 50,
+        "endLine": 1216,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d06818_ee1adf25",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 8
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "nit: EXPECT_EQ(status, OK), same on all of these",
+      "range": {
+        "startLine": 1230,
+        "startChar": 0,
+        "endLine": 1230,
+        "endChar": 30
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c705af9_ea92f90e",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3d06818_ee1adf25",
       "range": {
         "startLine": 1230,
         "startChar": 0,
@@ -123,6 +195,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "632a8576_c9c224a0",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "`getSession` is private to the binder as far as I can tell. Is there a way to get it from here? `binder-\u003eremoteBinder()-\u003egetPrivateAccessor().rpcSession()` does not work.",
+      "parentUuid": "8b333be2_75d1e526",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 19
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53ef7e98_82517f25",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 8
@@ -164,6 +260,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c54afbeb_9928fe12",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "The error without `forceShutdown()` is:\n```\nExpected equality of these values:                                                                      \n  remoteCounts.size()                                                                                   \n    Which is: 2                                                                                         \n  proc-\u003esessions.size()                                                                                 \n    Which is: 1                                                                                         \nframeworks/native/libs/binder/tests/binderRpcTestFixture.h:100: Failure                                 \nExpected equality of these values:                                                                      \n  remoteCount                                                                                           \n    Which is: 0                                                                                         \n  1   \n```\n\nWhen it\u0027s failing I\u0027m seeing `session.session-\u003estate()-\u003edump()` in the Fixture printing:\n```\n08-16 18:16:34.550  8635  8635 E RpcState: DUMP OF RpcState 0x752d303f3870                                                                                                                                         \n08-16 18:16:34.550  8635  8635 E RpcState: DUMP OF RpcState (1 nodes)                                                                                                                                              \n08-16 18:16:34.550  8635  8635 E RpcState: - address: 3 node{128838553509856 times sent: 0 times recd: 1 type: (rpc binder proxy)}                                                                                 \n08-16 18:16:34.550  8635  8635 E RpcState: END DUMP OF RpcState    \n```",
+      "parentUuid": "53ef7e98_82517f25",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1243,
+        "endChar": 54
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0692deae_3cd4468c",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 8
@@ -193,6 +313,24 @@
       "side": 1,
       "message": "oh - how much time do these add to the test too, do you know?",
       "parentUuid": "0692deae_3cd4468c",
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e9c17c_9f2e769e",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Without the new tests:\n```\nm binderRpcTest\nadb sync\ntime adb shell ./data/nativetest64/binderRpcTest/binderRpcTest64 \n\u003e real    4m50.152s \n```\n\nWith the new tests `real    4m56.998s`. Not a lot! I\u0027d guess the time is fairly variable too.",
+      "parentUuid": "942a520a_ee3e8ce5",
       "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -248,6 +386,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ab3d4f_f3f9d788",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Got rid of this test because without the cookie being passed to libbinder there is no longer a check for this.\n\nThe receipt is good enough to find the accessorProvider to delete.",
+      "parentUuid": "a35e2913_bfb6be21",
+      "range": {
+        "startLine": 1267,
+        "startChar": 0,
+        "endLine": 1267,
+        "endChar": 49
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87953839_644966c8",
@@ -261,6 +423,30 @@
       "writtenOn": "2024-08-16T16:09:02Z",
       "side": 1,
       "message": "will isDeclared return true in this case? I think it ought to - may be one reason to add an entire servicemanager implementation.",
+      "range": {
+        "startLine": 1327,
+        "startChar": 50,
+        "endLine": 1327,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d7ec8b_2eb15fcd",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "No! I didn\u0027t think about these injected services as being \"declared\". That sounds like a reasonable thing though. I can follow up with this and create a bug before closing this comment. (there\u0027s a CL after the libbinder/libbinder_ndk/libbinder_rust that will introduce this new servicemanager impl).",
+      "parentUuid": "87953839_644966c8",
       "range": {
         "startLine": 1327,
         "startChar": 50,

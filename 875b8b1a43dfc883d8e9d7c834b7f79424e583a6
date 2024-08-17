@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d91f8149_8c84bb37",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Good point, right now the user-supplied accessor provider only returns the accessor/nullptr, no status, so it\u0027s only true/false from this level.",
+      "parentUuid": "9a59df14_38c2233f",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ed9520_ee0ae35e",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 7
@@ -83,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed0e49d_f6ce2e1a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Yes, but it can not be null with the current implementation of getInjectedAccessor().\n\nAdded a check before this call in case we change the impl like you suggested.",
+      "parentUuid": "d0ed9520_ee0ae35e",
+      "range": {
+        "startLine": 75,
+        "startChar": 42,
+        "endLine": 75,
+        "endChar": 50
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb58370e_ede67d41",
@@ -96,6 +144,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "I think you want:\n- fd is not @nullable\n- fd is not inout (only out)\n- use Status constructors like serviceSpecificErrorWithMessage to have the error string contained within the status object\n\nright?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 31
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec34ed5_6fb2f79f",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "`serviceSpecificErrorWithMessage` nice!! This is exactly what I wanted instead of trying to return an error string (I mentioned the problem in the other comment). Went back to `ParcelFileDescriptor addConnection()` which fixes all those points.",
+      "parentUuid": "eb58370e_ede67d41",
       "range": {
         "startLine": 93,
         "startChar": 0,
@@ -131,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88d771b2_f5ccf885",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "I\u0027d like to keep symbols exported from libbinder to a minimum.\n\nBut outside of that, you\u0027re right they are the same thing! I was thinking we may want to add new methods later with new APIs without requiring changes in users, but we could have defaults for the methods that would be equivalent..\n\nI guess I\u0027m being biased by the NDK APIs that I decided on first and just forced the libbinder APIs to work for them 😊\n\nMaybe new methods will increase the size of libbinder similarly to exporting this type.\n\nI\u0027ll think about this some more while writing tests/users for this and think about which one feels better to use.",
+      "parentUuid": "f7c22c02_2a71c45d",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 24
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6e60489_ecf2db89",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 7
@@ -142,6 +238,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "nit: provide",
+      "range": {
+        "startLine": 168,
+        "startChar": 16,
+        "endLine": 168,
+        "endChar": 24
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3abf42f8_a52acfaf",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6e60489_ecf2db89",
       "range": {
         "startLine": 168,
         "startChar": 16,
@@ -165,6 +285,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "nit: \u0026\u0026",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 59
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d573dca4_55366b98",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d67fc68_dce6d5b7",
       "range": {
         "startLine": 179,
         "startChar": 58,
@@ -216,6 +360,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06dd1ba1_248460b7",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f45ffe0_c5d05206",
+      "range": {
+        "startLine": 218,
+        "startChar": 39,
+        "endLine": 218,
+        "endChar": 55
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10935569_84c7a162",
@@ -257,6 +425,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd9b1aa_6d529810",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10935569_84c7a162",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 9
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03fa5cfc_3db54ea2",
@@ -294,6 +486,30 @@
           ]
         }
       ],
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39cfdc0a_f1b3146f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "+1! Leave the details up to the stdlib. Likely more efficient. Done.",
+      "parentUuid": "03fa5cfc_3db54ea2",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 9
+      },
       "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -344,6 +560,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8ea375_2f58404e",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45e1ed42_b750780a",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 66
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a601433_b2421399",
@@ -367,6 +607,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69876711_ac452bc8",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a601433_b2421399",
+      "range": {
+        "startLine": 370,
+        "startChar": 30,
+        "endLine": 370,
+        "endChar": 45
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b02771_a2c48ed9",
@@ -380,6 +644,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "There are a few functions here that have extra indentation, consider this instead:\n\n```\nif (!status.isOk()) {\n    // note: preserve proximity of error log and check\n    ... status.toString() ...; return NAME_NOT_FOUND;\n}\n\nif (reportedInstance !\u003d instance) {\n    ...; return NAME_NOT_FOUND;\n}\n\nreturn OK;\n```\n\n(there are ToT for this etc..)",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 5
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c49138_68cdb018",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32b02771_a2c48ed9",
       "range": {
         "startLine": 371,
         "startChar": 0,
@@ -454,6 +742,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "058e5023_a0188c11",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "823a03c6_059ee869",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 598,
+        "endChar": 5
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8f5fa47_02a8aeb4",
@@ -467,6 +779,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "nit: /** on these",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad273ef_daf99c25",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8f5fa47_02a8aeb4",
       "range": {
         "startLine": 27,
         "startChar": 4,
@@ -502,6 +838,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39b687b0_07a356d7",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Yes, that would be helpful.\n\nI think the only thing that would definitely mean \"do not retry\" would be a permission error for the socket operations So maybe it\u0027s worth adding a new error for that and look at the",
+      "parentUuid": "ad105f39_1478764a",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 52
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "525ee3cb_ec12e81e",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 7
@@ -513,6 +873,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "update now that it\u0027s string?",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "095d695d_2a77643a",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Actually now that I write this out I\u0027m realizing we will never get this error string if there is a ServiceSpecificException, right? Because the return parcel never gets fully filled out?\n\n... I just read your other comment suggesting serviceSpecificExceptionWithMessage! Perfect! So I got rid of this String.",
+      "parentUuid": "525ee3cb_ec12e81e",
       "range": {
         "startLine": 46,
         "startChar": 7,
@@ -536,6 +920,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "\u0027out ParcelFileDescriptor\u0027? why does it need to be passed in?",
+      "range": {
+        "startLine": 49,
+        "startChar": 25,
+        "endLine": 49,
+        "endChar": 30
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d501aebe_c485a7f4",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "aosp/1607918 removed `out` for PFD because of Java. b/360137095 in case we want to add a default ctor to ParcelFileDescriptor.java some day but it\u0027s no longer needed here because I got rid of the `String` return.",
+      "parentUuid": "7f253761_f0a4b9f2",
       "range": {
         "startLine": 49,
         "startChar": 25,
@@ -571,6 +979,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72a2f310_4c7065cc",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "They can lie, and that\u0027s fine. By \"lying\" here, they are just supporting the instance they are \"lying\" about.\n\nI want to prevent people accidentally using the wrong one. I think it\u0027s pretty easy to do if there are lots of services and Accessors coming from different processes and could lead to problems later on that might be difficult to debug.\n\nI\u0027m fine with removing the comment if you think it\u0027s missleading, but I think having this check here is helpful - at least for the initial support and initial users. We can remove it later if we don\u0027t want the extra RPC call (I\u0027m sure people will ask to remove it once they notice it).",
+      "parentUuid": "c06c6f51_fbc9ed8a",
+      "range": {
+        "startLine": 54,
+        "startChar": 23,
+        "endLine": 54,
+        "endChar": 29
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a0feb35_0e06d0c8",
         "filename": "libs/binder/include/binder/IServiceManager.h",
         "patchSetId": 7
@@ -582,6 +1014,30 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "can we file a bug to fix/unify these? (do you have an overall bug for this with many child bugs - I think there will be a lot)",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b16c18_376d8bcc",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "b/360137141",
+      "parentUuid": "1a0feb35_0e06d0c8",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -639,6 +1095,30 @@
           ]
         }
       ],
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64996cb_0ab043b8",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "We talked about this and I removed the onDelete and cookie and have an object that the provider callback captures that will call the clients NDK `onDelete` callback on their `void*` when it\u0027s delted.\n\nRemoving the `void* cookie` here now allows users to register multiple provider callbacks with the same `void* data` from the NDK APIs and double free them in the onDelete accidentally.",
+      "parentUuid": "83752a7f_c3f57c84",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 0
+      },
       "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -707,6 +1187,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d91b25_ebe4aa28",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2f8385_5c156277",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 8
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90a1613_2042b20b",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "I might be misunderstanding your comment. Only libbinder can implement an accessor, and we require it to be associated with a specific service. `addConnection()` doesn\u0027t take any instance/name arguments right now so there\u0027s no way for an accessor not be associated with a service.",
+      "parentUuid": "8d1f384b_9e75d20c",
+      "range": {
+        "startLine": 65,
+        "startChar": 21,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83cbe2f2_a5c6a790",
@@ -748,6 +1276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b3d2812_ca3f9575",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Yes, deleted all of this an in binder_rpc.cpp I now package up the onDelete callback and void* in an object that will be destructed once all of the copies of the connectionInfoProvider are gone.",
+      "parentUuid": "83cbe2f2_a5c6a790",
+      "range": {
+        "startLine": 75,
+        "startChar": 46,
+        "endLine": 75,
+        "endChar": 78
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b990efe6_4d025215",
@@ -761,6 +1313,24 @@
       "writtenOn": "2024-08-14T00:18:36Z",
       "side": 1,
       "message": "nit: can you move these APIs here? so servicemanager is still the thing most people see first?",
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec187760_085bbcb8",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b990efe6_4d025215",
       "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -806,6 +1376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "441bec42_122f5c9a",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "+1 has no business in this file. Removed.",
+      "parentUuid": "b2a49bb8_6d5b7345",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 48
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b167d811_b1353603",
@@ -843,6 +1437,30 @@
           ]
         }
       ],
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9905bd24_e51fd69d",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-17T00:11:42Z",
+      "side": 1,
+      "message": "+1 has no business in this file. Removed.",
+      "parentUuid": "b167d811_b1353603",
+      "range": {
+        "startLine": 234,
+        "startChar": 62,
+        "endLine": 234,
+        "endChar": 71
+      },
       "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
