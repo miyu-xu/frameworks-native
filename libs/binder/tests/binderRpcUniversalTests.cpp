@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <type_traits>
 
+#include <android/os/IServiceManager.h>
 #include "binderRpcTestCommon.h"
 #include "binderRpcTestFixture.h"
 
@@ -31,6 +32,38 @@ namespace android {
 
 static_assert(RPC_WIRE_PROTOCOL_VERSION + 1 == RPC_WIRE_PROTOCOL_VERSION_NEXT ||
               RPC_WIRE_PROTOCOL_VERSION == RPC_WIRE_PROTOCOL_VERSION_EXPERIMENTAL);
+
+[[clang::no_destroy]] static std::once_flag gRealSmOnce;
+[[clang::no_destroy]] static sp<os::IServiceManager> gRealServiceManager;
+
+sp<os::IServiceManager> getBinderToRealServiceManager() {
+    std::call_once(gRealSmOnce, []() {
+#if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
+        /* wait for service manager */ {
+            using std::literals::chrono_literals::operator""s;
+            using android::base::WaitForProperty;
+            while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
+                ALOGE("Waited for servicemanager.ready for a second, waiting another...");
+            }
+        }
+#endif
+
+        sp<os::IServiceManager> sm = nullptr;
+        while (sm == nullptr) {
+            sm = interface_cast<os::IServiceManager>(
+                    ProcessState::self()->getContextObject(nullptr));
+            if (sm == nullptr) {
+                ALOGE("Waiting 1s on context object on %s.",
+                      ProcessState::self()->getDriverName().c_str());
+                sleep(1);
+            }
+        }
+
+        gRealServiceManager = sm;
+    });
+
+    return gRealServiceManager;
+}
 
 TEST(BinderRpcParcel, EntireParcelFormatted) {
     Parcel p;
@@ -301,10 +334,20 @@ TEST_P(BinderRpc, CannotSendRegularBinderOverSocketBinder) {
 
     auto proc = createRpcTestSocketServerProcess({});
 
-    sp<IBinder> someRealBinder = IInterface::asBinder(defaultServiceManager());
+    sp<IBinder> someRealBinder = IInterface::asBinder(getBinderToRealServiceManager());
     sp<IBinder> outBinder;
     EXPECT_EQ(INVALID_OPERATION,
               proc.rootIface->repeatBinder(someRealBinder, &outBinder).transactionError());
+}
+
+TEST_P(BinderRpc, DefaultServiceManagerBinderIsNotRealServiceManager) {
+    if (!kEnableKernelIpc || noKernel()) {
+        GTEST_SKIP() << "Test disabled because Binder kernel driver was disabled "
+                        "at build time.";
+    }
+    sp<IBinder> realSmBinder = IInterface::asBinder(getBinderToRealServiceManager());
+    sp<IBinder> defaultSmBinder = IInterface::asBinder(defaultServiceManager());
+    EXPECT_NE(realSmBinder, defaultSmBinder);
 }
 
 TEST_P(BinderRpc, CannotSendSocketBinderOverRegularBinder) {
