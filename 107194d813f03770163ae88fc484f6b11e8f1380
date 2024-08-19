@@ -16,6 +16,139 @@
       "message": "The \"CannotSendRegularBinderOverSocketBinder\" was failing. So I fixed it by creating a function which returns the realServiceManager binder.\n\nWhile I was doing that, I also added a new test which ensures that realServiceManagerBinder !\u003d defaultServiceManager binder.",
       "revId": "107194d813f03770163ae88fc484f6b11e8f1380",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e043f0de_f07f0f9d",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-19T23:35:40Z",
+      "side": 1,
+      "message": "this is too much code to copy/paste, and we shouldn\u0027t duplicate the logic anyway. Please delete",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6804677c_cce8d8e4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcUniversalTests.cpp",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/tests/binderRpcUniversalTests.cpp",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "    return getBinderToRealServiceManager(ProcessState::self());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "107194d813f03770163ae88fc484f6b11e8f1380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e53939_534c437f",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-19T23:35:40Z",
+      "side": 1,
+      "message": "you can use:\n\n```\nsp\u003cIBinder\u003e someRealBinder \u003d defaultServiceManager()-\u003egetService(String16(\"activity\"));\nASSERT_NE(someRealBinder, nullptr);\n```\n\nThere might be a few other tests that make this assumption as well. I\u0027ve been talking with Devin about creating standard \"get a proxy binder\" API, but alas!",
+      "range": {
+        "startLine": 337,
+        "startChar": 54,
+        "endLine": 337,
+        "endChar": 85
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d5d5fa98_106f0f4c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcUniversalTests.cpp",
+              "range": {
+                "startLine": 337,
+                "startChar": 0,
+                "endLine": 338,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003cIBinder\u003e someRealBinder \u003d defaultServiceManager()-\u003egetService(String16(\"activity\"));\n    ASSERT_NE(someRealBinder, nullptr);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "107194d813f03770163ae88fc484f6b11e8f1380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afb38de_f187074e",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-19T23:35:40Z",
+      "side": 1,
+      "message": "also, you can avoid adding this test as well.",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f351a6ee_7dd96173",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcUniversalTests.cpp",
+              "range": {
+                "startLine": 342,
+                "startChar": 0,
+                "endLine": 352,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "107194d813f03770163ae88fc484f6b11e8f1380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
