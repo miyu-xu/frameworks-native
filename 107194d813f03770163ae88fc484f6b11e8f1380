@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "316a6fb8_1dfbd824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-19T23:07:48Z",
+      "side": 1,
+      "message": "The \"CannotSendRegularBinderOverSocketBinder\" was failing. So I fixed it by creating a function which returns the realServiceManager binder.\n\nWhile I was doing that, I also added a new test which ensures that realServiceManagerBinder !\u003d defaultServiceManager binder.",
+      "revId": "107194d813f03770163ae88fc484f6b11e8f1380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
