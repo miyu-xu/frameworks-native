@@ -103,6 +103,20 @@ impl HardwareBuffer {
         }
     }
 
+    /// Returns the native handle of the buffer.
+    ///
+    /// The returned pointer may be null if the operation fails for any reason.
+    pub fn native_handle(&self) -> *const ffi::native_handle_t {
+        // SAFETY: The AHardwareBuffer pointer we pass is guaranteed to be non-null and valid
+        // because it must have been allocated by `AHardwareBuffer_allocate`,
+        // `AHardwareBuffer_readFromParcel` or the caller of `from_raw` and we have not yet
+        // released it.
+        unsafe { ffi::AHardwareBuffer_getNativeHandle(self.0.as_ptr()) }
+    }
+
+    /// Creates a `HardwareBuffer` from a native handle.
+    //pub fn create_from_handle() -> Self {}
+
     /// Adopts the given raw pointer and wraps it in a Rust HardwareBuffer.
     ///
     /// # Safety
