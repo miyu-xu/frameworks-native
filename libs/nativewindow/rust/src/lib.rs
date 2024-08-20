@@ -16,7 +16,10 @@
 
 extern crate nativewindow_bindgen as ffi;
 
+mod handle;
 mod surface;
+
+pub use handle::NativeHandle;
 pub use surface::Surface;
 
 pub use ffi::{AHardwareBuffer_Format, AHardwareBuffer_UsageFlags};
@@ -103,35 +106,43 @@ impl HardwareBuffer {
         }
     }
 
-    /// Returns the native handle of the buffer.
+    /// Returns a clone of the native handle of the buffer.
     ///
-    /// The returned pointer may be null if the operation fails for any reason.
-    pub fn native_handle(&self) -> *const ffi::native_handle_t {
+    /// Returns `None` if the operation fails for any reason.
+    pub fn native_handle(&self) -> Option<NativeHandle> {
         // SAFETY: The AHardwareBuffer pointer we pass is guaranteed to be non-null and valid
         // because it must have been allocated by `AHardwareBuffer_allocate`,
         // `AHardwareBuffer_readFromParcel` or the caller of `from_raw` and we have not yet
         // released it.
-        unsafe { ffi::AHardwareBuffer_getNativeHandle(self.0.as_ptr()) }
+        let native_handle = unsafe { ffi::AHardwareBuffer_getNativeHandle(self.0.as_ptr()) };
+        NonNull::new(native_handle.cast_mut()).and_then(|native_handle| {
+            // SAFETY: `AHardwareBuffer_getNativeHandle` should have returned a valid pointer which
+            // is valid at least as long as the buffer is, and `clone_from_raw` clones it rather
+            // than taking ownership of it so the original `native_handle` isn't stored.
+            unsafe { NativeHandle::clone_from_raw(native_handle) }
+        })
     }
 
     /// Creates a `HardwareBuffer` from a native handle.
     ///
-    /// # Safety
-    ///
-    /// `handle` must be a valid pointer to a `native_handle_t`.
-    pub unsafe fn create_from_handle(
-        handle: NonNull<ffi::native_handle_t>,
+    /// The native handle is cloned, so this doesn't take ownership of the original handle passed
+    /// in.
+    pub fn create_from_handle(
+        handle: &NativeHandle,
         buffer_desc: &ffi::AHardwareBuffer_Desc,
     ) -> Result<Self, StatusCode> {
-        let method = ffi::CreateFromHandleMethod_AHARDWAREBUFFER_CREATE_FROM_HANDLE_METHOD_REGISTER;
         let mut buffer = ptr::null_mut();
         // SAFETY: The caller guarantees that `handle` is valid, and the buffer pointer is valid
-        // because it comes from a reference.
+        // because it comes from a reference. The method we pass means that
+        // `AHardwareBuffer_createFromHandle` will clone the handle rather than taking ownership of
+        // it.
         let status = unsafe {
             ffi::AHardwareBuffer_createFromHandle(
                 buffer_desc,
-                handle.as_ptr(),
-                method.try_into().unwrap(),
+                handle.as_raw().as_ptr(),
+                ffi::CreateFromHandleMethod_AHARDWAREBUFFER_CREATE_FROM_HANDLE_METHOD_CLONE
+                    .try_into()
+                    .unwrap(),
                 &mut buffer,
             )
         };
