@@ -69,6 +69,24 @@
       "message": "Hey, can you confirm one thing though? I\u0027m a bit confused how this could work. It should require libbinder to be in the APEX to use this. Does this mean you have this library in the APEX, and it links to libbinder on the system image? At that point, could you link directly against this in the system.img?",
       "revId": "023537ceee3ebfba37cf1a9ac150a0e9110e9d09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eee63f6_e10dc536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-20T16:06:18Z",
+      "side": 1,
+      "message": "I needed to add this CL in order to compile libbinder into my rust binary.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3216616/3/microfuchsia/microfuchsiad/Android.bp#17\n\nThe library is not added separately, but is compiled in. soong complained when I tried to link against the library without adding these permissions.\n\n```\n    rustlibs: [\n        \"libbinder_rs\",\n    ],\n```",
+      "parentUuid": "4072c194_31fcebd6",
+      "revId": "023537ceee3ebfba37cf1a9ac150a0e9110e9d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
