@@ -39,6 +39,7 @@ rust_bindgen {
     ],
     shared_libs: [
         "libbinder_ndk",
+        "libcutils",
         "libnativewindow",
     ],
     rustlibs: [
