@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "54df669e_ed6b80c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-08-20T02:08:16Z",
+      "side": 1,
+      "message": "I\u0027ve rebased the patch.",
+      "parentUuid": "07fe5bea_401aaabb",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 5
+      },
+      "revId": "36213974bd5554af9b754cfb211c6cf072ec1ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a2653c8e_a8afc45a",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-08-16T13:01:44Z",
       "side": 1,
       "message": "nit please inline",
+      "range": {
+        "startLine": 4455,
+        "startChar": 21,
+        "endLine": 4455,
+        "endChar": 37
+      },
+      "revId": "36213974bd5554af9b754cfb211c6cf072ec1ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a532836_101c2b87",
+        "filename": "services/surfaceflinger/SurfaceFlinger.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4455,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-08-20T02:08:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21390748_281db2be",
       "range": {
         "startLine": 4455,
         "startChar": 21,
