@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6159e55_8eddecb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-08-20T21:16:12Z",
+      "side": 1,
+      "message": "This logic got submitted via cherry-picks to other branches, and is now the current behavior: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/data/etc/handheld_core_hardware.xml;l\u003d51\n\nI\u0027ll abandon this CL as stable (but restore it if you think this is mistaken).",
+      "revId": "56a18c8f1ca1d85d4de1a4795c5b6719de9743e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
