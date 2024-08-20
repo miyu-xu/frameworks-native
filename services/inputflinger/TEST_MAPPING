@@ -97,23 +97,10 @@
       ]
     },
     {
-      "name": "FrameworksCoreTests",
-      "options": [
-        {
-          "include-filter": "android.hardware.input"
-        }
-      ]
+      "name": "FrameworksCoreTests_hardware_input"
     },
     {
-      "name": "FrameworksCoreTests",
-      "options": [
-        {
-          "include-filter": "android.view.VerifiedKeyEventTest"
-        },
-        {
-          "include-filter": "android.view.VerifiedMotionEventTest"
-        }
-      ]
+      "name": "FrameworksCoreTests_view_verified"
     },
     {
       "name": "CtsAppTestCases",
@@ -240,15 +227,7 @@
       ]
     },
     {
-      "name": "FrameworksCoreTests",
-      "options": [
-        {
-          "include-filter": "android.view.VerifiedKeyEventTest"
-        },
-        {
-          "include-filter": "android.view.VerifiedMotionEventTest"
-        }
-      ]
+      "name": "FrameworksCoreTests_view_verified"
     },
     {
       "name": "CtsAppTestCases",
