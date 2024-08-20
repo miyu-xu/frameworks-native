@@ -52,6 +52,23 @@
       "parentUuid": "ead942e5_3333910d",
       "revId": "023537ceee3ebfba37cf1a9ac150a0e9110e9d09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4072c194_31fcebd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T00:54:47Z",
+      "side": 1,
+      "message": "Hey, can you confirm one thing though? I\u0027m a bit confused how this could work. It should require libbinder to be in the APEX to use this. Does this mean you have this library in the APEX, and it links to libbinder on the system image? At that point, could you link directly against this in the system.img?",
+      "revId": "023537ceee3ebfba37cf1a9ac150a0e9110e9d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
