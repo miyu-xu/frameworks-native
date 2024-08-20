@@ -1008,6 +1008,36 @@ std::string Gralloc4Mapper::dumpBuffers(bool less) const {
     return stream.str();
 }
 
+uint32_t Gralloc4Mapper::getMultiViewInfo(buffer_handle_t bufferHandle) const {
+    uint32_t views = 0;
+    auto ret = mMapper->getMultiViewInfo(const_cast<native_handle_t*>(bufferHandle), &views);
+
+    const Error error = ret.withDefault(kTransactionError);
+    if (error != Error::NONE) {
+        ALOGE("getMultiViewInfo failed with error: %d", error);
+        // return invalid bitset of VIEW_MASK
+        return 0;
+    }
+
+    return views;
+}
+
+status_t Gralloc4Mapper::importViewBuffer(const native_handle_t* rawHandle,
+                                         uint32_t view, buffer_handle_t* outHandle) const {
+    Error error;
+    auto ret = mMapper->importViewBuffer(const_cast<native_handle_t*>(rawHandle), view,
+                            [&](const auto& tmpError, const auto& tmpBuffer) {
+        error = tmpError;
+        if (error != Error::NONE) {
+            ALOGE("importViewBuffer(%p, %d) failed: %d", rawHandle, view, error);
+            return;
+        }
+        *outHandle = static_cast<buffer_handle_t>(tmpBuffer);
+    });
+
+    return static_cast<status_t>((ret.isOk()) ? error : kTransactionError);
+}
+
 Gralloc4Allocator::Gralloc4Allocator(const Gralloc4Mapper& mapper) : mMapper(mapper) {
     mAllocator = IAllocator::getService();
     if (__builtin_available(android 31, *)) {

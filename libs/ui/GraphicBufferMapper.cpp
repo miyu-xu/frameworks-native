@@ -379,5 +379,22 @@ status_t GraphicBufferMapper::setSmpte2094_10(buffer_handle_t bufferHandle,
     return mMapper->setSmpte2094_10(bufferHandle, smpte2094_10);
 }
 
+uint32_t GraphicBufferMapper::getMultiViewInfo(buffer_handle_t bufferHandle){
+    return mMapper->getMultiViewInfo(bufferHandle);
+}
+status_t GraphicBufferMapper::importViewBuffer(const native_handle_t* rawHandle,
+                                                uint32_t view, buffer_handle_t* outHandle){
+    buffer_handle_t bufferHandle;
+    status_t error = mMapper->importViewBuffer(rawHandle, view, &bufferHandle);
+    if (error != NO_ERROR) {
+        ALOGW("importViewBuffer(%p, %d) failed: %d", rawHandle, view, error);
+        return error;
+    }
+
+    *outHandle = bufferHandle;
+
+    return NO_ERROR;
+}
+
 // ---------------------------------------------------------------------------
 }; // namespace android

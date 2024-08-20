@@ -32,6 +32,7 @@
 #include <ui/Rect.h>
 #include <utils/Flattenable.h>
 #include <utils/RefBase.h>
+#include <ui/GraphicTypes.h>
 
 #include <nativebase/nativebase.h>
 
@@ -88,6 +89,12 @@ public:
         USAGE_CURSOR            = GRALLOC_USAGE_CURSOR,
     };
 
+    enum : uint32_t {
+        VIEW_MASK_LEFT = 0x00000001,
+        VIEW_MASK_RIGHT = 0x00000002,
+        VIEW_MASK_LEFT_DEPTH = 0x00000004,
+        VIEW_MASK_RIGHT_DEPTH = 0x00000008,
+    };
     static sp<GraphicBuffer> from(ANativeWindowBuffer *);
 
     AHB_CONVERSION static GraphicBuffer* fromAHardwareBuffer(AHardwareBuffer*);
@@ -228,6 +235,10 @@ public:
     }
 
     void addDeathCallback(GraphicBufferDeathCallback deathCallback, void* context);
+
+    // get a bitset of VIEW_MASK_*
+    uint32_t getAuxiliaryViewInfo() const;
+    const native_handle_t* getAuxiliaryHandle(uint32_t viewMask);
 
 private:
     ~GraphicBuffer();

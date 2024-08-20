@@ -176,6 +176,10 @@ public:
 
     Version getMapperVersion() const { return mMapperVersion; }
 
+    uint32_t getMultiViewInfo(buffer_handle_t bufferHandle);
+    status_t importViewBuffer(const native_handle_t* rawHandle, 
+                              uint32_t view, buffer_handle_t* outHandle);
+
 private:
     friend class Singleton<GraphicBufferMapper>;
 

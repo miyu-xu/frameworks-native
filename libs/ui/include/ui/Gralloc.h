@@ -201,6 +201,13 @@ public:
                                      std::optional<std::vector<uint8_t>> /*smpte2094_10*/) const {
         return INVALID_OPERATION;
     }
+    virtual uint32_t getMultiViewInfo(buffer_handle_t bufferHandle) const {
+        return 0;
+    }
+    virtual status_t importViewBuffer(const native_handle_t* rawHandle,
+                                     uint32_t view, buffer_handle_t* outHandle) const {
+        return INVALID_OPERATION;
+    }
 };
 
 // A wrapper to IAllocator

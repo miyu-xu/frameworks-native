@@ -124,6 +124,10 @@ public:
     std::vector<android::hardware::graphics::mapper::V4_0::IMapper::MetadataTypeDescription>
     listSupportedMetadataTypes() const;
 
+    uint32_t getMultiViewInfo(buffer_handle_t bufferHandle) const override;
+    status_t importViewBuffer(const native_handle_t* rawHandle,
+                              uint32_t view, buffer_handle_t* outHandle) const override;
+
 private:
     friend class GraphicBufferAllocator;
 

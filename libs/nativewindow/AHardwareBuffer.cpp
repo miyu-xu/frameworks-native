@@ -802,4 +802,13 @@ AHardwareBuffer* AHardwareBuffer_from_GraphicBuffer(GraphicBuffer* buffer) {
     return buffer->toAHardwareBuffer();
 }
 
+uint32_t AHardwareBuffer_getAuxiliaryViewInfo(const AHardwareBuffer* buffer) {
+    return AHardwareBuffer_to_GraphicBuffer(buffer)->getAuxiliaryViewInfo();
+}
+
+const native_handle_t* AHardwareBuffer_getAuxiliaryBuffer(AHardwareBuffer* buffer,
+        uint32_t viewMask) {
+    return AHardwareBuffer_to_GraphicBuffer(buffer)->getAuxiliaryHandle(viewMask);
+}
+
 } // namespace android

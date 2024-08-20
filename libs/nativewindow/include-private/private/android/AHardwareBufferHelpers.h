@@ -33,6 +33,13 @@ struct ANativeWindowBuffer;
 
 namespace android {
 
+enum : uint32_t {
+    VIEW_MASK_LEFT = 0x00000001,
+    VIEW_MASK_RIGHT = 0x00000002,
+    VIEW_MASK_LEFT_DEPTH = 0x00000004,
+    VIEW_MASK_RIGHT_DEPTH = 0x00000008,
+};
+
 // Validates whether the passed description does not have conflicting
 // parameters. Note: this does not verify any platform-specific contraints.
 bool AHardwareBuffer_isValidDescription(const AHardwareBuffer_Desc* desc, bool log);
@@ -60,6 +67,17 @@ const ANativeWindowBuffer* AHardwareBuffer_to_ANativeWindowBuffer(const AHardwar
 ANativeWindowBuffer* AHardwareBuffer_to_ANativeWindowBuffer(AHardwareBuffer* buffer);
 
 AHardwareBuffer* AHardwareBuffer_from_GraphicBuffer(GraphicBuffer* buffer);
+
+// Get the bitset of VIEW_MASK_* of all the auxiliary views inlcluded in AHB, excluding the base
+// view itself
+uint32_t AHardwareBuffer_getAuxiliaryViewInfo(const AHardwareBuffer* buffer);
+
+// The parameter viewMask is a single view mask, which shall not contains multiple masks.
+// If the AHB has multiple auxiliary views, client shall call AHardwareBuffer_getAuxiliaryBuffer
+// individually for each view.
+const native_handle_t* AHardwareBuffer_getAuxiliaryBuffer(AHardwareBuffer* buffer,
+        uint32_t viewMask);
+
 } // namespace android
 
 #endif // ANDROID_PRIVATE_NATIVE_AHARDWARE_BUFFER_HELPERS_H

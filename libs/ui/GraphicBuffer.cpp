@@ -618,6 +618,44 @@ void GraphicBuffer::addDeathCallback(GraphicBufferDeathCallback deathCallback, v
     mDeathCallbacks.emplace_back(deathCallback, context);
 }
 
+uint32_t GraphicBuffer::getAuxiliaryViewInfo() const {
+    if(handle != nullptr){
+        return mBufferMapper.getMultiViewInfo(handle);
+    }else{
+        ALOGE("Failed to get auxiliary views. Bad raw handle.");
+        return 0;
+    }
+}
+
+const native_handle_t* GraphicBuffer::getAuxiliaryHandle(uint32_t viewMask) {
+    //Check raw handle
+    if(handle == nullptr){
+        ALOGE("getAuxiliaryHandle: Failed to get auxiliary handle. Bad raw handle.");
+        return nullptr;
+    }
+
+    //check the view mask
+    switch (viewMask) {
+        case VIEW_MASK_LEFT:
+        case VIEW_MASK_RIGHT:
+        case VIEW_MASK_LEFT_DEPTH:
+        case VIEW_MASK_RIGHT_DEPTH:
+            break;
+        default:
+            ALOGE("getAuxiliaryHandle:Unsupported view mask %d", viewMask);
+            return nullptr;
+    }
+
+    buffer_handle_t auxiliaryHandle;
+    status_t error = mBufferMapper.importViewBuffer(handle, viewMask, &auxiliaryHandle);
+    if (error != NO_ERROR) {
+        ALOGE("getAuxiliaryHandle: import View Buffer failed: %d", error);
+        return nullptr;
+    }
+
+    return auxiliaryHandle;
+}
+
 // ---------------------------------------------------------------------------
 
 }; // namespace android
