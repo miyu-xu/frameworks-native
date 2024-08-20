@@ -29,6 +29,7 @@ rust_bindgen {
         "--bitfield-enum=AHardwareBuffer_UsageFlags",
 
         "--allowlist-file=.*/nativewindow/include/.*\\.h",
+        "--allowlist-file=.*/include/cutils/.*\\.h",
         "--blocklist-type",
         "AParcel",
         "--raw-line",

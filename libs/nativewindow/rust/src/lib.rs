@@ -16,7 +16,10 @@
 
 extern crate nativewindow_bindgen as ffi;
 
+mod handle;
 mod surface;
+
+pub use handle::NativeHandle;
 pub use surface::Surface;
 
 pub use ffi::{AHardwareBuffer_Format, AHardwareBuffer_UsageFlags};
@@ -106,21 +109,23 @@ impl HardwareBuffer {
     /// Returns the native handle of the buffer.
     ///
     /// The returned pointer may be null if the operation fails for any reason.
-    pub fn native_handle(&self) -> *const ffi::native_handle_t {
+    pub fn native_handle(&self) -> Option<NativeHandle> {
         // SAFETY: The AHardwareBuffer pointer we pass is guaranteed to be non-null and valid
         // because it must have been allocated by `AHardwareBuffer_allocate`,
         // `AHardwareBuffer_readFromParcel` or the caller of `from_raw` and we have not yet
         // released it.
-        unsafe { ffi::AHardwareBuffer_getNativeHandle(self.0.as_ptr()) }
+        let native_handle = unsafe { ffi::AHardwareBuffer_getNativeHandle(self.0.as_ptr()) };
+        NonNull::new(native_handle.cast_mut()).map(|native_handle| {
+            // TODO: Do we need to clone the native_handle_t first?
+            // SAFETY: AHardwareBuffer_getNativeHandle should have returned a valid pointer, and we
+            // don't use it anywhere else after this.
+            unsafe { NativeHandle::from_raw(native_handle) }
+        })
     }
 
     /// Creates a `HardwareBuffer` from a native handle.
-    ///
-    /// # Safety
-    ///
-    /// `handle` must be a valid pointer to a `native_handle_t`.
-    pub unsafe fn create_from_handle(
-        handle: NonNull<ffi::native_handle_t>,
+    pub fn create_from_handle(
+        handle: NativeHandle,
         buffer_desc: &ffi::AHardwareBuffer_Desc,
     ) -> Result<Self, StatusCode> {
         let method = ffi::CreateFromHandleMethod_AHARDWAREBUFFER_CREATE_FROM_HANDLE_METHOD_REGISTER;
@@ -130,11 +135,13 @@ impl HardwareBuffer {
         let status = unsafe {
             ffi::AHardwareBuffer_createFromHandle(
                 buffer_desc,
-                handle.as_ptr(),
+                // TODO: Does createFromHandle consume the handle?
+                handle.into_raw().as_ptr(),
                 method.try_into().unwrap(),
                 &mut buffer,
             )
         };
+        // TODO: what to do with handle if AHardwareBuffer_createFromHandle fails?
         status_result(status)?;
         Ok(Self(NonNull::new(buffer).expect("Allocated AHardwareBuffer was null")))
     }
