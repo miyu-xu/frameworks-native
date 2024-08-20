@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f55d2cc_945b0a91",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "I see. The thing I\u0027m worried about is if we add a new type, we don\u0027t want to forget to add it in doesAccessorSupportSocket. Could you switch that function to be the opposite logic, e.g. doesAccessorSupportSocket \u003d not UNIX_BOOTSTRAP and not TIPC. That way, new types added will be tested?\n\nYou can also subclass BinderRpc and call it \"BinderRpcAccessor\" and make this `TEST_P(BinderRpcAccessor, ...)` and then do this check in SetUp or similar, and that way you don\u0027t need this check at the beginning of each method or to copy it. Though no worries about that, I think it\u0027ll make sense if there is more to copy if there is a nice error message in the GTEST_SKIP.",
+      "parentUuid": "c59a2f25_8afc5bc5",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 21
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5609f42f_4ced0ec2",
         "filename": "libs/binder/tests/binderRpcTest.cpp",
         "patchSetId": 8
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "\u003e so when this happens, it\u0027s creating a separate RpcSession right, which connects to the same RpcServer instance?\n\nThat is my understanding. Anyone can connect to the socket that the server is listening on. And it seems to work with multiple different clients.\n\nI assumed this was intentional and supported. Otherwise the service would need to setup different servers on different sockets for each potential client, right?",
       "parentUuid": "5609f42f_4ced0ec2",
+      "range": {
+        "startLine": 1216,
+        "startChar": 50,
+        "endLine": 1216,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213d1962_785c43af",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "Right, it\u0027s a separate connect, so a separate RpcSession will be created on the other side. It should work, that\u0027s why you\u0027re seeing the multi-session error.",
+      "parentUuid": "6ba8d337_7d954d77",
       "range": {
         "startLine": 1216,
         "startChar": 50,
@@ -379,6 +427,24 @@
       "side": 1,
       "message": "Without the new tests:\n```\nm binderRpcTest\nadb sync\ntime adb shell ./data/nativetest64/binderRpcTest/binderRpcTest64 \n\u003e real    4m50.152s \n```\n\nWith the new tests `real    4m56.998s`. Not a lot! I\u0027d guess the time is fairly variable too.",
       "parentUuid": "942a520a_ee3e8ce5",
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61d9cf8_dad3ee2a",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "perfect! thanks",
+      "parentUuid": "58e9c17c_9f2e769e",
       "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

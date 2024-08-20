@@ -68,6 +68,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b90657a2_0e09d6f0",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "Could you go a layer up? The functions that call this are able to return errors as well.",
+      "parentUuid": "d91f8149_8c84bb37",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0ed9520_ee0ae35e",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 7
@@ -862,6 +886,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c30f00d5_feb918a7",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "(incomplete comment?)",
+      "parentUuid": "39b687b0_07a356d7",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 52
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "525ee3cb_ec12e81e",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 7
@@ -1001,6 +1049,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcdee152_f0985289",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "72a2f310_4c7065cc",
+      "range": {
+        "startLine": 54,
+        "startChar": 23,
+        "endLine": 54,
+        "endChar": 29
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a0feb35_0e06d0c8",
@@ -1125,6 +1197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d3094fd_3d54575b",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "ack, if you want to avoid this, the way would be to use a class like this:\n\n```\nclass AccessorProvider {\n    virtual bool querySubclass(void* /* \u003d class constructor address */) \u003d 0;\n    virtual sp\u003cIBinder\u003e getAccessor(const String16\u0026 name) \u003d 0;\n};\n\n// then in libbinder_ndk\n\nclass NdkAccessorProvider {\n    bool querySubclass(void* clazz) { return clazz \u003d\u003d \u0026NdkAccessorProvider; }\n    sp\u003cIBinder\u003e getAccessor(const String16\u0026 name) {\n        return /*potentially in another process*/ createAccessor(...);\n    }\n    void* data;\n};\n```\n\nthen in function to add accessor provider in libbinder_ndk, you could iterate over all accessors, and for those that return true from querySubclass(\u0026NdkAccessorProvider), you can cast to NdkAccessorProvider and check for double-ownership.\n\nbut yeah, ignoring and documenting the requirements is also okay.",
+      "parentUuid": "a64996cb_0ab043b8",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 0
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d1f384b_9e75d20c",
         "filename": "libs/binder/include/binder/IServiceManager.h",
         "patchSetId": 7
@@ -1225,6 +1321,30 @@
       "side": 1,
       "message": "I might be misunderstanding your comment. Only libbinder can implement an accessor, and we require it to be associated with a specific service. `addConnection()` doesn\u0027t take any instance/name arguments right now so there\u0027s no way for an accessor not be associated with a service.",
       "parentUuid": "8d1f384b_9e75d20c",
+      "range": {
+        "startLine": 65,
+        "startChar": 21,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "232a4441_c91819fb",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-20T23:58:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c90a1613_2042b20b",
       "range": {
         "startLine": 65,
         "startChar": 21,
