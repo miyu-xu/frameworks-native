@@ -138,7 +138,6 @@ cc_binary {
         "lpdump",
         "lpdumpd",
         "procrank",
-        "screencap",
         "showmap",
         "ss",
         "storaged",
