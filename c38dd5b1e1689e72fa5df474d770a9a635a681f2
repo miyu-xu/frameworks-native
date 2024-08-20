@@ -217,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5674a5_352097dc",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-20T22:07:47Z",
+      "side": 1,
+      "message": "Didn\u0027t need to do this. We can delete the binder instead. We do seem to have to wait for the service to remove the connection after the client binders are deleted.",
+      "parentUuid": "632a8576_c9c224a0",
+      "range": {
+        "startLine": 1234,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 19
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ef7e98_82517f25",
@@ -272,6 +296,30 @@
       "side": 1,
       "message": "The error without `forceShutdown()` is:\n```\nExpected equality of these values:                                                                      \n  remoteCounts.size()                                                                                   \n    Which is: 2                                                                                         \n  proc-\u003esessions.size()                                                                                 \n    Which is: 1                                                                                         \nframeworks/native/libs/binder/tests/binderRpcTestFixture.h:100: Failure                                 \nExpected equality of these values:                                                                      \n  remoteCount                                                                                           \n    Which is: 0                                                                                         \n  1   \n```\n\nWhen it\u0027s failing I\u0027m seeing `session.session-\u003estate()-\u003edump()` in the Fixture printing:\n```\n08-16 18:16:34.550  8635  8635 E RpcState: DUMP OF RpcState 0x752d303f3870                                                                                                                                         \n08-16 18:16:34.550  8635  8635 E RpcState: DUMP OF RpcState (1 nodes)                                                                                                                                              \n08-16 18:16:34.550  8635  8635 E RpcState: - address: 3 node{128838553509856 times sent: 0 times recd: 1 type: (rpc binder proxy)}                                                                                 \n08-16 18:16:34.550  8635  8635 E RpcState: END DUMP OF RpcState    \n```",
       "parentUuid": "53ef7e98_82517f25",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1243,
+        "endChar": 54
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad31fb9_824c3275",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-20T22:07:47Z",
+      "side": 1,
+      "message": "Adding a sleep after removing the last references of the binder from this new RpcSession avoids the problem. I wasn\u0027t seeing it with `usleep(1000)`, but was still seeing it with `usleep(100)`, so I added `usleep(10000)` to be a little safer.",
+      "parentUuid": "c54afbeb_9928fe12",
       "range": {
         "startLine": 1243,
         "startChar": 0,
