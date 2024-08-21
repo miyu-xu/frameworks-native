@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95676a59_a6012685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-21T23:52:57Z",
+      "side": 1,
+      "message": "Pawan, if you are going with the other approach here, will you upload it over this, or upload it elsewhere and abandon this?",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e884d73a_9659d382",
         "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
         "patchSetId": 5
@@ -14,6 +31,24 @@
       "writtenOn": "2024-08-12T22:07:33Z",
       "side": 1,
       "message": "Does this really need to be in the NDK? It appears to be just an LL-NDK header.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaaa4fb2_2f8829b9",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-21T23:52:57Z",
+      "side": 1,
+      "message": "It\u0027s not. It\u0027s in the include_cpp headers, which are not in the NDK. We split them off in b/337297103. They are in the /ndk/ folder because that\u0027s the home of libbinder_ndk.",
+      "parentUuid": "e884d73a_9659d382",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +83,24 @@
       "writtenOn": "2024-08-12T22:07:33Z",
       "side": 1,
       "message": "Same. Did you actually intend to add this to the NDK? Assuming not. Will review if that was intentional.\n\nWe don\u0027t even have guidelines for C++ reviews (the NDK is all C, so even though this is all inlines that wouldn\u0027t cause ABI problems, it\u0027s not something we have a process for), so if this is really intended for the NDK, it\u0027s going to slow things down a lot. The other C++ stuff that\u0027s in the NDK for binder was added by mistake.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06bbfe5d_854d4faf",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_trace_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-21T23:52:57Z",
+      "side": 1,
+      "message": "Same. It\u0027s not in the NDK, it\u0027s in include_cpp, and it in the original libbinder_ndk, it wasn\u0027t added as a mistake, it was intentional at the time. However, it caused problems due to coupling with the AIDL compiler, and you didn\u0027t like it. So here we are, but this isn\u0027t an NDK header, so it should be okay.",
+      "parentUuid": "e95444d3_599489fe",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +226,30 @@
       "writtenOn": "2024-08-12T22:07:33Z",
       "side": 1,
       "message": "I don\u0027t understand what platform release this corresponds to, but this looks like it potentially forces NDK APIs onto an unexpected finalization schedule?\n\n@michaelwr",
+      "range": {
+        "startLine": 254,
+        "startChar": 39,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd54d81b_c427a521",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-21T23:52:57Z",
+      "side": 1,
+      "message": "Yeah, this was a big conversation last year, but if there was a need to change the NDK API later, we\u0027d have to rename it and still support the same API. Though, we won\u0027t have this problem again this year because the schedule is more aligned.",
+      "parentUuid": "67ef387a_aef1ee2a",
       "range": {
         "startLine": 254,
         "startChar": 39,
