@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ec82560_1b2854d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T00:01:42Z",
+      "side": 1,
+      "message": "\u003e frameworks/native/libs/binder/Status.cpp:270:24: error: format specifies type \u0027int\u0027 but the argument has type \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wformat]\n  269 |     ALOGD(\"Skip unused header. exception code: %d, start: %d, size: %d.\",\n      |                                                           ~~\n      |                                                           %zu\n  270 |            mException, header_start, header_size);\n      |                        ^~~~~~~~~~~~",
+      "revId": "f3dab6db7fb0b0c5d40c7d4866c2ae7f232f8683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9ffd7df_95df99c4",
         "filename": "libs/binder/Status.cpp",
         "patchSetId": 1
