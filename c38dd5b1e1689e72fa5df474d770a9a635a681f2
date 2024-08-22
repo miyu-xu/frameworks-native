@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96771ee6_48bdb2bf",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "\u003e if we add a new type, we don\u0027t want to forget to add it in\n\nGood call. subclassed, added messages in the skips, and only skipping for the known unsupported types.",
+      "parentUuid": "7f55d2cc_945b0a91",
+      "range": {
+        "startLine": 1178,
+        "startChar": 0,
+        "endLine": 1178,
+        "endChar": 21
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5609f42f_4ced0ec2",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Right, it\u0027s a separate connect, so a separate RpcSession will be created on the other side. It should work, that\u0027s why you\u0027re seeing the multi-session error.",
       "parentUuid": "6ba8d337_7d954d77",
+      "range": {
+        "startLine": 1216,
+        "startChar": 50,
+        "endLine": 1216,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e98b47b_44037369",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "213d1962_785c43af",
       "range": {
         "startLine": 1216,
         "startChar": 50,
@@ -449,6 +497,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10c738a_3953d41c",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a61d9cf8_dad3ee2a",
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a35e2913_bfb6be21",
@@ -561,6 +627,30 @@
       "side": 1,
       "message": "No! I didn\u0027t think about these injected services as being \"declared\". That sounds like a reasonable thing though. I can follow up with this and create a bug before closing this comment. (there\u0027s a CL after the libbinder/libbinder_ndk/libbinder_rust that will introduce this new servicemanager impl).",
       "parentUuid": "87953839_644966c8",
+      "range": {
+        "startLine": 1327,
+        "startChar": 50,
+        "endLine": 1327,
+        "endChar": 62
+      },
+      "revId": "c38dd5b1e1689e72fa5df474d770a9a635a681f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3218c23b_5115bde5",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "Made a comment in local service manager CL with a link to this comment.",
+      "parentUuid": "17d7ec8b_2eb15fcd",
       "range": {
         "startLine": 1327,
         "startChar": 50,

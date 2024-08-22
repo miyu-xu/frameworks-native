@@ -90,6 +90,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d2cd50_9a67407d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "I added errors + logs to go up the calls.",
+      "parentUuid": "b90657a2_0e09d6f0",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0ed9520_ee0ae35e",
@@ -239,6 +263,30 @@
       "side": 1,
       "message": "I\u0027d like to keep symbols exported from libbinder to a minimum.\n\nBut outside of that, you\u0027re right they are the same thing! I was thinking we may want to add new methods later with new APIs without requiring changes in users, but we could have defaults for the methods that would be equivalent..\n\nI guess I\u0027m being biased by the NDK APIs that I decided on first and just forced the libbinder APIs to work for them 😊\n\nMaybe new methods will increase the size of libbinder similarly to exporting this type.\n\nI\u0027ll think about this some more while writing tests/users for this and think about which one feels better to use.",
       "parentUuid": "f7c22c02_2a71c45d",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 24
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3256d5d2_74dea589",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88d771b2_f5ccf885",
       "range": {
         "startLine": 158,
         "startChar": 0,
@@ -725,6 +773,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee87607_63a87465",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "\u003e directly converted back to String16\n\nYes, and Local::getInstanceName(String16*) and used as char* for all of the ALOGE instances.\n\nI think keeping it as String16 makes sense since most of the ALOGE calls are on error paths so the `String8(instance).c_str()` isn\u0027t that bad.\n\nb/361614498 to add binderAllocationLimits test and optimize.",
+      "parentUuid": "6d1ac3c1_336ee039",
+      "range": {
+        "startLine": 398,
+        "startChar": 44,
+        "endLine": 398,
+        "endChar": 52
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "823a03c6_059ee869",
@@ -898,6 +970,30 @@
       "side": 1,
       "message": "(incomplete comment?)",
       "parentUuid": "39b687b0_07a356d7",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 52
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "043be97f_76bf73fd",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "hah, yes. Look at the... errors from the singleSocketConnection is what I meant. The `-ernno` values to catch and throw the EACCES for example.\n\nI added the retry advice + some more errors and more handling in the `LocalAccess` implementation.\n\nWe log it in the `request` callback that goes into setupPreconnectedClient.",
+      "parentUuid": "c30f00d5_feb918a7",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -1209,6 +1305,30 @@
       "side": 1,
       "message": "ack, if you want to avoid this, the way would be to use a class like this:\n\n```\nclass AccessorProvider {\n    virtual bool querySubclass(void* /* \u003d class constructor address */) \u003d 0;\n    virtual sp\u003cIBinder\u003e getAccessor(const String16\u0026 name) \u003d 0;\n};\n\n// then in libbinder_ndk\n\nclass NdkAccessorProvider {\n    bool querySubclass(void* clazz) { return clazz \u003d\u003d \u0026NdkAccessorProvider; }\n    sp\u003cIBinder\u003e getAccessor(const String16\u0026 name) {\n        return /*potentially in another process*/ createAccessor(...);\n    }\n    void* data;\n};\n```\n\nthen in function to add accessor provider in libbinder_ndk, you could iterate over all accessors, and for those that return true from querySubclass(\u0026NdkAccessorProvider), you can cast to NdkAccessorProvider and check for double-ownership.\n\nbut yeah, ignoring and documenting the requirements is also okay.",
       "parentUuid": "a64996cb_0ab043b8",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 0
+      },
+      "revId": "875b8b1a43dfc883d8e9d7c834b7f79424e583a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26835ac9_de49e041",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-22T21:56:28Z",
+      "side": 1,
+      "message": "Checking the address of the ctor to know if it comes from the type is a convenient trick!\n\nI think documenting the requirements is ok. It allows mutiple callbacks to use a pointer to a type that isn\u0027t going to be deleted or the same value of the `void* data` if it\u0027s only used as some sort of value that doesn\u0027t need to be deleted.\n\nAdded more details to the ndk header.",
+      "parentUuid": "9d3094fd_3d54575b",
       "range": {
         "startLine": 42,
         "startChar": 0,
