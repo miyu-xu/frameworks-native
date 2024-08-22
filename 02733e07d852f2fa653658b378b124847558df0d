@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0cc938_442bcae4",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "note: it doesn\u0027t check whether it\u0027s alive or not (and we are actually not able to)",
+      "range": {
+        "startLine": 93,
+        "startChar": 52,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fb95e857_43f2ee79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "            ALOGW(\"Not updating cache. Binder null or caching not enabled for service_name : %s\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc919e43_0639841d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "this would spam a lot - please remove.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "32cd79d8_f1036796",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "            ALOGD(\"Not updating cache. Binder null, not alive or caching not enabled for \"\n                  \"service_name : %s\", service_name.c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2755dda4_354b166c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "spam, remove",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae974467_63a0b150",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52d50d5_72175a4d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "nit: ALOGI since this is expected during process shutdown, or is it not? If it causes many logs, we\u0027d need to remove it.",
+      "range": {
+        "startLine": 37,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "70ecc7c3_bcebb45f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "                ALOGI(\"Binder Cache pointer expired: %s\", mKey.c_str());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ad1661_319350c8",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "avoid making an extra heap allocation and copy, no need",
+      "range": {
+        "startLine": 70,
+        "startChar": 65,
+        "endLine": 70,
+        "endChar": 81
+      },
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa9c966_104015d7",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "curious, any reason for this? I mean, it works, but this is a bit atypical",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "762e55ae_0ce23fab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "        std::lock_guard\u003cstd::mutex\u003e lock(mCacheMutex);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd2ef42_82db69be",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "nit: libbinder style is serviceName (everywhere)",
+      "range": {
+        "startLine": 80,
+        "startChar": 55,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2cb5593e_494ffba2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "    bool isClientSideCachingEnabled(const std::string\u0026 service_name) const;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61160c64_4014fa2f",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "Still test it if this is false, but you should see the service is switched out instead of cached. That will ensure the flag is working properly as well.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3b05c124_e2489365",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "    if (kUseLibbinderCache) {\n        EXPECT_EQ(targetBinder, fakeservicemanager.getService(serviceName));\n    } else {\n        EXPECT_NE(targetBinder, fakeservicemanager.getService(serviceName));\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c5fe76_c893c311",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-22T18:00:35Z",
+      "side": 1,
+      "message": "This is testing unrelated code. The reason it passes is because this method will return UNEXPECTED_NULL. Please test the IServiceManager.h API you are modifying the implementation of.\n\nCheck all return values for errors as well, e.g. EXPECT_EQ(OK, ...);\n\nYou will also need to call setDefaultServiceManager with the fakeservicemanager to test it like this.",
+      "fixSuggestions": [
+        {
+          "fixId": "e0cf7adf_e65aba0d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "    // Add the null binder and replace the service. This should not affect the\n    // cache.\n    fakeservicemanager.addService(serviceName, nullptr);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02733e07d852f2fa653658b378b124847558df0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
