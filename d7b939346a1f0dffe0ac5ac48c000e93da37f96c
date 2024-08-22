@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8885bfa_03152c1b",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-22T19:10:25Z",
+      "side": 1,
+      "message": "This adds include_cpp to the NDK.",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e884d73a_9659d382",
         "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
         "patchSetId": 5
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "It\u0027s not. It\u0027s in the include_cpp headers, which are not in the NDK. We split them off in b/337297103. They are in the /ndk/ folder because that\u0027s the home of libbinder_ndk.",
       "parentUuid": "e884d73a_9659d382",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbe3f43_0573ae20",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-22T19:10:25Z",
+      "side": 1,
+      "message": "The split didn\u0027t change anything though, because that directory is still in an `ndk_headers` module in the Android.bp. See the line I just added a comment to. The TODO on that module is the problem. Until that\u0027s fixed, these are still all being added to the NDK. If you don\u0027t want those headers going into the NDK, you\u0027ll need to put them in a new directory that\u0027s *not* `ndk_headers`, or fix that TODO.\n\nhttps://android.googlesource.com/toolchain/prebuilts/ndk/r27/+/refs/heads/main/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/binder_auto_utils.h for proof.",
+      "parentUuid": "eaaa4fb2_2f8829b9",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -250,6 +285,30 @@
       "side": 1,
       "message": "Yeah, this was a big conversation last year, but if there was a need to change the NDK API later, we\u0027d have to rename it and still support the same API. Though, we won\u0027t have this problem again this year because the schedule is more aligned.",
       "parentUuid": "67ef387a_aef1ee2a",
+      "range": {
+        "startLine": 254,
+        "startChar": 39,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb0178a_030a273e",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-08-22T19:10:25Z",
+      "side": 1,
+      "message": "See http://b/361077712 as well.",
+      "parentUuid": "bd54d81b_c427a521",
       "range": {
         "startLine": 254,
         "startChar": 39,
