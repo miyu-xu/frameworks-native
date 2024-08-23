@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44540d85_131b4ddf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-23T16:38:32Z",
+      "side": 1,
+      "message": "Thank you! This used to not be true due to 32-bit IPC ABI, though that is removed now, and it was only used downstream, so I\u0027m not sure this ever made a difference in our tree.",
+      "revId": "169452a229e0a63b68437734a565bc1f98c77f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
