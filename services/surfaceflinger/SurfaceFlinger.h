@@ -1446,6 +1446,8 @@ private:
         return mScheduler->getLayerFramerate(now, id);
     }
 
+    int PriorityRet = -1;
+
     bool mPowerHintSessionEnabled;
 
     bool mLayerLifecycleManagerEnabled = false;
