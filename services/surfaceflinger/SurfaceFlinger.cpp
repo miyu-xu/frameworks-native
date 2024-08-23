@@ -845,6 +845,7 @@ void SurfaceFlinger::init() FTL_FAKE_GUARD(kMainThreadContext) {
     mMaxRenderTargetSize =
             std::min(getRenderEngine().getMaxTextureSize(), getRenderEngine().getMaxViewportDims());
 
+    PriorityRet = getGpuContextPriority();
     // Set SF main policy after initializing RenderEngine which has its own policy.
     if (!SetTaskProfiles(0, {"SFMainPolicy"})) {
         ALOGW("Failed to set main task profile");
@@ -8764,7 +8765,10 @@ void SurfaceFlinger::enableHdrSdrRatioOverlay(bool enable) {
 }
 
 int SurfaceFlinger::getGpuContextPriority() {
-    return getRenderEngine().getContextPriority();
+    if(PriorityRet != -1)
+        return PriorityRet;
+    else
+        return getRenderEngine().getContextPriority();
 }
 
 int SurfaceFlinger::calculateMaxAcquiredBufferCount(Fps refreshRate,
