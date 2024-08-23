@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6447b2f_6dd4527d",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9bd8b8_9b7b7691",
+      "range": {
+        "startLine": 42,
+        "startChar": 53,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82372776_c45bf93b",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-08-16T16:26:19Z",
       "side": 1,
       "message": "nit: no using for this?",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 26
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c37501_2c3953e1",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82372776_c45bf93b",
       "range": {
         "startLine": 44,
         "startChar": 7,
@@ -112,6 +160,30 @@
           ]
         }
       ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15014b88_c1fad1ee",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91a3076b_82e4638d",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 9
+      },
       "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -217,6 +289,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0754d367_73dceea4",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d60f6e6b_0e024e07",
+      "range": {
+        "startLine": 56,
+        "startChar": 23,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36285c04_11a3095a",
@@ -258,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b7b72e_4623f9d5",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36285c04_11a3095a",
+      "range": {
+        "startLine": 59,
+        "startChar": 18,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb95fe2a_1453504c",
@@ -295,6 +415,30 @@
           ]
         }
       ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8018324_a282b895",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Yeah, this is the spot. I created an object to hold it and call the mOnDelete(mData) on it.",
+      "parentUuid": "bb95fe2a_1453504c",
+      "range": {
+        "startLine": 98,
+        "startChar": 23,
+        "endLine": 98,
+        "endChar": 27
+      },
       "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -421,6 +565,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d2c7d8_72158c27",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39bf9dcc_651131eb",
+      "range": {
+        "startLine": 145,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 32
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb86471_b323c982",
@@ -434,6 +602,30 @@
       "writtenOn": "2024-08-16T16:26:19Z",
       "side": 1,
       "message": "btw - you said you\u0027d add inet as well?",
+      "range": {
+        "startLine": 150,
+        "startChar": 13,
+        "endLine": 171,
+        "endChar": 16
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5adaa160_76c0fede",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecb86471_b323c982",
       "range": {
         "startLine": 150,
         "startChar": 13,
@@ -485,6 +677,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d29428ae_d60f61f3",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "+1! b/361614498 to follow up with that. (I\u0027ll likely get to it before all of these CLs are in)",
+      "parentUuid": "fa0b6b41_9763fb45",
+      "range": {
+        "startLine": 187,
+        "startChar": 21,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac44051f_4c5fb02e",
@@ -522,6 +738,30 @@
           ]
         }
       ],
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d567b7c_c15dab61",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "good to know, but I\u0027ll keep the check to be able to LOG_ALWAYS_FATAL if null.",
+      "parentUuid": "ac44051f_4c5fb02e",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 32
+      },
       "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -567,6 +807,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4217a1fa_5f4e5c77",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Yes. Done.",
+      "parentUuid": "95066b8b_f360e90f",
+      "range": {
+        "startLine": 212,
+        "startChar": 6,
+        "endLine": 214,
+        "endChar": 5
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "611e6297_8534c07d",
@@ -608,6 +872,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99732276_b9eb35a5",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Not useful for anything. I didn\u0027t pay close enough attention to how `lookupOrCreateFromBinder` works and the fact that it always returns ABpBinder. (we talked about this in the office when I was confused). So I don\u0027t think we could ever end in a situation where we have an ABBinder for an accessor.\nRemoved this.",
+      "parentUuid": "611e6297_8534c07d",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 5
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "996b94f3_899e33d1",
@@ -621,6 +909,30 @@
       "writtenOn": "2024-08-16T16:26:19Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 228,
+        "startChar": 6,
+        "endLine": 234,
+        "endChar": 5
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b69012_657dfd4b",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "996b94f3_899e33d1",
       "range": {
         "startLine": 228,
         "startChar": 6,
@@ -674,6 +986,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "665e4e19_a13faa67",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "The reinterpret cast isn\u0027t allowed.\n```\nframeworks/native/libs/binder/ndk/binder_rpc.cpp:280:36: error: reinterpret_cast from \u0027socklen_t\u0027 (aka \u0027unsigned int\u0027) to \u0027size_t\u0027 (aka \u0027unsigned long\u0027) is not allowed\n  280 |     size_t socklen \u003d len \u003c 0 ? 0 : reinterpret_cast\u003csize_t\u003e(len);\n```\n\nstatic cast works, but I\u0027m doing it here to check the size against SIZE_MAX(unsigned long) (which can\u0027t compare with intmax_t) in case size_t is smaller than socklen_t. I don\u0027t think it ever would, but I don\u0027t think there are any guarantees that it won\u0027t.",
+      "parentUuid": "d95fee9f_068d32ff",
+      "range": {
+        "startLine": 247,
+        "startChar": 52,
+        "endLine": 247,
+        "endChar": 61
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6a8f2cf_7a6bb8b3",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 4
@@ -685,6 +1021,30 @@
       "writtenOn": "2024-08-16T16:26:19Z",
       "side": 1,
       "message": "vm",
+      "range": {
+        "startLine": 256,
+        "startChar": 39,
+        "endLine": 256,
+        "endChar": 82
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71725318_dbe52f4a",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-23T00:26:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6a8f2cf_7a6bb8b3",
       "range": {
         "startLine": 256,
         "startChar": 39,
