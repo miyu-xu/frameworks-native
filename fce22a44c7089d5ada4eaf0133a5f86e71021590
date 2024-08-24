@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f306586_c6275d55",
+        "filename": "libs/binder/trusty/include/binder/RpcServerTrusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-08-24T00:50:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure this change will compile on Trusty, since we cast this to `const struct uuid**` and Trusty has stricter compiler flags.",
+      "revId": "fce22a44c7089d5ada4eaf0133a5f86e71021590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
