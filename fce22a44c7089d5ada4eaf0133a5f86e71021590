@@ -34,6 +34,24 @@
       "parentUuid": "9f306586_c6275d55",
       "revId": "fce22a44c7089d5ada4eaf0133a5f86e71021590",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50dceb1c_f4d06a32",
+        "filename": "libs/binder/trusty/include/binder/RpcServerTrusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-08-24T00:56:22Z",
+      "side": 1,
+      "message": "It did (`test_binder:aosp-trusty-master`) and it passed, so I guess it wasn\u0027t an issue.",
+      "parentUuid": "a20374df_e59830b7",
+      "revId": "fce22a44c7089d5ada4eaf0133a5f86e71021590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
