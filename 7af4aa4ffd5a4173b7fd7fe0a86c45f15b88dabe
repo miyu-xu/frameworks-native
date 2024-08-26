@@ -40,6 +40,30 @@
       ],
       "revId": "7af4aa4ffd5a4173b7fd7fe0a86c45f15b88dabe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f9e4406_87536970",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-26T21:06:03Z",
+      "side": 1,
+      "message": "I separated the test. Created a new cc_test and now this isn\u0027t the issue.\n\nNow the issue is that linkToDeath returns -38.\n\n```\n08-26 20:57:15.521 shell  3572  3572 E binderCacheUnitTest: Failed to linkToDeath binder for service isub. Error: -38\n08-26 20:57:15.521 shell  3572  3572 E binderCacheUnitTest: Failed to linkToDeath binder for service isub. Error: -38\n```",
+      "parentUuid": "41ab1f04_218a23d6",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "revId": "7af4aa4ffd5a4173b7fd7fe0a86c45f15b88dabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
