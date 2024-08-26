@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac6bfa5_0193aebf",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Modified the toBinderService code that I added to return the error when `getInjectedAccessor` returns an error.\n\nIt will set _out to nullptr with no error if it fails to find.",
+      "parentUuid": "79647e60_3779a190",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 14
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9bac6cb_ba8744d3",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "220dc4f4_fa26a9df",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "b/362283950",
+      "parentUuid": "e9bac6cb_ba8744d3",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dea00a7_dc7d2bfd",
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d299e60c_44469e87",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Yes, it\u0027s nice to have during development but can be removed now!",
+      "parentUuid": "4dea00a7_dc7d2bfd",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 83
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dd4707d_410e0b53",
@@ -101,6 +173,30 @@
       "writtenOn": "2024-08-26T16:55:05Z",
       "side": 1,
       "message": "also nit - error case first always.",
+      "range": {
+        "startLine": 229,
+        "startChar": 8,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9fd714_eb7aa8a6",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dd4707d_410e0b53",
       "range": {
         "startLine": 229,
         "startChar": 8,
@@ -152,6 +248,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77319c5_2796ac35",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641c6a0f_f9d1dd33",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 80
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86cea999_d2a0c3e3",
@@ -195,6 +315,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a49a1947_40c60ecd",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "There isn\u0027t any need for a caller to ever have a strong pointer to the AccessorProvider. We just need a handle to be able to remove it from `libbinder` and this works well.\n\nWould it be better to have some other type of cookie to return here as a receipt to be able to reference the added provide for removeAccessorProvider?",
+      "parentUuid": "86cea999_d2a0c3e3",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 31
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bfaa1bb_22b59e5b",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 13
@@ -206,6 +350,30 @@
       "writtenOn": "2024-08-26T16:53:40Z",
       "side": 1,
       "message": "const\u0026",
+      "range": {
+        "startLine": 344,
+        "startChar": 52,
+        "endLine": 344,
+        "endChar": 63
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b99489b_7f646095",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bfaa1bb_22b59e5b",
       "range": {
         "startLine": 344,
         "startChar": 52,
@@ -259,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6c31518_f997d1e8",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "For which case? I only see `FdTrigger* shutdownTrigger` highlighted.",
+      "parentUuid": "c5a0dd8e_e1a84833",
+      "range": {
+        "startLine": 599,
+        "startChar": 62,
+        "endLine": 599,
+        "endChar": 88
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5853ed05_a48624fc",
         "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
         "patchSetId": 13
@@ -270,6 +462,30 @@
       "writtenOn": "2024-08-26T16:53:40Z",
       "side": 1,
       "message": "might remove this as it\u0027s non-specific, and you have already enough 😄",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a62cba6f_b26ae58c",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5853ed05_a48624fc",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -321,6 +537,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a649a3f7_5ac025a9",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "I have b/360137141 but that bug is for `trusty_ipc.h` to provide everything we need from `sys/socket.h`. I added a comment in that bug asking if there is a way for Trusty to use this file name.",
+      "parentUuid": "9440e10c_055346c8",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 65
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a88686dd_ff090919",
@@ -358,6 +598,30 @@
           ]
         }
       ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba8996d_2bb8dfe9",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T19:29:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88686dd_ff090919",
+      "range": {
+        "startLine": 1232,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 18
+      },
       "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
