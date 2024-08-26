@@ -497,6 +497,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26db916_54360fb2",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T22:40:07Z",
+      "side": 1,
+      "message": "`if (shutdownTrigger) {`! That\u0027s not necessary. Changed the arg to `const std::unique_ptr\u003c\u003e\u0026`, removed the `if`, and added a fatal log if nullptr to avoid getting stuck for ever.",
+      "parentUuid": "69f09a2c_daf9b1a1",
+      "range": {
+        "startLine": 599,
+        "startChar": 62,
+        "endLine": 599,
+        "endChar": 88
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5853ed05_a48624fc",
