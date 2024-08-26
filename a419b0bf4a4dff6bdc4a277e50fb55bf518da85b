@@ -1,0 +1,150 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe23e5f2_6738d78c",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:48:32Z",
+      "side": 1,
+      "message": "should this (and other cases) have a way to return an error?",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 96
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4f6983cc_a108e83f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 228,
+                "startChar": 0,
+                "endLine": 228,
+                "endChar": 0
+              },
+              "replacement": "                return;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36b58e6_2641db51",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:48:32Z",
+      "side": 1,
+      "message": "document: with one strong ref count",
+      "range": {
+        "startLine": 181,
+        "startChar": 11,
+        "endLine": 181,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6ddc008b_832aeaf3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": " * \\return binder of the supplied accessor with one strong ref\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7296adce_862806fe",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:48:32Z",
+      "side": 1,
+      "message": "document: this function does not take ownership, and it preserves the refcount of this binder object",
+      "range": {
+        "startLine": 194,
+        "startChar": 25,
+        "endLine": 195,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "64d08b15_a05b51b0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": " *         This function does not take ownership of the accessorBinder.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d8f434b_aec82246",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:48:32Z",
+      "side": 1,
+      "message": "Is there a reason to not try every type though? You do have some functions that returns errors for these cases. I\u0027d remove the comment - seems these are just unit tests?",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1345,
+        "endChar": 36
+      },
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
