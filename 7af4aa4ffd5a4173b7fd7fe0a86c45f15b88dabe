@@ -64,6 +64,30 @@
       },
       "revId": "7af4aa4ffd5a4173b7fd7fe0a86c45f15b88dabe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe53bf5_18cb2348",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T21:18:10Z",
+      "side": 1,
+      "message": "I think that\u0027s [INVALID_OPERATION   \u003d -ENOSYS,](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/core/libutils/binder/include/utils/Errors.h;drc\u003dfa601d919b3abf1dfb17e716a7fa2b936e066ad3;l\u003d48). Are there logs from libbinder around that time?",
+      "parentUuid": "6f9e4406_87536970",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "revId": "7af4aa4ffd5a4173b7fd7fe0a86c45f15b88dabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
