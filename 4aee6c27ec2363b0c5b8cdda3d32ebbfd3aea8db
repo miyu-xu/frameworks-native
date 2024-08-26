@@ -90,6 +90,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dd4707d_410e0b53",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:55:05Z",
+      "side": 1,
+      "message": "also nit - error case first always.",
+      "range": {
+        "startLine": 229,
+        "startChar": 8,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "641c6a0f_f9d1dd33",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 13
