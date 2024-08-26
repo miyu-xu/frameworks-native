@@ -1,0 +1,342 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79647e60_3779a190",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "if this status represents a failure (e.g. missing permission etc..) we probably still want to return an error. Though, if it\u0027s just that the service is not there, setting the out service to nullptr is expected.",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 14
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bac6cb_ba8744d3",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "hey btw, you\u0027ll need to add options to this to control the threadpool size/etc.. May want a bug for this case.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3e7a8ab_4eb75532",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "            auto session \u003d RpcSession::make(RpcSession::Options{\n                    .threadPoolName \u003d \"RpcSession\",\n                    .threadPoolNumThreads \u003d 1,\n                    .threadPoolPriority \u003d 0,\n                    .threadPoolIdleDuration \u003d 10s,\n            });\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dea00a7_dc7d2bfd",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "I\u0027m guessing you\u0027re keeping these for now as it\u0027s not used much? We may want to remove this and other logs though as it could be logspam.",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 83
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641c6a0f_f9d1dd33",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "nit: you don\u0027t need this check, it is guaranteed to crash due to how the zero page is setup.\n\nIf you are programming the kernel, it may be an issue:\nhttps://googleprojectzero.blogspot.com/2023/01/exploiting-null-dereferences-in-linux.html\n\nBut userspace process will just die.",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 80
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a00c9a4_d7ad736a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 250,
+                "startChar": 0,
+                "endLine": 251,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cea999_d2a0c3e3",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "why is this a weak ptr? to be explicit that something else is returning a strong pointer?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0c75ec6c_9a87c254",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "// Returns a weak pointer to the provider. The provider can be removed by\n// calling removeAccessorProvider with the weak pointer.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfaa1bb_22b59e5b",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "const\u0026",
+      "range": {
+        "startLine": 344,
+        "startChar": 52,
+        "endLine": 344,
+        "endChar": 63
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a0dd8e_e1a84833",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "file bug for this case, we should handle it?",
+      "range": {
+        "startLine": 599,
+        "startChar": 62,
+        "endLine": 599,
+        "endChar": 88
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b2ab98ae_000a2223",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/RpcSession.cpp",
+              "range": {
+                "startLine": 599,
+                "startChar": 0,
+                "endLine": 599,
+                "endChar": 0
+              },
+              "replacement": "// TODO(b/202031211): remove this function and use the one in RpcTransportUtils.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5853ed05_a48624fc",
+        "filename": "libs/binder/aidl/android/os/IAccessor.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "might remove this as it\u0027s non-specific, and you have already enough 😄",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9440e10c_055346c8",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "please file bug for this if you haven\u0027t already. We shouldn\u0027t have any of this stuff, as trusty (and other OSes) should provide a standard-enough sysroot for our case.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "58102832_3f45cc32",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManager.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "// TODO(b/280431111): Trusty has its own definition of socket APIs from trusty_ipc.h\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88686dd_ff090919",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T16:53:40Z",
+      "side": 1,
+      "message": "Btw, now that you know it does work, this may flake in our infra and file a bug. You might want to sleep for up to a second, usleep every 10000 and poll if it shutdown via proc.rootBinder...listSessions which you can use to query the other process.",
+      "range": {
+        "startLine": 1232,
+        "startChar": 0,
+        "endLine": 1234,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "020401fe_a91eff13",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderRpcTest.cpp",
+              "range": {
+                "startLine": 1234,
+                "startChar": 0,
+                "endLine": 1235,
+                "endChar": 0
+              },
+              "replacement": "    for (size_t i \u003d 0; i \u003c 10; i++) {\n        usleep(100000);\n        if (proc.proc-\u003esessions.empty()) break;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
