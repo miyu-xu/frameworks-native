@@ -484,6 +484,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "870607b3_776d9a8e",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T21:22:27Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "07f63f13_f6f68db2",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 20
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39bf9dcc_651131eb",
@@ -1008,6 +1032,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e61856bd_7c7c2541",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T21:22:27Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "665e4e19_a13faa67",
+      "range": {
+        "startLine": 247,
+        "startChar": 52,
+        "endLine": 247,
+        "endChar": 61
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a8f2cf_7a6bb8b3",
@@ -1068,6 +1116,30 @@
       "writtenOn": "2024-08-16T16:26:19Z",
       "side": 1,
       "message": "in this case, this binder is leaked (so btw prefer SpAIBinder), if you still see two remote sessions (after forceShutdown), you can sleep before returning from this test case. If that\u0027s the case, there is another API to wait for the session count to go to 0.\n\nOtherwise, you may need to add logic so when the last BpBinder which holds an RpcSession which is created from checkService here, when it is deleted, the refcount on RpcSession should also drop to zero. It may be the case some other code is holding a reference.",
+      "range": {
+        "startLine": 1595,
+        "startChar": 0,
+        "endLine": 1595,
+        "endChar": 67
+      },
+      "revId": "3c5ca49bbc41b474c029d26026813b9756be5e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb20cb61_78f91d9f",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1595,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-26T21:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19f2354c_05ebec79",
       "range": {
         "startLine": 1595,
         "startChar": 0,
