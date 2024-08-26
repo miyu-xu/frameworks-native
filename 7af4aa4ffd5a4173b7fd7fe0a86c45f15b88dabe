@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ab1f04_218a23d6",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-08-26T18:47:20Z",
+      "side": 1,
+      "message": "@smoreland@google.com Is this not enough to have a working Thread pool?\n\nDespite this, the test is failing because the check in isClientSideCachingEnabled for\ngetThreadPoolMaxTotalThreadCount() fails (i.e. it returns the count as zero).\n\nIt is weird as the ASSERT on line 59 is passing.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "592a0cac_116652dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7af4aa4ffd5a4173b7fd7fe0a86c45f15b88dabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
