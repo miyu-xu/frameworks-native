@@ -16,6 +16,24 @@
       "message": "I\u0027m pretty sure this does nothing, btw.",
       "revId": "765158ee2c8adf61e047d29411657a11d835fa08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845174ed_37437742",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T23:42:04Z",
+      "side": 1,
+      "message": "ack, if you want to remove them all, happy to help",
+      "parentUuid": "923d8bf9_af254a3b",
+      "revId": "765158ee2c8adf61e047d29411657a11d835fa08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
