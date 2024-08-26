@@ -337,6 +337,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb10214_c5158336",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a49a1947_40c60ecd",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 31
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bfaa1bb_22b59e5b",
@@ -439,6 +463,30 @@
       "side": 1,
       "message": "For which case? I only see `FdTrigger* shutdownTrigger` highlighted.",
       "parentUuid": "c5a0dd8e_e1a84833",
+      "range": {
+        "startLine": 599,
+        "startChar": 62,
+        "endLine": 599,
+        "endChar": 88
+      },
+      "revId": "4aee6c27ec2363b0c5b8cdda3d32ebbfd3aea8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f09a2c_daf9b1a1",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-26T21:38:34Z",
+      "side": 1,
+      "message": "If the VM crashes while you are trying to connect to it, and the connect call hangs, we might need it. Maybe that should be a transport bug though.",
+      "parentUuid": "f6c31518_f997d1e8",
       "range": {
         "startLine": 599,
         "startChar": 62,
