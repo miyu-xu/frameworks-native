@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07062cc9_0813d11b",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "Yeah I thought it was removed years ago, but now the bugs are off you and on me, will remove b/357711733. However many of the APIs here should be in other folders.",
+      "parentUuid": "b8885bfa_03152c1b",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e884d73a_9659d382",
         "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
         "patchSetId": 5
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "I moved this code from https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3197053/5/libs/binder/ndk/include_cpp/android/persistable_bundle_aidl.h to here to be used by other modules. It is redefinition of API_LEVEL_AT_LEAST from llndk versioning - https://cs.android.com/android/platform/superproject/main/+/main:system/core/libvendorsupport/include_llndk/android/llndk-versioning.h;l\u003d33;drc\u003ddcce9e044a3f62302558d7414797db5110ef0786",
       "parentUuid": "81b9840f_bcbf2ac2",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce789f1e_58c56be7",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "I\u0027ve noted this on b/361077712. We should prefer to maybe move where these macros are defined in our code or copy them, rather than adding a new header, as we\u0027ll want to remove this header. I\u0027m hoping though we may not need to do this once the tracing APIs are gone. Let\u0027s see!",
+      "parentUuid": "ae2c47ce_e9a35a1c",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -341,6 +377,24 @@
       "writtenOn": "2024-08-12T22:07:33Z",
       "side": 1,
       "message": "@michaelwr: shouldn\u0027t LL-NDK be using the same versioning scheme as the rest of the platform?",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb8d44b_cf5425e9",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "-\u003e b/361077712\n\n(the APIs added here should go in the NDK directly, since it was revised)",
+      "parentUuid": "2e988081_263f670d",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

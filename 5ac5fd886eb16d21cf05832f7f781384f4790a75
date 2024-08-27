@@ -1,0 +1,544 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de11f0f4_74421273",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "do we need this?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a20163_f53c4b59",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "we should remove this (can use libcutils directly here?)",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5d138cd0_b694d56d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68dec767_1429c83a",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "We\u0027ll probably want to get rid of these extra allocations and store everything together directly into a buffer. Do you think you could do this?",
+      "range": {
+        "startLine": 102,
+        "startChar": 10,
+        "endLine": 102,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "74dad583_0ee7dc74",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "const char* getFunctionName(const AIBinder_Class* clazz, transaction_code_t code) {\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "        return \"AIDL::ndk::\";\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "    const char* interfaceDescriptor \u003d clazz-\u003egetInterfaceDescriptorUtf8();\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "        return absl::StrFormat(\"AIDL::ndk::%s::%s\", interfaceDescriptor,\n                               clazz-\u003ecodeToFunction[code - FIRST_CALL_TRANSACTION]);\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "        return absl::StrFormat(\"AIDL::ndk::%s::getInterfaceVersion\", interfaceDescriptor);\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "        return absl::StrFormat(\"AIDL::ndk::%s::getInterfaceHash\", interfaceDescriptor);\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "        return absl::StrFormat(\"AIDL::ndk::%s::%d\", interfaceDescriptor, code);\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 233,
+                "startChar": 0,
+                "endLine": 235,
+                "endChar": 0
+              },
+              "replacement": "    ScopedTrace trace(getFunctionName(getClass(), code));\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 731,
+                "startChar": 0,
+                "endLine": 733,
+                "endChar": 0
+              },
+              "replacement": "    ScopedTrace _aidl_trace(getFunctionName(clazz, code));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84dbda52_2f7724b5",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "nit: (code \u003e\u003d FIRST_CALL_TRANSACTION)\n?",
+      "range": {
+        "startLine": 105,
+        "startChar": 39,
+        "endLine": 105,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e88f2dc5_8d32823f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "    if (code \u003c clazz-\u003efunctionCount \u0026\u0026 code \u003e\u003d FIRST_CALL_TRANSACTION \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040828e8_ace4cde0",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "should this be \"\u003c\u003d\", so that the last code on the last function shows up?",
+      "range": {
+        "startLine": 105,
+        "startChar": 13,
+        "endLine": 105,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "19dfb8f3_421f98a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "    if (code \u003c clazz-\u003efunctionCount \u0026\u0026 (code - FIRST_CALL_TRANSACTION) \u003c\u003d 0 \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6460fc_f28ebb68",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "I would add \"TODO(b/150155678)\" here. Put the numbers in constexpr variables too also?",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6630e7b2_a2b641b3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 110,
+                "startChar": 0,
+                "endLine": 111,
+                "endChar": 0
+              },
+              "replacement": "    } else if (code \u003d\u003d kGetInterfaceVersion) {\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "    } else if (code \u003d\u003d kGetInterfaceHash) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956403f6_7308cd90",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "we should only do the string allocations/concatenation if tracing is enabled. You may not be able to use a ScopedTrace due to this constraint. Consider:\n\n```\nbool tracingEnabled \u003d atrace_enabled_tags \u0026 ATRACE_TAG_AIDL;\nstd::string traceName;\n\nif (tracingEnabled) {\n    traceName \u003d ...;\n    atrace_begin(ATRACE_TAG_AIDL, traceName.c_str());\n}\nScopeGuard guard \u003d [\u0026]() {\n    if (tracingEnabled) atrace_end(ATRACE_TAG_AIDL, traceName.c_str());\n};\n```",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 41
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461e23aa_00bb5c57",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d37c5e9_8ce92cee",
+        "filename": "libs/binder/ndk/ibinder_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "keep this private, add a function to look up the value? that way, there will only ever be one copy of your validation logic?",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a52bb6e3_c5590995",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder_internal.h",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "   private:\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder_internal.h",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "\n   public:\n    const char* getFunctionName(transaction_code_t code) {\n        if (code \u003c functionCount) {\n            return codeToFunction[code];\n        }\n        return nullptr;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04351af9_06a2e56a",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "we may not be able to change this function due to prebuilts. Can you start an ABTD run to test this change on various devices so we can see the impact? Especially mokey, as we\u0027ve had some issues with that here. We may need to do a second function for this and have AIDL call both.",
+      "range": {
+        "startLine": 166,
+        "startChar": 34,
+        "endLine": 166,
+        "endChar": 45
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c0c516_b6d38313",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_trace_utils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "so should be able to remove this file",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a4fd1e_9aff0e55",
+        "filename": "libs/binder/ndk/include_cpp/android/persistable_bundle_aidl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "so should be able to undo changes here",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5380ac_f9002f7e",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "should be able to just do __INTRODUCED_IN(36) for this? do we need both? (if we do, let\u0027s get the file in a common place as Dan suggested, though hopefully uncoupled from this bug)",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1a9ed28e_10366c05",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+              "range": {
+                "startLine": 235,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "                               size_t functionCount) __INTRODUCED_IN(36);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b1dbb7_729a1220",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-27T23:26:18Z",
+      "side": 1,
+      "message": "do we need this because they are at the same time now or no?",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
