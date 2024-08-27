@@ -219,6 +219,9 @@ cc_defaults {
         "libscheduler_test_headers",
         "libsurfaceflinger_headers",
     ],
+    cflags: [
+        "-Wno-error=thread-safety-reference-return",
+    ],
 }
 
 cc_library_headers {
