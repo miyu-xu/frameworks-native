@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a98fdd0b_c1efdd17",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-08-27T17:16:47Z",
+      "side": 1,
+      "message": "This is the default name, you don\u0027t need to specify it",
+      "revId": "0260113bcf0beaee4d0e6bc17bb16564df7b1409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
