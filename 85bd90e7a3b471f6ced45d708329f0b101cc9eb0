@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de69f95c_1c74bf8c",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3334,
+      "author": {
+        "id": 1952791
+      },
+      "writtenOn": "2024-08-27T16:53:38Z",
+      "side": 1,
+      "message": "Note this is the recommended way to discard a return value according to go/totw/210#intentionally-ignoring-the-return-value",
+      "range": {
+        "startLine": 3334,
+        "startChar": 8,
+        "endLine": 3334,
+        "endChar": 14
+      },
+      "revId": "85bd90e7a3b471f6ced45d708329f0b101cc9eb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
