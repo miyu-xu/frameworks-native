@@ -814,9 +814,9 @@ private:
             REQUIRES(mStateLock, kMainThreadContext);
     // Flush pending transactions that were presented after desiredPresentTime.
     // For test only
-    bool flushTransactionQueues(VsyncId) REQUIRES(kMainThreadContext);
+    bool flushTransactionQueues() REQUIRES(kMainThreadContext);
 
-    bool applyTransactions(std::vector<TransactionState>&, VsyncId) REQUIRES(kMainThreadContext);
+    bool applyTransactions(std::vector<TransactionState>&) REQUIRES(kMainThreadContext);
     bool applyAndCommitDisplayTransactionStatesLocked(std::vector<TransactionState>& transactions)
             REQUIRES(kMainThreadContext, mStateLock);
 
@@ -854,8 +854,13 @@ private:
 
     static LatchUnsignaledConfig getLatchUnsignaledConfig();
     bool shouldLatchUnsignaled(const layer_state_t&, size_t numStates, bool firstTransaction) const;
+<<<<<<< PATCH SET (4b0022 Remove the redundant parameters in applyTransactionsLocked)
+    bool applyTransactionsLocked(std::vector<TransactionState>& transactions)
+            REQUIRES(mStateLock);
+=======
     bool applyTransactionsLocked(std::vector<TransactionState>& transactions, VsyncId)
             REQUIRES(mStateLock, kMainThreadContext);
+>>>>>>> BASE      (9f4086 Merge "Merge 24Q3 to AOSP main" into main)
     uint32_t setDisplayStateLocked(const DisplayState& s) REQUIRES(mStateLock);
     uint32_t addInputWindowCommands(const InputWindowCommands& inputWindowCommands)
             REQUIRES(mStateLock);
