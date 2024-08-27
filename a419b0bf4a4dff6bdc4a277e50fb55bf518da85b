@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "054a75e4_4d8d7fae",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-27T00:15:21Z",
+      "side": 1,
+      "message": "This should be addressed in the parent CL, probably before submitting, if so. I\u0027m going to just talk through this since I don\u0027t have an immediate answer.\n\na) Do we want `libbinder` to handle specific errors from the user-supplied callbacks? `RpcSocketAddressProvider` in this case, and (I should create a typedef for this) the `accessorProvider` callback.\n\nb) Do we want `libbinder_ndk` to handle specific errors from the user-supplied callbacks that it wraps to use with libbinder? `ARpc_ConnectionInfoProvider` and `ARpc_AccessorProvider_getAccessor` in this case.\n\nIn-general, do we handle different callback errors in NDK APIs? I\u0027m a little bit hesitant to try and change the behavior of libbinder/libbinder_ndk based on what a user\u0027s callback is telling us outside of a OK(non-null)/Not OK(null). I think it\u0027s easy for callers to make mistakes in the callback implementations and return incorrect errors. I feel the same for the libbinder APIs, but less so since most of the use is in AOSP platform code. \n\nWe can ignore the possibility of returning errors incorrectly from the callback implemetnatiosn and look concretely at what errors could we handle in libbinder/libbinder_ndk.\n\n* Permission errors could be percolated up through the service manager APIs. Maybe the users have special permissions themselves and their clients might want to do something different in that case.\n* Failing to find an instance name - we don\u0027t treat that as an error in libbinder. This would be treated the same as a `nullptr` return from the callback right now.\n* Bad arguments - the caller\u0027s callbacks were expecting something different from libbinder/libbinder_ndk. This could be percolated up, but might be kind of confusing for the service manager clients because it\u0027s not their arguments that are bad.\n* Unsupported address/socket types (this highlighted line) - libbinder already handles this, and I don\u0027t think this could actually happen here because the provider needs to return a ARpc_ConnectionInfo ptr from ARpc_ConnectionInfo_new (which is a variant of one of the 3 known types) or nullptr. So I think this can be FATAL (changed).\n* No-memory or other hard errors like that - could be percolated up to the client through the SM APIs.\n* DEAD_OBJECT to pass the blame onto another service the callback was relying on. Could be passed up through the SM APIs, but I think it wouldn\u0027t make sense to a caller of those APIs, similar to bad arguments. The caller of the SM APIs likely doesn\u0027t know what DEAD_OBJECT means when calling waitForService.\n\nI think in all of those cases, libbinder/libbinder_ndk would pass the errors on to the callers of the servicemanager APIs or drop/log them.\n\nI think from a caller of the service manager APIs, the only interesting error they they could act on would be the permission error. And in that case they would be looking for logs that would explain what kind of specific permissions are missing.\n\nSo I\u0027m still leaning towards not handling specific errors from the callbacks.\n\nWDYT?",
+      "parentUuid": "fe23e5f2_6738d78c",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 96
+      },
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d36b58e6_2641db51",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 13
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7214429c_01e55d9b",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-27T00:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d36b58e6_2641db51",
+      "range": {
+        "startLine": 181,
+        "startChar": 11,
+        "endLine": 181,
+        "endChar": 42
+      },
       "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -124,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9136b5_fcfcabcb",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-27T00:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7296adce_862806fe",
+      "range": {
+        "startLine": 194,
+        "startChar": 25,
+        "endLine": 195,
+        "endChar": 26
+      },
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d8f434b_aec82246",
@@ -137,6 +209,30 @@
       "writtenOn": "2024-08-26T21:48:32Z",
       "side": 1,
       "message": "Is there a reason to not try every type though? You do have some functions that returns errors for these cases. I\u0027d remove the comment - seems these are just unit tests?",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1345,
+        "endChar": 36
+      },
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "649be619_ac4875d9",
+        "filename": "libs/binder/tests/binderRpcTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-08-27T00:15:21Z",
+      "side": 1,
+      "message": "There\u0027s already so many test cases and adding one to BinderRpcTest creates 65 different instances!\n\nI don\u0027t think any of these test cases need to be tested more than once, except for `ARpcGetService` which uses `BinderRpcAccessor` on line 1511 and already gets run for all 65 different combos (a little over half skipped).\n\nThere are probably additional tests I can add to BinderRpcTest with these NDK APIs though.\n\nRemoved the comment, and I\u0027ll work on adding some more tests. (keeping this unresolved until then).",
+      "parentUuid": "1d8f434b_aec82246",
       "range": {
         "startLine": 1344,
         "startChar": 0,
