@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "855fe9a6_f41338f5",
+        "filename": "cmds/installd/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1480715
+      },
+      "writtenOn": "2024-08-27T20:58:33Z",
+      "side": 1,
+      "message": "What about `com.example..`? (looks like it is also valid, based on [validateName](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/core/java/android/content/pm/parsing/FrameworkParsingPackageUtils.java;drc\u003d96a423d422ba2ac71f6694bfac3adfe0f2d86728;l\u003d72))",
+      "range": {
+        "startLine": 1064,
+        "startChar": 8,
+        "endLine": 1064,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "514a7b1e_76974a5f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/installd/utils.cpp",
+              "range": {
+                "startLine": 1064,
+                "startChar": 0,
+                "endLine": 1065,
+                "endChar": 0
+              },
+              "replacement": "    if (path.substr(last, path.size() - last).find(\"..\") !\u003d std::string::npos) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0fe262f54a32f4300feb57d934472986fe2d5092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
