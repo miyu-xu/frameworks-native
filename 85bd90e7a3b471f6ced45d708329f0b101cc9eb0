@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b5db493b_b00f1b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952791
+      },
+      "writtenOn": "2024-08-27T20:03:35Z",
+      "side": 1,
+      "message": "b/362440093 for lint bypass",
+      "revId": "85bd90e7a3b471f6ced45d708329f0b101cc9eb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "de69f95c_1c74bf8c",
         "filename": "libs/binder/Parcel.cpp",
         "patchSetId": 1
