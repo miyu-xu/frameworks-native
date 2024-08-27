@@ -246,7 +246,19 @@ ndk_headers {
     license: "NOTICE",
 }
 
-// include_cpp are packaged in development/build/sdk.atree with the AIDL compiler
+// TODO(b/160624671): package with the aidl compiler
+ndk_headers {
+    name: "libbinder_ndk_helper_headers",
+    from: "include_cpp/android",
+    to: "android",
+    srcs: [
+        "include_cpp/android/*.h",
+    ],
+    license: "NOTICE",
+    // These are intentionally not C. It's a mistake that they're in the NDK.
+    // See the bug above.
+    skip_verification: true,
+}
 
 ndk_library {
     name: "libbinder_ndk",
@@ -254,5 +266,6 @@ ndk_library {
     first_version: "29",
     export_header_libs: [
         "libbinder_ndk_headers",
+        "libbinder_ndk_helper_headers",
     ],
 }
