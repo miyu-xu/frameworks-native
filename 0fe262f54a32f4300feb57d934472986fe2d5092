@@ -40,6 +40,30 @@
       ],
       "revId": "0fe262f54a32f4300feb57d934472986fe2d5092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ea4f35_7e7fd5ac",
+        "filename": "cmds/installd/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1941531
+      },
+      "writtenOn": "2024-08-27T21:59:07Z",
+      "side": 1,
+      "message": "That would still be valid. This only checks that the last dir is not a indirection. i.e. \"com.example/..\".",
+      "parentUuid": "855fe9a6_f41338f5",
+      "range": {
+        "startLine": 1064,
+        "startChar": 8,
+        "endLine": 1064,
+        "endChar": 53
+      },
+      "revId": "0fe262f54a32f4300feb57d934472986fe2d5092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
