@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f961a5_67d6a07b",
+        "filename": "libs/binder/Status.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1902133
+      },
+      "writtenOn": "2024-08-27T01:34:22Z",
+      "side": 1,
+      "message": "I\u0027ve fixed the compile error. I\u0027m sorry. It is OK in qcom platform so I didn\u0027t notice it. Maybe qcom turned off this compile check.",
+      "range": {
+        "startLine": 269,
+        "startChar": 58,
+        "endLine": 269,
+        "endChar": 61
+      },
+      "revId": "edee03a7be38a0327b108fc02bd947c641351c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
