@@ -390,7 +390,11 @@ public:
         }
     }
 
-    static constexpr const char* key_paths[] = {"/adb_keys", "/data/misc/adb/adb_keys"};
+    static constexpr const char* key_paths[] = {
+        "/product/etc/security/adb_keys",
+        "/adb_keys",
+        "/data/misc/adb/adb_keys",
+    };
     void IteratePublicKeys(bool (*callback)(void*, const char*, size_t), void* opaque) {
         for (const auto& path : key_paths) {
             if (access(path, R_OK) == 0) {
@@ -405,6 +409,8 @@ public:
                         return;
                     }
                 }
+            } else {
+                PLOG(ERROR) << "adbd_auth: couldn't access " << path;
             }
         }
     }
