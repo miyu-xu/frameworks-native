@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a522d2a_fea15c3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2024-08-28T16:57:55Z",
+      "side": 1,
+      "message": "Martin, this has been dead code for years and I wonder if we can delete it to avoid this kind of hassle.",
+      "revId": "0cba3b55e2f85cfa46cc929b099b5eed0382dba6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
