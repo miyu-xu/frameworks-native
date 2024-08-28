@@ -22,6 +22,30 @@
       },
       "revId": "edee03a7be38a0327b108fc02bd947c641351c47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b85e536_c86721db",
+        "filename": "libs/binder/Status.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-28T23:53:20Z",
+      "side": 1,
+      "message": "Thank you",
+      "parentUuid": "99f961a5_67d6a07b",
+      "range": {
+        "startLine": 269,
+        "startChar": 58,
+        "endLine": 269,
+        "endChar": 61
+      },
+      "revId": "edee03a7be38a0327b108fc02bd947c641351c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
