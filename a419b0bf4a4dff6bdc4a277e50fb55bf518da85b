@@ -68,6 +68,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "732716ea_90b94ddf",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-28T20:27:30Z",
+      "side": 1,
+      "message": "When these return cases are hit, createAccessor will call generate, and since sockaddr is not modified, it doesn\u0027t know there is a failure, so it would try to use the unmodified sockaddr. If a sockaddr is re-used, that could lead to it making a connection to something else. \u0027generator\u0027 here should return that it failed, so that createAccessor can fail (and either return an error or return nullptr).\n\n\u003e change the behavior of libbinder/libbinder_ndk based on what a user\u0027s callback is telling us outside of a OK(non-null)/Not OK(null)\n\n+1, binary info is okay. It\u0027s nice if we can return more detailed error for debugging, but the main thing that\u0027s needed is knowing when we failed.\n\n\u003e Unsupported address/socket types (this highlighted line) - libbinder already handles this\n\nerr, yeah, so I think it\u0027s impossible for it to handle this, given the current implementation of generator. Am I missing something?",
+      "parentUuid": "054a75e4_4d8d7fae",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 96
+      },
+      "revId": "a419b0bf4a4dff6bdc4a277e50fb55bf518da85b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d36b58e6_2641db51",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 13
