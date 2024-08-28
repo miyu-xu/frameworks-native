@@ -64,6 +64,30 @@
       },
       "revId": "0fe262f54a32f4300feb57d934472986fe2d5092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7259d9b_16290ec5",
+        "filename": "cmds/installd/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1480715
+      },
+      "writtenOn": "2024-08-28T16:04:11Z",
+      "side": 1,
+      "message": "Ah, I see. Thanks for the clarification!",
+      "parentUuid": "67ea4f35_7e7fd5ac",
+      "range": {
+        "startLine": 1064,
+        "startChar": 8,
+        "endLine": 1064,
+        "endChar": 53
+      },
+      "revId": "0fe262f54a32f4300feb57d934472986fe2d5092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
