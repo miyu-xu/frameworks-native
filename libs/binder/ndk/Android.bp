@@ -218,6 +218,7 @@ cc_library_headers {
     name: "libbinder_headers_platform_shared",
     export_include_dirs: ["include_cpp"],
     vendor_available: true,
+    product_available: true,
     recovery_available: true,
     host_supported: true,
     // TODO(b/153609531): remove when no longer needed.
@@ -230,9 +231,9 @@ cc_library_headers {
     },
     apex_available: [
         "//apex_available:platform",
-        "com.android.media",
-        "com.android.media.swcodec",
+        "//apex_available:anyapex",
     ],
+    sdk_version: "29", // some APEXes require this, good to test headers against old SDK
     min_sdk_version: "29",
 }
 
@@ -246,19 +247,7 @@ ndk_headers {
     license: "NOTICE",
 }
 
-// TODO(b/160624671): package with the aidl compiler
-ndk_headers {
-    name: "libbinder_ndk_helper_headers",
-    from: "include_cpp/android",
-    to: "android",
-    srcs: [
-        "include_cpp/android/*.h",
-    ],
-    license: "NOTICE",
-    // These are intentionally not C. It's a mistake that they're in the NDK.
-    // See the bug above.
-    skip_verification: true,
-}
+// include_cpp are packaged in development/build/sdk.atree with the AIDL compiler
 
 ndk_library {
     name: "libbinder_ndk",
@@ -266,6 +255,5 @@ ndk_library {
     first_version: "29",
     export_header_libs: [
         "libbinder_ndk_headers",
-        "libbinder_ndk_helper_headers",
     ],
 }
