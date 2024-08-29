@@ -20,7 +20,7 @@
 
 #define LOG_TAG "BufferQueueConsumer"
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 
 #if DEBUG_ONLY_CODE
 #define VALIDATE_CONSISTENCY() do { mCore->validateConsistencyLocked(); } while (0)
@@ -355,6 +355,7 @@ status_t BufferQueueConsumer::detachBuffer(int slot) {
     }
 
     if (listener) {
+        BQ_LOGD("detachBuffer: calling onBufferDetached() callback with %d", slot);
         listener->onBufferDetached(slot);
     }
     return NO_ERROR;
