@@ -201,6 +201,12 @@ ARpc_Accessor* ARpc_Accessor_fromBinder(const char* instance, AIBinder* accessor
         __INTRODUCED_IN(36);
 
 /**
+ * FIXME docs
+ */
+binder_status_t ARpc_Accessor_delegateAccessor(const char* instance, AIBinder* binder,
+                                               AIBinder** outDelegator) __INTRODUCED_IN(36);
+
+/**
  * Create a new ARpc_ConnectionInfo with sockaddr. This can be supported socket
  * types like sockaddr_vm (vsock) and sockaddr_un (Unix Domain Sockets).
  *
