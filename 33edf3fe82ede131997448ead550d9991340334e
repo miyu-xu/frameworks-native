@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea0b9d9_cabbc55f",
+        "filename": "libs/adbd_auth/adbd_auth.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-08-29T03:51:00Z",
+      "side": 1,
+      "message": "fixed.\n\nAdbDebuggingManager.java should just work fine (it follows symlinks).",
+      "parentUuid": "601d3611_6052441a",
+      "revId": "33edf3fe82ede131997448ead550d9991340334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5264b6be_e17505c9",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-08-28T12:18:42Z",
       "side": 1,
       "message": "this is probably a bad idea, because most devices _won\u0027t_ have the new file, so this will cause meaningless \"error\" messages in logcat that will confuse people into thinking there\u0027s a problem (without actually helping anyone?).",
+      "revId": "33edf3fe82ede131997448ead550d9991340334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f32b0e7_ec363954",
+        "filename": "libs/adbd_auth/adbd_auth.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-08-29T03:51:00Z",
+      "side": 1,
+      "message": "sorry, this was for debugging but I forgot to remove.",
+      "parentUuid": "5264b6be_e17505c9",
       "revId": "33edf3fe82ede131997448ead550d9991340334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
