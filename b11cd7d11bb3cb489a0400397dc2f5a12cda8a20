@@ -16,6 +16,24 @@
       "message": "Does this need an Android.bp change to pick up the corpus? installd_service_fuzzer, `corpus: [\"corpus/*\"]`?",
       "revId": "b11cd7d11bb3cb489a0400397dc2f5a12cda8a20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef899b44_2cb4d020",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-08-29T20:56:25Z",
+      "side": 1,
+      "message": "Done in service_fuzze_defaults.",
+      "parentUuid": "6b835d69_1b3e781f",
+      "revId": "b11cd7d11bb3cb489a0400397dc2f5a12cda8a20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
