@@ -253,6 +253,7 @@ LIBBINDER_NDK36 { # introduced=36
     ARpc_addAccessorProvider; # systemapi
     ARpc_removeAccessorProvider; # systemapi
     ARpc_Accessor_new; # systemapi
+    ARpc_Accessor_delegateAccessor; #systemapi
     ARpc_Accessor_delete; # systemapi
     ARpc_Accessor_asBinder; # systemapi
     ARpc_Accessor_fromBinder; # systemapi
