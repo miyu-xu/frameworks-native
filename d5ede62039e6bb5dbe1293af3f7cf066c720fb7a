@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aea6dbcc_5012cdd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:54Z",
+      "side": 1,
+      "message": "You could add a method to the remote service you register which kills that process?",
+      "parentUuid": "a53273bb_c90986e2",
+      "revId": "d5ede62039e6bb5dbe1293af3f7cf066c720fb7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53b20fcc_500ebe41",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 12
