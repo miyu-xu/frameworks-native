@@ -539,6 +539,30 @@
       },
       "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9050348b_b7365148",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-08-29T02:11:44Z",
+      "side": 1,
+      "message": "For now, yes. I think we need a way to encode \"they are at the same time now\". Something like..\n\n```\n| sdk | llndk  |\n| ... | ...    |\n| 34  | 34     |\n| -   | 202404 |\n| 35  | -      |\n| 36  | 202504 |\n| ..  | ..     |\n```",
+      "parentUuid": "c7b1dbb7_729a1220",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
