@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "601d3611_6052441a",
+        "filename": "libs/adbd_auth/adbd_auth.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2024-08-29T02:22:06Z",
+      "side": 1,
+      "message": "+1. \n\nAlso, there are other parts where `adb_keys` is hardcoded such as `AdbDebuggingManager.java`.",
+      "parentUuid": "42b32063_3cc3c8e3",
+      "revId": "33edf3fe82ede131997448ead550d9991340334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5264b6be_e17505c9",
         "filename": "libs/adbd_auth/adbd_auth.cpp",
         "patchSetId": 1
