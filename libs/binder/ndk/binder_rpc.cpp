@@ -276,6 +276,26 @@ ARpc_Accessor* ARpc_Accessor_fromBinder(const char* instance, AIBinder* binder) 
     }
 }
 
+binder_status_t ARpc_Accessor_delegateAccessor(const char* instance, AIBinder* accessor,
+                                               AIBinder** outDelegator) {
+    if (instance == nullptr || accessor == nullptr) {
+        ALOGE("Arguments to ARpc_Accessor_delegateBinder are null");
+        return STATUS_UNEXPECTED_NULL;
+    }
+    sp<IBinder> accessorBinder = accessor->getBinder();
+
+    sp<IBinder> delegator;
+    status_t status = android::delegateAccessor(String16(instance), accessorBinder, &delegator);
+    if (status != OK) {
+        return PruneStatusT(status);
+    }
+    sp<AIBinder> binder = ABpBinder::lookupOrCreateFromBinder(delegator);
+    *outDelegator = binder.get();
+    // FIXME document this
+    (*outDelegator)->incStrong(nullptr);
+    return OK;
+}
+
 ARpc_ConnectionInfo* ARpc_ConnectionInfo_new(const sockaddr* addr, socklen_t len) {
     if (addr == nullptr || len < 0 || static_cast<size_t>(len) < sizeof(sa_family_t)) {
         ALOGE("Invalid arguments in Arpc_Connection_new");
