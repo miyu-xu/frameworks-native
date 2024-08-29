@@ -420,6 +420,24 @@ sp<IBinder> createAccessor(const String16& instance,
     return binder;
 }
 
+status_t delegateAccessor(const String16& name, const sp<IBinder>& accessor,
+                          sp<IBinder>* delegator) {
+    if (accessor == nullptr || delegator == nullptr) {
+        ALOGE("Arguments to delegateAccessor are null");
+        return BAD_VALUE;
+    }
+    status_t status = validateAccessor(name, accessor);
+    if (status != OK) {
+        ALOGE("The provided accessor binder is not an IAccessor for instance %s. Status: "
+              "%s",
+              String8(name).c_str(), statusToString(status).c_str());
+        return status;
+    }
+    *delegator = sp<android::os::IAccessorDelegator>::make(interface_cast<IAccessor>(accessor));
+
+    return OK;
+}
+
 #if !defined(__ANDROID_VNDK__)
 // IPermissionController is not accessible to vendors
 
