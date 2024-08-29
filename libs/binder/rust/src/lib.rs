@@ -119,7 +119,7 @@ pub use service::{
     register_lazy_service, wait_for_interface, wait_for_service, LazyServiceGuard,
 };
 #[cfg(not(any(android_vendor, android_vndk)))]
-pub use service::{Accessor, ConnectionInfo};
+pub use service::{delegate_accessor, Accessor, ConnectionInfo};
 #[cfg(not(trusty))]
 pub use state::{ProcessState, ThreadState};
 
