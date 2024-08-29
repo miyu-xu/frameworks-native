@@ -1,0 +1,542 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1ed2a8_189db29d",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "can you add visibility on this so it isn\u0027t visible to submodules?\n\nNote - if you copy this, it will still be loaded in the same linker namespace as the existing one, and it may cause some ODR issue. If possible, add an API to test it instead.",
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3aa111f_96b18c0b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "nit: you might add a todo to cache nullptr values later. Do you have metrics on binders that are requested but are always null?",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "af024073_732f2af1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "    // TODO(b/280331111): Add a check for the service being in the same process.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd76903e_fd24c841",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "can this function return the error so that the client can see it? If it fails, we should know, so we can pass the error up, right? we\u0027d need to re-fetch the service then?",
+      "range": {
+        "startLine": 68,
+        "startChar": 9,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1567ff42_77b81cb1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "    status_t setItem(const std::string\u0026 key, const sp\u003cIBinder\u003e\u0026 item) {\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "                return status;\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "        return android::OK;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d99c4b_a22d0fff",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "serviceName",
+      "range": {
+        "startLine": 85,
+        "startChar": 55,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17162bbe_bfac1c36",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "can you add this into unit tests or binderLibTest so that we don\u0027t need multiple tests? Otherwise, please add to test mapping so it will run in presubmit. However, combining it with an existing test is better.",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 30
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e542237_cf991f14",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "general",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e102ae66_b01708f1",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "nit: prefer test name like \u0027binderCacheUnitTest\u0027 since it\u0027s registered on the global service manager",
+      "range": {
+        "startLine": 35,
+        "startChar": 39,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb61c07_2fc6720f",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "You can sp\u003cBBinder\u003e::make, no need to add a new class",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0458a41_b48a17f3",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "These may fail with a different kind of error. Please prefer:\n\nMaybe add this:\n\n```\n#define EXPECT_OK(status)                        \\\n    do {                                         \\\n        android::binder::Status stat \u003d (status); \\\n        EXPECT_TRUE(stat.isOk()) \u003c\u003c stat;        \\\n    } while (false)\n```\n\nFiled b/363058251 to simplify this later.",
+      "range": {
+        "startLine": 80,
+        "startChar": 62,
+        "endLine": 80,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f2c04fdb_a2d21a97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "#define EXPECT_OK(status)                        \\\n    do {                                         \\\n        android::binder::Status _status \u003d (status); \\\n        EXPECT_TRUE(_status.isOk());             \\\n    } while (false)\n\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_OK(mBusm-\u003eaddService(mServiceName, binder, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_OK(mBusm-\u003echeckService(mServiceName, \u0026service));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d8541d7_de0e73ee",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "this is specific to the caller of this function",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 67
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fac8102_6d47a895",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "avoid double negation \"not cache, else ...\".\n\n\u0027if (!A) { C } else { B }\u0027 -\u003e \u0027if (A) { B } else { C }\u0027",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "469da9f7_a4bc567a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "        if (kUseLibbinderCache) {\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "        } else {\n            // If cache is disabled, then we should get the newer binder\n            EXPECT_EQ(binder2, result);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3463e099_5ba671b0",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 38
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e652ec5_427b3d4a",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "also check local binder? another case of binder1 \u003d sp\u003cBBinder\u003e::make()",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "44b3d9b1_f4cd8e0c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "    sp\u003cIBinder\u003e binder2 \u003d sp\u003cBBinder\u003e::make();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177dc58a_fe318017",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202384a2_4d661a49",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "Can you add a few more cases:\n- what if the service returns nullptr first? confirm it won\u0027t cache it?\n- different name picked?",
+      "range": {
+        "startLine": 125,
+        "startChar": 51,
+        "endLine": 125,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2cac9223_55ff0576",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "\nTEST_F(LibbinderCacheTest, AddRemoteServiceAndConfirmCacheMiss) {\n    // A service name which is in the static list of cachable services\n    std::string mServiceName \u003d \"isub\";\n\n    sp\u003cIBinder\u003e binder1 \u003d defaultServiceManager()-\u003echeckService(kServerName);\n    ASSERT_TRUE(binder1 !\u003d nullptr);\n    sp\u003cIBinder\u003e binder2 \u003d IInterface::asBinder(mBusm);\n\n    // Add a service (in this case the default service manager)\n    this-\u003eaddBinderToSm(mServiceName, binder1);\n    // Get the service. This caches it.\n    sp\u003cIBinder\u003e result;\n    this-\u003echeckService(mServiceName, \u0026result);\n    ASSERT_EQ(binder1, result);\n\n    // Add the different binder and replace the service.\n    // The cache should still hold the default service manager.\n    this-\u003eaddBinderToSm(mServiceName, binder2);\n\n    this-\u003echeckService(mServiceName, \u0026result);\n    if (!kUseLibbinderCache) {\n        // If cache is disabled, then we should get the newer binder\n        EXPECT_EQ(binder2, result);\n    } else {\n        // If cache is enabled, we should get the binder to Service Manager.\n        EXPECT_EQ(binder1, result);\n    }\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f74329_1861c0c5",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-29T21:52:08Z",
+      "side": 1,
+      "message": "nit: prefer always ASSERT_NE(binder1, nullptr)",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "92a38a10_58d1b078",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": "    ASSERT_NE(binder1, nullptr);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
