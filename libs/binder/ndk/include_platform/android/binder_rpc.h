@@ -265,6 +265,14 @@ ABinderRpc_Accessor* _Nullable ABinderRpc_Accessor_fromBinder(const char* _Nonnu
         __INTRODUCED_IN(36);
 
 /**
+ * FIXME docs
+ */
+binder_status_t ABinderRpc_Accessor_delegateAccessor(const char* _Nonnull instance,
+                                                     AIBinder* _Nonnull binder,
+                                                     AIBinder* _Nullable* _Nonnull outDelegator)
+        __INTRODUCED_IN(36);
+
+/**
  * Create a new ABinderRpc_ConnectionInfo with sockaddr. This can be supported socket
  * types like sockaddr_vm (vsock) and sockaddr_un (Unix Domain Sockets).
  *
