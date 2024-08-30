@@ -22,12 +22,24 @@ extern "C" {
 #endif
 
 struct AIBinder;
+struct ARpcServer;
 struct ARpcServerTrusty;
 
 struct ARpcServerTrusty* ARpcServerTrusty_newPerSession(struct AIBinder* (*)(const void*, size_t,
                                                                              char*),
                                                         char*, void (*)(char*));
 void ARpcServerTrusty_delete(struct ARpcServerTrusty*);
+/**
+ * Retrieve an opaque handle to the underlying ARpcServer.
+ * This allows callers, like the rust wrapper, to delegate to the
+ * binder implementation as opposed to reimplementing all the methods
+ * that operate on ARpcServer* here.
+ *
+ * NOTE: The lifetime of the returned ARpcServer* is tied to the lifetime
+ * of the ARpcServerTrusty* input parameter. Storing this pointer is almost
+ * certainly a mistake.
+ */
+struct ARpcServer* ARpcServerTrusty_getARpcServer(struct ARpcServerTrusty*);
 int ARpcServerTrusty_handleConnect(struct ARpcServerTrusty*, handle_t, const struct uuid*, void**);
 int ARpcServerTrusty_handleMessage(void*);
 void ARpcServerTrusty_handleDisconnect(void*);

@@ -72,6 +72,13 @@ void ARpcServerTrusty_delete(ARpcServerTrusty* rstr) {
     delete rstr;
 }
 
+ARpcServer* ARpcServerTrusty_getARpcServer(ARpcServerTrusty* rstr) {
+    // This assumes that ARpcServer* and RpcServer* alias.
+    // That is the case for now, but it needs to be kept in sync
+    // with libbinder_rpc_unstable.cpp.
+    return reinterpret_cast<ARpcServer*>(rstr->mRpcServer.get());
+}
+
 int ARpcServerTrusty_handleConnect(ARpcServerTrusty* rstr, handle_t chan, const uuid* peer,
                                    void** ctx_p) {
     return RpcServerTrusty::handleConnectInternal(rstr->mRpcServer.get(), chan, peer, ctx_p);
