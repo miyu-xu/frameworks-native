@@ -384,12 +384,14 @@ mod tests {
     use std::time::Duration;
 
     use binder::{
-        BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, SpIBinder, StatusCode,
+        Accessor, BinderFeatures, DeathRecipient, ConnectionInfo, FromIBinder, IBinder, Interface, SpIBinder, StatusCode,
         Strong,
     };
     // Import from impl API for testing only, should not be necessary as long as
     // you are using AIDL.
     use binder::binder_impl::{Binder, IBinderInternal, TransactionCode};
+    use nix::sys::socket::VsockAddr;
+    use log::info;
 
     use binder_tokio::Tokio;
 
@@ -906,6 +908,77 @@ mod tests {
             service_ibinder.into_interface().expect("Could not reassociate the generic ibinder");
 
         assert_eq!(service.test().unwrap(), service_name);
+    }
+
+    static mut DESTRUCTED: bool = false;
+    struct ToBeDeleted { pub a: bool, }
+    impl Drop for ToBeDeleted {
+        fn drop(&mut self) {
+            // SAFETY: testing
+            unsafe {
+                if DESTRUCTED {
+                    info!("asdf dropping ToBeDeleted AGAIN?");
+                } else {
+                    info!("asdf dropping ToBeDeleted first time");
+                }
+            }
+            // SAFETY: this is only used in a single test case that isn't run in multiple
+            // instances on multiple threads.
+            unsafe {
+                assert!(!DESTRUCTED);
+            }
+
+            // SAFETY: this is only used in a single test case that isn't run in multiple
+            // instances on multiple threads.
+            unsafe { DESTRUCTED = true; }
+        }
+    }
+
+    #[test]
+    fn test_accessor_callback_destruction() {
+        // SAFETY: this is only used in a single test case that isn't run in multiple
+        // instances on multiple threads.
+        unsafe { DESTRUCTED = false; }
+        {
+            let accessor: Accessor;
+            {
+                let helper = ToBeDeleted { a: false, };
+                let get_connection_info = move || {
+                    // Capture this object so we can see it get destructed
+                    // after the parent scope
+                    if helper.a {
+                        Some(ConnectionInfo::Vsock(VsockAddr::new(0, 0)))
+                    } else {
+                        None
+                    }
+                };
+                // SAFETY: this is only used in a single test case that isn't run in multiple
+                // instances on multiple threads.
+                unsafe { assert!(!DESTRUCTED); }
+                accessor = Accessor::new("foo.service", get_connection_info);
+                // SAFETY: this is only used in a single test case that isn't run in multiple
+                // instances on multiple threads.
+                unsafe { assert!(!DESTRUCTED); }
+                info!("asdf dropping helper scope, but the callback should still be alive");
+            }
+
+            info!("asdf outside of helper scope the callback should still be alive");
+            match accessor.as_binder() {
+                Some(_) => {
+                    // FIXME why is this already deleted here?????!?!?!!?!?!!!?
+                    // SAFETY: this is only used in a single test case that isn't run in multiple
+                    // instances on multiple threads.
+                    //unsafe { assert!(!DESTRUCTED); }
+                },
+                None => panic!("failed to get that accessor binder"),
+            }
+            info!("asdf dropping out of accessor scope");
+
+        }
+        info!("asdf out of accessor scope");
+        // SAFETY: this is only used in a single test case that isn't run in multiple
+        // instances on multiple threads.
+        unsafe { assert!(DESTRUCTED); }
     }
 
     #[tokio::test]

@@ -41,6 +41,8 @@ use std::os::fd::AsRawFd;
 use std::os::raw::c_char;
 use std::ptr;
 use std::sync::Arc;
+#[cfg(not(any(android_vendor, android_vndk)))]
+use log::info;
 
 /// A strong reference to a Binder remote object.
 ///
@@ -874,6 +876,7 @@ unsafe impl AsNative<sys::ARpc_Accessor> for Accessor {
 #[cfg(not(any(android_vendor, android_vndk)))]
 impl Drop for Accessor {
     fn drop(&mut self) {
+        info!("dropping");
         // Safety: `self.accessor` is always a valid, owned
         // `ARpc_Accessor` pointer returned by
         // `ARpc_Accessor_new` when `self` was created. This delete

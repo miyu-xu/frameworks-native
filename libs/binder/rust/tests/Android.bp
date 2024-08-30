@@ -14,6 +14,8 @@ rust_test {
         "libbinder_rs",
         "libselinux_bindgen",
         "libbinder_tokio_rs",
+        "libnix",
+        "liblog_rust",
         "libtokio",
     ],
     shared_libs: [
@@ -31,6 +33,8 @@ rust_test {
     rustlibs: [
         "libbinder_rs",
         "liblibc",
+        "liblog_rust",
+        "libnix",
     ],
     // For the binaries to be pushed properly as specified in AndroidTest.xml,
     // this cannot be the same as the module name.
