@@ -30,6 +30,8 @@ use crate::sys;
 #[cfg(not(any(android_vendor, android_vndk)))]
 use libc::sockaddr;
 #[cfg(not(any(android_vendor, android_vndk)))]
+use log::info;
+#[cfg(not(any(android_vendor, android_vndk)))]
 use nix::sys::socket::{SockaddrLike, UnixAddr, VsockAddr};
 use std::cmp::Ordering;
 use std::convert::TryInto;
@@ -874,6 +876,7 @@ unsafe impl AsNative<sys::ARpc_Accessor> for Accessor {
 #[cfg(not(any(android_vendor, android_vndk)))]
 impl Drop for Accessor {
     fn drop(&mut self) {
+        info!("dropping");
         // Safety: `self.accessor` is always a valid, owned
         // `ARpc_Accessor` pointer returned by
         // `ARpc_Accessor_new` when `self` was created. This delete
