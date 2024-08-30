@@ -86,6 +86,24 @@
       "message": "Hello, Presubmit-Verified -2, how should I solve it?\nI don’t have permission to view the error link go/treehugger-pv-2 and http://go/automerger-presubmit-faq to solve this problem. Can your company help me check it, thank you",
       "revId": "e6136ceb826416021a7f0384de8ff2037e2b6079",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ba866a_f5f072d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-08-30T17:59:16Z",
+      "side": 1,
+      "message": "the error message is:\n```\n...oong/.intermediates/frameworks/native/services/surfaceflinger/tests/unittests/libsurfaceflinger_unittest/android_arm64_armv8-a_cortex-a53/obj/frameworks/native/services/surfaceflinger/SurfaceFlinger.o\n.../tests/unittests/libsurfaceflinger_unittest/android_arm64_armv8-a_cortex-a53/obj/frameworks/native/services/surfaceflinger/SurfaceFlinger.o frameworks/native/services/surfaceflinger/SurfaceFlinger.cpp\nframeworks/native/services/surfaceflinger/SurfaceFlinger.cpp:6033:41: error: too many arguments to function call, expected single argument \u0027transactions\u0027, have 2 arguments\n 6033 |         applyTransactions(transactions, VsyncId{0});\n      |         ~~~~~~~~~~~~~~~~~               ^~~~~~~~~~\nframeworks/native/services/surfaceflinger/SurfaceFlinger.cpp:4961:22: note: \u0027applyTransactions\u0027 declared here\n 4961 | bool SurfaceFlinger::applyTransactions(std::vector\u003cTransactionState\u003e\u0026 transactions) {\n      |                      ^                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n```\n\nError: the build failed.\nReproduce locally with m out/soong/.intermediates/frameworks/native/services/surfaceflinger/tests/unittests/libsurfaceflinger_unittest/android_arm64_armv8-a_cortex-a53/obj/frameworks/native/services/surfaceflinger/SurfaceFlinger.o",
+      "parentUuid": "7fb6f755_d2374f62",
+      "revId": "e6136ceb826416021a7f0384de8ff2037e2b6079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
