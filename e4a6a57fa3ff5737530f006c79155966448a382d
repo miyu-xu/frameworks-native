@@ -1,0 +1,200 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b009b395_be246c94",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T18:10:55Z",
+      "side": 1,
+      "message": "The client behavior should be flagged, not here\n\nAlso, do you want a separate flag for that or no? has it already been enabled?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7701f550_da4aee9b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 443,
+                "startChar": 0,
+                "endLine": 444,
+                "endChar": 0
+              },
+              "replacement": "        if (android::base::GetBoolProperty(\"ro.vendor.enable_libbinder_client_cache\", false)) {\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 614,
+                "startChar": 0,
+                "endLine": 615,
+                "endChar": 0
+              },
+              "replacement": "    if (android::base::GetBoolProperty(\"ro.vendor.enable_libbinder_client_cache\", false) \u0026\u0026\n        enableClientSideCache) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b2788f_f9da9cb2",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T18:10:55Z",
+      "side": 1,
+      "message": "can you put in the existing maps to avoid extra storage?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "264bc16d_799dcb8b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.h",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.h",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "        bool enableClientSideCache \u003d false;\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.h",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a564cd_568f2d9d",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T18:10:55Z",
+      "side": 1,
+      "message": "we should only need one API?",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 80
+      },
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7bf2466_f4f99345",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T18:10:55Z",
+      "side": 1,
+      "message": "should be added at the end, in case prebuilts call these virtual methods.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2fca31ed_4e352020",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManager.h",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/include/binder/IServiceManager.h",
+              "range": {
+                "startLine": 158,
+                "startChar": 0,
+                "endLine": 158,
+                "endChar": 0
+              },
+              "replacement": "\n    /**\n     * Register a service.\n     */\n    virtual status_t addService2(const String16\u0026 name, const sp\u003cIBinder\u003e\u0026 service,\n                                 bool allowIsolated \u003d false,\n                                 int dumpsysPriority \u003d DUMP_FLAG_PRIORITY_DEFAULT,\n                                 bool enableClientSideCache \u003d false) \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
