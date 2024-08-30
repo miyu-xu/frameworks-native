@@ -69,6 +69,23 @@
       "parentUuid": "c0a6b6d3_f90cf8ed",
       "revId": "e6136ceb826416021a7f0384de8ff2037e2b6079",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb6f755_d2374f62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-08-30T01:08:26Z",
+      "side": 1,
+      "message": "Hello, Presubmit-Verified -2, how should I solve it?\nI don’t have permission to view the error link go/treehugger-pv-2 and http://go/automerger-presubmit-faq to solve this problem. Can your company help me check it, thank you",
+      "revId": "e6136ceb826416021a7f0384de8ff2037e2b6079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
