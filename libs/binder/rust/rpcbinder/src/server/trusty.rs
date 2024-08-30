@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+use crate::session::FileDescriptorTransportMode;
 use binder::{unstable_api::AsNative, SpIBinder};
 use libc::size_t;
 use std::ffi::{c_char, c_void};
@@ -64,6 +65,29 @@ impl RpcServer {
             )
         };
         RpcServer { inner }
+    }
+
+    /// Sets the list of file descriptor transport modes supported by this server.
+    pub fn set_supported_file_descriptor_transport_modes(
+        &self,
+        modes: &[FileDescriptorTransportMode],
+    ) {
+        // SAFETY: The callee returns the inner ARpcServer of an ARpcServerTrusty.
+        // As long as we keep ARpcServerTrusty.cpp in sync with libbinder_rpc_unstable.cpp,
+        // this function should be safe. The pointer needs a cast below from
+        // `binder_rpc_server_bindgen::ARpcServer` to a
+        // `binder_rpc_unstable_bindgen::ARpcServer` because they are different types.
+        let rpc_server =
+            unsafe { binder_rpc_server_bindgen::ARpcServerTrusty_getARpcServer(self.inner) };
+        // SAFETY: Does not keep the pointer after returning does, nor does it
+        // read past its boundary. Only passes the 'self' pointer as an opaque handle.
+        unsafe {
+            binder_rpc_unstable_bindgen::ARpcServer_setSupportedFileDescriptorTransportModes(
+                rpc_server.cast(),
+                modes.as_ptr(),
+                modes.len(),
+            )
+        }
     }
 }
 

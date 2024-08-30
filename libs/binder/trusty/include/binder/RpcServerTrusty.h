@@ -106,6 +106,7 @@ private:
                                                                                 char*),
                                                                 char*, void (*)(char*));
     friend void ::ARpcServerTrusty_delete(::ARpcServerTrusty*);
+    friend ::ARpcServer* ::ARpcServerTrusty_getARpcServer(::ARpcServerTrusty*);
     friend int ::ARpcServerTrusty_handleConnect(::ARpcServerTrusty*, handle_t, const uuid*, void**);
     friend int ::ARpcServerTrusty_handleMessage(void*);
     friend void ::ARpcServerTrusty_handleDisconnect(void*);
