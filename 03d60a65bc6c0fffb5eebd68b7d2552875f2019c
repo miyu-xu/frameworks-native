@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5aacc1_9ad3bf04",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T19:07:40Z",
+      "side": 1,
+      "message": "is there a way we can avoid these forks in the trusty version?",
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347cfe7d_e304596d",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-08-30T19:07:40Z",
+      "side": 1,
+      "message": "This is very dangerous. Can you verify it?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b0eddf6d_75af4de1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 80,
+                "endChar": 0
+              },
+              "replacement": "ARpcServer* ARpcServerTrusty_getARpcServer(ARpcServerTrusty* rstr, ARpcServer** rstrPtr) {\n    *rstrPtr \u003d reinterpret_cast\u003cARpcServer*\u003e(rstr-\u003emRpcServer.get());\n    return *rstrPtr;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
