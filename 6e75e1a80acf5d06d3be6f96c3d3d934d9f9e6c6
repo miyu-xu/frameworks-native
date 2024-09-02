@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46eeb38f_3df475db",
+        "filename": "libs/nativewindow/rust/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2024-09-02T08:53:41Z",
+      "side": 1,
+      "message": "nit: How about `clone_into_native_handle` to emphasize there\u0027s a clone happened?",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 24
+      },
+      "revId": "6e75e1a80acf5d06d3be6f96c3d3d934d9f9e6c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
