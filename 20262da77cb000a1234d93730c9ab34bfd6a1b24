@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f42c64_6762c77e",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e1ed2a8_189db29d",
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3aa111f_96b18c0b",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f618c1a_b2fa897f",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "We don\u0027t have metrics for it right now. \n\nI\u0027ve created a bug for this and added a TODO",
+      "parentUuid": "f3aa111f_96b18c0b",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 22
+      },
       "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +162,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d359da9f_9c4d8648",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "fd76903e_fd24c841",
+      "range": {
+        "startLine": 68,
+        "startChar": 9,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53d99c4b_a22d0fff",
@@ -133,6 +199,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "serviceName",
+      "range": {
+        "startLine": 85,
+        "startChar": 55,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64221c37_3280e782",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d99c4b_a22d0fff",
       "range": {
         "startLine": 85,
         "startChar": 55,
@@ -166,6 +256,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14ee05f_a6beaeb4",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "I added it to the test mapping.\n\nI couldn\u0027t add it to the BinderUnitTests as this cannot run on host.\n\nI had issues with running the FooService in binderLibTest.",
+      "parentUuid": "17162bbe_bfac1c36",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 30
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e542237_cf991f14",
@@ -179,6 +293,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "general",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b50296d_a1d79260",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 33
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e542237_cf991f14",
       "range": {
         "startLine": 75,
         "startChar": 19,
@@ -212,6 +350,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec47002_0975bb2c",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e102ae66_b01708f1",
+      "range": {
+        "startLine": 35,
+        "startChar": 39,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceb61c07_2fc6720f",
@@ -225,6 +387,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "You can sp\u003cBBinder\u003e::make, no need to add a new class",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80fdb8a9_ffd35b62",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "I made the class shut down the server.\n\nI believe that it is reasonable to therefore keep this as a class",
+      "parentUuid": "ceb61c07_2fc6720f",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -296,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be755ee_c283bf37",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0458a41_b48a17f3",
+      "range": {
+        "startLine": 80,
+        "startChar": 62,
+        "endLine": 80,
+        "endChar": 75
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d8541d7_de0e73ee",
@@ -309,6 +519,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "this is specific to the caller of this function",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 67
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2bf0a0d_f21398bd",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d8541d7_de0e73ee",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -370,6 +604,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba4e4341_41754c2b",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fac8102_6d47a895",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 34
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3463e099_5ba671b0",
@@ -383,6 +641,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 38
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff948641_88e3c637",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3463e099_5ba671b0",
       "range": {
         "startLine": 112,
         "startChar": 0,
@@ -434,6 +716,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2044d5_8a5870f3",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e652ec5_427b3d4a",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 72
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "177dc58a_fe318017",
@@ -447,6 +753,30 @@
       "writtenOn": "2024-08-29T21:52:08Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6629be42_fdd84b79",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "177dc58a_fe318017",
       "range": {
         "startLine": 122,
         "startChar": 0,
@@ -498,6 +828,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f51d00_b2fe82a0",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "202384a2_4d661a49",
+      "range": {
+        "startLine": 125,
+        "startChar": 51,
+        "endLine": 125,
+        "endChar": 63
+      },
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4f74329_1861c0c5",
@@ -535,6 +889,30 @@
           ]
         }
       ],
+      "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "030d459f_456b91e0",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-02T15:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4f74329_1861c0c5",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 36
+      },
       "revId": "20262da77cb000a1234d93730c9ab34bfd6a1b24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
