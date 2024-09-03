@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a237761_72dc4b65",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-09-03T20:29:33Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM - I am assuming there is no way to enforce this technically?",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 90
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "347cfe7d_e304596d",
