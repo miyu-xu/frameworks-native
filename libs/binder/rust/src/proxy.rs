@@ -31,7 +31,6 @@ use std::cmp::Ordering;
 use std::convert::TryInto;
 use std::ffi::{c_void, CString};
 use std::fmt;
-use std::mem;
 use std::os::fd::AsRawFd;
 use std::ptr;
 use std::sync::Arc;
@@ -542,9 +541,8 @@ impl Drop for WpIBinder {
 ///
 /// Dropping the `DeathRecipient` will `unlink_to_death` any binders it is
 /// currently linked to.
-#[repr(C)]
 pub struct DeathRecipient {
-    recipient: *mut sys::AIBinder_DeathRecipient,
+    recipient: ptr::NonNull<sys::AIBinder_DeathRecipient>,
     cookie: *mut c_void,
     vtable: &'static DeathRecipientVtable,
 }
@@ -578,13 +576,15 @@ impl DeathRecipient {
         // must be destroyed via `AIBinder_DeathRecipient_delete` when no longer
         // needed.
         let recipient = unsafe { sys::AIBinder_DeathRecipient_new(Some(Self::binder_died::<F>)) };
+        let recipient = ptr::NonNull::new(recipient)
+            .expect("Unexpected null pointer from AIBinder_DeathRecipient_new");
         // Safety: The function pointer is a valid onUnlinked callback.
         //
         // All uses of linkToDeath in this file correctly increment the
         // ref-count that this onUnlinked callback will decrement.
         unsafe {
             sys::AIBinder_DeathRecipient_setOnUnlinked(
-                recipient,
+                recipient.as_ptr(),
                 Some(Self::cookie_decr_refcount::<F>),
             );
         }
@@ -651,7 +651,7 @@ impl DeathRecipient {
         F: Fn() + Send + Sync + 'static,
     {
         // Safety: The caller promises that `cookie` is for an Arc<F>.
-        drop(unsafe { Arc::from_raw(cookie as *const F) });
+        unsafe { Arc::decrement_strong_count(cookie as *const F) };
     }
 
     /// Callback that increments the ref-count.
@@ -665,8 +665,7 @@ impl DeathRecipient {
         F: Fn() + Send + Sync + 'static,
     {
         // Safety: The caller promises that `cookie` is for an Arc<F>.
-        let arc = mem::ManuallyDrop::new(unsafe { Arc::from_raw(cookie as *const F) });
-        mem::forget(Arc::clone(&arc));
+        unsafe { Arc::increment_strong_count(cookie as *const F) };
     }
 }
 
@@ -675,11 +674,11 @@ impl DeathRecipient {
 /// pointer.
 unsafe impl AsNative<sys::AIBinder_DeathRecipient> for DeathRecipient {
     fn as_native(&self) -> *const sys::AIBinder_DeathRecipient {
-        self.recipient
+        self.recipient.as_ptr()
     }
 
     fn as_native_mut(&mut self) -> *mut sys::AIBinder_DeathRecipient {
-        self.recipient
+        self.recipient.as_ptr()
     }
 }
 
@@ -690,7 +689,7 @@ impl Drop for DeathRecipient {
         // `AIBinder_DeathRecipient_new` when `self` was created. This delete
         // method can only be called once when `self` is dropped.
         unsafe {
-            sys::AIBinder_DeathRecipient_delete(self.recipient);
+            sys::AIBinder_DeathRecipient_delete(self.recipient.as_ptr());
         }
 
         // Safety: We own a ref-count to the cookie, and so does every linked
