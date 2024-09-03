@@ -43,6 +43,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "369c7d24_1d7aa7db",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-03T21:12:00Z",
+      "side": 1,
+      "message": "why do we have two bindgens? `binder_rpc_server_bindgen` is trusty only?\n\ni wonder if there is a better solution, maybe can add the trusty stuff to `binder_rpc_unstable_bindgen` conditionally. i don\u0027t know the setup, so maybe that is worse overall, just musing",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b91124b7_921cafcb",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-03T21:12:00Z",
+      "side": 1,
+      "message": "i think this all belongs in the other SAFETY comment because it is explaining why the cast is OK. i\u0027d guess this one should just be \"we know we have a valid ARpcServerTrusty pointer\"",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aa236e1_64394564",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-03T21:12:00Z",
+      "side": 1,
+      "message": "this doesn\u0027t seem right, there is no opaque pointer argument of ARpcServer_setSupportedFileDescriptorTransportModes",
+      "range": {
+        "startLine": 83,
+        "startChar": 35,
+        "endLine": 83,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "347cfe7d_e304596d",
         "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
         "patchSetId": 1
