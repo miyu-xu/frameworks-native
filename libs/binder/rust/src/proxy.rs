@@ -31,7 +31,6 @@ use std::cmp::Ordering;
 use std::convert::TryInto;
 use std::ffi::{c_void, CString};
 use std::fmt;
-use std::mem;
 use std::os::fd::AsRawFd;
 use std::ptr;
 use std::sync::Arc;
@@ -536,32 +535,27 @@ impl Drop for WpIBinder {
 
 /// Rust wrapper around DeathRecipient objects.
 ///
-/// The cookie in this struct represents an `Arc<F>` for the owned callback.
+/// The cookie in this struct is an `Arc<F>` for the owned callback.
 /// This struct owns a ref-count of it, and so does every binder that we
 /// have been linked with.
 ///
 /// Dropping the `DeathRecipient` will `unlink_to_death` any binders it is
 /// currently linked to.
-#[repr(C)]
 pub struct DeathRecipient {
-    recipient: *mut sys::AIBinder_DeathRecipient,
-    cookie: *mut c_void,
-    vtable: &'static DeathRecipientVtable,
+    recipient: ptr::NonNull<sys::AIBinder_DeathRecipient>,
+    cookie: DeathRecipientCookie,
 }
 
-struct DeathRecipientVtable {
-    cookie_incr_refcount: unsafe extern "C" fn(*mut c_void),
-    cookie_decr_refcount: unsafe extern "C" fn(*mut c_void),
-}
+type DeathRecipientCookie = Arc<dyn Fn() + Send + Sync + 'static>;
 
-/// Safety: A `DeathRecipient` is a wrapper around `AIBinder_DeathRecipient` and
-/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
-/// `AIBinder_DeathRecipient` is threadsafe, this structure is too.
+/// Safety: A `DeathRecipient` is a wrapper around `AIBinder_DeathRecipient` and a `Fn` which is
+/// `Sync` and `Send` (the cookie field). As `AIBinder_DeathRecipient` is threadsafe, this
+/// structure is too.
 unsafe impl Send for DeathRecipient {}
 
-/// Safety: A `DeathRecipient` is a wrapper around `AIBinder_DeathRecipient` and
-/// a pointer to a `Fn` which is `Sync` and `Send` (the cookie field). As
-/// `AIBinder_DeathRecipient` is threadsafe, this structure is too.
+/// Safety: A `DeathRecipient` is a wrapper around `AIBinder_DeathRecipient` and a `Fn` which is
+/// `Sync` and `Send` (the cookie field). As `AIBinder_DeathRecipient` is threadsafe, this
+/// structure is too.
 unsafe impl Sync for DeathRecipient {}
 
 impl DeathRecipient {
@@ -571,31 +565,26 @@ impl DeathRecipient {
     where
         F: Fn() + Send + Sync + 'static,
     {
-        let callback: *const F = Arc::into_raw(Arc::new(callback));
         // Safety: The function pointer is a valid death recipient callback.
         //
         // This call returns an owned `AIBinder_DeathRecipient` pointer which
         // must be destroyed via `AIBinder_DeathRecipient_delete` when no longer
         // needed.
-        let recipient = unsafe { sys::AIBinder_DeathRecipient_new(Some(Self::binder_died::<F>)) };
+        let recipient = unsafe { sys::AIBinder_DeathRecipient_new(Some(Self::binder_died)) };
+        let recipient = ptr::NonNull::new(recipient)
+            .expect("Unexpected null pointer from AIBinder_DeathRecipient_new");
+
         // Safety: The function pointer is a valid onUnlinked callback.
         //
         // All uses of linkToDeath in this file correctly increment the
         // ref-count that this onUnlinked callback will decrement.
         unsafe {
             sys::AIBinder_DeathRecipient_setOnUnlinked(
-                recipient,
-                Some(Self::cookie_decr_refcount::<F>),
+                recipient.as_ptr(),
+                Some(Self::cookie_decr_refcount),
             );
         }
-        DeathRecipient {
-            recipient,
-            cookie: callback as *mut c_void,
-            vtable: &DeathRecipientVtable {
-                cookie_incr_refcount: Self::cookie_incr_refcount::<F>,
-                cookie_decr_refcount: Self::cookie_decr_refcount::<F>,
-            },
-        }
+        DeathRecipient { recipient, cookie: Arc::new(callback) }
     }
 
     /// Increment the ref-count for the cookie and return it.
@@ -604,15 +593,7 @@ impl DeathRecipient {
     ///
     /// The caller must handle the returned ref-count correctly.
     unsafe fn new_cookie(&self) -> *mut c_void {
-        // Safety: `cookie_incr_refcount` points to
-        // `Self::cookie_incr_refcount`, and `self.cookie` is the cookie for an
-        // Arc<F>.
-        unsafe {
-            (self.vtable.cookie_incr_refcount)(self.cookie);
-        }
-
-        // Return a raw pointer with ownership of a ref-count
-        self.cookie
+        Arc::into_raw(self.cookie.clone()).cast_mut().cast()
     }
 
     /// Get the opaque cookie that identifies this death recipient.
@@ -621,21 +602,18 @@ impl DeathRecipient {
     /// binder object and will be passed to the `binder_died` callback as an
     /// opaque userdata pointer.
     fn get_cookie(&self) -> *mut c_void {
-        self.cookie
+        Arc::as_ptr(&self.cookie).cast_mut().cast()
     }
 
     /// Callback invoked from C++ when the binder object dies.
     ///
     /// # Safety
     ///
-    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
-    /// the caller must hold a ref-count to it.
-    unsafe extern "C" fn binder_died<F>(cookie: *mut c_void)
-    where
-        F: Fn() + Send + Sync + 'static,
-    {
-        // Safety: The caller promises that `cookie` is for an Arc<F>.
-        let callback = unsafe { (cookie as *const F).as_ref().unwrap() };
+    /// The `cookie` parameter must be a cookie returned by `Self::get_cookie` and the caller must
+    /// hold a ref-count to it.
+    unsafe extern "C" fn binder_died(cookie: *mut c_void) {
+        // Safety: The caller promises that `cookie` is for a DeathRecipientCookie.
+        let callback = unsafe { (cookie as *const DeathRecipientCookie).as_ref().unwrap() };
         callback();
     }
 
@@ -644,29 +622,12 @@ impl DeathRecipient {
     ///
     /// # Safety
     ///
-    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
-    /// the owner must give up a ref-count to it.
-    unsafe extern "C" fn cookie_decr_refcount<F>(cookie: *mut c_void)
-    where
-        F: Fn() + Send + Sync + 'static,
-    {
-        // Safety: The caller promises that `cookie` is for an Arc<F>.
-        drop(unsafe { Arc::from_raw(cookie as *const F) });
-    }
-
-    /// Callback that increments the ref-count.
-    ///
-    /// # Safety
-    ///
-    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
-    /// the owner must handle the created ref-count properly.
-    unsafe extern "C" fn cookie_incr_refcount<F>(cookie: *mut c_void)
-    where
-        F: Fn() + Send + Sync + 'static,
-    {
-        // Safety: The caller promises that `cookie` is for an Arc<F>.
-        let arc = mem::ManuallyDrop::new(unsafe { Arc::from_raw(cookie as *const F) });
-        mem::forget(Arc::clone(&arc));
+    /// The `cookie` parameter must be a cookie returned by `Self::get_cookie` and the caller must
+    /// hold a ref-count to it.
+    unsafe extern "C" fn cookie_decr_refcount(cookie: *mut c_void) {
+        // Safety: The caller promises that `cookie` is for a DeathRecipientCookie, which is an
+        // Arc<_>.
+        unsafe { Arc::decrement_strong_count(cookie) };
     }
 }
 
@@ -675,11 +636,11 @@ impl DeathRecipient {
 /// pointer.
 unsafe impl AsNative<sys::AIBinder_DeathRecipient> for DeathRecipient {
     fn as_native(&self) -> *const sys::AIBinder_DeathRecipient {
-        self.recipient
+        self.recipient.as_ptr()
     }
 
     fn as_native_mut(&mut self) -> *mut sys::AIBinder_DeathRecipient {
-        self.recipient
+        self.recipient.as_ptr()
     }
 }
 
@@ -690,14 +651,7 @@ impl Drop for DeathRecipient {
         // `AIBinder_DeathRecipient_new` when `self` was created. This delete
         // method can only be called once when `self` is dropped.
         unsafe {
-            sys::AIBinder_DeathRecipient_delete(self.recipient);
-        }
-
-        // Safety: We own a ref-count to the cookie, and so does every linked
-        // binder. This call gives up our ref-count. The linked binders should
-        // already have given up their ref-count, or should do so shortly.
-        unsafe {
-            (self.vtable.cookie_decr_refcount)(self.cookie);
+            sys::AIBinder_DeathRecipient_delete(self.recipient.as_ptr());
         }
     }
 }
