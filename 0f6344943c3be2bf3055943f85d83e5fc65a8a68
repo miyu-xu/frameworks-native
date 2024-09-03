@@ -326,6 +326,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867f38e2_74ab444b",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-03T23:10:56Z",
+      "side": 1,
+      "message": "Hit send before editing this... You mentioned the right answer in chat. I needed to cast the void ptr to the right type before the `decrement_strong_count` which worked nicely!",
+      "parentUuid": "feaa5026_9b0a882f",
+      "range": {
+        "startLine": 847,
+        "startChar": 0,
+        "endLine": 847,
+        "endChar": 59
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a24023_e6136490",
