@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ac6c43_52859282",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-03T22:46:21Z",
+      "side": 1,
+      "message": "It should only be needed if the struct is part of an ABI. I\u0027m pretty confident you don\u0027t need it and that it can be removed from `DeathRecipient`. Haven\u0027t looked closely at `Binder`",
+      "parentUuid": "e58568c6_5f498a82",
+      "range": {
+        "startLine": 718,
+        "startChar": 0,
+        "endLine": 718,
+        "endChar": 10
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eeddbd4_6dbc4eb8",
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "I think we need the extra `increase_strong_count` to keep the object alive until the NDK API calls the `cookie_decr_refcount`. (passing ownership when passing the function pointer + the object pointer to the NDK API).\n\nI think we don\u0027t need this Accessor object to hold a reference to it at all. Removing that cleaned up a lot!\n\nDoes this make sense? Is there another more rusty way to pass ownership of this object to libbinder_ndk?",
       "parentUuid": "1eeddbd4_6dbc4eb8",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 723,
+        "endChar": 1
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db121639_c09e371e",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-03T22:46:21Z",
+      "side": 1,
+      "message": "I think that makes sense. `DeathRecipient` wants to keep a ref count on the cookie itself, but there seems to be no need here, so you can let the NDK hold the only reference.\n\nI think what you\u0027ve done is a bit wrong though. When you do `Arc::new`, the ref count is at 1. Then `Arc::increment_strong_count` increases the count to 2. When you call `ARpc_Accessor_delete`, I expect it to call `cookie_decr_refcount` exactly one time, which brings the count down to 1. Then, nothing else does a decr, so it looks like a leak.\n\n(`Arc::into_raw` takes ownership of the existing ref count represented by the `Arc` value consumed. it doesn\u0027t do any decr or incr)",
+      "parentUuid": "0c293ce2_7ac00efe",
       "range": {
         "startLine": 719,
         "startChar": 0,
