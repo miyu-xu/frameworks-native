@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e4ee9d2_7fdface1",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-03T23:09:51Z",
+      "side": 1,
+      "message": "+1, talked to cranes@ who initially added it and they said it should be able to be removed.",
+      "parentUuid": "01ac6c43_52859282",
+      "range": {
+        "startLine": 718,
+        "startChar": 0,
+        "endLine": 718,
+        "endChar": 10
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eeddbd4_6dbc4eb8",
@@ -207,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd8adcc_1c34485d",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-03T23:09:51Z",
+      "side": 1,
+      "message": "+1 - I didn\u0027t realize that\u0027s how into_raw worked. I verified your description of the problem. I dropped the `increment_strong_count`.",
+      "parentUuid": "0c293ce2_7ac00efe",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 723,
+        "endChar": 1
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "731823b4_7bc8773d",
@@ -244,6 +292,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "731823b4_7bc8773d",
+      "range": {
+        "startLine": 847,
+        "startChar": 0,
+        "endLine": 847,
+        "endChar": 59
+      },
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feaa5026_9b0a882f",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-03T23:09:51Z",
+      "side": 1,
+      "message": "Never mind! With this change to use `decrement_strong_count` here instead of the `drop(from_raw())`, I was never seeing the Arc\u003cclosure\u003e object being deleted when the count went to 0.\n\nChanging it back to `drop(unsafe { Arc::from_raw(cookie as *const F) });` deletes the object like I expect (in `test/integration.rs`).\n\n\n\u003e To avoid a memory leak the pointer must be converted back to an Arc using Arc::from_raw.\n\nhttps://doc.rust-lang.org/std/sync/struct.Arc.html#method.from_raw this rust doc seems to say we need to use the from_raw for this case. Is there something else we can do with the `decrement_strong_count`?",
+      "parentUuid": "e258f417_ad1aae5b",
       "range": {
         "startLine": 847,
         "startChar": 0,
