@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb1fce9_0693399d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T17:33:07Z",
+      "side": 1,
+      "message": "Done. Confirmed that the test passes with this condition removed",
+      "parentUuid": "dcd8da40_b747e58e",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 35
+      },
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc15939c_5256f8e9",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-09-04T16:32:34Z",
       "side": 1,
       "message": "Hey - this will be deleted at the end of the function. I think you will want:\n\n```\nstruct Entry {\n    sp\u003cIBinder\u003e service;\n    sp\u003cBinderInvalidation\u003e deathRecipient;\n};\n...\nstd::map\u003cstd::string, Entry\u003e mCache;\n```",
+      "range": {
+        "startLine": 69,
+        "startChar": 31,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ad9c71_53c40aba",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T17:33:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc15939c_5256f8e9",
       "range": {
         "startLine": 69,
         "startChar": 31,
@@ -126,6 +174,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "569f139d_51b54ef8",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T17:33:07Z",
+      "side": 1,
+      "message": "Oops. Sorry, pitfalls of find and replace.",
+      "parentUuid": "e6e10801_3464854f",
+      "range": {
+        "startLine": 87,
+        "startChar": 42,
+        "endLine": 87,
+        "endChar": 60
+      },
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d189559e_eaf251bc",
@@ -183,6 +255,30 @@
           ]
         }
       ],
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "702c1eec_6e957820",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T17:33:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d189559e_eaf251bc",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 28
+      },
       "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
