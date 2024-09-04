@@ -1,0 +1,190 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd8da40_b747e58e",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T16:32:34Z",
+      "side": 1,
+      "message": "this is the check that\u0027s allowing that test to pass. If you remove this check, you should see that test to start to fail. binderDied calls \u0027cache-\u003eremoveItem(mKey, binder);\u0027 so, if linkToDeath is working, the test should pass without \u0027isBinderAlive\u0027 here.\n\nHowever, you should keep the \u0027isBinderAlive\u0027 check here as it is a good check.",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3fa73304_1a02addf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "        if (binder \u0026\u0026 mCacheForGetService-\u003eisClientSideCachingEnabled(serviceName)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc15939c_5256f8e9",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T16:32:34Z",
+      "side": 1,
+      "message": "Hey - this will be deleted at the end of the function. I think you will want:\n\n```\nstruct Entry {\n    sp\u003cIBinder\u003e service;\n    sp\u003cBinderInvalidation\u003e deathRecipient;\n};\n...\nstd::map\u003cstd::string, Entry\u003e mCache;\n```",
+      "range": {
+        "startLine": 69,
+        "startChar": 31,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e10801_3464854f",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T16:32:34Z",
+      "side": 1,
+      "message": "nit: \u0027k\u0027 prefix is for typically for constants. Here, it is an argument, so it should be \u0027serviceName\u0027 maybe?\n\nI was suggesting \u0027kCachedServiceName\u0027 to refer to a constant value of a service name which is cached only, not every use of service name.",
+      "range": {
+        "startLine": 87,
+        "startChar": 42,
+        "endLine": 87,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "98359b6a_60767bd6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "    void addBinderToSm(const std::string\u0026 serviceName, const sp\u003cIBinder\u003e\u0026 binder) {\n        EXPECT_OK(mBusm-\u003eaddService(serviceName, binder, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "    void checkService(const std::string\u0026 serviceName, sp\u003cIBinder\u003e* _out) {\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_OK(mBusm-\u003echeckService(serviceName, \u0026service));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d189559e_eaf251bc",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T16:32:34Z",
+      "side": 1,
+      "message": "I think this is working not due to the death notification, but because killServer calls exit directly, and then it will return DEAD_OBJECT, and BpBinder transact sets mAlive\u003d0 in transact, which is why \u0027isBinderAlive\u0027 will return false.\n\nHowever, if this dies for other reasons, the test won\u0027t work.\n\nConsider these two alternative implementations, if you use either, you will see this test doesn\u0027t work until the change I suggested in the other comment:\n\n1. option one - kill the service in another thread. Change `FooBar::onTransact` to `std::thread([]{ exit(EXIT_FAILURE); }).detach();`. and then, this test will usually fail (and sometimes pass). By exiting asynchronously, it will show the death notification doesn\u0027t work.\n\n2. option two - kill the service by PID. You could remove \u0027killServer\u0027 and use:\n\n```\npid_t pid;\nASSERT_EQ(OK, binder1-\u003egetDebugPid(\u0026pid));\nsystem(\"kill -9 \" + std::to_string(pid));\n```\n\nThen, binder is out of the loop, so it won\u0027t work because of isBinderAlive.\n\n\n---\n\nFor more coverage, you could kill the service both ways, but it\u0027s more important to kill it asynchronously since linkToDeath will be tested then.",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "68dfd708_67f797af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "class FooBar : public BBinder, public IBinder::DeathRecipient {\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "    void binderDied(const wp\u003cIBinder\u003e\u0026 who) {\n        LOG(INFO) \u003c\u003c \"Binder died\";\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 149,
+                "startChar": 0,
+                "endLine": 150,
+                "endChar": 0
+              },
+              "replacement": "    binder1-\u003elinkToDeath(sp\u003cFooBar\u003e::fromExisting(\u0026foo));\n    binder1-\u003eunlinkToDeath(sp\u003cFooBar\u003e::fromExisting(\u0026foo));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a4e6fc9ea9cfd651e37d0ddb560fd9126b4fc2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
