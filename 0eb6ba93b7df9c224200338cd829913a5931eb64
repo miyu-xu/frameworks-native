@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e2b0b7_3d958897",
+        "filename": "cmds/dumpstate/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:13:20Z",
+      "side": 0,
+      "message": "why does removing it from here help?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "0eb6ba93b7df9c224200338cd829913a5931eb64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b589a259_a4903c89",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4611,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:13:20Z",
+      "side": 0,
+      "message": "removing this makes sense for portability, but why does this do what the commit message says it does?",
+      "range": {
+        "startLine": 4611,
+        "startChar": 25,
+        "endLine": 4611,
+        "endChar": 37
+      },
+      "revId": "0eb6ba93b7df9c224200338cd829913a5931eb64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
