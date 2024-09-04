@@ -67,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d45c871a_3be6bba6",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-04T00:10:36Z",
+      "side": 1,
+      "message": "I tried it. Not a fan of losing an indent and I\u0027m not sure it\u0027s worth adding the dependency of libcfg_if. Since it\u0027s just a macro, will that dependency change anything in the generated library?  Like there is nothing to link against if we only use that cfg_if macro in libbinder_rs?",
+      "parentUuid": "e4d9b8a0_33bb83ff",
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f592dfb_d697df74",
         "filename": "libs/binder/rust/src/proxy.rs",
         "patchSetId": 16
