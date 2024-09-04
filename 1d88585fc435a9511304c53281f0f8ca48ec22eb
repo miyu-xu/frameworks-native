@@ -16,6 +16,23 @@
       "message": "clean CP of ag/28576207, thanks",
       "revId": "1d88585fc435a9511304c53281f0f8ca48ec22eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f917bca4_240f454d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659539
+      },
+      "writtenOn": "2024-09-04T10:51:10Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "1d88585fc435a9511304c53281f0f8ca48ec22eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
