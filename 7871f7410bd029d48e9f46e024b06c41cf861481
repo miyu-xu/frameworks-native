@@ -1,0 +1,306 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b645fb0c_3bf41db8",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 37
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "nit: prefer `\":__subpackages__\",` for clarity",
+      "range": {
+        "startLine": 479,
+        "startChar": 9,
+        "endLine": 479,
+        "endChar": 46
+      },
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3518965e_504662bd",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "if you keep this, use FIRST_CALL_TRANSACTION here - LAST_CALL_TRANSACTION is also used by AIDL meta methods",
+      "range": {
+        "startLine": 46,
+        "startChar": 45,
+        "endLine": 46,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b519519b_83aa6bbb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "        TRANSACTION_REPEAT_STRING \u003d IBinder::FIRST_CALL_TRANSACTION,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e70340_aabfa680",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "call this what it does - TRANSACTION_KILL_SERVER",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6382f1fd_8af20f08",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "        TRANSACTION_KILL_SERVER \u003d IBinder::LAST_CALL_TRANSACTION,\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "        binder-\u003etransact(TRANSACTION_KILL_SERVER, data, \u0026reply, FLAG_CLEAR_BUF);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee26b2b_6fd997ec",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "nit: if you do this regardless of the transaction code, don\u0027t create a transaction code",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5c21efae_81b4ae6e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83510108_b28b2203",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "`0`",
+      "range": {
+        "startLine": 54,
+        "startChar": 66,
+        "endLine": 54,
+        "endChar": 80
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e28af75f_bf17762f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "        binder-\u003etransact(TRANSACTION_REPEAT_STRING, data, \u0026reply, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14eaf01a_d453d408",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "prefer `const std::string kCachedServiceName`?",
+      "range": {
+        "startLine": 121,
+        "startChar": 16,
+        "endLine": 121,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6639838c_d48da061",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "    const std::string mServiceName \u003d \"isub\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa0301e6_a78afc34",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "avoid comment which is readable from code",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 18
+      },
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e3c1c7_6ec51f2a",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:11:51Z",
+      "side": 1,
+      "message": "why is this needed? if it is, it is likely to flake",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "81180406_f960a51b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 153,
+                "startChar": 0,
+                "endLine": 153,
+                "endChar": 0
+              },
+              "replacement": "    // Wait for the server to die.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7871f7410bd029d48e9f46e024b06c41cf861481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
