@@ -83,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de4719c_323a38c4",
+        "filename": "libs/binder/rust/src/proxy.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-04T00:12:34Z",
+      "side": 1,
+      "message": "It shouldn\u0027t change anything in the generated library. If you don\u0027t like the extra indent, it is fine to keep it as is.",
+      "parentUuid": "d45c871a_3be6bba6",
+      "revId": "0f6344943c3be2bf3055943f85d83e5fc65a8a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f592dfb_d697df74",
