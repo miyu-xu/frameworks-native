@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5f0ff4_d4d1eb57",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-04T17:51:46Z",
+      "side": 1,
+      "message": "wp\u003cIBinder\u003e so we can handle the case where the service is overwritten in servicemanager? Or is there a reason we want to hold a sp\u003c\u003e of the service?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ad8f3e68_0b00c31e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "        wp\u003cIBinder\u003e service;\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "            return it-\u003esecond.service.promote();\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "            if (it-\u003esecond.service.promote() \u003d\u003d who) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce25ed52_88073b7d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-04T17:51:46Z",
+      "side": 1,
+      "message": "We don\u0027t need to hold a reference to this if we don\u0027t want to.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "45c69ef7_b87c3b2c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": "        Entry entry \u003d {.service \u003d item};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0002f2_8f0bf47d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-04T17:51:46Z",
+      "side": 1,
+      "message": "do we care to unlinkToDeath the death recipient? \n\nIf the binder is removed from this process it will automatically unlink, but until then we could still be getting death notifications for this after removing it from the cache.\n\nI think the death notifications will be a no-op in that case since we don\u0027t care about the return value of `removeItem()`, so maybe we don\u0027t care about unlinking..",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f646d45a_f32ee7a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "                it-\u003esecond.deathRecipient-\u003eunlinkToDeath();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243d8907_9b94405f",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-04T17:51:46Z",
+      "side": 1,
+      "message": "What happens when there are no other clients holding this binder, and the last reference gets overwritten in servicemanager?\n\nWe are holding a strong ref to the service in `BinderCacheWithInvalidation`, so it\u0027s going to stick around with 1 client indefinitely (unless the service dies)?",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a05350c1_ab6064e1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "            // This is because the cache holds a strong reference to the binder.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
