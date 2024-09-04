@@ -136,7 +136,8 @@ static bool intersectionIsRoundRect(const SkRect& bounds, const SkRect& crop,
     if (leftEqual && topEqual) {
         radii[0].set(cornerRadius.x, cornerRadius.y);
     } else if ((leftEqual && bounds.fTop >= insetCrop.fTop) ||
-               (topEqual && bounds.fLeft >= insetCrop.fLeft)) {
+               (topEqual && bounds.fLeft >= insetCrop.fLeft) ||
+               (bounds.fTop >= insetCrop.fTop && bounds.fLeft >= insetCrop.fLeft)) {
         radii[0].set(0, 0);
     } else {
         return false;
@@ -145,7 +146,8 @@ static bool intersectionIsRoundRect(const SkRect& bounds, const SkRect& crop,
     if (rightEqual && topEqual) {
         radii[1].set(cornerRadius.x, cornerRadius.y);
     } else if ((rightEqual && bounds.fTop >= insetCrop.fTop) ||
-               (topEqual && bounds.fRight <= insetCrop.fRight)) {
+               (topEqual && bounds.fRight <= insetCrop.fRight) ||
+               (bounds.fTop >= insetCrop.fTop && bounds.fRight <= insetCrop.fRight)) {
         radii[1].set(0, 0);
     } else {
         return false;
@@ -154,7 +156,8 @@ static bool intersectionIsRoundRect(const SkRect& bounds, const SkRect& crop,
     if (rightEqual && bottomEqual) {
         radii[2].set(cornerRadius.x, cornerRadius.y);
     } else if ((rightEqual && bounds.fBottom <= insetCrop.fBottom) ||
-               (bottomEqual && bounds.fRight <= insetCrop.fRight)) {
+               (bottomEqual && bounds.fRight <= insetCrop.fRight) ||
+               (bounds.fBottom <= insetCrop.fBottom && bounds.fRight <= insetCrop.fRight)) {
         radii[2].set(0, 0);
     } else {
         return false;
@@ -163,7 +166,8 @@ static bool intersectionIsRoundRect(const SkRect& bounds, const SkRect& crop,
     if (leftEqual && bottomEqual) {
         radii[3].set(cornerRadius.x, cornerRadius.y);
     } else if ((leftEqual && bounds.fBottom <= insetCrop.fBottom) ||
-               (bottomEqual && bounds.fLeft >= insetCrop.fLeft)) {
+               (bottomEqual && bounds.fLeft >= insetCrop.fLeft) ||
+               (bounds.fBottom <= insetCrop.fBottom && bounds.fLeft >= insetCrop.fLeft)) {
         radii[3].set(0, 0);
     } else {
         return false;
