@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594d8a89_4d0fffa8",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T22:12:01Z",
+      "side": 1,
+      "message": "It should be sp\u003c\u003e. BpBinder is OBJECT_LIFETIME_WEAK, but for a local binder, we need a strong pointer so that even if client code stops using the binder, we can still retrieve it from servicemanager without an extra binder call.",
+      "parentUuid": "7a5f0ff4_d4d1eb57",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce25ed52_88073b7d",
@@ -113,6 +137,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7934f68b_d0b2f38b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T22:12:01Z",
+      "side": 1,
+      "message": "This is not true. BpBinder Obituary holds wp\u003c\u003e to this. This was the issue in the previous patchset.",
+      "parentUuid": "ce25ed52_88073b7d",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 46
+      },
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd0002f2_8f0bf47d",
@@ -156,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7f5739e_80f6059b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T22:12:01Z",
+      "side": 1,
+      "message": "It will automatically be unlinked, and that case is handled in binderDied.\n\nBut, yeah, it would be good to unlinkToDeath explicitly, in case something holds the binder pointer for longer, it will waste memory.",
+      "parentUuid": "fd0002f2_8f0bf47d",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "243d8907_9b94405f",
         "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
         "patchSetId": 41
@@ -191,6 +263,30 @@
           ]
         }
       ],
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66965b3_2d344774",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T22:12:01Z",
+      "side": 1,
+      "message": "Yup. That way, it\u0027s fast to get the service again (the goal here). Lazy services shouldn\u0027t be cached.",
+      "parentUuid": "243d8907_9b94405f",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 39
+      },
       "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
