@@ -226,6 +226,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "713887f5_7d309e0b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T23:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7f5739e_80f6059b",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "ae1d433f9374ea7c7f8c10e37305e516b47e86f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243d8907_9b94405f",

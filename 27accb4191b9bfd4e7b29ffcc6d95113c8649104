@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af114b5e_e36eebe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 45
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T23:47:16Z",
+      "side": 1,
+      "message": "Need one last review as I changed the way the test gets the CppBackendShim\u003cBackendUnifiedServiceManager\u003csm\u003e\u003e",
+      "revId": "27accb4191b9bfd4e7b29ffcc6d95113c8649104",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd34d4e0_8c9ff73b",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 45
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T23:47:16Z",
+      "side": 1,
+      "message": "I had to add this because using BackendUnifiedServiceManager.h in binderCacheUnitTest.cpp was failing to build because of newly added getInjectedAccessor function.\n\nI added this here as adding this to IServiceManager.h fails to build for other modules which don\u0027t link to android/os/IServiceManager.h",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1bab265f_4316bbb0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManagerGetter.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": "LIBBINDER_EXPORTED sp\u003cIServiceManager\u003e\ngetServiceManagerShimFromAidlServiceManager(sp\u003cos::IServiceManager\u003e sm);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27accb4191b9bfd4e7b29ffcc6d95113c8649104",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
