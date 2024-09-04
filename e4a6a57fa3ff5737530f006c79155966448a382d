@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "119712c9_d0e001a9",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T13:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b009b395_be246c94",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 6
+      },
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08b2788f_f9da9cb2",
@@ -123,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "987646a7_20641712",
+        "filename": "cmds/servicemanager/ServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T13:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08b2788f_f9da9cb2",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 52
+      },
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0a564cd_568f2d9d",
@@ -136,6 +184,30 @@
       "writtenOn": "2024-08-30T18:10:55Z",
       "side": 1,
       "message": "we should only need one API?",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 80
+      },
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf896e2_b343a6f3",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T13:58:46Z",
+      "side": 1,
+      "message": "Can I add a new argument to the addService API and not break older implementations?\n\nIf I can, then I\u0027ll will I need to update every call or should I have something like an optional argument where `enableClientSideCache\u003dfalse` by default?",
+      "parentUuid": "b0a564cd_568f2d9d",
       "range": {
         "startLine": 93,
         "startChar": 1,
@@ -193,6 +265,30 @@
           ]
         }
       ],
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13cd334f_9dc3c0c3",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-04T13:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7bf2466_f4f99345",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 0
+      },
       "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
