@@ -138,6 +138,23 @@
       "message": "Hello, excuse me, I encountered Presubmit-Verified -1 here, how can I solve it?\nI also don’t have permission to view the error link Checks tab. and http://go/automerger-presubmit-faq to solve this problem. Can your company help me check it again, thank you.",
       "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6600f4b_f916d500",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-09-05T01:26:15Z",
+      "side": 1,
+      "message": "There is a Test Coverage failure issue here, please help take a look, thank you.\n\nTest Coverage\nLow Coverage Alerting not enforced \nLow Coverage Alerting was not enforced for the following reasons:\n\nLow coverage alerting is disabled for this project",
+      "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
