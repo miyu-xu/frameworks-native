@@ -89,7 +89,6 @@ cc_cmake_snapshot {
     name: "binder_sdk",
     dist: {
         targets: ["binder_sdk"],
-        dest: "binder_sdk.zip",
     },
 
     modules_host: [
