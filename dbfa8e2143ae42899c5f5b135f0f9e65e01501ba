@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acbee685_45476b30",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-05T01:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "785f2c14_5bf67252",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33198c08_0723644d",
@@ -87,6 +111,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faac8a02_659ef813",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-05T01:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33198c08_0723644d",
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "992972d6_76a0e739",
@@ -124,6 +166,30 @@
           ]
         }
       ],
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5134f676_04cf56af",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-05T01:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "992972d6_76a0e739",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
       "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -187,6 +253,54 @@
         "startChar": 83,
         "endLine": 26,
         "endChar": 85
+      },
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86583968_66021a2f",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-05T01:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54dfe5ac_53a1abc7",
+      "range": {
+        "startLine": 26,
+        "startChar": 83,
+        "endLine": 26,
+        "endChar": 85
+      },
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d22ed8_32c1a838",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-05T01:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7c248dc_1f628f45",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 82
       },
       "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
