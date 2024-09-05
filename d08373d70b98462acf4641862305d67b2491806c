@@ -22,6 +22,30 @@
       },
       "revId": "d08373d70b98462acf4641862305d67b2491806c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "702ea94a_1889dc9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-05T01:02:24Z",
+      "side": 1,
+      "message": "i say fix because the PartialEq and PartialOrd traits need to be consistent with each other. the docs say\n\n\u003e `a \u003d\u003d b` if and only if `partial_cmp(a, b) \u003d\u003d Some(Equal)`\n\nhttps://doc.rust-lang.org/std/cmp/trait.PartialOrd.html",
+      "parentUuid": "535c8ccc_f60db69a",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "d08373d70b98462acf4641862305d67b2491806c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
