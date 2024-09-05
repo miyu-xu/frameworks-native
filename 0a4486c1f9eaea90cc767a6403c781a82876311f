@@ -34,6 +34,24 @@
       "parentUuid": "919ec848_b799a39c",
       "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ccb5c6c_55ec1005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T23:29:22Z",
+      "side": 1,
+      "message": "Yes, std::move does not make guarantees, but specific implementations of functions which take an r value reference do make guarantees. I wonder if it was passing because when we call `AccessorProviderEntry(std::move(provider))`, the AccessorProviderEntry constructor implementation calls `mProvider(provider)` instead of `mProvider(std::move(provider))`. Since the r value reference is copied instead of moved now it makes a copy, but if it is moved, it will call the constructor std::shared_ptr\u003cT\u003e(T\u0026\u0026), which guarantees to clear the r value reference.",
+      "parentUuid": "2b79d54f_84e4039f",
+      "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
