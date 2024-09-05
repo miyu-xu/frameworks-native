@@ -1,0 +1,236 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56ea952_ad3b2313",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 43
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "nit: \u0027false\u0027 \u00270\u0027 here can be removed, and you can use the default only",
+      "range": {
+        "startLine": 91,
+        "startChar": 94,
+        "endLine": 91,
+        "endChar": 105
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "92471872_192e4ca2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder,\n                                                  false, 0));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c5730e1df82cc589f1522073ac15e399bf71a461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bd3e8a_31a4c3aa",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 43
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "nit: avoid adding an API for a single function. Prefer to call the fuction directly. This makes the tests easier to read, as you don\u0027t have to learn these new addBinderToSm and checkService functions. The code will look the same in the function as it would look for normal users. A good related talk on this is https://2014.jsconf.eu/speakers/sebastian-markbage-minimal-api-surface-area-learning-patterns-instead-of-frameworks.html",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "37ecdc91_0d215bc5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder1, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 102,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "        result \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "        EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder2, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "        result \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder1, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 145,
+                "startChar": 0,
+                "endLine": 146,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 158,
+                "startChar": 0,
+                "endLine": 159,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder2, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 161,
+                "startChar": 0,
+                "endLine": 162,
+                "endChar": 0
+              },
+              "replacement": "    result2 \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 173,
+                "startChar": 0,
+                "endLine": 174,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(kCachedServiceName.c_str()), binder2, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 181,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d mServiceManager-\u003echeckService(String16(kCachedServiceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(serviceName.c_str()), binder1, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d mServiceManager-\u003echeckService(String16(serviceName.c_str()));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "    EXPECT_EQ(OK, mServiceManager-\u003eaddService(String16(serviceName.c_str()), binder2, false, 0));\n"
+            },
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "    result \u003d mServiceManager-\u003echeckService(String16(serviceName.c_str()));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c5730e1df82cc589f1522073ac15e399bf71a461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

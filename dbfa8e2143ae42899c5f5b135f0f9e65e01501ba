@@ -1,0 +1,195 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785f2c14_5bf67252",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "nit: log error, check error",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ed19a5fb_35effd32",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "                it-\u003esecond.service-\u003eunlinkToDeath(it-\u003esecond.deathRecipient);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33198c08_0723644d",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "could you name this file \u0027IServiceManagerUnitTestHelper.h\u0027? Getter sounds like something people should use. I wouldn\u0027t care about the name, but because it\u0027s in include/binder, anything which uses binder may import it",
+      "fixSuggestions": [
+        {
+          "fixId": "f52e7300_1a564f5c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManagerGetter.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/include/binder/IServiceManagerGetter.h",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": " * Encapsulate an AidlServiceManager in a CppBackendShim.\n *\n * Only used for testing.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992972d6_76a0e739",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4ca4955f_bb856442",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManagerGetter.h",
+              "range": {
+                "startLine": 2,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": " * Copyright (C) 2024 The Android Open Source Project\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c248dc_1f628f45",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "add \u0027ForTests\u0027 to this so that it\u0027s clear people should use this",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 82
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "98f1fe4b_5120f439",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManagerGetter.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "LIBBINDER_EXPORTED sp\u003cIServiceManager\u003e getServiceManagerShimFromAidlServiceManagerForTests(sp\u003cos::IServiceManager\u003e sm);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54dfe5ac_53a1abc7",
+        "filename": "libs/binder/include/binder/IServiceManagerGetter.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-05T00:15:48Z",
+      "side": 1,
+      "message": "const\u0026 always for sp\u003c\u003e",
+      "range": {
+        "startLine": 26,
+        "startChar": 83,
+        "endLine": 26,
+        "endChar": 85
+      },
+      "revId": "dbfa8e2143ae42899c5f5b135f0f9e65e01501ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
