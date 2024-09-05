@@ -121,6 +121,23 @@
       "message": "Vishnu Nair, Alec Mouri and other code-owners, please review the code, thank you very much.",
       "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0fb52f9_252c6732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-09-05T01:23:45Z",
+      "side": 1,
+      "message": "Hello, excuse me, I encountered Presubmit-Verified -1 here, how can I solve it?\nI also don’t have permission to view the error link Checks tab. and http://go/automerger-presubmit-faq to solve this problem. Can your company help me check it again, thank you.",
+      "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
