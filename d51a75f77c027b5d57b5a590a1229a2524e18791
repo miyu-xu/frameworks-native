@@ -16,6 +16,24 @@
       "message": "@colefaust@google.com: Is it possible to make `dist` default for all instances of `cc_cmake_snapshot`?",
       "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2724d5dc_5bd66a60",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-09-05T19:49:45Z",
+      "side": 1,
+      "message": "Yes, if you change the soong implementation, but if it were me I\u0027d leave it as is to be consistent with other module types.",
+      "parentUuid": "78833d09_75b741a3",
+      "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
