@@ -34,6 +34,24 @@
       "parentUuid": "78833d09_75b741a3",
       "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29249f29_f689988b",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2024-09-05T21:26:11Z",
+      "side": 1,
+      "message": "@smoreland@google.com, @ccross@android.com: do you folks have a preference here? I hink all cc_cmake_snapshot instances will need dist target, but I\u0027m fine either way.",
+      "parentUuid": "2724d5dc_5bd66a60",
+      "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
