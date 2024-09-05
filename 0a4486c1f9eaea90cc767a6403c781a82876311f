@@ -16,6 +16,24 @@
       "message": "Could you also add a test case for this?",
       "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b79d54f_84e4039f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-05T23:12:59Z",
+      "side": 1,
+      "message": "There are test cases using this API: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/tests/binderRpcTest.cpp;l\u003d1209?q\u003daddaccessorprovider. It seems to work fine creating the `weak_ptr` from the moved `shared_ptr` right now. `std::move` doesn\u0027t guarantee that it\u0027s going to clean up the thing it moved, so maybe that\u0027s why we are getting away with this?",
+      "parentUuid": "919ec848_b799a39c",
+      "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
