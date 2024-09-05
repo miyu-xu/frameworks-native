@@ -321,9 +321,10 @@ std::weak_ptr<AccessorProvider> addAccessorProvider(RpcAccessorProvider&& provid
     std::lock_guard<std::mutex> lock(gAccessorProvidersMutex);
     std::shared_ptr<AccessorProvider> provider =
             std::make_shared<AccessorProvider>(std::move(providerCallback));
+    std::weak_ptr<AccessorProvider> receipt = provider;
     gAccessorProviders.push_back(AccessorProviderEntry(std::move(provider)));
 
-    return provider;
+    return receipt;
 }
 
 status_t removeAccessorProvider(std::weak_ptr<AccessorProvider> wProvider) {
