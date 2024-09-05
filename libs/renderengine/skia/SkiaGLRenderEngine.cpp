@@ -41,6 +41,8 @@
 #include "GLExtensions.h"
 #include "log/log_main.h"
 
+std::mutex skiaMutex;
+
 namespace android {
 namespace renderengine {
 namespace skia {
@@ -144,24 +146,27 @@ std::unique_ptr<SkiaGLRenderEngine> SkiaGLRenderEngine::create(
         const RenderEngineCreationArgs& args) {
     // initialize EGL for the default display
     EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    if (!eglInitialize(display, nullptr, nullptr)) {
-        LOG_ALWAYS_FATAL("failed to initialize EGL");
-    }
-
-    const auto eglVersion = eglQueryString(display, EGL_VERSION);
-    if (!eglVersion) {
-        checkGlError(__FUNCTION__, __LINE__);
-        LOG_ALWAYS_FATAL("eglQueryString(EGL_VERSION) failed");
-    }
-
-    const auto eglExtensions = eglQueryString(display, EGL_EXTENSIONS);
-    if (!eglExtensions) {
-        checkGlError(__FUNCTION__, __LINE__);
-        LOG_ALWAYS_FATAL("eglQueryString(EGL_EXTENSIONS) failed");
-    }
-
     auto& extensions = GLExtensions::getInstance();
-    extensions.initWithEGLStrings(eglVersion, eglExtensions);
+    {
+        std::lock_guard<std::mutex> lock(skiaMutex);
+        if (!eglInitialize(display, nullptr, nullptr)) {
+            LOG_ALWAYS_FATAL("failed to initialize EGL");
+        }
+
+        const auto eglVersion = eglQueryString(display, EGL_VERSION);
+        if (!eglVersion) {
+            checkGlError(__FUNCTION__, __LINE__);
+            LOG_ALWAYS_FATAL("eglQueryString(EGL_VERSION) failed");
+        }
+
+        const auto eglExtensions = eglQueryString(display, EGL_EXTENSIONS);
+        if (!eglExtensions) {
+            checkGlError(__FUNCTION__, __LINE__);
+            LOG_ALWAYS_FATAL("eglQueryString(EGL_EXTENSIONS) failed");
+        }
+
+        extensions.initWithEGLStrings(eglVersion, eglExtensions);
+    }
 
     // The code assumes that ES2 or later is available if this extension is
     // supported.
@@ -190,32 +195,35 @@ std::unique_ptr<SkiaGLRenderEngine> SkiaGLRenderEngine::create(
                                                          Protection::UNPROTECTED);
         LOG_ALWAYS_FATAL_IF(placeholder == EGL_NO_SURFACE, "can't create placeholder pbuffer");
     }
-    EGLBoolean success = eglMakeCurrent(display, placeholder, placeholder, ctxt);
-    LOG_ALWAYS_FATAL_IF(!success, "can't make placeholder pbuffer current");
-    extensions.initWithGLStrings(glGetString(GL_VENDOR), glGetString(GL_RENDERER),
-                                 glGetString(GL_VERSION), glGetString(GL_EXTENSIONS));
+    {
+        std::lock_guard<std::mutex> lock(skiaMutex);
+        EGLBoolean success = eglMakeCurrent(display, placeholder, placeholder, ctxt);
+        LOG_ALWAYS_FATAL_IF(!success, "can't make placeholder pbuffer current");
+        extensions.initWithGLStrings(glGetString(GL_VENDOR), glGetString(GL_RENDERER),
+                                     glGetString(GL_VERSION), glGetString(GL_EXTENSIONS));
 
-    EGLSurface protectedPlaceholder = EGL_NO_SURFACE;
-    if (protectedContext != EGL_NO_CONTEXT && !extensions.hasSurfacelessContext()) {
-        protectedPlaceholder = createPlaceholderEglPbufferSurface(display, config, args.pixelFormat,
-                                                                  Protection::PROTECTED);
-        ALOGE_IF(protectedPlaceholder == EGL_NO_SURFACE,
-                 "can't create protected placeholder pbuffer");
+        EGLSurface protectedPlaceholder = EGL_NO_SURFACE;
+        if (protectedContext != EGL_NO_CONTEXT && !extensions.hasSurfacelessContext()) {
+            protectedPlaceholder = createPlaceholderEglPbufferSurface(display, config, args.pixelFormat,
+                                                                      Protection::PROTECTED);
+            ALOGE_IF(protectedPlaceholder == EGL_NO_SURFACE,
+                     "can't create protected placeholder pbuffer");
+        }
+
+        // initialize the renderer while GL is current
+        std::unique_ptr<SkiaGLRenderEngine> engine(new SkiaGLRenderEngine(args, display, ctxt,
+                                                                          placeholder, protectedContext,
+                                                                          protectedPlaceholder));
+        engine->ensureGrContextsCreated();
+
+        ALOGI("OpenGL ES informations:");
+        ALOGI("vendor    : %s", extensions.getVendor());
+        ALOGI("renderer  : %s", extensions.getRenderer());
+        ALOGI("version   : %s", extensions.getVersion());
+        ALOGI("extensions: %s", extensions.getExtensions());
+        ALOGI("GL_MAX_TEXTURE_SIZE = %zu", engine->getMaxTextureSize());
+        ALOGI("GL_MAX_VIEWPORT_DIMS = %zu", engine->getMaxViewportDims());
     }
-
-    // initialize the renderer while GL is current
-    std::unique_ptr<SkiaGLRenderEngine> engine(new SkiaGLRenderEngine(args, display, ctxt,
-                                                                      placeholder, protectedContext,
-                                                                      protectedPlaceholder));
-    engine->ensureGrContextsCreated();
-
-    ALOGI("OpenGL ES informations:");
-    ALOGI("vendor    : %s", extensions.getVendor());
-    ALOGI("renderer  : %s", extensions.getRenderer());
-    ALOGI("version   : %s", extensions.getVersion());
-    ALOGI("extensions: %s", extensions.getExtensions());
-    ALOGI("GL_MAX_TEXTURE_SIZE = %zu", engine->getMaxTextureSize());
-    ALOGI("GL_MAX_VIEWPORT_DIMS = %zu", engine->getMaxViewportDims());
 
     return engine;
 }
