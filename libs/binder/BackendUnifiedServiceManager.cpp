@@ -103,6 +103,13 @@ binder::Status BackendUnifiedServiceManager::updateCache(const std::string& serv
     }
     if (service.getTag() == os::Service::Tag::binder) {
         sp<IBinder> binder = service.get<os::Service::Tag::binder>();
+        if (mCacheForGetService->isClientSideCachingEnabled(serviceName)) {
+            if (!binder) {
+                ALOGW("BackendUnifiedServiceManager::updateCache Binder null for %s", serviceName.c_str());
+            } else if (!binder->isBinderAlive()) {
+                ALOGW("BackendUnifiedServiceManager::updateCache isBinderAlive failed for %s", serviceName.c_str());
+            }
+        }
         if (binder && mCacheForGetService->isClientSideCachingEnabled(serviceName) &&
             binder->isBinderAlive()) {
             return mCacheForGetService->setItem(serviceName, binder);
