@@ -173,6 +173,42 @@
       "parentUuid": "2363f159_c9df63d6",
       "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875e3642_b65d5d63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884457
+      },
+      "writtenOn": "2024-09-05T17:54:46Z",
+      "side": 1,
+      "message": "you can ignore this alert",
+      "parentUuid": "f6600f4b_f916d500",
+      "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc21761b_4d3d66b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884457
+      },
+      "writtenOn": "2024-09-05T17:54:46Z",
+      "side": 1,
+      "message": "it\u0027s some merge conflicts.\nYou can add “Merged-In: \u003cchange-id-of-cherry-pick\u003e” to the description of this CL as a work around.",
+      "parentUuid": "a0fb52f9_252c6732",
+      "revId": "ccb5dffc59edf96a5127e3189d4355d1cd7b5495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
