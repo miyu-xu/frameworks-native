@@ -78,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30ce9e7c_154efcfa",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-06T23:05:31Z",
+      "side": 1,
+      "message": "The AI suggested fix is wrong (thanks @fmayle@google.com).\n\nAnd can we do something similar with the constants as that file so we see the base value and each of these codes are derived from the base value + the offset. Could even reuse the constant names.",
+      "parentUuid": "2f317e50_63095ea7",
+      "range": {
+        "startLine": 48,
+        "startChar": 45,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c857982_a1abe40a",
         "filename": "libs/binder/ndk/ibinder.cpp",
         "patchSetId": 11
