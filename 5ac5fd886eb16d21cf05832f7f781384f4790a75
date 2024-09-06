@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ede7e6d1_4fa33372",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de11f0f4_74421273",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 31
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2a20163_f53c4b59",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b9b192e_06348921",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2a20163_f53c4b59",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 39
+      },
       "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -196,6 +244,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "195ce3eb_15ee7457",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Reserved a string with approximate size to avoid extra allocations which is supposed to be faster and more readable.",
+      "parentUuid": "68dec767_1429c83a",
+      "range": {
+        "startLine": 102,
+        "startChar": 10,
+        "endLine": 102,
+        "endChar": 12
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84dbda52_2f7724b5",
@@ -278,6 +350,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd6529e_d1993531",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040828e8_ace4cde0",
+      "range": {
+        "startLine": 105,
+        "startChar": 13,
+        "endLine": 105,
+        "endChar": 14
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ba8635_b35663db",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84dbda52_2f7724b5",
+      "range": {
+        "startLine": 105,
+        "startChar": 39,
+        "endLine": 105,
+        "endChar": 75
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f6460fc_f28ebb68",
@@ -329,6 +449,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f0cd31_8638fbe5",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6460fc_f28ebb68",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 36
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "956403f6_7308cd90",
@@ -352,6 +496,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ef4b3a1_667c16ba",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "956403f6_7308cd90",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 41
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "461e23aa_00bb5c57",
@@ -365,6 +533,24 @@
       "writtenOn": "2024-08-27T23:26:18Z",
       "side": 1,
       "message": "same here",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4a3c37_d90632bc",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "461e23aa_00bb5c57",
       "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -420,6 +606,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e4c39f_9d9ed807",
+        "filename": "libs/binder/ndk/ibinder_internal.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d37c5e9_8ce92cee",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 10
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04351af9_06a2e56a",
@@ -460,6 +670,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "570e177b_85c2279f",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_trace_utils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37c0c516_b6d38313",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97a4fd1e_9aff0e55",
@@ -473,6 +701,24 @@
       "writtenOn": "2024-08-27T23:26:18Z",
       "side": 1,
       "message": "so should be able to undo changes here",
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f195d1_8df5001a",
+        "filename": "libs/binder/ndk/include_cpp/android/persistable_bundle_aidl.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a4fd1e_9aff0e55",
       "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -518,6 +764,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b36b50_e5aa6326",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Removing this causes failures in android_vendor_x86_64\n\n```\nFAILED: out/soong/.intermediates/hardware/interfaces/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk/android_vendor_x86_64_silvermont_shared_apex10000/unstripped/android.hardware.wifi.supplicant-V3-\nndk.so\nprebuilts/clang/host/linux-x86/clang-r530567/bin/clang++ out/soong/.intermediates/bionic/libc/crtbegin_so/android_vendor_x86_64_silvermont_apex10000/crtbegin_so.o @out/soong/.intermediates/hardware/interfaces/wi\nfi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk/android_vendor_x86_64_silvermont_shared_apex10000/unstripped/android.hardware.wifi.supplicant-V3-ndk.so.rsp out/soong/.intermediates/bionic/libc/crtend_\nso/android_vendor_x86_64_silvermont_apex10000/crtend_so.o out/soong/.intermediates/bionic/libc/crt_pad_segment/android_vendor_x86_64_silvermont_apex10000/crt_pad_segment.o -o out/soong/.intermediates/hardware/in\nterfaces/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk/android_vendor_x86_64_silvermont_shared_apex10000/unstripped/android.hardware.wifi.supplicant-V3-ndk.so -target x86_64-linux-android10000 -Wl\n,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id\u003dmd5 -Wl,--fatal-warnings -Wl,--no-undefined-version -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_stripped.a -Wl,--exclude-libs,libunwind_llvm.a -Wl\n,--exclude-libs,libunwind.a -fuse-ld\u003dlld -Wl,--icf\u003dsafe -Wl,--no-demangle -Wl,--compress-debug-sections\u003dzstd -Wl,--pack-dyn-relocs\u003dandroid+relr -Wl,--no-undefined -Wl,-z,separate-loadable-segments -Wl,-z,max-pag\ne-size\u003d16384 -m64 -nostdlib -Wl,--gc-sections -shared -Wl,-soname,android.hardware.wifi.supplicant-V3-ndk.so -flto\u003dthin -fsplit-lto-unit -Wl,-plugin-opt,-import-instr-limit\u003d5 -Wl,--exclude-libs\u003dlibclang_rt.built\nins-x86_64-android.a \nld.lld: error: undefined symbol: AIBinder_Class_setCodeMap\n\u003e\u003e\u003e referenced by binder_interface_utils.h:279 (frameworks/native/libs/binder/ndk/include_cpp/android/binder_interface_utils.h:279)\n\u003e\u003e\u003e               out/soong/.intermediates/hardware/interfaces/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk/android_vendor_x86_64_silvermont_static_apex10000/obj/.intermediates/hardware/interface\ns/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk-source/gen/android/hardware/wifi/supplicant/android.hardware.wifi.supplicant-V3-ndk.so.lto.ISupplicantCallback.o:(_GLOBAL__sub_I_ISupplicantCallback\n.cpp)\n\u003e\u003e\u003e referenced by binder_interface_utils.h:279 (frameworks/native/libs/binder/ndk/include_cpp/android/binder_interface_utils.h:279)\n\u003e\u003e\u003e               out/soong/.intermediates/hardware/interfaces/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk/android_vendor_x86_64_silvermont_static_apex10000/obj/.intermediates/hardware/interface\ns/wifi/supplicant/aidl/android.hardware.wifi.supplicant-V3-ndk-source/gen/android/hardware/wifi/supplicant/android.hardware.wifi.supplicant-V3-ndk.so.lto.INonStandardCertCallback.o:(_GLOBAL__sub_I_INonStandardCe\nrtCallback.cpp)\n```",
+      "parentUuid": "4c5380ac_f9002f7e",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 29
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7b1dbb7_729a1220",
@@ -555,6 +825,30 @@
       "side": 1,
       "message": "For now, yes. I think we need a way to encode \"they are at the same time now\". Something like..\n\n```\n| sdk | llndk  |\n| ... | ...    |\n| 34  | 34     |\n| -   | 202404 |\n| 35  | -      |\n| 36  | 202504 |\n| ..  | ..     |\n```",
       "parentUuid": "c7b1dbb7_729a1220",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "5ac5fd886eb16d21cf05832f7f781384f4790a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c41bfe_5dc0d439",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9050348b_b7365148",
       "range": {
         "startLine": 254,
         "startChar": 0,

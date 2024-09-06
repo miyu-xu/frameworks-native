@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d393dc59_43c8ad05",
+        "filename": "libs/binder/ndk/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Removed the header",
+      "parentUuid": "07062cc9_0813d11b",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e884d73a_9659d382",
@@ -177,6 +195,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1faafa26_4daf3981",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "I have removed this header as I no longer need this in the AIDL code.",
+      "parentUuid": "ce789f1e_58c56be7",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e95444d3_599489fe",
@@ -208,6 +244,24 @@
       "side": 1,
       "message": "Same. It\u0027s not in the NDK, it\u0027s in include_cpp, and it in the original libbinder_ndk, it wasn\u0027t added as a mistake, it was intentional at the time. However, it caused problems due to coupling with the AIDL compiler, and you didn\u0027t like it. So here we are, but this isn\u0027t an NDK header, so it should be okay.",
       "parentUuid": "e95444d3_599489fe",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5711672d_18be5c0e",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_trace_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Removed header since I no longer need this in AIDL code.",
+      "parentUuid": "06bbfe5d_854d4faf",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -395,6 +449,24 @@
       "side": 1,
       "message": "-\u003e b/361077712\n\n(the APIs added here should go in the NDK directly, since it was revised)",
       "parentUuid": "2e988081_263f670d",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d814fde_e2e3a57d",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_trace.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-06T15:52:15Z",
+      "side": 1,
+      "message": "Removed this API. Please see https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3197053/comment/c7b1dbb7_729a1220/ for ll-ndk versioning.",
+      "parentUuid": "ebb8d44b_cf5425e9",
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
