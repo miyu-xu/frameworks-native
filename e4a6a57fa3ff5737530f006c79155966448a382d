@@ -220,6 +220,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ce3a35c_6973fecf",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T15:41:03Z",
+      "side": 1,
+      "message": "It\u0027s only used by a few places internally in libbinder. \u0027getService\u0027 only needed duplicated because getService is @UnsupportedAppUsage in ServiceManagerNative.java.\n\nHowever, other than that one API (getService), everything here can be changed at anytime.\n\nIn other API surfaces, it may need to be an additional API, just not in servicemanager.\n\nTo limit arguments in a function and for future extendability, I suggest:\n\n```\nparcelable ServiceOptions {\n    bool allowIsolated;\n    bool forceCaching;\n    ... dumpFlag;\n};\naddService(String name, IBinder service, ServiceOptions options);\n```",
+      "parentUuid": "2cf896e2_b343a6f3",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 101,
+        "endChar": 80
+      },
+      "revId": "e4a6a57fa3ff5737530f006c79155966448a382d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7bf2466_f4f99345",
         "filename": "libs/binder/include/binder/IServiceManager.h",
         "patchSetId": 7
