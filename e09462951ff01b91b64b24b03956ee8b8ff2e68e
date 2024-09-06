@@ -78,6 +78,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c857982_a1abe40a",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-06T22:55:32Z",
+      "side": 1,
+      "message": "i\u0027m not sure if it is true in practice, but something like `inline constexpr std::string_view kFoo \u003d \"foo\"` is probably faster. when you do the `trace +\u003d foo` later, it won\u0027t need to calculate strlen as part of the append",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be4a88e0_cd77b7a1",
         "filename": "libs/binder/ndk/ibinder.cpp",
         "patchSetId": 11
@@ -280,6 +303,40 @@
           ]
         }
       ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8c9d8c5_f955eded",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-06T22:55:32Z",
+      "side": 1,
+      "message": "this is the bounds check for the array access below, right? i think you want\n\n```\n    if (code \u003e\u003d mFunctionCount || code \u003c FIRST_CALL_TRANSACTION) {\n```",
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db362390_10ddcc07",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-06T22:55:32Z",
+      "side": 1,
+      "message": "extra semi colon",
       "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
