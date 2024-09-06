@@ -54,6 +54,122 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f317e50_63095ea7",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "+1 for both",
+      "parentUuid": "bc33fd3c_0acb332e",
+      "range": {
+        "startLine": 48,
+        "startChar": 45,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4a88e0_cd77b7a1",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "call getFunctionName first, and you can reserve the exact amount?\n\nthen add a check below that the string size is the same, that way we\u0027re sure there is only exactly one allocation?",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0c773763_9075068b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "    // reserve to avoid repeated allocations\n    trace.reserve(kTraceLen);\n    trace +\u003d \"AIDL::ndk::\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152e45aa_3d453e2b",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "What about a little more info? \"Unknown transaction code (\" + std::to_string(code) + \")\"",
+      "range": {
+        "startLine": 132,
+        "startChar": 17,
+        "endLine": 132,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "60871412_58d94dba",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": "        trace +\u003d \"Unknown transaction code (\" + std::to_string(code) + \")\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99f40451_8383991f",
         "filename": "libs/binder/ndk/ibinder.cpp",
         "patchSetId": 11
@@ -85,6 +201,81 @@
                 "endChar": 0
               },
               "replacement": "    if (mCodeToFunction !\u003d nullptr) {\n        ALOGE(\"mCodeToFunction is already set!\");\n        return false;\n    }\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59cfa9e4_393901af",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "99f40451_8383991f",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 19
+      },
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f26a4c5d_36db10db",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "nit: what about nullptr, as non-standard usage of getFunctionName may say a function name is \"\"?",
+      "range": {
+        "startLine": 434,
+        "startChar": 15,
+        "endLine": 434,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "779c7018_6ed8c1ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 434,
+                "startChar": 0,
+                "endLine": 435,
+                "endChar": 0
+              },
+              "replacement": "        return nullptr;\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 439,
+                "startChar": 0,
+                "endLine": 440,
+                "endChar": 0
+              },
+              "replacement": "        return nullptr;\n"
             }
           ]
         }

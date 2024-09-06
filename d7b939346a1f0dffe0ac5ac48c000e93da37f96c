@@ -575,6 +575,30 @@
       },
       "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa7ea55_d9dd6077",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-06T17:31:48Z",
+      "side": 1,
+      "message": "Let\u0027s keep this conversation separate. It won\u0027t affect us here.",
+      "parentUuid": "bdb0178a_030a273e",
+      "range": {
+        "startLine": 254,
+        "startChar": 39,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
