@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc33fd3c_0acb332e",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-06T17:23:48Z",
+      "side": 1,
+      "message": "nit: can we use hex here similar to the source of true so it\u0027s easier to find later: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/tools/aidl/aidl.cpp;drc\u003d914b60e556602386afc59776eb9cdccb6e36ba12;l\u003d77\n\nMight even mention the file name that has this info.",
+      "range": {
+        "startLine": 48,
+        "startChar": 45,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "93a5814c_f8495dd7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "static constexpr int kInterfaceVersionCode \u003d 0x0000000e;\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "static constexpr int kInterfaceHashCode \u003d 0x0000000d;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f40451_8383991f",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-06T17:23:48Z",
+      "side": 1,
+      "message": "should we throw an error if it was already set?",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "86ab95eb_d6c262fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "    if (mCodeToFunction !\u003d nullptr) {\n        ALOGE(\"mCodeToFunction is already set!\");\n        return false;\n    }\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6645c0c0_2768584e",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-06T17:23:48Z",
+      "side": 1,
+      "message": "update this doc. There is no binder here and it will return false if clazz ptr is null also.",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 238,
+        "endChar": 81
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4c7fb9b5_0be0d83a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": " * \\return true if the class clazz is not null and codeToFunction is not null.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
