@@ -52,6 +52,24 @@
       "parentUuid": "2b79d54f_84e4039f",
       "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191ac479_e0b314d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-06T00:02:07Z",
+      "side": 1,
+      "message": "Bingo! That\u0027s what it was. `mProvider(std::move(provider))` causes the test to fail without this CL.\nSomething something two wrongs make a right something something.\n\nI missed this in all of the member initializer lists!\n\nI was copying the shared_ptrs and std::functions when I didn\u0027t want to be. I don\u0027t see any issues from it, but it wasn\u0027t intentional (and could have been caught with a similar tests to the one I have for `libbinder_rs`). I\u0027ll add some in a follow-up.",
+      "parentUuid": "4ccb5c6c_55ec1005",
+      "revId": "0a4486c1f9eaea90cc767a6403c781a82876311f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
