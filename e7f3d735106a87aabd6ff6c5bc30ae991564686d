@@ -16,6 +16,24 @@
       "message": "Hello, I would like to ask, for this patch, where should I add Merged-In: \u003cchange-id-of-cherry-pick\u003e in the GL description, where should change-id be replaced with the Change-Id of this patch: Ic4ded171e90bcfb7a0d58df2c272f4c219be3a04? I tried adding this statement before and after Change-Id, and also tried replacing change-id with Ic4ded171e90bcfb7a0d58df2c272f4c219be3a04, but Verified-1 still exists.\nSally Qi,Can you provide the location to add the solution in the GL description? Or can you help modify the GL description? Thank you.",
       "revId": "e7f3d735106a87aabd6ff6c5bc30ae991564686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bb66c2_244ff2c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-09-07T02:12:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47f8e5db_862871df",
+      "revId": "e7f3d735106a87aabd6ff6c5bc30ae991564686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
