@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9e61da_7cc64950",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_api_level.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-07T00:44:27Z",
+      "side": 1,
+      "message": "Removed this.",
+      "parentUuid": "adbe3f43_0573ae20",
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b9840f_bcbf2ac2",
@@ -591,6 +609,30 @@
       "side": 1,
       "message": "Let\u0027s keep this conversation separate. It won\u0027t affect us here.",
       "parentUuid": "bdb0178a_030a273e",
+      "range": {
+        "startLine": 254,
+        "startChar": 39,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "d7b939346a1f0dffe0ac5ac48c000e93da37f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2e7b17_3b2ed2c2",
+        "filename": "libs/binder/ndk/libbinder_ndk.map.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-07T00:44:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9fa7ea55_d9dd6077",
       "range": {
         "startLine": 254,
         "startChar": 39,
