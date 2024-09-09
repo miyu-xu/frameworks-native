@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a2ecb8c_7f481b49",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-09T17:38:17Z",
+      "side": 1,
+      "message": "this seems wrong. why do we skip the stability check only when using the `Deserialize` trait? i wonder if this API is insufficient to implement the expected logic correctly",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
