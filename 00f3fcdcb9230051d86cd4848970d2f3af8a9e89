@@ -1,0 +1,100 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8598a51a_45c7cb6f",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T23:55:54Z",
+      "side": 1,
+      "message": "nit: Please consider in a follow-up but if you make this return const char* and you return null for the default case, then you can avoid the allocation here and have only one per trace point below.",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b9dea620_7c3c092f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "const std::string getMethodName(const AIBinder_Class* clazz, transaction_code_t code,\n                                bool isServer) {\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "    return isServer ? kServerTrace : kClientTrace + kUnknownCode + std::to_string(code);\n"
+            },
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 135,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "    const std::string methodName \u003d getMethodName(clazz, code, isServer);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00f3fcdcb9230051d86cd4848970d2f3af8a9e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf25b1b_08e17708",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T23:55:54Z",
+      "side": 1,
+      "message": "nit: assert trace.size() \u003d\u003d traceSize here?",
+      "fixSuggestions": [
+        {
+          "fixId": "9f5f4ffe_53d2e7b3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/ibinder.cpp",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "    LOG_ALWAYS_FATAL_IF(trace.size() !\u003d traceSize,\n                        \"Trace size mismatch. Expected %zu, got %zu\", traceSize, trace.size());\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00f3fcdcb9230051d86cd4848970d2f3af8a9e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
