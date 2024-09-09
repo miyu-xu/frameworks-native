@@ -512,6 +512,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15118809_445c9399",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-09T23:17:01Z",
+      "side": 1,
+      "message": "that\u0027s subtle. how about `code - FIRST_CALL_TRANSACTION \u003e\u003d mFunctionCount` then?",
+      "parentUuid": "fcb10ca0_94c29c98",
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db362390_10ddcc07",
         "filename": "libs/binder/ndk/ibinder.cpp",
         "patchSetId": 11
