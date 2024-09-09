@@ -81,8 +81,10 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
     auto pollingStateGuard = make_scope_guard([&]() { transportFd.setPollingState(false); });
 
     int ret = TEMP_FAILURE_RETRY(poll(pfd, countof(pfd), -1));
+    int saved_errno = errno;
     if (ret < 0) {
-        return -errno;
+        ALOGE("FdTrigger poll returned error: %d, with error: %s", ret, strerror(saved_errno));
+        return -saved_errno;
     }
     LOG_ALWAYS_FATAL_IF(ret == 0, "poll(%d) returns 0 with infinite timeout", transportFd.fd.get());
 
@@ -106,6 +108,7 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
 
     // POLLNVAL: invalid FD number, e.g. not opened.
     if (pfd[0].revents & POLLNVAL) {
+        ALOGE("Invalid FD number (%d) in FdTrigger (POLLNVAL)", pfd[0].fd);
         return BAD_VALUE;
     }
 
