@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8478ad7e_f69a4c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-09T22:03:24Z",
+      "side": 1,
+      "message": "bugs for the presubmit errors are closed, so should be fixed by now: b/270208306",
+      "revId": "2b803f3a9af8dd4a0932b5bddb02aedf456b3de0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
