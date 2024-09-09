@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11edb99a_7423b05b",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-09T23:50:37Z",
+      "side": 1,
+      "message": "I need to figure something else out for avoiding ProcessState in here when there is no `/dev/binder`.\n\nI don\u0027t think this is the right way to do it.",
+      "range": {
+        "startLine": 510,
+        "startChar": 4,
+        "endLine": 514,
+        "endChar": 5
+      },
+      "revId": "dd1cd125f31b294b5397eef2d9c953bbeeed4481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
