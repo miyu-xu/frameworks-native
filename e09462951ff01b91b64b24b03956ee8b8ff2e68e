@@ -147,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f024e5a8_4a0f4627",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-09T21:06:37Z",
+      "side": 1,
+      "message": "Acknowledged, I can evaluate this separately. If string view is faster, we probably want to use it in many places. I will file a bug for this evaluation.",
+      "parentUuid": "7c857982_a1abe40a",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 61
+      },
+      "revId": "e09462951ff01b91b64b24b03956ee8b8ff2e68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be4a88e0_cd77b7a1",
