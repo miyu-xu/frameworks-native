@@ -16,6 +16,24 @@
       "message": "Add more functionality to this local servicemanager and remove the explicity handling of the accessor providers from `libs/binder/BackendUnifiedServiceManager.cpp` https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3212539/comment/87953839_644966c8/",
       "revId": "5ca91afc29bed40280524f9d46c6aa0de448a925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadc7a2f_4d1db48a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-09T23:52:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20c274a5_20390193",
+      "revId": "5ca91afc29bed40280524f9d46c6aa0de448a925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
