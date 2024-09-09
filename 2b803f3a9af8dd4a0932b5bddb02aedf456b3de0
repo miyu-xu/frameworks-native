@@ -16,6 +16,23 @@
       "message": "bugs for the presubmit errors are closed, so should be fixed by now: b/270208306",
       "revId": "2b803f3a9af8dd4a0932b5bddb02aedf456b3de0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "937cf69b_56a1907a",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-09T23:12:42Z",
+      "side": 1,
+      "message": "nit: move into if block",
+      "revId": "2b803f3a9af8dd4a0932b5bddb02aedf456b3de0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
