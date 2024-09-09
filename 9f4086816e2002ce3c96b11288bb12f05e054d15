@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce16037_fabbe9b7",
+        "filename": "opengl/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1940280
+      },
+      "writtenOn": "2024-09-09T14:20:21Z",
+      "side": 0,
+      "message": "Can you guys spot anyone else who should be added/removed?",
+      "revId": "9f4086816e2002ce3c96b11288bb12f05e054d15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
