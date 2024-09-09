@@ -82,6 +82,7 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
 
     int ret = TEMP_FAILURE_RETRY(poll(pfd, countof(pfd), -1));
     if (ret < 0) {
+        ALOGE("FdTrigger poll returned error: %d, with errno: %s", ret, strerror(errno));
         return -errno;
     }
     LOG_ALWAYS_FATAL_IF(ret == 0, "poll(%d) returns 0 with infinite timeout", transportFd.fd.get());
@@ -91,6 +92,7 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
 #ifndef BINDER_RPC_SINGLE_THREADED
     // Detect explicit trigger(): DEAD_OBJECT
     if (pfd[1].revents & POLLHUP) {
+        ALOGE("Explicit trigger on FdTrigger (POLLHUP)");
         return DEAD_OBJECT;
     }
     // See unknown flags in trigger FD's revents (POLLERR / POLLNVAL).
@@ -106,6 +108,7 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
 
     // POLLNVAL: invalid FD number, e.g. not opened.
     if (pfd[0].revents & POLLNVAL) {
+        ALOGE("Invalid FD number in FdTrigger (POLLNVAL)");
         return BAD_VALUE;
     }
 
