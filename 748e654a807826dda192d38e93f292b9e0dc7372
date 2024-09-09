@@ -1,0 +1,166 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c63c1db_b60da567",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T20:36:24Z",
+      "side": 1,
+      "message": "can you do:\n\n```\nint saved_errno \u003d errno;\nALOGE(..., strerror(saved_errno));\nreturn -saved_errno;\n```\n\nI\u0027m not sure if the errno may change from the log, but even if it\u0027s just for clarity it\u0027s good to be explicit, same below",
+      "fixSuggestions": [
+        {
+          "fixId": "1e342e63_1b2232b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/FdTrigger.cpp",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 84,
+                "endChar": 0
+              },
+              "replacement": "    int saved_errno \u003d errno;\n"
+            },
+            {
+              "path": "libs/binder/FdTrigger.cpp",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"FdTrigger poll returned error: %d, with errno: %s\", ret, strerror(saved_errno));\n        return -saved_errno;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "748e654a807826dda192d38e93f292b9e0dc7372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3377b3_3de0b49e",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T20:36:24Z",
+      "side": 1,
+      "message": "nit: error (not technically the errno since it\u0027s the error now)",
+      "range": {
+        "startLine": 85,
+        "startChar": 55,
+        "endLine": 85,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d9671c2f_38ec4ce3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/FdTrigger.cpp",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"FdTrigger poll error: %d, with errno: %s\", ret, strerror(errno));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "748e654a807826dda192d38e93f292b9e0dc7372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3b8859_6a38b29b",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T20:36:24Z",
+      "side": 1,
+      "message": "This is expected to happen a lot - whenever the connection is shutting down. I don\u0027t think we should add an error log for this. There should already be logs from RpcState when it happens as well, I think, or no?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "222f96f6_70cea328",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/FdTrigger.cpp",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "748e654a807826dda192d38e93f292b9e0dc7372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6317ccb6_03553a12",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T20:36:24Z",
+      "side": 1,
+      "message": "nit: print the FD number?\n\ntbh, I think abort would even be okay here if you want to follow-up to try it. I certainly didn\u0027t write this code... if you are using an FD and you don\u0027t know it\u0027s valid, it\u0027s a dangerous stit.",
+      "fixSuggestions": [
+        {
+          "fixId": "5b47890c_a3d20cfa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/FdTrigger.cpp",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"Invalid FD number in FdTrigger (POLLNVAL): %d\", pfd[0].fd);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "748e654a807826dda192d38e93f292b9e0dc7372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
