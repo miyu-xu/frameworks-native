@@ -192,7 +192,7 @@ impl Deserialize for ParcelableHolder {
             Err(StatusCode::UNEXPECTED_NULL)
         } else {
             let mut parcelable = ParcelableHolder::new(Default::default());
-            parcelable.read_from_parcel(parcel)?;
+            parcelable.read_from_parcel_inner(parcel, false)?;
             Ok(parcelable)
         }
     }
@@ -236,9 +236,21 @@ impl Parcelable for ParcelableHolder {
     }
 
     fn read_from_parcel(&mut self, parcel: &BorrowedParcel<'_>) -> Result<(), StatusCode> {
-        if self.stability != parcel.read()? {
+        self.read_from_parcel_inner(parcel, true)
+    }
+}
+
+impl ParcelableHolder {
+    fn read_from_parcel_inner(
+        &mut self,
+        parcel: &BorrowedParcel<'_>,
+        check_stability: bool,
+    ) -> Result<(), StatusCode> {
+        let stability = parcel.read()?;
+        if check_stability && self.stability != stability {
             return Err(StatusCode::BAD_VALUE);
         }
+        self.stability = stability;
 
         let data_size: i32 = parcel.read()?;
         if data_size < 0 {
