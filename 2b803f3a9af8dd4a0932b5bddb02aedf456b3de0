@@ -33,6 +33,24 @@
       "message": "nit: move into if block",
       "revId": "2b803f3a9af8dd4a0932b5bddb02aedf456b3de0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2add0fd_a4ab843e",
+        "filename": "libs/binder/FdTrigger.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-09T23:14:50Z",
+      "side": 1,
+      "message": "(+1 too, it\u0027s more standard, but I didn\u0027t comment as I already suggested moving it once 😊)",
+      "parentUuid": "937cf69b_56a1907a",
+      "revId": "2b803f3a9af8dd4a0932b5bddb02aedf456b3de0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
