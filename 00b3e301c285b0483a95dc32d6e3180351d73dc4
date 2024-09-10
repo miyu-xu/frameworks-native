@@ -16,6 +16,24 @@
       "message": "Can this filtering be done on a higher level on the test runners, rather than modifying the test directly?",
       "revId": "00b3e301c285b0483a95dc32d6e3180351d73dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8cc292_d634a9d9",
+        "filename": "services/gpuservice/vts/src/com/android/tests/gpuservice/GpuWorkTracepointTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1013846
+      },
+      "writtenOn": "2024-09-10T03:26:18Z",
+      "side": 1,
+      "message": "The test jar file only includes this java file. We cannot add logical to filter this case in test runner for this test jar file.",
+      "parentUuid": "4cf590d8_0365e552",
+      "revId": "00b3e301c285b0483a95dc32d6e3180351d73dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
