@@ -34,6 +34,24 @@
       "parentUuid": "2a2ecb8c_7f481b49",
       "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ac6040_aa2a6ad2",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-10T22:25:44Z",
+      "side": 1,
+      "message": "i don\u0027t fully understand the vintf stuff. i\u0027m going to chat with Steven to figure out what we want to do here",
+      "parentUuid": "b6c27a25_6175a341",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
