@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4cd7c94_f43adf5d",
+        "filename": "libs/binder/trusty/ndk/include/android/llndk-versioning.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-10T00:47:51Z",
+      "side": 1,
+      "message": "nit: true, because we always have the APIs? Though in this case it doesn\u0027t matter, it should work in general.",
+      "range": {
+        "startLine": 20,
+        "startChar": 34,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3ba453d5_7a954e1c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/trusty/ndk/include/android/llndk-versioning.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "#define API_LEVEL_AT_LEAST(x, y) (true) /* nothing on Trusty */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc2496271b226d9c80b0d1a7ee30ad5b90c6dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
