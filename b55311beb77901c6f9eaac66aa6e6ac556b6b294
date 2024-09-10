@@ -52,6 +52,24 @@
       "parentUuid": "b6c27a25_6175a341",
       "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f470e2_eeebdf29",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-10T22:48:57Z",
+      "side": 1,
+      "message": "Can you call Stability::check(provided, required) like BpBinder does? Required stability should be the stability of the parcelable holder (e.g. system or vendor), and \u0027provided\u0027 should be the stability of the object in it.\n\nIf a vendor stability parcelable is added into a system ParcelableHolder, or system into vendor, this would allow code to depend on the API of unfrozen AIDL interfaces.\n\nI believe the initial implementation checked the exact value, since this is what is needed in multiple cases, but if we need to support the arbitrary behavior, we should follow the same structure that binder objects follow.",
+      "parentUuid": "20ac6040_aa2a6ad2",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
