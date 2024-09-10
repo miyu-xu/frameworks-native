@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2536a359_2ce68094",
+        "filename": "libs/binder/ndk/tests/libbinder_ndk_unit_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-10T00:39:31Z",
+      "side": 1,
+      "message": "actually - when we call this, service-\u003eguaranteeClient will be set to true in servicemanager, so the test shouldn\u0027t be passing. WDYT change the timeout to 16s instead? Are you sure this is passing?",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 51
+      },
+      "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
