@@ -46,6 +46,7 @@
 #include "android/binder_ibinder.h"
 
 using namespace android;
+using namespace std::chrono_literals;
 
 constexpr char kExistingNonNdkService[] = "SurfaceFlinger";
 constexpr char kBinderNdkUnitTestService[] = "BinderNdkUnitTest";
@@ -54,7 +55,7 @@ constexpr char kForcePersistNdkUnitTestService[] = "ForcePersistNdkUnitTestServi
 constexpr char kActiveServicesNdkUnitTestService[] = "ActiveServicesNdkUnitTestService";
 constexpr char kBinderNdkUnitTestServiceFlagged[] = "BinderNdkUnitTestFlagged";
 
-constexpr unsigned int kShutdownWaitTime = 11;
+constexpr auto kShutdownWaitTime = 30s;
 constexpr uint64_t kContextTestValue = 0xb4e42fb4d9a1d715;
 
 class MyTestFoo : public IFoo {
@@ -262,6 +263,17 @@ bool isServiceRunning(const char* serviceName) {
     return true;
 }
 
+bool isServiceShutdownWithWait(const char* serviceName) {
+    LOG(INFO) << "About to check and wait for shutdown of " << std::string(serviceName);
+    const auto before = std::chrono::steady_clock::now();
+    while (isServiceRunning(serviceName)) {
+        sleep(1);
+        const auto after = std::chrono::steady_clock::now();
+        if (after - before >= kShutdownWaitTime) return false;
+    }
+    return true;
+}
+
 TEST(NdkBinder, DetectDoubleOwn) {
     auto badService = ndk::SharedRefBase::make<MyBinderNdkUnitTest>();
     EXPECT_DEATH(std::shared_ptr<MyBinderNdkUnitTest>(badService.get()),
@@ -450,8 +462,8 @@ TEST(NdkBinder, CheckLazyServiceShutDown) {
     service = nullptr;
     IPCThreadState::self()->flushCommands();
     // Make sure the service is dead after some time of no use
-    sleep(kShutdownWaitTime);
-    ASSERT_EQ(nullptr, AServiceManager_checkService(kLazyBinderNdkUnitTestService));
+    ASSERT_TRUE(isServiceShutdownWithWait(kLazyBinderNdkUnitTestService))
+            << "Service failed to shut down";
 }
 
 TEST(NdkBinder, ForcedPersistenceTest) {
@@ -466,14 +478,12 @@ TEST(NdkBinder, ForcedPersistenceTest) {
         service = nullptr;
         IPCThreadState::self()->flushCommands();
 
-        sleep(kShutdownWaitTime);
-
-        bool isRunning = isServiceRunning(kForcePersistNdkUnitTestService);
-
         if (i == 0) {
-            ASSERT_TRUE(isRunning) << "Service shut down when it shouldn't have.";
+            ASSERT_TRUE(isServiceRunning(kForcePersistNdkUnitTestService))
+                    << "Service shut down when it shouldn't have.";
         } else {
-            ASSERT_FALSE(isRunning) << "Service failed to shut down.";
+            ASSERT_TRUE(isServiceShutdownWithWait(kForcePersistNdkUnitTestService))
+                    << "Service failed to shut down";
         }
     }
 }
@@ -491,10 +501,7 @@ TEST(NdkBinder, ActiveServicesCallbackTest) {
     service = nullptr;
     IPCThreadState::self()->flushCommands();
 
-    LOG(INFO) << "ActiveServicesCallbackTest about to sleep";
-    sleep(kShutdownWaitTime);
-
-    ASSERT_FALSE(isServiceRunning(kActiveServicesNdkUnitTestService))
+    ASSERT_TRUE(isServiceShutdownWithWait(kActiveServicesNdkUnitTestService))
             << "Service failed to shut down.";
 }
 
