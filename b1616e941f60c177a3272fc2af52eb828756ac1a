@@ -22,6 +22,30 @@
       },
       "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9840a2d7_270b39a1",
+        "filename": "libs/binder/ndk/tests/libbinder_ndk_unit_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-10T00:40:33Z",
+      "side": 1,
+      "message": "If you check listServices and check if the service name is in that list, that should work for polling.\n\nIf this change passes now, I\u0027m very confused.",
+      "parentUuid": "2536a359_2ce68094",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 51
+      },
+      "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
