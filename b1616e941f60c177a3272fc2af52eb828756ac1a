@@ -46,6 +46,30 @@
       },
       "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fc11f6_39cf1e2c",
+        "filename": "libs/binder/ndk/tests/libbinder_ndk_unit_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-10T16:22:50Z",
+      "side": 1,
+      "message": "Yes, the test is passing. It\u0027s using this same checkService mechanism before/after this change to check if the service is there.\n\nIt looks like the `guaranteeClient \u003d true` is only temporary and gets [set to false](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/cmds/servicemanager/ServiceManager.cpp;drc\u003dd404e0fcd477adffe77113370744f9d2b007cf75;l\u003d998) after handling the client callback from getting the binder from checkService. This is a pretty consistent 50ms window during this test that this is `true`.\n\nIf the `LazyServiceRegistrar` calls `tryUnregisterService` within that 50ms window it will see `guaranteeClient \u003d\u003d true` and give up, but outside of that window it should be ok, right?\n\nI don\u0027t see an API to check if the service exists in service manager without getting the binder and incrementing the client count. Am I missing one?\n\nI\u0027d rather have this change than the `16s because that forces each test case to wait at least that long. This change reduced the time of `atest libbinder_ndk_unit_test` on my cloudtop from",
+      "parentUuid": "9840a2d7_270b39a1",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 51
+      },
+      "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
