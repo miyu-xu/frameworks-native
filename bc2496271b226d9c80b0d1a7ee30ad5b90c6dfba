@@ -40,6 +40,30 @@
       ],
       "revId": "bc2496271b226d9c80b0d1a7ee30ad5b90c6dfba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b764ede_bdb8fd7b",
+        "filename": "libs/binder/trusty/ndk/include/android/llndk-versioning.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-10T00:50:04Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "d4cd7c94_f43adf5d",
+      "range": {
+        "startLine": 20,
+        "startChar": 34,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "bc2496271b226d9c80b0d1a7ee30ad5b90c6dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
