@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7d9949_3aeafc71",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-10T00:30:20Z",
+      "side": 1,
+      "message": "I am going to evaluate use of string_view instead of this as @fmayle suggested. I will change this as well if string_view is faster for the usecase or change it to const char*",
+      "parentUuid": "8598a51a_45c7cb6f",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "00f3fcdcb9230051d86cd4848970d2f3af8a9e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdf25b1b_08e17708",
@@ -93,6 +117,24 @@
           ]
         }
       ],
+      "revId": "00f3fcdcb9230051d86cd4848970d2f3af8a9e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1bf0a0e_ea884715",
+        "filename": "libs/binder/ndk/ibinder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-10T00:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdf25b1b_08e17708",
       "revId": "00f3fcdcb9230051d86cd4848970d2f3af8a9e89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
