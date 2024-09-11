@@ -569,6 +569,14 @@ impl<'a> ReadableSubParcel<'a> {
         D::deserialize(&self.parcel)
     }
 
+    /// Attempt to read a type that implements [`Deserialize`] from this
+    /// sub-parcel onto an existing value. This operation will overwrite the
+    /// old value partially or completely, depending on how much data is
+    /// available.
+    pub fn read_onto<D: Deserialize>(&self, x: &mut D) -> Result<()> {
+        x.deserialize_from(&self.parcel)
+    }
+
     /// Check if the sub-parcel has more data to read
     pub fn has_more_data(&self) -> bool {
         self.parcel.get_data_position() < self.end_position
@@ -858,24 +866,26 @@ fn test_utf8_utf16_conversions() {
         parcel.read::<Option<String>>().unwrap().unwrap(),
         "Embedded null \0 inside a string",
     );
-    // SAFETY: start is less than the current size of the parcel data buffer, because we haven't
-    // made it any shorter since we got the position.
+    // SAFETY: start is less than the current size of the parcel data buffer,
+    // because we haven't made it any shorter since we got the position.
     unsafe {
         assert!(parcel.set_data_position(start).is_ok());
     }
 
     assert!(parcel.write(&["str1", "str2", "str3"][..]).is_ok());
-    assert!(parcel
-        .write(&[String::from("str4"), String::from("str5"), String::from("str6"),][..])
-        .is_ok());
+    assert!(
+        parcel
+            .write(&[String::from("str4"), String::from("str5"), String::from("str6"),][..])
+            .is_ok()
+    );
 
     let s1 = "Hello, Binder!";
     let s2 = "This is a utf8 string.";
     let s3 = "Some more text here.";
 
     assert!(parcel.write(&[s1, s2, s3][..]).is_ok());
-    // SAFETY: start is less than the current size of the parcel data buffer, because we haven't
-    // made it any shorter since we got the position.
+    // SAFETY: start is less than the current size of the parcel data buffer,
+    // because we haven't made it any shorter since we got the position.
     unsafe {
         assert!(parcel.set_data_position(start).is_ok());
     }
@@ -901,8 +911,8 @@ fn test_sized_write() {
 
     assert_eq!(parcel.get_data_position(), start + expected_len);
 
-    // SAFETY: start is less than the current size of the parcel data buffer, because we haven't
-    // made it any shorter since we got the position.
+    // SAFETY: start is less than the current size of the parcel data buffer,
+    // because we haven't made it any shorter since we got the position.
     unsafe {
         parcel.set_data_position(start).unwrap();
     }
@@ -922,8 +932,8 @@ fn test_append_from() {
     assert_eq!(4, parcel2.get_data_size());
     assert_eq!(Ok(()), parcel2.append_all_from(&parcel1));
     assert_eq!(8, parcel2.get_data_size());
-    // SAFETY: 0 is less than the current size of the parcel data buffer, because the parcel is not
-    // empty.
+    // SAFETY: 0 is less than the current size of the parcel data buffer, because
+    // the parcel is not empty.
     unsafe {
         parcel2.set_data_position(0).unwrap();
     }
@@ -934,8 +944,8 @@ fn test_append_from() {
     assert_eq!(Ok(()), parcel2.append_from(&parcel1, 0, 2));
     assert_eq!(Ok(()), parcel2.append_from(&parcel1, 2, 2));
     assert_eq!(4, parcel2.get_data_size());
-    // SAFETY: 0 is less than the current size of the parcel data buffer, because the parcel is not
-    // empty.
+    // SAFETY: 0 is less than the current size of the parcel data buffer, because
+    // the parcel is not empty.
     unsafe {
         parcel2.set_data_position(0).unwrap();
     }
@@ -944,8 +954,8 @@ fn test_append_from() {
     let mut parcel2 = Parcel::new();
     assert_eq!(Ok(()), parcel2.append_from(&parcel1, 0, 2));
     assert_eq!(2, parcel2.get_data_size());
-    // SAFETY: 0 is less than the current size of the parcel data buffer, because the parcel is not
-    // empty.
+    // SAFETY: 0 is less than the current size of the parcel data buffer, because
+    // the parcel is not empty.
     unsafe {
         parcel2.set_data_position(0).unwrap();
     }
