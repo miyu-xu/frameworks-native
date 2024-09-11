@@ -16,6 +16,23 @@
       "message": "Requesting NDK API review @danalbert@google.com",
       "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ee9204_91b38a44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-11T19:42:19Z",
+      "side": 1,
+      "message": "+John as well, as Dan is busy with release work. PTAL!",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
