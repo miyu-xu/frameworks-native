@@ -70,6 +70,24 @@
       "parentUuid": "20ac6040_aa2a6ad2",
       "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b332bdc5_fe711d99",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1982430
+      },
+      "writtenOn": "2024-09-11T00:17:05Z",
+      "side": 1,
+      "message": "IIUC given field `ParcelableHolder ext;` the C++ generated code [writes the stability](https://cs.android.com/android/platform/superproject/main/+/main:system/tools/aidl/tests/golden_output/aidl-test-interface-cpp-source/gen/include/android/aidl/tests/extension/ExtendableParcelable.h;l\u003d24;drc\u003d7119fbd7b5f66d8311fb06ab1d73960a0d8efe43) and [does not create a new ParcelableHolder object](https://cs.android.com/android/platform/superproject/main/+/main:system/tools/aidl/tests/golden_output/aidl-test-interface-cpp-source/gen/android/aidl/tests/extension/ExtendableParcelable.cpp;l\u003d42-45;drc\u003dd737c3ed06f9aef6d68456288a5250c3893a8ca5) in `readFromParcel`; OTOH the Rust generated code [creates a new one](https://cs.android.com/android/platform/superproject/main/+/main:system/tools/aidl/tests/golden_output/aidl-test-interface-rust-source/gen/android/aidl/tests/extension/ExtendableParcelable.rs;l\u003d45-47;drc\u003d7119fbd7b5f66d8311fb06ab1d73960a0d8efe43).\n\nMaybe it makes sense to follow C++? I create 2 (WIP) CLs for that https://android-review.git.corp.google.com/q/topic:%22VintfParcelableHolder%22",
+      "parentUuid": "c5f470e2_eeebdf29",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
