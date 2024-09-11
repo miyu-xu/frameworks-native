@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65621dc1_1a3fe477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-11T01:03:32Z",
+      "side": 1,
+      "message": "Can you add more information in the commit message how you confirmed this, including the exact output file in the dist folder? I originally tried this, but I found that the output file it was creating was called \u0027libbinder_sdk\u0027 instead of \u0027libbinder_sdk.zip\u0027 so that\u0027s why I added this, even though Cole originally did not suggest to me adding dest.",
+      "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78833d09_75b741a3",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 1
