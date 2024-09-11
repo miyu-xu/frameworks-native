@@ -569,6 +569,14 @@ impl<'a> ReadableSubParcel<'a> {
         D::deserialize(&self.parcel)
     }
 
+    /// Attempt to read a type that implements [`Deserialize`] from this
+    /// sub-parcel onto an existing value. This operation will overwrite the
+    /// old value partially or completely, depending on how much data is
+    /// available.
+    pub fn read_onto<D: Deserialize>(&self, x: &mut D) -> Result<()> {
+        x.deserialize_from(&self.parcel)
+    }
+
     /// Check if the sub-parcel has more data to read
     pub fn has_more_data(&self) -> bool {
         self.parcel.get_data_position() < self.end_position
