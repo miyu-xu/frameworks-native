@@ -34,6 +34,24 @@
       "parentUuid": "4cf590d8_0365e552",
       "revId": "00b3e301c285b0483a95dc32d6e3180351d73dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99f5e6f_eb383d19",
+        "filename": "services/gpuservice/vts/src/com/android/tests/gpuservice/GpuWorkTracepointTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1967833
+      },
+      "writtenOn": "2024-09-11T10:50:12Z",
+      "side": 1,
+      "message": "I am not sure how the other properties(e.g. RestrictedBuildTest) are working in that case for different devices, like emulators, but it would be better to fix it in the test runner to avoid adding similar code to any other tests. \nAlso, I think the test should use assumeTrue here, to report an assumption failure, instead of a pass in the final reports. \nLastly, this should be approved by someone from the test infra team first, and I don\u0027t see if a decision has been made at b/341321154. @karthikmr@google.com, are there any updates on this?",
+      "parentUuid": "ec8cc292_d634a9d9",
+      "revId": "00b3e301c285b0483a95dc32d6e3180351d73dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
