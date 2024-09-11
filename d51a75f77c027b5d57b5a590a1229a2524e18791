@@ -69,6 +69,24 @@
       "parentUuid": "2724d5dc_5bd66a60",
       "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a32cbc1_809d74fb",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-11T01:04:54Z",
+      "side": 1,
+      "message": "This way gives more control. For instance, if you wanted to include cc_cmake_snapshot in sdk, you add \u0027targets: [\"sdk\"]\u0027. In this case it\u0027s only binder_sdk. In other cases you might want to group things. So, rule of 3s.",
+      "parentUuid": "29249f29_f689988b",
+      "revId": "d51a75f77c027b5d57b5a590a1229a2524e18791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
