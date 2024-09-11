@@ -27,6 +27,7 @@
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
 #include <binder/RpcServer.h>
+#include <binder/Status.h>
 #include <binder/unique_fd.h>
 #include <pthread.h>
 
@@ -123,6 +124,73 @@ status_t IBinder::shellCommand(const sp<IBinder>& target, int in, int out, int e
     send.writeStrongBinder(callback != nullptr ? IInterface::asBinder(callback) : nullptr);
     send.writeStrongBinder(resultReceiver != nullptr ? IInterface::asBinder(resultReceiver) : nullptr);
     return target->transact(SHELL_COMMAND_TRANSACTION, send, &reply);
+}
+
+status_t IBinder::getBinderInterfaceHash(const sp<IBinder>& binder, std::string* out) {
+    Parcel data;
+    Parcel reply;
+    data.writeInterfaceToken(binder->getInterfaceDescriptor());
+    status_t err = binder->transact(IBinder::LAST_CALL_TRANSACTION - 1, data, &reply, 0);
+    if (err == UNKNOWN_TRANSACTION) {
+        *out = "";
+        return OK;
+    }
+    if (err != OK) {
+        ALOGE("Failed to call get interface hash with status: %s", statusToString(err).c_str());
+        return err;
+    }
+    binder::Status status;
+    err = status.readFromParcel(reply);
+    if (err != OK) {
+        ALOGE("Failed to read reply parcel with status: %s", statusToString(err).c_str());
+        return err;
+    }
+    if (!status.isOk()) {
+        ALOGE("Failed to get interface hash with status: %s", status.toString8().c_str());
+        return status.transactionError();
+    }
+    std::string str;
+    err = reply.readUtf8FromUtf16(&str);
+    if (err != OK) {
+        ALOGE("Failed to read hash with status: %s", statusToString(err).c_str());
+        return err;
+    }
+
+    *out = str;
+    return err;
+}
+
+status_t IBinder::getBinderInterfaceVersion(const sp<IBinder>& binder, int* out) {
+    Parcel data;
+    Parcel reply;
+    const auto& descriptor = binder->getInterfaceDescriptor();
+    data.writeInterfaceToken(descriptor);
+    status_t err = binder->transact(IBinder::LAST_CALL_TRANSACTION, data, &reply);
+    // On upgrading devices, the HAL may not implement this transaction. libvintf
+    // treats missing <version> as version 1, so we do the same here.
+    if (err == UNKNOWN_TRANSACTION) {
+        const int kDefaultAidlVersion = 1;
+        ALOGW("%s does not have getInterfaceVersion defined, using default value of %d",
+              String8(descriptor).c_str(), kDefaultAidlVersion);
+        *out = kDefaultAidlVersion;
+        return OK;
+    }
+    if (err != OK) {
+        ALOGE("Failed to call get interface hash with status: %s", statusToString(err).c_str());
+        return err;
+    }
+    binder::Status status;
+    err = status.readFromParcel(reply);
+    if (err != OK) {
+        ALOGE("Failed to read reply parcel with status: %s", statusToString(err).c_str());
+        return err;
+    }
+    if (!status.isOk()) {
+        ALOGE("Failed to get interface hash with status: %s", status.toString8().c_str());
+        return status.transactionError();
+    }
+    *out = reply.readInt32();
+    return OK;
 }
 
 status_t IBinder::getExtension(sp<IBinder>* out) {

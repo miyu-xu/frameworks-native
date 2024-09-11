@@ -114,6 +114,22 @@ public:
                                          const sp<IResultReceiver>& resultReceiver);
 
     /**
+     * Get the binder implementation's interface version with a remote
+     * transaction.
+     * NOTE: This is only supported for interfaces that are defined in AIDL with
+     * the getInterfaceVersions and getInterfaceHash transactions defined.
+     */
+    static status_t getBinderInterfaceVersion(const sp<IBinder>& target, int* out);
+
+    /**
+     * Get the binder implementation's interface hash with a remote
+     * transaction.
+     * NOTE: This is only supported for interfaces that are defined in AIDL with
+     * the getInterfaceVersions and getInterfaceHash transactions defined.
+     */
+    static status_t getBinderInterfaceHash(const sp<IBinder>& target, std::string* out);
+
+    /**
      * This allows someone to add their own additions to an interface without
      * having to modify the original interface.
      *
