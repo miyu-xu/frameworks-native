@@ -51,6 +51,24 @@
       "parentUuid": "a280709f_c5fa7b46",
       "revId": "c98752c7b84f1c4da2dea6fbb416c1a67fa4ef94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f83ec368_451c2064",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-09-11T07:18:18Z",
+      "side": 1,
+      "message": "Got it, thanks for clearing up the confusion.",
+      "parentUuid": "01e2e9c3_e3ca45e8",
+      "revId": "c98752c7b84f1c4da2dea6fbb416c1a67fa4ef94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
