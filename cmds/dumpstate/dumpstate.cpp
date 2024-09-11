@@ -37,6 +37,7 @@
 #include <android_app_admin_flags.h>
 #include <android_tracing.h>
 #include <binder/IServiceManager.h>
+#include <com_android_aconfig_flags.h>
 #include <cutils/multiuser.h>
 #include <cutils/native_handle.h>
 #include <cutils/properties.h>
@@ -1783,8 +1784,14 @@ Dumpstate::RunStatus Dumpstate::dumpstate() {
     DumpFile("PRODUCT BUILD-TIME RELEASE FLAGS", "/product/etc/build_flags.json");
     DumpFile("VENDOR BUILD-TIME RELEASE FLAGS", "/vendor/etc/build_flags.json");
 
-    RunCommand("ACONFIG FLAGS", {PRINT_FLAGS},
-               CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    if (com::android::aconfig::flags::enable_only_new_storage()) {
+        RunCommand("ACONFIG FLAGS",
+                   {"echo \"Flag storage: $(aflags which-backing)\"", "aflags list"},
+                   CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    } else {
+        RunCommand("ACONFIG FLAGS", {PRINT_FLAGS},
+                   CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    }
 
     RunCommand("STORAGED IO INFO", {"storaged", "-u", "-p"});
 
