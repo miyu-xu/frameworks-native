@@ -187,13 +187,17 @@ impl Deserialize for ParcelableHolder {
     }
 
     fn deserialize(parcel: &BorrowedParcel<'_>) -> Result<Self, StatusCode> {
+        let mut parcelable = ParcelableHolder::new(Default::default());
+        parcelable.deserialize_from(parcel)?;
+        Ok(parcelable)
+    }
+
+    fn deserialize_from(&mut self, parcel: &BorrowedParcel<'_>) -> Result<(), StatusCode> {
         let status: i32 = parcel.read()?;
         if status == NULL_PARCELABLE_FLAG {
             Err(StatusCode::UNEXPECTED_NULL)
         } else {
-            let mut parcelable = ParcelableHolder::new(Default::default());
-            parcelable.read_from_parcel(parcel)?;
-            Ok(parcelable)
+            self.read_from_parcel(parcel)
         }
     }
 }
