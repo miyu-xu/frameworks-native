@@ -33,6 +33,24 @@
       "message": "My colleagues and I don\u0027t know what \"cl\" means, and we don\u0027t know where \"Merged-In: Ic4ded171e90bcfb7a0d58df2c272f4c219be3a04\" should be placed. If the Merged-In location is not filled in correctly this time, can you help correct it? It will save your time and allow you to merge the patch earlier.",
       "revId": "c98752c7b84f1c4da2dea6fbb416c1a67fa4ef94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e2e9c3_e3ca45e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884457
+      },
+      "writtenOn": "2024-09-11T02:18:59Z",
+      "side": 1,
+      "message": "The cl(changelist) means this gerrit patch, you actually added this into the right place, i.e., the commit message.\n\nI need to fix this internally and then this patch will be good to go.",
+      "parentUuid": "a280709f_c5fa7b46",
+      "revId": "c98752c7b84f1c4da2dea6fbb416c1a67fa4ef94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
