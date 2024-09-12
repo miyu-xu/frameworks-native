@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb31e8b2_c0f22065",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-12T19:42:23Z",
+      "side": 1,
+      "message": "can the check of this be moved into the binary which is read, so we only execute a binary here and we don\u0027t have more code here?\n\nThe general advice is to only execute binaries in dumpsys, so if they crash, it won\u0027t break bugreport.",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
