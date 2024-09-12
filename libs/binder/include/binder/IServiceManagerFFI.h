@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#pragma once
 
-parcelable BinderRpcTestServerConfig {
-    int numThreads;
-    int[] serverSupportedFileDescriptorTransportModes;
-    int socketType;
-    int rpcSecurity;
-    int serverVersion;
-    int socketFd; // Inherited from the parent process.
-    @utf8InCpp String addr;
-}
+#include <android/os/IServiceManager.h>
+
+namespace android::impl {
+
+LIBBINDER_EXPORTED sp<android::os::IServiceManager>
+getJavaServicemanagerImplPrivateDoNotUseExceptInTheOnePlaceItIsUsed();
+
+} // namespace android::impl
