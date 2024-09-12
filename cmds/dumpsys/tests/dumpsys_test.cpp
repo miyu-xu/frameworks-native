@@ -705,6 +705,13 @@ TEST_F(DumpsysTest, WriteDumpWithoutThreadStart) {
     EXPECT_THAT(status, Eq(INVALID_OPERATION));
 }
 
+TEST_F(DumpsysTest, GetCachableServices) {
+    CallMain({"--cachable-services"});
+
+    const std::string format("Client side cacheable services:\n.*");
+    AssertOutputFormat(format);
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
 

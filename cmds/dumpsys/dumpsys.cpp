@@ -28,6 +28,7 @@
 #include <binder/ProcessState.h>
 #include <binder/Stability.h>
 #include <binder/TextOutput.h>
+#include <binder/BinderCacheDumpsysHelper.h>
 #include <binderdebug/BinderDebug.h>
 #include <serviceutils/PriorityDumper.h>
 #include <utils/Log.h>
@@ -83,6 +84,7 @@ static void usage() {
         "         --skip SERVICES: dumps all services but SERVICES (comma-separated list)\n"
         "         --stability: dump binder stability information instead of usual dump\n"
         "         --thread: dump thread usage instead of usual dump\n"
+        "         --stability: dump binder stability information instead of usual dump\n"
         "         SERVICE [ARGS]: dumps only service SERVICE, optionally passing ARGS to it\n");
 }
 
@@ -141,7 +143,8 @@ int Dumpsys::main(int argc, char* const argv[]) {
         {"dump", no_argument, 0, 0},           {"pid", no_argument, 0, 0},
         {"priority", required_argument, 0, 0}, {"proto", no_argument, 0, 0},
         {"skip", no_argument, 0, 0},           {"stability", no_argument, 0, 0},
-        {"thread", no_argument, 0, 0},         {0, 0, 0, 0}};
+        {"thread", no_argument, 0, 0},         {"cachable-services", no_argument, 0, 0},
+        {0, 0, 0, 0}};
 
     // Must reset optind, otherwise subsequent calls will fail (wouldn't happen on main.cpp, but
     // happens on test cases).
@@ -182,6 +185,8 @@ int Dumpsys::main(int argc, char* const argv[]) {
                 dumpTypeFlags |= TYPE_THREAD;
             } else if (!strcmp(longOptions[optionIndex].name, "clients")) {
                 dumpTypeFlags |= TYPE_CLIENTS;
+            } else if (!strcmp(longOptions[optionIndex].name, "cachable-services")) {
+                dumpTypeFlags |= TYPE_CLIENT_CACHABLE_SERVICES;
             }
             break;
 
@@ -221,6 +226,11 @@ int Dumpsys::main(int argc, char* const argv[]) {
 
     if (dumpTypeFlags == 0) {
         dumpTypeFlags = TYPE_DUMP;
+    }
+
+    if (dumpTypeFlags & TYPE_CLIENT_CACHABLE_SERVICES) {
+        std::cout << "Client side cacheable services:" << std::endl;
+        printCachableListForDumpsys();
     }
 
     for (int i = optind; i < argc; i++) {

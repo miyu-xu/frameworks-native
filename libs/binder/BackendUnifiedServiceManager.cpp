@@ -16,7 +16,9 @@
 #include "BackendUnifiedServiceManager.h"
 
 #include <android/os/IAccessor.h>
+#include <binder/BinderCacheDumpsysHelper.h>
 #include <binder/RpcSession.h>
+#include <iostream>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
@@ -80,6 +82,12 @@ static const char* kStaticCachableList[] = {
         "virtualdevice_native",
         "webviewupdate",
 };
+
+void printCachableListForDumpsys() {
+    for (const char* name : kStaticCachableList) {
+        std::cout << name << std::endl;
+    }
+}
 
 bool BinderCacheWithInvalidation::isClientSideCachingEnabled(const std::string& serviceName) {
     if (ProcessState::self()->getThreadPoolMaxTotalThreadCount() <= 0) {
