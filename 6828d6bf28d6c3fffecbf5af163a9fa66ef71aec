@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4d84664_e74e13e2",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T22:11:08Z",
+      "side": 1,
+      "message": "What does \"annotate\" mean? https://clang.llvm.org/docs/AttributeReference.html#annotate\n\nI\u0027m asking because this _is_ being applied when this header is included from the NDK. I need to know what this does before I can approve this. This CL adds an API that\u0027s marked with an attribute I don\u0027t understand.",
+      "parentUuid": "3c5851f2_14aa7666",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f7822b1_01c75c7c",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 19
