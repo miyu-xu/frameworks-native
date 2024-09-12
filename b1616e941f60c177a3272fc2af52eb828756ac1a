@@ -70,6 +70,30 @@
       },
       "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552a1162_0ef62c79",
+        "filename": "libs/binder/ndk/tests/libbinder_ndk_unit_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-12T01:52:14Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t see an API to check if the service exists in service manager without getting the binder and incrementing the client count. Am I missing one?\n\nlist services?\n\n\u003e It looks like the guaranteeClient \u003d true is only temporary\n\nah - I see now. That makes sense why it works. AIDL handles this case quite well. In HIDL, it would have forced the service to stay alive longer (thinking that if a client accesses it, it\u0027s likely to access it again), but AIDL lazy service infrastructure shuts the service down faster. We can try it this way if you want. I am certainly interested to see if it ever causes an issue.",
+      "parentUuid": "e2fc11f6_39cf1e2c",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 51
+      },
+      "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
