@@ -88,6 +88,24 @@
       "parentUuid": "c5f470e2_eeebdf29",
       "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5363ed39_be1c4a7c",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-12T08:32:48Z",
+      "side": 1,
+      "message": "Those CLs seem okay to me as well.",
+      "parentUuid": "b332bdc5_fe711d99",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
