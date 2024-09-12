@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbb72678_21e58dab",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-12T20:52:23Z",
+      "side": 1,
+      "message": "Yeah, this is an implementation detail of AIDL to avoid changing space. We shouldn\u0027t put it here, as this is a layer below that.\n\nI would recommend saying \"When defining methods, transaction codes are expected to be contiguous, and this is required for maximum memory efficiency. You can use nullptr if certain transaction codes are not used.\"",
+      "parentUuid": "dd592512_18cdf25e",
+      "range": {
+        "startLine": 240,
+        "startChar": 33,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94e65a4b_a278c0b0",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 20
