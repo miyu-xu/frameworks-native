@@ -190,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e59ea321_620e36b7",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T20:44:04Z",
+      "side": 1,
+      "message": "A link (in the docs) to what a \"transaction code\" is would still be helpful.\n\n\u003e unless it\u0027s expected that codeToFunction is potentially as large as 128MB.\n\u003e\n\u003e If the actual used range of codes is always small and that max is just extreme future proofing, my question would still be where the caller needs to look to know what codes exist so they know how to map them.\n\nStill needs to be answered.\n\n\u003e AIDL allows to set custom codes which can be non contiguous.\n\nIf they\u0027re non-contiguous isn\u0027t this the wrong API? Shouldn\u0027t it be `AIBinder_Class_setFunctionNameForTransactionCode` like I suggested? Or is there a reason it should be a giant list of holes despite that?",
+      "parentUuid": "a36e3478_98c151c2",
+      "range": {
+        "startLine": 230,
+        "startChar": 22,
+        "endLine": 230,
+        "endChar": 26
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ba61e83_95587254",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 19
@@ -489,6 +513,42 @@
       "side": 1,
       "message": "There is no unset. Implementation will return error if set is attempted twice.",
       "parentUuid": "97375e77_ff527ee6",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef38368_00123602",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T20:44:04Z",
+      "side": 1,
+      "message": "Same. Say so in the docs.",
+      "parentUuid": "ceeedde6_856a0257",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ac44fc_06b36d39",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T20:44:04Z",
+      "side": 1,
+      "message": "Don\u0027t tell me, tell the users 😊",
+      "parentUuid": "81182cd6_63b74d48",
       "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
