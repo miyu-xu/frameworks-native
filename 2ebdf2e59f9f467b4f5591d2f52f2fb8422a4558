@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c952e2_cd52c57c",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1789,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-12T08:35:16Z",
+      "side": 1,
+      "message": "Security: specify full path to aflags binary to not rely on PATH. (This is done for some but not all of the RunCommand invocations in this file. It should be done for all of them.)",
+      "range": {
+        "startLine": 1789,
+        "startChar": 44,
+        "endLine": 1789,
+        "endChar": 50
+      },
+      "revId": "2ebdf2e59f9f467b4f5591d2f52f2fb8422a4558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
