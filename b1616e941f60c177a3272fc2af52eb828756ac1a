@@ -94,6 +94,30 @@
       },
       "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631f4f5a_b66b17fa",
+        "filename": "libs/binder/ndk/tests/libbinder_ndk_unit_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-12T17:08:06Z",
+      "side": 1,
+      "message": "\u003e list services?\n\nI didn\u0027t think about using the libbinder APIs in this test! duh. `defaultServiceManager` is already used in here too.\n\n\u003e We can try it this way if you want. I am certainly interested to see if it ever causes an issue.\n\nI switched it to IServiceManager::listServices instead. We should hit that 50ms some of the time. Each 5s registrar poll has a chance of hitting it, and since we poll every second and the registrar polls every 5s it\u0027s _possible_ to hit it 6 times in a row and fail the test 😄",
+      "parentUuid": "552a1162_0ef62c79",
+      "range": {
+        "startLine": 257,
+        "startChar": 23,
+        "endLine": 257,
+        "endChar": 51
+      },
+      "revId": "b1616e941f60c177a3272fc2af52eb828756ac1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
