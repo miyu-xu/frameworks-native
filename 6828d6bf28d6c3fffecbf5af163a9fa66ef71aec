@@ -33,6 +33,218 @@
       "message": "+John as well, as Dan is busy with release work. PTAL!",
       "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3e6ef8_81fa641c",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "This is the `!defined(__ANDROID_VENDOR__)` case... what does this do? Shouldn\u0027t this just be defined to empty?",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7822b1_01c75c7c",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "Assuming I\u0027ve understood the API correctly, I think the following reword is a bit clearer. \"Used how?\" and \"what\u0027s a code?\" were the questions I had when I read this:\n\n```\nAssociates a mapping of transaction codes to function names for the given class.\n\nTrace messages will use the provided names instead of bare integer codes when\nset. If not set by this function, trace messages will only be identified by the\nbare code.\n```",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff13c167_062bc397",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "Is a \"transaction code\" a term the reader will be familiar with? It\u0027s not one I\u0027m familiar with. Googling \"binder transaction code\" doesn\u0027t find much. https://developer.android.com/reference/android/os/Binder doesn\u0027t help me a whole lot either, unless it\u0027s expected that `codeToFunction` is potentially as large as 128MB.\n\nIf the actual used range of codes is always small and that max is just extreme future proofing, my question would still be where the caller needs to look to know what codes exist so they know how to map them.\n\nI assume the used codes are expected to be contiguous? If not, this should probably be `AIBinder_Class_setFunctionNameForTransactionCode(AIBinder_Class*, int transactionCode, const char* functionName)`.",
+      "range": {
+        "startLine": 230,
+        "startChar": 22,
+        "endLine": 230,
+        "endChar": 26
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba61e83_95587254",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "\u003e ... indexed by transaction code.\n\nI think the `-` should also be omitted?\n\nIt looks like transaction codes begin at 1, not 0. Should the first element of the array just be nullptr? Say what\u0027s expected.\n\nAre holes allowed?\n\nLifetime needs to be defined. Does the caller need to keep the memory live? For how long? Or will the implementation copy the array, in which case the caller can safely free the memory after the call? In either case, does the caller need to unset the map before the memory can be freed? How?\n\nEncoding is irrelevant here, right? This is just printed to logcat or something? If I\u0027m wrong and the encoding matters, document it.\n\n(up to you which of those answers go in the \\param and which go in the body of the docs)",
+      "range": {
+        "startLine": 235,
+        "startChar": 27,
+        "endLine": 235,
+        "endChar": 50
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1fbdd6_4c2f4213",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "The name\u0027s a little misleading if I\u0027ve understood \"code\" correctly, since for a map of one function the list will have two elements, unless holes are allowed, in which case a map of one function could potentially have 16777215 elements.\n\nIf that\u0027s correct, maybe just go with the simpler name `length` and have the docs be \"length of the `transactionCodeToFunctionMap` in number of elements\"?\n\nI\u0027m not sure I\u0027ve understood this though, so maybe that\u0027s terrible advice 😊",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 48
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a600ca43_adf566ec",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "This would be a programming error, right? If so, change the return type to void and just abort when the caller does this: go/android-ndk-api-guidelines#methods-with-non-trivial-error-possibilities",
+      "range": {
+        "startLine": 238,
+        "startChar": 66,
+        "endLine": 239,
+        "endChar": 29
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f8d577_a51bc28b",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "Can this be safely called at any time? From any thread?",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5e2d23_b72fdef2",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "If so, `transactionCodeToFunctionMap`",
+      "range": {
+        "startLine": 241,
+        "startChar": 67,
+        "endLine": 241,
+        "endChar": 81
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97375e77_ff527ee6",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "Is there a corresponding \"unset\", or is \"unset\" the same API called with `clazz, nullptr, 0`?",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8477a7_497ef1bd",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-12T00:03:30Z",
+      "side": 1,
+      "message": "`setTransactionCodeToFunctionNameMap`, right?",
+      "range": {
+        "startLine": 241,
+        "startChar": 5,
+        "endLine": 241,
+        "endChar": 30
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
