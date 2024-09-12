@@ -123,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a7b994_9b0a5904",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f7822b1_01c75c7c",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff13c167_062bc397",
@@ -136,6 +154,30 @@
       "writtenOn": "2024-09-12T00:03:30Z",
       "side": 1,
       "message": "Is a \"transaction code\" a term the reader will be familiar with? It\u0027s not one I\u0027m familiar with. Googling \"binder transaction code\" doesn\u0027t find much. https://developer.android.com/reference/android/os/Binder doesn\u0027t help me a whole lot either, unless it\u0027s expected that `codeToFunction` is potentially as large as 128MB.\n\nIf the actual used range of codes is always small and that max is just extreme future proofing, my question would still be where the caller needs to look to know what codes exist so they know how to map them.\n\nI assume the used codes are expected to be contiguous? If not, this should probably be `AIBinder_Class_setFunctionNameForTransactionCode(AIBinder_Class*, int transactionCode, const char* functionName)`.",
+      "range": {
+        "startLine": 230,
+        "startChar": 22,
+        "endLine": 230,
+        "endChar": 26
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36e3478_98c151c2",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "AIDL allows to set custom codes which can be non contiguous.",
+      "parentUuid": "ff13c167_062bc397",
       "range": {
         "startLine": 230,
         "startChar": 22,
@@ -169,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff098743_71cba405",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Holes are allowed till certain number which I added in documentation. Added more info for transactionCodeToFunctionMap. Lifetime should be same as clazz, added it in documentation. This will be added to traces, so encoding is irrelevant.",
+      "parentUuid": "9ba61e83_95587254",
+      "range": {
+        "startLine": 235,
+        "startChar": 27,
+        "endLine": 235,
+        "endChar": 50
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f1fbdd6_4c2f4213",
@@ -192,6 +258,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54abbfa_8c76f157",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1fbdd6_4c2f4213",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 48
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a600ca43_adf566ec",
@@ -205,6 +295,30 @@
       "writtenOn": "2024-09-12T00:03:30Z",
       "side": 1,
       "message": "This would be a programming error, right? If so, change the return type to void and just abort when the caller does this: go/android-ndk-api-guidelines#methods-with-non-trivial-error-possibilities",
+      "range": {
+        "startLine": 238,
+        "startChar": 66,
+        "endLine": 239,
+        "endChar": 29
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fc5efe_8371bba3",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a600ca43_adf566ec",
       "range": {
         "startLine": 238,
         "startChar": 66,
@@ -291,6 +405,90 @@
         "endLine": 241,
         "endChar": 30
       },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6600850f_8cba9332",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee5e2d23_b72fdef2",
+      "range": {
+        "startLine": 241,
+        "startChar": 67,
+        "endLine": 241,
+        "endChar": 81
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81182cd6_63b74d48",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "This will be called one time during defineClass is called for interface. we don\u0027t allow resetting it.",
+      "parentUuid": "75f8d577_a51bc28b",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c9057f_8763cd15",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8477a7_497ef1bd",
+      "range": {
+        "startLine": 241,
+        "startChar": 5,
+        "endLine": 241,
+        "endChar": 30
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceeedde6_856a0257",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-12T20:10:22Z",
+      "side": 1,
+      "message": "There is no unset. Implementation will return error if set is attempted twice.",
+      "parentUuid": "97375e77_ff527ee6",
       "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
