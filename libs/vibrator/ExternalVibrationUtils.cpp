@@ -1,3 +1,5 @@
+<<<<<<< PATCH SET (5684ce Add scale factor field to HapticScale)
+=======
 /*
  * Copyright (C) 2020 The Android Open Source Project
  *
@@ -171,3 +173,4 @@ void scaleHapticData(float* buffer, size_t length, HapticScale scale, float limi
 }
 
 } // namespace android::os
+>>>>>>> BASE      (cfe1e7 Merge "Fix haptics scaling to match VibrationEffect function)
