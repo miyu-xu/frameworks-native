@@ -37,6 +37,7 @@
 #include <android_app_admin_flags.h>
 #include <android_tracing.h>
 #include <binder/IServiceManager.h>
+#include <com_android_aconfig_flags.h>
 #include <cutils/multiuser.h>
 #include <cutils/native_handle.h>
 #include <cutils/properties.h>
@@ -170,6 +171,7 @@ void add_mountinfo();
 #define ALT_PSTORE_LAST_KMSG "/sys/fs/pstore/console-ramoops-0"
 #define BLK_DEV_SYS_DIR "/sys/block"
 
+#define AFLAGS "/system/bin/aflags"
 #define RECOVERY_DIR "/cache/recovery"
 #define RECOVERY_DATA_DIR "/data/misc/recovery"
 #define UPDATE_ENGINE_LOG_DIR "/data/misc/update_engine_log"
@@ -1783,8 +1785,16 @@ Dumpstate::RunStatus Dumpstate::dumpstate() {
     DumpFile("PRODUCT BUILD-TIME RELEASE FLAGS", "/product/etc/build_flags.json");
     DumpFile("VENDOR BUILD-TIME RELEASE FLAGS", "/vendor/etc/build_flags.json");
 
-    RunCommand("ACONFIG FLAGS", {PRINT_FLAGS},
-               CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    if (com::android::aconfig::flags::enable_only_new_storage()) {
+        std::string backing_command =
+            "echo \"Flag storage: $(" + std::string(AFLAGS) + " which-backing)\"";
+        std::string list_command = std::string(AFLAGS) + " list";
+        RunCommand("ACONFIG FLAGS", {backing_command, list_command}
+                   CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    } else {
+        RunCommand("ACONFIG FLAGS", {PRINT_FLAGS},
+                   CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+    }
 
     RunCommand("STORAGED IO INFO", {"storaged", "-u", "-p"});
 
