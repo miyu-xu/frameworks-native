@@ -61,12 +61,9 @@ public:
 
 private:
     sp<os::IServiceManager> mTheRealServiceManager;
-    binder::Status toBinderService(const ::std::string& name, const os::Service& in,
-                                   os::Service* _out);
+    void toBinderService(const os::Service& in, os::Service* _out);
 };
 
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
-
-android::binder::Status getInjectedAccessor(const std::string& name, android::os::Service* service);
 
 } // namespace android

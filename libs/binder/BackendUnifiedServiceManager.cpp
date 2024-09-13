@@ -46,9 +46,7 @@ binder::Status BackendUnifiedServiceManager::getService2(const ::std::string& na
                                                          os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->getService2(name, &service);
-    if (status.isOk()) {
-        return toBinderService(name, service, _out);
-    }
+    toBinderService(service, _out);
     return status;
 }
 
@@ -56,38 +54,15 @@ binder::Status BackendUnifiedServiceManager::checkService(const ::std::string& n
                                                           os::Service* _out) {
     os::Service service;
     binder::Status status = mTheRealServiceManager->checkService(name, &service);
-    if (status.isOk()) {
-        return toBinderService(name, service, _out);
-    }
+    toBinderService(service, _out);
     return status;
 }
 
-binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
-                                                             const os::Service& in,
-                                                             os::Service* _out) {
+void BackendUnifiedServiceManager::toBinderService(const os::Service& in, os::Service* _out) {
     switch (in.getTag()) {
         case os::Service::Tag::binder: {
-            if (in.get<os::Service::Tag::binder>() == nullptr) {
-                // failed to find a service. Check to see if we have any local
-                // injected Accessors for this service.
-                os::Service accessor;
-                binder::Status status = getInjectedAccessor(name, &accessor);
-                if (!status.isOk()) {
-                    *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
-                    return status;
-                }
-                if (accessor.getTag() == os::Service::Tag::accessor &&
-                    accessor.get<os::Service::Tag::accessor>() != nullptr) {
-                    ALOGI("Found local injected service for %s, will attempt to create connection",
-                          name.c_str());
-                    // Call this again using the accessor Service to get the real
-                    // service's binder into _out
-                    return toBinderService(name, accessor, _out);
-                }
-            }
-
             *_out = in;
-            return binder::Status::ok();
+            break;
         }
         case os::Service::Tag::accessor: {
             sp<IBinder> accessorBinder = in.get<os::Service::Tag::accessor>();
@@ -95,7 +70,7 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
             if (accessor == nullptr) {
                 ALOGE("Service#accessor doesn't have accessor. VM is maybe starting...");
                 *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
-                return binder::Status::ok();
+                break;
             }
             auto request = [=] {
                 os::ParcelFileDescriptor fd;
@@ -108,15 +83,10 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
                 }
             };
             auto session = RpcSession::make();
-            status_t status = session->setupPreconnectedClient(base::unique_fd{}, request);
-            if (status != OK) {
-                ALOGE("Failed to set up preconnected binder RPC client: %s",
-                      statusToString(status).c_str());
-                return binder::Status::fromStatusT(status);
-            }
+            session->setupPreconnectedClient(base::unique_fd{}, request);
             session->setSessionSpecificRoot(accessorBinder);
             *_out = os::Service::make<os::Service::Tag::binder>(session->getRootObject());
-            return binder::Status::ok();
+            break;
         }
         default: {
             LOG_ALWAYS_FATAL("Unknown service type: %d", in.getTag());
