@@ -120,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a539d5b_36d13e74",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:44:17Z",
+      "side": 1,
+      "message": "Previous sentence was too ambiguous. Tried to clarify a bit in this set. Please have a look.",
+      "parentUuid": "fd6543aa_a9c444d8",
+      "range": {
+        "startLine": 232,
+        "startChar": 72,
+        "endLine": 232,
+        "endChar": 82
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dd592512_18cdf25e",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 20
