@@ -72,6 +72,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0ca34e41_062db552",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Removed the word. Caller will decide where to call this from during initialization.",
+      "parentUuid": "c6087f52_6c576ea5",
+      "range": {
+        "startLine": 232,
+        "startChar": 45,
+        "endLine": 232,
+        "endChar": 52
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836c8612_ea74f4d2",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d17ff63b_77e25b7c",
+      "range": {
+        "startLine": 232,
+        "startChar": 19,
+        "endLine": 232,
+        "endChar": 21
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dd592512_18cdf25e",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 20
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "607ce99f_4d0ca9dc",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb72678_21e58dab",
+      "range": {
+        "startLine": 240,
+        "startChar": 33,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94e65a4b_a278c0b0",
@@ -130,6 +202,30 @@
       "writtenOn": "2024-09-12T20:44:04Z",
       "side": 1,
       "message": "elements or bytes?",
+      "range": {
+        "startLine": 242,
+        "startChar": 17,
+        "endLine": 242,
+        "endChar": 59
+      },
+      "revId": "51da1472853422c15eae6eb51d9addf8a1c84941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e5fb9c_f15d53ab",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "elements, added in the doc",
+      "parentUuid": "94e65a4b_a278c0b0",
       "range": {
         "startLine": 242,
         "startChar": 17,

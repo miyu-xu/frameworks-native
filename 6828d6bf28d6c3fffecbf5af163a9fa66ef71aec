@@ -260,6 +260,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "589ef796_2647706a",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Added transact_code_t type in brackets which should link to the doc on the same page. If the interface uses default ordering, we allow this array to be as large as possible for full range of transact code. If interface is not using default ordering, we don\u0027t want the giant holes as you mentioned. Thats why just certain number of holes are allowed. AIBinder_Class_setFunctionNameForTransactionCode will have to be added in every function call of the AIDL interface which will increases the aidl ndk library size by almost 8 percent(This approach was tried with very first revision of this change i.e. adding scopedtrace for every function call) vs current approach is 0.29 percent. again, we will skip adding function names for the method if someone assigns huge transact id like 1000000.",
+      "parentUuid": "e59ea321_620e36b7",
+      "range": {
+        "startLine": 230,
+        "startChar": 22,
+        "endLine": 230,
+        "endChar": 26
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ba61e83_95587254",
@@ -597,6 +621,42 @@
       "side": 1,
       "message": "Don\u0027t tell me, tell the users 😊",
       "parentUuid": "81182cd6_63b74d48",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11f5a1e_86f3cd65",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Added `Resetting/clearing the transactionCodeToFunctionMap is not allowed.` in doc",
+      "parentUuid": "2ef38368_00123602",
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0e44c7_8f6f8624",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-13T00:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ac44fc_06b36d39",
       "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
