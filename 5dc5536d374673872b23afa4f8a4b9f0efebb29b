@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7b9ef55_08b7eef8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-13T06:29:45Z",
+      "side": 1,
+      "message": "Add a section on why this is needed. We didn\u0027t have this in the past but need it now -- what has changed / is about to change?",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d6f2e8_9dca087e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-13T06:29:45Z",
+      "side": 1,
+      "message": "How about\n\n```\nTest: adb bugreport /tmp/bugreport.zip \u0026\u0026 unzip -c /tmp/bugreport.zip bugreport*.txt | grep \u003csomething something\u003e\n```",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21394653_381433ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-13T06:29:45Z",
+      "side": 1,
+      "message": "Huh, I expected a Flag: git trailer to be required but apparently not!\n\nSince the code *is* adding logic that is essentially #ifdef guarded by a flag, you want to include Flag: to make it easy to essentially undo this CL if it causes an error.",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb31e8b2_c0f22065",
         "filename": "cmds/dumpstate/dumpstate.cpp",
         "patchSetId": 4
@@ -14,6 +65,30 @@
       "writtenOn": "2024-09-12T19:42:23Z",
       "side": 1,
       "message": "can the check of this be moved into the binary which is read, so we only execute a binary here and we don\u0027t have more code here?\n\nThe general advice is to only execute binaries in dumpsys, so if they crash, it won\u0027t break bugreport.",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c539c10b_06d0e30d",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-13T06:29:45Z",
+      "side": 1,
+      "message": "+1 to not typing dumpstate to aflag flags, if possible. Suggest you call both \n`/system/bin/{printflags,aflags}` and have both binaries check if the new storage is used, printing some \"hey I\u0027m not going to print any data because flag X is Y\" if the flag isn\u0027t in the state the tool expects it to be.\n\n(I\u0027m more OK with printflags linking against the aconfig flags -- that tool feels more closely related to aconfig flags than dumpstate does)",
+      "parentUuid": "cb31e8b2_c0f22065",
       "range": {
         "startLine": 1788,
         "startChar": 38,
