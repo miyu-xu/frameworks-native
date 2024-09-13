@@ -1,0 +1,195 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802fa9fd_e84d8042",
+        "filename": "cmds/dumpsys/dumpsys.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:34:22Z",
+      "side": 1,
+      "message": "s/cachable/cacheable/gi",
+      "range": {
+        "startLine": 146,
+        "startChar": 49,
+        "endLine": 146,
+        "endChar": 57
+      },
+      "revId": "b139386a724dbc3518290b2669470506cf217bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0590103e_b2aa95d6",
+        "filename": "cmds/dumpsys/dumpsys.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:34:22Z",
+      "side": 1,
+      "message": "omit suffix (since this is all about services)",
+      "range": {
+        "startLine": 146,
+        "startChar": 57,
+        "endLine": 146,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "89b30894_847c02e7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpsys/dumpsys.cpp",
+              "range": {
+                "startLine": 146,
+                "startChar": 0,
+                "endLine": 147,
+                "endChar": 0
+              },
+              "replacement": "        {\"thread\", no_argument, 0, 0},         {\"cachable\", no_argument, 0, 0},\n"
+            },
+            {
+              "path": "cmds/dumpsys/dumpsys.cpp",
+              "range": {
+                "startLine": 188,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": "            } else if (!strcmp(longOptions[optionIndex].name, \"cachable\")) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b139386a724dbc3518290b2669470506cf217bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f1f384_1beb334d",
+        "filename": "cmds/dumpsys/dumpsys.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:34:22Z",
+      "side": 1,
+      "message": "try running this tool with some other flags (-l and --pid for instance), the output is split for each service. This output as its done here is very different from other commands. You will probably need an API like \u0027getCacheableServices\u0027 in order to use it.",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d6fc66ad_e1a489d3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpsys/dumpsys.cpp",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "        std::cout \u003c\u003c \"Client side cacheable services: \" \u003c\u003c std::endl;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b139386a724dbc3518290b2669470506cf217bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41abe1d5_e9dd83f8",
+        "filename": "cmds/dumpsys/tests/dumpsys_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:34:22Z",
+      "side": 1,
+      "message": "anything else in the output? can you test one piece of it?",
+      "range": {
+        "startLine": 710,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fe538bf1_d3fabe0f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpsys/tests/dumpsys_test.cpp",
+              "range": {
+                "startLine": 711,
+                "startChar": 0,
+                "endLine": 712,
+                "endChar": 0
+              },
+              "replacement": "    const std::string format(\"Client side cacheable services:\\n.*\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b139386a724dbc3518290b2669470506cf217bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "069da9b6_8ac08541",
+        "filename": "libs/binder/include/binder/BinderCacheDumpsysHelper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:34:22Z",
+      "side": 1,
+      "message": "Please don\u0027t add a header for every function you add. I think it\u0027s fine in the normal service manager header.",
+      "fixSuggestions": [
+        {
+          "fixId": "d5b1a695_61b9e326",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderCacheDumpsysHelper.h",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "namespace android { LIBBINDER_EXPORTED void printCachableListForDumpsys(); }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b139386a724dbc3518290b2669470506cf217bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
