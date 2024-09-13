@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d49077f9_4096bdd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-13T19:59:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b9ef55_08b7eef8",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9d6f2e8_9dca087e",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-09-13T06:29:45Z",
       "side": 1,
       "message": "Huh, I expected a Flag: git trailer to be required but apparently not!\n\nSince the code *is* adding logic that is essentially #ifdef guarded by a flag, you want to include Flag: to make it easy to essentially undo this CL if it causes an error.",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25733ff1_6b08beea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-13T19:59:30Z",
+      "side": 1,
+      "message": "Ack, IMO for this CL we can do it without a flag now that we\u0027re dumping both tools, WDYT?",
+      "parentUuid": "21394653_381433ab",
       "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -89,6 +125,30 @@
       "side": 1,
       "message": "+1 to not typing dumpstate to aflag flags, if possible. Suggest you call both \n`/system/bin/{printflags,aflags}` and have both binaries check if the new storage is used, printing some \"hey I\u0027m not going to print any data because flag X is Y\" if the flag isn\u0027t in the state the tool expects it to be.\n\n(I\u0027m more OK with printflags linking against the aconfig flags -- that tool feels more closely related to aconfig flags than dumpstate does)",
       "parentUuid": "cb31e8b2_c0f22065",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36e4f58_d59f2d13",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-13T19:59:30Z",
+      "side": 1,
+      "message": "Ack, changed CL to call both for now. It might be thorny to flag guard `printflags` and have it take different behavior depending on the flag state--I believe at least one CTS test parses its output, so IMO it\u0027s easiest to handle that transition separately.\n\n(Side discussion, I know we had at one point briefly discussed removing `printflags`, or maybe we can point it to `aflags`? Will follow up offline.)",
+      "parentUuid": "c539c10b_06d0e30d",
       "range": {
         "startLine": 1788,
         "startChar": 38,
