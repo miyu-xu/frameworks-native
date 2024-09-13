@@ -106,6 +106,24 @@
       "parentUuid": "b332bdc5_fe711d99",
       "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0d22dc_26dccf37",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-13T00:29:01Z",
+      "side": 1,
+      "message": "Yes, that topic looks good to me too. Thank you!",
+      "parentUuid": "5363ed39_be1c4a7c",
+      "revId": "b55311beb77901c6f9eaac66aa6e6ac556b6b294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
