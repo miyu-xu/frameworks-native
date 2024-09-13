@@ -87,6 +87,7 @@ cc_defaults {
         "android.hardware.dumpstate@1.0",
         "android.hardware.dumpstate@1.1",
         "android.hardware.dumpstate-V1-ndk",
+        "libaconfig_flags_cc",
         "libziparchive",
         "libbase",
         "libbinder",

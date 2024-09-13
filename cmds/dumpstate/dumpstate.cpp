@@ -37,6 +37,7 @@
 #include <android_app_admin_flags.h>
 #include <android_tracing.h>
 #include <binder/IServiceManager.h>
+#include <com_android_aconfig_flags.h>
 #include <cutils/multiuser.h>
 #include <cutils/native_handle.h>
 #include <cutils/properties.h>
@@ -170,6 +171,8 @@ void add_mountinfo();
 #define ALT_PSTORE_LAST_KMSG "/sys/fs/pstore/console-ramoops-0"
 #define BLK_DEV_SYS_DIR "/sys/block"
 
+#define AFLAGS_LIST "/system/bin/aflags list"
+#define AFLAGS_WHICHBACKING "/system/bin/aflags which-backing"
 #define RECOVERY_DIR "/cache/recovery"
 #define RECOVERY_DATA_DIR "/data/misc/recovery"
 #define UPDATE_ENGINE_LOG_DIR "/data/misc/update_engine_log"
@@ -1784,6 +1787,11 @@ Dumpstate::RunStatus Dumpstate::dumpstate() {
     DumpFile("VENDOR BUILD-TIME RELEASE FLAGS", "/vendor/etc/build_flags.json");
 
     RunCommand("ACONFIG FLAGS", {PRINT_FLAGS},
+
+    RunCommand("ACONFIG FLAGS DUMP", {AFLAGS_LIST},
+               CommandOptions::WithTimeout(10).Always().DropRoot().Build());
+
+    RunCommand("WHICH ACONFIG FLAG STORAGE", {AFLAGS_WHICHBACKING},
                CommandOptions::WithTimeout(10).Always().DropRoot().Build());
 
     RunCommand("STORAGED IO INFO", {"storaged", "-u", "-p"});
