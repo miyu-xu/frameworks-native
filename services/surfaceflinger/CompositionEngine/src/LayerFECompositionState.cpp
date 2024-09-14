@@ -50,6 +50,7 @@ LayerFECompositionState::~LayerFECompositionState() = default;
 
 void LayerFECompositionState::dump(std::string& out) const {
     out.append("      ");
+    out.append("Composition state:      \n      ");
     dumpVal(out, "isSecure", isSecure);
     dumpVal(out, "geomUsesSourceCrop", geomUsesSourceCrop);
     dumpVal(out, "geomBufferUsesDisplayInverseTransform", geomBufferUsesDisplayInverseTransform);

@@ -1638,7 +1638,8 @@ void Layer::miniDump(std::string& result, const frontend::LayerSnapshot& snapsho
         return;
     }
 
-    StringAppendF(&result, " %s\n", snapshot.debugName.c_str());
+    StringAppendF(&result, " %s\n", (snapshot.debugName
+                                        + (snapshot.path.isClone() ? " (Mirror)" : "")).c_str());
     StringAppendF(&result, "  %10zu | ", snapshot.globalZ);
     StringAppendF(&result, "  %10d | ",
                   snapshot.layerMetadata.getInt32(gui::METADATA_WINDOW_TYPE, 0));
