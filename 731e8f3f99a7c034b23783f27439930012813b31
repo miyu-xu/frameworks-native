@@ -50,6 +50,24 @@
       "message": "Please review this fix. Looks like this review does not move forward.",
       "revId": "731e8f3f99a7c034b23783f27439930012813b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc53421c_ba6b3d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T23:45:43Z",
+      "side": 1,
+      "message": "This change seems to break devices. Are you sure it works on all devices? The comment itself about bugreports may be wrong, and it may be used elsewhere.",
+      "parentUuid": "c852482b_25556cb9",
+      "revId": "731e8f3f99a7c034b23783f27439930012813b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
