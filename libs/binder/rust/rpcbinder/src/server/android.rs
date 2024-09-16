@@ -18,7 +18,7 @@ use crate::session::FileDescriptorTransportMode;
 use binder::{unstable_api::AsNative, SpIBinder};
 use binder_rpc_unstable_bindgen::ARpcServer;
 use foreign_types::{foreign_type, ForeignType, ForeignTypeRef};
-use std::ffi::CString;
+use std::ffi::{c_uint, CString};
 use std::io::{Error, ErrorKind};
 use std::os::unix::io::{IntoRawFd, OwnedFd};
 
@@ -44,16 +44,27 @@ impl RpcServer {
     ///
     // Set `cid` to libc::VMADDR_CID_ANY to accept connections from any client.
     // Set `cid` to libc::VMADDR_CID_LOCAL to only bind to the local vsock interface.
-    pub fn new_vsock(mut service: SpIBinder, cid: u32, port: u32) -> Result<RpcServer, Error> {
+    // Set |port| to VMADDR_PORT_ANY to pick an ephemeral port.
+    // The assigend port is returned with RpcServer.
+    pub fn new_vsock(
+        mut service: SpIBinder,
+        cid: u32,
+        port: u32,
+    ) -> Result<(RpcServer, u32 /* assigned_port */), Error> {
         let service = service.as_native_mut();
 
+        let mut assigned_port: u32 = 0;
         // SAFETY: Service ownership is transferring to the server and won't be valid afterward.
         // Plus the binder objects are threadsafe.
-        unsafe {
+        let server = unsafe {
             Self::checked_from_ptr(binder_rpc_unstable_bindgen::ARpcServer_newVsock(
-                service, cid, port,
-            ))
-        }
+                service,
+                cid,
+                port,
+                &mut assigned_port as *mut c_uint,
+            ))?
+        };
+        Ok((server, assigned_port))
     }
 
     /// Creates a binder RPC server, serving the supplied binder service implementation on the given

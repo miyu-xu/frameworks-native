@@ -37,8 +37,10 @@ enum class ARpcSession_FileDescriptorTransportMode {
 // Set `cid` to VMADDR_CID_LOCAL to only bind to the local vsock interface.
 // Returns an opaque handle to the running server instance, or null if the server
 // could not be started.
+// Set |port| to VMADDR_PORT_ANY to pick an ephemeral port. In this case, |assignedPort|
+// will be set to the picked port number, if it is not null.
 [[nodiscard]] ARpcServer* ARpcServer_newVsock(AIBinder* service, unsigned int cid,
-                                              unsigned int port);
+                                              unsigned int port, unsigned int* assignedPort);
 
 // Starts a Unix domain RPC server with an open raw socket file descriptor
 // and a given root IBinder object.
