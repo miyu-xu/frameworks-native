@@ -46,6 +46,30 @@
       },
       "revId": "586e75baf30bedfb4b6a32d93bcf662254198cf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74207bb_d14a809e",
+        "filename": "libs/binder/rust/src/parcel.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T17:09:45Z",
+      "side": 1,
+      "message": "I think the comment should say \"This operation will overwrite the old value partially but won\u0027t change the stability.\" Right? This implementation won\u0027t override it completely?",
+      "parentUuid": "05cb8952_fdbadb0e",
+      "range": {
+        "startLine": 573,
+        "startChar": 43,
+        "endLine": 574,
+        "endChar": 41
+      },
+      "revId": "586e75baf30bedfb4b6a32d93bcf662254198cf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

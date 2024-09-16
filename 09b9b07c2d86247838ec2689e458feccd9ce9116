@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c49c55_f963bc29",
+        "filename": "libs/binder/rust/src/parcel.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T17:09:45Z",
+      "side": 1,
+      "message": "can we make this method return an error for ParcelableHolder?",
+      "range": {
+        "startLine": 569,
+        "startChar": 11,
+        "endLine": 569,
+        "endChar": 22
+      },
+      "revId": "09b9b07c2d86247838ec2689e458feccd9ce9116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
