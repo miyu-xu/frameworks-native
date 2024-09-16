@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb3e2c2_cc8242fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2024-09-16T12:56:21Z",
+      "side": 1,
+      "message": "Added @smoreland@google.com as the first person I could see with +2, could not find any OWNERS file. Please modify the reviewer list if necessary.",
+      "revId": "6df500c37434b88eb4883729a5f2499ae5255e64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
