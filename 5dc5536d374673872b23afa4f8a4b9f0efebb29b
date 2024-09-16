@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5dc582b7_c6ca12df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-16T12:03:41Z",
+      "side": 1,
+      "message": "SGTM, as long as both printflags and aflags are switched based on the value of the  ebable_only_new_storage flag .",
+      "parentUuid": "25733ff1_6b08beea",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb31e8b2_c0f22065",
         "filename": "cmds/dumpstate/dumpstate.cpp",
         "patchSetId": 4
@@ -149,6 +167,30 @@
       "side": 1,
       "message": "Ack, changed CL to call both for now. It might be thorny to flag guard `printflags` and have it take different behavior depending on the flag state--I believe at least one CTS test parses its output, so IMO it\u0027s easiest to handle that transition separately.\n\n(Side discussion, I know we had at one point briefly discussed removing `printflags`, or maybe we can point it to `aflags`? Will follow up offline.)",
       "parentUuid": "c539c10b_06d0e30d",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66da20c_85ead6e4",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-16T12:03:41Z",
+      "side": 1,
+      "message": "Having a CTS test depend on the output, including current formatting, of printflags sounds really bad. If someone wants to write a test that reads flags, they should either link against the aconfig libs, or request that the output format from a \"random\" CLI remains backwards compatible.\n\nThat said, can you update the CTS test as part of a topic that includes this CL, flag switching in aconfig dump, etc?\n\nWhich CTS test are we talking about btw?\n\nAlso, there should not be a combination of flag values where both aconfig dump and aflags print flag values, that would be super confusing to someone reading the bugreport.",
+      "parentUuid": "c36e4f58_d59f2d13",
       "range": {
         "startLine": 1788,
         "startChar": 38,

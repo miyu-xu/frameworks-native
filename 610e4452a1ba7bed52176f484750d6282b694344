@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67753b4_00c7d6f4",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-16T12:03:41Z",
+      "side": 1,
+      "message": "No longer needed, remove.",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "610e4452a1ba7bed52176f484750d6282b694344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
