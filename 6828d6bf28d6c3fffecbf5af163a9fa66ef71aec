@@ -204,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f63085e9_7f033782",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T23:02:48Z",
+      "side": 1,
+      "message": "It might break the ABI dumps? That\u0027s my guess.",
+      "parentUuid": "f2718c70_61671ff3",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f7822b1_01c75c7c",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 19
