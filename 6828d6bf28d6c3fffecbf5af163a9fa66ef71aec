@@ -274,6 +274,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26b6772_2f5f76c5",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-16T23:29:24Z",
+      "side": 1,
+      "message": "Yes, that\u0027s fine. I thought you were the author of this, which is why I\u0027d asked here.\n\nI\u0027ve sent an email to jiyong and justinyun (you\u0027re CC\u0027d).",
+      "parentUuid": "bce74dea_c24bc4dc",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7822b1_01c75c7c",
