@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2718c70_61671ff3",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T22:57:26Z",
+      "side": 1,
+      "message": "This is what the LL-NDK peeps did. Idk. It might build without it or not, but I\u0027d rather do the existing thing here, and take that in a separate bug. Pawan shouldn\u0027t have to worry about this as it should move to a standard header, and we should do the same thing everywhere, rather than introducing a different version of this same code here. This could help solve b/136506169, but I\u0027m not aware of a particular use of it.",
+      "parentUuid": "2c6580c7_e65e8d7f",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f7822b1_01c75c7c",
         "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
         "patchSetId": 19
