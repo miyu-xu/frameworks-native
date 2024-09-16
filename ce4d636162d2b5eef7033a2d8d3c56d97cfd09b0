@@ -16,6 +16,29 @@
       "message": "FWIW, I tried doing this in 2017 http://ag/2525858.",
       "revId": "ce4d636162d2b5eef7033a2d8d3c56d97cfd09b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b93e4f_41d98336",
+        "filename": "libs/arect/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T23:41:27Z",
+      "side": 1,
+      "message": "btw, it can\u0027t rely on re-exporting these headers?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "ce4d636162d2b5eef7033a2d8d3c56d97cfd09b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
