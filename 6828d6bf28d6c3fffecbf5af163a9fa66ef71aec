@@ -298,6 +298,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3bc38a_8d6803c1",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-16T23:31:18Z",
+      "side": 1,
+      "message": "😊 I would never include a header in one case and copy/paste the code if the header is not there into every place trying to include the header.",
+      "parentUuid": "e26b6772_2f5f76c5",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "6828d6bf28d6c3fffecbf5af163a9fa66ef71aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7822b1_01c75c7c",
