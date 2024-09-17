@@ -16,6 +16,24 @@
       "message": "Should I wait for the Lint error to resolve, or should we +2 and bypass?",
       "revId": "d8dd7c3d2e02558697167cb9d99bf5f63f7eb4da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d784b6_38228714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T22:42:42Z",
+      "side": 1,
+      "message": "Let\u0027s merge the fix first, and make sure another bug doesn\u0027t get filed, then merge this, yeah!",
+      "parentUuid": "fcbf807a_dbf786db",
+      "revId": "d8dd7c3d2e02558697167cb9d99bf5f63f7eb4da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
