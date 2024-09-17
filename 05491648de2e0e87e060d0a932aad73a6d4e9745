@@ -144,6 +144,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb86fa58_d7a477ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "Yeah, now or later are both fine with me. Whichever is easier for you.",
+      "parentUuid": "dd9e3a76_4ca65742",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d5c64ed_cfdd8b99",
@@ -608,6 +626,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14512958_ba096ac5",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "Alright. tbh that pretty much all went over my head since I don\u0027t know anything about binder, but I\u0027ll defer to the experts (you folks) on this 😊\n\nOther people on API council have a better understanding of binder, so we\u0027ll refer back to this thread when we go over it as a group.",
+      "parentUuid": "1060e727_2cc09641",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1a924b0_bf826954",
@@ -681,6 +717,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb893b81_ab6efd50",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "Assuming you go that route, https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests will help you rewrite those tests.",
+      "parentUuid": "3db64892_b4af42d6",
+      "range": {
+        "startLine": 111,
+        "startChar": 46,
+        "endLine": 112,
+        "endChar": 69
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3722a7e6_66b610e1",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -716,6 +776,30 @@
       "side": 1,
       "message": "\u003e #callbacks-register-unregister\n\nDone.\n\n\u003e Register \u0026 unregister must use the pair of function pointer + void* as the unique key\n\nThis is effectively what it\u0027s doing with the returned `ARpc_AccessorProvider*` from the `registerAccessorProvider` function with one caveat. We allow multiple registrations with the same pair of function pointer + void*.\n\nI ended up doing this because `libbinder` is the one storing/managing the registered callbacks and we didn\u0027t want to pass the `void*` in a libbinder API, and didn\u0027t want to store it here in a global variable in `libbinder_ndk` to check for each register/unregister. This might make more sense looking at the implementation of `ABinderRpc_registerAccessorProvider`.\n\nIs this reasonable?",
       "parentUuid": "3722a7e6_66b610e1",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 114,
+        "endChar": 43
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9079f7a1_737aae12",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "\u003e We allow multiple registrations with the same pair of function pointer + void*.\n\nHow\u0027s that work? Is each provider called in arbitrary order until one\u0027s found that returns a non-null accessor? Even if the order is defined (in registration order, presumably), it sounds like the callers won\u0027t have much influence over when they get to register in relation to other callers, so it sounds like it wouldn\u0027t be possible to have deterministic behavior.\n\nDo you need an additional key for `ABinderRpc_registerAccessorProvider` to define which service the provider belongs to, and then return an error for duplicate registrations?",
+      "parentUuid": "317949ee_8eb26a79",
       "range": {
         "startLine": 114,
         "startChar": 16,

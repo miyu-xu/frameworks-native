@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f9c966_be896dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "LGTM aside from the comments that are still open. lmk when you\u0027re ready for me to take another look.",
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec8439f9_9395eeb8",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "Ah, now it\u0027s starting to make sense 😊\n\nIt looks like `IAccessor` is a pre-existing name so I suppose it\u0027s less confusing to stick with this, but just to make sure I\u0027ve understood correctly: `ABinderRpc_ServiceSocketProvider` is a more accurate name, right? Though if that\u0027s right the `AccessorProvider` would be more accurately named `ServiceSocketProviderProvider`, which is a bit of a code smell",
+      "range": {
+        "startLine": 25,
+        "startChar": 62,
+        "endLine": 26,
+        "endChar": 67
+      },
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7788733_f637b9a5",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "Error conditions need to be documented, otherwise the caller won\u0027t know how to handle the error case",
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44216b58_e3f4a294",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T23:27:23Z",
+      "side": 1,
+      "message": "How does the caller do this? \"... passes ownership of the object by calling ...\" if there\u0027s a simple answer. I guess leave it as-is if the answer is open-ended.",
+      "range": {
+        "startLine": 245,
+        "startChar": 3,
+        "endLine": 245,
+        "endChar": 45
+      },
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
