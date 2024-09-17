@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0579c2dd_f94bc15a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T18:47:29Z",
+      "side": 1,
+      "message": "If it\u0027s platform rather than systemapi, it should say platform-only (or be in a group named `*_PLATFORM` or `*_PRIVATE`) https://cs.android.com/android/platform/superproject/main/+/main:build/soong/docs/map_files.md (go/map-files)\n\nIf this is supposed to be systemapi it\u0027s correct as-is, my comment was directed at smoreland\u0027s comment:\n\n\u003e these are platform headers, not NDK headers.",
+      "parentUuid": "78639771_425768b7",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d5c64ed_cfdd8b99",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -831,6 +849,24 @@
       "side": 1,
       "message": "Ack. Sorry about that! Added docs.",
       "parentUuid": "9230f2c0_31a439e5",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd54b0d_25cd088a",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-17T18:47:29Z",
+      "side": 1,
+      "message": "np, just needed to let you know where I stopped 😊 I\u0027ll get back to this latest today.",
+      "parentUuid": "c3ea5cad_285f4b98",
       "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
