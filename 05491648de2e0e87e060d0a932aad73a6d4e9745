@@ -592,6 +592,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1060e727_2cc09641",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T21:09:32Z",
+      "side": 1,
+      "message": "We discussed both design options when we were designing this.\n\nOne process knows how to get services (service A), and one services consume them (service B).\n\n1. With addAccessorProvider flow, you pass a single object which hooks up A and B, and all service related functionality is hidden and implemented below this layer.\n\n2. With addAccessor, we need services A and B to implement an API like \u0027IBinder getBinder(string)\u0027. If we want functionality like \u0027list all services\u0027 then we would need to implement this separately any two services A and B.\n\nSo the double indirection has two main benefits:\n- this allows the maximum amount of logic to be re-used between different service delegation implementations.\n- this allows us to change the implementation between processes A and B arbitrarily inside of libbinder, without having to externalize the communication mechanism to this API.",
+      "parentUuid": "e31a0366_e64db1d7",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1a924b0_bf826954",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -627,6 +645,30 @@
       "side": 1,
       "message": "I think that\u0027s reasonable. \n\nThese are all cases where the caller is pretty clearly doing something wrong and they wouldn\u0027t be doing anything differently based on the status value outside of logging the reason for debugging (which we already do underneath the API in libbinder_ndk or libbinder).\n\n@smoreland@google.com are you OK with us aborting in these cases for the libbinder_ndk APIs? These are done in the same process responsible for the error, and each of the errors are logged already.",
       "parentUuid": "f1a924b0_bf826954",
+      "range": {
+        "startLine": 111,
+        "startChar": 46,
+        "endLine": 112,
+        "endChar": 69
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db64892_b4af42d6",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T21:09:32Z",
+      "side": 1,
+      "message": "This does have symmetry with other libbinder APIs (unlinkToDeath), but in this case, yeah, I think abort would be appropriate.",
+      "parentUuid": "d59d94a0_03077df1",
       "range": {
         "startLine": 111,
         "startChar": 46,
