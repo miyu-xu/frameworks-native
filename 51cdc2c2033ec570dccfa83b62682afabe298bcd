@@ -16,6 +16,24 @@
       "message": "Does this reduce the flake? If so how does it do that?\n\nIt looks like something is causing the service to not wait for `blockTimeMs` after the call `proc.rootIface-\u003eunlockInMsAsync(blockTimeMs)`?\n\nReducing the threads seems find to do regardless.",
       "revId": "51cdc2c2033ec570dccfa83b62682afabe298bcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75dfb9f_4edb04c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T18:24:19Z",
+      "side": 1,
+      "message": "Notice: the failue is `Expected: (epochMsAfter) \u003e\u003d (epochMsBefore + blockTimeMs), actual: 2600380514 vs 2600380585`\n\nAnd:\n```\n\u003e\u003e\u003e 2600380514 \u003c 2600380585\nTrue\n```\n\nThere are two ways this could happen:\n1. the synchronous transactions are not executed on parallel threads (the implementation of these happens to force them to be executed in series so the time is additive), and they get queued behind each other, so only some run (and block).\n2. the synchronous transactions from starting `kNumThreads - 1` threads in parallel don\u0027t actually get run in the first place, due to starting so many threads, so some of them run, but then the transaction unblocking them is able to run before they get setup, so only some of them run.\n\nI hypothesize that because the code hasn\u0027t been changed, and because the flake rate is so low, it can\u0027t be (1).\n\nAn alternative fix would be to move away from the lock mechanism and instead, have the threads count up a value while they are locked. Then, instead of sleeping 100ms, we could wait until the value reaches `kNumThreads - 1`. However, I\u0027ll hold on that due to time for now.",
+      "parentUuid": "5afcadc0_6be13fc4",
+      "revId": "51cdc2c2033ec570dccfa83b62682afabe298bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
