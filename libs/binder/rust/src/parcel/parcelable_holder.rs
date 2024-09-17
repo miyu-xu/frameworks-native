@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
+use std::any::Any;
+use std::marker::PhantomData;
+use std::sync::{Arc, Mutex};
+
+use downcast_rs::{impl_downcast, DowncastSync};
+
 use crate::binder::Stability;
 use crate::error::StatusCode;
 use crate::parcel::{
     BorrowedParcel, Deserialize, Parcel, Parcelable, Serialize, NON_NULL_PARCELABLE_FLAG,
     NULL_PARCELABLE_FLAG,
 };
-
-use downcast_rs::{impl_downcast, DowncastSync};
-use std::any::Any;
-use std::sync::{Arc, Mutex};
 
 /// Metadata that `ParcelableHolder` needs for all parcelables.
 ///
@@ -52,6 +54,27 @@ enum ParcelableHolderData {
     Parcel(Parcel),
 }
 
+trait ParcelableHolderStability {
+    fn stability() -> Stability;
+}
+
+/// Typed Stability::Local.
+pub struct ParcelableHolderStabilityLocal;
+
+impl ParcelableHolderStability for ParcelableHolderStabilityLocal {
+    fn stability() -> Stability {
+        Stability::Local
+    }
+}
+
+struct ParcelableHolderStabilityVintf;
+
+impl ParcelableHolderStability for ParcelableHolderStabilityVintf {
+    fn stability() -> Stability {
+        Stability::Vintf
+    }
+}
+
 /// A container that can hold any arbitrary `Parcelable`.
 ///
 /// This type is currently used for AIDL parcelable fields.
@@ -60,7 +83,7 @@ enum ParcelableHolderData {
 /// `Send` nor `Sync`), mainly because it internally contains
 /// a `Parcel` which in turn is not thread-safe.
 #[derive(Debug)]
-pub struct ParcelableHolder {
+pub struct ParcelableHolder<S: ParcelableHolderStability> {
     // This is a `Mutex` because of `get_parcelable`
     // which takes `&self` for consistency with C++.
     // We could make `get_parcelable` take a `&mut self`
@@ -68,22 +91,18 @@ pub struct ParcelableHolder {
     // improvement, but then callers would require a mutable
     // `ParcelableHolder` even for that getter method.
     data: Mutex<ParcelableHolderData>,
-    stability: Stability,
+    phantom: PhantomData<S>,
 }
 
-impl ParcelableHolder {
-    /// Construct a new `ParcelableHolder` with the given stability.
-    pub fn new(stability: Stability) -> Self {
-        Self { data: Mutex::new(ParcelableHolderData::Empty), stability }
+impl<S: ParcelableHolderStability> ParcelableHolder<S> {
+    /// Construct a new `ParcelableHolder`.
+    pub fn new() -> Self {
+        Self { data: Mutex::new(ParcelableHolderData::Empty), phantom: PhantomData::default() }
     }
 
     /// Reset the contents of this `ParcelableHolder`.
-    ///
-    /// Note that this method does not reset the stability,
-    /// only the contents.
     pub fn reset(&mut self) {
         *self.data.get_mut().unwrap() = ParcelableHolderData::Empty;
-        // We could also clear stability here, but C++ doesn't
     }
 
     /// Set the parcelable contained in this `ParcelableHolder`.
@@ -91,7 +110,7 @@ impl ParcelableHolder {
     where
         T: Any + Parcelable + ParcelableMetadata + std::fmt::Debug + Send + Sync,
     {
-        if self.stability > p.get_stability() {
+        if S::stability() > p.get_stability() {
             return Err(StatusCode::BAD_VALUE);
         }
 
@@ -155,32 +174,32 @@ impl ParcelableHolder {
         }
     }
 
-    /// Return the stability value of this object.
+    /// Return the stability value of this type.
     pub fn get_stability(&self) -> Stability {
-        self.stability
+        S::stability()
     }
 }
 
-impl Clone for ParcelableHolder {
-    fn clone(&self) -> ParcelableHolder {
+impl<S: ParcelableHolderStability> Clone for ParcelableHolder<S> {
+    fn clone(&self) -> Self {
         ParcelableHolder {
             data: Mutex::new(self.data.lock().unwrap().clone()),
-            stability: self.stability,
+            phantom: PhantomData::default(),
         }
     }
 }
 
-impl Serialize for ParcelableHolder {
+impl<S: ParcelableHolderStability> Serialize for ParcelableHolder<S> {
     fn serialize(&self, parcel: &mut BorrowedParcel<'_>) -> Result<(), StatusCode> {
         parcel.write(&NON_NULL_PARCELABLE_FLAG)?;
         self.write_to_parcel(parcel)
     }
 }
 
-impl Deserialize for ParcelableHolder {
+impl<S: ParcelableHolderStability> Deserialize for ParcelableHolder<S> {
     type UninitType = Self;
     fn uninit() -> Self::UninitType {
-        Self::new(Default::default())
+        Self::new()
     }
     fn from_init(value: Self) -> Self::UninitType {
         value
@@ -191,16 +210,16 @@ impl Deserialize for ParcelableHolder {
         if status == NULL_PARCELABLE_FLAG {
             Err(StatusCode::UNEXPECTED_NULL)
         } else {
-            let mut parcelable = ParcelableHolder::new(Default::default());
+            let mut parcelable = Self::new();
             parcelable.read_from_parcel(parcel)?;
             Ok(parcelable)
         }
     }
 }
 
-impl Parcelable for ParcelableHolder {
+impl<S: ParcelableHolderStability> Parcelable for ParcelableHolder<S> {
     fn write_to_parcel(&self, parcel: &mut BorrowedParcel<'_>) -> Result<(), StatusCode> {
-        parcel.write(&self.stability)?;
+        parcel.write(&S::stability())?;
 
         let mut data = self.data.lock().unwrap();
         match *data {
@@ -236,7 +255,7 @@ impl Parcelable for ParcelableHolder {
     }
 
     fn read_from_parcel(&mut self, parcel: &BorrowedParcel<'_>) -> Result<(), StatusCode> {
-        if self.stability != parcel.read()? {
+        if S::stability() != parcel.read()? {
             return Err(StatusCode::BAD_VALUE);
         }
 
