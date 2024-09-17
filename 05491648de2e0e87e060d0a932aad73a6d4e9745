@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78639771_425768b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Should it say something different in the map file?",
+      "parentUuid": "a01bcdda_d8922268",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d5c64ed_cfdd8b99",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -94,6 +112,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ea33e8_2eb02696",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0099d2_2ee33817",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd56043e_ab442d57",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Yes. I think that is more appropriate. Changed.",
+      "parentUuid": "3d5c64ed_cfdd8b99",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0666b382_30608e25",
@@ -107,6 +167,30 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "I\u0027m not sure what this means, but it looks like this is just the usual caller-provided callback data, right? Maybe \"the data that was associated with this instance when the callback was registered\"?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 49
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "854f093f_5dca30ae",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "That\u0027s right, that sounds much better. Done.",
+      "parentUuid": "0666b382_30608e25",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -157,6 +241,72 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "408bd500_db2c79ed",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done. That recommendation sounds good to me!",
+      "parentUuid": "c67c97b3_d587ff73",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 58
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60773459_7526d001",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c67c97b3_d587ff73",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 58
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0024c5_dcc6dca0",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Got it! I _think_ I\u0027ve gotten them all.",
+      "parentUuid": "8cd27915_ac264d52",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5d038f2_1ea3c879",
@@ -170,6 +320,24 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "As above, `ARpc_AccessorProviderUserData_deleteCallback`",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc3ab9d_f235c781",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5d038f2_1ea3c879",
       "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -197,6 +365,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09ce603_af36b0a3",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8d4a140_5e03cf5c",
+      "range": {
+        "startLine": 85,
+        "startChar": 20,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b531be76_fea4b30a",
@@ -210,6 +402,30 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "As in C++ exceptions? I don\u0027t think you can do that at a stable API boundary, because the C++ ABI is not stable. It\u0027s never come up before so we don\u0027t have an explicit rule against it, but the initial reaction from API council is that this isn\u0027t viable. (http://cl/675302191 adds explicit language to the docs)\n\nReturn error codes if there\u0027s anything the caller can do about them (go/android-ndk-api-guidelines#error-handling) and document them (go/android-ndk-api-guidelines#well-documented)",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "407a6810_cd4d962d",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "This is old and invalid comment.\n\nIt\u0027s now a pointer to be used with removeAccessorProvider. Updated the docs.",
+      "parentUuid": "b531be76_fea4b30a",
       "range": {
         "startLine": 91,
         "startChar": 11,
@@ -262,6 +478,48 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e31a0366_e64db1d7",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Yeah, it is a lot of indirection...\n\nThe goal is for a process to be able to be able to register something once when it\u0027s starting (maybe through an `__attribute((constructor))` library [like this](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3225466/4/libs/libvm_payload/src/injector.cpp)) and have a way to get binder services over sockets when there is no `servicemanager` process or kernel binder available.\n\nI want to be flexible to allow:\n1) The Accessor binder to come from another process that might die and restart leading to the original Accessor binder to be invalid and never be updated.\n2) Services to become available sometime later. The provider reaches out to some other service and can now create an Accessor for that service when it wouldn\u0027t have been able to when the client process first started.\n\nI think both of these points are probably worth discussing. There may be other reasons to keep it this way but I\u0027m not thinking of them right now. @smoreland@google.com WDYT?\n\nIf we didn\u0027t have #1, it\u0027s going to often be the same as requiring all binder clients to restart when servicemanager crashes/restart. That sounds annoying and unnecessary, but servicemanager is currently `critical` in [its rc file](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/cmds/servicemanager/servicemanager.rc) so we do already do that.\n\nIf we didn\u0027t have #2, it would require knowing all available services as soon as any client starts. This seems like an unnecessary restriction, but again, we do already mostly have this restriction for some subset of binder services.",
+      "parentUuid": "6c0fd235_4c162d89",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946f6477_5569305b",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fdce427_0cd85864",
+      "range": {
+        "startLine": 93,
+        "startChar": 23,
+        "endLine": 93,
+        "endChar": 47
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1a924b0_bf826954",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -285,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d59d94a0_03077df1",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "I think that\u0027s reasonable. \n\nThese are all cases where the caller is pretty clearly doing something wrong and they wouldn\u0027t be doing anything differently based on the status value outside of logging the reason for debugging (which we already do underneath the API in libbinder_ndk or libbinder).\n\n@smoreland@google.com are you OK with us aborting in these cases for the libbinder_ndk APIs? These are done in the same process responsible for the error, and each of the errors are logged already.",
+      "parentUuid": "f1a924b0_bf826954",
+      "range": {
+        "startLine": 111,
+        "startChar": 46,
+        "endLine": 112,
+        "endChar": 69
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3722a7e6_66b610e1",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 22
@@ -296,6 +578,30 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "Either `register`/`unregister` or `set` and `set` with `nullptr`: go/android-ndk-api-guidelines#callbacks-setcallback go/android-ndk-api-guidelines#callbacks-register-unregister\n\nAside from the naming, it also says:\n\n\u003e Register \u0026 unregister must use the pair of function pointer + void* as the unique key. As in, it must support registering the same function pointer with different void* userData.",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 114,
+        "endChar": 43
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317949ee_8eb26a79",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "\u003e #callbacks-register-unregister\n\nDone.\n\n\u003e Register \u0026 unregister must use the pair of function pointer + void* as the unique key\n\nThis is effectively what it\u0027s doing with the returned `ARpc_AccessorProvider*` from the `registerAccessorProvider` function with one caveat. We allow multiple registrations with the same pair of function pointer + void*.\n\nI ended up doing this because `libbinder` is the one storing/managing the registered callbacks and we didn\u0027t want to pass the `void*` in a libbinder API, and didn\u0027t want to store it here in a global variable in `libbinder_ndk` to check for each register/unregister. This might make more sense looking at the implementation of `ABinderRpc_registerAccessorProvider`.\n\nIs this reasonable?",
+      "parentUuid": "3722a7e6_66b610e1",
       "range": {
         "startLine": 114,
         "startChar": 16,
@@ -352,6 +658,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf0f872_1c894bee",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c06bb3_df73cfad",
+      "range": {
+        "startLine": 117,
+        "startChar": 71,
+        "endLine": 117,
+        "endChar": 73
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af16a2dd_9c98db9e",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f640b48_18dc262e",
+      "range": {
+        "startLine": 117,
+        "startChar": 3,
+        "endLine": 117,
+        "endChar": 19
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a13d8cf3_d8372ac4",
@@ -365,6 +719,30 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "Too many .",
+      "range": {
+        "startLine": 133,
+        "startChar": 12,
+        "endLine": 133,
+        "endChar": 13
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd80f65_dd2095a1",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a13d8cf3_d8372ac4",
       "range": {
         "startLine": 133,
         "startChar": 12,
@@ -398,6 +776,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9df466_c004d833",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a56b10a_77c969c3",
+      "range": {
+        "startLine": 134,
+        "startChar": 62,
+        "endLine": 134,
+        "endChar": 68
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9230f2c0_31a439e5",
@@ -411,6 +813,24 @@
       "writtenOn": "2024-09-16T22:35:36Z",
       "side": 1,
       "message": "Until `ARpc_Accessor` is documented, I\u0027ve got no idea what this does, so I\u0027ll have to review the rest of the API after that\u0027s done.",
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ea5cad_285f4b98",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T18:22:52Z",
+      "side": 1,
+      "message": "Ack. Sorry about that! Added docs.",
+      "parentUuid": "9230f2c0_31a439e5",
       "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
