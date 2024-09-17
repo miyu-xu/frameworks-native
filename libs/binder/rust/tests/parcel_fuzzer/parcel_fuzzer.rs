@@ -121,13 +121,15 @@ fn do_read_fuzz(read_operations: Vec<ReadOperation>, data: &[u8]) {
             }
 
             ReadOperation::ReadParcelableHolder { is_vintf } => {
-                let stability = if is_vintf { Stability::Vintf } else { Stability::Local };
-                let mut holder: ParcelableHolder = ParcelableHolder::new(stability);
-                match holder.read_from_parcel(parcel.borrowed_ref()) {
-                    Ok(result) => result,
-                    Err(err) => {
-                        println!("error occurred while reading from parcel: {:?}", err)
-                    }
+                let result = if is_vintf {
+                    ParcelableHolder::<{ Stability::Vintf.to_raw() }>::new()
+                        .read_from_parcel(parcel.borrowed_ref())
+                } else {
+                    ParcelableHolder::<{ Stability::Local.to_raw() }>::new()
+                        .read_from_parcel(parcel.borrowed_ref())
+                };
+                if let Err(e) = result {
+                    println!("error occurred while reading from parcel: {e:?}")
                 }
             }
 

@@ -114,13 +114,20 @@ pub enum Stability {
     Vintf,
 }
 
-impl From<Stability> for i32 {
-    fn from(stability: Stability) -> i32 {
+impl Stability {
+    /// TODO
+    pub const fn to_raw(self) -> i32 {
         use Stability::*;
-        match stability {
+        match self {
             Local => 0,
             Vintf => 1,
         }
+    }
+}
+
+impl From<Stability> for i32 {
+    fn from(stability: Stability) -> i32 {
+        stability.to_raw()
     }
 }
 
