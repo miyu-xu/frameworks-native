@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d4dd28_1872a1e6",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T23:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a84e46ab_b64e9b56",
+      "range": {
+        "startLine": 238,
+        "startChar": 18,
+        "endLine": 238,
+        "endChar": 51
+      },
+      "revId": "0b0ff029cc5e41dfa197526a0e6259032a5824a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c602954f_35bedeca",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "0b0ff029cc5e41dfa197526a0e6259032a5824a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d6322e0_28f7fffc",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-17T23:52:29Z",
+      "side": 1,
+      "message": "Good point! Done. @cmllamas@google.com do you think `HexDump(cmds, parcel.dataSize())` is good enough to debug that issue? Or should we ask for them to try and repro with `IF_LOG_COMMANDS` set to `if (true)`?",
+      "parentUuid": "c602954f_35bedeca",
+      "range": {
+        "startLine": 239,
+        "startChar": 30,
+        "endLine": 239,
+        "endChar": 48
+      },
       "revId": "0b0ff029cc5e41dfa197526a0e6259032a5824a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
