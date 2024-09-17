@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84e46ab_b64e9b56",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T23:41:00Z",
+      "side": 1,
+      "message": "this also has enough info to debug so might as well add this in the first change",
+      "range": {
+        "startLine": 238,
+        "startChar": 18,
+        "endLine": 238,
+        "endChar": 51
+      },
+      "revId": "0b0ff029cc5e41dfa197526a0e6259032a5824a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c602954f_35bedeca",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-17T23:41:00Z",
+      "side": 1,
+      "message": "this is not very well tested, as it is only used if a debug flag is set. If we want to use it normally, we should add it to one of the binder fuzzers. You could wrap in `IF_LOG_COMMANDS` until that is done.",
+      "range": {
+        "startLine": 239,
+        "startChar": 30,
+        "endLine": 239,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "42505d07_cf0e936f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IPCThreadState.cpp",
+              "range": {
+                "startLine": 239,
+                "startChar": 0,
+                "endLine": 240,
+                "endChar": 0
+              },
+              "replacement": "    IF_LOG_COMMANDS() {\n        while (cmds \u003c end) cmds \u003d printReturnCommand(out, cmds);\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0b0ff029cc5e41dfa197526a0e6259032a5824a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
