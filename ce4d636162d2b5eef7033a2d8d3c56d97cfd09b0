@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6fe80f_beee4c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2024-09-17T08:09:38Z",
+      "side": 1,
+      "message": "Oh wow, what a coincidence 😮",
+      "parentUuid": "246af9c8_ce02f534",
+      "revId": "ce4d636162d2b5eef7033a2d8d3c56d97cfd09b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08b93e4f_41d98336",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-09-16T23:41:27Z",
       "side": 1,
       "message": "btw, it can\u0027t rely on re-exporting these headers?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "ce4d636162d2b5eef7033a2d8d3c56d97cfd09b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a416dc29_d0301fb6",
+        "filename": "libs/arect/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2024-09-17T08:09:38Z",
+      "side": 1,
+      "message": "I suppose it could - but only the headers are needed, so this is maybe cleaner (I did not notice until now, however, it could have saved me an AOSP change 😄).",
+      "parentUuid": "08b93e4f_41d98336",
       "range": {
         "startLine": 61,
         "startChar": 0,
