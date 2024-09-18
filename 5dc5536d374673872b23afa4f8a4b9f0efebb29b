@@ -199,6 +199,30 @@
       },
       "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256d8757_15791a89",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-18T14:09:49Z",
+      "side": 1,
+      "message": "This utils class is used in some CTS tests: https://cs.android.com/android/platform/superproject/main/+/main:cts/common/device-side/device-info/src/com/android/compatibility/common/deviceinfo/FeatureFlagUtils.java;l\u003d41?q\u003dprintflags\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:cts%2F, used for reporting flag values in EDI IIUC, there\u0027s a thread I\u0027ll ping you. Makes sense to make a topic with these three CLs 👍 Should be able to hack at this today.",
+      "parentUuid": "f66da20c_85ead6e4",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
