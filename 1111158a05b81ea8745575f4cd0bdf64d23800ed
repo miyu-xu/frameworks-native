@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8651be39_0d5b9bc4",
+        "filename": "libs/nativewindow/AHardwareBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2001520
+      },
+      "writtenOn": "2024-09-18T17:29:18Z",
+      "side": 1,
+      "message": "nit: follow spacing used above where static_assert and static_cast are both used",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4d9e3e_ff4e72de",
+        "filename": "libs/nativewindow/AHardwareBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2001520
+      },
+      "writtenOn": "2024-09-18T17:29:18Z",
+      "side": 1,
+      "message": "nit: are word-aligned",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2466269e_1ea3f980",
         "filename": "libs/ui/include/ui/PublicFormat.h",
         "patchSetId": 2
