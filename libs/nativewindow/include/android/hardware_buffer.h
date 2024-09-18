@@ -209,6 +209,14 @@ enum AHardwareBuffer_Format {
      *   OpenGL ES: N/A
      */
     AHARDWAREBUFFER_FORMAT_R10G10B10A10_UNORM       = 0x3b,
+
+    /**
+     * YUV P210 format.
+     * Must have an even width and height. Can be accessed in OpenGL
+     * shaders through an external sampler. Does not support mip-maps
+     * cube-maps or multi-layered textures.
+     */
+    AHARDWAREBUFFER_FORMAT_YCbCr_P210               = 0x3c,
 };
 
 /**
