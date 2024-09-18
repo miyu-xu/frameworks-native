@@ -250,6 +250,12 @@ LIBBINDER_NDK35 { # introduced=VanillaIceCream
 
 LIBBINDER_NDK36 { # introduced=36
   global:
+<<<<<<< PATCH SET (8c10cc Revert^2 "Move tracing calls to libbinder_ndk")
+    AIBinder_Class_setTransactionCodeToFunctionNameMap;
+    AIBinder_Class_setTransactionCodeToFunctionNameMap; # llndk=202504
+    AIBinder_Class_getFunctionName;
+    AIBinder_Class_getFunctionName; # llndk=202504
+=======
     ABinderRpc_registerAccessorProvider; # systemapi
     ABinderRpc_unregisterAccessorProvider; # systemapi
     ABinderRpc_Accessor_new; # systemapi
@@ -258,6 +264,7 @@ LIBBINDER_NDK36 { # introduced=36
     ABinderRpc_Accessor_fromBinder; # systemapi
     ABinderRpc_ConnectionInfo_new; # systemapi
     ABinderRpc_ConnectionInfo_delete; # systemapi
+>>>>>>> BASE      (7cc4a3 Merge "Add libbinder_ndk systemapi support for injecting RPC)
 };
 
 LIBBINDER_NDK_PLATFORM {
