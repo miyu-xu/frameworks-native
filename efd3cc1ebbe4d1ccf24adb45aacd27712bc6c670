@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55119f58_ad18c1b7",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-09-18T16:31:46Z",
+      "side": 1,
+      "message": "Let\u0027s add all the services that are in `ActivityManagerService#getCommonServicesLocked` and aren\u0027t already listed below.",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514022a5_395f2547",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-09-18T16:31:46Z",
+      "side": 1,
+      "message": "You can use go/keep-sorted",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
