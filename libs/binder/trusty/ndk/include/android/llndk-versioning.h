@@ -16,5 +16,3 @@
 #pragma once
 
 #define __INTRODUCED_IN_LLNDK(x) /* nothing on Trusty */
-
-#define API_LEVEL_AT_LEAST(x, y) (false) /* nothing on Trusty */
