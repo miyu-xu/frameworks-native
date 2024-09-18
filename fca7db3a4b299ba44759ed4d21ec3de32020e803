@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c038a28_2c81c947",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2024-09-18T13:15:33Z",
+      "side": 1,
+      "message": "How about `handle.as_mut()`?",
+      "range": {
+        "startLine": 45,
+        "startChar": 17,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "fca7db3a4b299ba44759ed4d21ec3de32020e803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
