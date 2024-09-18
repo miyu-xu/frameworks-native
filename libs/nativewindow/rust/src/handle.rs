@@ -12,7 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{mem::forget, ptr::NonNull};
+use std::{
+    ffi::c_int,
+    mem::forget,
+    os::fd::{IntoRawFd, OwnedFd},
+    ptr::NonNull,
+};
 
 /// Rust wrapper around `native_handle_t`.
 ///
@@ -22,6 +27,38 @@ use std::{mem::forget, ptr::NonNull};
 pub struct NativeHandle(NonNull<ffi::native_handle_t>);
 
 impl NativeHandle {
+    /// Creates a new `NativeHandle` with the given file descriptors and integer values.
+    ///
+    /// The `NativeHandle` will take ownership of the file descriptors and close them when it is
+    /// dropped.
+    pub fn new(fds: Vec<OwnedFd>, ints: &[c_int]) -> Option<Self> {
+        let fd_count = fds.len();
+        // SAFETY: native_handle_create doesn't have any safety requirements.
+        let handle = unsafe {
+            ffi::native_handle_create(fd_count.try_into().unwrap(), ints.len().try_into().unwrap())
+        };
+        let handle = NonNull::new(handle)?;
+        for (i, fd) in fds.into_iter().enumerate() {
+            // SAFETY: `handle` must be valid because it was just created, and the array offset is
+            // within the bounds of what we allocated above.
+            unsafe {
+                *(*handle.as_ptr()).data.as_mut_ptr().add(i) = fd.into_raw_fd();
+            }
+        }
+        for (i, value) in ints.iter().enumerate() {
+            // SAFETY: `handle` must be valid because it was just created, and the array offset is
+            // within the bounds of what we allocated above.
+            unsafe {
+                *(*handle.as_ptr()).data.as_mut_ptr().add(fd_count + i) = *value;
+            }
+        }
+        // SAFETY: `handle` must be valid because it was just created.
+        unsafe {
+            ffi::native_handle_set_fdsan_tag(handle.as_ptr());
+        }
+        Some(Self(handle))
+    }
+
     /// Wraps a raw `native_handle_t` pointer, taking ownership of it.
     ///
     /// # Safety
@@ -90,3 +127,28 @@ unsafe impl Send for NativeHandle {}
 // SAFETY: A `NativeHandle` can be used from different threads simultaneously, as is is just
 // integers and file descriptors.
 unsafe impl Sync for NativeHandle {}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use std::fs::File;
+
+    #[test]
+    fn create_empty() {
+        let handle = NativeHandle::new(vec![], &[]);
+        assert!(handle.is_some());
+    }
+
+    #[test]
+    fn create_with_ints() {
+        let handle = NativeHandle::new(vec![], &[1, 2, 42]);
+        assert!(handle.is_some());
+    }
+
+    #[test]
+    fn create_with_fd() {
+        let file = File::open("/dev/null").unwrap();
+        let handle = NativeHandle::new(vec![file.into()], &[]);
+        assert!(handle.is_some());
+    }
+}
