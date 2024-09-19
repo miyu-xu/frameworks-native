@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85815631_cd89a779",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-09-19T13:56:57Z",
+      "side": 1,
+      "message": "As someone who have not seen this code before, I would appreciate a comment right after `let handle \u003d` above explaining the layout of this type.\n\nI gather that it has a `data` field which is a buffer large enough for all these integers — but I\u0027m having a hard time verifying this from the diff here.\n\nLooking around a bit, I guess we\u0027re talking about [`native_handle_t` here](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/core/libcutils/include/cutils/native_handle.h;l\u003d34-47)? The code is fine then!\n\nThe code relies on `RawFd` being equal to `c_int`, which indeed is the case: https://doc.rust-lang.org/stable/std/os/fd/type.RawFd.html\n\nHave you considered using [`slice::from_raw_parts_mut`](https://doc.rust-lang.org/stable/std/slice/fn.from_raw_parts_mut.html) on `handle.as_ptr().data.as_mut_ptr()` (one unsafe call) and then do the assignments to this slice (no more unsafe). Something like\n\n```\nlet mut fd_slice \u003d std::slice::from_raw_parts_mut(handle.as_ref().data.as_mut_ptr(), fds.len());\nfor (i, fd) in fds.into_iter().enumerate() {\n    fd_slice[i] \u003d fd.into_raw_fd();\n}\n\nlet mut int_slice \u003d std::slice::from_raw_parts_mut(handle.as_ref().data.as_mut_ptr().add(fds.len(), ints.len());\nint_slice.copy_from_slice(ints);\n```\n\nI hope this compiles to the same, but it would involve less pointer arithmetic 😊 Could be easier for people to wrap their heads around.",
+      "range": {
+        "startLine": 50,
+        "startChar": 26,
+        "endLine": 50,
+        "endChar": 59
+      },
+      "revId": "ddb43846934c02a80db30302cc47a8227ac1dfa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ece0ff7_695c1126",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-09-19T13:56:57Z",
+      "side": 1,
+      "message": "I guess this could be `self.data()[..self.fd_count()]` for symmetry with the code below?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 34
+      },
+      "revId": "ddb43846934c02a80db30302cc47a8227ac1dfa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
