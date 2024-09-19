@@ -93,6 +93,30 @@
       },
       "revId": "a98849d230c89b336e65927321a8b522f069520a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2c8ce7_1cc52217",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-19T01:18:40Z",
+      "side": 1,
+      "message": "Devin - will it be possible for libvmclient to move off of this and onto your code, or what type of changes would it require in trusty_vm_nonsecure?\n\nIf you are going to use libvmclient, could you use it now and avoid more unstable access? or are you using this library directly as well?",
+      "parentUuid": "be3b5f57_1f260585",
+      "range": {
+        "startLine": 900,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 72
+      },
+      "revId": "a98849d230c89b336e65927321a8b522f069520a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
