@@ -16,6 +16,24 @@
       "message": "you have to guard this with an API 35 check instead then, see the build error",
       "revId": "96c817e3a64ddff78fe2e9aa32a52c210284f994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3429a927_c68eaec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-19T21:48:06Z",
+      "side": 1,
+      "message": "Ugh, I didn\u0027t realize this was used in APEX. I\u0027ll put the `__builtin_available()` back, but the LL-NDK bits of it aren\u0027t needed.",
+      "parentUuid": "edac747d_214082ac",
+      "revId": "96c817e3a64ddff78fe2e9aa32a52c210284f994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
