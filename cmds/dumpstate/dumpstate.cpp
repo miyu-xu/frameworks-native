@@ -3430,7 +3430,7 @@ Dumpstate::RunStatus Dumpstate::RunInternal(int32_t calling_uid,
             // Do an early return if there were errors. We make an exception for consent
             // timing out because it's possible the user got distracted. In this case the
             // bugreport is not shared but made available for manual retrieval.
-            MYLOGI("User denied consent. Returning\n");
+            MYLOGI("Failed to copy bugreport to caller. Returning\n");
             return status;
         }
         if (status == Dumpstate::RunStatus::USER_CONSENT_TIMED_OUT) {
