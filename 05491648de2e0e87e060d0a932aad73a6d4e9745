@@ -763,6 +763,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "560ccf87_ac067b4a",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-19T00:51:14Z",
+      "side": 1,
+      "message": "Done. I did change the error handling a bit so the abort message is more clear and the EXPECT_DEATH matching checks the message.",
+      "parentUuid": "31753314_b0219100",
+      "range": {
+        "startLine": 111,
+        "startChar": 46,
+        "endLine": 112,
+        "endChar": 69
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3722a7e6_66b610e1",
@@ -824,6 +848,30 @@
       "side": 1,
       "message": "\u003e We allow multiple registrations with the same pair of function pointer + void*.\n\nHow\u0027s that work? Is each provider called in arbitrary order until one\u0027s found that returns a non-null accessor? Even if the order is defined (in registration order, presumably), it sounds like the callers won\u0027t have much influence over when they get to register in relation to other callers, so it sounds like it wouldn\u0027t be possible to have deterministic behavior.\n\nDo you need an additional key for `ABinderRpc_registerAccessorProvider` to define which service the provider belongs to, and then return an error for duplicate registrations?",
       "parentUuid": "317949ee_8eb26a79",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 114,
+        "endChar": 43
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7943eb0f_45872d51",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-19T00:51:14Z",
+      "side": 1,
+      "message": "\u003e Is each provider called in arbitrary order until one\u0027s found that returns a non-null accessor?\n\nYes. There is no order in registration/calling.\n\n-----\n\nTL;DR I still have tests to write, but going OOO til Monday. Should be enough to continue the review here. I switched to requiring a list of services that the provider is responsible for and am rejecting providers that have services that have already been associated with registered providers.\n\n...\n\nI think there are a couple of problems with the current implementation that would be hard to debug.\n\n1) If a provider is expecting to provide Accessors for a service that is already registered with `servicemanager`, the `servicemanager` kernel binder instance is going to be returned instead.\n2) If a provider is expecting to provide Accessors for a service that another provider is also handling, then which one provides it will depend on whatever order they were registered in.\n3) If the same caller accidentally calls the `ABinderRpc_registerAccessorProvider` method twice with `void*` object that they expect to be deleted by the delete callback, there will be a double delete with a possible use-after-free.\n\nA) Using the `function*/void*` combo would prevent #3 (they could still hit the problem using a different `function*` with same `void*` object) but not 1 or 2.\n\nB) Requiring the providers to be associated with a specific service (`const char* instance`) or set of services (`const char**`) could prevent all of those issues (they could still figure out a way to double-free).\n\nI chatted with @smoreland@google.com and I\u0027d like to go with (B) and associate the provider with a list of instances. The list will go down to libbinder and the registration will be rejected if the service is already associated with a provider (or available in servicemanager if we want to go that far).\n\nThey can still remove `removeAccessorProvider` with the handle that was returned from the `registerAccessorProvider` (don\u0027t need the full list that was provided to register).",
+      "parentUuid": "9079f7a1_737aae12",
       "range": {
         "startLine": 114,
         "startChar": 16,

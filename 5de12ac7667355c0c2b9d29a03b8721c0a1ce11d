@@ -58,6 +58,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3eddaf7_9f108b35",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-19T00:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7788733_f637b9a5",
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44216b58_e3f4a294",
@@ -71,6 +89,30 @@
       "writtenOn": "2024-09-17T23:27:23Z",
       "side": 1,
       "message": "How does the caller do this? \"... passes ownership of the object by calling ...\" if there\u0027s a simple answer. I guess leave it as-is if the answer is open-ended.",
+      "range": {
+        "startLine": 245,
+        "startChar": 3,
+        "endLine": 245,
+        "endChar": 45
+      },
+      "revId": "5de12ac7667355c0c2b9d29a03b8721c0a1ce11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb36aa1f_d2dadf4a",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-19T00:51:14Z",
+      "side": 1,
+      "message": "I have no idea what I was trying to say here... maybe bad copy/paste at some point. It makes no sense for a `.*_delete` method. Removed this note.",
+      "parentUuid": "44216b58_e3f4a294",
       "range": {
         "startLine": 245,
         "startChar": 3,
