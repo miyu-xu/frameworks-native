@@ -69,6 +69,24 @@
       "parentUuid": "55119f58_ad18c1b7",
       "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c005fdc_f582dc57",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-09-19T18:11:39Z",
+      "side": 1,
+      "message": "Your call, but I think it\u0027s safe to assume that vibrator is safe to cache because AMS caches it and has been doing so for many years.",
+      "parentUuid": "6f485c67_606ca1ca",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
