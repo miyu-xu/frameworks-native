@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edac747d_214082ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-09-19T21:45:18Z",
+      "side": 1,
+      "message": "you have to guard this with an API 35 check instead then, see the build error",
+      "revId": "96c817e3a64ddff78fe2e9aa32a52c210284f994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
