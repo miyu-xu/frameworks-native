@@ -248,8 +248,7 @@ void AIBinder_Class_setOnDump(AIBinder_Class* clazz, AIBinder_onDump onDump) __I
  */
 void AIBinder_Class_setTransactionCodeToFunctionNameMap(AIBinder_Class* clazz,
                                                         const char** transactionCodeToFunctionMap,
-                                                        size_t length) __INTRODUCED_IN(36)
-        __INTRODUCED_IN_LLNDK(202504);
+                                                        size_t length) __INTRODUCED_IN(36);
 
 /**
  * Get function name associated with transaction code for given class
@@ -267,7 +266,7 @@ void AIBinder_Class_setTransactionCodeToFunctionNameMap(AIBinder_Class* clazz,
  * if transaction code is invalid or transactionCodeToFunctionMap is not set, nullptr is returned
  */
 const char* AIBinder_Class_getFunctionName(AIBinder_Class* clazz, transaction_code_t code)
-        __INTRODUCED_IN(36) __INTRODUCED_IN_LLNDK(202504);
+        __INTRODUCED_IN(36);
 
 /**
  * This tells users of this class not to use a transaction header. By default, libbinder_ndk users
