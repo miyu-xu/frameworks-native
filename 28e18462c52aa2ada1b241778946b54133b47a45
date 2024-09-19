@@ -34,6 +34,23 @@
       "parentUuid": "fa90959e_2d812081",
       "revId": "28e18462c52aa2ada1b241778946b54133b47a45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a663411b_473214aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870086
+      },
+      "writtenOn": "2024-09-19T13:53:54Z",
+      "side": 1,
+      "message": "Please help to check PV-1, thanks!",
+      "revId": "28e18462c52aa2ada1b241778946b54133b47a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
