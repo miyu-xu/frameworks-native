@@ -23,7 +23,6 @@
 #include <aidlcommonsupport/NativeHandle.h>
 #include <android/binder_manager.h>
 #include <android/hardware/graphics/mapper/utils/IMapperMetadataTypes.h>
-#include <android/llndk-versioning.h>
 #include <binder/IPCThreadState.h>
 #include <dlfcn.h>
 #include <ui/FatVector.h>
@@ -90,14 +89,8 @@ static void *loadIMapperLibrary() {
             return nullptr;
         }
 
-        void* so = nullptr;
-        if API_LEVEL_AT_LEAST (__ANDROID_API_V__, 202404) {
-            so = AServiceManager_openDeclaredPassthroughHal("mapper", mapperSuffix.c_str(),
-                                                            RTLD_LOCAL | RTLD_NOW);
-        } else {
-            std::string lib_name = "mapper." + mapperSuffix + ".so";
-            so = android_load_sphal_library(lib_name.c_str(), RTLD_LOCAL | RTLD_NOW);
-        }
+        void* so = AServiceManager_openDeclaredPassthroughHal("mapper", mapperSuffix.c_str(),
+                                                              RTLD_LOCAL | RTLD_NOW);
         if (!so) {
             ALOGE("Failed to load mapper.%s.so", mapperSuffix.c_str());
         }
