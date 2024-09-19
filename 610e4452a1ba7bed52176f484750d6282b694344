@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47432d8_7a736bbb",
+        "filename": "cmds/dumpstate/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-19T19:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b932760_5921e24d",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 30
+      },
+      "revId": "610e4452a1ba7bed52176f484750d6282b694344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a67753b4_00c7d6f4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-16T12:03:41Z",
       "side": 1,
       "message": "No longer needed, remove.",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "610e4452a1ba7bed52176f484750d6282b694344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b2da6d_c4677d8e",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-19T19:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a67753b4_00c7d6f4",
       "range": {
         "startLine": 40,
         "startChar": 10,
