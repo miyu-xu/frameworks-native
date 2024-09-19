@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42fb5af9_96bd3b3b",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-09-19T14:22:40Z",
+      "side": 1,
+      "message": "Oh, of course... I was hoping to use the slice to get simpler syntax, kindof like [`new_uninit_slice`](https://doc.rust-lang.org/std/primitive.slice.html#method.new_uninit_slice) which I just learned about. But I see that your approach is simpler and supported in today\u0027s Rust. Thanks for explaining!",
+      "parentUuid": "7319bce5_7eeeb1d5",
+      "range": {
+        "startLine": 50,
+        "startChar": 26,
+        "endLine": 50,
+        "endChar": 59
+      },
+      "revId": "ddb43846934c02a80db30302cc47a8227ac1dfa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ece0ff7_695c1126",
