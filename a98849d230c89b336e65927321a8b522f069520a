@@ -69,6 +69,30 @@
       },
       "revId": "a98849d230c89b336e65927321a8b522f069520a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3b5f57_1f260585",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-19T01:16:26Z",
+      "side": 1,
+      "message": "I just copied `demo_native` and I\u0027m not aware of C++ APIs you\u0027re mentioning but ultimately my plan is to use `libvmclient`.",
+      "parentUuid": "a6e63956_1230fd55",
+      "range": {
+        "startLine": 900,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 72
+      },
+      "revId": "a98849d230c89b336e65927321a8b522f069520a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
