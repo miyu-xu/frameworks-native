@@ -3717,11 +3717,13 @@ Dumpstate::RunStatus Dumpstate::CopyBugreportIfUserConsented(int32_t calling_uid
             if (options_->do_screenshot &&
                 options_->screenshot_fd.get() != -1 &&
                 !options_->is_screenshot_copied) {
-                copy_succeeded = android::os::CopyFileToFd(screenshot_path_,
+                bool is_screenshot_copied = android::os::CopyFileToFd(screenshot_path_,
                                                            options_->screenshot_fd.get());
-                options_->is_screenshot_copied = copy_succeeded;
-                if (copy_succeeded) {
+                options_->is_screenshot_copied = is_screenshot_copied;
+                if (is_screenshot_copied) {
                     android::os::UnlinkAndLogOnError(screenshot_path_);
+                } else {
+                    MYLOGE("Failed to copy screenshot to the calling app.\n");
                 }
             }
         }
