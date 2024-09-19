@@ -33,6 +33,42 @@
       "message": "You can use go/keep-sorted",
       "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4183817c_69cd1b42",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-19T12:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514022a5_395f2547",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f485c67_606ca1ca",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-09-19T12:15:53Z",
+      "side": 1,
+      "message": "Added most of the services\n\nI didn\u0027t add vibrator service as I couldn\u0027t confirm if it is a dynamic service or not.",
+      "parentUuid": "55119f58_ad18c1b7",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
