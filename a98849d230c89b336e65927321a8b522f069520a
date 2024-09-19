@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6130a07f_d6028c26",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-19T01:11:22Z",
+      "side": 1,
+      "message": "Devin, maybe you can modify this to mention the C++ APIs that are now available?",
+      "range": {
+        "startLine": 893,
+        "startChar": 63,
+        "endLine": 893,
+        "endChar": 91
+      },
+      "revId": "a98849d230c89b336e65927321a8b522f069520a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a07ce0d_750d485d",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-19T01:11:22Z",
+      "side": 1,
+      "message": "Inseob, I guess this is a test now? Are you okay with transitioning it away from libbinder_rpc_unstable?",
+      "range": {
+        "startLine": 900,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 72
+      },
+      "revId": "a98849d230c89b336e65927321a8b522f069520a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
