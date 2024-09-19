@@ -16,10 +16,7 @@
 
 extern crate nativewindow_bindgen as ffi;
 
-mod handle;
 mod surface;
-
-pub use handle::NativeHandle;
 pub use surface::Surface;
 
 pub use ffi::{AHardwareBuffer_Format, AHardwareBuffer_UsageFlags};
