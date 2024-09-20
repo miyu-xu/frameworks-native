@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e23cb5f_0c898928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-09-20T21:22:31Z",
+      "side": 1,
+      "message": "Global approval - for a janitorial, safe cleanup.",
+      "revId": "02e350f404d7a24f72a144c1c12d19918d2be773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
