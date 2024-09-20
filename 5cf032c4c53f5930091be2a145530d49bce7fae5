@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2e89e8_e6ef42a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879875
+      },
+      "writtenOn": "2024-09-20T20:44:45Z",
+      "side": 1,
+      "message": "samgarg@google.com for DrNo-Review",
+      "revId": "5cf032c4c53f5930091be2a145530d49bce7fae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
