@@ -105,6 +105,24 @@
       "parentUuid": "8c005fdc_f582dc57",
       "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb48f46_750e8dad",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-09-20T04:00:38Z",
+      "side": 1,
+      "message": "I think we should remove most of the Java caches once the underlying caches are all in.\nNote btw that `ActivityManagerService#getCommonServicesLocked` still has utility, it\u0027s used to seed the (Java) cache.",
+      "parentUuid": "a9ce7f27_f6ae768b",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
