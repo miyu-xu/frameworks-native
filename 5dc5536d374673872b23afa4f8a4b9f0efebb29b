@@ -124,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a3b512_0a3cc0ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-20T19:33:48Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "5dc582b7_c6ca12df",
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb31e8b2_c0f22065",
@@ -233,6 +251,30 @@
       "side": 1,
       "message": "This utils class is used in some CTS tests: https://cs.android.com/android/platform/superproject/main/+/main:cts/common/device-side/device-info/src/com/android/compatibility/common/deviceinfo/FeatureFlagUtils.java;l\u003d41?q\u003dprintflags\u0026sq\u003d\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:cts%2F, used for reporting flag values in EDI IIUC, there\u0027s a thread I\u0027ll ping you. Makes sense to make a topic with these three CLs 👍 Should be able to hack at this today.",
       "parentUuid": "f66da20c_85ead6e4",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640f4562_eec2d04f",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1981530
+      },
+      "writtenOn": "2024-09-20T19:33:48Z",
+      "side": 1,
+      "message": "Added CLs to this topic to switch the CTS test, and flagged `printflags` to not output anything when the new storage flag is enabled. This would mean that `printflags` and `aflags list` will both dump before this flag is enabled though. Both tools would print accurate info from DeviceConfig until then. Alternatively, we could make `printflags` point to `aflags list` and guard _that_ change with the flag? I\u0027m up for either.",
+      "parentUuid": "256d8757_15791a89",
       "range": {
         "startLine": 1788,
         "startChar": 38,
