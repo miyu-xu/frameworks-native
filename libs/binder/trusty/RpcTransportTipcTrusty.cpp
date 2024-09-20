@@ -27,11 +27,24 @@
 #include "../RpcState.h"
 #include "TrustyStatus.h"
 
+#ifndef DIV_ROUND_UP
+#define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+#endif
+
+// Creating a definition to hook a mock implementation of send_msg for unit test purposes
+#ifndef SEND_MSG_IMPL
+#define SEND_MSG_IMPL send_msg
+#else
+ssize_t SEND_MSG_IMPL(handle_t, ipc_msg_t*);
+#endif
+
 namespace android {
 
 using namespace android::binder::impl;
 using android::binder::borrowed_fd;
 using android::binder::unique_fd;
+
+constexpr size_t kMaxMessageSize = 4096;
 
 // RpcTransport for Trusty.
 class RpcTransportTipcTrusty : public RpcTransport {
@@ -45,6 +58,56 @@ public:
             return status;
         }
         return mHaveMessage ? OK : WOULD_BLOCK;
+    }
+
+    status_t sendTrustyMsg(ipc_msg_t* msg, size_t msg_size) {
+        ssize_t rc = SEND_MSG_IMPL(mSocket.fd.get(), msg);
+        if (rc == ERR_NOT_ENOUGH_BUFFER) {
+            // Peer is blocked, wait until it unblocks.
+            // TODO: when tipc supports a send-unblocked handler,
+            // save the message here in a queue and retry it asynchronously
+            // when the handler gets called by the library
+            uevent uevt;
+            do {
+                rc = ::wait(mSocket.fd.get(), &uevt, INFINITE_TIME);
+                if (rc < 0) {
+                    return statusFromTrusty(rc);
+                }
+                if (uevt.event & IPC_HANDLE_POLL_HUP) {
+                    return DEAD_OBJECT;
+                }
+            } while (!(uevt.event & IPC_HANDLE_POLL_SEND_UNBLOCKED));
+
+            // Retry the send, it should go through this time because
+            // sending is now unblocked
+            rc = SEND_MSG_IMPL(mSocket.fd.get(), msg);
+        }
+        if (rc < 0) {
+            return statusFromTrusty(rc);
+        }
+        LOG_ALWAYS_FATAL_IF(static_cast<size_t>(rc) != msg_size,
+                            "Sent the wrong number of bytes %zd!=%zu", rc, msg_size);
+        return OK;
+    }
+
+    status_t sendPartialTrustyMsg(ipc_msg_t* msg, size_t msg_size, size_t start_iov,
+                                  size_t num_iov) {
+        ipc_msg_t acc_msg{
+                .num_iov = static_cast<uint32_t>(num_iov),
+                .iov = &(msg->iov[start_iov]),
+                .num_handles = msg->num_handles,
+                .handles = msg->handles,
+        };
+
+        ssize_t rc = sendTrustyMsg(&acc_msg, msg_size);
+        if (rc < 0) {
+            return statusFromTrusty(rc);
+        }
+        // We are only sending the ancillaryFds on the first message
+        // TODO: check correctness of this approach
+        msg->num_handles = 0;
+
+        return OK;
     }
 
     status_t interruptableWriteFully(
@@ -86,33 +149,90 @@ public:
             msg.handles = msgHandles;
         }
 
-        ssize_t rc = send_msg(mSocket.fd.get(), &msg);
-        if (rc == ERR_NOT_ENOUGH_BUFFER) {
-            // Peer is blocked, wait until it unblocks.
-            // TODO: when tipc supports a send-unblocked handler,
-            // save the message here in a queue and retry it asynchronously
-            // when the handler gets called by the library
-            uevent uevt;
-            do {
-                rc = ::wait(mSocket.fd.get(), &uevt, INFINITE_TIME);
+        if (size <= kMaxMessageSize) {
+            return sendTrustyMsg(&msg, size);
+        } else {
+            // We will send each iov individually and break each one of them in pieces of size up to
+            // kMaxMessageSize bytes
+            size_t first_iov_send = 0, num_acc_iov = 0;
+            size_t num_iov_to_send = static_cast<size_t>(niovs);
+            size = 0;
+
+            for (size_t current_iov = 0; current_iov < num_iov_to_send; current_iov++) {
+                if (msg.iov[current_iov].iov_len < kMaxMessageSize) {
+                    // we don't need to break this iov
+                    if (num_acc_iov == 0) {
+                        // We are starting to accumulate, so this is the first iov to send
+                        first_iov_send = current_iov;
+                    }
+                    // Try to group this iov with more iovs
+                    if ((size + msg.iov[current_iov].iov_len) < kMaxMessageSize) {
+                        // We can continue grouping iovs
+                        size += msg.iov[current_iov].iov_len;
+                        num_acc_iov++;
+                        continue;
+                    } else {
+                        // We have reached the limit of what we can send, send the accumulated
+                        // buffers and because the current buffer is smaller than the
+                        // kMaxMessageSize, start accumulating again
+                        ssize_t rc = sendPartialTrustyMsg(&msg, size, first_iov_send, num_acc_iov);
+                        if (rc < 0) {
+                            return statusFromTrusty(rc);
+                        }
+                        size = msg.iov[current_iov].iov_len;
+                        first_iov_send = current_iov;
+                        num_acc_iov = 1;
+                        continue;
+                    }
+                } else {
+                    // The current message needs to be broken
+                    // check first if we have accumulated messages and send them
+                    if (num_acc_iov > 0) {
+                        ssize_t rc = sendPartialTrustyMsg(&msg, size, first_iov_send, num_acc_iov);
+                        if (rc < 0) {
+                            return statusFromTrusty(rc);
+                        }
+                        size = 0;
+                        num_acc_iov = 0;
+                    }
+                    // Break the current iov into smaller parts
+                    size_t remaining_iov_len = msg.iov[current_iov].iov_len;
+                    size_t number_packets = DIV_ROUND_UP(remaining_iov_len, kMaxMessageSize);
+
+                    // Send all the parts one by one
+                    for (size_t j = 0; j < number_packets; j++) {
+                        // Send up up to kMaxMessageSize bytes
+                        msg.iov[current_iov].iov_len =
+                                std::min(msg.iov[current_iov].iov_len, kMaxMessageSize);
+
+                        ssize_t rc = sendPartialTrustyMsg(&msg, msg.iov[current_iov].iov_len,
+                                                          current_iov, 1);
+                        if (rc < 0) {
+                            return statusFromTrusty(rc);
+                        }
+
+                        // Adjust the size and buffer start of the data that still remains to be
+                        // sent
+                        if (remaining_iov_len >= kMaxMessageSize) {
+                            remaining_iov_len -= kMaxMessageSize;
+                            msg.iov[current_iov].iov_len = remaining_iov_len;
+                            msg.iov[current_iov].iov_base =
+                                    static_cast<char*>(msg.iov[current_iov].iov_base) +
+                                    kMaxMessageSize;
+                        }
+                    }
+                }
+            }
+            // Finish sending any remaining accumulated buffers
+            if (num_acc_iov > 0) {
+                ssize_t rc = sendPartialTrustyMsg(&msg, size, first_iov_send, num_acc_iov);
                 if (rc < 0) {
                     return statusFromTrusty(rc);
                 }
-                if (uevt.event & IPC_HANDLE_POLL_HUP) {
-                    return DEAD_OBJECT;
-                }
-            } while (!(uevt.event & IPC_HANDLE_POLL_SEND_UNBLOCKED));
-
-            // Retry the send, it should go through this time because
-            // sending is now unblocked
-            rc = send_msg(mSocket.fd.get(), &msg);
+                size = 0;
+                num_acc_iov = 0;
+            }
         }
-        if (rc < 0) {
-            return statusFromTrusty(rc);
-        }
-        LOG_ALWAYS_FATAL_IF(static_cast<size_t>(rc) != size,
-                            "Sent the wrong number of bytes %zd!=%zu", rc, size);
-
         return OK;
     }
 
