@@ -27,11 +27,19 @@
 #include "../RpcState.h"
 #include "TrustyStatus.h"
 
+// Creating a definition to hook a mock implementation of send_msg for unit test purposes
+#ifndef SEND_MSG_IMPL
+#define SEND_MSG_IMPL send_msg
+#endif
+ssize_t SEND_MSG_IMPL(handle_t, ipc_msg_t*);
+
 namespace android {
 
 using namespace android::binder::impl;
 using android::binder::borrowed_fd;
 using android::binder::unique_fd;
+
+constexpr size_t kMaxMessageSize = 4096;
 
 // RpcTransport for Trusty.
 class RpcTransportTipcTrusty : public RpcTransport {
@@ -45,6 +53,106 @@ public:
             return status;
         }
         return mHaveMessage ? OK : WOULD_BLOCK;
+    }
+
+    status_t sendTrustyMsg(ipc_msg_t* msg, size_t msg_size) {
+        ssize_t rc = SEND_MSG_IMPL(mSocket.fd.get(), msg);
+        if (rc == ERR_NOT_ENOUGH_BUFFER) {
+            // Peer is blocked, wait until it unblocks.
+            // TODO: when tipc supports a send-unblocked handler,
+            // save the message here in a queue and retry it asynchronously
+            // when the handler gets called by the library
+            uevent uevt;
+            do {
+                rc = ::wait(mSocket.fd.get(), &uevt, INFINITE_TIME);
+                if (rc < 0) {
+                    return statusFromTrusty(rc);
+                }
+                if (uevt.event & IPC_HANDLE_POLL_HUP) {
+                    return DEAD_OBJECT;
+                }
+            } while (!(uevt.event & IPC_HANDLE_POLL_SEND_UNBLOCKED));
+
+            // Retry the send, it should go through this time because
+            // sending is now unblocked
+            rc = SEND_MSG_IMPL(mSocket.fd.get(), msg);
+        }
+        if (rc < 0) {
+            return statusFromTrusty(rc);
+        }
+        LOG_ALWAYS_FATAL_IF(static_cast<size_t>(rc) != msg_size,
+                            "Sent the wrong number of bytes %zd!=%zu", rc, msg_size);
+        return OK;
+    }
+
+    void takeIovs(iovec** src_iovs, size_t* src_niovs, iovec* dest_iovs, size_t* dest_niovs,
+                  size_t* acc_size) {
+        // copy up to 4096 bytes of slices into `dest_iovs`.
+        // modify `src_iovs` to keep only what's left.
+        *acc_size = 0;
+        size_t num_acc_iov = 0;
+        // No need to check for (*dest_niovs == 0) || (*src_niovs == 0) because the for loop and
+        // initial if statement take care of those cases
+        for (size_t current_iov = 0; current_iov < *src_niovs; current_iov++) {
+            if (current_iov >= *dest_niovs) {
+                // We do not have more iovs to fill
+                break;
+            }
+            size_t curr_iov_len = ((*src_iovs)[current_iov]).iov_len;
+            if (curr_iov_len < kMaxMessageSize) {
+                // we don't need to break this iov, try to group it with more iovs
+                if ((*acc_size + curr_iov_len) < kMaxMessageSize) {
+                    // We can continue grouping iovs, increment the accumulated size and copy the
+                    // iov to dest
+                    *acc_size += curr_iov_len;
+                    dest_iovs[num_acc_iov].iov_base = ((*src_iovs)[current_iov]).iov_base;
+                    dest_iovs[num_acc_iov].iov_len = curr_iov_len;
+                    num_acc_iov++;
+                    continue;
+                } else {
+                    // We have reached the limit of what we can send, send the accumulated
+                    // buffers back
+                    break;
+                }
+            } else {
+                // The current iov needs to be broken down in smaller chunks
+                if (*acc_size >= kMaxMessageSize) {
+                    // We don't have space left to send more data on the current dest iov
+                    break;
+                }
+                // There is some space left on dest_iovs; use the remaining space to send the first
+                // part of this iov
+                size_t remaining_space = kMaxMessageSize - *acc_size;
+
+                dest_iovs[num_acc_iov].iov_base = ((*src_iovs)[current_iov]).iov_base;
+                dest_iovs[num_acc_iov].iov_len = remaining_space;
+
+                // "Removing" copied data from the corresponding src iov by moving the iov_base and
+                // decresing its size.
+                ((*src_iovs)[current_iov]).iov_base = static_cast<void*>(
+                        static_cast<char*>(((*src_iovs)[current_iov]).iov_base) + remaining_space);
+                ((*src_iovs)[current_iov]).iov_len -= remaining_space;
+                *acc_size += remaining_space;
+                if (((*src_iovs)[current_iov]).iov_len > 0) {
+                    // "removing" the iovs that have been copied from src_iovs. We remove it
+                    // before incrementing num_acc_iov becuase we need to continue sending the
+                    // current iov on the next call
+                    *src_iovs = &((*src_iovs)[num_acc_iov]);
+                    *src_niovs -= num_acc_iov;
+                    num_acc_iov++;
+                    *dest_niovs = num_acc_iov;
+                    return;
+                }
+                // We are done with this iov, move to the next one
+                num_acc_iov++;
+                break;
+            }
+        }
+        // "removing" the iovs that have been copied from src_iovs by moving the base iov list
+        // pointer
+        *src_iovs = &((*src_iovs)[num_acc_iov]);
+        *src_niovs -= num_acc_iov;
+        *dest_niovs = num_acc_iov;
     }
 
     status_t interruptableWriteFully(
@@ -86,33 +194,33 @@ public:
             msg.handles = msgHandles;
         }
 
-        ssize_t rc = send_msg(mSocket.fd.get(), &msg);
-        if (rc == ERR_NOT_ENOUGH_BUFFER) {
-            // Peer is blocked, wait until it unblocks.
-            // TODO: when tipc supports a send-unblocked handler,
-            // save the message here in a queue and retry it asynchronously
-            // when the handler gets called by the library
-            uevent uevt;
-            do {
-                rc = ::wait(mSocket.fd.get(), &uevt, INFINITE_TIME);
-                if (rc < 0) {
-                    return statusFromTrusty(rc);
-                }
-                if (uevt.event & IPC_HANDLE_POLL_HUP) {
-                    return DEAD_OBJECT;
-                }
-            } while (!(uevt.event & IPC_HANDLE_POLL_SEND_UNBLOCKED));
+        if (size <= kMaxMessageSize) {
+            return sendTrustyMsg(&msg, size);
+        } else {
+            size_t num_iov_to_send = static_cast<size_t>(niovs);
+            for (;;) {
+                constexpr size_t kPartialMax = 5;
+                size_t partial_niovs = kPartialMax;
+                iovec partial_iovs[kPartialMax];
+                size_t acc_size;
 
-            // Retry the send, it should go through this time because
-            // sending is now unblocked
-            rc = send_msg(mSocket.fd.get(), &msg);
-        }
-        if (rc < 0) {
-            return statusFromTrusty(rc);
-        }
-        LOG_ALWAYS_FATAL_IF(static_cast<size_t>(rc) != size,
-                            "Sent the wrong number of bytes %zd!=%zu", rc, size);
+                takeIovs(&msg.iov, &num_iov_to_send, partial_iovs, &partial_niovs, &acc_size);
+                if (partial_niovs <= 0) {
+                    break;
+                }
 
+                ipc_msg_t curr_msg{
+                        .num_iov = static_cast<uint32_t>(partial_niovs),
+                        .iov = partial_iovs,
+                        .num_handles = msg.num_handles,
+                        .handles = msg.handles,
+                };
+
+                sendTrustyMsg(&curr_msg, acc_size);
+                // We are only sending the ancillaryFds on the first message
+                msg.num_handles = 0;
+            }
+        }
         return OK;
     }
 
