@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27fa33e1_edc34cba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-09-20T06:37:36Z",
+      "side": 1,
+      "message": "This is not true. It is necessary when `NDK \u003c 35 \u0026\u0026 LLNDK \u003e\u003d 202404`, which is the `ap2a` configuration.\n\nI am not sure if we can ignore the ap2a configuration that is still in the release configs.\n\nWe can remove `INTRODICED_IN_LLNDK` because the symbol map is doing the same, but not the caller side `API_LEVEL_AT_LEAST`.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "6184aa5648ad2c78a47dab5a292df8c1b5817149",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
