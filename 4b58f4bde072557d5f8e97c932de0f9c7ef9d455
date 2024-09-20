@@ -34,6 +34,23 @@
       "parentUuid": "3a69cc67_d003d4ec",
       "revId": "4b58f4bde072557d5f8e97c932de0f9c7ef9d455",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b1a267c_13dd80b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-09-20T21:21:53Z",
+      "side": 1,
+      "message": "Global approval based on smoreland\u0027s comment from yesterday.",
+      "revId": "4b58f4bde072557d5f8e97c932de0f9c7ef9d455",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
