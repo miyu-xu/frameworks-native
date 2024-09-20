@@ -87,6 +87,24 @@
       "parentUuid": "6f485c67_606ca1ca",
       "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ce7f27_f6ae768b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-20T03:48:14Z",
+      "side": 1,
+      "message": "btw, are we also going to remove the caching mechanisms from the Java layers now?",
+      "parentUuid": "8c005fdc_f582dc57",
+      "revId": "efd3cc1ebbe4d1ccf24adb45aacd27712bc6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
