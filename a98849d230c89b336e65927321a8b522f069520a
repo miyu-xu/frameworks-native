@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2646497f_193693fd",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-23T15:37:04Z",
+      "side": 1,
+      "message": "They are not available now. http://r.android.com/3214895 doesn\u0027t replace all of these APIs here(no FD mode/threads/connections APIs, servers, join), only some of the client APIs.",
+      "parentUuid": "6130a07f_d6028c26",
+      "range": {
+        "startLine": 893,
+        "startChar": 63,
+        "endLine": 893,
+        "endChar": 91
+      },
+      "revId": "a98849d230c89b336e65927321a8b522f069520a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a07ce0d_750d485d",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 1
