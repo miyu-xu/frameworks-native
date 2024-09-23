@@ -283,6 +283,30 @@
       },
       "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadd5026_109e65a9",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1788,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-09-23T06:26:38Z",
+      "side": 1,
+      "message": "If `printflags` is expected to be deprecated in O(days) I don\u0027t really care if we duplicate the flag information, as long as it\u0027s consistent and correct.",
+      "parentUuid": "640f4562_eec2d04f",
+      "range": {
+        "startLine": 1788,
+        "startChar": 38,
+        "endLine": 1788,
+        "endChar": 61
+      },
+      "revId": "5dc5536d374673872b23afa4f8a4b9f0efebb29b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
