@@ -16,6 +16,24 @@
       "message": "What was the fix? Add a bug number or two to the commit message?",
       "revId": "bafa25d557681f5c62894dbba8e4aa3a9a0e3230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e671d8_4b6cb0a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-23T20:18:07Z",
+      "side": 1,
+      "message": "__ANDROID_VENDOR__ -\u003e __ANDROID_VNDK__ for the product partition.",
+      "parentUuid": "0f6f3854_cdc77703",
+      "revId": "bafa25d557681f5c62894dbba8e4aa3a9a0e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
