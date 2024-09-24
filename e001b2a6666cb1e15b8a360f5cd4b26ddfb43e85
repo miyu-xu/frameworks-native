@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f67238_85360455",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-24T00:50:28Z",
+      "side": 1,
+      "message": "put %p here, since the provider must be null? or add %p for the below log for any !\u003d OK status. With statusToString, this and the next line will be clear.",
+      "range": {
+        "startLine": 158,
+        "startChar": 62,
+        "endLine": 158,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7688d5d1_0def6aa4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 158,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "    LOG_ALWAYS_FATAL_IF(status \u003d\u003d android::BAD_VALUE, \"Provider is not valid. %p\", provider);\n    LOG_ALWAYS_FATAL_IF(status \u003d\u003d android::NAME_NOT_FOUND,\n                        \"Provider was already unregistered. %p\", provider);\n"
+            },
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 162,
+                "startChar": 0,
+                "endLine": 164,
+                "endChar": 0
+              },
+              "replacement": "            \"Unknown error when attempting to unregister ABinderRpc_AccessorProvider. Status: %s. \"\n            \"%p\",\n            android::statusToString(status).c_str(), provider);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e001b2a6666cb1e15b8a360f5cd4b26ddfb43e85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
