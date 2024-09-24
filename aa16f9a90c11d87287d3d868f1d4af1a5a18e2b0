@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d091ccf_141d977a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-24T21:41:06Z",
+      "side": 1,
+      "message": "@justinyun: does the problem you pointed out on https://r.android.com/3273619 apply here as well? I don\u0027t know how to tell which callers that does or doesn\u0027t impact.",
+      "revId": "aa16f9a90c11d87287d3d868f1d4af1a5a18e2b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
