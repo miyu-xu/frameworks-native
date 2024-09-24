@@ -906,6 +906,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "433b5d8d_db1982eb",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-24T19:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1bc83c9_618a2fea",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 114,
+        "endChar": 43
+      },
+      "revId": "05491648de2e0e87e060d0a932aad73a6d4e9745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f640b48_18dc262e",

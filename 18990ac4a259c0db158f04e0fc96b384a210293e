@@ -16,6 +16,46 @@
       "message": "presubmit boot test failed before logcat with no obvious logs. Rerunning.",
       "revId": "18990ac4a259c0db158f04e0fc96b384a210293e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "700c746f_654274d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-24T19:36:44Z",
+      "side": 1,
+      "message": "(you may need me to re approve after fixing the type nit, just DM me for a quick +1 if so)",
+      "revId": "18990ac4a259c0db158f04e0fc96b384a210293e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e17b4d_c226b393",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-09-24T19:36:44Z",
+      "side": 1,
+      "message": "`size_t`: go/android-ndk-api-guidelines#fixed-size-types\n\n(fine to do as a follow up, but it looks like you\u0027ve gotta wait for treehugger again anyway)",
+      "range": {
+        "startLine": 128,
+        "startChar": 51,
+        "endLine": 128,
+        "endChar": 59
+      },
+      "revId": "18990ac4a259c0db158f04e0fc96b384a210293e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
