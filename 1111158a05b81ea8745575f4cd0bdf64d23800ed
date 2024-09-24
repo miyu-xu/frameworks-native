@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "241ea113_16867afa",
+        "filename": "libs/nativewindow/AHardwareBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3621465
+      },
+      "writtenOn": "2024-09-24T09:49:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8651be39_0d5b9bc4",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4d9e3e_ff4e72de",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cb5fa9_33afec79",
+        "filename": "libs/nativewindow/AHardwareBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 3621465
+      },
+      "writtenOn": "2024-09-24T09:49:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e4d9e3e_ff4e72de",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2466269e_1ea3f980",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-09-18T17:10:32Z",
       "side": 1,
       "message": "nit: comma after last entry like LHS",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e014b9e6_8c705ca7",
+        "filename": "libs/ui/include/ui/PublicFormat.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3621465
+      },
+      "writtenOn": "2024-09-24T09:49:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2466269e_1ea3f980",
       "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
