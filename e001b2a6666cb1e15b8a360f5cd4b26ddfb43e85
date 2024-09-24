@@ -50,6 +50,30 @@
       ],
       "revId": "e001b2a6666cb1e15b8a360f5cd4b26ddfb43e85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62c77af_438efb53",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-24T16:39:07Z",
+      "side": 1,
+      "message": "Done! Added (%p) and statusToString to each of these logs.\n\n\u003e since the provider must be null?\n\nThe `provider-\u003emProviderCookie` can\u0027t be promoted so the provider was likely destructed. The passed in `provider` ptr has to be non-null to get here, but it might be invalid. (maybe the `provider-\u003emProviderCookie` would fail/abort first if we are lucky).",
+      "parentUuid": "13f67238_85360455",
+      "range": {
+        "startLine": 158,
+        "startChar": 62,
+        "endLine": 158,
+        "endChar": 65
+      },
+      "revId": "e001b2a6666cb1e15b8a360f5cd4b26ddfb43e85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
