@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba680170_f357eda9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-24T18:05:08Z",
+      "side": 1,
+      "message": "presubmit boot test failed before logcat with no obvious logs. Rerunning.",
+      "revId": "18990ac4a259c0db158f04e0fc96b384a210293e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
