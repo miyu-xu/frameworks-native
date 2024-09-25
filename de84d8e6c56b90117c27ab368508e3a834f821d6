@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8a613c_b418e8b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2024-09-25T09:01:07Z",
+      "side": 1,
+      "message": "Added the \"Merged-In\" line to prevent this CL from being auto merged to internal main but then we need to deal with the commit on aosp-main separately.",
+      "revId": "de84d8e6c56b90117c27ab368508e3a834f821d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
