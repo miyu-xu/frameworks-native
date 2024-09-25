@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a996d6_6627b1d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-09-25T23:44:04Z",
+      "side": 1,
+      "message": "Could you add `Bug: b/369698627` in the commit message?",
+      "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55068516_da311802",
