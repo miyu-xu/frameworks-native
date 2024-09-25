@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360546d3_ec3048ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-25T20:35:50Z",
+      "side": 1,
+      "message": "binder_interface_utils.h now and persistable_bundle.h always includes this file when __ANDROID_VENDOR__ is true. We should probably leave the file (and perhaps define other things here, but remove the __INTRODUCED_IN_LLNK bit alone.).",
+      "revId": "8f7689f65b39639b6471c080a1ae8fbbf8e5d5f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
