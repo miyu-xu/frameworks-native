@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69a9e92e_8abd3554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-25T20:38:24Z",
+      "side": 1,
+      "message": "I think b/369665070 is already fixed with aosp/3283715",
+      "revId": "00f5a992a682e9d9ef943f165da3a9813f1501e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
