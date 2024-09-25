@@ -178,6 +178,9 @@ class ICInterface : public SharedRefBase {
                                               AIBinder_Class_onTransact onTransact,
                                               const char** codeToFunction, size_t functionCount);
 
+    static inline AIBinder_Class* defineClass(const char* interfaceDescriptor,
+                                              AIBinder_Class_onTransact onTransact);
+
    private:
     class ICInterfaceData {
        public:
@@ -267,8 +270,25 @@ std::shared_ptr<ICInterface> ICInterface::asInterface(AIBinder* binder) {
 }
 
 AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
+<<<<<<< PATCH SET (6c7aff Add defineClass variant)
+                                         AIBinder_Class_onTransact onTransact) {
+<<<<<<< PATCH SET (bed360 Add defineClass variant)
+    return defineClass(interfaceDescriptor, onTransact, nullptr, 0);
+}
+
+AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
                                          AIBinder_Class_onTransact onTransact,
                                          const char** codeToFunction, size_t functionCount) {
+||||||| BASE
+                                         const char** codeToFunction, size_t functionCount) {
+=======
+>>>>>>> BASE      (12f83c Merge "Revert^3 "Move tracing calls to libbinder_ndk"" into )
+||||||| BASE
+                                         AIBinder_Class_onTransact onTransact) {
+=======
+                                         AIBinder_Class_onTransact onTransact,
+                                         const char** codeToFunction, size_t functionCount) {
+>>>>>>> BASE      (0d6e60 Reland "Move tracing calls to libbinder_ndk")
     AIBinder_Class* clazz = AIBinder_Class_define(interfaceDescriptor, ICInterfaceData::onCreate,
                                                   ICInterfaceData::onDestroy, onTransact);
     if (clazz == nullptr) {
