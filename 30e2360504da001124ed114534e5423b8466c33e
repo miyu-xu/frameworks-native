@@ -121,6 +121,24 @@
       "parentUuid": "e5490f88_d7285f47",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc4785f_a61db872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-09-25T12:41:38Z",
+      "side": 1,
+      "message": "Thank you for the quick reply. Anything else that I need to do to get it merged?",
+      "parentUuid": "6c247f96_c4636b7b",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
