@@ -33,6 +33,24 @@
       "message": "Suggests surface is _not_ a window surface? (instead pbuffer, etc) ?",
       "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48271277_4feddc62",
+        "filename": "opengl/libs/EGL/egl_platform_entries.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-09-25T23:08:44Z",
+      "side": 1,
+      "message": "Is that a possibility for your use case? Regardless, since non-window surfaces exist, I think this is a good change since they would hit this crash.",
+      "parentUuid": "55068516_da311802",
+      "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
