@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5ebfbd_6d0777ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-09-25T23:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92a996d6_6627b1d4",
+      "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55068516_da311802",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Yes this is a possibility for our use case where a surface is not a window surface where they do indeed hit this crash, so overall I also believe that this in general will be a good change to handle those cases.",
       "parentUuid": "48271277_4feddc62",
+      "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f559e6c5_f33a48c8",
+        "filename": "opengl/libs/EGL/egl_platform_entries.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-09-25T23:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1be44173_e7f4a909",
       "revId": "a04dcdf5cb1f3e70df38b2e36bc162135382ecb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
