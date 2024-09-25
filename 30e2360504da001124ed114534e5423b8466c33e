@@ -139,6 +139,24 @@
       "parentUuid": "6c247f96_c4636b7b",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b39dc37_493c3ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1835071
+      },
+      "writtenOn": "2024-09-25T12:59:04Z",
+      "side": 1,
+      "message": "Nope, I think once you have a presubmit +2 [triggered the +2 run for this CL] (with no unresolved comments) you should be able to merge this.",
+      "parentUuid": "3bc4785f_a61db872",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
