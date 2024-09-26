@@ -281,6 +281,24 @@
       "parentUuid": "07d74b5f_ed0908a1",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17136bfc_4c5c16c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-09-26T15:39:16Z",
+      "side": 1,
+      "message": "Is there any way for me to see what the tests run or be guided as to why the test is failing? As I have no visibility on the failing test or why it is failing.",
+      "parentUuid": "15a3b5e5_4a2258db",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
