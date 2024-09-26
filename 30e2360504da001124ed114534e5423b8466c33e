@@ -228,6 +228,23 @@
       "parentUuid": "dcf92fad_3bb2883c",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d74b5f_ed0908a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-09-26T10:05:40Z",
+      "side": 1,
+      "message": "@smoreland@google.com @ronish@google.com would it be possible to bypass pre-submit verified in this case? As it was passing a couple of days ago according to the change log, so it might be some flaky tests that are failing?",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
