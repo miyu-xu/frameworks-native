@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b89323_a2ecda84",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T22:47:09Z",
+      "side": 1,
+      "message": "One thing you could do is send as many consecutive iovs as you can as long as their total size does not exceed `MAX_MESSAGE_SIZE`.\n\nYou can implement that by maintaining a first-last contiguous iov range. Once the next iov causes the current range to go over, you send out the current range then update `first` to the current iov. If that one is larger than 4096 by itself, then you can break it up.\n\nYou _could_ also keep track of positions inside them and coalesce partial iovs, but that would make the implementation even more complex.",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0427a6_c3581859",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T22:47:09Z",
+      "side": 1,
+      "message": "Why -1 here?",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26668526_2207bc12",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T22:47:09Z",
+      "side": 1,
+      "message": "Do you need this check? You could increment `msg_iov` unconditionally, it will eventually stop at one past the last element.",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee109307_21ba0445",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T22:47:09Z",
+      "side": 1,
+      "message": "```suggestion\n                    msg.iov++;\n```",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
