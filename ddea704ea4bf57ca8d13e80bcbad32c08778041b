@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03b51b8_8df69dcf",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T19:58:01Z",
+      "side": 1,
+      "message": "Could this be a `const VALUE: Stability` instead? Alternatively, make it a `const fn`?",
+      "revId": "ddea704ea4bf57ca8d13e80bcbad32c08778041b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df154d9_89bead83",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-26T19:58:01Z",
+      "side": 1,
+      "message": "I was thinking we could also make this a `const fn`, but then it would be difficult to change it back later if we need to. Wdyt?",
+      "revId": "ddea704ea4bf57ca8d13e80bcbad32c08778041b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
