@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "394a31d8_9add4012",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T15:50:05Z",
+      "side": 1,
+      "message": "nit:` represented`\n```suggestion\n    /// The `Stability` represented by this type.\n```",
+      "range": {
+        "startLine": 145,
+        "startChar": 24,
+        "endLine": 145,
+        "endChar": 34
+      },
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ed862db_f509912f",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 3
