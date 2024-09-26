@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "714103ac_f4c9c4fc",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:38:38Z",
+      "side": 1,
+      "message": "Yeah, we could have a `system_only.rs`, then do something like\n\n```\n#[cfg(not(any(android_vendor, android_vndk)))]\nmod system_only;\n#[cfg(not(any(android_vendor, android_vndk)))]\npub use system_only::*;\n```\n\nmeans more churn if we decide to make it vendor available later though",
+      "parentUuid": "9e654931_641b3e62",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9412278_848d5e87",
         "filename": "libs/binder/rust/src/service.rs",
         "patchSetId": 36
@@ -71,6 +89,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64e33654_1045b2e7",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:38:38Z",
+      "side": 1,
+      "message": "obsolete\n\nthough it is still important that the `Fn` be `Send + Sync`. maybe we should note that the `Fn` owned by the Accessor has those properties",
+      "range": {
+        "startLine": 275,
+        "startChar": 67,
+        "endLine": 276,
+        "endChar": 24
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b97c04_3c3adaaa",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:38:38Z",
+      "side": 1,
+      "message": "obsolete",
+      "range": {
+        "startLine": 276,
+        "startChar": 51,
+        "endLine": 276,
+        "endChar": 69
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1084c05_1992a5e5",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:38:38Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 63
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a2e5b8d_a2e2423e",
         "filename": "libs/binder/rust/src/service.rs",
         "patchSetId": 36
@@ -82,6 +169,29 @@
       "writtenOn": "2024-09-26T17:33:56Z",
       "side": 1,
       "message": "Why isn\u0027t this used? What is it intended for?",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a75d133_fb297979",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:38:38Z",
+      "side": 1,
+      "message": "if we always abort when the return is `None`, it would be better to change the signature to `Fn() -\u003e ConnectionInfo` to make that obvious to the user. then they\u0027ll be forced to abort themselves if they can\u0027t provide it",
+      "range": {
+        "startLine": 343,
+        "startChar": 35,
+        "endLine": 343,
+        "endChar": 44
+      },
       "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
