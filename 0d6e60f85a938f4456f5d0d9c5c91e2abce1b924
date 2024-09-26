@@ -16,6 +16,24 @@
       "message": "Seems to be causing lots of failures on ART LUCI builder:\n\nout/soong/.intermediates/art/artd/binder/artd-aidl-ndk-source/gen/com/android/server/art/IArtd.cpp:657:167: error: too many arguments to function call, expected 2, have 4\n  657 | static AIBinder_Class* _g_aidl_com_android_server_art_IArtd_clazz \u003d ::ndk::ICInterface::defineClass(IArtd::descriptor, _aidl_com_android_server_art_IArtd_onTransact, _g_aidl_com_android_server_art_IArtd_clazz_code_to_function, 29);\n      |                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nprebuilts/runtime/mainline/platform/sdk/include/frameworks/native/libs/binder/ndk/include_cpp/android/binder_interface_utils.h:257:30: note: \u0027defineClass\u0027 declared here\n  257 | AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,\n      |                              ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  258 |                                          AIBinder_Class_onTransact onTransact) {\n      |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
       "revId": "0d6e60f85a938f4456f5d0d9c5c91e2abce1b924",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3855716d_8ac6aa53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-26T23:55:08Z",
+      "side": 1,
+      "message": "Note https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3283866 which keeps both versions of defineClass due checked in generated AIDL code. Does the branch has this fix? This change was landed yesterday and reverted due to similar errors but it has been merged with fix today : https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3283866",
+      "parentUuid": "1be69937_f5bddbd3",
+      "revId": "0d6e60f85a938f4456f5d0d9c5c91e2abce1b924",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
