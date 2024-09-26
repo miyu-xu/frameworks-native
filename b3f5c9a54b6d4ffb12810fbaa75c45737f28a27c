@@ -16,6 +16,74 @@
       "message": "Thanks for adding Andrew as a reviewer, I\u0027m about be away for travel.",
       "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e654931_641b3e62",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-09-26T17:33:56Z",
+      "side": 1,
+      "message": "Instead of putting this `cfg` guard on everything, how about moving these types into a submodule, and then just `cfg` guarding that submodule and a re-export?",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9412278_848d5e87",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-09-26T17:33:56Z",
+      "side": 1,
+      "message": "It might be worth implementing `Debug` for this, even if it just writes the pointer address.",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240f8c62_f537a704",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-09-26T17:33:56Z",
+      "side": 1,
+      "message": "Can you derive any of the standard traits on this? E.g. `Debug`, `Clone`, `Eq`...",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2e5b8d_a2e2423e",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-09-26T17:33:56Z",
+      "side": 1,
+      "message": "Why isn\u0027t this used? What is it intended for?",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
