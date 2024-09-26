@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b8b1ed_0cddd852",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "714103ac_f4c9c4fc",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9412278_848d5e87",
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4982fcf6_c51c6cda",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9412278_848d5e87",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "240f8c62_f537a704",
@@ -83,6 +119,24 @@
       "writtenOn": "2024-09-26T17:33:56Z",
       "side": 1,
       "message": "Can you derive any of the standard traits on this? E.g. `Debug`, `Clone`, `Eq`...",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9187075b_200c639a",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Yes, I was able to derive `Debug, Clone, Copy, PartialEq, Eq`.\n\n`Ord`/`PartialOrd` aren\u0027t implemented by the Addr types, I\u0027m not sure why `Hash` would ever be used, and I think `Display` isn\u0027t needed because `Debug` is enough? Is that right, are there others that would be helpful?",
+      "parentUuid": "240f8c62_f537a704",
       "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -133,6 +187,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec5c5dc_79c47e31",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b97c04_3c3adaaa",
+      "range": {
+        "startLine": 276,
+        "startChar": 51,
+        "endLine": 276,
+        "endChar": 69
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b231428_41a50f07",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e33654_1045b2e7",
+      "range": {
+        "startLine": 275,
+        "startChar": 67,
+        "endLine": 276,
+        "endChar": 24
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1084c05_1992a5e5",
@@ -146,6 +248,30 @@
       "writtenOn": "2024-09-26T19:38:38Z",
       "side": 1,
       "message": "Same here",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 63
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f927c0_5972cd3a",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1084c05_1992a5e5",
       "range": {
         "startLine": 281,
         "startChar": 0,
@@ -175,6 +301,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f527139_a2da0602",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "I figured it wasn\u0027t needed in this Rust API since the `callback: F` closure that we get isn\u0027t a free standing function like it is in the NDK API and the object typically captures which instance it\u0027s created for (the instance is passed into `Accessor::new` along with the callback).\n\nBut I see closures might be copyable/clonable so a caller might want to reuse a single definition and may benefit from the parameter, so I added the use of it! WDYT?",
+      "parentUuid": "5a2e5b8d_a2e2423e",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a75d133_fb297979",
         "filename": "libs/binder/rust/src/service.rs",
         "patchSetId": 36
@@ -186,6 +330,30 @@
       "writtenOn": "2024-09-26T19:38:38Z",
       "side": 1,
       "message": "if we always abort when the return is `None`, it would be better to change the signature to `Fn() -\u003e ConnectionInfo` to make that obvious to the user. then they\u0027ll be forced to abort themselves if they can\u0027t provide it",
+      "range": {
+        "startLine": 343,
+        "startChar": 35,
+        "endLine": 343,
+        "endChar": 44
+      },
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03552180_b5e913df",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-26T23:14:34Z",
+      "side": 1,
+      "message": "We shouldn\u0027t abort here. I was lazy and didn\u0027t go back and clean this up! We are now returning nullptr in the `None` case (which is allowed/expected to happen).",
+      "parentUuid": "2a75d133_fb297979",
       "range": {
         "startLine": 343,
         "startChar": 35,
