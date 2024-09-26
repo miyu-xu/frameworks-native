@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08f3d220_3c1d7d8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-26T07:34:50Z",
+      "side": 1,
+      "message": "Overall LGTM.",
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed862db_f509912f",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-26T07:34:50Z",
+      "side": 1,
+      "message": "Since you never construct values of these types, you can make them enums with zero possible values.\n```suggestion\npub enum LocalStabilityType {}\n```",
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
