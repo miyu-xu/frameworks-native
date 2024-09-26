@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d7a93b_5eea2c20",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T20:15:12Z",
+      "side": 1,
+      "message": "good idea, switch to an associated constant. i don\u0027t think `const fn` in traits works yet",
+      "parentUuid": "a03b51b8_8df69dcf",
+      "revId": "ddea704ea4bf57ca8d13e80bcbad32c08778041b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2df154d9_89bead83",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-26T19:58:01Z",
       "side": 1,
       "message": "I was thinking we could also make this a `const fn`, but then it would be difficult to change it back later if we need to. Wdyt?",
+      "revId": "ddea704ea4bf57ca8d13e80bcbad32c08778041b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9503412a_b5d7585c",
+        "filename": "libs/binder/rust/src/parcel/parcelable_holder.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T20:15:12Z",
+      "side": 1,
+      "message": "I was thinking of deleting this method but didn\u0027t have time to see who uses it yet. I don\u0027t feel strongly either way. If we switch to non-const, there is going to be churn to change the typename anyways. Going to leave it as is for this initial CL.",
+      "parentUuid": "2df154d9_89bead83",
       "revId": "ddea704ea4bf57ca8d13e80bcbad32c08778041b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
