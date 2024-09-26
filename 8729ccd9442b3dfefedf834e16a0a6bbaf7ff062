@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "075c6aca_5f5ad5be",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "394a31d8_9add4012",
+      "range": {
+        "startLine": 145,
+        "startChar": 24,
+        "endLine": 145,
+        "endChar": 34
+      },
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed862db_f509912f",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-09-26T07:34:50Z",
       "side": 1,
       "message": "Since you never construct values of these types, you can make them enums with zero possible values.\n```suggestion\npub enum LocalStabilityType {}\n```",
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733ca1b2_1cf429b3",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-26T19:50:44Z",
+      "side": 1,
+      "message": "Thanks, didn\u0027t know that trick",
+      "parentUuid": "7ed862db_f509912f",
       "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
