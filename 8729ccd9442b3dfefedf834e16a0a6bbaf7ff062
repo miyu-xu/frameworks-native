@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a4cdbf_c282b105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982430
+      },
+      "writtenOn": "2024-09-27T03:16:54Z",
+      "side": 1,
+      "message": "Confirmed this fixes our Rust HAL receiving vintf ParcelableHolder values",
+      "revId": "8729ccd9442b3dfefedf834e16a0a6bbaf7ff062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "394a31d8_9add4012",
