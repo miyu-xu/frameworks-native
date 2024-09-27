@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abb48ce2_894975e0",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-27T00:10:39Z",
+      "side": 1,
+      "message": "Oh are you rounding up to the next multiple of `MAX_MESSAGE_SIZE` here? libc has a `roundup` macro for that, and Trusty has a couple of them: `ROUND_UP` and `DIV_ROUND_UP` (probably what you need here).\n\nIn any case, it\u0027s worth at least a comment explaining why the -1 is here.",
+      "parentUuid": "3d0427a6_c3581859",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26668526_2207bc12",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 2
