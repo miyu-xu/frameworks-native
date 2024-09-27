@@ -16,6 +16,24 @@
       "message": "Is there a safety requirement for `instance` too? Presumably the same as what `CStr::from_ptr` requires.",
       "revId": "2a0691ed53fa93580c9e044983f45e1be0f085f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f46ac8_89828957",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 39
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-27T17:54:22Z",
+      "side": 1,
+      "message": "Yes, thanks! I added a the requirements here as a summary of the `CStr::from_ptr` requirements. (also added a null check with error log).",
+      "parentUuid": "f06398fe_5bd122e5",
+      "revId": "2a0691ed53fa93580c9e044983f45e1be0f085f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
