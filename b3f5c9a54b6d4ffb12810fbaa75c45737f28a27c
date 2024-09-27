@@ -335,6 +335,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22347c23_e352e637",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-27T22:39:06Z",
+      "side": 1,
+      "message": "I think this is right. Resolving now.",
+      "parentUuid": "2f527139_a2da0602",
+      "revId": "b3f5c9a54b6d4ffb12810fbaa75c45737f28a27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a75d133_fb297979",
