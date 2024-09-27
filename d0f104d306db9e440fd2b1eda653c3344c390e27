@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a47809a_3dade3a1",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-09-27T00:04:51Z",
+      "side": 1,
+      "message": "```suggestion\nconstexpr size_t kMaxMessageSize \u003d 4096;\n```",
+      "revId": "d0f104d306db9e440fd2b1eda653c3344c390e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29b89323_a2ecda84",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 2
