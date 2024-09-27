@@ -68,6 +68,24 @@
       "parentUuid": "c852482b_25556cb9",
       "revId": "731e8f3f99a7c034b23783f27439930012813b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b94a68f_75d9c2f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983010
+      },
+      "writtenOn": "2024-09-27T11:27:40Z",
+      "side": 1,
+      "message": "I tested it locally only on my AOSP13-based device.\n\nCould you please provide more technical details (logs for example) about this issue with broken devices.\nWhat devices are broken after applying this commit and why?",
+      "parentUuid": "dc53421c_ba6b3d3f",
+      "revId": "731e8f3f99a7c034b23783f27439930012813b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
