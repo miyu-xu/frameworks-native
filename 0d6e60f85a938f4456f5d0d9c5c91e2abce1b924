@@ -34,6 +34,24 @@
       "parentUuid": "1be69937_f5bddbd3",
       "revId": "0d6e60f85a938f4456f5d0d9c5c91e2abce1b924",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a75be2_1d6f0a6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-09-27T00:10:22Z",
+      "side": 1,
+      "message": "These headers should be updated as well.",
+      "parentUuid": "3855716d_8ac6aa53",
+      "revId": "0d6e60f85a938f4456f5d0d9c5c91e2abce1b924",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
