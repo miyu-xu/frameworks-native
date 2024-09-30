@@ -299,6 +299,24 @@
       "parentUuid": "15a3b5e5_4a2258db",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56ed303_acfb0ea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-30T22:13:30Z",
+      "side": 1,
+      "message": "Note Ronish, external folks can\u0027t see the failure, and I suspect in this case, the TH comparison is wrong, so re-running presubmit.\n\nAbdelrahman, the failure being reported is this:\n\n```\nframeworks/native/cmds/dumpstate/tests/dumpstate_test.cpp:966: Failure\nValue of: err\nExpected: is empty\n  Actual: \"Duration of \u0027Might as well dump. Dump!\u0027: 0.66s\\n\", whose size is 47\n```\n\nWe have no other record of this internally, except we have seen a similar flake several years ago.",
+      "parentUuid": "17136bfc_4c5c16c5",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
