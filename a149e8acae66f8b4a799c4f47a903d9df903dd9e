@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e458426_89dd0b92",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-30T20:45:49Z",
+      "side": 1,
+      "message": "You might add `!defined(__ANDROID_APEX__)` as a temp fix here with another todo. I am not sure if the below fix will work, but it might.",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "88f6b108_42e2a6cd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+              "range": {
+                "startLine": 301,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": "#if !defined(__ANDROID_PRODUCT__) \u0026\u0026 !defined(__ANDROID_APEX__) \u0026\u0026 \\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a149e8acae66f8b4a799c4f47a903d9df903dd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
