@@ -90,7 +90,6 @@ static const char* kStaticCachableList[] = {
         "virtualdevice",
         "virtualdevice_native",
         "webviewupdate",
-        "window",
         // go/keep-sorted end
 };
 
