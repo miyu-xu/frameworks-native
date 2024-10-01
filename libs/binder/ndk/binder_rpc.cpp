@@ -94,7 +94,7 @@ struct OnDeleteProviderHolder {
     }
     void* mData;
     ABinderRpc_AccessorProviderUserData_deleteCallback mOnDelete;
-    // needs to be copyable for std::function, but we will never copy it
+    // needs to be copy-able for std::function, but we will never copy it
     OnDeleteProviderHolder(const OnDeleteProviderHolder&) {
         LOG_ALWAYS_FATAL("This object can't be copied!");
     }
@@ -113,7 +113,7 @@ ABinderRpc_AccessorProvider* ABinderRpc_registerAccessorProvider(
     }
     if (data && onDelete == nullptr) {
         ALOGE("If a non-null data ptr is passed to ABinderRpc_registerAccessorProvider, then a "
-              "ABinderRpc_AccessorProviderUserData_deleteCallback must alse be passed to delete "
+              "ABinderRpc_AccessorProviderUserData_deleteCallback must also be passed to delete "
               "the data object once the ABinderRpc_AccessorProvider is removed.");
         return nullptr;
     }
@@ -179,7 +179,7 @@ struct OnDeleteConnectionInfoHolder {
     }
     void* mData;
     ABinderRpc_ConnectionInfoProviderUserData_delete mOnDelete;
-    // needs to be copyable for std::function, but we will never copy it
+    // needs to be copy-able for std::function, but we will never copy it
     OnDeleteConnectionInfoHolder(const OnDeleteConnectionInfoHolder&) {
         LOG_ALWAYS_FATAL("This object can't be copied!");
     }
@@ -197,7 +197,7 @@ ABinderRpc_Accessor* ABinderRpc_Accessor_new(
     }
     if (data && onDelete == nullptr) {
         ALOGE("If a non-null data ptr is passed to ABinderRpc_Accessor_new, then a "
-              "ABinderRpc_ConnectionInfoProviderUserData_delete callback must alse be passed to "
+              "ABinderRpc_ConnectionInfoProviderUserData_delete callback must also be passed to "
               "delete "
               "the data object once the ABinderRpc_Accessor is deleted.");
         return nullptr;
@@ -324,7 +324,7 @@ binder_status_t ABinderRpc_Accessor_delegateAccessor(const char* instance, AIBin
 
 ABinderRpc_ConnectionInfo* ABinderRpc_ConnectionInfo_new(const sockaddr* addr, socklen_t len) {
     if (addr == nullptr || len < 0 || static_cast<size_t>(len) < sizeof(sa_family_t)) {
-        ALOGE("Invalid arguments in Arpc_Connection_new");
+        ALOGE("Invalid arguments in ABinderRpc_Connection_new");
         return nullptr;
     }
     // socklen_t was int32_t on 32-bit and uint32_t on 64 bit.
@@ -337,8 +337,9 @@ ABinderRpc_ConnectionInfo* ABinderRpc_ConnectionInfo_new(const sockaddr* addr, s
             return nullptr;
         }
         sockaddr_vm vm = *reinterpret_cast<const sockaddr_vm*>(addr);
-        LOG_ACCESSOR_DEBUG("Arpc_ConnectionInfo_new found AF_VSOCK. family %d, port %d, cid %d",
-                           vm.svm_family, vm.svm_port, vm.svm_cid);
+        LOG_ACCESSOR_DEBUG(
+                "ABinderRpc_ConnectionInfo_new found AF_VSOCK. family %d, port %d, cid %d",
+                vm.svm_family, vm.svm_port, vm.svm_cid);
         return new ABinderRpc_ConnectionInfo(vm);
     } else if (addr->sa_family == AF_UNIX) {
         if (len != sizeof(sockaddr_un)) {
@@ -347,7 +348,7 @@ ABinderRpc_ConnectionInfo* ABinderRpc_ConnectionInfo_new(const sockaddr* addr, s
             return nullptr;
         }
         sockaddr_un un = *reinterpret_cast<const sockaddr_un*>(addr);
-        LOG_ACCESSOR_DEBUG("Arpc_ConnectionInfo_new found AF_UNIX. family %d, path %s",
+        LOG_ACCESSOR_DEBUG("ABinderRpc_ConnectionInfo_new found AF_UNIX. family %d, path %s",
                            un.sun_family, un.sun_path);
         return new ABinderRpc_ConnectionInfo(un);
     } else if (addr->sa_family == AF_INET) {
@@ -357,12 +358,14 @@ ABinderRpc_ConnectionInfo* ABinderRpc_ConnectionInfo_new(const sockaddr* addr, s
             return nullptr;
         }
         sockaddr_in in = *reinterpret_cast<const sockaddr_in*>(addr);
-        LOG_ACCESSOR_DEBUG("Arpc_ConnectionInfo_new found AF_INET. family %d, address %s, port %d",
-                           in.sin_family, inet_ntoa(in.sin_addr), ntohs(in.sin_port));
+        LOG_ACCESSOR_DEBUG(
+                "ABinderRpc_ConnectionInfo_new found AF_INET. family %d, address %s, port %d",
+                in.sin_family, inet_ntoa(in.sin_addr), ntohs(in.sin_port));
         return new ABinderRpc_ConnectionInfo(in);
     }
 
-    ALOGE("ARpc APIs only support AF_VSOCK right now but the supplied sockadder::sa_family is: %hu",
+    ALOGE("ABinderRpc APIs only support AF_VSOCK right now but the supplied sockaddr::sa_family "
+          "is: %hu",
           addr->sa_family);
     return nullptr;
 }
