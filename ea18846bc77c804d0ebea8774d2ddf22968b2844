@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03bf21f1_a0102f65",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-10-01T23:30:51Z",
+      "side": 1,
+      "message": "Reworded in this change. I think we will need to update it for all headers libbinder_ndk. Filed b/370833447.",
+      "parentUuid": "e7f47687_d00bb1fc",
+      "range": {
+        "startLine": 229,
+        "startChar": 3,
+        "endLine": 229,
+        "endChar": 68
+      },
+      "revId": "ea18846bc77c804d0ebea8774d2ddf22968b2844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a135c21_93214091",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-01T23:14:44Z",
       "side": 1,
       "message": "The data is, not the pointer. How about:\n\n\u003e The value returned is valid for the lifetime of clazz.",
+      "range": {
+        "startLine": 258,
+        "startChar": 3,
+        "endLine": 258,
+        "endChar": 10
+      },
+      "revId": "ea18846bc77c804d0ebea8774d2ddf22968b2844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4d31cc_669885ed",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-10-01T23:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a135c21_93214091",
       "range": {
         "startLine": 258,
         "startChar": 3,
