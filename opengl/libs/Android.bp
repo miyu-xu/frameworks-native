@@ -185,6 +185,9 @@ cc_library_shared {
         versions: ["29"],
     },
     header_libs: ["libsurfaceflinger_headers"],
+    sanitize: {
+        address: true,
+    },
 }
 
 cc_test {

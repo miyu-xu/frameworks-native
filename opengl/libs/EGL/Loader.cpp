@@ -58,8 +58,10 @@ namespace android {
 #ifndef SYSTEM_LIB_PATH
 #if defined(__LP64__)
 #define SYSTEM_LIB_PATH "/system/lib64"
+#define ASAN_SYSTEM_LIB_PATH "/data/asan/system/lib64"
 #else
 #define SYSTEM_LIB_PATH "/system/lib"
+#define ASAN_SYSTEM_LIB_PATH "/data/asan/system/lib"
 #endif
 #endif
 
@@ -73,6 +75,13 @@ static const char* HAL_SUBNAME_KEY_PROPERTIES[3] = {
         RO_DRIVER_SUFFIX_PROPERTY,
         RO_BOARD_PLATFORM_PROPERTY,
 };
+
+static const char* const ASAN_VENDOR_LIB_EGL_DIR =
+#if defined(__LP64__)
+        "/data/asan/vendor/lib64/egl";
+#else
+        "/vendor/lib/egl";
+#endif
 
 static const char* const VENDOR_LIB_EGL_DIR =
 #if defined(__LP64__)
@@ -347,12 +356,21 @@ void* Loader::open(egl_connection_t* cnx) {
 
     if (!cnx->libEgl) {
         cnx->libEgl = load_wrapper(SYSTEM_LIB_PATH "/libEGL.so");
+        if (!cnx->libEgl) {
+            cnx->libEgl = load_wrapper(ASAN_SYSTEM_LIB_PATH "/libEGL.so");
+        }
     }
     if (!cnx->libGles1) {
         cnx->libGles1 = load_wrapper(SYSTEM_LIB_PATH "/libGLESv1_CM.so");
+        if (!cnx->libGles1) {
+            cnx->libGles1 = load_wrapper(ASAN_SYSTEM_LIB_PATH "/libGLESv1_CM.so");
+        }
     }
     if (!cnx->libGles2) {
         cnx->libGles2 = load_wrapper(SYSTEM_LIB_PATH "/libGLESv2.so");
+        if (!cnx->libGles2) {
+            cnx->libGles2 = load_wrapper(ASAN_SYSTEM_LIB_PATH "/libGLESv2.so");
+        }
     }
 
     if (!cnx->libEgl || !cnx->libGles2 || !cnx->libGles1) {
@@ -502,8 +520,13 @@ static void* load_system_driver(const char* kind, const char* suffix, const bool
     void* dso = nullptr;
 
     const bool isSuffixAngle = suffix != nullptr && strcmp(suffix, ANGLE_SUFFIX_VALUE) == 0;
-    const std::string absolutePath =
-            findLibrary(libraryName, isSuffixAngle ? SYSTEM_LIB_PATH : VENDOR_LIB_EGL_DIR, exact);
+
+
+
+    std::string absolutePath = findLibrary(libraryName, isSuffixAngle ? SYSTEM_LIB_PATH : VENDOR_LIB_EGL_DIR, exact);
+    if (absolutePath.empty() && isSuffixAngle) {
+        absolutePath = findLibrary(libraryName, ASAN_SYSTEM_LIB_PATH, exact);
+    }
     if (absolutePath.empty()) {
         // this happens often, we don't want to log an error
         return nullptr;
