@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672488b6_d851da5d",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-01T22:44:09Z",
+      "side": 1,
+      "message": "be explicit here \"aborts.\"",
+      "range": {
+        "startLine": 229,
+        "startChar": 55,
+        "endLine": 229,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c4af5bef_bb09c9b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+              "range": {
+                "startLine": 229,
+                "startChar": 0,
+                "endLine": 230,
+                "endChar": 0
+              },
+              "replacement": " * Resetting/clearing the transactionCodeToFunctionMap is not allowed. Lifetime should be same as\n * clazz.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bca38dc4446ee18d74321884ac55de783a4dc3ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
