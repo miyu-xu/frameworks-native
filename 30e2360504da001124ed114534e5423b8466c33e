@@ -335,6 +335,24 @@
       "parentUuid": "d56ed303_acfb0ea5",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3413c3e8_a147bf09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-10-01T14:41:46Z",
+      "side": 1,
+      "message": "I\u0027ve had a look at the failing test, seems to not be related to screencap changes, so might actually be a flakey test especially considering it is also failing on http://r.android.com/3278331 and that the failures are all on internal targets and not on any of the public targets. @smoreland@google.com what do you think?",
+      "parentUuid": "52d4ac8b_beef6f52",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
