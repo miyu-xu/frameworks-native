@@ -16,6 +16,47 @@
       "message": "jreck, could you take this? I don\u0027t know enough about binder to have gotten this right the first time, so it should probably be reviewed by someone that knows better.",
       "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75fc26b3_7983fc75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-01T23:39:31Z",
+      "side": 1,
+      "message": "(specifically the contents of the defgroup, the rest LGTM)",
+      "parentUuid": "0de98344_ff5e2dc3",
+      "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89178d64_91df0620",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-01T23:39:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t do what you think it does :) https://www.doxygen.nl/manual/commands.html#cmddefgroup. This creates a group with the ID `ABinderRpc` with a page title \"APIs\".\n\nI\u0027d say just drop \"APIs\" rather than trying to add it to the name though, since that\u0027s consistent with the rest of the groups. The way this is used elsewhere in Android is as a topic heading for navigation: https://developer.android.com/ndk/reference. If you want a name other than `ABinderRpc` you can do that like: `@defgroup ABinderRpc Binder RPC` or whatever.",
+      "range": {
+        "startLine": 25,
+        "startChar": 24,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
