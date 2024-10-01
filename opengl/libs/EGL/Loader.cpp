@@ -58,8 +58,10 @@ namespace android {
 #ifndef SYSTEM_LIB_PATH
 #if defined(__LP64__)
 #define SYSTEM_LIB_PATH "/system/lib64"
+#define ASAN_SYSTEM_LIB_PATH "/data/asan/system/lib64"
 #else
 #define SYSTEM_LIB_PATH "/system/lib"
+#define ASAN_SYSTEM_LIB_PATH "/data/asan/system/lib"
 #endif
 #endif
 
@@ -502,8 +504,13 @@ static void* load_system_driver(const char* kind, const char* suffix, const bool
     void* dso = nullptr;
 
     const bool isSuffixAngle = suffix != nullptr && strcmp(suffix, ANGLE_SUFFIX_VALUE) == 0;
-    const std::string absolutePath =
-            findLibrary(libraryName, isSuffixAngle ? SYSTEM_LIB_PATH : VENDOR_LIB_EGL_DIR, exact);
+
+
+
+    std::string absolutePath = findLibrary(libraryName, isSuffixAngle ? SYSTEM_LIB_PATH : VENDOR_LIB_EGL_DIR, exact);
+    if (absolutePath.empty() && isSuffixAngle) {
+        absolutePath = findLibrary(libraryName, ASAN_SYSTEM_LIB_PATH, exact);
+    }
     if (absolutePath.empty()) {
         // this happens often, we don't want to log an error
         return nullptr;
