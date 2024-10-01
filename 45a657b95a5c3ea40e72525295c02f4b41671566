@@ -68,6 +68,23 @@
       "parentUuid": "6a62a0f5_95ec700d",
       "revId": "45a657b95a5c3ea40e72525295c02f4b41671566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44ae50c_b03539a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2024-10-01T18:45:40Z",
+      "side": 1,
+      "message": "@smoreland@google.com Looks like presubmit verified is failing? I don\u0027t see failure in checks tab. Can you help?",
+      "revId": "45a657b95a5c3ea40e72525295c02f4b41671566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
