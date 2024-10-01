@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f47687_d00bb1fc",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-01T23:14:44Z",
+      "side": 1,
+      "message": "I think the original text was more clear, fwiw (API council was fine with it as well). The first part of the sentence doesn\u0027t make much sense now because there\u0027s no explanation of how to reset/or clear (which is of course correct, because it\u0027s not allowed).\n\nIf you want to add the explicit language about aborting on nullptr, how about:\n\n\u003e Resetting/clearing the transactionCodeToFunctionMap is not allowed. Passing null for either clazz or transactionCodeToFunctionMap will abort.\n\nActually the _best_ way to document that would be to make it self-documenting:  revert this part of the change, and (you\u0027d want to do this as a separate CL, probably) add _Nonnull/_Nullable to the header. Annoyingly you have to do that for the whole header at once, which is why I didn\u0027t suggest it in the initial review, but it\u0027s a pretty helpful thing to do. Aside from making it self documenting, it also makes the API much better for Rust users (because bindgen doesn\u0027t have to wrap things in `std::Option` if it\u0027s `_Nonnull`).\n\nLike I said though that\u0027s not required and is sometimes a fair amount of work, so it\u0027s also fine if you\u0027d rather reword this for now (or even just revert back to the language in PS1)",
+      "range": {
+        "startLine": 229,
+        "startChar": 3,
+        "endLine": 229,
+        "endChar": 68
+      },
+      "revId": "ea18846bc77c804d0ebea8774d2ddf22968b2844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a135c21_93214091",
+        "filename": "libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-01T23:14:44Z",
+      "side": 1,
+      "message": "The data is, not the pointer. How about:\n\n\u003e The value returned is valid for the lifetime of clazz.",
+      "range": {
+        "startLine": 258,
+        "startChar": 3,
+        "endLine": 258,
+        "endChar": 10
+      },
+      "revId": "ea18846bc77c804d0ebea8774d2ddf22968b2844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
