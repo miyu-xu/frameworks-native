@@ -57,6 +57,30 @@
       },
       "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d310e182_5c1427e3",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-01T23:50:55Z",
+      "side": 1,
+      "message": "Got it! `@defgroup ABinderRpc Binder RPC` seems reasonable.",
+      "parentUuid": "89178d64_91df0620",
+      "range": {
+        "startLine": 25,
+        "startChar": 24,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
