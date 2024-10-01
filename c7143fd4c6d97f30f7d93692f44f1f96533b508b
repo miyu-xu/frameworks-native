@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de98344_ff5e2dc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-01T23:31:09Z",
+      "side": 1,
+      "message": "jreck, could you take this? I don\u0027t know enough about binder to have gotten this right the first time, so it should probably be reviewed by someone that knows better.",
+      "revId": "c7143fd4c6d97f30f7d93692f44f1f96533b508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
