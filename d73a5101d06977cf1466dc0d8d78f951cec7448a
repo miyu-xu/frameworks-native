@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d881e65b_f92ffc38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-10-01T13:58:41Z",
+      "side": 1,
+      "message": "The SLO for presubmit didn\u0027t pass as in 4 instances the cache invalidation didn\u0027t happen fast enough.\n\nAdding a delay to help deflake",
+      "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
