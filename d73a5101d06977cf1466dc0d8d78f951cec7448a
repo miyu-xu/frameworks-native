@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f62f857c_98ad61b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-02T02:26:50Z",
+      "side": 1,
+      "message": "please keep a close eye on it!",
+      "parentUuid": "d881e65b_f92ffc38",
+      "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e7e7b58_8f1bdb83",
@@ -79,6 +97,47 @@
         "endLine": 152,
         "endChar": 23
       },
+      "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4afb2081_9a28d6f7",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-02T02:26:50Z",
+      "side": 1,
+      "message": "nit: nullptr here, as there should be no other service registered",
+      "range": {
+        "startLine": 160,
+        "startChar": 24,
+        "endLine": 160,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e6cc9e59_99ffe428",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": "    } while (result2 \u003d\u003d nullptr);\n"
+            }
+          ]
+        }
+      ],
       "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
