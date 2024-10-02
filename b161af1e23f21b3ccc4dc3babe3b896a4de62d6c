@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463925b5_b6cd752a",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "If you don\u0027t have this everywhere, might be simpler to always use your own implementation.",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c02176_4eb09449",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "```suggestion\n// Creating a definition to hook a mock implementation of send_msg for unit test purposes\n```",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bb3b7f2_f398f964",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "If someone is supposed to define this macro, couldn\u0027t they also provide the declaration? Or is the macro defined with `-D`?",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610a97b4_218be519",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "If you removed this case, it would be much easier to test the rest (albeit less efficient).",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7062c6f8_8d782272",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "Could this whole loop be simplified like this?\n```\n            for (size_t current_iov \u003d 0; current_iov \u003c num_iov_to_send; current_iov++) {\n                    // Try to group this iov with more iovs\n                    if ((size + msg.iov[current_iov].iov_len) \u003c kMaxMessageSize) {\n                        // We can continue grouping iovs\n                        size +\u003d msg.iov[current_iov].iov_len;\n                        num_acc_iov++;\n                        continue;\n                    }\n...continue on line 188...\n```",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9ec0d0_bf5463e3",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-02T01:26:51Z",
+      "side": 1,
+      "message": "The current iov might also be bigger than 4k, so you\u0027ll need to split it. Instead of setting `num_acc_iov \u003d 1` here, I\u0027d set it to 0 and fall through to line 190 from here instead of `continue`ing.",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
