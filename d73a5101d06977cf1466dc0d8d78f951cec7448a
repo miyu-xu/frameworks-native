@@ -16,6 +16,47 @@
       "message": "The SLO for presubmit didn\u0027t pass as in 4 instances the cache invalidation didn\u0027t happen fast enough.\n\nAdding a delay to help deflake",
       "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7e7b58_8f1bdb83",
+        "filename": "libs/binder/tests/binderCacheUnitTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-02T02:25:37Z",
+      "side": 1,
+      "message": "You\u0027ll want this to be 20, for 1s. Sometimes scheduler delays delay that much here.",
+      "range": {
+        "startLine": 152,
+        "startChar": 22,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2744dfd4_90e7eefc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/tests/binderCacheUnitTest.cpp",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 153,
+                "endChar": 0
+              },
+              "replacement": "    int retry_count \u003d 20;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d73a5101d06977cf1466dc0d8d78f951cec7448a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
