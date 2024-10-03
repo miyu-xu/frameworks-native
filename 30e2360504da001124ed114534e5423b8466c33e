@@ -371,6 +371,23 @@
       "parentUuid": "3413c3e8_a147bf09",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea3a50e_16688c1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-03T01:15:49Z",
+      "side": 1,
+      "message": "I\u0027ve filed b/371083782 for the unrelated presubmit failure.",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
