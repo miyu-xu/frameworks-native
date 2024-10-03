@@ -101,6 +101,24 @@
       "message": "The current iov might also be bigger than 4k, so you\u0027ll need to split it. Instead of setting `num_acc_iov \u003d 1` here, I\u0027d set it to 0 and fall through to line 190 from here instead of `continue`ing.",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a69267_336271ab",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-03T00:58:13Z",
+      "side": 1,
+      "message": "We should fix at least this one before submitting, it might be a bug.",
+      "parentUuid": "3b9ec0d0_bf5463e3",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
