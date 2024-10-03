@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bbb437_732a4b44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-10-03T21:24:29Z",
+      "side": 1,
+      "message": "@smoreland@google.com we need a quick rubberstamp here, ty!",
+      "revId": "25525631fb7619fb5317be46e97227033fd48da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
