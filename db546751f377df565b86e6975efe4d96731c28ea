@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd795abe_64857b3f",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-03T20:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bacb52db_99afad42",
+      "range": {
+        "startLine": 320,
+        "startChar": 7,
+        "endLine": 320,
+        "endChar": 12
+      },
+      "revId": "db546751f377df565b86e6975efe4d96731c28ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4295640_7df7d5e4",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "db546751f377df565b86e6975efe4d96731c28ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f035ba_1a2e400c",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-03T20:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4295640_7df7d5e4",
+      "range": {
+        "startLine": 268,
+        "startChar": 3,
+        "endLine": 268,
+        "endChar": 8
+      },
       "revId": "db546751f377df565b86e6975efe4d96731c28ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
