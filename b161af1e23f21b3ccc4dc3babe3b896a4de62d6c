@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bf9689f_46759c62",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "Like I have it here or do you mean not to use the `ifndef` and change the name slightly to prevent collisions with the \"official\" macro?",
+      "parentUuid": "463925b5_b6cd752a",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0c02176_4eb09449",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-02T01:26:51Z",
       "side": 1,
       "message": "```suggestion\n// Creating a definition to hook a mock implementation of send_msg for unit test purposes\n```",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9206bb60_04045bba",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0c02176_4eb09449",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb01387f_012199cb",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "I am defining it with -D on the trusty side. Would you prefer to use header files that are provided only on each side?",
+      "parentUuid": "1bb3b7f2_f398f964",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610a97b4_218be519",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08cdd571_b32755f2",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "I coded it like that originally, but I decided to do it this way instead because I thought it made it harder to check the correctness of this case when looking at the code and because I expected this to be the most common case, so I wanted to keep it as efficient as possible.",
+      "parentUuid": "610a97b4_218be519",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7062c6f8_8d782272",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -82,6 +154,24 @@
       "writtenOn": "2024-10-02T01:26:51Z",
       "side": 1,
       "message": "Could this whole loop be simplified like this?\n```\n            for (size_t current_iov \u003d 0; current_iov \u003c num_iov_to_send; current_iov++) {\n                    // Try to group this iov with more iovs\n                    if ((size + msg.iov[current_iov].iov_len) \u003c kMaxMessageSize) {\n                        // We can continue grouping iovs\n                        size +\u003d msg.iov[current_iov].iov_len;\n                        num_acc_iov++;\n                        continue;\n                    }\n...continue on line 188...\n```",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd3e30f_c4dd4104",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "Not exactly, if we go to line 188 we are expecting that the current iovec length is greater than 4K and it needs to be broken into pieces, so it will still need some of the code used between lines 162-187 unless the algorithm is changed a little bit more or we are OK by sending that iovec by itself and not trying to merge it with more iovs.",
+      "parentUuid": "7062c6f8_8d782272",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -117,6 +207,24 @@
       "side": 1,
       "message": "We should fix at least this one before submitting, it might be a bug.",
       "parentUuid": "3b9ec0d0_bf5463e3",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3189db1_a3921c49",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-03T20:32:14Z",
+      "side": 1,
+      "message": "At this point current iov will be less than 4k because this whole `if..else` is only executed if the condition on line 162 `if (msg.iov[current_iov].iov_len \u003c kMaxMessageSize)` is true. Sorry, maybe the logic is a little convoluted.",
+      "parentUuid": "30a69267_336271ab",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
