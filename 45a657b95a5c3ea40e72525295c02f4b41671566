@@ -103,6 +103,24 @@
       "parentUuid": "d44ae50c_b03539a2",
       "revId": "45a657b95a5c3ea40e72525295c02f4b41671566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03969936_d70558ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-03T01:18:47Z",
+      "side": 1,
+      "message": "Note - this appears to be an unrelated failure, filed b/371083782.",
+      "parentUuid": "4e0a292c_4e2ebf3e",
+      "revId": "45a657b95a5c3ea40e72525295c02f4b41671566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
