@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacb52db_99afad42",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-03T18:23:22Z",
+      "side": 1,
+      "message": "Also need to document this.",
+      "range": {
+        "startLine": 320,
+        "startChar": 7,
+        "endLine": 320,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d8395530_e8ec7d77",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/binder_rpc.cpp",
+              "range": {
+                "startLine": 320,
+                "startChar": 0,
+                "endLine": 321,
+                "endChar": 0
+              },
+              "replacement": "    // The caller of this function is responsible for calling incStrong on the\n    // returned AIBinder.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db546751f377df565b86e6975efe4d96731c28ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4295640_7df7d5e4",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-03T18:23:22Z",
+      "side": 1,
+      "message": "Oops, need to update the docs!",
+      "range": {
+        "startLine": 268,
+        "startChar": 3,
+        "endLine": 268,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5573cc87_9463f2c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+              "range": {
+                "startLine": 268,
+                "startChar": 0,
+                "endLine": 269,
+                "endChar": 0
+              },
+              "replacement": " * This function is used to delegate the ownership of an IAccessor to another\n * process. This is used when a process is trying to send an IAccessor to\n * another process. The other process can then use the IAccessor to connect to\n * the service.\n *\n * \\param instance name of the service that the Accessor is responsible for.\n *        This string must remain valid and unchanged for the duration of this\n *        function call.\n * \\param binder binder that is being sent to another process. This binder must\n *        be an IAccessor implementation.\n * \\param outDelegator out parameter that will be set to the binder that can be\n *        used to connect to the service.\n * \\return binder_status_t error code\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db546751f377df565b86e6975efe4d96731c28ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
