@@ -15,5 +15,4 @@
  */
 #pragma once
 
-// TODO(b/349936395): set to true for Trusty
-#define API_LEVEL_AT_LEAST(sdk_api_level, vendor_api_level) (false)
+#define __INTRODUCED_IN_LLNDK(x) /* nothing on Trusty */
