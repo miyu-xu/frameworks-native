@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68fd0eb_a56651d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-04T15:05:30Z",
+      "side": 1,
+      "message": "This tracing is running on the client side right, clients are not yet registered to use perfetto so this might not work. You might have to do \u0027expensive\u0027 atrace",
+      "revId": "386947231da19882a05fe44cedaa72c622f871f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
