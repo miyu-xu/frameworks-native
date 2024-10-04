@@ -16,6 +16,24 @@
       "message": "This tracing is running on the client side right, clients are not yet registered to use perfetto so this might not work. You might have to do \u0027expensive\u0027 atrace",
       "revId": "386947231da19882a05fe44cedaa72c622f871f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e32379_4d88a499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-10-04T15:38:41Z",
+      "side": 1,
+      "message": "This uses atrace.\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/OS_android.cpp;l\u003d40;drc\u003d0d6e60f85a938f4456f5d0d9c5c91e2abce1b924",
+      "parentUuid": "c68fd0eb_a56651d9",
+      "revId": "386947231da19882a05fe44cedaa72c622f871f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
