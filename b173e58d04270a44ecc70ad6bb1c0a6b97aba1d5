@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4801f1ee_4237ccdb",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 30
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T09:00:06Z",
+      "side": 1,
+      "message": "Should we just add this file to the filegroup `libbinder_aidl`? It seems that no one will need it separately now.",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 812,
+        "endChar": 41
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4947f567_dfe5caa4",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 30
@@ -274,6 +297,29 @@
         "startChar": 70,
         "endLine": 197,
         "endChar": 79
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c704f1_d2f70343",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 30
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T09:00:06Z",
+      "side": 1,
+      "message": "nit: line too long.",
+      "range": {
+        "startLine": 205,
+        "startChar": 98,
+        "endLine": 205,
+        "endChar": 101
       },
       "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
