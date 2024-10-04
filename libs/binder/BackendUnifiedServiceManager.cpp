@@ -115,9 +115,16 @@ binder::Status BackendUnifiedServiceManager::updateCache(const std::string& serv
         return binder::Status::ok();
     }
     if (service.getTag() == os::Service::Tag::binder) {
+        binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL, "BinderCacheWithInvalidation::updateCache");
         sp<IBinder> binder = service.get<os::Service::Tag::binder>();
-        if (binder && mCacheForGetService->isClientSideCachingEnabled(serviceName) &&
-            binder->isBinderAlive()) {
+        if (!binder) {
+            binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL,
+                                           "BinderCacheWithInvalidation::updateCache binder null");
+        } else if (!binder->isBinderAlive()) {
+            binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL,
+                                           "BinderCacheWithInvalidation::updateCache binder "
+                                           "isBinderAlive false");
+        } else if (mCacheForGetService->isClientSideCachingEnabled(serviceName)) {
             return mCacheForGetService->setItem(serviceName, binder);
         }
     }
