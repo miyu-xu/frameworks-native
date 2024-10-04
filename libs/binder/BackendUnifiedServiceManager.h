@@ -18,6 +18,7 @@
 #include <android/os/BnServiceManager.h>
 #include <android/os/IServiceManager.h>
 #include <binder/IPCThreadState.h>
+#include <binder/Trace.h>
 #include <map>
 #include <memory>
 
@@ -59,6 +60,7 @@ public:
     }
 
     bool removeItem(const std::string& key, const sp<IBinder>& who) {
+        binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL, "BinderCacheWithInvalidation::removeItem");
         std::lock_guard<std::mutex> lock(mCacheMutex);
         if (auto it = mCache.find(key); it != mCache.end()) {
             if (it->second.service == who) {
@@ -86,6 +88,8 @@ public:
                 return binder::Status::fromStatusT(status);
             }
         }
+        binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL,
+                                       "BinderCacheWithInvalidation::setItem Successfully Cached");
         std::lock_guard<std::mutex> lock(mCacheMutex);
         Entry entry = {.service = item, .deathRecipient = deathRecipient};
         mCache[key] = entry;
