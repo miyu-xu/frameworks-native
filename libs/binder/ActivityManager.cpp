@@ -17,6 +17,9 @@
 #include <mutex>
 #include <unistd.h>
 
+#include <android/app/JavaMethodLocation.h>
+#include <android/app/MethodDescriptor.h>
+#include <android/app/TargetProcessInfo.h>
 #include <android/permission_manager.h>
 #include <binder/ActivityManager.h>
 #include <binder/Binder.h>
@@ -172,6 +175,16 @@ status_t ActivityManager::unlinkToDeath(const sp<IBinder::DeathRecipient>& recip
     sp<IActivityManager> service = getService();
     if (service != nullptr) {
         return IInterface::asBinder(service)->unlinkToDeath(recipient);
+    }
+    return INVALID_OPERATION;
+}
+
+status_t ActivityManager::locateJavaMethod(const app::TargetProcessInfo& targetProcess,
+                                           const app::MethodDescriptor& methodDescriptor,
+                                           app::JavaMethodLocation* out) {
+    sp<IActivityManager> service = getService();
+    if (service != nullptr) {
+        return service->locateJavaMethod(targetProcess, methodDescriptor, out);
     }
     return INVALID_OPERATION;
 }

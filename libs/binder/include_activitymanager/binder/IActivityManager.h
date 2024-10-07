@@ -18,10 +18,17 @@
 
 #ifndef __ANDROID_VNDK__
 
-#include <binder/IUidObserver.h>
 #include <binder/IInterface.h>
+#include <binder/IUidObserver.h>
+#include <binder/Parcelable.h>
 
 namespace android {
+
+namespace app {
+class JavaMethodLocation;
+class MethodDescriptor;
+class TargetProcessInfo;
+} // namespace app
 
 // ------------------------------------------------------------------------------------
 
@@ -55,9 +62,13 @@ public:
     virtual status_t logFgsApiEnd(int32_t apiType, int32_t appUid, int32_t appPid) = 0;
     virtual status_t logFgsApiStateChanged(int32_t apiType, int32_t state, int32_t appUid,
                                            int32_t appPid) = 0;
+    virtual status_t locateJavaMethod(const app::TargetProcessInfo& targetProcess,
+                                      const app::MethodDescriptor& methodDescriptor,
+                                      app::JavaMethodLocation* out) = 0;
 
     enum {
-        OPEN_CONTENT_URI_TRANSACTION = IBinder::FIRST_CALL_TRANSACTION,
+        LOCATE_JAVA_METHOD = IBinder::FIRST_CALL_TRANSACTION,
+        OPEN_CONTENT_URI_TRANSACTION,
         REGISTER_UID_OBSERVER_TRANSACTION,
         UNREGISTER_UID_OBSERVER_TRANSACTION,
         REGISTER_UID_OBSERVER_FOR_UIDS_TRANSACTION,
@@ -68,7 +79,7 @@ public:
         CHECK_PERMISSION_TRANSACTION,
         LOG_FGS_API_BEGIN_TRANSACTION,
         LOG_FGS_API_END_TRANSACTION,
-        LOG_FGS_API_STATE_CHANGED_TRANSACTION
+        LOG_FGS_API_STATE_CHANGED_TRANSACTION,
     };
 };
 
