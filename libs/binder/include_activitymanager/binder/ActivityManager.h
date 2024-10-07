@@ -25,6 +25,12 @@
 // ---------------------------------------------------------------------------
 namespace android {
 
+namespace app {
+class JavaMethodExecutableOffset;
+class MethodDescriptor;
+class TargetProcess;
+} // namespace app
+
 #define DECLARE_PROCESS_STATE(name) \
     PROCESS_STATE_##name = (int32_t) app::ProcessStateEnum::name
 
@@ -97,6 +103,9 @@ public:
 
     status_t linkToDeath(const sp<IBinder::DeathRecipient>& recipient);
     status_t unlinkToDeath(const sp<IBinder::DeathRecipient>& recipient);
+    status_t getJavaMethodExecutableOffset(const app::TargetProcess& targetProcess,
+                                           const app::MethodDescriptor& methodDescriptor,
+                                           app::JavaMethodExecutableOffset* out);
 
 private:
     Mutex mLock;
