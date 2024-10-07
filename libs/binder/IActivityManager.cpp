@@ -17,6 +17,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <android/app/JavaMethodExecutableOffset.h>
+#include <android/app/MethodDescriptor.h>
+#include <android/app/TargetProcessInfo.h>
 #include <android/permission_manager.h>
 #include <binder/ActivityManager.h>
 #include <binder/IActivityManager.h>
@@ -229,6 +232,21 @@ public:
             return err;
         }
         return NO_ERROR;
+    }
+
+    virtual status_t getJavaMethodExecutableOffset(const app::TargetProcessInfo& targetProcess,
+                                                   const app::MethodDescriptor& methodDescriptor,
+                                                   app::JavaMethodExecutableOffset* out) {
+        Parcel data, reply;
+        data.writeInterfaceToken(IActivityManager::getInterfaceDescriptor());
+        data.writeParcelable(targetProcess);
+        data.writeParcelable(methodDescriptor);
+        status_t err = remote()->transact(GET_JAVA_METHOD_EXECUTABLE_OFFSET, data, &reply);
+        if (err != NO_ERROR || ((err = reply.readExceptionCode()) != NO_ERROR)) {
+            ALOGD("%s: getJavaMethodExecutableOffset txn failed, %d", __func__, err);
+            return err;
+        }
+        return reply.readParcelable(out);
     }
 };
 
