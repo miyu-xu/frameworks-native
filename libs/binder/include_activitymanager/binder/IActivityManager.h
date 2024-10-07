@@ -18,10 +18,17 @@
 
 #ifndef __ANDROID_VNDK__
 
-#include <binder/IUidObserver.h>
 #include <binder/IInterface.h>
+#include <binder/IUidObserver.h>
+#include <binder/Parcelable.h>
 
 namespace android {
+
+namespace app {
+class ExecutableMethodFileOffsets;
+class MethodDescriptor;
+class TargetProcess;
+} // namespace app
 
 // ------------------------------------------------------------------------------------
 
@@ -55,6 +62,9 @@ public:
     virtual status_t logFgsApiEnd(int32_t apiType, int32_t appUid, int32_t appPid) = 0;
     virtual status_t logFgsApiStateChanged(int32_t apiType, int32_t state, int32_t appUid,
                                            int32_t appPid) = 0;
+    virtual status_t getExecutableMethodFileOffsets(const app::TargetProcess& targetProcess,
+                                                    const app::MethodDescriptor& methodDescriptor,
+                                                    app::ExecutableMethodFileOffsets* out) = 0;
 
     enum {
         OPEN_CONTENT_URI_TRANSACTION = IBinder::FIRST_CALL_TRANSACTION,
@@ -68,7 +78,8 @@ public:
         CHECK_PERMISSION_TRANSACTION,
         LOG_FGS_API_BEGIN_TRANSACTION,
         LOG_FGS_API_END_TRANSACTION,
-        LOG_FGS_API_STATE_CHANGED_TRANSACTION
+        LOG_FGS_API_STATE_CHANGED_TRANSACTION,
+        GET_JAVA_METHOD_EXECUTABLE_OFFSET
     };
 };
 
