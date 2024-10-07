@@ -17,6 +17,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <android/app/JavaMethodLocation.h>
+#include <android/app/MethodDescriptor.h>
+#include <android/app/TargetProcessInfo.h>
 #include <android/permission_manager.h>
 #include <binder/ActivityManager.h>
 #include <binder/IActivityManager.h>
@@ -226,6 +229,26 @@ public:
                                           IBinder::FLAG_ONEWAY);
         if (err != NO_ERROR || ((err = reply.readExceptionCode()) != NO_ERROR)) {
             ALOGD("%s: FGS Logger Transaction failed, %d", __func__, err);
+            return err;
+        }
+        return NO_ERROR;
+    }
+
+    virtual status_t locateJavaMethod(const app::TargetProcessInfo& targetProcess,
+                                      const app::MethodDescriptor& methodDescriptor,
+                                      app::JavaMethodLocation* out) {
+        Parcel data, reply;
+        data.writeInterfaceToken(IActivityManager::getInterfaceDescriptor());
+        data.writeParcelable(targetProcess);
+        data.writeParcelable(methodDescriptor);
+        status_t err = remote()->transact(LOCATE_JAVA_METHOD, data, &reply);
+        if (err != NO_ERROR || ((err = reply.readExceptionCode()) != NO_ERROR)) {
+            ALOGD("%s: locateJavaMethod txn failed, %d", __func__, err);
+            return err;
+        }
+        status_t reply_err = reply.readParcelable(out);
+        if (reply_err != NO_ERROR || ((err = reply.readExceptionCode()) != NO_ERROR)) {
+            ALOGD("%s: locateJavaMethod readParcelable failed, %d", __func__, err);
             return err;
         }
         return NO_ERROR;
