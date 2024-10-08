@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd4f3d7_2c6530c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-10-08T00:59:26Z",
+      "side": 1,
+      "message": "@smoreland@google.com This CL is ready to submit. Could you PTAL?",
+      "revId": "163415a4de2fddee1d5b9760abe3f465ab2cc5a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
