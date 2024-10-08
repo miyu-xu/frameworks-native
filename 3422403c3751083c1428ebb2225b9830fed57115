@@ -1,0 +1,218 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99817979_9ab742e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "Just some minor nits, thanks Linnan!!!",
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "761d0446_cf5d2de7",
+        "filename": "services/inputflinger/dispatcher/DragState.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "started",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "60e739b4_5d8f0b62",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/dispatcher/DragState.h",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "    // Indicate which device started this drag and drop.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5385c9_41745bba",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12215,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "super nit: /\\*sendDown\u003d\\*/",
+      "range": {
+        "startLine": 12215,
+        "startChar": 26,
+        "endLine": 12215,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f7652ee8_5b1a4e8a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 12216,
+                "startChar": 0,
+                "endLine": 12216,
+                "endChar": 0
+              },
+              "replacement": "    // Click first window with device B, we should ensure dispatcher work well.\n    mDispatcher-\u003enotifyMotion(MotionArgsBuilder(ACTION_DOWN, AINPUT_SOURCE_TOUCHSCREEN)\n                                      .deviceId(deviceB)\n                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(50).y(50))\n                                      .build());\n    mWindow-\u003econsumeMotionDown();\n\n    mDispatcher-\u003enotifyMotion(MotionArgsBuilder(ACTION_UP, AINPUT_SOURCE_TOUCHSCREEN)\n                                      .deviceId(deviceB)\n                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(50).y(50))\n                                      .build());\n    mWindow-\u003econsumeMotionUp();\n\n    // Move with device A.\n    mDispatcher-\u003enotifyMotion(MotionArgsBuilder(ACTION_MOVE, AINPUT_SOURCE_TOUCHSCREEN)\n                                      .deviceId(deviceA)\n                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))\n                                      .pointer(PointerBuilder(1, ToolType::FINGER).x(50).y(50))\n                                      .build());\n\n    mDragWindow-\u003econsumeMotionMove(ui::LogicalDisplayId::DEFAULT,\n                                   AMOTION_EVENT_FLAG_NO_FOCUS_CHANGE);\n    mWindow-\u003econsumeDragEvent(false, 50, 50);\n    mSecondWindow-\u003econsumeMotionMove();\n\n    // Release the drag pointer should perform drop.\n    mDispatcher-\u003enotifyMotion(MotionArgsBuilder(POINTER_1_UP, AINPUT_SOURCE_TOUCHSCREEN)\n                                      .deviceId(deviceA)\n                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))\n                                      .pointer(PointerBuilder(1, ToolType::FINGER).x(50).y(50))\n                                      .build());\n    mDragWindow-\u003econsumeMotionUp(ui::LogicalDisplayId::DEFAULT, AMOTION_EVENT_FLAG_NO_FOCUS_CHANGE);\n    mFakePolicy-\u003eassertDropTargetEquals(*mDispatcher, mWindow-\u003egetToken());\n    mSecondWindow-\u003econsumeMotionMove();\n\n    // Release all pointer.\n    mDispatcher-\u003enotifyMotion(MotionArgsBuilder(ACTION_UP, AINPUT_SOURCE_TOUCHSCREEN)\n                                      .deviceId(deviceA)\n                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))\n                                      .build());\n    mSecondWindow-\u003econsumeMotionUp();\n    mWindow-\u003eassertNoEvents();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8c061c_e3f72585",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12218,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "Just curious: in the repro, this is a mouse. Does that make any difference here?",
+      "range": {
+        "startLine": 12218,
+        "startChar": 61,
+        "endLine": 12218,
+        "endChar": 86
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8e6b3e9_b18a7cb6",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12222,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "nit: could you plz also check the device ids of these events (helps read the test a bit)",
+      "range": {
+        "startLine": 12222,
+        "startChar": 4,
+        "endLine": 12222,
+        "endChar": 33
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b08f98_040686a5",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12234,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "nit: this moved, but the coords didn\u0027t change. maybe also change the coords?",
+      "range": {
+        "startLine": 12233,
+        "startChar": 85,
+        "endLine": 12234,
+        "endChar": 95
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2632f60c_08000377",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12242,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "Releasing the drag pointer should cause drop",
+      "range": {
+        "startLine": 12242,
+        "startChar": 7,
+        "endLine": 12242,
+        "endChar": 52
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64651ce0_13f60cc6",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12252,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-10-08T20:33:40Z",
+      "side": 1,
+      "message": "pointers",
+      "range": {
+        "startLine": 12252,
+        "startChar": 19,
+        "endLine": 12252,
+        "endChar": 26
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
