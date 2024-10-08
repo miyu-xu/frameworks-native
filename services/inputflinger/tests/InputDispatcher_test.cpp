@@ -12192,6 +12192,72 @@ TEST_F(InputDispatcherDragTests, NoDragAndDropWithHoveringPointer) {
             << "Drag and drop should not work with a hovering pointer";
 }
 
+TEST_F(InputDispatcherDragTests, DragAndDropWhenSplitTouchAndMultiDevice) {
+    const DeviceId deviceA = 1;
+    const DeviceId deviceB = 2;
+    // First down on second window with deviceA.
+    mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_DOWN, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceA)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))
+                                      .build());
+    mSecondWindow->consumeMotionDown();
+
+    // Second down on first window with deviceA
+    mDispatcher->notifyMotion(MotionArgsBuilder(POINTER_1_DOWN, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceA)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))
+                                      .pointer(PointerBuilder(1, ToolType::FINGER).x(50).y(50))
+                                      .build());
+    mWindow->consumeMotionDown();
+    mSecondWindow->consumeMotionMove();
+
+    // Perform drag and drop from first window.
+    ASSERT_TRUE(startDrag(false));
+
+    // Click first window with device B, we should ensure dispatcher work well.
+    mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_DOWN, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceB)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(50).y(50))
+                                      .build());
+    mWindow->consumeMotionDown();
+
+    mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_UP, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceB)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(50).y(50))
+                                      .build());
+    mWindow->consumeMotionUp();
+
+    // Move with device A.
+    mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_MOVE, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceA)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))
+                                      .pointer(PointerBuilder(1, ToolType::FINGER).x(50).y(50))
+                                      .build());
+
+    mDragWindow->consumeMotionMove(ui::LogicalDisplayId::DEFAULT,
+                                   AMOTION_EVENT_FLAG_NO_FOCUS_CHANGE);
+    mWindow->consumeDragEvent(false, 50, 50);
+    mSecondWindow->consumeMotionMove();
+
+    // Release the drag pointer should perform drop.
+    mDispatcher->notifyMotion(MotionArgsBuilder(POINTER_1_UP, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceA)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))
+                                      .pointer(PointerBuilder(1, ToolType::FINGER).x(50).y(50))
+                                      .build());
+    mDragWindow->consumeMotionUp(ui::LogicalDisplayId::DEFAULT, AMOTION_EVENT_FLAG_NO_FOCUS_CHANGE);
+    mFakePolicy->assertDropTargetEquals(*mDispatcher, mWindow->getToken());
+    mSecondWindow->consumeMotionMove();
+
+    // Release all pointer.
+    mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_UP, AINPUT_SOURCE_TOUCHSCREEN)
+                                      .deviceId(deviceA)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(150).y(50))
+                                      .build());
+    mSecondWindow->consumeMotionUp();
+    mWindow->assertNoEvents();
+}
+
 class InputDispatcherDropInputFeatureTest : public InputDispatcherTest {};
 
 TEST_F(InputDispatcherDropInputFeatureTest, WindowDropsInput) {
