@@ -2567,8 +2567,9 @@ bool SurfaceFlinger::updateLayerSnapshots(VsyncId vsyncId, nsecs_t frameTimeNs,
     }
 
     updateLayerHistory(latchTime);
-    mLayerSnapshotBuilder.forEachVisibleSnapshot([&](const frontend::LayerSnapshot& snapshot) {
-        if (mLayersIdsWithQueuedFrames.find(snapshot.path.id) == mLayersIdsWithQueuedFrames.end())
+    mLayerSnapshotBuilder.forEachHasSomethingSnapshot([&](const frontend::LayerSnapshot& snapshot) {
+        if (mLayersIdsWithQueuedFrames.find(snapshot.path.id) == mLayersIdsWithQueuedFrames.end() &&
+            !snapshot.changes.test(frontend::RequestedLayerState::Changes::Visibility))
             return;
         Region visibleReg;
         visibleReg.set(snapshot.transformedBoundsWithoutTransparentRegion);
