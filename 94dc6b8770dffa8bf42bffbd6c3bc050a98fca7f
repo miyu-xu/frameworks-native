@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b12f58f_c19a468d",
+        "filename": "libs/binder/rust/sys/BinderBindings.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-09T22:28:29Z",
+      "side": 1,
+      "message": "smoreland@ - do you know the \"proper\" way for me to indicate this? I made up this define, and I suspect we already have a more standardized one.",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
