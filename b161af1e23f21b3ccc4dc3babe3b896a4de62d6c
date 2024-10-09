@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf9079ae_4ef7a373",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-09T01:31:43Z",
+      "side": 1,
+      "message": "You\u0027re only calling it from one place, so you don\u0027t even need a macro. Just expand the code manually.",
+      "parentUuid": "8bf9689f_46759c62",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0c02176_4eb09449",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I am defining it with -D on the trusty side. Would you prefer to use header files that are provided only on each side?",
       "parentUuid": "1bb3b7f2_f398f964",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dafebce_35b23321",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-09T01:31:43Z",
+      "side": 1,
+      "message": "I didn\u0027t have a specific alternative in mind. On second thought, this is probably fine.\n\nOne simplification you could make is move the declaration outside the `#else`, so you\u0027re enforcing the same signature for `SEND_MSG_IMPL` regardless of how it was defined.",
+      "parentUuid": "bb01387f_012199cb",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
