@@ -263,6 +263,24 @@
       "parentUuid": "30a69267_336271ab",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eab9c76_12faf388",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-09T01:32:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b3189db1_a3921c49",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
