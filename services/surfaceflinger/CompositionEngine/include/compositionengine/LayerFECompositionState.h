@@ -103,7 +103,7 @@ struct LayerFECompositionState {
     ui::LayerFilter outputFilter;
 
     // If false, this layer should not be considered visible
-    bool isVisible{true};
+    bool isVisible{false};
 
     // True if the layer is completely opaque
     bool isOpaque{true};

@@ -1178,6 +1178,14 @@ void LayerSnapshotBuilder::forEachVisibleSnapshot(const Visitor& visitor) {
     }
 }
 
+void LayerSnapshotBuilder::forEachHasSomethingSnapshot(const ConstVisitor& visitor) const {
+    for (int i = 0; i < static_cast<int>(mSnapshots.size()); i++) {
+        LayerSnapshot& snapshot = *mSnapshots[(size_t)i];
+        if (!snapshot.hasSomethingToDraw()) continue;
+        visitor(snapshot);
+    }
+}
+
 void LayerSnapshotBuilder::forEachInputSnapshot(const ConstVisitor& visitor) const {
     for (int i = mNumInterestingSnapshots - 1; i >= 0; i--) {
         LayerSnapshot& snapshot = *mSnapshots[(size_t)i];
