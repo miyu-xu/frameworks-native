@@ -16,6 +16,23 @@
       "message": "The main thing I think this needs feedback on is whether these things make sense to expose.\n\nI do also think that in the future we should do a rework to the cfg system on this library. We should be describing most of this with additive feature flags, and trusty should be described by `target_os \u003d trusty`.",
       "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa96e162_7ab8061a",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-09T22:29:48Z",
+      "side": 1,
+      "message": "This also seemed odd - if we need to explicitly `None` this out on the platform, it seems weird that the NDK doesn\u0027t expose it.",
+      "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
