@@ -207,8 +207,10 @@ pub const LAST_CALL_TRANSACTION: TransactionCode = sys::LAST_CALL_TRANSACTION;
 /// Corresponds to TF_ONE_WAY -- an asynchronous call.
 pub const FLAG_ONEWAY: TransactionFlags = sys::FLAG_ONEWAY;
 /// Corresponds to TF_CLEAR_BUF -- clear transaction buffers after call is made.
+#[cfg(not(android_ndk))]
 pub const FLAG_CLEAR_BUF: TransactionFlags = sys::FLAG_CLEAR_BUF;
 /// Set to the vendor flag if we are building for the VNDK, 0 otherwise
+#[cfg(not(android_ndk))]
 pub const FLAG_PRIVATE_LOCAL: TransactionFlags = sys::FLAG_PRIVATE_LOCAL;
 
 /// Internal interface of binder local or remote objects for making
@@ -221,7 +223,7 @@ pub trait IBinderInternal: IBinder {
     fn is_binder_alive(&self) -> bool;
 
     /// Indicate that the service intends to receive caller security contexts.
-    #[cfg(not(android_vndk))]
+    #[cfg(not(any(android_vndk, android_ndk)))]
     fn set_requesting_sid(&mut self, enable: bool);
 
     /// Dump this object to the given file handle
@@ -346,6 +348,9 @@ impl InterfaceClass {
                 panic!("Expected non-null class pointer from AIBinder_Class_define!");
             }
             sys::AIBinder_Class_setOnDump(class, Some(I::on_dump));
+            // TODO this seems odd, but as far as I can tell, the header is missing from the latest
+            // NDK. Is it maybe in the preview?
+            #[cfg(not(android_ndk))]
             sys::AIBinder_Class_setHandleShellCommand(class, None);
             class
         };
