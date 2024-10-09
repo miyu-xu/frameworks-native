@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "978a628d_a176af4f",
+        "filename": "services/inputflinger/dispatcher/DragState.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "761d0446_cf5d2de7",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f5385c9_41745bba",
@@ -100,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4bde1a4_ec52b98d",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12215,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f5385c9_41745bba",
+      "range": {
+        "startLine": 12215,
+        "startChar": 26,
+        "endLine": 12215,
+        "endChar": 31
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec8c061c_e3f72585",
@@ -113,6 +161,30 @@
       "writtenOn": "2024-10-08T20:33:40Z",
       "side": 1,
       "message": "Just curious: in the repro, this is a mouse. Does that make any difference here?",
+      "range": {
+        "startLine": 12218,
+        "startChar": 61,
+        "endLine": 12218,
+        "endChar": 86
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177fc6cf_95e4f0a8",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12218,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec8c061c_e3f72585",
       "range": {
         "startLine": 12218,
         "startChar": 61,
@@ -146,6 +218,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85fc2155_674afcc4",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12222,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e6b3e9_b18a7cb6",
+      "range": {
+        "startLine": 12222,
+        "startChar": 4,
+        "endLine": 12222,
+        "endChar": 33
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98b08f98_040686a5",
@@ -159,6 +255,30 @@
       "writtenOn": "2024-10-08T20:33:40Z",
       "side": 1,
       "message": "nit: this moved, but the coords didn\u0027t change. maybe also change the coords?",
+      "range": {
+        "startLine": 12233,
+        "startChar": 85,
+        "endLine": 12234,
+        "endChar": 95
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2374136_6ab2ad54",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12234,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98b08f98_040686a5",
       "range": {
         "startLine": 12233,
         "startChar": 85,
@@ -192,6 +312,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf2ad3b_5a059d33",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12242,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2632f60c_08000377",
+      "range": {
+        "startLine": 12242,
+        "startChar": 7,
+        "endLine": 12242,
+        "endChar": 52
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64651ce0_13f60cc6",
@@ -205,6 +349,30 @@
       "writtenOn": "2024-10-08T20:33:40Z",
       "side": 1,
       "message": "pointers",
+      "range": {
+        "startLine": 12252,
+        "startChar": 19,
+        "endLine": 12252,
+        "endChar": 26
+      },
+      "revId": "3422403c3751083c1428ebb2225b9830fed57115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16a7902_e31d6521",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 12252,
+      "author": {
+        "id": 1934851
+      },
+      "writtenOn": "2024-10-09T02:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64651ce0_13f60cc6",
       "range": {
         "startLine": 12252,
         "startChar": 19,
