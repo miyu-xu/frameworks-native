@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a69efa82_2e6a45eb",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 30
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "I can\u0027t remove this. The libraries depending on it aren\u0027t in AOSP and they might not want to write the more detailed path here.",
+      "parentUuid": "fa53bacf_901fd80c",
+      "range": {
+        "startLine": 781,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 35
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4801f1ee_4237ccdb",
         "filename": "libs/binder/Android.bp",
         "patchSetId": 30
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-04T09:00:06Z",
       "side": 1,
       "message": "Should we just add this file to the filegroup `libbinder_aidl`? It seems that no one will need it separately now.",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 812,
+        "endChar": 41
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7e18c4_0f019ec2",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 30
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "No, that gets used in the framework. I\u0027ll keep this file out of there.",
+      "parentUuid": "4801f1ee_4237ccdb",
       "range": {
         "startLine": 812,
         "startChar": 0,
@@ -60,6 +108,24 @@
       "writtenOn": "2024-10-04T02:30:47Z",
       "side": 1,
       "message": "add: `visibility: [\":__subpackages__\"],` here (or put the source directly in libbinder_kernel_defaults so you don\u0027t have another module - you can do it, but it requires a `aidl: { ...: \"aidl\", }` entry in the cc_defaults module as well.",
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "022deb14_54d15567",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 30
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4947f567_dfe5caa4",
       "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +171,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5326e629_2494d3aa",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08c6af94_f0c0178f",
+      "range": {
+        "startLine": 424,
+        "startChar": 26,
+        "endLine": 424,
+        "endChar": 48
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ece40080_58da3d2c",
@@ -142,6 +232,30 @@
           ]
         }
       ],
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a2082de_e7446cdc",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "It\u0027s likely unintended use of this function and I like finding issues sooner rather than later.\nBut, passing it through does let the caller decide what they want and when to check for null, so... Done.",
+      "parentUuid": "ece40080_58da3d2c",
+      "range": {
+        "startLine": 425,
+        "startChar": 8,
+        "endLine": 425,
+        "endChar": 28
+      },
       "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -212,6 +326,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0ab3b13_ad32c9be",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "This function is really only useful if it\u0027s _not_ a local object. \n\nIf it\u0027s a local object, then there is no need to wrap it in a delegator as it can be sent to other processes and/or registered with servicemanager directly.\n\nThe lazy host `accessor` process is getting this binder from the `virtmgr` host process because that\u0027s the only process that can set up the connection.",
+      "parentUuid": "9c8aa541_33b3e671",
+      "range": {
+        "startLine": 436,
+        "startChar": 85,
+        "endLine": 436,
+        "endChar": 93
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6fd7ae_29c317ec",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "`validateAccessor()` would have already caught this with the failed call on the binder, but I changed `validateAccessor()` to use checked_interface_cast so we can differentiate between errors. It could be helpful for a caller, and it was helpful when writing tests.\n\nAdded a comment here saying it\u0027s safe because we already called validateAccessor (no need for a 3rd IPC call).",
+      "parentUuid": "0a2340d8_78db12da",
+      "range": {
+        "startLine": 436,
+        "startChar": 59,
+        "endLine": 436,
+        "endChar": 73
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8091c76_04a53655",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 30
@@ -223,6 +385,30 @@
       "writtenOn": "2024-10-04T02:30:47Z",
       "side": 1,
       "message": "same, abort if null",
+      "range": {
+        "startLine": 306,
+        "startChar": 64,
+        "endLine": 306,
+        "endChar": 76
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49804909_1f89c179",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8091c76_04a53655",
       "range": {
         "startLine": 306,
         "startChar": 64,
@@ -258,6 +444,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a224376b_8a0227f4",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "\u003e and avoids extra symbols.\n\nHow so? Which extra symbols are needed?\n\nMade the change because it looks nicer either way.",
+      "parentUuid": "b4bafe5d_23e10f4f",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 40
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "184dc0b4_3a197833",
         "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
         "patchSetId": 30
@@ -269,6 +479,30 @@
       "writtenOn": "2024-10-04T02:30:47Z",
       "side": 1,
       "message": "with one count of ownership",
+      "range": {
+        "startLine": 285,
+        "startChar": 10,
+        "endLine": 285,
+        "endChar": 22
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54bcdc0f_8558d12b",
+        "filename": "libs/binder/ndk/include_platform/android/binder_rpc.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "184dc0b4_3a197833",
       "range": {
         "startLine": 285,
         "startChar": 10,
@@ -302,6 +536,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f3cfb5_5d132848",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 30
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "No. It will allow it though! Added some tests with this case being one of them.",
+      "parentUuid": "ddd023c5_e8033ff0",
+      "range": {
+        "startLine": 197,
+        "startChar": 70,
+        "endLine": 197,
+        "endChar": 79
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3c704f1_d2f70343",
@@ -315,6 +573,30 @@
       "writtenOn": "2024-10-04T09:00:06Z",
       "side": 1,
       "message": "nit: line too long.",
+      "range": {
+        "startLine": 205,
+        "startChar": 98,
+        "endLine": 205,
+        "endChar": 101
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91459891_13dcefb2",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 30
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T23:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3c704f1_d2f70343",
       "range": {
         "startLine": 205,
         "startChar": 98,
