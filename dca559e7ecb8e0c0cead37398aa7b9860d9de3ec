@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf07399c_e64d57a2",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-09T01:35:55Z",
+      "side": 1,
+      "message": "Generally LGTM, just would be nice if we could simplify it somehow.",
+      "revId": "dca559e7ecb8e0c0cead37398aa7b9860d9de3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
