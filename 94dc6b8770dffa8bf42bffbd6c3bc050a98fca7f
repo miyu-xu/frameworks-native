@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fdd9be5_14f41760",
+        "filename": "libs/binder/rust/sys/BinderBindings.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T17:55:52Z",
+      "side": 1,
+      "message": "You may also want to ask danalbert@, who could help propose a standard Rust way.",
+      "parentUuid": "f5a324db_e9735c64",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31c4d166_6ef23ead",
         "filename": "libs/binder/rust/sys/build.rs",
         "patchSetId": 1
