@@ -40,6 +40,30 @@
       ],
       "revId": "df6813406c0dd22dca002de7994ae0ee2e3f126b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d51fd7f2_35b934b8",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-10-10T23:28:36Z",
+      "side": 1,
+      "message": "I know that is ugly, but this is because the `if API_LEVEL_AT_LEAST` can be replaced to `if constexpr` that cannot have `(` between `if` and `constexpr`.",
+      "parentUuid": "223fbeca_d5af6679",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 40
+      },
+      "revId": "df6813406c0dd22dca002de7994ae0ee2e3f126b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
