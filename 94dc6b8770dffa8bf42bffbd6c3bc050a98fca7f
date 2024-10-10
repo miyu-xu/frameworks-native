@@ -16,6 +16,41 @@
       "message": "smoreland@ - do you know the \"proper\" way for me to indicate this? I made up this define, and I suspect we already have a more standardized one.",
       "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a324db_e9735c64",
+        "filename": "libs/binder/rust/sys/BinderBindings.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T17:54:58Z",
+      "side": 1,
+      "message": "Well, we usually do it with a pure NDK header and then a platform header, and let the build system pick it.\n\nWe also have other ad hoc stuff:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/ndk/include_cpp/android/binder_interface_utils.h;l\u003d46;drc\u003d163415a4de2fddee1d5b9760abe3f465ab2cc5a4\n\nThe NDK has an official build system, but it may be built in other ways, so I would suggest reversing the direction (define something only for platform builds). That will make it easier for app developers to adopt this.\n\nor split the headers out like libbinder_ndk",
+      "parentUuid": "8b12f58f_c19a468d",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c4d166_6ef23ead",
+        "filename": "libs/binder/rust/sys/build.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T17:54:58Z",
+      "side": 1,
+      "message": "license",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
