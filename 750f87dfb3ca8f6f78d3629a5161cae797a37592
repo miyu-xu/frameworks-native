@@ -70,6 +70,24 @@
       "parentUuid": "3520938b_abd89615",
       "revId": "750f87dfb3ca8f6f78d3629a5161cae797a37592",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde959dd_2433b196",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:48:05Z",
+      "side": 1,
+      "message": "ack. If this fixes it, it also means that minSdkVersion or similar is not set right on the mainline module build currently. Please split to an additional bug.",
+      "parentUuid": "216fdfb0_6dc4762b",
+      "revId": "750f87dfb3ca8f6f78d3629a5161cae797a37592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
