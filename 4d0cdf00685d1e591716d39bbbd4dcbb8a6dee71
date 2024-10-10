@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09359764_df825fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:25:46Z",
+      "side": 1,
+      "message": "Is there a way to see everything which is exposed?",
+      "parentUuid": "aea85c0b_8936251e",
+      "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa96e162_7ab8061a",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-09T22:29:48Z",
       "side": 1,
       "message": "This also seemed odd - if we need to explicitly `None` this out on the platform, it seems weird that the NDK doesn\u0027t expose it.",
+      "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6ac912_85b74f1f",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:25:46Z",
+      "side": 1,
+      "message": "See `HAS_BINDER_SHELL_COMMAND`",
+      "parentUuid": "fa96e162_7ab8061a",
       "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
