@@ -420,6 +420,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2538883e_3760f887",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-10T20:19:41Z",
+      "side": 1,
+      "message": "I think it\u0027s OK to allow local objects.\n\nWe allow the auto-generated delgators to do it and delegating to a local object works, it allows for more portable code, and there may be use cases for it. The extra cost of the layer might be worth it to some users.",
+      "parentUuid": "624acd6f_a9f81ecd",
+      "range": {
+        "startLine": 436,
+        "startChar": 85,
+        "endLine": 436,
+        "endChar": 93
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8091c76_04a53655",
