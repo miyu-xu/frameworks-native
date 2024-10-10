@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "295b8d4a_4d419f43",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 30
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:56:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a69efa82_2e6a45eb",
+      "range": {
+        "startLine": 781,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 35
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4801f1ee_4237ccdb",
@@ -374,6 +398,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "624acd6f_a9f81ecd",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:56:21Z",
+      "side": 1,
+      "message": "ack, then check this?",
+      "parentUuid": "c0ab3b13_ad32c9be",
+      "range": {
+        "startLine": 436,
+        "startChar": 85,
+        "endLine": 436,
+        "endChar": 93
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8091c76_04a53655",
         "filename": "libs/binder/ndk/binder_rpc.cpp",
         "patchSetId": 30
@@ -456,6 +504,30 @@
       "side": 1,
       "message": "\u003e and avoids extra symbols.\n\nHow so? Which extra symbols are needed?\n\nMade the change because it looks nicer either way.",
       "parentUuid": "b4bafe5d_23e10f4f",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 40
+      },
+      "revId": "b173e58d04270a44ecc70ad6bb1c0a6b97aba1d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01267d56_4a0ccea2",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-10T19:56:21Z",
+      "side": 1,
+      "message": "(in the source code) \"(*\" \")\"",
+      "parentUuid": "a224376b_8a0227f4",
       "range": {
         "startLine": 321,
         "startChar": 0,
