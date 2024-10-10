@@ -1,5 +1,47 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223fbeca_d5af6679",
+        "filename": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1108919
+      },
+      "writtenOn": "2024-10-10T21:16:57Z",
+      "side": 1,
+      "message": "syntactically, this is really really ugly. My first reaction here was to wonder\nhow the code even compiled since it was missing the parentheses.\n\nprefer:\nif (API_LEVEL_AT_LEAST(36,202504)) { \n\nthe macro definition is wrapped in (), which is the only reason that this\nisn\u0027t flagged as a compiler error.\n\nis this because of the limitations of how __builtin_available() works in\nthe compiler (it\u0027s not full-on control-flow ready). We could at least\nchange the macro definition from\n#define API_LEVEL   (builtin_available(...))\nto\n#define API_LEVEL builtin_available()\n\nsince that particular substitution isn\u0027t going to burn us on a precedence\nthe way that you might with \n#define SUM  5+10\nint x \u003d 5 * SUM;   which becomes 5 * 5 + 10 and we get a surprising result.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ee6c1dc_2219a5cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_cpp/android/binder_interface_utils.h",
+              "range": {
+                "startLine": 301,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": "    if (API_LEVEL_AT_LEAST(36, 202504)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df6813406c0dd22dca002de7994ae0ee2e3f126b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
