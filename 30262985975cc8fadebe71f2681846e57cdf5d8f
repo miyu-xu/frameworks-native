@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6c3fee_42eb26c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-10T01:39:36Z",
+      "side": 1,
+      "message": "Does this test use the added functions?",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "30262985975cc8fadebe71f2681846e57cdf5d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "288572be_0cd3d35e",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-10-04T19:05:15Z",
       "side": 1,
       "message": "Unsafe Rust LGTM",
+      "revId": "30262985975cc8fadebe71f2681846e57cdf5d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b380bd_7d73cd8a",
+        "filename": "libs/nativewindow/rust/src/surface/buffer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-10T01:39:36Z",
+      "side": 1,
+      "message": "Is this used outside of this crate?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 3
+      },
       "revId": "30262985975cc8fadebe71f2681846e57cdf5d8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
