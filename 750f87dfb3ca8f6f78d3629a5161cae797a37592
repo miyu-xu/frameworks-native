@@ -16,6 +16,24 @@
       "message": "hey - lgtm, but please wait to merge unless it\u0027s proven that the previous change did not break here, as we shouldn\u0027t need this. So, if we can avoid adding it, it\u0027ll be less things to remove later.",
       "revId": "750f87dfb3ca8f6f78d3629a5161cae797a37592",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743a1e78_f230b42c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956258
+      },
+      "writtenOn": "2024-10-10T17:51:04Z",
+      "side": 1,
+      "message": "I think b/368303753 is going to need this check.",
+      "parentUuid": "6c19f26b_12866157",
+      "revId": "750f87dfb3ca8f6f78d3629a5161cae797a37592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
