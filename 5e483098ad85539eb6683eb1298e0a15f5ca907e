@@ -16,6 +16,24 @@
       "message": "Are these trace points sufficient to debug the issue you saw? How would you use it?",
       "revId": "5e483098ad85539eb6683eb1298e0a15f5ca907e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d168f943_0f62017e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-10-11T11:53:35Z",
+      "side": 1,
+      "message": "I\u0027ve added traces for all the major operations.\nWe should be able to see in the perfetto traces if a call is cached, and if not, why.\n\nThe only thing I\u0027ve not added is the check for binder threads as we can make them out from the traces",
+      "parentUuid": "1bc7729f_51a1ca94",
+      "revId": "5e483098ad85539eb6683eb1298e0a15f5ca907e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
