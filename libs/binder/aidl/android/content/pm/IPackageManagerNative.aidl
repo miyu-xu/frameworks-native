@@ -136,12 +136,19 @@ interface IPackageManagerNative {
 
     /**
      * Get APEX module names of all APEX that are staged ready for installation
+     * TODO(370712193) remove once all observers migrate to `getStagedApexInfos`
      */
     @utf8InCpp String[] getStagedApexModuleNames();
 
     /**
      * Get information of APEX which is staged ready for installation.
      * Returns null if no such APEX is found.
+     * TODO(370712193) remove once all observers migrate to `getStagedApexInfos`
      */
     @nullable StagedApexInfo getStagedApexInfo(in @utf8InCpp String moduleName);
+
+    /**
+     * Get information of staged APEXes.
+     */
+    StagedApexInfo[] getStagedApexInfos();
 }

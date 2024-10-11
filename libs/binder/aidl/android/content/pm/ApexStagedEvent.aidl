@@ -16,6 +16,8 @@
 
 package android.content.pm;
 
+import android.content.pm.StagedApexInfo;
+
 /**
  * This event is designed for notification to native code listener about
  * any changes to set of apex packages staged for installation on next boot.
@@ -23,5 +25,7 @@ package android.content.pm;
  * @hide
  */
 parcelable ApexStagedEvent {
+  // TODO(370712193) remove once all observers migrate to `stagedApexInfos`
   @utf8InCpp String[] stagedApexModuleNames;
+  StagedApexInfo[] stagedApexInfos;
 }
