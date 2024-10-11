@@ -105,6 +105,24 @@
       "parentUuid": "9b6ac912_85b74f1f",
       "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1543eb9_63d18218",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-11T00:35:39Z",
+      "side": 1,
+      "message": "It\u0027s (1), yeah, just delete it or comment it out. I suppose it was just to make it more clear where it could be set if you wanted to set it?",
+      "parentUuid": "b199e323_6c4e2987",
+      "revId": "4d0cdf00685d1e591716d39bbbd4dcbb8a6dee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
