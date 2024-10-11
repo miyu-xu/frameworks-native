@@ -81,6 +81,30 @@
       },
       "revId": "dd1cd125f31b294b5397eef2d9c953bbeeed4481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3dd00f_3f481aeb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-11T22:29:34Z",
+      "side": 1,
+      "message": "It looks like can mostly handle the failed open of the binder driver if we remove the abort.\n\nRight now I\u0027m avoiding the abort only if `/dev/binder` doesn\u0027t exist. It\u0027s still fatal for any other error opening the driver.",
+      "parentUuid": "0b907286_6a1dc322",
+      "range": {
+        "startLine": 510,
+        "startChar": 4,
+        "endLine": 514,
+        "endChar": 5
+      },
+      "revId": "dd1cd125f31b294b5397eef2d9c953bbeeed4481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
