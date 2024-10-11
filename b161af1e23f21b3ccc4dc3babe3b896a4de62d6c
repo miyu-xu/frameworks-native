@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43138b5c_f40195db",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-11T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9079ae_4ef7a373",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c02176_4eb09449",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "I didn\u0027t have a specific alternative in mind. On second thought, this is probably fine.\n\nOne simplification you could make is move the declaration outside the `#else`, so you\u0027re enforcing the same signature for `SEND_MSG_IMPL` regardless of how it was defined.",
       "parentUuid": "bb01387f_012199cb",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf2b764_4ff0e93e",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-11T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dafebce_35b23321",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
