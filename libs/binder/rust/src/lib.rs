@@ -104,7 +104,7 @@ mod proxy;
 mod service;
 #[cfg(not(trusty))]
 mod state;
-#[cfg(not(any(android_vendor, android_vndk)))]
+#[cfg(not(any(android_vendor, android_vndk, trusty)))]
 mod system_only;
 
 use binder_ndk_sys as sys;
@@ -122,7 +122,7 @@ pub use service::{
 };
 #[cfg(not(trusty))]
 pub use state::{ProcessState, ThreadState};
-#[cfg(not(any(android_vendor, android_vndk)))]
+#[cfg(not(any(android_vendor, android_vndk, trusty)))]
 pub use system_only::{Accessor, ConnectionInfo};
 
 /// Binder result containing a [`Status`] on error.
