@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f638a38_068d24a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-11T17:58:01Z",
+      "side": 1,
+      "message": "You will likely need to poll, with a timeout of up to 1s to avoid flakes. 50ms is not enough.",
+      "revId": "a5c919bbde40555d3739747e5adaecaab1c59c00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
