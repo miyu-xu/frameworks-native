@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7e5054_53100195",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-11T23:43:55Z",
+      "side": 1,
+      "message": "`BINDER_VENDOR_COMPILE_FLAGS` to avoid conflicts?",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d607bb3d_219e0004",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-11T23:43:55Z",
+      "side": 1,
+      "message": "You could set these for `ifeq (false,$(call TOBOOL,$(USE_SYSTEM_BINDER)))` and leave it undefined otherwise, would make the CL simpler.",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399be39e_a4bd19e2",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-11T23:43:55Z",
+      "side": 1,
+      "message": "```suggestion\nifeq (true,$(call TOBOOL,$(USE_SYSTEM_BINDER)))\n```",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
