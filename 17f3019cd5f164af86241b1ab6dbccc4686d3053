@@ -1,0 +1,450 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a5f24a_7284e0fd",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "Would I be understanding the intention correctly if I suggested to rename this to \u0027hasOutOfProcessServiceManager\u0027? or could it also be a local service manager object installed?",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9a403e47_4f73de8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 286,
+                "startChar": 0,
+                "endLine": 287,
+                "endChar": 0
+              },
+              "replacement": "static bool hasOutOfProcessServiceManager() {\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 606,
+                "startChar": 0,
+                "endLine": 607,
+                "endChar": 0
+              },
+              "replacement": "        if (hasOutOfProcessServiceManager()) {\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 616,
+                "startChar": 0,
+                "endLine": 617,
+                "endChar": 0
+              },
+              "replacement": "        while (hasOutOfProcessServiceManager() \u0026\u0026 sm \u003d\u003d nullptr) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7294f85a_f73fcd14",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "maybe return an error from this case? It\u0027s a bit weird - if you are trying to do something, you should only do it once.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 5
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f0108c_a19ff81a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "can delete, this will never happen",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 87
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcbf5c91_58d8a44a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "We also recommend undeclared ones do as well. Since they are injected, why not return true regardless? I would say injection is a form of declaration (and cases like this is precisely why I chose the generic name \u0027isDeclared\u0027 in the binder APIs instead of something VINTF-specific).",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "606938e8_95163260",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 345,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "        // \u003cinterface\u003e/instance like foo.bar.ISomething/instance.\n        // We also recommend undeclared ones do as well.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ddf181_1ec1f3e4",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 92
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f7dcde_51870484",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "same, `listInjectedAccessors(instances)`, I think everything injected can be declared?\n\nI\u0027d recommend for-loop always btw. Lambdas can be pretty heavy weight - I\u0027d be skeptical, maybe I\u0027m wrong.",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "248be507_ec3d7783",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 357,
+                "startChar": 0,
+                "endLine": 368,
+                "endChar": 0
+              },
+              "replacement": "        listInjectedAccessors(instances);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "135cbd29_4740427c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "please suppress deprecated warning",
+      "range": {
+        "startLine": 428,
+        "startChar": 35,
+        "endLine": 428,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6a286e45_354b69d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 425,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6103301e_c9fcf69f",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "yeah - the first time you can add the service, if it returns a success, you probably don\u0027t want to do it again? Seems like it could break if you tried to use this class more?\n\nMaybe even always force the first manager to get the service added? I\u0027m not sure",
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81cdbc6d_d620192c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "on all these, prefer something like `std::move(v.begin(), v.end(), std::back_inserter(l));` to avoid re-allocating the strings on the heap?",
+      "range": {
+        "startLine": 474,
+        "startChar": 26,
+        "endLine": 474,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0247bf81_2208bdd5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 474,
+                "startChar": 0,
+                "endLine": 475,
+                "endChar": 0
+              },
+              "replacement": "            std::move(services.begin(), services.end(), std::back_inserter(*_aidl_return));\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 523,
+                "startChar": 0,
+                "endLine": 524,
+                "endChar": 0
+              },
+              "replacement": "            std::move(services.begin(), services.end(), std::back_inserter(*_aidl_return));\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 549,
+                "startChar": 0,
+                "endLine": 550,
+                "endChar": 0
+              },
+              "replacement": "            std::move(names.begin(), names.end(), std::back_inserter(*_aidl_return));\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 593,
+                "startChar": 0,
+                "endLine": 594,
+                "endChar": 0
+              },
+              "replacement": "            std::move(debug.begin(), debug.end(), std::back_inserter(*_aidl_return));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528e3b2c_421e3e10",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "this will always return okay, from the one at the beginning of the loop.",
+      "range": {
+        "startLine": 502,
+        "startChar": 15,
+        "endLine": 502,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5a7196dc_7d6fa76d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 492,
+                "startChar": 0,
+                "endLine": 493,
+                "endChar": 0
+              },
+              "replacement": "        Status status \u003d Status::ok();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f90041f_3277448f",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "can break\n\nhonestly though, maybe don\u0027t break and add an \u0027if (isDeclared) log warning duplicate declaration\u0027",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47b6ecc1_21940d10",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 512,
+                "endChar": 0
+              },
+              "replacement": "            if (ret) {\n                isDeclared \u003d true;\n                break;\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2028508f_c5303535",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T01:01:47Z",
+      "side": 1,
+      "message": "yeah - it\u0027s weird this one is backwards. We should maybe chat about this a bit more, how these are composed. The amount of custom logic and coupling with LocalAccessorServiceManager is making me think, maybe LocalAccessorServiceManager should have a \u0027mDelegate-\u003eaddService\u0027 which is the real servicemanager? rather than try to do the generic one here? I mean, I\u0027ll leave it up to you, but it is a lot of coupling (the okay/!okay cases). I\u0027m really not sure.",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 46
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
