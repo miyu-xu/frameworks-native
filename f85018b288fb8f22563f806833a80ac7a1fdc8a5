@@ -16,6 +16,24 @@
       "message": "Can you stop using this class and use AIDL instead? If not, don\u0027t add dead code. Also, do document why you are doing something! Thanks!",
       "revId": "f85018b288fb8f22563f806833a80ac7a1fdc8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30a9b31_02ce1cb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-10-14T21:56:03Z",
+      "side": 1,
+      "message": "Not until mid-next year at least (the refactor needed is AOSP-wide, on IGraphicBufferProducers, IGraphicBufferConsumers, and all their users all over).\n\nThe code that uses this isn\u0027t AOSP-first, but this is, so it won\u0027t be dead code.\n\nDocs added!",
+      "parentUuid": "714f679e_5ca60c9c",
+      "revId": "f85018b288fb8f22563f806833a80ac7a1fdc8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
