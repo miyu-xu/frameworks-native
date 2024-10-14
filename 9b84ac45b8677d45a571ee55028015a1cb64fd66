@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa64aa3e_4003802b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-14T13:29:53Z",
+      "side": 1,
+      "message": "I\u0027m guessing these calls are neither frequent not low latency required. Otherwise might be worth avoiding string concatenations if tracing is disabled. Especially if you don\u0027t plan to remove these trace points after the investigation.\n\nIf you do plan to remove the trace points. Please leave a TODO in the code",
+      "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d410f9_457e9126",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-14T13:29:53Z",
+      "side": 1,
+      "message": "Can you instead move this unconditional trace into the else branch below",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 100
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "527ddc12_8f8ee849",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 118,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "            binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL,\n                                           \"BinderCacheWithInvalidation::updateCache binder \"\n                                           \"isBinderAlive true\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b09e75e_5a991b7c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-14T13:29:53Z",
+      "side": 1,
+      "message": "Would it be more useful to trace the caller of removeItem so that you can trace the return as well?",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a9f14d6a_b56b791a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "        std::string trace_str \u003d \"BinderCacheWithInvalidation::removeItem \" + std::to_string(key);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
