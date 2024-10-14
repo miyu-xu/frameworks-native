@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c98e714_d2736378",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-14T23:58:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf7e5054_53100195",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d607bb3d_219e0004",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0950f4c5_9399098e",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-14T23:58:28Z",
+      "side": 1,
+      "message": "Done. Also found a couple of extra makefiles that needed this change and added them to the CL.",
+      "parentUuid": "d607bb3d_219e0004",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "399be39e_a4bd19e2",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-10-11T23:43:55Z",
       "side": 1,
       "message": "```suggestion\nifeq (true,$(call TOBOOL,$(USE_SYSTEM_BINDER)))\n```",
+      "revId": "9756645e3ad9135fe718792f695e346111c5b397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf11dc8_44715845",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-14T23:58:28Z",
+      "side": 1,
+      "message": "Not needed anymore because I took your previous recommendation.",
+      "parentUuid": "399be39e_a4bd19e2",
       "revId": "9756645e3ad9135fe718792f695e346111c5b397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
