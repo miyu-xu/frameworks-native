@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73bd4de1_966e02b0",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-14T16:45:32Z",
+      "side": 1,
+      "message": "any value in tracing the else here?",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34d3703f_447ca173",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "        } else {\n            binder::ScopedTrace aidl_trace(ATRACE_TAG_AIDL,\n                                           \"BinderCacheWithInvalidation::updateCache failed: \"\n                                           \"isClientSideCachingEnabled_false\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8b4ba44c4ddcbbbd87551f449deceff14361edee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
