@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3ec477_5e1c905c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T21:59:23Z",
+      "side": 1,
+      "message": "why does it need it? std::vector\u003cbool\u003e is a pretty controversial type, due to being a specialization of std::vector itself, it has a lot of differences from other std::vector types. People generally recommend std::vector\u003cbyte\u003e or similar.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "7693c4ab1c93e8de40d5bf490bdb76aabf05d064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
