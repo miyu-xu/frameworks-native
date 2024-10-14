@@ -1525,6 +1525,8 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
             // both allocateBuffers and dequeueBuffer.
             newBufferCount = mCore->mFreeSlots.empty() ? 0 : 1;
             if (newBufferCount == 0) {
+                BQ_LOGV("allocateBuffers: a slot was occupied while "
+                        "allocating. Dropping allocated buffer.");
                 return;
             }
 
@@ -1567,7 +1569,7 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
 #endif
 
         Vector<sp<GraphicBuffer>> buffers;
-        for (size_t i = 0; i < newBufferCount; ++i) {
+        {
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
             sp<GraphicBuffer> graphicBuffer = new GraphicBuffer(allocRequest);
 #else
@@ -1614,15 +1616,10 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
                 continue;
             }
 
-            for (size_t i = 0; i < newBufferCount; ++i) {
-                if (mCore->mFreeSlots.empty()) {
-                    BQ_LOGV("allocateBuffers: a slot was occupied while "
-                            "allocating. Dropping allocated buffer.");
-                    continue;
-                }
+            {
                 auto slot = mCore->mFreeSlots.begin();
                 mCore->clearBufferSlotLocked(*slot); // Clean up the slot first
-                mSlots[*slot].mGraphicBuffer = buffers[i];
+                mSlots[*slot].mGraphicBuffer = buffers[0];
                 mSlots[*slot].mFence = Fence::NO_FENCE;
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
                 mSlots[*slot].mAdditionalOptionsGenerationId = allocOptionsGenId;
