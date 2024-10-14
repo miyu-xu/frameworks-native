@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee50c9f1_6fa74327",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-10-14T16:00:43Z",
+      "side": 1,
+      "message": "nit: something like ::updateCache failed: binder_null\n\nbelow \n\n::updateCache failed: binder_dead\n\n::updateCache successful\n\n(also helps with parsing the queries with sql)",
+      "range": {
+        "startLine": 121,
+        "startChar": 85,
+        "endLine": 121,
+        "endChar": 96
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d672ba04_33d4f27f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 121,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "                                           \"BinderCacheWithInvalidation::updateCache failed: \"\n                                           \"binder_null\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "                                           \"BinderCacheWithInvalidation::updateCache failed: \"\n                                           \"binder_dead\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "                                           \"BinderCacheWithInvalidation::updateCache successful\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c9c77ddf818111ffd5c87283e6850d0a348b5769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
