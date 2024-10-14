@@ -1501,7 +1501,6 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
 
     const bool useDefaultSize = !width && !height;
     while (true) {
-        size_t newBufferCount = 0;
         uint32_t allocWidth = 0;
         uint32_t allocHeight = 0;
         PixelFormat allocFormat = PIXEL_FORMAT_UNKNOWN;
@@ -1523,8 +1522,9 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
 
             // Only allocate one buffer at a time to reduce risks of overlapping an allocation from
             // both allocateBuffers and dequeueBuffer.
-            newBufferCount = mCore->mFreeSlots.empty() ? 0 : 1;
-            if (newBufferCount == 0) {
+            if (mCore->mFreeSlots.empty()) {
+                BQ_LOGV("allocateBuffers: a slot was occupied while "
+                        "allocating. Dropping allocated buffer.");
                 return;
             }
 
@@ -1566,28 +1566,26 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
         };
 #endif
 
-        Vector<sp<GraphicBuffer>> buffers;
-        for (size_t i = 0; i < newBufferCount; ++i) {
+        sp<GraphicBuffer> buffer;
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
-            sp<GraphicBuffer> graphicBuffer = new GraphicBuffer(allocRequest);
+        sp<GraphicBuffer> graphicBuffer = new GraphicBuffer(allocRequest);
 #else
-            sp<GraphicBuffer> graphicBuffer = new GraphicBuffer(
-                    allocWidth, allocHeight, allocFormat, BQ_LAYER_COUNT,
-                    allocUsage, allocName);
+        sp<GraphicBuffer> graphicBuffer = new GraphicBuffer(
+                allocWidth, allocHeight, allocFormat, BQ_LAYER_COUNT,
+                allocUsage, allocName);
 #endif
 
-            status_t result = graphicBuffer->initCheck();
+        status_t result = graphicBuffer->initCheck();
 
-            if (result != NO_ERROR) {
-                BQ_LOGE("allocateBuffers: failed to allocate buffer (%u x %u, format"
-                        " %u, usage %#" PRIx64 ")", width, height, format, usage);
-                std::lock_guard<std::mutex> lock(mCore->mMutex);
-                mCore->mIsAllocating = false;
-                mCore->mIsAllocatingCondition.notify_all();
-                return;
-            }
-            buffers.push_back(graphicBuffer);
+        if (result != NO_ERROR) {
+            BQ_LOGE("allocateBuffers: failed to allocate buffer (%u x %u, format"
+                    " %u, usage %#" PRIx64 ")", width, height, format, usage);
+            std::lock_guard<std::mutex> lock(mCore->mMutex);
+            mCore->mIsAllocating = false;
+            mCore->mIsAllocatingCondition.notify_all();
+            return;
         }
+        buffer = graphicBuffer;
 
         { // Autolock scope
             std::unique_lock<std::mutex> lock(mCore->mMutex);
@@ -1614,31 +1612,29 @@ void BufferQueueProducer::allocateBuffers(uint32_t width, uint32_t height,
                 continue;
             }
 
-            for (size_t i = 0; i < newBufferCount; ++i) {
-                if (mCore->mFreeSlots.empty()) {
-                    BQ_LOGV("allocateBuffers: a slot was occupied while "
-                            "allocating. Dropping allocated buffer.");
-                    continue;
-                }
-                auto slot = mCore->mFreeSlots.begin();
-                mCore->clearBufferSlotLocked(*slot); // Clean up the slot first
-                mSlots[*slot].mGraphicBuffer = buffers[i];
-                mSlots[*slot].mFence = Fence::NO_FENCE;
+            if (mCore->mFreeSlots.empty()) {
+                BQ_LOGV("allocateBuffers: a slot was occupied while "
+                        "allocating. Dropping allocated buffer.");
+                return;
+            }
+            auto slot = mCore->mFreeSlots.begin();
+            mCore->clearBufferSlotLocked(*slot); // Clean up the slot first
+            mSlots[*slot].mGraphicBuffer = graphicBuffer;
+            mSlots[*slot].mFence = Fence::NO_FENCE;
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
-                mSlots[*slot].mAdditionalOptionsGenerationId = allocOptionsGenId;
+            mSlots[*slot].mAdditionalOptionsGenerationId = allocOptionsGenId;
 #endif
 
-                // freeBufferLocked puts this slot on the free slots list. Since
-                // we then attached a buffer, move the slot to free buffer list.
-                mCore->mFreeBuffers.push_front(*slot);
+            // freeBufferLocked puts this slot on the free slots list. Since
+            // we then attached a buffer, move the slot to free buffer list.
+            mCore->mFreeBuffers.push_front(*slot);
 
-                BQ_LOGV("allocateBuffers: allocated a new buffer in slot %d",
-                        *slot);
+            BQ_LOGV("allocateBuffers: allocated a new buffer in slot %d",
+                    *slot);
 
-                // Make sure the erase is done after all uses of the slot
-                // iterator since it will be invalid after this point.
-                mCore->mFreeSlots.erase(slot);
-            }
+            // Make sure the erase is done after all uses of the slot
+            // iterator since it will be invalid after this point.
+            mCore->mFreeSlots.erase(slot);
 
             mCore->mIsAllocating = false;
             mCore->mIsAllocatingCondition.notify_all();
