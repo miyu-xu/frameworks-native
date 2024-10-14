@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a971e128_bbb7c0a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010050
+      },
+      "writtenOn": "2024-10-14T21:37:03Z",
+      "side": 1,
+      "message": "since the AOSP patches don\u0027t merge cleanly, moving review to internal and will follow up with these after. So I\u0027ll remove everyone from the AOSP patches for now.",
+      "revId": "24e38ec440e7700b58cb87e85c8dd1d0469fa0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
