@@ -69,6 +69,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19134f3_0385617b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-10-14T15:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d410f9_457e9126",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 100
+      },
+      "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b09e75e_5a991b7c",
@@ -106,6 +130,30 @@
           ]
         }
       ],
+      "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4183fd5c_744abf9c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-10-14T15:51:08Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s that useful. Regardless of the return value, the item will no longer be present in the cache.",
+      "parentUuid": "7b09e75e_5a991b7c",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 75
+      },
       "revId": "9b84ac45b8677d45a571ee55028015a1cb64fd66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
