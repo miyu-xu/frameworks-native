@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d620b53a_c9851f71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-14T17:21:08Z",
+      "side": 1,
+      "message": "No, I don\u0027t currently have test coverage for the `Surface` code as I don\u0027t have a way to create a `Surface` from nothing, we can only get them from AIDL interfaces.",
+      "parentUuid": "0b6c3fee_42eb26c5",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "30262985975cc8fadebe71f2681846e57cdf5d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "288572be_0cd3d35e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2024-10-10T01:39:36Z",
       "side": 1,
       "message": "Is this used outside of this crate?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 3
+      },
+      "revId": "30262985975cc8fadebe71f2681846e57cdf5d8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fdcefc_a8e8cd3a",
+        "filename": "libs/nativewindow/rust/src/surface/buffer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-14T17:21:08Z",
+      "side": 1,
+      "message": "No, in fact it\u0027s not exposed outside the crate, this module is not public and `EMPTY` is not re-exported.",
+      "parentUuid": "71b380bd_7d73cd8a",
       "range": {
         "startLine": 20,
         "startChar": 0,
