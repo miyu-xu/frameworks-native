@@ -46,6 +46,30 @@
       },
       "revId": "7693c4ab1c93e8de40d5bf490bdb76aabf05d064",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1323b7f0_0c317409",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-10-14T22:32:32Z",
+      "side": 1,
+      "message": "BufferQueues used to have 64 slots. Now they can have any number of them. I\u0027m adding an alternative for \n\n```\n    // getReleasedBuffers sets the value pointed to by slotMask to a bit set. Each bit index with a\n    // 1 corresponds to a released buffer slot with that index value. In particular, a released\n    // buffer is one that has been released by the BufferQueue but has not yet been released by\n    // the consumer.\n    //\n    // This should be called from the onBuffersReleased() callback.\n    //\n    // Return of a value other than NO_ERROR means an error has occurred:\n    // * NO_INIT - the BufferQueue has been abandoned.\n    virtual status_t getReleasedBuffers(uint64_t* slotMask) \u003d 0;\n```\n\nwhich uses a bitmask. Using a std:vector\u003cbool\u003e seems appropriate, the weirdness of it notwithstanding.",
+      "parentUuid": "9e3ec477_5e1c905c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "7693c4ab1c93e8de40d5bf490bdb76aabf05d064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
