@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf0aba1_69db07fd",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T18:35:17Z",
+      "side": 1,
+      "message": "these will be extremely narrow on the graph, is it intentional that these don\u0027t scope around anything?",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 122,
+        "endChar": 97
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae492bc1_a0007b94",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "            binder::ScopedTrace aidl_trace(\n                    ATRACE_TAG_AIDL,\n                    \"BinderCacheWithInvalidation::::updateCache failed: binder_null\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": "                                           \"BinderCacheWithInvalidation::updateCache failed: \"\n                                           \"caching_not_enabled\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "230118df87edac9555c0f008996bcd56a5103067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3506cfbc_90639e07",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T18:35:17Z",
+      "side": 1,
+      "message": "style - all the code here is camel case",
+      "range": {
+        "startLine": 63,
+        "startChar": 20,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "230118df87edac9555c0f008996bcd56a5103067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02115903_1051cc32",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T18:35:17Z",
+      "side": 1,
+      "message": "same, and below",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "230118df87edac9555c0f008996bcd56a5103067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae802b6_75e746b0",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T18:35:17Z",
+      "side": 1,
+      "message": "trace key here as well to match removeItem? same below?",
+      "range": {
+        "startLine": 94,
+        "startChar": 70,
+        "endLine": 94,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d1065d97_2bf4d11f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "                    trace_str \u003d \"BinderCacheWithInvalidation::setItem Failed LinkToDeath \" + key +\n"
+            }
+          ]
+        }
+      ],
+      "revId": "230118df87edac9555c0f008996bcd56a5103067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -16,6 +16,24 @@
       "message": "There are instances seen in the field where we can see that there is binder spam for checkService.\nbut without tracing we cannot confirm if this is expected behaviour for the cache.\n\nCheck bug for more info.",
       "revId": "4264c0378114a0782f62813d31fd5d0889919665",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78b56ea_fd8b44b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-14T18:35:17Z",
+      "side": 1,
+      "message": "Many checkService is pretty common fwiw. Is there a bug with the details of the error you are seeing?",
+      "parentUuid": "fbfb0150_b5160e06",
+      "revId": "4264c0378114a0782f62813d31fd5d0889919665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
