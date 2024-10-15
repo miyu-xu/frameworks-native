@@ -16,6 +16,23 @@
       "message": "This change should land in internal main branch first. Code history of this file shows changes all landed in internal main first, and then merged to aosp main: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/opengl/libs/EGL/Loader.cpp",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f56797_7588fcd4",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-15T21:06:07Z",
+      "side": 1,
+      "message": "Couple potential problematic scenarios:\n\n1. ANGLE gn arg `angle_libs_suffix` set to `_angle_in_apk`, `debug.angle.libs.suffix` is not set. lib*angle.so in system partition is loaded.\n\n2. ANGLE gn arg `angle_libs_suffix` is not set. `debug.angle.libs.suffix` is set to `angle_in_apk`. Loader fails to find `lib*_angle_in_apk.so` and will crash.\n\n3. ANGLE gn arg `angle_libs_suffix` is not set. `debug.angle.libs.suffix` is not set. lib*angle.so in system partition is loaded.\n\nIs my understanding correct?\n\nWould you please update the readme https://chromium.googlesource.com/angle/angle/+/HEAD/doc/DevSetupAndroid.md#building-the-angle-apk with a section on how to side-load angle apk on SkiaGL-based devices?",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
