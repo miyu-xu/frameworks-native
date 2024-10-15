@@ -16,6 +16,67 @@
       "message": "Thank you for your suggestion. It has been modified. Please help review the patch.",
       "revId": "9ecd22db1e581e09a5f91e51f83fe50586bb90cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9db598_f5b809d5",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-10-15T19:41:21Z",
+      "side": 1,
+      "message": "[nit] We can just use graphicBuffer defined below.",
+      "range": {
+        "startLine": 1569,
+        "startChar": 0,
+        "endLine": 1569,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3562865_23c94365",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/gui/BufferQueueProducer.cpp",
+              "range": {
+                "startLine": 1569,
+                "startChar": 0,
+                "endLine": 1570,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/gui/BufferQueueProducer.cpp",
+              "range": {
+                "startLine": 1588,
+                "startChar": 0,
+                "endLine": 1589,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/gui/BufferQueueProducer.cpp",
+              "range": {
+                "startLine": 1617,
+                "startChar": 0,
+                "endLine": 1618,
+                "endChar": 0
+              },
+              "replacement": "            mSlots[*slot].mGraphicBuffer \u003d graphicBuffer;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9ecd22db1e581e09a5f91e51f83fe50586bb90cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

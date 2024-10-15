@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ecf1378_5f57dc60",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-10-15T19:41:21Z",
+      "side": 0,
+      "message": "I think we need to keep this check, since the lock is dropped since the last time it was checked and mFreeSlots can get emptied in the meantime.",
+      "range": {
+        "startLine": 1618,
+        "startChar": 0,
+        "endLine": 1623,
+        "endChar": 0
+      },
+      "revId": "0c01454656d28d34b9b24b0e647c4fc03356ca66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
