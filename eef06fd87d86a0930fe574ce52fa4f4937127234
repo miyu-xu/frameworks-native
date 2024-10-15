@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "459f02d8_a993c06e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2024-10-15T18:26:40Z",
+      "side": 1,
+      "message": "@smoreland@google.com In that case can we merge this patch by bypassing presubmit-verified?",
+      "revId": "eef06fd87d86a0930fe574ce52fa4f4937127234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
