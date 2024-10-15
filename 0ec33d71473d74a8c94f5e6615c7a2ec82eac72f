@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad3f2e5_143cc6ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-15T23:08:29Z",
+      "side": 1,
+      "message": "I got answer from Chris Forbes and other people that if the code added is not sensitive, it is fine to do it in aosp first.",
+      "parentUuid": "153cdb6f_85bdd4a5",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9f56797_7588fcd4",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yes, I think your understanding is correct. Any issues with that?\n\nYeah I\u0027ll update the readme with some details from the bug once we converge on the workaround.",
       "parentUuid": "a9f56797_7588fcd4",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d720a424_d555bc1e",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-15T23:08:29Z",
+      "side": 1,
+      "message": "\u003e Yes, I think your understanding is correct. Any issues with that?\n\nThank you for clarifying.\n\nDo you think the better way is to figure out the namespace problem https://buganizer.corp.google.com/issues/371356548#comment21? I am fine with this being a temporary solution, but I think the fact that 1. and 3. are happening can still lead to confusion.",
+      "parentUuid": "bdc5ce01_8d2916fa",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
