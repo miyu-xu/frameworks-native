@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69897e1_f21299b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-15T20:50:12Z",
+      "side": 1,
+      "message": "This change should land in internal main branch first. Code history of this file shows changes all landed in internal main first, and then merged to aosp main: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/opengl/libs/EGL/Loader.cpp",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
