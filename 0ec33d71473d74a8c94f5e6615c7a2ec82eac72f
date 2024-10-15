@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "153cdb6f_85bdd4a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-15T21:20:09Z",
+      "side": 1,
+      "message": "I was under the impression automerger should take care of this. Have a look at http://ag/28648321, it seems the change landed to aosp then merged to other branches. Any reason not to be doing that here? Is it because of the additional presubmits on internal? That shouldn\u0027t matter in this case as this is basically dead code from the presubmit perspective.",
+      "parentUuid": "a69897e1_f21299b9",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9f56797_7588fcd4",
         "filename": "opengl/libs/EGL/Loader.cpp",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-15T21:06:07Z",
       "side": 1,
       "message": "Couple potential problematic scenarios:\n\n1. ANGLE gn arg `angle_libs_suffix` set to `_angle_in_apk`, `debug.angle.libs.suffix` is not set. lib*angle.so in system partition is loaded.\n\n2. ANGLE gn arg `angle_libs_suffix` is not set. `debug.angle.libs.suffix` is set to `angle_in_apk`. Loader fails to find `lib*_angle_in_apk.so` and will crash.\n\n3. ANGLE gn arg `angle_libs_suffix` is not set. `debug.angle.libs.suffix` is not set. lib*angle.so in system partition is loaded.\n\nIs my understanding correct?\n\nWould you please update the readme https://chromium.googlesource.com/angle/angle/+/HEAD/doc/DevSetupAndroid.md#building-the-angle-apk with a section on how to side-load angle apk on SkiaGL-based devices?",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc5ce01_8d2916fa",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-15T21:20:09Z",
+      "side": 1,
+      "message": "Yes, I think your understanding is correct. Any issues with that?\n\nYeah I\u0027ll update the readme with some details from the bug once we converge on the workaround.",
+      "parentUuid": "a9f56797_7588fcd4",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
