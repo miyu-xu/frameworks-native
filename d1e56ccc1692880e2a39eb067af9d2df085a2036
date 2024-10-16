@@ -46,6 +46,30 @@
       },
       "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4b1933_dcee6ba3",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-16T22:28:52Z",
+      "side": 1,
+      "message": "I think to have it in trusty `system_only` would need to be refactored/modified (for example we do not have the `nix` crate in Trusty). Can this be something we do in a longer term period?",
+      "parentUuid": "fc6e4a46_f9c6569b",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
