@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1d9f37_a6a59783",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-10-16T17:30:14Z",
+      "side": 1,
+      "message": "there is a behavior change: in the previous code, this line would break out of the inner loop and proceed to line 1643.\n\nIn this patch, now we return entirely out of this function, so we skip the setting `mCore-\u003emIsAllocating`, etc.",
+      "range": {
+        "startLine": 1616,
+        "startChar": 16,
+        "endLine": 1616,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b9263c87_555b830e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/gui/BufferQueueProducer.cpp",
+              "range": {
+                "startLine": 1616,
+                "startChar": 0,
+                "endLine": 1617,
+                "endChar": 0
+              },
+              "replacement": "                break;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0b8f81e989db139fb9c7910b8158f97e2cfd87e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
