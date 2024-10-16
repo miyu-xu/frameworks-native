@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60417caa_8f701510",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-16T17:03:02Z",
+      "side": 1,
+      "message": "does this mean that \"system binder\" for trusty won\u0027t include \"system_only\" stuff?",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
