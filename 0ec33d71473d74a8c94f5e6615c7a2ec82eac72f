@@ -159,6 +159,24 @@
       "parentUuid": "03cad996_1c484bcc",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee00104_c144cc44",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-17T21:25:17Z",
+      "side": 1,
+      "message": "I think I made the \"isolated\" path work: https://r.android.com/3312140",
+      "parentUuid": "5d65bbf6_416dce55",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
