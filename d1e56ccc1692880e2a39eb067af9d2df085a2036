@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9db1bf1a_73148d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-17T00:32:36Z",
+      "side": 1,
+      "message": "Hmmm. The trusty code is vendor specific. I thought we were going with a different transport to make this possible? We should meet on this if it\u0027s required, it\u0027s a big change in direction, thanks!",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
