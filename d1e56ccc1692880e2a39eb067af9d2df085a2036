@@ -87,6 +87,30 @@
       },
       "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37367ad0_6b98127d",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-17T18:02:31Z",
+      "side": 1,
+      "message": "Sorry, `libnix` came from me being new to Rust and bumbling around with the docs/types! I think we can remove it in https://r.android.com/3311324\n\nAre there other changes needed? Yes, I would like to keep this working in Trusty (we need it for service management).",
+      "parentUuid": "6f4b1933_dcee6ba3",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
