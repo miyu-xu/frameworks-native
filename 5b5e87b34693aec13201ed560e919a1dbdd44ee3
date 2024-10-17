@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69a291d_470ab919",
+        "filename": "libs/graphicsenv/GraphicsEnv.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-17T21:55:38Z",
+      "side": 1,
+      "message": "I don\u0027t know if it is correct to use `android_get_exported_namespace(\"sphal\")` for `ANGLE APK` libs. The comment says: If the application process will run top of **system ANGLE**, construct the namespace with sphal...\n\n@chrisforbes@google.com would you please help us take a look if it reasonable to use `sphal` namespace for both ANGLE in system and ANGLE in apk?",
+      "revId": "5b5e87b34693aec13201ed560e919a1dbdd44ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

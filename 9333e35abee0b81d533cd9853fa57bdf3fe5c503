@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71ff645_7e390a71",
+        "filename": "libs/graphicsenv/GraphicsEnv.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-17T21:55:38Z",
+      "side": 0,
+      "message": "I think there were some problems with `vndk` deprecation: https://buganizer.corp.google.com/issues/358073391, and ANGLE managed to get around by returning early.\n\nWould you please explain why you are removing this block?",
+      "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
