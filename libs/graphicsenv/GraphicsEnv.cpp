@@ -673,16 +673,13 @@ android_namespace_t* GraphicsEnv::getAngleNamespace() {
                                      mShouldUseSystemAngle
                                              ? defaultLibraryPaths
                                              : mAnglePath.c_str(), // default_library_path
-                                     ANDROID_NAMESPACE_TYPE_SHARED_ISOLATED,
+                                     mShouldUseSystemAngle
+                                             ? ANDROID_NAMESPACE_TYPE_SHARED_ISOLATED
+                                             : ANDROID_NAMESPACE_TYPE_ISOLATED,  // b/371356548
                                      nullptr, // permitted_when_isolated_path
-                                     mShouldUseSystemAngle ? android_get_exported_namespace("sphal")
-                                                           : nullptr); // parent
+                                     android_get_exported_namespace("sphal")); // parent
 
     ALOGD_IF(!mAngleNamespace, "Could not create ANGLE namespace from default");
-
-    if (!mShouldUseSystemAngle) {
-        return mAngleNamespace;
-    }
 
     auto vndkNamespace = android_get_exported_namespace(isVndkEnabled() ? "vndk" : "sphal");
     if (!vndkNamespace) {
