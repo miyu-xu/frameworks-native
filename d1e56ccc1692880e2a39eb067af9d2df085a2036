@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95eb5947_a71fca6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-10-17T18:23:49Z",
+      "side": 1,
+      "message": "here we need the Trusty TA within the VM to implement an non VINTF service.\nDoes that clarify?",
+      "parentUuid": "9db1bf1a_73148d96",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
