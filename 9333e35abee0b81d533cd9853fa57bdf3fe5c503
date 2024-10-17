@@ -34,6 +34,24 @@
       "parentUuid": "d71ff645_7e390a71",
       "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954919c9_06848196",
+        "filename": "libs/graphicsenv/GraphicsEnv.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-17T22:26:22Z",
+      "side": 0,
+      "message": "To clarify further, I have no idea about this vndk/sphal business. I just know that without linking a list of libs like `linkDriverNamespaceLocked` does, loading the library as \"isolated\" fails with errors like `dlopen_ext(\"libEGL_angle.so\") failed: dlopen failed: library \"libdl.so\" not found`. So we can\u0027t just return early like we did before with \"shared isolated\" dlopen. Now whether it is correct to just remove this block or not, I don\u0027t know. I only know that it worked this way on cuttlefish.",
+      "parentUuid": "97d3300c_9698f12c",
+      "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
