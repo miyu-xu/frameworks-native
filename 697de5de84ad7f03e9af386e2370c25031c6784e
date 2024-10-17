@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "875aa69d_c5c506b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1691065
+      },
+      "writtenOn": "2024-10-17T23:10:28Z",
+      "side": 1,
+      "message": "would be helpful to add the data as part of the commit message",
+      "revId": "697de5de84ad7f03e9af386e2370c25031c6784e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9d43d9ad_b9664f1c",
@@ -14,6 +31,29 @@
       "writtenOn": "2024-10-17T23:08:47Z",
       "side": 1,
       "message": "PATL",
+      "revId": "697de5de84ad7f03e9af386e2370c25031c6784e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255752a7_2043df7a",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1691065
+      },
+      "writtenOn": "2024-10-17T23:10:28Z",
+      "side": 1,
+      "message": "if this is no longer in use can it be removed?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
       "revId": "697de5de84ad7f03e9af386e2370c25031c6784e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
