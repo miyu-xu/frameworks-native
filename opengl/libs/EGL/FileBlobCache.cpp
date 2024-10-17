@@ -27,12 +27,19 @@
 
 #include <log/log.h>
 #include <utils/Trace.h>
+#include <zlib.h>
 
 // Cache file header
 static const char* cacheFileMagic = "EGL$";
 static const size_t cacheFileHeaderSize = 8;
 
 namespace android {
+
+uint32_t GenerateCRC32(const uint8_t *data, size_t size)
+{
+    const unsigned long initialValue = crc32_z(0u, nullptr, 0u);
+    return static_cast<uint32_t>(crc32_z(initialValue, data, size));
+}
 
 uint32_t crc32c(const uint8_t* buf, size_t len) {
     const uint32_t polyBits = 0x82F63B78;

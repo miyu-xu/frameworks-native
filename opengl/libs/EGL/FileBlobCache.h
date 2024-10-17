@@ -22,6 +22,8 @@
 
 namespace android {
 
+uint32_t GenerateCRC32(const uint8_t *data, size_t size);
+
 uint32_t crc32c(const uint8_t* buf, size_t len);
 
 class FileBlobCache : public BlobCache {

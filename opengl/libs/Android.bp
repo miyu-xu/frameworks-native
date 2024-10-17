@@ -135,6 +135,9 @@ cc_library_static {
         "EGL/MultifileBlobCache.cpp",
     ],
     export_include_dirs: ["EGL"],
+    shared_libs: [
+        "libz",
+    ],
 }
 
 cc_library_shared {
@@ -199,6 +202,7 @@ cc_test {
     ],
     shared_libs: [
         "libutils",
+        "libz",
     ],
 }
 
