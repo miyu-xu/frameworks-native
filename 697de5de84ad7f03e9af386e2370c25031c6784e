@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "808290fb_31aff980",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3248209
+      },
+      "writtenOn": "2024-10-17T23:56:12Z",
+      "side": 1,
+      "message": "add the same data as described in https://partnerissuetracker.corp.google.com/issues/373718861",
+      "parentUuid": "875aa69d_c5c506b7",
+      "revId": "697de5de84ad7f03e9af386e2370c25031c6784e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9d43d9ad_b9664f1c",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-10-17T23:10:28Z",
       "side": 1,
       "message": "if this is no longer in use can it be removed?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "697de5de84ad7f03e9af386e2370c25031c6784e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c72421d3_2cd0f8d7",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3248209
+      },
+      "writtenOn": "2024-10-17T23:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "255752a7_2043df7a",
       "range": {
         "startLine": 44,
         "startChar": 0,
