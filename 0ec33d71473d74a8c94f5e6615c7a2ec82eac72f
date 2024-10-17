@@ -141,6 +141,24 @@
       "parentUuid": "aed0405e_15c8e433",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d65bbf6_416dce55",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-17T17:21:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "03cad996_1c484bcc",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
