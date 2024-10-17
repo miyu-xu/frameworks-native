@@ -40,6 +40,30 @@
       ],
       "revId": "0b8f81e989db139fb9c7910b8158f97e2cfd87e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cb2689_c11f4599",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-10-17T01:18:53Z",
+      "side": 1,
+      "message": "Hello, the following judgment logic is no longer inside any loop, so using break will not work, right? The following statements will still be executed when mCore-\u003emFreeSlots is empty. Can you help me see if this can be modified? Thank you.",
+      "parentUuid": "2d1d9f37_a6a59783",
+      "range": {
+        "startLine": 1616,
+        "startChar": 16,
+        "endLine": 1616,
+        "endChar": 23
+      },
+      "revId": "0b8f81e989db139fb9c7910b8158f97e2cfd87e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
