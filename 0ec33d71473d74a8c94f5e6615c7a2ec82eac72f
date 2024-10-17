@@ -123,6 +123,24 @@
       "parentUuid": "d720a424_d555bc1e",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cad996_1c484bcc",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-17T15:22:04Z",
+      "side": 1,
+      "message": "ugh yeah the \"updatable gfx driver\" path uses a bunch of shenanigans to figure out the allowlist...\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/graphicsenv/GraphicsEnv.cpp;drc\u003d00face6199cf2f1c9fa4c3d2e2c0b1cc769bff6c;l\u003d171",
+      "parentUuid": "aed0405e_15c8e433",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
