@@ -64,6 +64,30 @@
       },
       "revId": "0b8f81e989db139fb9c7910b8158f97e2cfd87e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc02b322_79ff6cc8",
+        "filename": "libs/gui/BufferQueueProducer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-10-17T21:46:25Z",
+      "side": 1,
+      "message": "i think the new patchset is now correct",
+      "parentUuid": "40cb2689_c11f4599",
+      "range": {
+        "startLine": 1616,
+        "startChar": 16,
+        "endLine": 1616,
+        "endChar": 23
+      },
+      "revId": "0b8f81e989db139fb9c7910b8158f97e2cfd87e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
