@@ -16,6 +16,24 @@
       "message": "Thank you for reviewing the patch again.",
       "revId": "045a30e06207744f45d7defa109764a5565bf30e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4dbd44_9f407ed0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-10-17T01:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dedb9bce_962d8853",
+      "revId": "045a30e06207744f45d7defa109764a5565bf30e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
