@@ -105,6 +105,24 @@
       "parentUuid": "bdc5ce01_8d2916fa",
       "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed0405e_15c8e433",
+        "filename": "opengl/libs/EGL/Loader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-17T13:15:35Z",
+      "side": 1,
+      "message": "Yeah it would be preferable to fix the root cause than work around :)\n\nI poked around but see b/371356548#comment22 and the link in b/371356548#comment23, it seems that dropping \"shared\" needs an allowlist for additional libs that need to be loaded including the very basic stuff like `libc.so`. I don\u0027t fully understand what \"isolated\" means. The namespace documentation doesn\u0027t mention an allowlist: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/libs/native_bridge_support/guest_state_accessor/include/native_bridge_support/guest_state_accessor/dlext_namespaces.h;drc\u003d0ca0d9faabfeb3d64d4690c3c6d6f052a25c5c00;l\u003d87",
+      "parentUuid": "d720a424_d555bc1e",
+      "revId": "0ec33d71473d74a8c94f5e6615c7a2ec82eac72f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
