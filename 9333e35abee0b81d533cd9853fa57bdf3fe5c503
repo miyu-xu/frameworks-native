@@ -52,6 +52,24 @@
       "parentUuid": "97d3300c_9698f12c",
       "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b7600d_981f658d",
+        "filename": "libs/graphicsenv/GraphicsEnv.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1941946
+      },
+      "writtenOn": "2024-10-18T01:18:39Z",
+      "side": 0,
+      "message": "Found this reference https://b.corp.google.com/issues/120106759 that we can learn more about these namespaces.\n\nCan you test your change works on build where `ro.vndk.version` is not empty?",
+      "parentUuid": "954919c9_06848196",
+      "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
