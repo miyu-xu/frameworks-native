@@ -86,6 +86,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e80f22f_f603f250",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T22:56:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef8a6719_2d23c7e4",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 29
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7294f85a_f73fcd14",

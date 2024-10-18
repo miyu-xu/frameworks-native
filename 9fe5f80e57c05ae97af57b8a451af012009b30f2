@@ -22,6 +22,30 @@
       },
       "revId": "9fe5f80e57c05ae97af57b8a451af012009b30f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5459b5ca_836dc05d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T22:56:44Z",
+      "side": 0,
+      "message": "+1. Slipped https://r.android.com/3314054 underneath this to help make it clearer.",
+      "parentUuid": "0372d30c_cdaa5fbd",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 8
+      },
+      "revId": "9fe5f80e57c05ae97af57b8a451af012009b30f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
