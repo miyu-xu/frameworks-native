@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04427bc9_7f4b4fbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-18T00:21:21Z",
+      "side": 1,
+      "message": "Can you setup a time to talk about this or setup a diagram how this works?\n\nIf we\u0027re using TIPC to communicate from VM to TEE, then it should be a VintfStability service. This should be true even if VM is pure system variant, and if a different transport is used.\n\nStill, I don\u0027t understand what the Trusty TA is, so I\u0027d like to see exactly, the client, the server, where the code lives, which variant each is, and how we enforce the interface requirement for these.",
+      "parentUuid": "95eb5947_a71fca6b",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
