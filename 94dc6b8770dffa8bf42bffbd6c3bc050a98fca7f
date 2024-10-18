@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b857bc3_abefa5d5",
+        "filename": "libs/binder/rust/sys/BinderBindings.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-18T23:18:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fdd9be5_14f41760",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31c4d166_6ef23ead",
@@ -67,6 +85,24 @@
       "writtenOn": "2024-10-10T17:54:58Z",
       "side": 1,
       "message": "license",
+      "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b0a6e50_0c00ef29",
+        "filename": "libs/binder/rust/sys/build.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-18T23:18:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c4d166_6ef23ead",
       "revId": "94dc6b8770dffa8bf42bffbd6c3bc050a98fca7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
