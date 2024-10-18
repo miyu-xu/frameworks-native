@@ -16,6 +16,24 @@
       "message": "+1 for Rust code, always like dropping deps and this looks equivalent\n\nThat said, was there something that lead you to remove the `nix`-based types? Is the existing code equivalent to what you\u0027ve changed it to, or is there a subtle difference? (Primarily asking because while I approve of the refactor, I wouldn\u0027t expect to see it alongside the rest of this CL, so I am curious if I\u0027ve missed something.)",
       "revId": "d8461799e9573886b322b2d588f9e9aef24eaa7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fddc251a_3f56ebd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 46
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T17:17:24Z",
+      "side": 1,
+      "message": "Dropping `nix` isn\u0027t really supposed to be a part of this CL(sorry!), I expect https://r.android.com/3311324 to be submitted before this and will rebase on top. I was using this repo/topic to make sure that change still works with all of this and was being kind of lazy by submitting the changes along with the latest patchset here instead of rebasing on top of that CL...\n\n\nhttps://r.android.com/3311324 was done because of the comment here: https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3305566/comment/60417caa_8f701510/",
+      "parentUuid": "6fe67357_0009fd9c",
+      "revId": "d8461799e9573886b322b2d588f9e9aef24eaa7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
