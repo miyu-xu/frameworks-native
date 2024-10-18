@@ -64,6 +64,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef8a6719_2d23c7e4",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "`hasOutOfProcessServiceManager` is close I renamed (better than isSmInstalled). It\u0027s specifically `has ServiceManager As ContextObject(0)` or `Should we wait for servicemanager.ready`. I think those things _could_ be done in the same process.",
+      "parentUuid": "a5a5f24a_7284e0fd",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 29
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7294f85a_f73fcd14",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 45
@@ -75,6 +99,30 @@
       "writtenOn": "2024-10-12T01:01:47Z",
       "side": 1,
       "message": "maybe return an error from this case? It\u0027s a bit weird - if you are trying to do something, you should only do it once.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 5
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d1dad8_e65749d2",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7294f85a_f73fcd14",
       "range": {
         "startLine": 322,
         "startChar": 0,
@@ -98,6 +146,30 @@
       "writtenOn": "2024-10-12T01:01:47Z",
       "side": 1,
       "message": "can delete, this will never happen",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 87
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8cc2cb3_97693047",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46f0108c_a19ff81a",
       "range": {
         "startLine": 327,
         "startChar": 0,
@@ -151,6 +223,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14c58301_17283549",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "\u003e why not return true regardless\n`getDeclaredInstances` will have unexpected behavior in this case. We would either count the whole name as an instance, or return nothing when they don\u0027t have that format.\n\n```\nandroid.hardware.foo/bar\nandroid.hardware.foo/zed\n```\nisDeclared(\"android.hardware.foo/bar\") returns true.\ngetDeclaredInstances(\"android.hardware.foo\") returns {\"bar\", \"zed\"}.\n\n```\nblah\n```\nisDeclared(\"blah\") returns true?\ngetDeclaredInstances(\"blah\") returns {}, or {\"blah\"}?\n\nI lean more towards `{}` since it doesn\u0027t have \"/\u003cinstance\u003e\".",
+      "parentUuid": "fcbf5c91_58d8a44a",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 64
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59ddf181_1ec1f3e4",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 45
@@ -162,6 +258,30 @@
       "writtenOn": "2024-10-12T01:01:47Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 92
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66aa98e8_c290c76c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59ddf181_1ec1f3e4",
       "range": {
         "startLine": 356,
         "startChar": 0,
@@ -254,6 +374,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18d3700_7e865975",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "135cbd29_4740427c",
+      "range": {
+        "startLine": 428,
+        "startChar": 35,
+        "endLine": 428,
+        "endChar": 61
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6103301e_c9fcf69f",
@@ -267,6 +411,24 @@
       "writtenOn": "2024-10-12T01:01:47Z",
       "side": 1,
       "message": "yeah - the first time you can add the service, if it returns a success, you probably don\u0027t want to do it again? Seems like it could break if you tried to use this class more?\n\nMaybe even always force the first manager to get the service added? I\u0027m not sure",
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e6cc77_59719de6",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "We want the first manager\u0027s(ContextObject[0] normally) error when all managers fail to add the service.\n\nI think we will likely end up with a different addService API for binder RPC like `addService(string name, binder service, Accessor accessor)` or something similar so the client can choose how they want to register the service.",
+      "parentUuid": "6103301e_c9fcf69f",
       "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -342,6 +504,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89fb325_a17ce7cf",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81cdbc6d_d620192c",
+      "range": {
+        "startLine": 474,
+        "startChar": 26,
+        "endLine": 474,
+        "endChar": 32
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "528e3b2c_421e3e10",
@@ -379,6 +565,30 @@
           ]
         }
       ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7e3f865_f6e9bf29",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Didn\u0027t mean to be shadowing the `status` variable there!",
+      "parentUuid": "528e3b2c_421e3e10",
+      "range": {
+        "startLine": 502,
+        "startChar": 15,
+        "endLine": 502,
+        "endChar": 21
+      },
       "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -424,6 +634,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61cf8440_30a7e28a",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Added the warning.",
+      "parentUuid": "6f90041f_3277448f",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 39
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2028508f_c5303535",
@@ -437,6 +671,30 @@
       "writtenOn": "2024-10-12T01:01:47Z",
       "side": 1,
       "message": "yeah - it\u0027s weird this one is backwards. We should maybe chat about this a bit more, how these are composed. The amount of custom logic and coupling with LocalAccessorServiceManager is making me think, maybe LocalAccessorServiceManager should have a \u0027mDelegate-\u003eaddService\u0027 which is the real servicemanager? rather than try to do the generic one here? I mean, I\u0027ll leave it up to you, but it is a lot of coupling (the okay/!okay cases). I\u0027m really not sure.",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 46
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f57a1a8_2f531f58",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:55Z",
+      "side": 1,
+      "message": "Yeah I\u0027m not a fan of these multiple service managers because each of these functions needs to be different and even if we get each one right, we will be dropping some errors in some cases.\n\n\u003e  LocalAccessorServiceManager should have a \u0027mDelegate-\u003eaddService\u0027 which is the real servicemanage\n\nThe only reason I want to add a local servicemanager is because we need something when there is no ContextObject[0] without changing a lot of things (defaultservicemanager() has never returned `nullptr` and everything assumes there is a servicemanager for instance).\n\nIf I understand your suggestion, we could add this accessor logic into `BackendUnifiedServiceManager` that already has the `mTheRealServiceManager-\u003eaddService`, right? But we would still need to make the decisions about when to throw/ignore errors from either or.",
+      "parentUuid": "2028508f_c5303535",
       "range": {
         "startLine": 583,
         "startChar": 0,
