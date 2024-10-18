@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe67357_0009fd9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 46
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-18T16:47:46Z",
+      "side": 1,
+      "message": "+1 for Rust code, always like dropping deps and this looks equivalent\n\nThat said, was there something that lead you to remove the `nix`-based types? Is the existing code equivalent to what you\u0027ve changed it to, or is there a subtle difference? (Primarily asking because while I approve of the refactor, I wouldn\u0027t expect to see it alongside the rest of this CL, so I am curious if I\u0027ve missed something.)",
+      "revId": "d8461799e9573886b322b2d588f9e9aef24eaa7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
