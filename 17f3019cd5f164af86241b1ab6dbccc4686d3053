@@ -703,6 +703,30 @@
       },
       "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd68634d_8369acd5",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-18T22:26:53Z",
+      "side": 1,
+      "message": "Yeah, I mean maybe it is cleaner to do it like that (in BackendUnifiedServiceManager) because it turns out we don\u0027t have enough examples to make the multi-service-manager very general. Keeping it compact until we have more examples SGTM!",
+      "parentUuid": "7f57a1a8_2f531f58",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 46
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

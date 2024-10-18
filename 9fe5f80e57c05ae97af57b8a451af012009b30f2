@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0372d30c_cdaa5fbd",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-18T22:26:53Z",
+      "side": 0,
+      "message": "nit: in the future, please make changes like this separately, it\u0027s a lot of code delta to try to see here",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 8
+      },
+      "revId": "9fe5f80e57c05ae97af57b8a451af012009b30f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
