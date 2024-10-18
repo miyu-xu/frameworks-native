@@ -70,6 +70,24 @@
       "parentUuid": "954919c9_06848196",
       "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41e7cad_c5c30ca8",
+        "filename": "libs/graphicsenv/GraphicsEnv.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-18T13:36:59Z",
+      "side": 0,
+      "message": "No idea how to get builds we\u0027d need for testing the different setup combinations. For proper testing we\u0027d need to check permutations of `{vndk/sphal, system/updatable gfx, system/apk ANGLE}` Related: b/357144111.\n\nAlso this makes me wonder how the combination \"updatable gfx driver\" + ANGLE (system or side-loaded) is expected to work. When ANGLE libs are loaded we\u0027ll load some vulkan libs as well. The updatable gfx driver was set up as \"isolated\" on that bug above, to avoid a similar issue where the wrong libs could be loaded. When ANGLE is loaded, it\u0027ll load some vulkan libs - so can it happen to load the wrong libs due to (system) ANGLE being loaded as \"shared isolated\"? Or would that already be taken care of by the gfx driver namespace isolation?\n\nI think this is getting more involved than anticipated. We might want to just land https://r.android.com/3310155 for now as it\u0027s a simple and safe workaround, and have a separate tracking bug for all this stuff.",
+      "parentUuid": "08b7600d_981f658d",
+      "revId": "9333e35abee0b81d533cd9853fa57bdf3fe5c503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
