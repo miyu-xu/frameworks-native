@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be13d4a_9d3fb75c",
+        "filename": "libs/binder/rust/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-19T01:32:40Z",
+      "side": 1,
+      "message": "since ANDROID_PLATFORM is used in the header though, won\u0027t these features be missing here? You could check it based on if an include is there.\n\nor should visibility of these be restricted?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 35
+      },
+      "revId": "9320f59fb90540ee8bfcc543e2060aedf29e427b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
