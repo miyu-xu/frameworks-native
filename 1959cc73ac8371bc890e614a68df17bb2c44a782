@@ -22,6 +22,30 @@
       },
       "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0953a761_14254ccf",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3248209
+      },
+      "writtenOn": "2024-10-21T02:02:54Z",
+      "side": 1,
+      "message": "Simply since adding `static_assert(sizeof(unsigned long) \u003d\u003d 4, \"Unsignled long not 4 bytes\");` gives me a compile error, `unsigned long` and `uint32_t` are not the same. So, theoretically `using unsigned long` might be good in that there is no need to truncate it.\n\nIn practice, when I run the Genshin trace, `truncating to 32bits` and `using unsigned long` do not show a diff in term of function duration. \nSo,, difficult to say which one is better.",
+      "parentUuid": "cfd277ac_40341067",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
