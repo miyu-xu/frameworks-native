@@ -18,6 +18,7 @@
 package android.content.pm;
 
 import android.content.pm.IStagedApexObserver;
+import android.content.pm.PackageInfo;
 import android.content.pm.StagedApexInfo;
 
 /**
@@ -41,6 +42,28 @@ interface IPackageManagerNative {
      * strings.
      */
     @utf8InCpp String[] getNamesForUids(in int[] uids);
+
+    /**
+     * Retrieve overall information about an application package that is
+     * installed on the system.
+     *
+     * Note that the information returned is a subset of the information available
+     * by the PackageManager API, but with the same structure.
+     *
+     * Use {@link #getPackageInfo(String, PackageInfoFlags)} when long flags are needed.
+     *
+     * @param packageName The full name (i.e. com.google.apps.contacts) of the
+     *            desired package.
+     * @param flags Additional option flags to modify the data returned.
+     * @return A PackageInfo object containing information about the package. If
+     *         flag {@code MATCH_UNINSTALLED_PACKAGES} is set and if the package
+     *         is not found in the list of installed applications, the package
+     *         information is retrieved from the list of uninstalled
+     *         applications (which includes installed applications as well as
+     *         applications with data directory i.e. applications which had been
+     *         deleted with {@code DELETE_KEEP_DATA} flag set).
+     */
+    PackageInfo getPackageInfo(String packageName, int flags, int userId);
 
     /**
      * Return the UID associated with the given package name.
