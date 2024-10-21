@@ -70,6 +70,30 @@
       },
       "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad0bb912_fbdfb4c7",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3248209
+      },
+      "writtenOn": "2024-10-21T14:09:27Z",
+      "side": 1,
+      "message": "ok right, I see crc32_z() actually returns 32bit value -\u003e https://cs.android.com/android/platform/superproject/main/+/main:external/zlib/crc32.c;drc\u003d24c07df5033183efad8607cba62e746bea7180bf;l\u003d773\nThank you.\n\nMohan, if you don\u0027t mind, please resolve this comment.",
+      "parentUuid": "537ed4d1_7a1e7ebb",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
