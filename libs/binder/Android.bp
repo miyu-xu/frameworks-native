@@ -821,9 +821,12 @@ aidl_interface {
     local_include_dir: "aidl",
     host_supported: true,
     srcs: [
+        "aidl/android/content/pm/PackageInfo.aidl",
+        "aidl/android/content/pm/Signature.aidl",
+        "aidl/android/content/pm/SigningInfo.aidl",
+        "aidl/android/content/pm/ApexStagedEvent.aidl",
         "aidl/android/content/pm/IPackageManagerNative.aidl",
         "aidl/android/content/pm/IStagedApexObserver.aidl",
-        "aidl/android/content/pm/ApexStagedEvent.aidl",
         "aidl/android/content/pm/StagedApexInfo.aidl",
     ],
     backend: {
@@ -832,6 +835,10 @@ aidl_interface {
                 "com.android.virt",
             ],
             enabled: true,
+            gen_mockall: true,
+            additional_rustlibs: [
+                "libmockall",
+            ],
         },
     },
 }
