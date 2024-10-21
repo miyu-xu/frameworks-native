@@ -94,6 +94,30 @@
       },
       "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae797789_65c177e9",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1691065
+      },
+      "writtenOn": "2024-10-21T15:42:09Z",
+      "side": 1,
+      "message": "\u003e crc32 returns a 32-bit value, this is just working around the return type not being a uint32_t\n\ngiven that `sizeof(unsigned long) !\u003d sizeof(uint32_t)` hopefully there wont be a silent change in zlib where they begin to return values \u003e `size_of(uint32_t)`\n\nbut resolving this for now",
+      "parentUuid": "ad0bb912_fbdfb4c7",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
