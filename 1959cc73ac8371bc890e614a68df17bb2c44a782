@@ -46,6 +46,30 @@
       },
       "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "537ed4d1_7a1e7ebb",
+        "filename": "opengl/libs/EGL/FileBlobCache.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1941110
+      },
+      "writtenOn": "2024-10-21T12:42:16Z",
+      "side": 1,
+      "message": "I don\u0027t think there is any truncation happening - crc32 returns a 32-bit value, this is just working around the return type not being a uint32_t.",
+      "parentUuid": "0953a761_14254ccf",
+      "range": {
+        "startLine": 41,
+        "startChar": 23,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "1959cc73ac8371bc890e614a68df17bb2c44a782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
