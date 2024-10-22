@@ -62,7 +62,7 @@ public:
     bool removeItem(const std::string& key, const sp<IBinder>& who) {
         std::string traceStr;
         uint64_t tag = ATRACE_TAG_AIDL;
-        if (atrace_is_tag_enabled(tag)) {
+        if (binder::os::is_tag_enabled(tag)) {
             traceStr = "BinderCacheWithInvalidation::removeItem " + key;
         }
         binder::ScopedTrace aidlTrace(tag, traceStr.c_str());
@@ -90,7 +90,7 @@ public:
             if (status != android::OK) {
                 std::string traceStr;
                 uint64_t tag = ATRACE_TAG_AIDL;
-                if (atrace_is_tag_enabled(tag)) {
+                if (binder::os::is_tag_enabled(tag)) {
                     traceStr =
                             "BinderCacheWithInvalidation::setItem Failed LinkToDeath for service " +
                             key + " : " + std::to_string(status);

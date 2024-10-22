@@ -26,9 +26,6 @@
 #include <chrono>
 #include <condition_variable>
 
-#include <FdTrigger.h>
-#include <RpcSocketAddress.h>
-#include <android-base/properties.h>
 #include <android/os/BnAccessor.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/BnServiceManager.h>
@@ -44,6 +41,7 @@
 #endif
 
 #ifdef __ANDROID__
+#include <android-base/properties.h>
 #include <cutils/properties.h>
 #else
 #include "ServiceManagerHost.h"
@@ -54,6 +52,8 @@
 #include <vndksupport/linker.h>
 #endif
 
+#include "FdTrigger.h"
+#include "RpcSocketAddress.h"
 #include "Static.h"
 #include "Utils.h"
 
@@ -581,9 +581,7 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
           ProcessState::self()->getDriverName().c_str());
 
-    int n = 0;
     while (std::chrono::steady_clock::now() - startTime < timeout) {
-        n++;
         usleep(1000*sleepTime);
 
         sp<IBinder> svc = checkService(name);
