@@ -52,6 +52,10 @@ uint64_t get_trace_enabled_tags() {
     return atrace_enabled_tags;
 }
 
+uint64_t is_tag_enabled(uint64_t tag) {
+    return atrace_is_tag_enabled(tag);
+}
+
 } // namespace os
 
 // Legacy trace symbol. To be removed once all of downstream rebuilds.

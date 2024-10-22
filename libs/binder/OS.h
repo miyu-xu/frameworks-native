@@ -28,6 +28,7 @@ LIBBINDER_EXPORTED void trace_begin(uint64_t tag, const char* name);
 LIBBINDER_EXPORTED void trace_end(uint64_t tag);
 LIBBINDER_EXPORTED void trace_int(uint64_t tag, const char* name, int32_t value);
 LIBBINDER_EXPORTED uint64_t get_trace_enabled_tags();
+LIBBINDER_EXPORTED uint64_t is_tag_enabled(uint64_t tag);
 
 status_t setNonBlocking(borrowed_fd fd);
 

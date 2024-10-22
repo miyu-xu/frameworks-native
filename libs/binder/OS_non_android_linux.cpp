@@ -45,6 +45,10 @@ uint64_t get_trace_enabled_tags() {
     return 0;
 }
 
+uint64_t is_tag_enabled(uint64_t) {
+    return 0;
+}
+
 uint64_t GetThreadId() {
     return syscall(__NR_gettid);
 }

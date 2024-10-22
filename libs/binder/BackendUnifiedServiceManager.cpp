@@ -17,6 +17,7 @@
 
 #include <android/os/IAccessor.h>
 #include <binder/RpcSession.h>
+#include <binder/Trace.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
@@ -125,7 +126,7 @@ Status BackendUnifiedServiceManager::updateCache(const std::string& serviceName,
         return Status::ok();
     }
     std::string traceStr;
-    if (atrace_is_tag_enabled(ATRACE_TAG_AIDL)) {
+    if (binder::os::is_tag_enabled(ATRACE_TAG_AIDL)) {
         traceStr = "BinderCacheWithInvalidation::updateCache : " + serviceName;
     }
     binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, traceStr.c_str());
