@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed090d4f_e49cd53a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-10-22T19:43:04Z",
+      "side": 1,
+      "message": "Hi, I\u0027m just cleaning up some TEST_MAPPING file and ran across this unneeded glob.",
+      "revId": "caddf49a5687db6f7dd4a70864b8b6479a74f944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
