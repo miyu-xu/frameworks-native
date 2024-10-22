@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e951d4_97bf9998",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2024-10-22T15:39:13Z",
+      "side": 1,
+      "message": "Hi Andrew,\n\nPlease take a look at this CL for ag/30011991. Thanks!",
+      "revId": "8237ba6696590098fadfb08295eaa327c0d7c55b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
