@@ -196,7 +196,6 @@ void LayerFE::prepareClearClientComposition(LayerFE::LayerSettings& layerSetting
 
     // If layer is blacked out, force alpha to 1 so that we draw a black color layer.
     layerSettings.alpha = blackout ? 1.0f : 0.0f;
-    layerSettings.name = mSnapshot->name;
 }
 
 void LayerFE::prepareEffectsClientComposition(
