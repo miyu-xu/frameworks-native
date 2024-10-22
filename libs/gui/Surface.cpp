@@ -2412,6 +2412,7 @@ status_t Surface::lock(
         if (err) {
             return err;
         }
+        setDequeueTimeout(2000000000);
         // we're intending to do software rendering from this point
         setUsage(GRALLOC_USAGE_SW_READ_OFTEN | GRALLOC_USAGE_SW_WRITE_OFTEN);
     }
