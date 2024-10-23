@@ -16,6 +16,24 @@
       "message": "There are a lot of other paths in ProcessState which are very unclear what they would do if the binder driver is not initialized.\n\nWhich code paths need ProcessState you need right now? Could we avoid instantiating ProcessState in the NO_BINDER build for these codepaths? If not, which functionality in ProcessState do we still need (even though it doesn\u0027t have the binder FD).",
       "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9d2951_866d2382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-23T21:48:09Z",
+      "side": 1,
+      "message": "Would it ever make sense to have `ProcessState` initialized without kernel binder support on a device? Or is it _only_ responsible for kernel binder?\n\nThere are a few places in [IServiceManager.cpp/BakcendUnifiedServiceManager.cpp](https://source.corp.google.com/search?q\u003dprocessstate::self%20f:libs%2Fbinder%20f:manager\u0026sq\u003d\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:frameworks%2Fnative%2Flibs%2Fbinder%2F) that call `ProcessState::Self()` and deference it immediately.\n\nI don\u0027t think we need any of the functionality from it (maybe the caching if we want to do that). So I could check `ProcessState::Self()` and change it to return nullptr instead.",
+      "parentUuid": "9743028d_392c6e15",
+      "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
