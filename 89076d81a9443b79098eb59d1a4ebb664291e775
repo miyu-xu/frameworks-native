@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcd353b6_8d710326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-23T15:36:48Z",
+      "side": 1,
+      "message": "Can we remove this? There are no users and I want to make some changes that will be easier if no one can get this real service manager field.",
+      "revId": "89076d81a9443b79098eb59d1a4ebb664291e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
