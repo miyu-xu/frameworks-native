@@ -165,5 +165,6 @@ private:
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager();
 
 android::binder::Status getInjectedAccessor(const std::string& name, android::os::Service* service);
+void listInjectedAccessors(std::vector<std::string>* list);
 
 } // namespace android
