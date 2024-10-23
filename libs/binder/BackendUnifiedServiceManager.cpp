@@ -15,6 +15,7 @@
  */
 #include "BackendUnifiedServiceManager.h"
 
+#include <android-base/strings.h>
 #include <android/os/IAccessor.h>
 #include <binder/RpcSession.h>
 
@@ -293,11 +294,15 @@ Status BackendUnifiedServiceManager::addService(const ::std::string& name,
 }
 Status BackendUnifiedServiceManager::listServices(int32_t dumpPriority,
                                                   ::std::vector<::std::string>* _aidl_return) {
+    Status status = Status::ok();
     if (mTheRealServiceManager) {
-        return mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
+        status = mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
     }
-    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
-                                     kUnsupportedOpNoServiceManager);
+    if (!status.isOk()) return status;
+
+    listInjectedAccessors(_aidl_return);
+
+    return status;
 }
 Status BackendUnifiedServiceManager::registerForNotifications(
         const ::std::string& name, const sp<os::IServiceCallback>& callback) {
@@ -316,19 +321,45 @@ Status BackendUnifiedServiceManager::unregisterForNotifications(
                                      kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::isDeclared(const ::std::string& name, bool* _aidl_return) {
+    Status status = Status::ok();
     if (mTheRealServiceManager) {
-        return mTheRealServiceManager->isDeclared(name, _aidl_return);
+        status = mTheRealServiceManager->isDeclared(name, _aidl_return);
     }
-    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
-                                     kUnsupportedOpNoServiceManager);
+    if (!status.isOk()) return status;
+
+    if (!*_aidl_return) {
+        std::vector<std::string> list;
+        listInjectedAccessors(&list);
+        if (std::find(list.begin(), list.end(), name) != list.end()) {
+            *_aidl_return = true;
+        }
+    }
+
+    return status;
 }
 Status BackendUnifiedServiceManager::getDeclaredInstances(
         const ::std::string& iface, ::std::vector<::std::string>* _aidl_return) {
+    Status status = Status::ok();
     if (mTheRealServiceManager) {
-        return mTheRealServiceManager->getDeclaredInstances(iface, _aidl_return);
+        status = mTheRealServiceManager->getDeclaredInstances(iface, _aidl_return);
     }
-    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
-                                     kUnsupportedOpNoServiceManager);
+    if (!status.isOk()) return status;
+
+    std::vector<std::string> list;
+    listInjectedAccessors(&list);
+    for (const auto& service : list) {
+        // Declared instances have the format
+        // <interface>/instance like foo.bar.ISomething/instance
+        // If it does not have that format, consider the instance to be ""
+        std::string_view instance(service);
+        if (base::ConsumePrefix(&instance, iface + "/")) {
+            _aidl_return->emplace_back(instance);
+        } else if (iface == instance) {
+            _aidl_return->push_back("");
+        }
+    }
+
+    return status;
 }
 Status BackendUnifiedServiceManager::updatableViaApex(
         const ::std::string& name, ::std::optional<::std::string>* _aidl_return) {
