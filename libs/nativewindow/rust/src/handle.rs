@@ -174,6 +174,15 @@ impl NativeHandle {
         forget(self);
         raw
     }
+
+    /// Unsets FDSan tag for the FDs in this handle. This is needed when transferring ownership of
+    /// the FDs to other wrappers like Rust `OwnedFd` or AIDL `NativeHandle`.
+    fn unset_fdsan_tag(&self) {
+        // SAFETY: Our wrapped `native_handle_t` pointer is always valid.
+        unsafe {
+            ffi::native_handle_unset_fdsan_tag(self.as_ref());
+        }
+    }
 }
 
 impl Clone for NativeHandle {
@@ -203,6 +212,7 @@ impl From<AidlNativeHandle> for NativeHandle {
 
 impl From<NativeHandle> for AidlNativeHandle {
     fn from(native_handle: NativeHandle) -> Self {
+        native_handle.unset_fdsan_tag();
         let ints = native_handle.ints().to_owned();
         let fds = native_handle.into_fds().into_iter().map(ParcelFileDescriptor::new).collect();
         Self { ints, fds }
@@ -258,6 +268,18 @@ mod test {
         assert_eq!(cloned.fds().len(), 1);
 
         drop(cloned);
+    }
+
+    #[test]
+    fn to_aidl() {
+        let file = File::open("/dev/null").unwrap();
+        let original = NativeHandle::new(vec![file.into()], &[42]).unwrap();
+        assert_eq!(original.ints(), &[42]);
+        assert_eq!(original.fds().len(), 1);
+
+        let aidl = AidlNativeHandle::from(original);
+        assert_eq!(&aidl.ints, &[42]);
+        assert_eq!(aidl.fds.len(), 1);
     }
 
     #[test]
