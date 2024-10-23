@@ -30,10 +30,12 @@ MODULE_SRCS := \
 	$(LOCAL_DIR)/TrustyStatus.cpp \
 	$(LOCAL_DIR)/socket.cpp \
 	$(LIBBINDER_DIR)/Binder.cpp \
+	$(LIBBINDER_DIR)/BackendUnifiedServiceManager.cpp \
 	$(LIBBINDER_DIR)/BpBinder.cpp \
 	$(LIBBINDER_DIR)/FdTrigger.cpp \
 	$(LIBBINDER_DIR)/IInterface.cpp \
 	$(LIBBINDER_DIR)/IResultReceiver.cpp \
+	$(LIBBINDER_DIR)/IServiceManager.cpp \
 	$(LIBBINDER_DIR)/Parcel.cpp \
 	$(LIBBINDER_DIR)/ParcelFileDescriptor.cpp \
 	$(LIBBINDER_DIR)/RpcServer.cpp \
@@ -70,6 +72,7 @@ MODULE_EXPORT_COMPILEFLAGS += \
 	-DBINDER_DISABLE_NATIVE_HANDLE \
 	-DBINDER_DISABLE_BLOB \
 	-DBINDER_NO_LIBBASE \
+	-D__NEED_socklen_t \
 	-D__ANDROID_VENDOR__ \
 	-D__ANDROID_VNDK__ \
 
@@ -79,6 +82,7 @@ MODULE_EXPORT_COMPILEFLAGS += \
 	-Wno-error=deprecated-declarations \
 
 MODULE_LIBRARY_DEPS += \
+	$(LOCAL_DIR)/aidl \
 	trusty/user/base/lib/libstdc++-trusty \
 	trusty/user/base/lib/tipc \
 	external/boringssl \

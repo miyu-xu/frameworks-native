@@ -18,7 +18,9 @@
 #include <binder/Common.h>
 #include <binder/IInterface.h>
 // Trusty has its own definition of socket APIs from trusty_ipc.h
-#ifndef __TRUSTY__
+#ifdef __TRUSTY__
+struct sockaddr;
+#else
 #include <sys/socket.h>
 #endif // __TRUSTY__
 #include <utils/String16.h>
@@ -221,7 +223,6 @@ LIBBINDER_EXPORTED bool checkPermission(const String16& permission, pid_t pid, u
 
 // ----------------------------------------------------------------------
 // Trusty's definition of the socket APIs does not include sockaddr types
-#ifndef __TRUSTY__
 typedef std::function<status_t(const String16& name, sockaddr* outAddr, socklen_t addrSize)>
         RpcSocketAddressProvider;
 
@@ -313,8 +314,6 @@ LIBBINDER_EXPORTED status_t validateAccessor(const String16& instance, const sp<
  */
 LIBBINDER_EXPORTED status_t delegateAccessor(const String16& name, const sp<IBinder>& accessor,
                                              sp<IBinder>* delegator);
-#endif // __TRUSTY__
-
 #ifndef __ANDROID__
 // Create an IServiceManager that delegates the service manager on the device via adb.
 // This is can be set as the default service manager at program start, so that

@@ -26,9 +26,6 @@
 #include <chrono>
 #include <condition_variable>
 
-#include <FdTrigger.h>
-#include <RpcSocketAddress.h>
-#include <android-base/properties.h>
 #include <android/os/BnAccessor.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/BnServiceManager.h>
@@ -44,6 +41,7 @@
 #endif
 
 #ifdef __ANDROID__
+#include <android-base/properties.h>
 #include <cutils/properties.h>
 #else
 #include "ServiceManagerHost.h"
@@ -54,6 +52,8 @@
 #include <vndksupport/linker.h>
 #endif
 
+#include "FdTrigger.h"
+#include "RpcSocketAddress.h"
 #include "Static.h"
 #include "Utils.h"
 
@@ -561,8 +561,10 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     sp<IBinder> svc = checkService(name);
     if (svc != nullptr) return svc;
 
-    const bool isVendorService =
-        strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+    bool isVendorService = false;
+#ifdef __BINDER_WITH_KERNEL_IPC__
+    isVendorService = strcmp(ProcessState::self()->getDriverName().c_str(), "/dev/vndbinder") == 0;
+#endif // __BINDER_WITH_KERNEL_IPC__
     constexpr auto timeout = 5s;
     const auto startTime = std::chrono::steady_clock::now();
     // Vendor code can't access system properties
@@ -578,20 +580,22 @@ sp<IBinder> CppBackendShim::getService(const String16& name) const {
     // retry interval in millisecond; note that vendor services stay at 100ms
     const useconds_t sleepTime = gSystemBootCompleted ? 1000 : 100;
 
+#ifdef __BINDER_WITH_KERNEL_IPC__
     ALOGI("Waiting for service '%s' on '%s'...", String8(name).c_str(),
           ProcessState::self()->getDriverName().c_str());
+#endif //__BINDER_WITH_KERNEL_IPC__
 
-    int n = 0;
     while (std::chrono::steady_clock::now() - startTime < timeout) {
-        n++;
         usleep(1000*sleepTime);
 
         sp<IBinder> svc = checkService(name);
         if (svc != nullptr) {
+#ifdef __BINDER_WITH_KERNEL_IPC__
             const auto waitTime = std::chrono::steady_clock::now() - startTime;
             ALOGI("Waiting for service '%s' on '%s' successful after waiting %" PRIu64 "ms",
                   String8(name).c_str(), ProcessState::self()->getDriverName().c_str(),
                   to_ms(waitTime));
+#endif // __BINDER_WITH_KERNEL_IPC__
             return svc;
         }
     }
@@ -629,6 +633,7 @@ Vector<String16> CppBackendShim::listServices(int dumpsysPriority) {
 }
 
 sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
+#ifdef __BINDER_WITH_KERNEL_IPC__
     class Waiter : public android::os::BnServiceCallback {
         Status onRegistration(const std::string& /*name*/,
                               const sp<IBinder>& binder) override {
@@ -645,6 +650,15 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
         std::mutex mMutex;
         std::condition_variable mCv;
     };
+#else
+    // TODO is this trusty specific or specific to environments without
+    // callback support?
+    class Waiter : public android::os::BnServiceCallback {
+        Status onRegistration(const std::string& /*name*/, const sp<IBinder>& /*binder*/) override {
+            return Status::ok();
+        }
+    };
+#endif // __BINDER_WITH_KERNEL_IPC__
 
     // Simple RAII object to ensure a function call immediately before going out of scope
     class Defer {
@@ -661,6 +675,7 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
     if (Status status = realGetService(name, &out); !status.isOk()) {
         ALOGW("Failed to getService in waitForService for %s: %s", name.c_str(),
               status.toString8().c_str());
+#ifdef __BINDER_WITH_KERNEL_IPC__
         if (0 == ProcessState::self()->getThreadPoolMaxTotalThreadCount()) {
             ALOGW("Got service, but may be racey because we could not wait efficiently for it. "
                   "Threadpool has 0 guaranteed threads. "
@@ -668,10 +683,12 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
                   "See ProcessState::startThreadPool and "
                   "ProcessState::setThreadPoolMaxThreadCount.");
         }
+#endif // __BINDER_WITH_KERNEL_IPC__
         return nullptr;
     }
-    if (out != nullptr) return out;
+    return out;
 
+#ifdef __BINDER_WITH_KERNEL_IPC__
     sp<Waiter> waiter = sp<Waiter>::make();
     if (Status status = mUnifiedServiceManager->registerForNotifications(name, waiter);
         !status.isOk()) {
@@ -715,6 +732,7 @@ sp<IBinder> CppBackendShim::waitForService(const String16& name16) {
         }
         if (out != nullptr) return out;
     }
+#endif // __BINDER_WITH_KERNEL_IPC__
 }
 
 bool CppBackendShim::isDeclared(const String16& name) {
