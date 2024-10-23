@@ -34,6 +34,24 @@
       "parentUuid": "9743028d_392c6e15",
       "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16699782_4ccd3309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-23T23:39:05Z",
+      "side": 1,
+      "message": "Can you use ProcessState::selfOrNull for some of those cases? For instance, if ProcessState is null, we know the binder thread count is 0.\n\nThat way:\n- we don\u0027t have to allocate ProcessState (has cost)\n- we can hopefully even compile out ProcessState later to save memory\n- we don\u0027t have to audit the 100+ ProcessState functions or potentially run them in this untested state (where the binder driver is not initialized). E.g. the ProcessState code may have bugs if the FD is -1.",
+      "parentUuid": "4b9d2951_866d2382",
+      "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
