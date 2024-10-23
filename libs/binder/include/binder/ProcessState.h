@@ -148,7 +148,7 @@ private:
     friend class IPCThreadState;
     friend class sp<ProcessState>;
 
-    explicit ProcessState(const char* driver);
+    explicit ProcessState(const char* driver, base::unique_fd&& opened);
     ~ProcessState();
 
     ProcessState(const ProcessState& o);
