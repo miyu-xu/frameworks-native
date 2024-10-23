@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9743028d_392c6e15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-23T21:31:19Z",
+      "side": 1,
+      "message": "There are a lot of other paths in ProcessState which are very unclear what they would do if the binder driver is not initialized.\n\nWhich code paths need ProcessState you need right now? Could we avoid instantiating ProcessState in the NO_BINDER build for these codepaths? If not, which functionality in ProcessState do we still need (even though it doesn\u0027t have the binder FD).",
+      "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
