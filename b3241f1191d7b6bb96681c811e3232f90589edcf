@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c07cd6_1049af4c",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-23T09:58:12Z",
+      "side": 1,
+      "message": "Please add a comment here explaining why it is necessary to unset the tag.",
+      "revId": "b3241f1191d7b6bb96681c811e3232f90589edcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

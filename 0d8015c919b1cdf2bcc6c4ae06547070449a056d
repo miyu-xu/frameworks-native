@@ -16,6 +16,24 @@
       "message": "Hi Andrew,\n\nI tested aosp/3317051 and found this is needed, otherwise usage like the newly added unit test can trigger FDSan crash.\n\nPTAL. Thanks!",
       "revId": "0d8015c919b1cdf2bcc6c4ae06547070449a056d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b1fc6a8_279a2717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-23T09:58:12Z",
+      "side": 1,
+      "message": "Thanks! Though I wonder why the `to_from_aidl` test wasn\u0027t crashing in that case.",
+      "parentUuid": "3eb9779b_ad1da7c0",
+      "revId": "0d8015c919b1cdf2bcc6c4ae06547070449a056d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
