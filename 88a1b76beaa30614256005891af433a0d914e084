@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9bea24_0f70a964",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3248209
+      },
+      "writtenOn": "2024-10-23T01:09:13Z",
+      "side": 1,
+      "message": "Changed this to `millisecond` in patchset #4.\nI used `systemTime()` function to measure the duration, and it returns millisecond.",
+      "range": {
+        "startLine": 13,
+        "startChar": 47,
+        "endLine": 13,
+        "endChar": 57
+      },
+      "revId": "88a1b76beaa30614256005891af433a0d914e084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
