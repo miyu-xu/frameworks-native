@@ -16,6 +16,24 @@
       "message": "Please add a comment here explaining why it is necessary to unset the tag.",
       "revId": "b3241f1191d7b6bb96681c811e3232f90589edcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9650884_d0df8da0",
+        "filename": "libs/nativewindow/rust/src/handle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2024-10-23T10:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88c07cd6_1049af4c",
+      "revId": "b3241f1191d7b6bb96681c811e3232f90589edcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
