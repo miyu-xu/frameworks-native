@@ -34,6 +34,9 @@ using AidlServiceManager = android::os::IServiceManager;
 using android::os::IAccessor;
 using binder::Status;
 
+static const char* kUnsupportedOpNoServiceManager =
+        "Unsupported operation without a kernel binder servicemanager process";
+
 static const char* kStaticCachableList[] = {
         // go/keep-sorted start
         "accessibility",
@@ -190,7 +193,10 @@ Status BackendUnifiedServiceManager::getService2(const ::std::string& name, os::
         return Status::ok();
     }
     os::Service service;
-    Status status = mTheRealServiceManager->getService2(name, &service);
+    Status status = Status::ok();
+    if (mTheRealServiceManager) {
+        status = mTheRealServiceManager->getService2(name, &service);
+    }
 
     if (status.isOk()) {
         status = toBinderService(name, service, _out);
@@ -207,7 +213,10 @@ Status BackendUnifiedServiceManager::checkService(const ::std::string& name, os:
         return Status::ok();
     }
 
-    Status status = mTheRealServiceManager->checkService(name, &service);
+    Status status = Status::ok();
+    if (mTheRealServiceManager) {
+        status = mTheRealServiceManager->checkService(name, &service);
+    }
     if (status.isOk()) {
         status = toBinderService(name, service, _out);
         if (status.isOk()) {
@@ -281,60 +290,121 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
 Status BackendUnifiedServiceManager::addService(const ::std::string& name,
                                                 const sp<IBinder>& service, bool allowIsolated,
                                                 int32_t dumpPriority) {
-    return mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::listServices(int32_t dumpPriority,
                                                   ::std::vector<::std::string>* _aidl_return) {
-    return mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->listServices(dumpPriority, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::registerForNotifications(
         const ::std::string& name, const sp<os::IServiceCallback>& callback) {
-    return mTheRealServiceManager->registerForNotifications(name, callback);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->registerForNotifications(name, callback);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::unregisterForNotifications(
         const ::std::string& name, const sp<os::IServiceCallback>& callback) {
-    return mTheRealServiceManager->unregisterForNotifications(name, callback);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->unregisterForNotifications(name, callback);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::isDeclared(const ::std::string& name, bool* _aidl_return) {
-    return mTheRealServiceManager->isDeclared(name, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->isDeclared(name, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::getDeclaredInstances(
         const ::std::string& iface, ::std::vector<::std::string>* _aidl_return) {
-    return mTheRealServiceManager->getDeclaredInstances(iface, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->getDeclaredInstances(iface, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::updatableViaApex(
         const ::std::string& name, ::std::optional<::std::string>* _aidl_return) {
-    return mTheRealServiceManager->updatableViaApex(name, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->updatableViaApex(name, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::getUpdatableNames(const ::std::string& apexName,
                                                        ::std::vector<::std::string>* _aidl_return) {
-    return mTheRealServiceManager->getUpdatableNames(apexName, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->getUpdatableNames(apexName, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::getConnectionInfo(
         const ::std::string& name, ::std::optional<os::ConnectionInfo>* _aidl_return) {
-    return mTheRealServiceManager->getConnectionInfo(name, _aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->getConnectionInfo(name, _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::registerClientCallback(
         const ::std::string& name, const sp<IBinder>& service,
         const sp<os::IClientCallback>& callback) {
-    return mTheRealServiceManager->registerClientCallback(name, service, callback);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->registerClientCallback(name, service, callback);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::tryUnregisterService(const ::std::string& name,
                                                           const sp<IBinder>& service) {
-    return mTheRealServiceManager->tryUnregisterService(name, service);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->tryUnregisterService(name, service);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 Status BackendUnifiedServiceManager::getServiceDebugInfo(
         ::std::vector<os::ServiceDebugInfo>* _aidl_return) {
-    return mTheRealServiceManager->getServiceDebugInfo(_aidl_return);
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->getServiceDebugInfo(_aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
 }
 
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
 [[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 
+static bool hasOutOfProcessServiceManager() {
+#ifndef BINDER_WITH_KERNEL_IPC
+    return false;
+#else
+#if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
+    return android::base::GetBoolProperty("servicemanager.installed", true);
+#else
+    return true;
+#endif
+#endif // BINDER_WITH_KERNEL_IPC
+}
+
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
     std::call_once(gUSmOnce, []() {
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
-        /* wait for service manager */ {
+        /* wait for service manager */
+        if (hasOutOfProcessServiceManager()) {
             using std::literals::chrono_literals::operator""s;
             using android::base::WaitForProperty;
             while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
@@ -344,7 +414,7 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
 #endif
 
         sp<AidlServiceManager> sm = nullptr;
-        while (sm == nullptr) {
+        while (hasOutOfProcessServiceManager() && sm == nullptr) {
             sm = interface_cast<AidlServiceManager>(
                     ProcessState::self()->getContextObject(nullptr));
             if (sm == nullptr) {
