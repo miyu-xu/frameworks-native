@@ -52,6 +52,24 @@
       "parentUuid": "4b9d2951_866d2382",
       "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb00cce_e27b8c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T00:06:04Z",
+      "side": 1,
+      "message": "Don\u0027t mind this patchset!\n\nAnd yes, I can use selfOrNull instead. It works for now.",
+      "parentUuid": "16699782_4ccd3309",
+      "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
