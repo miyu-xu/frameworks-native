@@ -22,6 +22,30 @@
       },
       "revId": "ccbb10ce2dd94fba5e75110333a66a3509657432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f027b1bf_1ebbfd37",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T20:52:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "797ef637_ece8a6c9",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 28
+      },
+      "revId": "ccbb10ce2dd94fba5e75110333a66a3509657432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
