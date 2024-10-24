@@ -70,6 +70,24 @@
       "parentUuid": "16699782_4ccd3309",
       "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d8c1d0_97fca615",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T00:12:05Z",
+      "side": 1,
+      "message": "This still feels fragile since any code using ProcessState::self will abort, but it works for now since we don\u0027t have code that does that! We figure something else out in the future.\n\nThe previous patchset avoided initializing it, but since most callers of self() expect non-null, things would also end up aborting a lot.",
+      "parentUuid": "aeb00cce_e27b8c00",
+      "revId": "4251a42b826ca03f89cf846092481bef04de12c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
