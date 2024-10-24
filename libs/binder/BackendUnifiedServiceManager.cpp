@@ -18,6 +18,7 @@
 #include <android-base/strings.h>
 #include <android/os/IAccessor.h>
 #include <binder/RpcSession.h>
+#include <binder/Stability.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
@@ -234,6 +235,7 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
             if (in.get<os::Service::Tag::binder>() == nullptr) {
                 // failed to find a service. Check to see if we have any local
                 // injected Accessors for this service.
+                // These services must be vintf stable.
                 os::Service accessor;
                 Status status = getInjectedAccessor(name, &accessor);
                 if (!status.isOk()) {
@@ -245,8 +247,35 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
                     ALOGI("Found local injected service for %s, will attempt to create connection",
                           name.c_str());
                     // Call this again using the accessor Service to get the real
-                    // service's binder into _out
-                    return toBinderService(name, accessor, _out);
+                    // service's binder into _out if it is VINTF stable.
+                    os::Service service;
+                    status = toBinderService(name, accessor, &service);
+                    if (status.isOk() && service.getTag() == os::Service::Tag::binder) {
+                        sp<IBinder> binder = service.get<os::Service::Tag::binder>();
+                        if (binder) {
+                            // TODO add a Stability::isVintfStable() method
+                            // TODO how can conditionally check this? We have:
+                            // - name of service
+                            // - localLevel which will give us Level::VENDOR or
+                            // SYSTEM depending on how this version of libbinder
+                            // was built.
+                            // - level of the remote binder that we just
+                            // received.
+                            if (internal::Stability::requiresVintfDeclaration(binder)) {
+                                *_out = service;
+                                return status;
+                            } else {
+                                ALOGI("The received binder for service '%s' is not VINTF stable "
+                                      "and can not be retreived by this process",
+                                      name.c_str());
+                                *_out = os::Service::make<os::Service::Tag::binder>(nullptr);
+                                ;
+                                return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION);
+                            }
+                        }
+                    }
+                    *_out = service;
+                    return status;
                 }
             }
 
