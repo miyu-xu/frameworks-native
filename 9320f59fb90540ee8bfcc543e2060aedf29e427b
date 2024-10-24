@@ -22,6 +22,30 @@
       },
       "revId": "9320f59fb90540ee8bfcc543e2060aedf29e427b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9757e3b_caafb883",
+        "filename": "libs/binder/rust/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-24T19:28:31Z",
+      "side": 1,
+      "message": "There is an argument that we should investigate this to avoid breakage of apexes, but this doesn\u0027t change current behavior - `binder_ndk_sys` currently exposes all of these headers to anyapex. If we want to try trimming that, I think we should do it in a separate change, because it\u0027s not related to cargoifying the build.",
+      "parentUuid": "5be13d4a_9d3fb75c",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 35
+      },
+      "revId": "9320f59fb90540ee8bfcc543e2060aedf29e427b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
