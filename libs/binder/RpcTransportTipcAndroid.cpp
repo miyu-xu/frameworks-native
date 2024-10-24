@@ -81,8 +81,11 @@ public:
         auto writeFn = [&](iovec* iovs, size_t niovs) -> ssize_t {
             // TODO: send ancillaryFds. For now, we just abort if anyone tries
             // to send any.
-            LOG_ALWAYS_FATAL_IF(ancillaryFds != nullptr && !ancillaryFds->empty(),
-                                "File descriptors are not supported on Trusty yet");
+            if (ancillaryFds != nullptr && !ancillaryFds->empty()) {
+                ALOGE("File descriptors are not supported on Trusty yet");
+                errno = EINVAL;
+                return -1;
+            }
             return TEMP_FAILURE_RETRY(tipc_send(mSocket.fd.get(), iovs, niovs, nullptr, 0));
         };
 
