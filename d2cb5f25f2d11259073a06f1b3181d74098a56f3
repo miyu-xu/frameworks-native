@@ -1,0 +1,155 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be265daf_65eebde6",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 51
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-24T00:33:55Z",
+      "side": 1,
+      "message": "nit: I would not recommend copy-pasting the error string, as if it does get de-duped",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a21c8083_739793a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 289,
+                "startChar": 0,
+                "endLine": 292,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 301,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 316,
+                "startChar": 0,
+                "endLine": 319,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 324,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 342,
+                "startChar": 0,
+                "endLine": 345,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 354,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 360,
+                "startChar": 0,
+                "endLine": 363,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 370,
+                "startChar": 0,
+                "endLine": 373,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 379,
+                "startChar": 0,
+                "endLine": 382,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 388,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION, \"Unsupported operation\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d2cb5f25f2d11259073a06f1b3181d74098a56f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
