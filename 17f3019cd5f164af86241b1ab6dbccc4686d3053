@@ -269,6 +269,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49d3ddd_da72b5d8",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T00:12:18Z",
+      "side": 1,
+      "message": "We return \"\" for the instance if the declared service is only \"android.hardware.foo\". See the tests for more details.",
+      "parentUuid": "14c58301_17283549",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 64
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59ddf181_1ec1f3e4",
@@ -353,6 +377,30 @@
           ]
         }
       ],
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9c6e0d_e820f336",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T00:12:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f7dcde_51870484",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 0
+      },
       "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -791,6 +839,30 @@
       "side": 1,
       "message": "I plan to make that change to get rid of this multi-servicemanager pattern before submitting.",
       "parentUuid": "2fdd5b06_66a28bda",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 46
+      },
+      "revId": "17f3019cd5f164af86241b1ab6dbccc4686d3053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba32ba4_e6491e86",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-24T00:12:18Z",
+      "side": 1,
+      "message": "Made the change and split the CL into a few different CLs visible in the relation chain.",
+      "parentUuid": "d4e97507_ec3984fe",
       "range": {
         "startLine": 583,
         "startChar": 0,
