@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43a6364b_466c52f6",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-25T21:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86be71e9_2601154f",
+      "range": {
+        "startLine": 583,
+        "startChar": 50,
+        "endLine": 583,
+        "endChar": 54
+      },
+      "revId": "9f3ed49ea94a3cf60ad65521339e984c016fcccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2409fe3d_6bec5d94",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-10-25T21:29:08Z",
       "side": 1,
       "message": "I would probably only log this if ProcessState is not null, as for the RPC binder case, we don\u0027t know if",
+      "range": {
+        "startLine": 666,
+        "startChar": 2,
+        "endLine": 671,
+        "endChar": 64
+      },
+      "revId": "9f3ed49ea94a3cf60ad65521339e984c016fcccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e6aaa0_b41222c7",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-25T21:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2409fe3d_6bec5d94",
       "range": {
         "startLine": 666,
         "startChar": 2,
