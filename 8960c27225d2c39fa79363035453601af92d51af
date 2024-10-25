@@ -1,0 +1,223 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2a5033_9bf51038",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T22:12:00Z",
+      "side": 1,
+      "message": "I approve this choice (RPC services appear as regular services).",
+      "fixSuggestions": [
+        {
+          "fixId": "75d93be1_8d3b8a1c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 304,
+                "startChar": 0,
+                "endLine": 305,
+                "endChar": 0
+              },
+              "replacement": "    listInjectedAccessors(dumpPriority, _aidl_return);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "        listInjectedAccessors(dumpPriority, \u0026list);\n"
+            },
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 350,
+                "startChar": 0,
+                "endLine": 351,
+                "endChar": 0
+              },
+              "replacement": "    listInjectedAccessors(dumpPriority, \u0026list);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbddceb_e9dfabb2",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T22:12:00Z",
+      "side": 1,
+      "message": "avoid allocation for this?\n\nperhaps this is a reason to consider this as the API instead:\n\n```\nvoid eachInjectedAccessorInstance(const std::function\u003cvoid(const \u003cT\u003e\u0026)\u003e\u0026 f)\n```\n\nwhere \u003cT\u003e is std::string or Accessor or something. Though, perhaps that should not be a public API, due to the requirements it imposes on the implementation of `f` (it can\u0027t use any function which requires accessor lock), it is a lot of unnecessary allocations.",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "da33d6eb_0099e0b3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 332,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": "        std::vector\u003cstd::string\u003e injectedAccessors;\n        listInjectedAccessors(\u0026injectedAccessors);\n        if (std::find(injectedAccessors.begin(), injectedAccessors.end(), name) !\u003d\n            injectedAccessors.end()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b099dd_120ff4d6",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T22:12:00Z",
+      "side": 1,
+      "message": "I left a comment elsewhere for this I know, but I must have missed the response. Why aren\u0027t they all considered declared? They are all declared (a.k.a. they are in this list)",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6a0c436e_0831e580",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 361,
+                "endChar": 0
+              },
+              "replacement": "        _aidl_return-\u003epush_back(service);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e20b9f61_db5e5713",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T22:12:00Z",
+      "side": 1,
+      "message": "call \u0027appendInjectedAccessors\u0027 (since list-\u003eclear() is not called in implementation), same name if you clear, otherwise use return argument, to return whole list (note: it won\u0027t require additional heap allocations as you can do `*aidl_out \u003d std::move(listInjectedAccessors())\u0027 - though std::move may even be redundant here in later versions of C++)?",
+      "range": {
+        "startLine": 167,
+        "startChar": 5,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb018519_d2e559de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.h",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 168,
+                "endChar": 0
+              },
+              "replacement": "void appendInjectedAccessors(std::vector\u003cstd::string\u003e* list);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21cd9282_8ab373b9",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T22:12:00Z",
+      "side": 1,
+      "message": "omitted (or abort for explicit error), not silent lose data",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "97de914d_02a65e9e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/IServiceManager.cpp",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "    if (list \u003d\u003d nullptr) {\n        ALOGE(\"listInjectedAccessors called with a null list\");\n        return;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
