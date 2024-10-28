@@ -16,6 +16,24 @@
       "message": "This change is sound unless the inline relies on some non-obvious behavior change of `ANativeWindow_setFrameRateWithChangeStrategy` which isn\u0027t documented.",
       "revId": "36595687470d9c06ac4182a448685443b362fecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f781c9_242c03da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-10-28T21:41:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "17f68d14_7f73bbb2",
+      "revId": "36595687470d9c06ac4182a448685443b362fecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
