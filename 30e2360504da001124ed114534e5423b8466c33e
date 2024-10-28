@@ -388,6 +388,23 @@
       "message": "I\u0027ve filed b/371083782 for the unrelated presubmit failure.",
       "revId": "30e2360504da001124ed114534e5423b8466c33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3a42fb_fc1821c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3524514
+      },
+      "writtenOn": "2024-10-28T10:46:23Z",
+      "side": 1,
+      "message": "Hi @smoreland@google.com, how are you doing? I was wondering if there were any updates on this? Thank.",
+      "revId": "30e2360504da001124ed114534e5423b8466c33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
