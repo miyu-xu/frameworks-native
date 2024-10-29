@@ -16,6 +16,23 @@
       "message": "Unsafe Rust LGTM",
       "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a723e41_d7a32335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-29T16:42:36Z",
+      "side": 1,
+      "message": "Jim, do you know much about what exactly can happen if `AHardwareBuffer_lock` is called when the buffer is already locked from another thread or process, or writes haven\u0027t completed before calling it? Is there any way this can be made safe?",
+      "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
