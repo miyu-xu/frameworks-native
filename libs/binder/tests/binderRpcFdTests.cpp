@@ -90,7 +90,7 @@ TEST_P(BinderRpc, ReceiveFile) {
 
     android::os::ParcelFileDescriptor out;
     auto status = proc.rootIface->echoAsFile("hello", &out);
-    if (!supportsFdTransport()) {
+    if (!supportsFdReturn()) {
         EXPECT_EQ(status.transactionError(), BAD_VALUE) << status;
         return;
     }
@@ -114,16 +114,25 @@ TEST_P(BinderRpc, SendFiles) {
     files.emplace_back(android::os::ParcelFileDescriptor(mockFileDescriptor("b")));
     files.emplace_back(android::os::ParcelFileDescriptor(mockFileDescriptor("cd")));
 
-    android::os::ParcelFileDescriptor out;
-    auto status = proc.rootIface->concatFiles(files, &out);
+    std::string result;
+    auto status = proc.rootIface->concatFilesToString(files, &result);
     if (!supportsFdTransport()) {
         EXPECT_EQ(status.transactionError(), BAD_VALUE) << status;
         proc.expectAlreadyShutdown = true;
         return;
     }
     ASSERT_TRUE(status.isOk()) << status;
+    EXPECT_EQ(result, "123abcd");
 
-    std::string result;
+    android::os::ParcelFileDescriptor out;
+    status = proc.rootIface->concatFiles(files, &out);
+    if (!supportsFdReturn()) {
+        EXPECT_EQ(status.transactionError(), BAD_VALUE) << status;
+        proc.expectAlreadyShutdown = true;
+        return;
+    }
+    ASSERT_TRUE(status.isOk()) << status;
+
     EXPECT_TRUE(ReadFdToString(out.get(), &result));
     EXPECT_EQ(result, "123abcd");
 }
@@ -145,11 +154,20 @@ TEST_P(BinderRpc, SendMaxFiles) {
         files.emplace_back(android::os::ParcelFileDescriptor(mockFileDescriptor("a")));
     }
 
+    std::string result;
+    auto status = proc.rootIface->concatFilesToString(files, &result);
+    ASSERT_TRUE(status.isOk()) << status;
+    EXPECT_EQ(result, std::string(maxFds, 'a'));
+
     android::os::ParcelFileDescriptor out;
-    auto status = proc.rootIface->concatFiles(files, &out);
+    status = proc.rootIface->concatFiles(files, &out);
+    if (!supportsFdReturn()) {
+        EXPECT_EQ(status.transactionError(), BAD_VALUE) << status;
+        proc.expectAlreadyShutdown = true;
+        return;
+    }
     ASSERT_TRUE(status.isOk()) << status;
 
-    std::string result;
     EXPECT_TRUE(ReadFdToString(out.get(), &result));
     EXPECT_EQ(result, std::string(maxFds, 'a'));
 }

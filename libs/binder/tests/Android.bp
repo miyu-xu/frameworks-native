@@ -561,8 +561,26 @@ cc_test {
     name: "binderRpcToTrustyTest",
     vendor: true,
     host_supported: false,
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+
     defaults: [
-        "binderRpcTest_common_defaults",
+        // We are not using binderRpcTest_common_defaults because we need
+        // trusty-specific FileUtils
+        "binder_test_defaults",
         "binderRpcTest_static_defaults",
     ],
 
@@ -571,6 +589,7 @@ cc_test {
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcUniversalTests.cpp",
+        "FileUtilsTrusty.cpp",
     ],
 
     cflags: [
@@ -582,7 +601,13 @@ cc_test {
         // to the device for testing independently of the library
         "libbinder_rpc_no_kernel",
         "libbinder_trusty",
+        "libdmabufheap",
+        "libion",
         "libtrusty",
+        "libbinder_tls_static",
+        "libbinder_tls_test_utils",
+        "binderRpcTestIface-cpp",
+        "binderRpcTestIface-ndk",
     ],
 
     test_suites: ["device-tests"],
