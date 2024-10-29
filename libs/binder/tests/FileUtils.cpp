@@ -22,7 +22,6 @@
 
 #if defined(__linux__)
 #include <signal.h>
-#include <string_view>
 #endif
 
 #ifdef BINDER_NO_LIBBASE
