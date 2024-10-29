@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa333eb4_c09a6fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-29T22:18:34Z",
+      "side": 1,
+      "message": "As per our meeting conversation I added b/376329293 to track the agreed solution to the main concern (insure that communications to Trusty in TZ use a stable binder interface).",
+      "parentUuid": "04427bc9_7f4b4fbc",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
@@ -223,6 +241,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6569234_d35a0105",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-29T22:18:34Z",
+      "side": 1,
+      "message": "As per the discussion on today\u0027s meeting, this is something we want to support in the medium term, opened b/376328268 to track this.",
+      "parentUuid": "7d8f6d7f_7e721962",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69aafc27_e69daa81",
         "filename": "libs/binder/trusty/rules.mk",
         "patchSetId": 4
@@ -234,6 +276,30 @@
       "writtenOn": "2024-10-29T21:07:36Z",
       "side": 1,
       "message": "so are you saying we don\u0027t need this stuff in the VM?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b80bc3_8059563d",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-10-29T22:18:34Z",
+      "side": 1,
+      "message": "Sorry, they are still needed on the VM side. I was referring to the Android side.",
+      "parentUuid": "69aafc27_e69daa81",
       "range": {
         "startLine": 28,
         "startChar": 0,
