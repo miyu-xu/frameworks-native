@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f41e0d6_4725518b",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-29T01:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b8c81b_4b57841c",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4565ae1_a9c9409f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-03T23:01:23Z",
       "side": 1,
       "message": "Same here: probably should return `EINVAL` or `EBADFD`.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb0410a_b9f1b965",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-29T01:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4565ae1_a9c9409f",
       "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,42 @@
       "writtenOn": "2024-07-03T22:58:34Z",
       "side": 1,
       "message": "Regardless of the value, it should probably be something like `constexpr size_t kMaxTrustyShms \u003d 8;` instead of a macro.",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "636b5460_25fe76fd",
+        "filename": "libs/binder/include_trusty/binder/RpcTransportTipcAndroid.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-29T01:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042c1bfd_db2e8e1b",
+      "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "372a140a_247bd2da",
+        "filename": "libs/binder/include_trusty/binder/RpcTransportTipcAndroid.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-29T01:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b1cd5d0_ba4ae9c6",
       "revId": "3ee95f82338894b5d1dd024718f33e8560c51c4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
