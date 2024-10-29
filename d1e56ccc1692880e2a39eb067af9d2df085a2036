@@ -219,6 +219,29 @@
       },
       "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69aafc27_e69daa81",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-29T21:07:36Z",
+      "side": 1,
+      "message": "so are you saying we don\u0027t need this stuff in the VM?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
