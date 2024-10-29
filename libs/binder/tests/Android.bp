@@ -565,12 +565,31 @@ cc_test {
     name: "binderRpcToTrustyTest",
     vendor: true,
     host_supported: false,
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+
     defaults: [
-        "binderRpcTest_common_defaults",
+        // We are not using binderRpcTest_common_defaults because we need
+        // trusty-specific FileUtils
         "binderRpcTest_static_defaults",
+        "binder_test_defaults",
     ],
 
     srcs: [
+        "FileUtilsTrusty.cpp",
         "binderRpcFdTests.cpp",
         "binderRpcTest.cpp",
         "binderRpcTestCommon.cpp",
@@ -584,8 +603,14 @@ cc_test {
     static_libs: [
         // We want to link libbinder statically so we can push the binary
         // to the device for testing independently of the library
+        "binderRpcTestIface-cpp",
+        "binderRpcTestIface-ndk",
         "libbinder_rpc_no_kernel",
+        "libbinder_tls_static",
+        "libbinder_tls_test_utils",
         "libbinder_trusty",
+        "libdmabufheap",
+        "libion",
         "libtrusty",
     ],
 
