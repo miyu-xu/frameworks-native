@@ -16,6 +16,24 @@
       "message": "Nit: I\u0027d usually suggest doing\n```\nlet mut assigned_port: c_uint \u003d 0;\n// ...\n\u0026mut assigned_port,\n// ...\nOk((server, assigned_port as u32))\n```\n\nfor two reasons:\n1. Some platforms have a 16-bit integer (unlikely this code would run there, but...). For these platforms, whether or not what you\u0027re doing works depends on the endianness of the system.\n2. Platforms are allowed to have an integer larger than 32-bits. (Not actually aware of any, but spec doesn\u0027t prevent this) On these platforms, `ARpcServer_newVsock` may overwrite other memory in Rust\n\nBy making sure that pointers match *exactly* the `c_foo` type and then doing a cast on a value, you ensure that the worst that can happen is truncation.",
       "revId": "75539255fdc24a582450cd3f53b01b9b53c2a000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82eafc78_07559dfb",
+        "filename": "libs/binder/rust/rpcbinder/src/server/android.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-29T20:37:31Z",
+      "side": 1,
+      "message": "Thank you for the catch + reasoning! I had to cherry-pick this topic to internal because of a dependency and the unsafe reviewers added someone else. \n\n@fmayle@google.com also caught this and had the same suggestion:\nhttps://googleplex-android-review.git.corp.google.com/c/platform/frameworks/native/+/30114017/comment/b684fc8b_7f780c8d/\n\n\u003e `assigned_port as u32`\n\nThis part seems to be implicit since the compiler isn\u0027t complaining without it.\n\nOnce that topic lands, I\u0027ll update this topic with the final results.",
+      "parentUuid": "8fb3a0a0_3b4894f4",
+      "revId": "75539255fdc24a582450cd3f53b01b9b53c2a000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
