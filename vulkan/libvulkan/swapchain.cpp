@@ -968,6 +968,10 @@ VkResult GetPhysicalDeviceSurfaceCapabilities2KHR(
 
         err = window->query(window, NATIVE_WINDOW_MAX_BUFFER_COUNT,
                             &max_buffer_count);
+	if (max_buffer_count == 0)
+	{
+	    max_buffer_count = 64;
+	}
         if (err != android::OK) {
             ALOGE("NATIVE_WINDOW_MAX_BUFFER_COUNT query failed: %s (%d)",
                   strerror(-err), err);
