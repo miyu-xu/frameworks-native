@@ -192,6 +192,9 @@ impl IBinderRpcTest for TestService {
     fn concatFiles(&self, _: &[ParcelFileDescriptor]) -> Result<ParcelFileDescriptor, Status> {
         todo!()
     }
+    fn concatFilesToString(&self, _: &[ParcelFileDescriptor]) -> Result<String, Status> {
+        todo!()
+    }
     fn blockingSendFdOneway(&self, _: &ParcelFileDescriptor) -> Result<(), Status> {
         todo!()
     }
