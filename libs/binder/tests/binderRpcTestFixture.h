@@ -142,6 +142,16 @@ public:
                  socketType() == SocketType::UNIX_RAW || socketType() == SocketType::TIPC);
     }
 
+    // Can we receive FDs as return values?
+    bool supportsFdReturn() const {
+#ifdef BINDER_RPC_TO_TRUSTY_TEST
+        // Trusty cannot send FDs back to Android
+        return false;
+#else
+        return supportsFdTransport();
+#endif
+    }
+
     RpcSession::FileDescriptorTransportMode fdTransportMode() const {
         if (socketType() == SocketType::TIPC) {
             return RpcSession::FileDescriptorTransportMode::TRUSTY;

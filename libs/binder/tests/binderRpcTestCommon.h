@@ -477,6 +477,16 @@ public:
         return Status::ok();
     }
 
+    Status concatFilesToString(const std::vector<android::os::ParcelFileDescriptor>& files,
+                               std::string* out) override {
+        for (const auto& file : files) {
+            std::string result;
+            LOG_ALWAYS_FATAL_IF(!binder::ReadFdToString(file.get(), &result));
+            out->append(result);
+        }
+        return Status::ok();
+    }
+
     Status blockingSendFdOneway(const android::os::ParcelFileDescriptor& /*fd*/) override {
         return Status::fromStatusT(UNKNOWN_TRANSACTION);
     }

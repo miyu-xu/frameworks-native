@@ -71,6 +71,7 @@ interface IBinderRpcTest {
     ParcelFileDescriptor echoAsFile(@utf8InCpp String content);
 
     ParcelFileDescriptor concatFiles(in List<ParcelFileDescriptor> files);
+    @utf8InCpp String concatFilesToString(in List<ParcelFileDescriptor> files);
 
     // FDs sent via `blockingSendFdOneway` can be received via
     // `blockingRecvFd`. The handler for `blockingSendFdOneway` will block
