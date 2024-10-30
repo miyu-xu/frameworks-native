@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae6cff7_11cb5a06",
+        "filename": "libs/binder/tests/binderRpcFdTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-30T17:49:36Z",
+      "side": 1,
+      "message": "This symbol is not exported from `libbinder`. Should we export it or is there a better place to put shared code between libbinder and tests? This could be an inline header function but we\u0027d have to guard it with `#ifndef __TRUSTY__`, is that ok?",
+      "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
