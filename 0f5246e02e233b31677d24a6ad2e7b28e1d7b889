@@ -16,6 +16,24 @@
       "message": "This symbol is not exported from `libbinder`. Should we export it or is there a better place to put shared code between libbinder and tests? This could be an inline header function but we\u0027d have to guard it with `#ifndef __TRUSTY__`, is that ok?",
       "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bb94d6_3af34a39",
+        "filename": "libs/binder/tests/binderRpcFdTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-30T18:18:21Z",
+      "side": 1,
+      "message": "if possible, it shouldn\u0027t be exported. we probably need to define a static lib for shared stuff like this. maybe a header only lib is OK\n\nCC @smoreland@google.com",
+      "parentUuid": "eae6cff7_11cb5a06",
+      "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
