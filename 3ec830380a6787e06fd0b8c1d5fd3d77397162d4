@@ -51,6 +51,24 @@
       "parentUuid": "4a723e41_d7a32335",
       "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560b85f6_24b41d0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-30T14:07:51Z",
+      "side": 1,
+      "message": "Is that \u0027undefined\u0027 in the sense of \u0027undefined behaviour\u0027, i.e. anything arbitrarily bad could happen, memory somewhere else might get corrupted, compiler assumptions will be broken and other parts of your program might start misbehaving? Or is it something more restricted? What I\u0027m trying to understand here is whether the Rust wrappers must necessarily be `unsafe` and the caller just needs to make sure (somehow...) that nobody else in any other process is touching the buffer, or whether we can make a safe wrapper somehow.",
+      "parentUuid": "c7841b8f_77c4509e",
+      "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
