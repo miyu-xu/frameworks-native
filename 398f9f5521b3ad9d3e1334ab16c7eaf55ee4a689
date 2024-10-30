@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad92369_53be8eae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-30T22:02:02Z",
+      "side": 1,
+      "message": "Presubmit failures in the CTS apps should be \"transient\" according to https://buganizer.corp.google.com/issues/375624310#comment4\n\nI\u0027ll retry again in a bit.",
+      "revId": "398f9f5521b3ad9d3e1334ab16c7eaf55ee4a689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
