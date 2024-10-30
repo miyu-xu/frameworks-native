@@ -34,6 +34,24 @@
       "parentUuid": "8fb3a0a0_3b4894f4",
       "revId": "75539255fdc24a582450cd3f53b01b9b53c2a000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab35811b_90b9387d",
+        "filename": "libs/binder/rust/rpcbinder/src/server/android.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-30T20:56:21Z",
+      "side": 1,
+      "message": "The internal dependency was deleted, so we can land these AOSP CLs first!\n\nThis was the +2\u0027s internal CL http://ag/30114017",
+      "parentUuid": "82eafc78_07559dfb",
+      "revId": "75539255fdc24a582450cd3f53b01b9b53c2a000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
