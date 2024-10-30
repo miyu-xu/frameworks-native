@@ -69,6 +69,24 @@
       "parentUuid": "c7841b8f_77c4509e",
       "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8803f3_44d7f10e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2024-10-30T17:21:18Z",
+      "side": 1,
+      "message": "I checked with some expert maintainers and things like memory corruption would not be valid undefined behavior here. I think it should be ok to mark it as safe.",
+      "parentUuid": "560b85f6_24b41d0a",
+      "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
