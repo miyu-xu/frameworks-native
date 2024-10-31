@@ -16,6 +16,24 @@
       "message": "Should this be `static inline`?",
       "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a175d12c_63d10596",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-31T21:06:20Z",
+      "side": 1,
+      "message": "I was basing this on the inline functions in `FdUtils.h`, which doesn\u0027t, but we could.",
+      "parentUuid": "4c0fa424_4fdecfdd",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
