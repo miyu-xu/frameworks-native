@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "785f7744_1682feda",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-31T21:15:38Z",
+      "side": 1,
+      "message": "You could make this more portable by checking for `fcntl` and `F_DUPFD_CLOEXEC` support instead:\n\n```\n       F_DUPFD_CLOEXEC is specified in POSIX.1-2008.  (To get this\n       definition, define _POSIX_C_SOURCE with the value 200809L or\n       greater, or _XOPEN_SOURCE with the value 700 or greater.)\n```",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c0fa424_4fdecfdd",
         "filename": "libs/binder/OS.h",
         "patchSetId": 7
