@@ -34,6 +34,24 @@
       "parentUuid": "4c0fa424_4fdecfdd",
       "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1344c93f_635d1092",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-31T21:13:45Z",
+      "side": 1,
+      "message": "libbinder seems to use a mix of both `static inline` and `inline`, so I guess either way is fine?",
+      "parentUuid": "a175d12c_63d10596",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
