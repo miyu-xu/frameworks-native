@@ -34,6 +34,24 @@
       "parentUuid": "eae6cff7_11cb5a06",
       "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ecb0fa_6cd89548",
+        "filename": "libs/binder/tests/binderRpcFdTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-10-31T19:58:18Z",
+      "side": 1,
+      "message": "I made it part of `OS.h`. Maybe this should be refactored into a new library, but could that be a separate change if so?",
+      "parentUuid": "a9bb94d6_3af34a39",
+      "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
