@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ffa4c17_c746c706",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2024-10-31T21:16:34Z",
+      "side": 1,
+      "message": "Otoh Trusty\u0027s musl might have those definitions, and we definitely don\u0027t want to use them even if they exist.",
+      "parentUuid": "785f7744_1682feda",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c0fa424_4fdecfdd",
         "filename": "libs/binder/OS.h",
         "patchSetId": 7
