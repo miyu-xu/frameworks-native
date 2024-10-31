@@ -16,6 +16,23 @@
       "message": "Please help review it, thanks!",
       "revId": "1c1725e78c24083bc23702818d6b685ef37d5eb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36bca68e_5e5bd3df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3679731
+      },
+      "writtenOn": "2024-10-31T06:15:00Z",
+      "side": 1,
+      "message": "Hi @jshargo@google.com, \n\nCan you tell me why this CL is not reasonable? And why can we set a dequeue timeout for hardware accelerator? \n\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/libs/hwui/renderthread/CanvasContext.cpp;l\u003d215;bpv\u003d1;bpt\u003d1?q\u003dCanvasContext.cpp\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "revId": "1c1725e78c24083bc23702818d6b685ef37d5eb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
