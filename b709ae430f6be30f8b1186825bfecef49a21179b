@@ -16,6 +16,24 @@
       "message": "This won\u0027t work in RPC binder or for in-process transactions. If we track this at the binder layer, we\u0027d need to re-implement it again in a couple of years (or - lose out). Can you add to BpBinder instead?",
       "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903e2a61_0522ce3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-11-01T19:43:12Z",
+      "side": 1,
+      "message": "Sure. Let me check how it can be moved to BpBinder.",
+      "parentUuid": "0c22a628_66bcab91",
+      "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
