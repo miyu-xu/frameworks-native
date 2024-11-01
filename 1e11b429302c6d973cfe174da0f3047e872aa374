@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ed186e_0127404b",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-11-01T08:25:50Z",
+      "side": 1,
+      "message": "I think we should go with an explicit check for Trusty, because I also want to point out where the definition is in that case.",
+      "parentUuid": "2ffa4c17_c746c706",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c0fa424_4fdecfdd",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "libbinder seems to use a mix of both `static inline` and `inline`, so I guess either way is fine?",
       "parentUuid": "a175d12c_63d10596",
+      "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237784ca_76e3d225",
+        "filename": "libs/binder/OS.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2024-11-01T08:25:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1344c93f_635d1092",
       "revId": "1e11b429302c6d973cfe174da0f3047e872aa374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
