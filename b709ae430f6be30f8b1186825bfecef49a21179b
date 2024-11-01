@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c22a628_66bcab91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-01T19:01:57Z",
+      "side": 1,
+      "message": "This won\u0027t work in RPC binder or for in-process transactions. If we track this at the binder layer, we\u0027d need to re-implement it again in a couple of years (or - lose out). Can you add to BpBinder instead?",
+      "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
