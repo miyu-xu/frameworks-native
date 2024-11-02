@@ -52,6 +52,24 @@
       "parentUuid": "a9bb94d6_3af34a39",
       "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a25c825_398d107e",
+        "filename": "libs/binder/tests/binderRpcFdTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-02T00:04:29Z",
+      "side": 1,
+      "message": "I honestly think it should be okay to export this stuff. That way, you can write generic code on top of libbinder, across Trusty/Android/etc..\n\nHowever, I\u0027m also okay with a static library, as exporting the minimum needed is a good principle.",
+      "parentUuid": "44ecb0fa_6cd89548",
+      "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
