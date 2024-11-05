@@ -27,6 +27,7 @@
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
 #include <binder/RpcServer.h>
+#include <binder/Trace.h>
 #include <binder/unique_fd.h>
 #include <pthread.h>
 
@@ -407,6 +408,12 @@ status_t BBinder::transact(
         default:
             err = onTransact(code, data, reply, flags);
             break;
+    }
+
+    {
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      (std::string("BBinder::onTransact :") + statusToString(err))
+                                              .c_str());
     }
 
     // In case this is being transacted on in the same process.

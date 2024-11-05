@@ -21,6 +21,9 @@
 namespace android::impl {
 sp<android::os::IServiceManager>
 getJavaServicemanagerImplPrivateDoNotUseExceptInTheOnePlaceItIsUsed() {
+    binder::ScopedTrace
+            aidlTrace(ATRACE_TAG_AIDL,
+                      "getJavaServicemanagerImplPrivateDoNotUseExceptInTheOnePlaceItIsUsed");
     return getBackendUnifiedServiceManager();
 }
 

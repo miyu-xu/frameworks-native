@@ -176,17 +176,39 @@ BackendUnifiedServiceManager::BackendUnifiedServiceManager(const sp<AidlServiceM
 Status BackendUnifiedServiceManager::getService(const ::std::string& name,
                                                 sp<IBinder>* _aidl_return) {
     os::Service service;
+    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "BinderCacheWithInvalidation::getService");
+
     Status status = getService2(name, &service);
+    if (name == "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default") {
+        binder::ScopedTrace
+                aidlTrace(ATRACE_TAG_AIDL,
+                          (std::string("BackendUnifiedServiceManager::getService gotService :") +
+                           std::string(status.toString8().c_str()))
+                                  .c_str());
+        ALOGE("getService GOT THE FUNCTION!!!");
+    }
     *_aidl_return = service.get<os::Service::Tag::binder>();
     return status;
 }
 
 Status BackendUnifiedServiceManager::getService2(const ::std::string& name, os::Service* _out) {
+    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "BinderCacheWithInvalidation::getService2");
+
+    ALOGE("getService2!!!");
     if (returnIfCached(name, _out)) {
         return Status::ok();
     }
     os::Service service;
     Status status = mTheRealServiceManager->getService2(name, &service);
+
+    if (name == "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default") {
+        binder::ScopedTrace
+                aidlTrace(ATRACE_TAG_AIDL,
+                          (std::string("BackendUnifiedServiceManager::getService gotService :") +
+                           std::string(status.toString8().c_str()))
+                                  .c_str());
+        ALOGE("getService GOT THE FUNCTION!!!");
+    }
 
     if (status.isOk()) {
         status = toBinderService(name, service, _out);
@@ -198,16 +220,43 @@ Status BackendUnifiedServiceManager::getService2(const ::std::string& name, os::
 }
 
 Status BackendUnifiedServiceManager::checkService(const ::std::string& name, os::Service* _out) {
+    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "BinderCacheWithInvalidation::checkService");
+    if (name == "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default") {
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      "BackendUnifiedServiceManager::checkService gotService");
+
+        ALOGE("checkService GOT THE FUNCTION!!!");
+    }
     os::Service service;
     if (returnIfCached(name, _out)) {
         return Status::ok();
     }
 
     Status status = mTheRealServiceManager->checkService(name, &service);
+
+    if (name == "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default") {
+        binder::ScopedTrace
+                aidlTrace(ATRACE_TAG_AIDL,
+                          (std::string("BackendUnifiedServiceManager::getService gotService :") +
+                           std::string(status.toString8().c_str()))
+                                  .c_str());
+        ALOGE("getService GOT THE FUNCTION!!!");
+    }
+
     if (status.isOk()) {
         status = toBinderService(name, service, _out);
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      (std::string("toBinderService :") +
+                                       std::string(status.toString8().c_str()))
+                                              .c_str());
         if (status.isOk()) {
-            return updateCache(name, service);
+            auto ret = updateCache(name, service);
+            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                          (std::string(
+                                                   "BackendUnifiedServiceManager::updateCache :") +
+                                           std::string(ret.toString8().c_str()))
+                                                  .c_str());
+            return ret;
         }
     }
     return status;
@@ -250,6 +299,11 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
             auto request = [=] {
                 os::ParcelFileDescriptor fd;
                 Status ret = accessor->addConnection(&fd);
+                binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                              (std::string("accessor->addConnection :") +
+                                               std::string(ret.toString8().c_str()))
+                                                      .c_str());
+
                 if (ret.isOk()) {
                     return base::unique_fd(fd.release());
                 } else {
@@ -259,6 +313,12 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
             };
             auto session = RpcSession::make();
             status_t status = session->setupPreconnectedClient(base::unique_fd{}, request);
+            {
+                binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                              (std::string("session->setupPreconnectedClient :") +
+                                               statusToString(status))
+                                                      .c_str());
+            }
             if (status != OK) {
                 ALOGE("Failed to set up preconnected binder RPC client: %s",
                       statusToString(status).c_str());
@@ -269,6 +329,8 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
             return Status::ok();
         }
         default: {
+            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "Unknown service type :");
+
             LOG_ALWAYS_FATAL("Unknown service type: %d", in.getTag());
         }
     }
