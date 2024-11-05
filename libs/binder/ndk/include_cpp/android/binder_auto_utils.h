@@ -281,20 +281,12 @@ class ScopedAStatus : public impl::ScopedAResource<AStatus*, AStatus_delete, nul
     const char* getMessage() const { return AStatus_getMessage(get()); }
 
     std::string getDescription() const {
-#ifdef __ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__
         if (__builtin_available(android 30, *)) {
-#endif
-
-#if defined(__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__) || __ANDROID_API__ >= 30
             const char* cStr = AStatus_getDescription(get());
             std::string ret = cStr;
             AStatus_deleteDescription(cStr);
             return ret;
-#endif
-
-#ifdef __ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__
         }
-#endif
 
         binder_exception_t exception = getExceptionCode();
         std::string desc = std::to_string(exception);
