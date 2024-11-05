@@ -291,7 +291,7 @@ android::binder::Status getInjectedAccessor(const std::string& name,
             ALOGE("A provider returned a binder that is not an IAccessor for instance %s. Status: "
                   "%s",
                   name.c_str(), statusToString(status).c_str());
-            return android::binder::Status::fromStatusT(android::INVALID_OPERATION);
+            return android::binder::Status::fromStatusT(android::NO_MEMORY);
         }
         *service = os::Service::make<os::Service::Tag::accessor>(binder);
         return android::binder::Status::ok();

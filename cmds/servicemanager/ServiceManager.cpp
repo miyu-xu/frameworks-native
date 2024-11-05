@@ -420,6 +420,10 @@ Status ServiceManager::checkService(const std::string& name, os::Service* outSer
 }
 
 os::Service ServiceManager::tryGetService(const std::string& name, bool startIfNotFound) {
+    if (name == "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default") {
+        ALOGE("ServiceManager::tryGetService !!!");
+    }
+
     std::optional<std::string> accessorName;
 #ifndef VENDORSERVICEMANAGER
     accessorName = getVintfAccessorName(name);
