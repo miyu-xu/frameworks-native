@@ -418,15 +418,17 @@ void Scheduler::onHdcpLevelsChanged(Cycle cycle, PhysicalDisplayId displayId,
     eventThreadFor(cycle).onHdcpLevelsChanged(displayId, connectedLevel, maxLevel);
 }
 
-void Scheduler::onPrimaryDisplayModeChanged(Cycle cycle, const FrameRateMode& mode) {
+void Scheduler::onPrimaryDisplayModeChanged(Cycle cycle, const FrameRateMode& mode, bool clearContentRequirements) {
     {
         std::lock_guard<std::mutex> lock(mPolicyLock);
         // Cache the last reported modes for primary display.
         mPolicy.cachedModeChangedParams = {cycle, mode};
 
-        // Invalidate content based refresh rate selection so it could be calculated
-        // again for the new refresh rate.
-        mPolicy.contentRequirements.clear();
+        if (clearContentRequirements) {
+            // Invalidate content based refresh rate selection so it could be calculated
+            // again for the new refresh rate.
+            mPolicy.contentRequirements.clear();
+        }
     }
     onNonPrimaryDisplayModeChanged(cycle, mode);
 }

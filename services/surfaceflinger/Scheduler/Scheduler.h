@@ -154,7 +154,7 @@ public:
 
     void dispatchHotplugError(int32_t errorCode);
 
-    void onPrimaryDisplayModeChanged(Cycle, const FrameRateMode&) EXCLUDES(mPolicyLock);
+    void onPrimaryDisplayModeChanged(Cycle, const FrameRateMode&, bool clearContentRequirements) EXCLUDES(mPolicyLock);
     void onNonPrimaryDisplayModeChanged(Cycle, const FrameRateMode&);
 
     void enableSyntheticVsync(bool = true) REQUIRES(kMainThreadContext);
