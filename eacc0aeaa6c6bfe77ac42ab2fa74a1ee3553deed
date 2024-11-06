@@ -16,6 +16,24 @@
       "message": "Hey Steven,",
       "revId": "eacc0aeaa6c6bfe77ac42ab2fa74a1ee3553deed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba3a501_89a35484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-11-06T05:14:52Z",
+      "side": 1,
+      "message": "I think we\u0027d better to use the same __builtin_available even when building vendor variants. It works better with trunk-stable and makes code simpler.",
+      "parentUuid": "0a6a3511_a5689c79",
+      "revId": "eacc0aeaa6c6bfe77ac42ab2fa74a1ee3553deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
