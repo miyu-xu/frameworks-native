@@ -104,6 +104,24 @@
       "parentUuid": "2466269e_1ea3f980",
       "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b07823e9_a7aca50b",
+        "filename": "libs/ui/include/ui/PublicFormat.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3710226
+      },
+      "writtenOn": "2024-11-07T17:23:36Z",
+      "side": 1,
+      "message": "\u003e Done\ngzip_srcs \u003d [\"src/test/minigzip.c\"], cc_binary { name: \"gzip\", srcs: gzip_srcs, shared_libs: [\"libz\"], stl: \"none\", }",
+      "parentUuid": "e014b9e6_8c705ca7",
+      "revId": "1111158a05b81ea8745575f4cd0bdf64d23800ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
