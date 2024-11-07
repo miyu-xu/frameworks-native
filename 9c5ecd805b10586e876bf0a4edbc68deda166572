@@ -22,6 +22,30 @@
       },
       "revId": "9c5ecd805b10586e876bf0a4edbc68deda166572",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba68d2b_3ebb6949",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-07T01:17:13Z",
+      "side": 1,
+      "message": "This is the default, if `USE_SYSTEM_BINDER` is not defined it will use these defines. The other condition on a makefile on this CL follows this same pattern to also default to vendor if the variable is not defined.",
+      "parentUuid": "59195c67_62b8587c",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 4
+      },
+      "revId": "9c5ecd805b10586e876bf0a4edbc68deda166572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
