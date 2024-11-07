@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c811a0bf_1db52864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975060
+      },
+      "writtenOn": "2024-11-07T04:38:36Z",
+      "side": 1,
+      "message": "Hi Alec Mouri, \nlibs/nativewindow/include/android/hardware_buffer.h -\u003e In patchset2 I have included the format in this file as well. Is it not needed?",
+      "revId": "f4923a93ac2582991575f6f51925eb35bd7f78cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
