@@ -16,6 +16,24 @@
       "message": "Hi Alec Mouri, \nlibs/nativewindow/include/android/hardware_buffer.h -\u003e In patchset2 I have included the format in this file as well. Is it not needed?",
       "revId": "f4923a93ac2582991575f6f51925eb35bd7f78cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4cb8d28_2ccd6241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-11-07T17:18:15Z",
+      "side": 1,
+      "message": "The format definition in hardware_buffer.h was already upstreamed in https://r.android.com/3308796, so I removed the file to help cleanup + upstream the rest of this patchset.",
+      "parentUuid": "c811a0bf_1db52864",
+      "revId": "f4923a93ac2582991575f6f51925eb35bd7f78cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
