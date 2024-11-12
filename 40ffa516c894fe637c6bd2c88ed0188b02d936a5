@@ -16,6 +16,24 @@
       "message": "Do we still want this?",
       "revId": "40ffa516c894fe637c6bd2c88ed0188b02d936a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4280ced9_69332be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T23:08:35Z",
+      "side": 1,
+      "message": "I want it, but it requires a breaking protocol change, so we\u0027ll need to add a new protocol version and more branches to deal with it. I figured I\u0027d hold off until we had another protocol breaking change so that we can bundle them together, or, a real use case for this functionality.",
+      "parentUuid": "e3eb372e_8e57e39d",
+      "revId": "40ffa516c894fe637c6bd2c88ed0188b02d936a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
