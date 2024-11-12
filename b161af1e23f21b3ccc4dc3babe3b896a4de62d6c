@@ -215,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b22259b3_ea9a781b",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T20:50:00Z",
+      "side": 1,
+      "message": "Did you measure a perf difference? The bookkeeping code looks minor in the generic branch, so the extra code side and branches introduced by this specialization might actually be a bigger perf issue",
+      "parentUuid": "08cdd571_b32755f2",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7062c6f8_8d782272",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -244,6 +262,24 @@
       "side": 1,
       "message": "Not exactly, if we go to line 188 we are expecting that the current iovec length is greater than 4K and it needs to be broken into pieces, so it will still need some of the code used between lines 162-187 unless the algorithm is changed a little bit more or we are OK by sending that iovec by itself and not trying to merge it with more iovs.",
       "parentUuid": "7062c6f8_8d782272",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851d5877_b15c71f7",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T20:50:00Z",
+      "side": 1,
+      "message": "how about something like the following. all of the iovec math and corner cases get centralized in `take_iovs`\n\n```\nvoid take_iovs(iovec** src_iovs, int* src_niovs,\n               iovec* dest_iovs, int* dest_niovs) {\n  // copy up to 4096 bytes of slices into `dest_iovs`.\n  // modify `src_iovs` to keep only what\u0027s left.\n}\n\nfor (;;) {\n  constexpr size_t kPartialMax \u003d 5;\n  int partial_niovs \u003d kPartialMax;\n  iovec partial_iovs[kPartialMax];\n  take_iovs(\u0026iovs, \u0026niovs, partial_iovs, \u0026partial_niovs);\n  if (partial_niovs \u003c\u003d 0) {\n    break;\n  }\n\n  ipc_msg_t msg{\n      .num_iov \u003d partial_niovs,\n      .iov \u003d partial_iovs,\n      .num_handles \u003d ...,\n      .handles \u003d ...,\n  };\n  // ...\n}\n```",
+      "parentUuid": "ebd3e30f_c4dd4104",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

@@ -16,6 +16,69 @@
       "message": "please add fuzzer",
       "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e576f7f_fb26d79e",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T20:50:00Z",
+      "side": 1,
+      "message": "do we need this in the submitted version of the code? the macro name here is too easy to conflict IMO. i suggest deleting this and calling `send_msg` directly",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5b7a74_1338a1ca",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T20:50:00Z",
+      "side": 1,
+      "message": "this is a trusty implementation detail, right? should it go into trusty_ipc.h?",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e973027d_492794f0",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-12T20:50:00Z",
+      "side": 1,
+      "message": "please resolve\n\ni didn\u0027t look closely, but it might be more readable to do `num_handles \u003d 0` from `interruptableWriteFully` and have `sendPartialTrustyMsg` accept a `const ipc_msg_t* msg`",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 51
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
