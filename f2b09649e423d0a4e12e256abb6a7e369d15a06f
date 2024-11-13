@@ -33,6 +33,24 @@
       "message": "Please help me check the Verified -1 error. I don\u0027t have permission to view it:\n\nPresubmit finished: 31 failed, 1 nonblocking in progress, 85 skipped, 16 passed (15 new).\nCheck out your Presubmit results in Checks tab.\n\nCONFLICT: Your changes failed to cherry-pick against build 12641766 on branch \u003cinternal-branch\u003e (could not apply f2b09649e423d0a4e12e256abb6a7e369d15a06f). See logs/git.log in \u003cinternal-url\u003e and search for \"Automatic merge failed\". And please see http://go/automerger-presubmit-faq for advices. . NOTE: This build has automerged changes. You may need to perform a manual merge. See http://go/automerger-presubmit-faq",
       "revId": "f2b09649e423d0a4e12e256abb6a7e369d15a06f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a19a28_9c263735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-11-13T00:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99748e0d_dd9b0031",
+      "revId": "f2b09649e423d0a4e12e256abb6a7e369d15a06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
