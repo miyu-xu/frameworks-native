@@ -34,6 +34,24 @@
       "parentUuid": "0c22a628_66bcab91",
       "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1c5e9c_dafb3c16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-11-13T19:42:16Z",
+      "side": 1,
+      "message": "The generic netlink provides global netlink messages. It\u0027s not associated to any specific binder service/client instances. So it\u0027s not suitable to be implemented in BpBinder.\n\nI can move it to a standalone folder like libs/genl or bionic/genl. But libbinder is still the best option as this generic netlink family works directly with kernel binder driver.",
+      "parentUuid": "903e2a61_0522ce3a",
+      "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
