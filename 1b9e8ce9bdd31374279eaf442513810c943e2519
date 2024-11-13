@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34eff5b3_cf71018a",
+        "filename": "include/android/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2024-11-13T22:26:26Z",
+      "side": 1,
+      "message": "captial S",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "1b9e8ce9bdd31374279eaf442513810c943e2519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
