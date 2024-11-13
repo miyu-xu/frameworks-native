@@ -34,6 +34,24 @@
       "parentUuid": "e3eb372e_8e57e39d",
       "revId": "40ffa516c894fe637c6bd2c88ed0188b02d936a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f459b2f_93ab91f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-13T00:37:17Z",
+      "side": 1,
+      "message": "Yes. This is blocking RPC binder from wider usage in framework. Maybe still a few years out.",
+      "parentUuid": "e3eb372e_8e57e39d",
+      "revId": "40ffa516c894fe637c6bd2c88ed0188b02d936a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
