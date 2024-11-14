@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2007fd0_00dfe9df",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2024-11-14T16:17:39Z",
+      "side": 1,
+      "message": "Is this function only invoked for local services (and are those permanent)? If not, it may be dangerous to cache here.",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 74
+      },
+      "revId": "076a43042a93c344ab03036eb628b1e4e7debdda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
