@@ -51,6 +51,23 @@
       "parentUuid": "99748e0d_dd9b0031",
       "revId": "f2b09649e423d0a4e12e256abb6a7e369d15a06f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696729e0_5c9480b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-11-14T00:52:14Z",
+      "side": 1,
+      "message": "Could you please help me check the CONFLICT error in this Verified -1? Thank you very much.",
+      "revId": "f2b09649e423d0a4e12e256abb6a7e369d15a06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
