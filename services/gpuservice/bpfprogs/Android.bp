@@ -25,3 +25,8 @@ bpf {
     name: "gpuMem.o",
     srcs: ["gpuMem.c"],
 }
+
+libbpf_prog {
+    name: "gpuMem2.o",
+    srcs: ["gpuMem2.c"],
+}
