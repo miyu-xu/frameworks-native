@@ -312,12 +312,6 @@ cc_library {
                 "libstatssocket_lazy",
             ],
         },
-        host: {
-            include_dirs: [
-                "bionic/libc/kernel/android/uapi/",
-                "bionic/libc/kernel/uapi",
-            ],
-        },
     },
 }
 
