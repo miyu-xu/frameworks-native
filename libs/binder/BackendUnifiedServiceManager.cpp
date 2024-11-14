@@ -120,6 +120,28 @@ bool BinderCacheWithInvalidation::isClientSideCachingEnabled(const std::string& 
     return false;
 }
 
+Status BackendUnifiedServiceManager::updateCacheWithBinder(const std::string& serviceName,
+                                                           const sp<IBinder>& binder) {
+    if (!binder) {
+        binder::ScopedTrace
+                aidlTrace(ATRACE_TAG_AIDL,
+                          "BinderCacheWithInvalidation::updateCache failed: binder_null");
+    } else if (!binder->isBinderAlive()) {
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      "BinderCacheWithInvalidation::updateCache failed: "
+                                      "isBinderAlive_false");
+    } else if (mCacheForGetService->isClientSideCachingEnabled(serviceName)) {
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      "BinderCacheWithInvalidation::updateCache successful");
+        return mCacheForGetService->setItem(serviceName, binder);
+    } else {
+        binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                      "BinderCacheWithInvalidation::updateCache failed: "
+                                      "caching_not_enabled");
+    }
+    return Status::ok();
+}
+
 Status BackendUnifiedServiceManager::updateCache(const std::string& serviceName,
                                                  const os::Service& service) {
     if (!kUseCache) {
@@ -132,24 +154,7 @@ Status BackendUnifiedServiceManager::updateCache(const std::string& serviceName,
     binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, traceStr.c_str());
 
     if (service.getTag() == os::Service::Tag::binder) {
-        sp<IBinder> binder = service.get<os::Service::Tag::binder>();
-        if (!binder) {
-            binder::ScopedTrace
-                    aidlTrace(ATRACE_TAG_AIDL,
-                              "BinderCacheWithInvalidation::updateCache failed: binder_null");
-        } else if (!binder->isBinderAlive()) {
-            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                          "BinderCacheWithInvalidation::updateCache failed: "
-                                          "isBinderAlive_false");
-        } else if (mCacheForGetService->isClientSideCachingEnabled(serviceName)) {
-            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                          "BinderCacheWithInvalidation::updateCache successful");
-            return mCacheForGetService->setItem(serviceName, binder);
-        } else {
-            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                          "BinderCacheWithInvalidation::updateCache failed: "
-                                          "caching_not_enabled");
-        }
+        return updateCacheWithBinder(serviceName, service.get<os::Service::Tag::binder>());
     }
     return Status::ok();
 }
@@ -277,7 +282,11 @@ Status BackendUnifiedServiceManager::toBinderService(const ::std::string& name,
 Status BackendUnifiedServiceManager::addService(const ::std::string& name,
                                                 const sp<IBinder>& service, bool allowIsolated,
                                                 int32_t dumpPriority) {
-    return mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
+    Status status = mTheRealServiceManager->addService(name, service, allowIsolated, dumpPriority);
+    if (status.isOk()) {
+        return updateCacheWithBinder(name, service);
+    }
+    return status;
 }
 Status BackendUnifiedServiceManager::listServices(int32_t dumpPriority,
                                                   ::std::vector<::std::string>* _aidl_return) {

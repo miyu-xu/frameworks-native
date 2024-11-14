@@ -74,56 +74,52 @@ public:
                 innerSm.addService(String16(name.c_str()), service, allowIsolated, dumpPriority));
     }
 
+    void clearServices() { innerSm.clear(); }
+
     FakeServiceManager innerSm;
 };
 
 class LibbinderCacheTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        sp<MockAidlServiceManager> sm = sp<MockAidlServiceManager>::make();
-        mServiceManager = getServiceManagerShimFromAidlServiceManagerForTests(sm);
+        fakeServiceManager = sp<MockAidlServiceManager>::make();
+        mServiceManager = getServiceManagerShimFromAidlServiceManagerForTests(fakeServiceManager);
     }
 
     void TearDown() override {}
 
 public:
-    void cacheAndConfirmCacheHit(const sp<IBinder>& binder1, const sp<IBinder>& binder2) {
-        // Add a service
+    void cacheAndConfirmCacheHit(const sp<IBinder>& binder1) {
+        // Add a service. This also caches it.
         EXPECT_EQ(OK, mServiceManager->addService(kCachedServiceName, binder1));
-        // Get the service. This caches it.
+        // remove services from fakeservicemanager
+        fakeServiceManager->clearServices();
+
         sp<IBinder> result = mServiceManager->checkService(kCachedServiceName);
-        ASSERT_EQ(binder1, result);
-
-        // Add the different binder and replace the service.
-        // The cache should still hold the original binder.
-        EXPECT_EQ(OK, mServiceManager->addService(kCachedServiceName, binder2));
-
-        result = mServiceManager->checkService(kCachedServiceName);
         if (kUseLibbinderCache) {
             // If cache is enabled, we should get the binder to Service Manager.
             EXPECT_EQ(binder1, result);
         } else {
             // If cache is disabled, then we should get the newer binder
-            EXPECT_EQ(binder2, result);
+            EXPECT_EQ(nullptr, result);
         }
     }
 
+    sp<MockAidlServiceManager> fakeServiceManager;
     sp<android::IServiceManager> mServiceManager;
 };
 
 TEST_F(LibbinderCacheTest, AddLocalServiceAndConfirmCacheHit) {
     sp<IBinder> binder1 = sp<BBinder>::make();
-    sp<IBinder> binder2 = sp<BBinder>::make();
 
-    cacheAndConfirmCacheHit(binder1, binder2);
+    cacheAndConfirmCacheHit(binder1);
 }
 
 TEST_F(LibbinderCacheTest, AddRemoteServiceAndConfirmCacheHit) {
     sp<IBinder> binder1 = defaultServiceManager()->checkService(kServerName);
     ASSERT_NE(binder1, nullptr);
-    sp<IBinder> binder2 = IInterface::asBinder(mServiceManager);
 
-    cacheAndConfirmCacheHit(binder1, binder2);
+    cacheAndConfirmCacheHit(binder1);
 }
 
 TEST_F(LibbinderCacheTest, RemoveFromCacheOnServerDeath) {
@@ -175,6 +171,9 @@ TEST_F(LibbinderCacheTest, NullBinderNotCached) {
     // Add the same service
     EXPECT_EQ(OK, mServiceManager->addService(kCachedServiceName, binder2));
 
+    // Remove services from fakeservicemanager
+    fakeServiceManager->clearServices();
+
     // This should return the newly added service.
     result = mServiceManager->checkService(kCachedServiceName);
     EXPECT_EQ(binder2, result);
@@ -184,18 +183,17 @@ TEST_F(LibbinderCacheTest, DoNotCacheServiceNotInList) {
     sp<IBinder> binder1 = sp<BBinder>::make();
     sp<IBinder> binder2 = sp<BBinder>::make();
     String16 serviceName = String16("NewLibbinderCacheTest");
-    // Add a service
+    // Add a service. This shouldn't caches it.
     EXPECT_EQ(OK, mServiceManager->addService(serviceName, binder1));
     // Get the service. This shouldn't caches it.
     sp<IBinder> result = mServiceManager->checkService(serviceName);
     ASSERT_EQ(binder1, result);
 
-    // Add the different binder and replace the service.
-    EXPECT_EQ(OK, mServiceManager->addService(serviceName, binder2));
-
-    // Confirm that we get the new service
+    // Remove services from fakeservicemanager
+    fakeServiceManager->clearServices();
+    // Confirm that we get a null binder
     result = mServiceManager->checkService(serviceName);
-    EXPECT_EQ(binder2, result);
+    EXPECT_EQ(nullptr, result);
 }
 
 int main(int argc, char** argv) {

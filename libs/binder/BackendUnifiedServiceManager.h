@@ -105,8 +105,7 @@ public:
         binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
                                       "BinderCacheWithInvalidation::setItem Successfully Cached");
         std::lock_guard<std::mutex> lock(mCacheMutex);
-        Entry entry = {.service = item, .deathRecipient = deathRecipient};
-        mCache[key] = entry;
+        mCache[key] = {.service = item, .deathRecipient = deathRecipient};
         return binder::Status::ok();
     }
 
@@ -158,6 +157,7 @@ private:
     binder::Status toBinderService(const ::std::string& name, const os::Service& in,
                                    os::Service* _out);
     binder::Status updateCache(const std::string& serviceName, const os::Service& service);
+    binder::Status updateCacheWithBinder(const std::string& serviceName, const sp<IBinder>& binder);
     bool returnIfCached(const std::string& serviceName, os::Service* _out);
 };
 
