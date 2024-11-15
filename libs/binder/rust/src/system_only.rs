@@ -100,6 +100,19 @@ impl Accessor {
         unsafe { SpIBinder::from_raw(sys::ABinderRpc_Accessor_asBinder(self.accessor)) }
     }
 
+    /// Release the underlying ABinderRpc_Accessor pointer for use with the ndk API
+    /// This gives up ownership of the ABinderRpc_Accessor and it is the responsibility of
+    /// the caller to delete it with ABinderRpc_Accessor_delete
+    pub fn release(&mut self) -> *mut sys::ABinderRpc_Accessor {
+        if self.accessor.is_null() {
+            log::error!("Attempting to release an Accessor that was already released");
+            return ptr::null_mut();
+        }
+        let ptr = self.accessor;
+        self.accessor = ptr::null_mut();
+        ptr
+    }
+
     /// Callback invoked from C++ when the connection info is needed.
     ///
     /// # Safety
@@ -185,6 +198,10 @@ impl Accessor {
 
 impl Drop for Accessor {
     fn drop(&mut self) {
+        if self.accessor.is_null() {
+            // This Accessor was already released.
+            return;
+        }
         // Safety: `self.accessor` is always a valid, owned
         // `ABinderRpc_Accessor` pointer returned by
         // `ABinderRpc_Accessor_new` when `self` was created. This delete
@@ -217,4 +234,132 @@ pub fn delegate_accessor(name: &str, mut binder: SpIBinder) -> Result<SpIBinder>
     // Safety: `delegator` is either null or a valid, owned pointer at this
     // point, so can be safely passed to `SpIBinder::from_raw`.
     Ok(unsafe { SpIBinder::from_raw(delegator).expect("Expected valid binder at this point") })
+}
+
+/// Rust wrapper around ABinderRpc_AccessorProvider objects for RPC binder service management.
+///
+/// Dropping the `AccessorProvider` will drop/unregister the underlying object.
+pub struct AccessorProvider {
+    accessor_provider: *mut sys::ABinderRpc_AccessorProvider,
+}
+
+impl fmt::Debug for AccessorProvider {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "ABinderRpc_AccessorProvider({:p})", self.accessor_provider)
+    }
+}
+
+/// Safety: A `AccessorProvider` is a wrapper around `ABinderRpc_AccessorProvider` which is
+/// `Sync` and `Send`. As
+/// `ABinderRpc_AccessorProvider` is threadsafe, this structure is too.
+/// The Fn owned the AccessorProvider has `Sync` and `Send` properties
+unsafe impl Send for AccessorProvider {}
+
+/// Safety: A `AccessorProvider` is a wrapper around `ABinderRpc_AccessorProvider` which is
+/// `Sync` and `Send`. As `ABinderRpc_AccessorProvider` is threadsafe, this structure is too.
+/// The Fn owned the AccessorProvider has `Sync` and `Send` properties
+unsafe impl Sync for AccessorProvider {}
+
+impl AccessorProvider {
+    /// Create a new AccessorProvider that will give libbinder Accessors in order to
+    /// connect to binder services over sockets.
+    ///
+    pub fn new<F>(instances: &[String], provider: F) -> Option<AccessorProvider>
+    where
+        F: Fn(&str) -> Option<Accessor> + Send + Sync + 'static,
+    {
+        let callback: *mut c_void = Arc::into_raw(Arc::new(provider)) as *mut c_void;
+        let c_str_instances: Vec<CString> =
+            instances.iter().map(|s| CString::new(s.as_bytes()).unwrap()).collect();
+        let mut c_instances: Vec<*const c_char> =
+            c_str_instances.iter().map(|s| s.as_ptr()).collect();
+        let num_instances: usize = c_instances.len();
+        // Safety: The function pointer is a valid get_accessor callback.
+        // This call returns an owned `ABinderRpc_AccessorProvider` pointer which
+        // must be destroyed via `ABinderRpc_unregisterAccessorProvider` when no longer
+        // needed.
+        // When the underlying ABinderRpc_AccessorProvider is deleted, it will call
+        // the cookie_decr_refcount callback to release its strong ref.
+        let accessor_provider = unsafe {
+            sys::ABinderRpc_registerAccessorProvider(
+                Some(Self::get_accessor::<F>),
+                c_instances.as_mut_ptr(),
+                num_instances,
+                callback,
+                Some(Self::accessor_cookie_decr_refcount::<F>),
+            )
+        };
+
+        if accessor_provider.is_null() {
+            return None;
+        }
+        Some(AccessorProvider { accessor_provider })
+    }
+
+    /// Callback invoked from C++ when an Accessor is needed.
+    ///
+    /// # Safety
+    ///
+    /// libbinder guarantees the instance is a valid C string if it's not null.
+    /// The cookie pointer is same pointer that we pass to ABinderRpc_registerAccessorProvider
+    /// in AccessorProvider.new() which is the closure that we will delete with
+    /// self.accessor_cookie_decr_refcount when unregistering the AccessorProvider.
+    unsafe extern "C" fn get_accessor<F>(
+        instance: *const c_char,
+        cookie: *mut c_void,
+    ) -> *mut binder_ndk_sys::ABinderRpc_Accessor
+    where
+        F: Fn(&str) -> Option<Accessor> + Send + Sync + 'static,
+    {
+        if cookie.is_null() || instance.is_null() {
+            log::error!("Cookie({cookie:p}) or instance({instance:p}) is null!");
+            return ptr::null_mut();
+        }
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        let callback = unsafe { (cookie as *const F).as_ref().unwrap() };
+
+        // Safety: The caller in libbinder_ndk will have already verified this is a valid
+        // C string
+        let inst = unsafe {
+            match CStr::from_ptr(instance).to_str() {
+                Ok(s) => s,
+                Err(err) => {
+                    log::error!("Failed to get a valid C string! {err:?}");
+                    return ptr::null_mut();
+                }
+            }
+        };
+
+        match callback(inst) {
+            Some(mut a) => a.release(),
+            None => ptr::null_mut(),
+        }
+    }
+
+    /// Callback that decrements the ref-count.
+    /// This is invoked from C++ when the provider is unregistered.
+    ///
+    /// # Safety
+    ///
+    /// The `cookie` parameter must be the cookie for an `Arc<F>` and
+    /// the owner must give up a ref-count to it.
+    unsafe extern "C" fn accessor_cookie_decr_refcount<F>(cookie: *mut c_void)
+    where
+        F: Fn(&str) -> Option<Accessor> + Send + Sync + 'static,
+    {
+        // Safety: The caller promises that `cookie` is for an Arc<F>.
+        unsafe { Arc::decrement_strong_count(cookie as *const F) };
+    }
+}
+
+impl Drop for AccessorProvider {
+    fn drop(&mut self) {
+        // Safety: `self.accessor_provider` is always a valid, owned
+        // `ABinderRpc_AccessorProvider` pointer returned by
+        // `ABinderRpc_registerAccessorProvider` when `self` was created. This delete
+        // method can only be called once when `self` is dropped.
+        unsafe {
+            sys::ABinderRpc_unregisterAccessorProvider(self.accessor_provider);
+        }
+    }
 }
