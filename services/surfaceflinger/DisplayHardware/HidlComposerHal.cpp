@@ -325,7 +325,7 @@ Error HidlComposer::createVirtualDisplay(uint32_t width, uint32_t height, PixelF
     const uint32_t bufferSlotCount = 1;
     Error error = kDefaultError;
     if (mClient_2_2) {
-        mClient_2_2->createVirtualDisplay_2_2(width, height,
+        auto status = mClient_2_2->createVirtualDisplay_2_2(width, height,
                                               static_cast<types::V1_1::PixelFormat>(*format),
                                               bufferSlotCount,
                                               [&](const auto& tmpError, const auto& tmpDisplay,
@@ -339,8 +339,11 @@ Error HidlComposer::createVirtualDisplay(uint32_t width, uint32_t height, PixelF
                                                   *format = static_cast<types::V1_2::PixelFormat>(
                                                           tmpFormat);
                                               });
+        if (!status.isOk()) {
+            return error;
+        }
     } else {
-        mClient->createVirtualDisplay(width, height, static_cast<types::V1_0::PixelFormat>(*format),
+        auto status = mClient->createVirtualDisplay(width, height, static_cast<types::V1_0::PixelFormat>(*format),
                                       bufferSlotCount,
                                       [&](const auto& tmpError, const auto& tmpDisplay,
                                           const auto& tmpFormat) {
@@ -352,6 +355,9 @@ Error HidlComposer::createVirtualDisplay(uint32_t width, uint32_t height, PixelF
                                           *outDisplay = tmpDisplay;
                                           *format = static_cast<PixelFormat>(tmpFormat);
                                       });
+        if (!status.isOk()) {
+            return error;
+        }
     }
 
     return error;
