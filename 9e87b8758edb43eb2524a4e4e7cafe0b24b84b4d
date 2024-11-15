@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42e9d7aa_31680c3c",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-15T20:49:26Z",
+      "side": 1,
+      "message": "I am using this macro to mock the send message implementation to be able to unit test this code. The other CL in this topic (aosp/3288220) have a mock implementation of this function. Because `send_msg` is part of trusty it isn\u0027t as easy to replace its implementation for unit testing. Would it be OK to change the macro name to `TRUSTY_SEND_MSG_IMPL`?",
+      "parentUuid": "0e576f7f_fb26d79e",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5b7a74_1338a1ca",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2b860c7_b391fbc3",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-15T20:49:26Z",
+      "side": 1,
+      "message": "Not trusty specifically (we can have messages larger than 4096). I think its a limitation from the Android-Trusty communication path over virtio we currently have. At this point I am not sure of a header file that would be a good fit for this definition.",
+      "parentUuid": "9a5b7a74_1338a1ca",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
@@ -71,6 +113,30 @@
       "writtenOn": "2024-11-12T20:50:00Z",
       "side": 1,
       "message": "please resolve\n\ni didn\u0027t look closely, but it might be more readable to do `num_handles \u003d 0` from `interruptableWriteFully` and have `sendPartialTrustyMsg` accept a `const ipc_msg_t* msg`",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 51
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf49752a_643955e9",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-15T20:49:26Z",
+      "side": 1,
+      "message": "No longer applicable after the refactor.",
+      "parentUuid": "e973027d_492794f0",
       "range": {
         "startLine": 102,
         "startChar": 0,

@@ -233,6 +233,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c253f13c_fa9abbd0",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-15T20:49:26Z",
+      "side": 1,
+      "message": "I haven\u0027t but we could measure performance and refactor later. Because of the normal size of Trusty messages I\u0027d expect this arm to be taken most of the time.",
+      "parentUuid": "b22259b3_ea9a781b",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7062c6f8_8d782272",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 4
@@ -280,6 +298,24 @@
       "side": 1,
       "message": "how about something like the following. all of the iovec math and corner cases get centralized in `take_iovs`\n\n```\nvoid take_iovs(iovec** src_iovs, int* src_niovs,\n               iovec* dest_iovs, int* dest_niovs) {\n  // copy up to 4096 bytes of slices into `dest_iovs`.\n  // modify `src_iovs` to keep only what\u0027s left.\n}\n\nfor (;;) {\n  constexpr size_t kPartialMax \u003d 5;\n  int partial_niovs \u003d kPartialMax;\n  iovec partial_iovs[kPartialMax];\n  take_iovs(\u0026iovs, \u0026niovs, partial_iovs, \u0026partial_niovs);\n  if (partial_niovs \u003c\u003d 0) {\n    break;\n  }\n\n  ipc_msg_t msg{\n      .num_iov \u003d partial_niovs,\n      .iov \u003d partial_iovs,\n      .num_handles \u003d ...,\n      .handles \u003d ...,\n  };\n  // ...\n}\n```",
       "parentUuid": "ebd3e30f_c4dd4104",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "544ca0a2_bce90f22",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-15T20:49:26Z",
+      "side": 1,
+      "message": "Thanks, refactored the code that way.",
+      "parentUuid": "851d5877_b15c71f7",
       "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
