@@ -87,6 +87,24 @@
       "parentUuid": "560b85f6_24b41d0a",
       "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6020e8cc_42f857de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-15T15:27:32Z",
+      "side": 1,
+      "message": "I\u0027m going to leave this `unsafe` for now as there are still ways it can be used to create aliases that could result in unsoundness. I\u0027ll come back to this once I see how the locked buffer is actually used.",
+      "parentUuid": "fd8803f3_44d7f10e",
+      "revId": "3ec830380a6787e06fd0b8c1d5fd3d77397162d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
