@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8589f280_836e34c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-11-18T22:31:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4285f9f8_7a5d677a",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "474e27ff_98bfd1f8",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45719df7_b049df41",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-11-18T22:31:40Z",
+      "side": 1,
+      "message": "Looking at the published docs, there are actually a ton of non-linked things. I\u0027ll fix this CL so I\u0027m not introducing new problems, but I\u0027ll save the rest for another CL (in particular none of the enum names are linked, which I\u0027m guessing requires an explicit \\ref or something, but I\u0027ll figure that out later)",
+      "parentUuid": "474e27ff_98bfd1f8",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5aa65e7_03d3f9b1",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-18T13:21:25Z",
       "side": 1,
       "message": "Grammar nit: \"the pollAll\"?\n\n```suggestion\n * hidden and callers should migrate to ALooper_pollAll(). Binary\n```",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f649c3a8_bb5b9baa",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-11-18T22:31:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5aa65e7_03d3f9b1",
       "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
