@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4285f9f8_7a5d677a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-18T13:21:25Z",
+      "side": 1,
+      "message": "Thanks for addressing this so quickly! I mainly only have nits regarding link and/or monospace formatting.",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474e27ff_98bfd1f8",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-18T13:21:25Z",
+      "side": 1,
+      "message": "Should these and the below have `()` to be turned into references? Or is there other syntax for monospace and/or function links?\n\n```suggestion\n     * explicitly woken by ALooper_wake().\n```",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5aa65e7_03d3f9b1",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-18T13:21:25Z",
+      "side": 1,
+      "message": "Grammar nit: \"the pollAll\"?\n\n```suggestion\n * hidden and callers should migrate to ALooper_pollAll(). Binary\n```",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
