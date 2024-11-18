@@ -91,6 +91,19 @@ impl Accessor {
         Accessor { accessor }
     }
 
+    /// TODO
+    pub fn from_binder(instance: &str, binder: SpIBinder) -> Option<Accessor> {
+        let inst = CString::new(instance).unwrap();
+
+        // Safety: TODO
+        let accessor =
+            unsafe { sys::ABinderRpc_Accessor_fromBinder(inst.as_ptr(), binder.as_raw()) };
+        if accessor.is_null() {
+            return None;
+        }
+        Some(Accessor { accessor })
+    }
+
     /// Get the underlying binder for this Accessor for when it needs to be either
     /// registered with service manager or sent to another process.
     pub fn as_binder(&self) -> Option<SpIBinder> {
