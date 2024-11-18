@@ -52,6 +52,24 @@
       "parentUuid": "903e2a61_0522ce3a",
       "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d2f1123_40e48ffe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-18T21:07:09Z",
+      "side": 1,
+      "message": "This is raising a lot of red flags. Can you schedule a meeting to discuss? I left similar feedback on the original doc, but this is a lot bigger and worse than I was imaging. Netlink sockets reporting binder calls to a centralized place? All this custom C code? Has this gone through security review? Is there sepolicy for it? How will it work for vndbinder, RPC binder? Do we retain the ability to define how transactions are normal in binder userspace?",
+      "parentUuid": "0e1c5e9c_dafb3c16",
+      "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
