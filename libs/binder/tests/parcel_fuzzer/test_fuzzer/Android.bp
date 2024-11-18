@@ -29,6 +29,7 @@ cc_fuzz {
     static_libs: [
         "liblog",
         "testServiceIface-cpp",
+        "libc++",
     ],
     host_supported: true,
     srcs: ["TestServiceFuzzer.cpp"],
