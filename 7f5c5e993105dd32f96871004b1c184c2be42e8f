@@ -16,6 +16,224 @@
       "message": "This is being used in the AVF example here: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3225466/17/libs/libvm_payload/src/lib.rs",
       "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f01400_d5226a0d",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "prefer `fn release(self)` (similar to a `\u0026\u0026` rvalue method in C++) so that the caller can\u0027t hang onto the now invalid `Accessor` value",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 28
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd69c0cc_5515fd0a",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "does this need to be part of the public API? it is dangerous. maybe make it unsafe either way\n\nnote that in rust, any code within the same file can access private methods/fields",
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff265ced_2e7a390d",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "why not just use `#[derive(Debug)]`? it might confuse people that the debug formatting doesn\u0027t match the type name",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 1
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174184b3_aa8d32df",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "can you document the arguments. what is the callback string argument? maybe an example or link to other docs would help",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 7
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0fbd4ee_767eeb96",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca2902b_ebc3e73d",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "this is true of `Accessor` as well: you can probably replace `Arc` with `Box`. this `Arc` will always have a refcount of one. the real refcounting is done in the NDK code with a `std::shared_ptr`. `Box` is slighter more efficient (it is just a pointer) and communicates what\u0027s going on more clearly\n\n(maybe better for a follow up CL)",
+      "range": {
+        "startLine": 271,
+        "startChar": 36,
+        "endLine": 271,
+        "endChar": 69
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35b39e2_1ae38ccd",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "nit: `CString::new(s)` ought to work",
+      "range": {
+        "startLine": 273,
+        "startChar": 37,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d87a96_14ff8c30",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "when `ABinderRpc_registerAccessorProvider` returns nullptr, it doesn\u0027t call `accessor_cookie_decr_refcount`, so the Arc will leak. i think that is a bug in the NDK code though",
+      "range": {
+        "startLine": 284,
+        "startChar": 17,
+        "endLine": 284,
+        "endChar": 52
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92727ba9_b9ca2610",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "make the unsafe scope smaller when possible, e.g. this can probably be `match unsafe { CStr::from_ptr(instance) }.to_str() {`",
+      "range": {
+        "startLine": 323,
+        "startChar": 19,
+        "endLine": 323,
+        "endChar": 27
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74c6362_6ad4c667",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T22:57:49Z",
+      "side": 1,
+      "message": "this case happens when the c string contains invalid utf8\n\nyou could consider using https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.to_string_lossy instead and then let the supplied callback log an error about an unexpected instance name (it would have the special `�` character in it). up to you",
+      "range": {
+        "startLine": 327,
+        "startChar": 33,
+        "endLine": 327,
+        "endChar": 65
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
