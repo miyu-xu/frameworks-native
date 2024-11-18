@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0946f5fe_41fad5ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-18T18:17:21Z",
+      "side": 1,
+      "message": "This is being used in the AVF example here: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3225466/17/libs/libvm_payload/src/lib.rs",
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
