@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f20522a_1fcc8520",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T23:08:44Z",
+      "side": 1,
+      "message": "maybe \"create the socket connection FD\" (are the connection and socket FD separate things?)",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 97,
+        "endChar": 10
+      },
+      "revId": "3e64b2586c528f201c36a1afdccbf985f13b7397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd153f98_3e5893a8",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-18T23:08:44Z",
+      "side": 1,
+      "message": "technically, it can\u0027t be a valid C string. i think you want \"must not contain null bytes\"",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 43
+      },
+      "revId": "3e64b2586c528f201c36a1afdccbf985f13b7397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
