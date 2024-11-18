@@ -97,6 +97,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70cacce7_beb3e7ba",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-18T21:40:41Z",
+      "side": 1,
+      "message": "Added a new method for this. Both of these are private APIs (declared in `libs/binder/BackendUnifiedServiceManager.h`).",
+      "parentUuid": "9bbddceb_e9dfabb2",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 37
+      },
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9b099dd_120ff4d6",
@@ -134,6 +158,30 @@
           ]
         }
       ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0160ea10_2ecfe77d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-18T21:40:41Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/platform/frameworks/native/+/3214896/comment/fcbf5c91_58d8a44a/\n\nThey are all now considered \"declared\" but `getDecalredInstances()` only returns the instance names which come after the `/`. If a service doesn\u0027t have a `/`, I\u0027m saying it\u0027s still declared, but the instance name is `\"\"`.\n\nThe test cases try to illustrate this. Let me know if you want any more added.",
+      "parentUuid": "f9b099dd_120ff4d6",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 9
+      },
       "revId": "8960c27225d2c39fa79363035453601af92d51af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -179,6 +227,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d58fe9_5f0755c1",
+        "filename": "libs/binder/BackendUnifiedServiceManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-18T21:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e20b9f61_db5e5713",
+      "range": {
+        "startLine": 167,
+        "startChar": 5,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21cd9282_8ab373b9",
@@ -216,6 +288,30 @@
           ]
         }
       ],
+      "revId": "8960c27225d2c39fa79363035453601af92d51af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63df98ab_d9999a08",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-18T21:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21cd9282_8ab373b9",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 32
+      },
       "revId": "8960c27225d2c39fa79363035453601af92d51af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
