@@ -30,6 +30,9 @@ cc_fuzz {
         "liblog",
         "testServiceIface-cpp",
     ],
+    shared_libs: [
+        "libc++",
+    ],
     host_supported: true,
     srcs: ["TestServiceFuzzer.cpp"],
     fuzz_config: {
