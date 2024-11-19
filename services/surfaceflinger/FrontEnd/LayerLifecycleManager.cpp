@@ -218,6 +218,21 @@ void LayerLifecycleManager::applyTransactions(const std::vector<TransactionState
             uint32_t oldParentId = layer->parentId;
             uint32_t oldRelativeParentId = layer->relativeParentId;
             uint32_t oldTouchCropId = layer->touchCropId;
+
+            if (layer->getDebugString().find("NavigationBar") != std::string::npos) {
+                if (resolvedComposerState.state.flags & layer_state_t::eLayerHidden) {
+                    isNavigationBarHide = true;
+                    tempNavigationBarId = resolvedComposerState.state.layerId;
+                }
+            }
+
+            if (tempNavigationBarId == resolvedComposerState.state.layerId && isNavigationBarHide) {
+                if (resolvedComposerState.state.flags == 0) {
+                    ALOGW("this is a transition to hide NavigationBar, shouldn't show NavigationBar.");
+                    continue;
+                }
+            }
+
             layer->merge(resolvedComposerState);
 
             if (layer->what & layer_state_t::eBackgroundColorChanged) {
