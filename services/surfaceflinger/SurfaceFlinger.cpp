@@ -8583,8 +8583,8 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                 .updatingOutputGeometryThisFrame = true,
                 .updatingGeometryThisFrame = true,
                 .colorTransformMatrix =
-                mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
-                     vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f}),
+                        mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                             vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f}),
         };
         compositionEngine->present(refreshArgs);
 
