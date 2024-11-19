@@ -33,6 +33,41 @@
       "message": "Please help me to check the Weird Verified -2 error,I can\u0027t find the cause of the error and I don\u0027t have permission to view it:\nYour change(s) likely causes build failures.\n\nFAIL: Failed to build aosp_cf_x86_64_phone-trunk_staging-userdebug:aosp-main\n\nFAIL: Failed to build \u003cinternal-target\u003e.\nNote: This is a checkbuild (go/checkbuild). It will take longer and could uncover errors not found in other builds.\n\nFAIL: Failed to build aosp_cf_arm64_only_phone-trunk_staging-userdebug:git_aosp-main-with-phones\n\nFAIL: Failed to build aosp_panther_hwasan-trunk_staging-userdebug:git_aosp-main-with-phones",
       "revId": "3ab327c2564034ebe74ca8d6c460a1fb320cf7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9637472_644eef96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955350
+      },
+      "writtenOn": "2024-11-19T15:18:17Z",
+      "side": 1,
+      "message": "Please try presubmits again after applying the suggested edit to MockSchedulerCallback.h.",
+      "parentUuid": "39503961_563a831a",
+      "revId": "3ab327c2564034ebe74ca8d6c460a1fb320cf7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ab9625_1adf3f25",
+        "filename": "services/surfaceflinger/tests/unittests/mock/MockSchedulerCallback.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1955350
+      },
+      "writtenOn": "2024-11-19T15:18:17Z",
+      "side": 1,
+      "message": "```suggestion\n    MOCK_METHOD(void, onCommitNotComposited, (), (override));\n```",
+      "revId": "3ab327c2564034ebe74ca8d6c460a1fb320cf7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
