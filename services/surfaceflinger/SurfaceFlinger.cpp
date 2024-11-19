@@ -8576,7 +8576,6 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                                         .enableLocalTonemapping = enableLocalTonemapping});
 
         const float colorSaturation = grayscale ? 0 : 1;
-        base::StringPrintf("%.2fadb", colorSaturation);
         compositionengine::CompositionRefreshArgs refreshArgs{
                 .outputs = {output},
                 .layers = std::move(layerFEs),
