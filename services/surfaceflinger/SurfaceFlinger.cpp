@@ -2817,7 +2817,9 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
     refreshArgs.internalDisplayRotationFlags = getActiveDisplayRotationFlags();
 
     if (CC_UNLIKELY(mDrawingState.colorMatrixChanged)) {
-        refreshArgs.colorTransformMatrix = mDrawingState.colorMatrix;
+        refreshArgs.colorTransformMatrix =
+                mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                     vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
         mDrawingState.colorMatrixChanged = false;
     }
 
