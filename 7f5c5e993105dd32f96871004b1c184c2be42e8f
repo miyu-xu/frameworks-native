@@ -276,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "550a8726_a04799ca",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T20:45:12Z",
+      "side": 1,
+      "message": "Added a test in this CL to make sure the callback is being deleted correctly and then https://r.android.com/c/3365276/1 to change both of the `Arc` uses to `Box`.",
+      "parentUuid": "a5088031_aa848d98",
+      "range": {
+        "startLine": 271,
+        "startChar": 36,
+        "endLine": 271,
+        "endChar": 69
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c35b39e2_1ae38ccd",
