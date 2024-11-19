@@ -58,6 +58,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b8caa5_74c947d3",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "Perfect! Done.",
+      "parentUuid": "b9f01400_d5226a0d",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 28
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "288ee0ae_7c1a3a47",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "It does not! Removed the `pub`.",
+      "parentUuid": "bd69c0cc_5515fd0a",
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff265ced_2e7a390d",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-11-18T22:57:49Z",
       "side": 1,
       "message": "why not just use `#[derive(Debug)]`? it might confuse people that the debug formatting doesn\u0027t match the type name",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 1
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b338b1e7_6edb2c30",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "No good reason. I was asked to implement `Debug` in a previous review for `Accessor` and didn\u0027t think about `derive`. Looks like that works fine! CL fixing the `Accessor` instance of this: https://r.android.com/3363349",
+      "parentUuid": "ff265ced_2e7a390d",
       "range": {
         "startLine": 246,
         "startChar": 0,
@@ -121,6 +187,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5319fc_99e79e25",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "174184b3_aa8d32df",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 7
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5c5f0e_243f429a",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0fbd4ee_767eeb96",
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eca2902b_ebc3e73d",
@@ -134,6 +242,30 @@
       "writtenOn": "2024-11-18T22:57:49Z",
       "side": 1,
       "message": "this is true of `Accessor` as well: you can probably replace `Arc` with `Box`. this `Arc` will always have a refcount of one. the real refcounting is done in the NDK code with a `std::shared_ptr`. `Box` is slighter more efficient (it is just a pointer) and communicates what\u0027s going on more clearly\n\n(maybe better for a follow up CL)",
+      "range": {
+        "startLine": 271,
+        "startChar": 36,
+        "endLine": 271,
+        "endChar": 69
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5088031_aa848d98",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "OK, I\u0027ll try it out and put the patchset on top of this stack. I\u0027ll keep this comment open until I have link to the CL.",
+      "parentUuid": "eca2902b_ebc3e73d",
       "range": {
         "startLine": 271,
         "startChar": 36,
@@ -169,6 +301,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a521d9d_bac4b6b6",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "It fails to to compile.\n\nShould I change the `instances` argument to something other than `\u0026[String]`? I\u0027m not sold on anything here, I just want this to be nice to use in Rust, reasonable to use with AIDL types (`Vec\u003cString\u003e`), and not be too atrocious to send through FFI (although I think I\u0027ve already kind of failed that haha...).\n```\nerror[E0277]: the trait bound `std::vec::Vec\u003cu8\u003e: std::convert::From\u003c\u0026std::string::String\u003e` is not satisfied\n   --\u003e frameworks/native/libs/binder/rust/src/system_only.rs:306:51\n    |\n306 |             instances.iter().map(|s| CString::new(s).unwrap()).collect();\n    |                                      ------------ ^ the trait `std::convert::From\u003c\u0026std::string::String\u003e` is not implemented for `std::vec::Vec\u003cu8\u003e`, which is required by `\u0026std::string::String: std::convert::Into\u003cstd::vec::Vec\u003cu8\u003e\u003e`\n    |                                      |\n    |                                      required by a bound introduced by this call\n    |\n    \u003d help: the following other types implement trait `std::convert::From\u003cT\u003e`:\n              `std::vec::Vec\u003cu8\u003e` implements `std::convert::From\u003c\u0026str\u003e`\n              `std::vec::Vec\u003cu8\u003e` implements `std::convert::From\u003cstd::ffi::CString\u003e`\n              `std::vec::Vec\u003cu8\u003e` implements `std::convert::From\u003cstd::string::String\u003e`\n    \u003d note: required for `\u0026std::string::String` to implement `std::convert::Into\u003cstd::vec::Vec\u003cu8\u003e\u003e`\nnote: required by a bound in `std::ffi::CString::new`\n   --\u003e ./prebuilts/rust/linux-x86/1.81.0/src/stdlibs/library/alloc/src/ffi/c_str.rs:264:5\n```",
+      "parentUuid": "c35b39e2_1ae38ccd",
+      "range": {
+        "startLine": 273,
+        "startChar": 37,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54d87a96_14ff8c30",
         "filename": "libs/binder/rust/src/system_only.rs",
         "patchSetId": 2
@@ -180,6 +336,30 @@
       "writtenOn": "2024-11-18T22:57:49Z",
       "side": 1,
       "message": "when `ABinderRpc_registerAccessorProvider` returns nullptr, it doesn\u0027t call `accessor_cookie_decr_refcount`, so the Arc will leak. i think that is a bug in the NDK code though",
+      "range": {
+        "startLine": 284,
+        "startChar": 17,
+        "endLine": 284,
+        "endChar": 52
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3d9922_ee12cc38",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "Nice catch! I think handling that in `ABinderRpc_registerAccessorProvider` sounds better, so we give up ownership when calling this either way: https://r.android.com/3363328",
+      "parentUuid": "54d87a96_14ff8c30",
       "range": {
         "startLine": 284,
         "startChar": 17,
@@ -213,6 +393,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0703c3_17e725a8",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92727ba9_b9ca2610",
+      "range": {
+        "startLine": 323,
+        "startChar": 19,
+        "endLine": 323,
+        "endChar": 27
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b74c6362_6ad4c667",
@@ -226,6 +430,30 @@
       "writtenOn": "2024-11-18T22:57:49Z",
       "side": 1,
       "message": "this case happens when the c string contains invalid utf8\n\nyou could consider using https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.to_string_lossy instead and then let the supplied callback log an error about an unexpected instance name (it would have the special `�` character in it). up to you",
+      "range": {
+        "startLine": 327,
+        "startChar": 33,
+        "endLine": 327,
+        "endChar": 65
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4b3919_6c81a953",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T18:08:35Z",
+      "side": 1,
+      "message": "I\u0027d rather throw an error earlier here. I don\u0027t want to allow invalid utf8 in instance names even if the caller was willing to handle it.",
+      "parentUuid": "b74c6362_6ad4c667",
       "range": {
         "startLine": 327,
         "startChar": 33,
