@@ -22,6 +22,30 @@
       },
       "revId": "59b548f906214d7decef4566b84674ae2183af9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb52bd3b_3a68ceed",
+        "filename": "libs/binder/ndk/binder_rpc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-19T17:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e777985c_63f176f2",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 69
+      },
+      "revId": "59b548f906214d7decef4566b84674ae2183af9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
