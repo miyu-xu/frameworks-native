@@ -16,6 +16,23 @@
       "message": "Please help review the modifications of this patch, thank you.",
       "revId": "3ab327c2564034ebe74ca8d6c460a1fb320cf7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39503961_563a831a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-11-19T00:59:09Z",
+      "side": 1,
+      "message": "Please help me to check the Weird Verified -2 error,I can\u0027t find the cause of the error and I don\u0027t have permission to view it:\nYour change(s) likely causes build failures.\n\nFAIL: Failed to build aosp_cf_x86_64_phone-trunk_staging-userdebug:aosp-main\n\nFAIL: Failed to build \u003cinternal-target\u003e.\nNote: This is a checkbuild (go/checkbuild). It will take longer and could uncover errors not found in other builds.\n\nFAIL: Failed to build aosp_cf_arm64_only_phone-trunk_staging-userdebug:git_aosp-main-with-phones\n\nFAIL: Failed to build aosp_panther_hwasan-trunk_staging-userdebug:git_aosp-main-with-phones",
+      "revId": "3ab327c2564034ebe74ca8d6c460a1fb320cf7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
