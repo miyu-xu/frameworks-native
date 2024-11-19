@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2850811_824a47b1",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2024-11-19T15:19:11Z",
+      "side": 1,
+      "message": "nit: snake case consistency",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7b61f2f7_15817644",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": "                                      \"is_binder_alive_false\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "715fa451e302164f0fd13467b937f221518eae1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
