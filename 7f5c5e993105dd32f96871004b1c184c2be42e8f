@@ -347,6 +347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb4a698_5391c7eb",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-19T21:49:30Z",
+      "side": 1,
+      "message": "I think this is OK as is.\n\n`CString::new(s)` should work if `s: String` or `s: \u0026str`, but it is `s: \u0026String` in this case. You could convert it to a `\u0026str`, but that isn\u0027t clearly better than using `as_bytes`.",
+      "parentUuid": "9a521d9d_bac4b6b6",
+      "range": {
+        "startLine": 273,
+        "startChar": 37,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "7f5c5e993105dd32f96871004b1c184c2be42e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54d87a96_14ff8c30",
