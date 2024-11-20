@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef413aa5_9906a6f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2024-11-20T01:34:09Z",
+      "side": 1,
+      "message": "Requesting NDK API review to @danalbert@google.com",
+      "revId": "bbd4088dd5d5631b06df1b487dec23c0625d19b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
