@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df40fee2_d8648870",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-20T19:16:12Z",
+      "side": 1,
+      "message": "It seems right to me.\n\n`Send` looks OK because: The only `ABinderRpc_AccessorProvider` field is `std::weak_ptr\u003candroid::AccessorProvider\u003e`. `weak_ptr` is thread safe as long as the pointer itself isn\u0027t mutated, which seems to be true in this case. `android::AccessorProvider` looks safe because its fields are read only and the `std::function` field is calling into a rust function that we require to be `Send + Sync` via the `AccessorProvider::new` signature in rust.\n\n`Sync` looks OK in a trivial way because, there is nothing that can actually be done with an `AccessProvider` (i.e. there are no methods) besides dropping it.",
+      "parentUuid": "0ca50bae_edf48be2",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 40
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0399443b_ee303722",
         "filename": "libs/binder/rust/src/system_only.rs",
         "patchSetId": 4
