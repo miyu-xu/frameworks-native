@@ -33,6 +33,24 @@
       "message": "Umm.... they need to fix the test config? like b/313732799. You can see go/25q4-vts-coupling for a discussion of this technical issue, but we shouldn\u0027t one-off fix these things. We need to fix the testing configuration OR schedule the work to fix the 100s or more VTS test that would need fixes like this to support running tests built from random other builds. It\u0027s a lot of shared libraries, and a lot of even just storage to statically include all of them.",
       "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f099f2_50559092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-20T22:00:37Z",
+      "side": 1,
+      "message": "Or in this case, since it\u0027s two presubmit runs, it may be b/370854414, but that is an infra issue and transient, not necessarily a reason we should restructure VTS, until we\u0027re fully committed to it.",
+      "parentUuid": "b25d5da3_25ea94b8",
+      "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
