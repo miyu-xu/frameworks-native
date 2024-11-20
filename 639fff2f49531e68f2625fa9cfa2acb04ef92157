@@ -16,6 +16,24 @@
       "message": "AFAIK there is external styli with USB connection, so this is not a good way to determine this.\n\nInstead, could we add a check for the opposite? That is, if it supports stylus buttons and headphone buttons (like mute, volume), don\u0027t recognize it as a stylus.",
       "revId": "639fff2f49531e68f2625fa9cfa2acb04ef92157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fd86ec_5ffbfe6b",
+        "filename": "services/inputflinger/reader/EventHub.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2500,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2024-11-20T12:19:45Z",
+      "side": 1,
+      "message": "Yeah, this would break external drawing tablets. I\u0027m reluctant to suggest checking for headphone buttons, though, since there are external drawing tablets (such as the Huion HS64 and Inspiroy Dial Q620M; and XP-Pen Star G640, Deco mini7W, and Artist 12 Pro) which identify as full external keyboards, which probably include buttons such as volume controls in their descriptors. (I can\u0027t check this because I don\u0027t have those devices in my possession, only records from a previous team\u0027s test device library, but I believe it\u0027s highly likely.) This will be so that their remappable buttons can be reconfigured to those functions.\n\nSince, as far as I know, we\u0027ve only got reports of this issue with one particular device, we should exclude it specifically, by its vendor and product IDs, rather than potentially breaking whole classes of input device. Ideally this would be done in an Input Device Configuration file, but chatting with Josep we might be able to do this in a Key Layout file instead.",
+      "parentUuid": "abf6dee2_c4dd253f",
+      "revId": "639fff2f49531e68f2625fa9cfa2acb04ef92157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
