@@ -16,6 +16,23 @@
       "message": "@smoreland for OWNERS",
       "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25d5da3_25ea94b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-20T21:55:58Z",
+      "side": 1,
+      "message": "Umm.... they need to fix the test config? like b/313732799. You can see go/25q4-vts-coupling for a discussion of this technical issue, but we shouldn\u0027t one-off fix these things. We need to fix the testing configuration OR schedule the work to fix the 100s or more VTS test that would need fixes like this to support running tests built from random other builds. It\u0027s a lot of shared libraries, and a lot of even just storage to statically include all of them.",
+      "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
