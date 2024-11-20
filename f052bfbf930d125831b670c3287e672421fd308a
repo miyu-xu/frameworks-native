@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "504f9539_7b0a0990",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-20T19:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee140c5_5bde73e0",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 83
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ca50bae_edf48be2",
@@ -88,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b876afa_8a7d88a6",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-20T19:33:44Z",
+      "side": 1,
+      "message": "Thanks Frederick! (I\u0027ve heard Rust unsafe reviewers could use more volunteers if you are interested in some `Community Contribution`^tm 😊).\n\nThat\u0027s my understanding and the use is similar to other uses wrapping NDK types in `libbinder_rs` that have had other unsafe reviewers looking as well.",
+      "parentUuid": "0ca50bae_edf48be2",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 40
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0399443b_ee303722",
@@ -101,6 +149,30 @@
       "writtenOn": "2024-11-20T18:35:14Z",
       "side": 1,
       "message": "same nit - maybe break this into 2 bullets",
+      "range": {
+        "startLine": 310,
+        "startChar": 8,
+        "endLine": 313,
+        "endChar": 83
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bfe9ee_4b2616ee",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-20T19:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0399443b_ee303722",
       "range": {
         "startLine": 310,
         "startChar": 8,
