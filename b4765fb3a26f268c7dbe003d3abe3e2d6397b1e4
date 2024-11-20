@@ -51,6 +51,24 @@
       "parentUuid": "b25d5da3_25ea94b8",
       "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d4bae4_e1d12db8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-20T22:22:04Z",
+      "side": 1,
+      "message": "\u003e but that is an infra issue and transient\n\nI think this is it and it is transient - the tests in the bug only failed once around the time the original CL landed and my presubmits probably would have passed again when the device/test builds weren\u0027t straddling the revert of T.J.s CL.\n\nI don\u0027t mind this change, but I agree it doesn\u0027t fix the underlying problem and it\u0027s not guaranteed the problem will occur in this test again.",
+      "parentUuid": "33f099f2_50559092",
+      "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
