@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbec521_420cc0d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-11-20T00:44:42Z",
+      "side": 1,
+      "message": "Please help me to review the modifications of this patch again, thank you.",
+      "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
