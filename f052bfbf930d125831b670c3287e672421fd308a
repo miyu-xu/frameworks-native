@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d16af7_35197bf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-20T18:35:14Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM (with a couple of nits/comments)",
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee140c5_5bde73e0",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-20T18:35:14Z",
+      "side": 1,
+      "message": "nit: consider a bulleted list",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 83
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca50bae_edf48be2",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-20T18:35:14Z",
+      "side": 1,
+      "message": "Going to give Unsafe Rust LGTM - as this looks right to me - but you may want to consider double checking this with another reviewer - as the rules of `Send`/`Sync` are a bit at the edge of my understanding.",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 40
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0399443b_ee303722",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-20T18:35:14Z",
+      "side": 1,
+      "message": "same nit - maybe break this into 2 bullets",
+      "range": {
+        "startLine": 310,
+        "startChar": 8,
+        "endLine": 313,
+        "endChar": 83
+      },
+      "revId": "f052bfbf930d125831b670c3287e672421fd308a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

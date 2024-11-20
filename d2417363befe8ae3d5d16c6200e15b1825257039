@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3897322f_ad03afc8",
+        "filename": "libs/binder/rust/src/system_only.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-20T18:35:14Z",
+      "side": 1,
+      "message": "Nit: bulleted list (here, in the function docs, and anywhere else you have multiple constraints). IMHO makes it easier for readers to treat it like a checklist when they are calling the API. e.g.\n\n```\n        // Safety: \n        // - The function pointer is a valid get_accessor callback.\n        // - This call returns an owned `ABinderRpc_AccessorProvider` pointer which\n        //   must be destroyed via `ABinderRpc_unregisterAccessorProvider` when no longer\n        //   needed.\n        // - When the underlying ABinderRpc_AccessorProvider is deleted, it will call\n        //   the cookie_decr_refcount callback to release its strong ref.\n```",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 289,
+        "endChar": 71
+      },
+      "revId": "d2417363befe8ae3d5d16c6200e15b1825257039",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
