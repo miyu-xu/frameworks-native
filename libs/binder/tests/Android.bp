@@ -154,11 +154,11 @@ cc_test {
         "libbase",
         "libbinder",
         "liblog",
-        "libprocessgroup",
         "libutils",
     ],
     static_libs: [
         "libgmock",
+        "libprocessgroup",
     ],
     test_suites: [
         "general-tests",
