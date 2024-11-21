@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f181e0_b077588b",
+        "filename": "include/android/looper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-11-21T16:56:10Z",
+      "side": 1,
+      "message": "should migrate to ALooper_poll*Once*",
+      "range": {
+        "startLine": 224,
+        "startChar": 40,
+        "endLine": 224,
+        "endChar": 55
+      },
+      "revId": "9bd9577da7cf7c9d420c2d145a383ebd0a1084a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
