@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5070fdb8_e46f035a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1955350
+      },
+      "writtenOn": "2024-11-21T16:46:18Z",
+      "side": 1,
+      "message": "PhysicalDisplayId is a struct but it\u0027s only member is a uint64_t value so it should fit inside a single register. I don\u0027t think this change will cause any observable performance improvements. For general code health, I think it\u0027s fine to remove an unused variable though.",
+      "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cbec521_420cc0d4",
