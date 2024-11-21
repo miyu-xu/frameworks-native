@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477c5b22_c6f77479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-11-21T00:27:38Z",
+      "side": 1,
+      "message": "fuzzers:\nhttps://android-review.git.corp.google.com/c/platform/frameworks/native/+/2763649\n\ncurrently not executed due to https://b.corp.google.com/issues/363960844#comment8\nand expected to fail due to:\nhttps://android-review.git.corp.google.com/c/platform/system/core/+/2907204\n\ntracking this at b/377782979/dependencies.",
+      "parentUuid": "341ce114_82debe21",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e576f7f_fb26d79e",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
