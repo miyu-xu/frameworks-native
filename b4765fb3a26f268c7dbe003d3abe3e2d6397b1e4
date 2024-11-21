@@ -69,6 +69,24 @@
       "parentUuid": "33f099f2_50559092",
       "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da12d35_cce61b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-11-21T00:07:54Z",
+      "side": 1,
+      "message": "I\u0027ve hit this on I think 3 different CLs now, so I\u0027m supportive of the go/25q4-vts-coupling / b/313732799 effort. But since that effort isn\u0027t started, can we just reapply aosp/3369297 and ignore the initial test failure, waiting for subsequent attempts to pass so that this change isn\u0027t blocked indefinitely?",
+      "parentUuid": "32d4bae4_e1d12db8",
+      "revId": "b4765fb3a26f268c7dbe003d3abe3e2d6397b1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
