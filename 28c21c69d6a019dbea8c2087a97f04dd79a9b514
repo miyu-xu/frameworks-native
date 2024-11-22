@@ -34,6 +34,23 @@
       "parentUuid": "ef323204_189550f9",
       "revId": "28c21c69d6a019dbea8c2087a97f04dd79a9b514",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9659962_35c00e10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-11-22T07:55:27Z",
+      "side": 1,
+      "message": "Hello, Sally Qi,：\n   excuse me, is there any progress on fixing the Verified -1 issue?",
+      "revId": "28c21c69d6a019dbea8c2087a97f04dd79a9b514",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
