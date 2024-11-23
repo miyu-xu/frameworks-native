@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fafb815f_a7c043b4",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-23T22:09:09Z",
+      "side": 1,
+      "message": "Thank you for that, just mentioning that such \"intradoc\" links go a long way in making the documentation easier to follow 👍.",
+      "parentUuid": "45719df7_b049df41",
+      "revId": "3b34ed98031b2605fd5d157ded96f1285e8c9b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5aa65e7_03d3f9b1",

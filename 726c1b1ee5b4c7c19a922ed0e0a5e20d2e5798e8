@@ -1,5 +1,57 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86dcc769_8ad18e2c",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-23T22:09:09Z",
+      "side": 1,
+      "message": "One pair of parenthesis too many?\n\n\n\n```suggestion\n     * ALooper_wake().\n```",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb35f93_72bd6476",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-23T22:09:09Z",
+      "side": 1,
+      "message": "Just in case, one missed new link here:\n```suggestion\n * hidden and callers should migrate to ALooper_pollOnce(). Binary compatibility\n```",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ed67b9_59abb017",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-11-23T22:09:09Z",
+      "side": 1,
+      "message": "Would `()` be treated as link here as well?",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
