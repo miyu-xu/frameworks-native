@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dee7660_fe5f1d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-11-26T16:20:47Z",
+      "side": 1,
+      "message": "This will mainly be useful during post-boot where there will be some time saved.\n\nIt will reduce the number of calls to ServiceManager for system_server.\nI\u0027ll run some benchmarks",
+      "parentUuid": "94cd9b4e_393b5c3f",
+      "revId": "715fa451e302164f0fd13467b937f221518eae1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2850811_824a47b1",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 3
@@ -73,6 +91,30 @@
           ]
         }
       ],
+      "revId": "715fa451e302164f0fd13467b937f221518eae1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d227c2_576ac790",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-11-26T16:20:47Z",
+      "side": 1,
+      "message": "Acknowledged. I don\u0027t think I want to change this now since we have a lot of traces with this string.",
+      "parentUuid": "c2850811_824a47b1",
+      "range": {
+        "startLine": 132,
+        "startChar": 39,
+        "endLine": 132,
+        "endChar": 58
+      },
       "revId": "715fa451e302164f0fd13467b937f221518eae1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
