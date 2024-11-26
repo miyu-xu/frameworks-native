@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "308ad8a0_71534035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-26T18:11:14Z",
+      "side": 1,
+      "message": "This is a partial or the purpose of the change, but please describe the change with exactly what it does as the title. This change sets inheriting to RT by default for all binder objects. This is not a path we can take, due to the number of random RT threads it would create in Android in various old or device-specific codebases.",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "611d85a9d7aa3813a15d2801bc9029b5dafa1fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc44fcd0_1dadf81f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-26T18:11:14Z",
+      "side": 1,
+      "message": "Please test that the policy is set end-to-end. You can see binderLibTest has tests which check the right scheduler is set. You can get the current scheduler in a server process (e.g. in an app test) and verify it. Whether this boolean returns true or not, who can say what happens after that in the cases you care about.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "611d85a9d7aa3813a15d2801bc9029b5dafa1fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1807cb2f_becda7f9",
