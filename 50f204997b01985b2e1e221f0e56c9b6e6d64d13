@@ -40,6 +40,30 @@
       ],
       "revId": "50f204997b01985b2e1e221f0e56c9b6e6d64d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9c69870_05d7aeba",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-11-27T11:40:32Z",
+      "side": 1,
+      "message": "Yes. It is enabled by default. \nBut I have added an API with which you can change it.",
+      "parentUuid": "8a5dd8b6_dcd8071f",
+      "range": {
+        "startLine": 292,
+        "startChar": 33,
+        "endLine": 292,
+        "endChar": 55
+      },
+      "revId": "50f204997b01985b2e1e221f0e56c9b6e6d64d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
