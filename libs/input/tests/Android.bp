@@ -69,6 +69,7 @@ cc_test {
         "libtinyxml2",
         "libutils",
         "server_configurable_flags",
+        "libaconfig_storage_read_api_cc",
     ],
     data: [
         "data/*",
