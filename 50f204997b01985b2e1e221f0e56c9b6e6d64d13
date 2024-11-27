@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5dd8b6_dcd8071f",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-27T01:15:04Z",
+      "side": 1,
+      "message": "do you want to enable this globally? I am strongly supportive of enabling it globally, as it is a good default.",
+      "range": {
+        "startLine": 292,
+        "startChar": 33,
+        "endLine": 292,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7d3148e1_e194a658",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BackendUnifiedServiceManager.cpp",
+              "range": {
+                "startLine": 292,
+                "startChar": 0,
+                "endLine": 293,
+                "endChar": 0
+              },
+              "replacement": "    if (kUseCacheInAddService \u0026\u0026 status.isOk()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "50f204997b01985b2e1e221f0e56c9b6e6d64d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
