@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "305a8e0d_6bbc8749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982145
+      },
+      "writtenOn": "2024-11-27T04:52:31Z",
+      "side": 1,
+      "message": "This should fix up CtsWidgetTestCases and convert other modules in this TEST_MAPPING.\nI still will need one more follow up to fix the stagglers with options in this TEST_MAPPING.",
+      "revId": "bbc2f3bedf18b023394d67b1520f8b69ea124333",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
