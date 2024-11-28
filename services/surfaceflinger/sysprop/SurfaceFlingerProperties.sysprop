@@ -507,3 +507,12 @@ prop {
     access: Readonly
     prop_name: "ro.surface_flinger.game_default_frame_rate_override"
 }
+
+# Indicates whether surfaceflinger disables refresh rate update or not.
+prop {
+    api_name: "disable_refresh_rate_update"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "ro.surface_flinger.disable_refresh_rate_update"
+}

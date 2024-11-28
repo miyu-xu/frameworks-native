@@ -1445,6 +1445,9 @@ private:
     // be any issues with a raw pointer referencing an invalid object.
     std::unordered_set<Layer*> mOffscreenLayers;
 
+    // Disabled FPS update or not, i.e. when DFPS is enabled.
+    bool mDisableRefreshRateUpdate = false;
+
     BufferCountTracker mBufferCountTracker;
 
     std::unordered_map<DisplayId, sp<HdrLayerInfoReporter>> mHdrLayerInfoListeners
