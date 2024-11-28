@@ -103,6 +103,8 @@ bool clear_slots_with_set_layer_buffer(bool defaultValue);
 
 int32_t game_default_frame_rate_override(int32_t defaultValue);
 
+bool disable_refresh_rate_update(bool defaultValue);
+
 } // namespace sysprop
 } // namespace android
 #endif // SURFACEFLINGERPROPERTIES_H_
