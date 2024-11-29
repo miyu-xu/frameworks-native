@@ -115,10 +115,12 @@ private:
 
     os::Service tryGetService(const std::string& name, bool startIfNotFound);
     sp<IBinder> tryGetBinder(const std::string& name, bool startIfNotFound);
+    sp<IBinder> tryGetBinder(Service* service, const std::string& name, bool startIfNotFound);
     binder::Status canAddService(const Access::CallingContext& ctx, const std::string& name,
                                  std::optional<std::string>* accessor);
     binder::Status canFindService(const Access::CallingContext& ctx, const std::string& name,
                                   std::optional<std::string>* accessor);
+    Service* findService(const std::string& name);
 
     ServiceMap mNameToService;
     ServiceCallbackMap mNameToRegistrationCallback;

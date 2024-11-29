@@ -22,6 +22,7 @@
 #include <android-base/strings.h>
 #include <binder/BpBinder.h>
 #include <binder/IPCThreadState.h>
+#include <binder/IServiceManager.h>
 #include <binder/ProcessState.h>
 #include <binder/Stability.h>
 #include <cutils/android_filesystem_config.h>
@@ -432,21 +433,37 @@ os::Service ServiceManager::tryGetService(const std::string& name, bool startIfN
         return os::Service::make<os::Service::Tag::accessor>(
                 tryGetBinder(*accessorName, startIfNotFound));
     } else {
-        return os::Service::make<os::Service::Tag::binder>(tryGetBinder(name, startIfNotFound));
+        Service* service = findService(name);
+        bool isLazyService = false;
+        if (service) {
+            isLazyService =
+                    service->dumpPriority & android::IServiceManager::DUMP_FLAG_IS_LAZY_SERVICE;
+        }
+        os::ServiceWithMetadata serviceWithMetadata = os::ServiceWithMetadata();
+        serviceWithMetadata.service = tryGetBinder(service, name, startIfNotFound);
+        serviceWithMetadata.isLazyService = isLazyService;
+        return os::Service::make<os::Service::Tag::serviceWithMetadata>(serviceWithMetadata);
     }
 }
 
-sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNotFound) {
+ServiceManager::Service* ServiceManager::findService(const std::string& name) {
+    Service* service = nullptr;
+    if (auto it = mNameToService.find(name); it != mNameToService.end()) {
+        service = &(it->second);
+    }
+    return service;
+}
+
+sp<IBinder> ServiceManager::tryGetBinder(Service* service, const std::string& name,
+                                         bool startIfNotFound) {
     SM_PERFETTO_TRACE_FUNC(PERFETTO_TE_PROTO_FIELDS(
             PERFETTO_TE_PROTO_FIELD_CSTR(kProtoServiceName, name.c_str())));
 
     auto ctx = mAccess->getCallingContext();
 
     sp<IBinder> out;
-    Service* service = nullptr;
-    if (auto it = mNameToService.find(name); it != mNameToService.end()) {
-        service = &(it->second);
 
+    if (service) {
         if (!service->allowIsolated && is_multiuser_uid_isolated(ctx.uid)) {
             LOG(WARNING) << "Isolated app with UID " << ctx.uid << " requested '" << name
                          << "', but the service is not allowed for isolated apps.";
@@ -475,6 +492,11 @@ sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNo
     }
 
     return out;
+}
+
+sp<IBinder> ServiceManager::tryGetBinder(const std::string& name, bool startIfNotFound) {
+    Service* service = findService(name);
+    return tryGetBinder(service, name, startIfNotFound);
 }
 
 bool isValidServiceName(const std::string& name) {
