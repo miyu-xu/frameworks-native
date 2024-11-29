@@ -134,6 +134,8 @@ bool ClientCounterCallbackImpl::registerServiceLocked(const sp<IBinder>& service
     std::string regStr = (reRegister) ? "Re-registering" : "Registering";
     ALOGI("%s service %s", regStr.c_str(), name.c_str());
 
+    dumpFlags |= android::IServiceManager::DUMP_FLAG_IS_LAZY_SERVICE;
+
     if (Status status = manager->addService(name.c_str(), service, allowIsolated, dumpFlags);
         !status.isOk()) {
         ALOGE("Failed to register service %s (%s)", name.c_str(), status.toString8().c_str());

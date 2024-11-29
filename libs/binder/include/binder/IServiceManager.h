@@ -57,6 +57,7 @@ public:
     static const int DUMP_FLAG_PRIORITY_ALL = DUMP_FLAG_PRIORITY_CRITICAL |
             DUMP_FLAG_PRIORITY_HIGH | DUMP_FLAG_PRIORITY_NORMAL | DUMP_FLAG_PRIORITY_DEFAULT;
     static const int DUMP_FLAG_PROTO = 1 << 4;
+    static const int DUMP_FLAG_IS_LAZY_SERVICE = 1 << 5;
 
     /**
      * Retrieve an existing service, blocking for a few seconds if it doesn't yet exist. This
