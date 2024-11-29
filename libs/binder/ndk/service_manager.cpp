@@ -66,6 +66,9 @@ binder_exception_t AServiceManager_addServiceWithFlags(AIBinder* binder, const c
     if (dumpFlags == 0) {
         dumpFlags = IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT;
     }
+    if (flags & AServiceManager_AddServiceFlag::ADD_SERVICE_IS_LAZY_SERVICE) {
+        dumpFlags |= IServiceManager::DUMP_FLAG_IS_LAZY_SERVICE;
+    }
     status_t exception =
             sm->addService(String16(instance), binder->getBinder(), allowIsolated, dumpFlags);
 
