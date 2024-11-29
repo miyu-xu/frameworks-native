@@ -49,6 +49,8 @@ interface IServiceManager {
              DUMP_FLAG_PRIORITY_CRITICAL | DUMP_FLAG_PRIORITY_HIGH
              | DUMP_FLAG_PRIORITY_NORMAL | DUMP_FLAG_PRIORITY_DEFAULT;
 
+    const int DUMP_FLAG_IS_LAZY_SERVICE = 1 << 30;
+
     /* Allows services to dump sections in protobuf format. */
     const int DUMP_FLAG_PROTO = 1 << 4;
 
