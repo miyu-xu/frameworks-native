@@ -112,6 +112,30 @@
       },
       "revId": "50f204997b01985b2e1e221f0e56c9b6e6d64d13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0c7b481_99e6ac1b",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T19:03:58Z",
+      "side": 1,
+      "message": "(I meant comment on IServiceManager.h API, since the API name is \u0027enable...\u0027 it sounds like it would be disabled by default. It\u0027s not clear it is already enabled for everyone)",
+      "parentUuid": "26503b4a_2bc68d8a",
+      "range": {
+        "startLine": 292,
+        "startChar": 33,
+        "endLine": 292,
+        "endChar": 55
+      },
+      "revId": "50f204997b01985b2e1e221f0e56c9b6e6d64d13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
