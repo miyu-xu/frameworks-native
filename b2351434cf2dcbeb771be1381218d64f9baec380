@@ -1,0 +1,406 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6170ef4a_758ab269",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "nit: avoid this function and keep it flat, a la https://2014.jsconf.eu/speakers/sebastian-markbage-minimal-api-surface-area-learning-patterns-instead-of-frameworks.html, or create a separate CL to move everything over. There is a lot of code in servicemanager that looks up things in the map directly.",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c6b03f70_bb1ae323",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 436,
+                "startChar": 0,
+                "endLine": 437,
+                "endChar": 0
+              },
+              "replacement": "        auto it \u003d mNameToService.find(name);\n        Service* service \u003d it \u003d\u003d mNameToService.end() ? nullptr : \u0026it-\u003esecond;\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 448,
+                "startChar": 0,
+                "endLine": 456,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 498,
+                "startChar": 0,
+                "endLine": 499,
+                "endChar": 0
+              },
+              "replacement": "    auto it \u003d mNameToService.find(name);\n    Service* service \u003d it \u003d\u003d mNameToService.end() ? nullptr : \u0026it-\u003esecond;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57fa0120_f3e98972",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "- or (cont\u0027d from above nit), if you make tryGetBinder return servicewithmetadata (and ignore this in the accessor case), it will make the change a lot smaller, and less work when we do figure out how it interacts with accessors.",
+      "range": {
+        "startLine": 437,
+        "startChar": 8,
+        "endLine": 446,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ed78a073_c11ddedb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 423,
+                "startChar": 0,
+                "endLine": 424,
+                "endChar": 0
+              },
+              "replacement": "os::ServiceWithMetadata ServiceManager::tryGetService(const std::string\u0026 name,\n                                                      bool startIfNotFound) {\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 431,
+                "startChar": 0,
+                "endLine": 432,
+                "endChar": 0
+              },
+              "replacement": "            return os::ServiceWithMetadata();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 433,
+                "startChar": 0,
+                "endLine": 435,
+                "endChar": 0
+              },
+              "replacement": "        return os::ServiceWithMetadata(\n                os::Service::make\u003cos::Service::Tag::accessor\u003e(\n                        tryGetBinder(*accessorName, startIfNotFound)));\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 437,
+                "startChar": 0,
+                "endLine": 446,
+                "endChar": 0
+              },
+              "replacement": "        return os::ServiceWithMetadata(\n                os::Service::make\u003cos::Service::Tag::serviceWithMetadata\u003e(\n                        tryGetBinder(service, name, startIfNotFound)));\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 457,
+                "startChar": 0,
+                "endLine": 459,
+                "endChar": 0
+              },
+              "replacement": "os::ServiceWithMetadata ServiceManager::tryGetBinder(Service* service,\n                                                     const std::string\u0026 name,\n                                                     bool startIfNotFound) {\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 464,
+                "startChar": 0,
+                "endLine": 465,
+                "endChar": 0
+              },
+              "replacement": "    os::ServiceWithMetadata out;\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 470,
+                "startChar": 0,
+                "endLine": 471,
+                "endChar": 0
+              },
+              "replacement": "            return os::ServiceWithMetadata();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 472,
+                "startChar": 0,
+                "endLine": 473,
+                "endChar": 0
+              },
+              "replacement": "        out.service \u003d service-\u003ebinder;\n        out.isLazyService \u003d\n                service-\u003edumpPriority \u0026 android::IServiceManager::DUMP_FLAG_IS_LAZY_SERVICE;\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 476,
+                "startChar": 0,
+                "endLine": 477,
+                "endChar": 0
+              },
+              "replacement": "        return os::ServiceWithMetadata();\n"
+            },
+            {
+              "path": "cmds/servicemanager/ServiceManager.cpp",
+              "range": {
+                "startLine": 497,
+                "startChar": 0,
+                "endLine": 498,
+                "endChar": 0
+              },
+              "replacement": "os::ServiceWithMetadata ServiceManager::tryGetBinder(const std::string\u0026 name,\n                                                     bool startIfNotFound) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a698a59_da6bd3fe",
+        "filename": "cmds/servicemanager/test_sm.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "add test case with this flag true?",
+      "range": {
+        "startLine": 154,
+        "startChar": 20,
+        "endLine": 154,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "446441e6_c8e57973",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/servicemanager/test_sm.cpp",
+              "range": {
+                "startLine": 176,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "\nTEST(AddService, OverwriteExistingService_AllowIsolated) {\n    auto sm \u003d getPermissiveServiceManager();\n    sp\u003cIBinder\u003e serviceA \u003d getBinder();\n    EXPECT_TRUE(sm-\u003eaddService(\"foo\", serviceA, true /*allowIsolated*/,\n        IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk());\n\n    Service outA;\n    EXPECT_TRUE(sm-\u003egetService2(\"foo\", \u0026outA).isOk());\n    EXPECT_EQ(serviceA, outA.get\u003cService::Tag::serviceWithMetadata\u003e().service);\n    sp\u003cIBinder\u003e outBinderA;\n    EXPECT_TRUE(sm-\u003egetService(\"foo\", \u0026outBinderA).isOk());\n    EXPECT_EQ(serviceA, outBinderA);\n\n    // serviceA should be overwritten by serviceB\n    sp\u003cIBinder\u003e serviceB \u003d getBinder();\n    EXPECT_TRUE(sm-\u003eaddService(\"foo\", serviceB, true /*allowIsolated*/,\n        IServiceManager::DUMP_FLAG_PRIORITY_DEFAULT).isOk());\n\n    Service outB;\n    EXPECT_TRUE(sm-\u003egetService2(\"foo\", \u0026outB).isOk());\n    EXPECT_EQ(serviceB, outB.get\u003cService::Tag::serviceWithMetadata\u003e().service);\n    sp\u003cIBinder\u003e outBinderB;\n    EXPECT_TRUE(sm-\u003egetService(\"foo\", \u0026outBinderB).isOk());\n    EXPECT_EQ(serviceB, outBinderB);\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2137854_347fa499",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "const\u0026, or \u0026\u0026",
+      "range": {
+        "startLine": 121,
+        "startChar": 50,
+        "endLine": 121,
+        "endChar": 61
+      },
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae2333d_54e43946",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "use createServiceWithMetadata consistently or don\u0027t use it consistently?",
+      "range": {
+        "startLine": 199,
+        "startChar": 7,
+        "endLine": 201,
+        "endChar": 50
+      },
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66293edd_afc88abd",
+        "filename": "libs/binder/LazyServiceRegistrar.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "nit: if this flag is already set, log a warning. This will help you debug a lot if someone is messing up bit 30 already.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 69
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "40855b14_ae2165c6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/LazyServiceRegistrar.cpp",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "    if (dumpFlags \u0026 android::IServiceManager::DUMP_FLAG_IS_LAZY_SERVICE) {\n        ALOGW(\"DUMP_FLAG_IS_LAZY_SERVICE already set for service %s\", name.c_str());\n    }\n    dumpFlags |\u003d android::IServiceManager::DUMP_FLAG_SERVICE_IS_LAZY;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3556abb_0c3d554b",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "Avoid defining it here. You can use the definition in IServiceManager.aidl as the source of truth, since that is not exported to users of libbinder",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1048367d_0d831e06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/IServiceManager.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a9372c_1bb56596",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-02T23:51:39Z",
+      "side": 1,
+      "message": "nit: you should say all other bits are reserved, so that no one adds any. That internal values should be updated, and this should only reflect internal values.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ec4ef2d_d13c244c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_manager.h",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "    // All other bits are reserved for internal usage\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b2351434cf2dcbeb771be1381218d64f9baec380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
