@@ -155,6 +155,23 @@
       "message": "Dear Google colleagues, please help review this patch. Thank you.",
       "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050c3e6b_107f7404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-02T23:40:43Z",
+      "side": 1,
+      "message": "Thanks for the fix!",
+      "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
