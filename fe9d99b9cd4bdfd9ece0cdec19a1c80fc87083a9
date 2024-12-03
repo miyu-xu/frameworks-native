@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e201a5_641f9131",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2024-12-03T16:36:29Z",
+      "side": 1,
+      "message": "As we discussed, can you rename this one to FLAG_IS_LAZY_SERVICE and if possible the dumpPriority member that holds these to flags?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 50
+      },
+      "revId": "fe9d99b9cd4bdfd9ece0cdec19a1c80fc87083a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
