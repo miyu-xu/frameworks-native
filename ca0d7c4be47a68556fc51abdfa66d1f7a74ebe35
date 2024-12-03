@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c56d3f_73e8ac6f",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-03T02:55:59Z",
+      "side": 1,
+      "message": "nit: add todo/comment for other fields",
+      "range": {
+        "startLine": 399,
+        "startChar": 42,
+        "endLine": 399,
+        "endChar": 49
+      },
+      "revId": "ca0d7c4be47a68556fc51abdfa66d1f7a74ebe35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
