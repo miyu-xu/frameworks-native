@@ -153,7 +153,7 @@ public:
 
     /**
      * Directly enable or disable caching binder during addService calls.
-     * Only used for testing.
+     * Only used for testing. Should be enabled by default.
      */
     virtual void enableAddServiceCache(bool value) = 0;
 };
