@@ -22,6 +22,30 @@
       },
       "revId": "ca0d7c4be47a68556fc51abdfa66d1f7a74ebe35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb8846b_ca8cc5ad",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1975865
+      },
+      "writtenOn": "2024-12-03T11:37:07Z",
+      "side": 1,
+      "message": "Added a comment to IServiceManager.aidl definition of getService.",
+      "parentUuid": "93c56d3f_73e8ac6f",
+      "range": {
+        "startLine": 399,
+        "startChar": 42,
+        "endLine": 399,
+        "endChar": 49
+      },
+      "revId": "ca0d7c4be47a68556fc51abdfa66d1f7a74ebe35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
