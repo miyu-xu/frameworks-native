@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88b52468_a67cf32a",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T23:01:44Z",
+      "side": 1,
+      "message": "If trusty has various TIPC implementations with different max sizes and clients like binder are expected to work with all of them, then the effective max size is the minimum of the max size of all the transports and the trusty API should communicate that number somehow. Basically, we need a promise that messages under size X will always be supported. That shouldn\u0027t be an undocumented constant in a binder cpp file. Why doesn\u0027t it make sense in trusty_ipc.h?",
+      "parentUuid": "d2b860c7_b391fbc3",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
