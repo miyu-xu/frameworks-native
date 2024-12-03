@@ -225,6 +225,24 @@
       "message": "Hello, the CI process shows Verified -1 due to timeout. Could you please help me check it out? Thanks.",
       "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28a67d0_d0b21aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010302
+      },
+      "writtenOn": "2024-12-03T06:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c1952b_a563e96b",
+      "revId": "081ed30648328dc465b50ff4db4df892aa8b1d4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
