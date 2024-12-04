@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc07ba31_ae7b3304",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-12-04T20:15:23Z",
+      "side": 1,
+      "message": "Fixed this (and the other comments) in https://r.android.com/3391721. A full audit\u0027s gonna have to happen later.",
+      "parentUuid": "86dcc769_8ad18e2c",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fb35f93_72bd6476",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9351de48_ef28ccf5",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-12-04T20:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fb35f93_72bd6476",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0ed67b9_59abb017",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-23T22:09:09Z",
       "side": 1,
       "message": "Would `()` be treated as link here as well?",
+      "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7392e57_fac07bf7",
+        "filename": "include/android/looper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2024-12-04T20:15:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0ed67b9_59abb017",
       "revId": "726c1b1ee5b4c7c19a922ed0e0a5e20d2e5798e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
