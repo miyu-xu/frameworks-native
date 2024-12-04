@@ -599,6 +599,32 @@ TEST_F(SurfaceTest, TestGetLastDequeueStartTime) {
     ASSERT_GE(after, lastDequeueTime);
 }
 
+TEST_F(SurfaceTest, SurfaceIsForCursor) {
+    sp<IGraphicBufferProducer> producer;
+    sp<IGraphicBufferConsumer> consumer;
+    BufferQueue::createBufferQueue(&producer, &consumer);
+
+    sp<MockConsumer> mockConsumer(new MockConsumer);
+    consumer->consumerConnect(mockConsumer, false);
+    consumer->setConsumerName(String8("TestConsumer"));
+
+    sp<Surface> surface = new Surface(producer);
+    sp<ANativeWindow> anw(surface);
+
+    surface->setIsForCursor(true);
+
+    ASSERT_EQ(NO_ERROR, surface->lock(nullptr, nullptr));
+    ASSERT_EQ(NO_ERROR, surface->unlockAndPost());
+
+    surface->allocateBuffers();
+
+    int fence;
+    ANativeWindowBuffer* buffer;
+    ASSERT_EQ(NO_ERROR, anw->dequeueBuffer(anw.get(), &buffer, &fence));
+
+    EXPECT_TRUE(buffer->usage & GRALLOC_USAGE_CURSOR);
+}
+
 class FakeConsumer : public BnConsumerListener {
 public:
     void onFrameAvailable(const BufferItem& /*item*/) override {}
