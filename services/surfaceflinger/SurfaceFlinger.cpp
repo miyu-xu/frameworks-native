@@ -2823,6 +2823,11 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
 
     refreshArgs.devOptForceClientComposition = mDebugDisableHWC;
 
+    refreshArgs.colorTransformMatrix =
+            mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                 vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
+
+    
     if (mDebugFlashDelay != 0) {
         refreshArgs.devOptForceClientComposition = true;
         refreshArgs.devOptFlashDirtyRegionsDelay = std::chrono::milliseconds(mDebugFlashDelay);
@@ -7027,6 +7032,8 @@ void SurfaceFlinger::updateColorMatrixLocked() {
         mCurrentState.colorMatrixChanged = true;
         setTransactionFlags(eTransactionNeeded);
     }
+    mClientColorMatrix = mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                          vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
 }
 
 status_t SurfaceFlinger::CheckTransactCodeCredentials(uint32_t code) {
@@ -8578,10 +8585,14 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                 .outputs = {output},
                 .layers = std::move(layerFEs),
                 .updatingOutputGeometryThisFrame = true,
-                .updatingGeometryThisFrame = true,
-                .colorTransformMatrix = calculateColorMatrix(colorSaturation),
+        .updatingGeometryThisFrame = true,
+.colorTransformMatrix =
+                mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                     vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f}),
         };
         compositionEngine->present(refreshArgs);
+
+        base::StringPrintf("%.2fadb", colorSaturation); 
 
         return output->getRenderSurface()->getClientTargetAcquireFence();
     };
