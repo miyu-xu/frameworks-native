@@ -214,6 +214,7 @@ public:
     virtual status_t setFrameRate(float frameRate, int8_t compatibility,
                                   int8_t changeFrameRateStrategy);
     virtual status_t setFrameTimelineInfo(uint64_t frameNumber, const FrameTimelineInfo& info);
+    virtual int setUsage(uint64_t reqUsage);
 
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
     /**
@@ -339,7 +340,6 @@ protected:
     virtual int setBuffersCta8613Metadata(const android_cta861_3_metadata* metadata);
     virtual int setBuffersHdr10PlusMetadata(const size_t size, const uint8_t* metadata);
     virtual int setCrop(Rect const* rect);
-    virtual int setUsage(uint64_t reqUsage);
     virtual void setSurfaceDamage(android_native_rect_t* rects, size_t numRects);
 
 public:

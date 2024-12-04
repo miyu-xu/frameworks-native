@@ -2413,7 +2413,8 @@ status_t Surface::lock(
             return err;
         }
         // we're intending to do software rendering from this point
-        setUsage(GRALLOC_USAGE_SW_READ_OFTEN | GRALLOC_USAGE_SW_WRITE_OFTEN);
+        setUsage(GRALLOC_USAGE_SW_READ_OFTEN | GRALLOC_USAGE_SW_WRITE_OFTEN |
+                 (mReqUsage & GRALLOC_USAGE_CURSOR));
     }
 
     ANativeWindowBuffer* out;
@@ -2517,7 +2518,7 @@ status_t Surface::unlockAndPost()
 bool Surface::waitForNextFrame(uint64_t lastFrame, nsecs_t timeout) {
     Mutex::Autolock lock(mMutex);
     if (mNextFrameNumber > lastFrame) {
-      return true;
+        return true;
     }
     return mQueueBufferCondition.waitRelative(mMutex, timeout) == OK;
 }

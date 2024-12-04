@@ -146,6 +146,9 @@ sp<Surface> SurfaceControl::generateSurfaceLocked()
     // This surface is always consumed by SurfaceFlinger, so the
     // producerControlledByApp value doesn't matter; using false.
     mSurfaceData = mBbq->getSurface(true);
+    if (flags & ISurfaceComposerClient::eCursorWindow) {
+        mSurfaceData->setUsage(GRALLOC_USAGE_CURSOR);
+    }
 
     return mSurfaceData;
 }

@@ -25,6 +25,7 @@
 #include <cutils/android_filesystem_config.h>
 #include <cutils/multiuser.h>
 #include <gralloctypes/Gralloc4.h>
+#include <hardware/gralloc.h>
 #include <hidl/ServiceManagement.h>
 #include <hwbinder/IPCThreadState.h>
 #include <ui/Gralloc4.h>
@@ -152,6 +153,17 @@ static inline status_t sBufferDescriptorInfo(std::string name, uint32_t width, u
     return validateBufferDescriptorInfo(outDescriptorInfo);
 }
 
+static std::optional<uint32_t> minBufferSizeForCursorPlane(uint32_t width, uint32_t height) {
+    static constexpr uint32_t kAcceptedBufferSizes[]{64, 128, 256};
+    uint32_t size = std::max(width, height);
+    for (uint32_t s : kAcceptedBufferSizes) {
+        if (size <= s) {
+            return s;
+        }
+    }
+    return std::nullopt;
+}
+
 } // anonymous namespace
 
 void Gralloc4Mapper::preload() {
@@ -224,6 +236,11 @@ status_t Gralloc4Mapper::validateBufferSize(buffer_handle_t bufferHandle, uint32
                                             uint32_t height, PixelFormat format,
                                             uint32_t layerCount, uint64_t usage,
                                             uint32_t stride) const {
+    if (usage & GRALLOC_USAGE_CURSOR) {
+        auto size = minBufferSizeForCursorPlane(width, height);
+        width = size.value_or(width);
+        height = size.value_or(height);
+    }
     IMapper::BufferDescriptorInfo descriptorInfo;
     if (auto error = sBufferDescriptorInfo("validateBufferSize", width, height, format, layerCount,
                                            usage, &descriptorInfo) != OK) {
@@ -1042,6 +1059,12 @@ status_t Gralloc4Allocator::allocate(std::string requestorName, uint32_t width, 
                                      android::PixelFormat format, uint32_t layerCount,
                                      uint64_t usage, uint32_t* outStride,
                                      buffer_handle_t* outBufferHandles, bool importBuffers) const {
+    if (usage & GRALLOC_USAGE_CURSOR) {
+        auto size = minBufferSizeForCursorPlane(width, height);
+        width = size.value_or(width);
+        height = size.value_or(height);
+    }
+
     IMapper::BufferDescriptorInfo descriptorInfo;
     if (auto error = sBufferDescriptorInfo(requestorName, width, height, format, layerCount, usage,
                                            &descriptorInfo) != OK) {
