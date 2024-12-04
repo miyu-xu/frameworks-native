@@ -263,6 +263,7 @@ public:
     virtual status_t setFrameRate(float frameRate, int8_t compatibility,
                                   int8_t changeFrameRateStrategy);
     virtual status_t setFrameTimelineInfo(uint64_t frameNumber, const FrameTimelineInfo& info);
+    void setIsForCursor(bool is_for_cursor) { mIsForCursor = is_for_cursor; }
 
 #if COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_EXTENDEDALLOCATE)
     /**
@@ -742,6 +743,8 @@ protected:
 
     // Buffers that are successfully dequeued/attached and handed to clients
     std::unordered_set<int> mDequeuedSlots;
+
+    bool mIsForCursor = false;
 };
 
 } // namespace android
