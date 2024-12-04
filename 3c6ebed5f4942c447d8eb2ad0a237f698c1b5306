@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7b4669_169c2136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933945
+      },
+      "writtenOn": "2024-12-04T21:32:52Z",
+      "side": 1,
+      "message": "Added a Merged-In as this is fixed in internal main branch with new NDK update for 25Q2",
+      "revId": "3c6ebed5f4942c447d8eb2ad0a237f698c1b5306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
