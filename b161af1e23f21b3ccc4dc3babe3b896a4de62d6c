@@ -249,6 +249,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92f7abf_746494c0",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T01:00:25Z",
+      "side": 1,
+      "message": "I still feel the same way, but won\u0027t push too much. Resolving this comment",
+      "parentUuid": "c253f13c_fa9abbd0",
+      "revId": "b161af1e23f21b3ccc4dc3babe3b896a4de62d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7062c6f8_8d782272",

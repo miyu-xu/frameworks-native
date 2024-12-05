@@ -156,6 +156,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a853c13_ba472445",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T01:00:25Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t like trusty_ipc.h for that because there is more than 1 of those files (for example there is one here in the binder repository for a mock implementation).\n\nThat\u0027s the price we pay for mocking a header file. It seems OK to me. If you create a mock of a class and some new method is added to the class, you\u0027ve got to add that method to both the real class and also to the mock, right?\n\n\u003e I see this more of a characteristic/limitation on this specific path (binder RPC connection to Trusty)\n\nThis isn\u0027t a general limitation of TIPC message sizes?",
+      "parentUuid": "4e9501fe_c49f3194",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
