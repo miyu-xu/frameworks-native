@@ -45,6 +45,23 @@
       },
       "revId": "7c989db4efc61fa4203344f1d9dcb9fec206ce94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf63c15_391dbc39",
+        "filename": "vulkan/libvulkan/driver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2024-12-05T22:26:31Z",
+      "side": 1,
+      "message": "Since old_size is now always zero, this copy no longer does anything 😞",
+      "revId": "7c989db4efc61fa4203344f1d9dcb9fec206ce94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
