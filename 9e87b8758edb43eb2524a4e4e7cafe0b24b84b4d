@@ -258,6 +258,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a891b381_d0bb1cbb",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-12-05T23:40:19Z",
+      "side": 1,
+      "message": "My understanding is that is an artifact of the buffer passed to the vsock library we are using.",
+      "parentUuid": "4893cab3_5e9a0f9a",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
