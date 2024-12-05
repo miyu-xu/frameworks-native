@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f2bd93e_0031eb91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2015495
+      },
+      "writtenOn": "2024-12-05T13:17:42Z",
+      "side": 1,
+      "message": "Hi, Google team, could you help merge the patch? Thanks!",
+      "revId": "997897acfa28b2a1379a20bcfd233b2063556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
