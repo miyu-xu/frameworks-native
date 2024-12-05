@@ -157,6 +157,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eabc8da3_ef931f46",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-12-05T23:53:41Z",
+      "side": 1,
+      "message": "Not sure if I follow how to avoid the ifndef part; the main reason I used the ifndef was to preserve the current behavior on all places except on the new unit test I wrote.On the trusty unitttest TA I added to test this algorithm I am defining the macro on this [build file](https://android-review.git.corp.google.com/c/trusty/app/sample/+/3288220/8/bindertransport-unittest/rules.mk#31). I didn\u0027t do anything similar to the any other build file that includes this source file (neither on Android nor on Trusty). Is the suggestion to do something similar and just define the macro on all the build files that reference this source?",
+      "parentUuid": "c35c2231_6575d37e",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5b7a74_1338a1ca",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
