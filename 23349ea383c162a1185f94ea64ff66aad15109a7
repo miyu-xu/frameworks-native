@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc2a5ab_501a254c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960164
+      },
+      "writtenOn": "2024-12-05T01:44:12Z",
+      "side": 1,
+      "message": "Hi，please help to review the patch, thanks",
+      "revId": "23349ea383c162a1185f94ea64ff66aad15109a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
