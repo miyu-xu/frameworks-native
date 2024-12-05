@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868ac735_4cba7f53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-12-05T22:22:45Z",
+      "side": 1,
+      "message": "Suggested CL message:\n```\nVulkan: Remove use of malloc_usable_size\n\nWith \"_FORTIFY_SOURCE\u003d3\" requirement, this function is no longer available.\n\nIt was arguably incorrect to, if `posix_memalign` actually allocated more\nspace than requested.  `malloc_usable_size` is just for diagnostics.\n\nBug: b/291762537 \nTest: Presubmit\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 53
+      },
+      "revId": "7c989db4efc61fa4203344f1d9dcb9fec206ce94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e123863d_76bec1a3",
+        "filename": "vulkan/libvulkan/driver.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1097542
+      },
+      "writtenOn": "2024-12-05T22:22:45Z",
+      "side": 1,
+      "message": "I think this entire block can go away.  Defer to Chris though who is closer to this code.",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 19
+      },
+      "revId": "7c989db4efc61fa4203344f1d9dcb9fec206ce94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
