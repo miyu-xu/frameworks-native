@@ -65,6 +65,22 @@ impl RpcServer {
         };
         RpcServer { inner }
     }
+
+    /// Sets the server protocol version supported
+    pub fn set_protocol_version(&self, version: u32) -> bool {
+        // SAFETY: The callee returns the inner ARpcServer of an ARpcServerTrusty.
+        // As long as we keep ARpcServerTrusty.cpp in sync with libbinder_rpc_unstable.cpp,
+        // this function should be safe. The pointer needs a cast below from
+        // `binder_rpc_server_bindgen::ARpcServer` to a
+        // `binder_rpc_unstable_bindgen::ARpcServer` because they are different types.
+        let rpc_server =
+            unsafe { binder_rpc_server_bindgen::ARpcServerTrusty_getARpcServer(self.inner) };
+        // SAFETY: Does not keep the pointer after returning. Only passes the 'self' pointer
+        // as an opaque handle.
+        unsafe {
+            binder_rpc_unstable_bindgen::ARpcServer_setProtocolVersion(rpc_server.cast(), version)
+        }
+    }
 }
 
 unsafe extern "C" fn per_session_callback_wrapper<F: PerSessionCallback>(

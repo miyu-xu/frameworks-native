@@ -77,6 +77,10 @@ void ARpcServer_setSupportedFileDescriptorTransportModes(
         const ARpcSession_FileDescriptorTransportMode modes[],
         size_t modes_len);
 
+// Sets the server protocol version supported
+bool ARpcServer_setProtocolVersion(
+        ARpcServer* handle, uint32_t version);
+
 // Sets the maximum number of threads that the Server will use for
 // incoming client connections.
 //
