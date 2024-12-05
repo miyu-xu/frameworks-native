@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "006a0705_6e24fa72",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T22:29:19Z",
+      "side": 1,
+      "message": "yeah, let\u0027s namespace the macro at least, maybe `LIBBINDER_TRUSTY_SEND_MSG_IMPL`",
+      "parentUuid": "42e9d7aa_31680c3c",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5b7a74_1338a1ca",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
