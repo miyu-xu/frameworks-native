@@ -240,6 +240,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4893cab3_5e9a0f9a",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T23:38:48Z",
+      "side": 1,
+      "message": "Where does the max size come from here? It isn\u0027t a binder RPC protocol limitation",
+      "parentUuid": "e3ead66b_691712c2",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
