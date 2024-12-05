@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c35c2231_6575d37e",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-05T23:44:06Z",
+      "side": 1,
+      "message": "I\u0027d avoid \u0027ifndef\u0027 here though, if we can be more precise about where it\u0027s supposed to come from or if the definition changes. For a macro in .cpp, it\u0027s okay, if it was a header, I\u0027d be more concerned about the name.",
+      "parentUuid": "42e9d7aa_31680c3c",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5b7a74_1338a1ca",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
