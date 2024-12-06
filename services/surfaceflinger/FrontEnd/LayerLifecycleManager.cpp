@@ -95,6 +95,9 @@ void LayerLifecycleManager::onHandlesDestroyed(
     for (const auto& [layerId, name] : destroyedHandles) {
         auto it = mIdToLayer.find(layerId);
         if (it == mIdToLayer.end()) {
+            if (ignoreUnknownHandles) {
+                ALOGE("%s Layerid not found %s[%d]", __func__, name.c_str(), layerId);
+            }
             LLOG_ALWAYS_FATAL_WITH_TRACE_IF(!ignoreUnknownHandles, "%s Layerid not found %s[%d]",
                                             __func__, name.c_str(), layerId);
             continue;
