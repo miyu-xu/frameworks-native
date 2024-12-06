@@ -835,6 +835,8 @@ private:
     status_t createEffectLayer(const LayerCreationArgs& args, sp<IBinder>* outHandle,
                                sp<Layer>* outLayer);
 
+    status_t SurfaceFlinger::checkLayerLeaks();
+
     status_t mirrorLayer(const LayerCreationArgs& args, const sp<IBinder>& mirrorFromHandle,
                          gui::CreateSurfaceResult& outResult);
 
