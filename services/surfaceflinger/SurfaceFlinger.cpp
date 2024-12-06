@@ -2453,7 +2453,8 @@ bool SurfaceFlinger::updateLayerSnapshots(VsyncId vsyncId, nsecs_t frameTimeNs,
                                                           mFrontEndDisplayInfosChanged);
         }
         mLayerLifecycleManager.applyTransactions(update.transactions);
-        mLayerLifecycleManager.onHandlesDestroyed(update.destroyedHandles);
+        mLayerLifecycleManager.onHandlesDestroyed(update.destroyedHandles
+                                                  /*ignoreUnknownHandles=*/true);
         for (auto& legacyLayer : update.layerCreatedStates) {
             sp<Layer> layer = legacyLayer.layer.promote();
             if (layer) {
