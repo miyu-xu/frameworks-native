@@ -95,6 +95,9 @@ private:
 
     void updateDisplayMirrorLayers(RequestedLayerState& rootLayer);
 
+    // Check if there is a cycle in the layer hierarchy.
+    bool hasLayerCycle(uint32_t parentId, uint32_t childId);
+
     struct References {
         // Lifetime tied to mLayers
         RequestedLayerState& owner;
