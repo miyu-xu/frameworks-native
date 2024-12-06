@@ -363,6 +363,34 @@ TEST_F(LayerLifecycleManagerTest, canDestroyBackgroundLayer) {
     listener->expectLayersDestroyed({bgLayerId});
 }
 
+TEST_F(LayerLifecycleManagerTest, reparentingToDescendants) {
+    LayerLifecycleManager lifecycleManager;
+    auto listener = std::make_shared<ExpectLayerLifecycleListener>();
+    lifecycleManager.addLifecycleListener(listener);
+
+    std::vector<std::unique_ptr<RequestedLayerState>> layers;
+    layers.emplace_back(rootLayer(1));
+    layers.emplace_back(childLayer(2, /*parent*/ 1));
+    layers.emplace_back(childLayer(3, /*parent*/ 2));
+
+    lifecycleManager.addLayers(std::move(layers));
+    lifecycleManager.commitChanges();
+    listener->expectLayersAdded({1, 2, 3});
+    listener->expectLayersDestroyed({});
+
+    EXPECT_TRUE(getRequestedLayerState(lifecycleManager, 1)->parentId == UNASSIGNED_LAYER_ID);
+    lifecycleManager.applyTransactions(reparentLayerTransaction(1, 3));
+    EXPECT_TRUE(getRequestedLayerState(lifecycleManager, 1)->parentId == UNASSIGNED_LAYER_ID);
+
+    EXPECT_TRUE(getRequestedLayerState(lifecycleManager, 2)->parentId == 1);
+    lifecycleManager.applyTransactions(reparentLayerTransaction(2, 3));
+    EXPECT_TRUE(getRequestedLayerState(lifecycleManager, 2)->parentId == 1);
+
+    lifecycleManager.commitChanges();
+    listener->expectLayersAdded({});
+    listener->expectLayersDestroyed({});
+}
+
 TEST_F(LayerLifecycleManagerTest, onParentDestroyDestroysBackgroundLayer) {
     LayerLifecycleManager lifecycleManager;
     auto listener = std::make_shared<ExpectLayerLifecycleListener>();

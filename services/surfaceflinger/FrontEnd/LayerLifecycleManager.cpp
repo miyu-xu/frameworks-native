@@ -259,10 +259,18 @@ void LayerLifecycleManager::applyTransactions(const std::vector<TransactionState
             }
 
             if (oldParentId != layer->parentId) {
-                unlinkLayer(oldParentId, layer->id);
-                layer->parentId = linkLayer(layer->parentId, layer->id);
-                if (oldParentId == UNASSIGNED_LAYER_ID) {
-                    updateDisplayMirrorLayers(*layer);
+                if (hasLayerCycle(layer->parentId, layer->id)) {
+                    ALOGE("Can't reparent layer (%s) to its descendant (%s)",
+                          layer->getDebugStringShort().c_str(),
+                          getLayerFromId(layer->parentId)->getDebugStringShort().c_str());
+                    // restore parentId since it has changed but no unlinked.
+                    layer->parentId = oldParentId;
+                } else {
+                    unlinkLayer(oldParentId, layer->id);
+                    layer->parentId = linkLayer(layer->parentId, layer->id);
+                    if (oldParentId == UNASSIGNED_LAYER_ID) {
+                        updateDisplayMirrorLayers(*layer);
+                    }
                 }
             }
             if (layer->what & layer_state_t::eLayerStackChanged && layer->isRoot()) {
@@ -449,6 +457,17 @@ bool LayerLifecycleManager::isLayerSecure(uint32_t layerId) const {
         return true;
     }
     return isLayerSecure(getLayerFromId(layerId)->parentId);
+}
+
+bool LayerLifecycleManager::hasLayerCycle(uint32_t parentId, uint32_t childId) {
+    if (parentId == UNASSIGNED_LAYER_ID) {
+        return false;
+    }
+    RequestedLayerState* parent = getLayerFromId(parentId);
+    if (parent->id == childId) {
+        return true;
+    }
+    return hasLayerCycle(parent->parentId, childId);
 }
 
 } // namespace android::surfaceflinger::frontend
