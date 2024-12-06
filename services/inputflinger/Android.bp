@@ -112,6 +112,7 @@ cc_defaults {
         "libinput",
         "libkll",
         "liblog",
+        "libprocessgroup",
         "libprotobuf-cpp-lite",
         "libstatslog",
         "libutils",

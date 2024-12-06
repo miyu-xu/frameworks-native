@@ -39,6 +39,7 @@ cc_defaults {
         "libgpuwork",
         "libgraphicsenv",
         "liblog",
+        "libprocessgroup",
         "libutils",
     ],
     static_libs: [
