@@ -106,6 +106,24 @@
       "parentUuid": "a16613ec_d24fee92",
       "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5dd767_b3bd167e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T00:37:18Z",
+      "side": 1,
+      "message": "A few more notes:\n- reason to use NL is that it is reliable even if binder buffer in system_server is full\n- for RPC binder, we could have a separate interface to AMS\n- we should check fuzzers cover this as well",
+      "parentUuid": "be54fc99_9bcb20a0",
+      "revId": "b709ae430f6be30f8b1186825bfecef49a21179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
