@@ -4351,9 +4351,7 @@ void SurfaceFlinger::invalidateLayerStack(const ui::LayerFilter& layerFilter, co
     }
 }
 
-status_t SurfaceFlinger::addClientLayer(LayerCreationArgs& args, const sp<IBinder>& handle,
-                                        const sp<Layer>& layer, const wp<Layer>& parent,
-                                        uint32_t* outTransformHint) {
+status_t SurfaceFlinger::checkLayerLeaks(){
     if (mNumLayers >= MAX_LAYERS) {
         static std::atomic<nsecs_t> lasttime{0};
         nsecs_t now = systemTime();
@@ -4374,7 +4372,12 @@ status_t SurfaceFlinger::addClientLayer(LayerCreationArgs& args, const sp<IBinde
         }));
         return NO_MEMORY;
     }
+    return NO_ERROR;
+}
 
+status_t SurfaceFlinger::addClientLayer(LayerCreationArgs& args, const sp<IBinder>& handle,
+                                        const sp<Layer>& layer, const wp<Layer>& parent,
+                                        uint32_t* outTransformHint) {
     if (outTransformHint) {
         *outTransformHint = mActiveDisplayTransformHint;
     }
@@ -5090,6 +5093,12 @@ uint32_t SurfaceFlinger::addInputWindowCommands(const InputWindowCommands& input
 status_t SurfaceFlinger::mirrorLayer(const LayerCreationArgs& args,
                                      const sp<IBinder>& mirrorFromHandle,
                                      gui::CreateSurfaceResult& outResult) {
+
+    // Checks if layerLeaks before create layer
+    if (checkLayerLeaks() != NO_ERROR) {
+        return NO_MEMORY;
+    }
+
     if (!mirrorFromHandle) {
         return NAME_NOT_FOUND;
     }
@@ -5127,6 +5136,11 @@ status_t SurfaceFlinger::mirrorDisplay(DisplayId displayId, const LayerCreationA
         return PERMISSION_DENIED;
     }
 
+    // Checks if layerLeaks before create layer
+    if (checkLayerLeaks() != NO_ERROR) {
+        return NO_MEMORY;
+    }
+
     ui::LayerStack layerStack;
     sp<Layer> rootMirrorLayer;
     status_t result = 0;
@@ -5161,6 +5175,11 @@ status_t SurfaceFlinger::mirrorDisplay(DisplayId displayId, const LayerCreationA
 
 status_t SurfaceFlinger::createLayer(LayerCreationArgs& args, gui::CreateSurfaceResult& outResult) {
     status_t result = NO_ERROR;
+
+    // Checks if layerLeaks before create layer
+    if (checkLayerLeaks() != NO_ERROR) {
+        return NO_MEMORY;
+    }
 
     sp<Layer> layer;
 
