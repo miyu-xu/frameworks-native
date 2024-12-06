@@ -27,6 +27,7 @@ cc_benchmark {
         "libinputflinger_base",
         "libinputreporter",
         "liblog",
+        "libprocessgroup",
         "libstatslog",
         "libutils",
     ],
