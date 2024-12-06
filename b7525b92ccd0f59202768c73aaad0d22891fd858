@@ -16,6 +16,876 @@
       "message": "This version works with https://lore.kernel.org/all/20241113193239.2113577-1-dualli@chromium.org/",
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56581500_2b84b8ca",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "add to here instead (only build it when we build the binder kernel for now)",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92c0820_c3e9ba12",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "Also exclude it from here. Avoid adding it into libbinder.vendor, but not added to libbinder_device_interface_sources, just another entry here. We haven\u0027t had any other case of kernel binder code that doesn\u0027t go in libbinder.vendor, but this is the perfect example.",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ce9952_3024a73d",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "remove from here",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 25
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807c857e_48c4d07c",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "declare all variables as late as possible?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fde5e78c_47213a38",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "can you store pid_t, or switch to C++ style casts (everywhere) `static_cast\u003c__u32\u003e(getpid())`. The reason is generic, to avoid C style casts everywhere, which may be more extreme (e.g. const cast, reinterpret cast)",
+      "range": {
+        "startLine": 41,
+        "startChar": 10,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b928633c_c6692a39",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "    pid \u003d getpid();\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 221,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": "int BinderGenl::setReport(const char *context, pid_t pid, __u32 flags) {\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 266,
+                "startChar": 0,
+                "endLine": 267,
+                "endChar": 0
+              },
+              "replacement": "    pid_t echo \u003d *(__u32 *)NLA_DATA(nla);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88336557_7776f380",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "Prefer designated initializer, which is equivalent, but we use it for a lot of the newer code in libbinder:\n\n```\nstruct sockaddr_nl sa {\n    .nl_family \u003d AF_NETLINK,\n    ...\n};\n```",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a820eb6d_1c4effbd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "    struct sockaddr_nl sa \u003d {\n        .nl_family \u003d AF_NETLINK,\n        .nl_pid \u003d getpid(),\n    };\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"Binder genl socket[%d]: %d\", sa.nl_pid, fd);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "    struct sockaddr_nl sa \u003d {\n        .nl_family \u003d AF_NETLINK,\n    };\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "    msg.nlh.nlmsg_pid \u003d sa.nl_pid;\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "    struct sockaddr_nl sa \u003d {\n        .nl_family \u003d AF_NETLINK,\n    };\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "    msg.nlh.nlmsg_pid \u003d sa.nl_pid;\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc9565c_94c74671",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "`\u003e\u003d 0`",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fdcbfa0_57b27694",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "-1",
+      "range": {
+        "startLine": 68,
+        "startChar": 13,
+        "endLine": 68,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b72836f_36434039",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "note - overflow here will abort",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24361d9f_900c3f2b",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "print size, n here?",
+      "range": {
+        "startLine": 120,
+        "startChar": 45,
+        "endLine": 120,
+        "endChar": 49
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c9b924_fbfcc6a2",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "This is also always called by the callers of getFamilyId, but it\u0027s not always called below. Remove for consistency?",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2be05728_7bd09347",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 185,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2185744f_af8639c7",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "return error here? (to avoid UB later on)",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a8b4c624_06b0a624",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "        return -1;\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 292,
+                "startChar": 0,
+                "endLine": 292,
+                "endChar": 0
+              },
+              "replacement": "        return -1;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9d0e80a_21ffaca4",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "nit: avoid additional variables, use msg.nlh, msg.glh to keep fewer things in scope?, except for nla, that would be moved down?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "aa4a13f8_35b02740",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "    struct genlmsghdr *glh \u003d (struct genlmsghdr *)NLMSG_DATA(\u0026msg.nlh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 203,
+                "startChar": 0,
+                "endLine": 203,
+                "endChar": 0
+              },
+              "replacement": "\n    struct nlattr *nla \u003d (struct nlattr *)GENLMSG_DATA(glh);\n    if (nla-\u003enla_type !\u003d CTRL_ATTR_FAMILY_ID) {\n        ALOGE(\"Wrong nla type %d, expect %d\", nla-\u003enla_type, CTRL_ATTR_FAMILY_ID);\n        return -1;\n    }\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 205,
+                "startChar": 0,
+                "endLine": 206,
+                "endChar": 0
+              },
+              "replacement": "    int payload \u003d GENLMSG_PAYLOAD(\u0026msg.nlh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "        nla \u003d (struct nlattr *)((char *)nla + cur);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 211,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "        id \u003d *(__u16*)NLA_DATA(nla);\n        ALOGD(\"Binder genl family id is %d\", id);\n        return 0;\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": "    struct genlmsghdr *glh \u003d (struct genlmsghdr *)NLMSG_DATA(\u0026msg.nlh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 250,
+                "startChar": 0,
+                "endLine": 251,
+                "endChar": 0
+              },
+              "replacement": "    struct nlattr *nla \u003d (struct nlattr *)GENLMSG_DATA(glh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 294,
+                "startChar": 0,
+                "endLine": 299,
+                "endChar": 0
+              },
+              "replacement": "    struct genlmsghdr *glh \u003d (struct genlmsghdr *)NLMSG_DATA(\u0026msg.nlh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 303,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "\n    struct nlattr *nla \u003d (struct nlattr *)GENLMSG_DATA(glh);\n    if (nla-\u003enla_type !\u003d BINDER_GENL_A_REPORT_CONTEXT) {\n        ALOGE(\"Wrong nla type %d, expect %d\", nla-\u003enla_type, BINDER_GENL_A_REPORT_CONTEXT);\n        return -1;\n    }\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 306,
+                "startChar": 0,
+                "endLine": 307,
+                "endChar": 0
+              },
+              "replacement": "    int payload \u003d GENLMSG_PAYLOAD(\u0026msg.nlh);\n"
+            },
+            {
+              "path": "libs/binder/BinderGenl.cpp",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "        nla \u003d (struct nlattr *)((char *)nla + cur);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "872f8d08_73c58b73",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "can you add the kernel bits in binder_module.h (which are also not exported) or would it be possible to avoid using kernel types in the header, so that it is generic?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e13472_d43d69d1",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "548fd747_4ee423e8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 154,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e9b0c9_4125553a",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "can you use binder/unique_fd for explicit ownership?",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 7
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "91dec446_8eacf3eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 162,
+                "startChar": 0,
+                "endLine": 163,
+                "endChar": 0
+              },
+              "replacement": "    LIBBINDER_EXPORTED int fd;\n"
+            },
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 168,
+                "endChar": 0
+              },
+              "replacement": "    LIBBINDER_EXPORTED __u32 pid;\n"
+            },
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 173,
+                "endChar": 0
+              },
+              "replacement": "    LIBBINDER_EXPORTED __u16 id;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c55326b_f956fb0b",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "mFd, mPid, mId, for C++ member variable naming",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 10
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba032a4_0b887293",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "do we need to return the FD, or can it be kept as a private member field?",
+      "range": {
+        "startLine": 185,
+        "startChar": 18,
+        "endLine": 185,
+        "endChar": 28
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040cca85_0857d529",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "how are races handled here, or who would be expected to set these?",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 69
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2cd85265_c51d415e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 236,
+                "endChar": 0
+              },
+              "replacement": "     * The flags are set atomically.\n     *\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f07796_d5f7e21d",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-06T02:04:30Z",
+      "side": 1,
+      "message": "what would this be set to? who would want to set it?",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bde06a80_5fd0b7be",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "     * @param context The name of the target binder context, or NULL for the\n     *                whole binder context\n"
+            },
+            {
+              "path": "libs/binder/include/binder/BinderGenl.h",
+              "range": {
+                "startLine": 246,
+                "startChar": 0,
+                "endLine": 247,
+                "endChar": 0
+              },
+              "replacement": "     * @param context The name of the binder context, or NULL for the\n     *                whole binder context\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
