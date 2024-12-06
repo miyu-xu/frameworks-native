@@ -324,6 +324,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fcebdfe_39ba4235",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-06T00:11:20Z",
+      "side": 1,
+      "message": "That sounds like an implementation detail of trusty. If the other side is using virtio-vsock (which is not obvious in any way here), there is this 4096 message size limit. If a TIPC client can\u0027t somehow tell if it might go over virtio-vsock or not, then all the TIPC clients ought to respect this limit, not just binder. I think you ought to add it to the TIPC header.\n\nBy the way, when we start using vsock directly instead of proxying through TIPC from the android side, we\u0027ll need this limit lifted. Binder RPC over vsock isn\u0027t going to split the messages into 4096 byte chunks",
+      "parentUuid": "a891b381_d0bb1cbb",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e973027d_492794f0",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 6
