@@ -16,6 +16,24 @@
       "message": "since this is only needed for one routine, shouldn\u0027t we break that out into its own file and only drop _FORTIFY_SOURCE there?",
       "revId": "65014f907004121a126ec68c214ce5216fbbc448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ec5b7a8_b7944b6a",
+        "filename": "vulkan/libvulkan/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-12-09T20:10:26Z",
+      "side": 1,
+      "message": "(not a regression; we can improve this later...)",
+      "parentUuid": "6dd6d986_0f8c457d",
+      "revId": "65014f907004121a126ec68c214ce5216fbbc448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
