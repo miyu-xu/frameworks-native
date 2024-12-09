@@ -130,6 +130,12 @@ pub struct RpcServerConnection {
     ctx: *mut c_void,
 }
 
+// TODO: Add SAFETY note
+unsafe impl Send for RpcServerConnection {}
+
+// TODO: Add SAFETY note
+unsafe impl Sync for RpcServerConnection {}
+
 impl Drop for RpcServerConnection {
     fn drop(&mut self) {
         // We do not need to close handle_fd since we do not own it.
