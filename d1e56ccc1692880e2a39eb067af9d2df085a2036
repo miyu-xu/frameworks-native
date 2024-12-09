@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "446f6ac1_612eebae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-12-09T22:35:33Z",
+      "side": 1,
+      "message": "Commented on http://b/376329293#comment4. I think building the Trusty VM libraries (for the VM on /system) as SYSTEM is what we want to be doing so they can talk to other SYSTEM binders without VINTF, and prevent them from talking to VENDOR service without VINTF.",
+      "parentUuid": "aa333eb4_c09a6fab",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
