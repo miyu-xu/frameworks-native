@@ -106,6 +106,14 @@ pub struct RpcServerConnection {
     ctx: *mut c_void,
 }
 
+// SAFETY: The opaque handle: `ctx` points into a dynamic allocation,
+// and not tied to anything specific to the current thread.
+unsafe impl Send for RpcServerConnection {}
+
+// SAFETY: This is safe based on the property:
+// T is Sync if and only if &T is Send.
+unsafe impl Sync for RpcServerConnection {}
+
 impl Drop for RpcServerConnection {
     fn drop(&mut self) {
         // We do not need to close handle_fd since we do not own it.
