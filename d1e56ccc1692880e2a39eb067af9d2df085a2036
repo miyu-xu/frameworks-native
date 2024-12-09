@@ -263,6 +263,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d5dfb9_1baab95f",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-12-09T22:14:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c6569234_d35a0105",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69aafc27_e69daa81",
