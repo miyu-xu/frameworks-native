@@ -282,6 +282,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5f88c96_3d591265",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2024-12-09T19:45:56Z",
+      "side": 1,
+      "message": "This error is expected if userspace is running against a kernel that doesn\u0027t have your binder genl patch yet. In this case, maybe demote the error log here to warning or info.\nThe same for all the error logs inside the body of getFamilyId(), consider demoting them as well.",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dc9565c_94c74671",
         "filename": "libs/binder/BinderGenl.cpp",
         "patchSetId": 7
