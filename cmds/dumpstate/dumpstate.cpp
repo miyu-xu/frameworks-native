@@ -1257,6 +1257,13 @@ static void DumpIpAddrAndRules() {
     RunCommand("IP RULES v6", {"ip", "-6", "rule", "show"});
 }
 
+static void DumpKernelMemoryAllocations() {
+    if (!access("/proc/allocinfo", F_OK)) {
+        RunCommand("KERNEL MEMORY ALLOCATIONS",
+                   {"alloctop", "--once", "--sort", "s", "--min", "1", "--lines", "100"});
+    }
+}
+
 static Dumpstate::RunStatus RunDumpsysTextByPriority(const std::string& title, int priority,
                                                      std::chrono::milliseconds timeout,
                                                      std::chrono::milliseconds service_timeout) {
@@ -1765,6 +1772,8 @@ Dumpstate::RunStatus Dumpstate::dumpstate() {
     RunDumpsys("EBPF MAP STATS", {"connectivity", "trafficcontroller"});
 
     DoKmsg();
+
+    DumpKernelMemoryAllocations();
 
     DumpShutdownCheckpoints();
 
