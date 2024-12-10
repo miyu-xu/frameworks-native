@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3acbc766_fa6478f0",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-12-10T22:46:58Z",
+      "side": 1,
+      "message": "Same: looks like you didn\u0027t touch this in r.android.com/3353154 but might as well fix the whole sentence if you\u0027re changing it anyway:\n\n```suggestion\n * \\bug ALooper_pollAll() will not wake in response to ALooper_wake() calls if it\n```",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0c7226_a34fc1e9",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-12-10T22:46:58Z",
+      "side": 1,
+      "message": "You didn\u0027t change this paragraph in the other MR but if you\u0027re auditing it anyway, might as well fix the whole paragraph:\n```suggestion\n * ALooper_pollOnce(). If you call ALooper_pollOnce() in a loop, you *must* treat\n```",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59f19ff_b278de0a",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2024-12-10T22:46:58Z",
+      "side": 1,
+      "message": "```suggestion\n * \\bug ALooper_pollAll() will not reliably wake in response to ALooper_wake().\n```",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
