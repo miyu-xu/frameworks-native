@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea444b7c_08660eb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-12-10T00:12:33Z",
+      "side": 1,
+      "message": "Hi @smoreland@google.com, do you think the current state of the bug trackers is enough to close the comments to be able to close this CL review as well?",
+      "parentUuid": "446f6ac1_612eebae",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
