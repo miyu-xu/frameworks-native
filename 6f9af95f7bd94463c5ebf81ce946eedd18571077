@@ -16,6 +16,139 @@
       "message": "Hi google team,\n\nCould you please help to review this CL?\n\nthanks.",
       "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb29e35_01309582",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-10T00:13:08Z",
+      "side": 1,
+      "message": "can you add a test for this in frameworks/native/services/surfaceflinger/tests/unittests/LayerLifecycleManagerTest.cpp",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b48c2b16_ce36fe04",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 264,
+                "endChar": 0
+              },
+              "replacement": "                    ALOGE(\"Can\u0027t reparent layer (%s) to its descendant (%s)\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89c43b0_5d935ec9",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-10T00:13:08Z",
+      "side": 1,
+      "message": "thoughts on updating here:\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/services/surfaceflinger/FrontEnd/LayerHierarchy.cpp;drc\u003db418ae890a456fe2527e8fe2144c19f1211d429f;l\u003d430\nto check for loops? this way you can avoid reacting to partially inconsistent states",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75637437_87920a75",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+              "range": {
+                "startLine": 223,
+                "startChar": 0,
+                "endLine": 261,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda2756e_0b83a910",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-10T00:13:08Z",
+      "side": 1,
+      "message": "nit parent id is already oldparent id, so is this needed?",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "64dc3642_cfbf8b50",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+              "range": {
+                "startLine": 266,
+                "startChar": 0,
+                "endLine": 267,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
