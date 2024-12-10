@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ebfe76_b976d703",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-10T17:24:58Z",
+      "side": 1,
+      "message": "if we add more than 4000 layers, system_server will crash.. I don\u0027t think we should ignore unknown handles unless there is a specific scenario (not an invalid one like +4096 layers) that can cause this issue.",
+      "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
