@@ -110,6 +110,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "644ff38c_3a1053be",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-10T07:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbb29e35_01309582",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 64
+      },
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5f8519_c2652f15",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-10T07:27:38Z",
+      "side": 1,
+      "message": "I can\u0027t access the link you provided, do you mean in `LayerHierarchyBuilder::update()` like detecting relLoop?https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/services/surfaceflinger/FrontEnd/LayerHierarchy.cpp;l\u003d427?q\u003dLayerHierarchy\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain\n\nIf we detect layer cycle in here, we can\u0027t get an old parent id in `LayerHierarchyBuilder::update()` to restore if there is a layer cycle.\nSo I think we should detect layer cycle in `LayerLifecycleManager::applyTransactions()` so that we could use old parent id to restore its hierarchy.",
+      "parentUuid": "f89c43b0_5d935ec9",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 64
+      },
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eda2756e_0b83a910",
@@ -147,6 +195,30 @@
           ]
         }
       ],
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e476d923_e47531d5",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-10T07:27:38Z",
+      "side": 1,
+      "message": "Hi vishnu,\n\nit is necessary to reset parentId since it has changed in `layer-\u003emerge()`, but it has not yet been unlinked from oldparentId, so here just reset to oldParent. \nI have added comments on this.",
+      "parentUuid": "eda2756e_0b83a910",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 50
+      },
       "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
