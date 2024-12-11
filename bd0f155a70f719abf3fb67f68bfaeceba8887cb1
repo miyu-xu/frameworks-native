@@ -16,6 +16,24 @@
       "message": "if we add more than 4000 layers, system_server will crash.. I don\u0027t think we should ignore unknown handles unless there is a specific scenario (not an invalid one like +4096 layers) that can cause this issue.",
       "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b486effe_ccfb0d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-11T07:54:38Z",
+      "side": 1,
+      "message": "Hi vishnu,\n\n\"if we add more than 4000 layers, system_server will crash.. \"\nthe reason why system_server will crash is `OutOfResourceException` occurred:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/view/SurfaceControl.java;l\u003d1318?q\u003dSurfaceControl\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain\n\nand why `OOR` occurred is that `NO_MEMORY` returned in constructor of SurfaceControl;\n\nand why `NO_MEMORY` returned is that there has already created 4096 or more layers in sf.\n\nHowever, although this operation is failed for this time, the instance of Layer and LayerHandle have already been created, so the `~LayerHandle()` for the instance also can be called, and sf will crash due to `LayerLifecycleManager::onHandlesDestroyed`.\n\nIf sf crash ahead of system_server crash, we will never get any logs to know exactly which layer is leaked.",
+      "parentUuid": "65ebfe76_b976d703",
+      "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
