@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bad9628_9ce97ba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-11T22:57:08Z",
+      "side": 1,
+      "message": "Yes, please make sure that only @VintfStability interfaces are used across system\u003c-\u003evendor surfaces. Do we have such a check? Is there anything else we can do to detect mismatched versions?",
+      "parentUuid": "ea444b7c_08660eb4",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60417caa_8f701510",
         "filename": "libs/binder/rust/src/lib.rs",
         "patchSetId": 4
