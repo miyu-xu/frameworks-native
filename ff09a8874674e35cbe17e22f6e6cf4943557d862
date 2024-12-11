@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34ed373_064b9913",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-11T15:07:42Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "3acbc766_fa6478f0",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd0c7226_a34fc1e9",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a80464_eccdac0b",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-11T15:07:42Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "cd0c7226_a34fc1e9",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e59f19ff_b278de0a",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-12-10T22:46:58Z",
       "side": 1,
       "message": "```suggestion\n * \\bug ALooper_pollAll() will not reliably wake in response to ALooper_wake().\n```",
+      "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bf88b1e_1625e396",
+        "filename": "include/android/looper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-11T15:07:42Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "e59f19ff_b278de0a",
       "revId": "ff09a8874674e35cbe17e22f6e6cf4943557d862",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
