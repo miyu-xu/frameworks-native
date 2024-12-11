@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "573169da_33ea0a17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-12-11T15:24:43Z",
+      "side": 1,
+      "message": "It sounds like a broken implementation of https://source.android.com/docs/core/graphics/multiple-refresh-rate.",
+      "parentUuid": "846dc540_c0ddaf2e",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "69578b42a28c463eab564e27e9ee58317e7cdfc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78f8eb70_d69d58cb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -60,6 +84,24 @@
       "writtenOn": "2024-12-11T14:01:13Z",
       "side": 1,
       "message": "Allowing the hal to control refresh rate without informing the framework breaks vsync timeline management and backpressure propagation. It\u0027s also not clear to me how this interacts with framework policies that, amongst other things, may switch to a lower refresh rate to save battery.\n\nMoreover, the logs in the commit message seem to imply that you would implement this by applying modesets within HWC. The choreographer infrastructure will still dispatch vsync callbacks at the display mode\u0027s refresh rate (90Hz in your example): If the HAL switches to 72Hz while an app is attempting to render at 90fps (e.g., the app intermittently renders 1-2 \"slow\" frames, or a video is overlaid on top of the app), then the app will irrecoverably experience judder. SurfaceFlinger would _also_ composite at 90fps, which will not help either, as SurfaceFlinger will over time miss internal HWC deadlines to composite at 72Hz due to timeline skew.\n\nYou will probably want to look at the Adaptive Refresh Rate feature (https://source.android.com/docs/core/graphics/arr) for how we would prefer to adapt to content frame rate.",
+      "revId": "69578b42a28c463eab564e27e9ee58317e7cdfc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf357e0_7336b426",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1099928
+      },
+      "writtenOn": "2024-12-11T15:24:43Z",
+      "side": 1,
+      "message": "Also, the broken scheduling would be evident in Perfetto traces, so please use them to validate your changes in the future:\n\nhttps://perfetto.dev/docs/data-sources/frametimeline",
+      "parentUuid": "78f8eb70_d69d58cb",
       "revId": "69578b42a28c463eab564e27e9ee58317e7cdfc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
