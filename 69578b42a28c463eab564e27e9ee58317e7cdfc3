@@ -106,6 +106,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ce0d47_8d9b43e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060206
+      },
+      "writtenOn": "2024-12-11T16:18:48Z",
+      "side": 1,
+      "message": "To re-echo Dom and Alec\u0027s comments and add more context:\n\n1. This seems to involve some proprietary concepts that don\u0027t exist in AOSP.  We have no way of evaluating feasibility or design.  At the very least, please provide more context.\n\n2. The code you are checking in here breaks fundamental assumptions for the rest of the OS.  Whatever you check in here can\u0027t break the rest of Android, including shipping devices.  Have you tried running this on a phone?",
+      "revId": "69578b42a28c463eab564e27e9ee58317e7cdfc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b52b3e5_74d173ee",
