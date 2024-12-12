@@ -126,6 +126,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d20a0af5_5f838fee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-12-12T00:20:12Z",
+      "side": 1,
+      "message": "just to close on this comment, let me record the approach we agreed on:\n\nin Trusty VM, the Trusted HAL client TAs (WV / Keymint) will add below assert to ensure the endpoint communication is via VINTF: \nCHECK(Stability::requiresVintfDeclaration(myBinder)).\nThis is be tracked by b/376329293\n\nThis is beyond this current CL (which deals with Host to VM), let me resolve the comment in this CL!",
+      "parentUuid": "8bad9628_9ce97ba3",
+      "revId": "d1e56ccc1692880e2a39eb067af9d2df085a2036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60417caa_8f701510",
