@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41766358_5ec1aa63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-13T21:50:12Z",
+      "side": 1,
+      "message": "Hi, can you add on AOSP, and honestly, maybe move the \u0027if __TRUSTY__\u0027 check there, we could maybe only have one place with \u0027if __TRUSTY__\u0027? LG!",
+      "revId": "aee4e9d7b750d88b048ae74e371e2859a788fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
