@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ac608f7_250e44f4",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:56:14Z",
+      "side": 1,
+      "message": "i think it would be easier to read if this function was called \"onThreadPoolJoin\" and it is a hook allowing `ProcessState` to make whatever checks it wants or, alternatively, if it returned a bool indicating whether `startThreadPool` ought to be called and then the logging would be done from `IPCThreadState::joinThreadPool`",
+      "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
