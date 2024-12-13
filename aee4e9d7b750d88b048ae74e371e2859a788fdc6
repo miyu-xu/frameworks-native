@@ -52,6 +52,24 @@
       "parentUuid": "926918bb_259bac2b",
       "revId": "aee4e9d7b750d88b048ae74e371e2859a788fdc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a5aa09_e2326b32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1070453
+      },
+      "writtenOn": "2024-12-13T22:03:47Z",
+      "side": 1,
+      "message": "Ah yes, this is the AOSP repo :).\n\nLooking more closely I think the #ifdef needs to stay in this file since it is guarding includes of header files that are used for code blocks below also guarded by `__TRUSTY__` #ifdefs.",
+      "parentUuid": "fc9f6174_b452ce92",
+      "revId": "aee4e9d7b750d88b048ae74e371e2859a788fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
