@@ -16,6 +16,24 @@
       "message": "i think it would be easier to read if this function was called \"onThreadPoolJoin\" and it is a hook allowing `ProcessState` to make whatever checks it wants or, alternatively, if it returned a bool indicating whether `startThreadPool` ought to be called and then the logging would be done from `IPCThreadState::joinThreadPool`",
       "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43975389_6f7b5c79",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-13T23:53:52Z",
+      "side": 1,
+      "message": "I was thinking I might want to move it to IServiceManager::addService or elsewhere, that required a threadpool to be started. Maybe also waitForService, since this would be a more clear error.",
+      "parentUuid": "0ac608f7_250e44f4",
+      "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
