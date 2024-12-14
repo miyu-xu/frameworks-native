@@ -34,6 +34,24 @@
       "parentUuid": "65ebfe76_b976d703",
       "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f5d15b_1e9d46ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2024-12-14T00:06:15Z",
+      "side": 1,
+      "message": "i see. Is it possible to move the num layer check before we create the layer and the handle? This was we dont have any unknown handles.",
+      "parentUuid": "b486effe_ccfb0d68",
+      "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
