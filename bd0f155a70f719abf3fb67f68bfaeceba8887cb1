@@ -52,6 +52,24 @@
       "parentUuid": "b486effe_ccfb0d68",
       "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9897d367_9845139d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-16T13:25:57Z",
+      "side": 1,
+      "message": "yes, this is a better choice, I have updated the CL by this way, please take a look, thanks.",
+      "parentUuid": "55f5d15b_1e9d46ef",
+      "revId": "bd0f155a70f719abf3fb67f68bfaeceba8887cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
