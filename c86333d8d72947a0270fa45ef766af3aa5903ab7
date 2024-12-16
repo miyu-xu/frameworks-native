@@ -34,6 +34,24 @@
       "parentUuid": "0ac608f7_250e44f4",
       "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6035d85_43324857",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-12-16T16:48:01Z",
+      "side": 1,
+      "message": "`addService` + `checkService` would be nice and could catch issues when joinThreadPool is never called.",
+      "parentUuid": "43975389_6f7b5c79",
+      "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
