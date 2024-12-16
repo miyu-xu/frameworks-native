@@ -52,6 +52,24 @@
       "parentUuid": "43975389_6f7b5c79",
       "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b8665e_806624e1",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-16T22:08:25Z",
+      "side": 1,
+      "message": "yes, though sometimes startThreadPool is called after addService. Let me submit this, and we can add in more places as things come up",
+      "parentUuid": "c6035d85_43324857",
+      "revId": "c86333d8d72947a0270fa45ef766af3aa5903ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
