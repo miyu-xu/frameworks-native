@@ -158,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29ed51b_464103eb",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-16T13:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b5f8519_c2652f15",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 64
+      },
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eda2756e_0b83a910",
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "Hi vishnu,\n\nit is necessary to reset parentId since it has changed in `layer-\u003emerge()`, but it has not yet been unlinked from oldparentId, so here just reset to oldParent. \nI have added comments on this.",
       "parentUuid": "eda2756e_0b83a910",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 50
+      },
+      "revId": "6f9af95f7bd94463c5ebf81ce946eedd18571077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729815f2_38b99083",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 3698570
+      },
+      "writtenOn": "2024-12-16T13:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e476d923_e47531d5",
       "range": {
         "startLine": 266,
         "startChar": 0,
