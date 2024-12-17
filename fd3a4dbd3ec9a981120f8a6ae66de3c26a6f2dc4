@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d665265_05216ce3",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-17T22:18:42Z",
+      "side": 1,
+      "message": "This is a large file. We should filter out empty and small allocations. Best to define a size threshold and filter out anything smaller that that. Also serting them by size before adding to the bugreport would be great.\nIf we implement the `alloctop` tool I suggested in https://docs.google.com/document/d/15zmMneNM87aIA1ZJowehbpDx6z5wOoh1ZTOlhAyx3oo/edit?usp\u003dsharing, that would make this task quite simple.",
+      "range": {
+        "startLine": 1261,
+        "startChar": 4,
+        "endLine": 1261,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7cb240ef_142f4220",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpstate/dumpstate.cpp",
+              "range": {
+                "startLine": 197,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "// Minimum size of a kernel memory allocation to be included in the bugreport.\nstatic const uint64_t KERNEL_MEMORY_ALLOCATION_MIN_SIZE \u003d 1024 * 1024; // 1MB\n\n"
+            },
+            {
+              "path": "cmds/dumpstate/dumpstate.cpp",
+              "range": {
+                "startLine": 1260,
+                "startChar": 0,
+                "endLine": 1262,
+                "endChar": 0
+              },
+              "replacement": "static void DumpKernelMemoryAllocations(int out_fd) {\n    std::string title \u003d \"KERNEL MEMORY ALLOCATIONS\";\n    DurationReporter duration_reporter(title, true);\n\n    std::ifstream ifs(\"/proc/allocinfo\");\n    std::string line;\n    while (std::getline(ifs, line)) {\n        std::vector\u003cstd::string\u003e parts \u003d android::base::Split(line, \u0027 \u0027);\n        if (parts.size() \u003c 3) {\n            continue;\n        }\n        uint64_t size;\n        if (!android::base::ParseUint(parts[2], \u0026size)) {\n            continue;\n        }\n        if (size \u003c KERNEL_MEMORY_ALLOCATION_MIN_SIZE) {\n            continue;\n        }\n        ds.AddTextZipEntry(title + \" - \" + parts[0], line);\n    }\n"
+            },
+            {
+              "path": "cmds/dumpstate/dumpstate.cpp",
+              "range": {
+                "startLine": 1766,
+                "startChar": 0,
+                "endLine": 1767,
+                "endChar": 0
+              },
+              "replacement": "    RUN_SLOW_FUNCTION_WITH_CONSENT_CHECK(DumpKernelMemoryAllocations);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd3a4dbd3ec9a981120f8a6ae66de3c26a6f2dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
