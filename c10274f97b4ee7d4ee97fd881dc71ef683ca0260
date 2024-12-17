@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6197f5c2_2b15116b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3790621
+      },
+      "writtenOn": "2024-12-17T15:03:09Z",
+      "side": 1,
+      "message": "Hi\njesse Hall and Ian elliot, you were added as code owners according to OWNERS file",
+      "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
