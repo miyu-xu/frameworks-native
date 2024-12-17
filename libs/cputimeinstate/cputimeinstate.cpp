@@ -289,6 +289,8 @@ std::optional<std::vector<std::vector<uint64_t>>> getTotalCpuFreqTimes() {
         for (uint32_t policyIdx = 0; policyIdx < gNPolicies; ++policyIdx) {
             if (freqIdx >= gPolicyFreqs[policyIdx].size()) continue;
             for (const auto &cpu : gPolicyCpus[policyIdx]) {
+                if (gCpuIndexMap.find(cpu) == gCpuIndexMap.end())
+                    continue;
                 out[policyIdx][freqIdx] += vals[gCpuIndexMap[cpu]];
             }
         }
