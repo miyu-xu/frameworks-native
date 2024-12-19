@@ -6054,6 +6054,9 @@ mat4 SurfaceFlinger::calculateColorMatrix(float saturation) {
 }
 
 void SurfaceFlinger::updateColorMatrixLocked() {
+    mClientColorMatrix = mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                              vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
+
     mat4 colorMatrix =
             mClientColorMatrix * calculateColorMatrix(mGlobalSaturationFactor) * mDaltonizer();
 
