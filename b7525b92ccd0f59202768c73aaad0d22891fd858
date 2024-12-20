@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "938f3cee_224db337",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56581500_2b84b8ca",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c92c0820_c3e9ba12",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "Also exclude it from here. Avoid adding it into libbinder.vendor, but not added to libbinder_device_interface_sources, just another entry here. We haven\u0027t had any other case of kernel binder code that doesn\u0027t go in libbinder.vendor, but this is the perfect example.",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5a15f1_5dae44b2",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c92c0820_c3e9ba12",
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed9002b2_a2001bf6",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ce9952_3024a73d",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 556,
+        "endChar": 25
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "807c857e_48c4d07c",
@@ -88,6 +148,30 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "declare all variables as late as possible?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4654075_679b7ae2",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "807c857e_48c4d07c",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -155,6 +239,30 @@
           ]
         }
       ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d75f40_5be8f9a0",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde5e78c_47213a38",
+      "range": {
+        "startLine": 41,
+        "startChar": 10,
+        "endLine": 41,
+        "endChar": 17
+      },
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -280,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8adc9cce_ed9746d4",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88336557_7776f380",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5f88c96_3d591265",
@@ -297,6 +429,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "441a96e9_57d265b5",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5f88c96_3d591265",
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc9565c_94c74671",
@@ -310,6 +460,30 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "`\u003e\u003d 0`",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "541c3333_871dcfb4",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc9565c_94c74671",
       "range": {
         "startLine": 65,
         "startChar": 11,
@@ -343,6 +517,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc17a2bb_a41fc97d",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fdcbfa0_57b27694",
+      "range": {
+        "startLine": 68,
+        "startChar": 13,
+        "endLine": 68,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b72836f_36434039",
@@ -366,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6b5fc7_8b03ea9e",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b72836f_36434039",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 14
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24361d9f_900c3f2b",
@@ -379,6 +601,30 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "print size, n here?",
+      "range": {
+        "startLine": 120,
+        "startChar": 45,
+        "endLine": 120,
+        "endChar": 49
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8dea6b_17ac6cc9",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24361d9f_900c3f2b",
       "range": {
         "startLine": 120,
         "startChar": 45,
@@ -450,6 +696,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "316a4c2b_b361b460",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c9b924_fbfcc6a2",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 16
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2185744f_af8639c7",
@@ -497,6 +767,30 @@
           ]
         }
       ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72156d55_90bf0165",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2185744f_af8639c7",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 13
+      },
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -642,6 +936,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df30b47f_62b46076",
+        "filename": "libs/binder/BinderGenl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9d0e80a_21ffaca4",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 23
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "872f8d08_73c58b73",
@@ -655,6 +973,30 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "can you add the kernel bits in binder_module.h (which are also not exported) or would it be possible to avoid using kernel types in the header, so that it is generic?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a45f47ef_df87a404",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "872f8d08_73c58b73",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -702,6 +1044,30 @@
           ]
         }
       ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ebd466_2852405e",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e13472_d43d69d1",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 17
+      },
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -790,6 +1156,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "413ff598_80578331",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e9b0c9_4125553a",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 7
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ea8dc1_21b21423",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c55326b_f956fb0b",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 10
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eba032a4_0b887293",
@@ -803,6 +1217,30 @@
       "writtenOn": "2024-12-06T02:04:30Z",
       "side": 1,
       "message": "do we need to return the FD, or can it be kept as a private member field?",
+      "range": {
+        "startLine": 185,
+        "startChar": 18,
+        "endLine": 185,
+        "endChar": 28
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7ce915_eb96e73d",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eba032a4_0b887293",
       "range": {
         "startLine": 185,
         "startChar": 18,
@@ -854,6 +1292,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e08803_48d9f596",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040cca85_0857d529",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 69
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56f07796_d5f7e21d",
@@ -901,6 +1363,30 @@
           ]
         }
       ],
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526d2061_f4927598",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2024-12-20T09:24:23Z",
+      "side": 1,
+      "message": "The Android management process (AMS in this case) sets this (e.g. \"binder\") to monitor the specific binder context.",
+      "parentUuid": "56f07796_d5f7e21d",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 59
+      },
       "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
