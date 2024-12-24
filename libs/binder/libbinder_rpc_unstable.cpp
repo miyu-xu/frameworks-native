@@ -23,8 +23,11 @@
 
 #ifndef __TRUSTY__
 #include <cutils/sockets.h>
-#include "vm_sockets.h"
-#endif  // !__TRUSTY__
+#endif
+
+#ifdef __linux__
+#include <linux/vm_sockets.h>
+#endif // __linux__
 
 using android::OK;
 using android::RpcServer;
