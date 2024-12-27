@@ -60,6 +60,30 @@
       ],
       "revId": "fd3a4dbd3ec9a981120f8a6ae66de3c26a6f2dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc71ecb_f2ce2893",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-27T16:36:17Z",
+      "side": 1,
+      "message": "We decided to move forward with alloctop.\nWaiting for it to be merged.",
+      "parentUuid": "6d665265_05216ce3",
+      "range": {
+        "startLine": 1261,
+        "startChar": 4,
+        "endLine": 1261,
+        "endChar": 61
+      },
+      "revId": "fd3a4dbd3ec9a981120f8a6ae66de3c26a6f2dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
