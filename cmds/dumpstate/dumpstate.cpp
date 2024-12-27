@@ -4539,6 +4539,9 @@ void dump_route_tables() {
 
 void dump_frozen_cgroupfs(const char *dir, int level,
         int (*dump_from_fd)(const char* title, const char* path, int fd)) {
+    // Unbounded recursion should not be possible on cgroupfs, but let's be paranoid.
+    const int MAX_LEVEL = 5;
+
     DIR *dirp;
     struct dirent *d;
     char *newpath = nullptr;
@@ -4560,9 +4563,7 @@ void dump_frozen_cgroupfs(const char *dir, int level,
             if (!newpath) {
                 continue;
             }
-            if (level == 0 && !strncmp(d->d_name, "uid_", 4)) {
-                dump_frozen_cgroupfs(newpath, 1, dump_from_fd);
-            } else if (level == 1 && !strncmp(d->d_name, "pid_", 4)) {
+            if (!strncmp(d->d_name, "pid_", 4)) {
                 char *freezer = nullptr;
                 asprintf(&freezer, "%s/%s", newpath, "cgroup.freeze");
                 if (freezer) {
@@ -4577,6 +4578,8 @@ void dump_frozen_cgroupfs(const char *dir, int level,
                     }
                     free(freezer);
                 }
+            } else if (level < MAX_LEVEL) {
+                dump_frozen_cgroupfs(newpath, level + 1, dump_from_fd);
             }
         }
     }
