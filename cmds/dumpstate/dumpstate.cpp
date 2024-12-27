@@ -4537,7 +4537,7 @@ void dump_route_tables() {
     fclose(fp);
 }
 
-void dump_frozen_cgroupfs(const char *dir, int level,
+void dump_frozen_cgroupfs(const char *dir,
         int (*dump_from_fd)(const char* title, const char* path, int fd)) {
     DIR *dirp;
     struct dirent *d;
@@ -4560,9 +4560,7 @@ void dump_frozen_cgroupfs(const char *dir, int level,
             if (!newpath) {
                 continue;
             }
-            if (level == 0 && !strncmp(d->d_name, "uid_", 4)) {
-                dump_frozen_cgroupfs(newpath, 1, dump_from_fd);
-            } else if (level == 1 && !strncmp(d->d_name, "pid_", 4)) {
+            if (!strncmp(d->d_name, "pid_", 4)) {
                 char *freezer = nullptr;
                 asprintf(&freezer, "%s/%s", newpath, "cgroup.freeze");
                 if (freezer) {
@@ -4577,6 +4575,8 @@ void dump_frozen_cgroupfs(const char *dir, int level,
                     }
                     free(freezer);
                 }
+            } else {
+                dump_frozen_cgroupfs(newpath, dump_from_fd);
             }
         }
     }
@@ -4587,7 +4587,7 @@ void dump_frozen_cgroupfs() {
     MYLOGD("Adding frozen processes from %s\n", CGROUPFS_DIR);
     DurationReporter duration_reporter("FROZEN CGROUPFS");
     if (PropertiesHelper::IsDryRun()) return;
-    dump_frozen_cgroupfs(CGROUPFS_DIR, 0, _add_file_from_fd);
+    dump_frozen_cgroupfs(CGROUPFS_DIR, _add_file_from_fd);
 }
 
 void Dumpstate::UpdateProgress(int32_t delta_sec) {
