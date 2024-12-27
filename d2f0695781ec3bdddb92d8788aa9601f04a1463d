@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c72487_02bf8bf4",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-27T17:58:12Z",
+      "side": 1,
+      "message": "So, this will print 100 top allocations, right?",
+      "range": {
+        "startLine": 1263,
+        "startChar": 42,
+        "endLine": 1263,
+        "endChar": 87
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8c1a4b5e_86d4a13f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpstate/dumpstate.cpp",
+              "range": {
+                "startLine": 1262,
+                "startChar": 0,
+                "endLine": 1262,
+                "endChar": 0
+              },
+              "replacement": "        // Print the 100 biggest allocations.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d2f0695781ec3bdddb92d8788aa9601f04a1463d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
