@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56f9aed_5d38063a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-27T18:36:52Z",
+      "side": 1,
+      "message": "Also changed the commit message with a rough estimation of the additional time and size that this change adds.",
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

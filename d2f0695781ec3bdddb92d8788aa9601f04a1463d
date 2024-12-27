@@ -40,6 +40,30 @@
       ],
       "revId": "d2f0695781ec3bdddb92d8788aa9601f04a1463d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc62f41_2d9bf3f7",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-27T18:36:52Z",
+      "side": 1,
+      "message": "Correct, I added a comment to make it more clear.",
+      "parentUuid": "d2c72487_02bf8bf4",
+      "range": {
+        "startLine": 1263,
+        "startChar": 42,
+        "endLine": 1263,
+        "endChar": 87
+      },
+      "revId": "d2f0695781ec3bdddb92d8788aa9601f04a1463d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
