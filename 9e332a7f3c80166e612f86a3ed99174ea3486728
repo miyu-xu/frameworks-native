@@ -80,6 +80,30 @@
       ],
       "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "913c7439_92ad40ac",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-12-30T17:26:04Z",
+      "side": 1,
+      "message": "The kernel endpoint will not change, it\u0027s an upstream UAPI.\n\nI suggested this if to avoid having something like this in the bugreport:\n```\nKERNEL MEMORY ALLOCATIONS\nError: File /proc/allocinfo does not exist\n```",
+      "parentUuid": "ef1a9bbf_c214b503",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1261,
+        "endChar": 43
+      },
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
