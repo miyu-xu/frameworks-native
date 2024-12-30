@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1595f913_94437228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-30T17:40:31Z",
+      "side": 1,
+      "message": "Thanks a lot Steven and Suren, I\u0027ll get this merge and send out a cleanup change ASAP to fix the nits!",
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "187fc189_f4715544",
@@ -31,6 +48,30 @@
       "writtenOn": "2024-12-30T17:09:57Z",
       "side": 1,
       "message": "nit: I would avoid adding a function a la https://2014.jsconf.eu/speakers/sebastian-markbage-minimal-api-surface-area-learning-patterns-instead-of-frameworks.html\n\nNot sure why there are so many short functions here, this file is not maintained actively.",
+      "range": {
+        "startLine": 1260,
+        "startChar": 12,
+        "endLine": 1260,
+        "endChar": 39
+      },
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ad01b0_d2e5d8d0",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-30T17:40:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "187fc189_f4715544",
       "range": {
         "startLine": 1260,
         "startChar": 12,
@@ -96,6 +137,30 @@
       "side": 1,
       "message": "The kernel endpoint will not change, it\u0027s an upstream UAPI.\n\nI suggested this if to avoid having something like this in the bugreport:\n```\nKERNEL MEMORY ALLOCATIONS\nError: File /proc/allocinfo does not exist\n```",
       "parentUuid": "ef1a9bbf_c214b503",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1261,
+        "endChar": 43
+      },
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "074b1773_7aa371c2",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2024-12-30T17:40:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "913c7439_92ad40ac",
       "range": {
         "startLine": 1261,
         "startChar": 0,
