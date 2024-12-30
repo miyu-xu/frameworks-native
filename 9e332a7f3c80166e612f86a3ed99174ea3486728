@@ -16,6 +16,70 @@
       "message": "Also changed the commit message with a rough estimation of the additional time and size that this change adds.",
       "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187fc189_f4715544",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T17:09:57Z",
+      "side": 1,
+      "message": "nit: I would avoid adding a function a la https://2014.jsconf.eu/speakers/sebastian-markbage-minimal-api-surface-area-learning-patterns-instead-of-frameworks.html\n\nNot sure why there are so many short functions here, this file is not maintained actively.",
+      "range": {
+        "startLine": 1260,
+        "startChar": 12,
+        "endLine": 1260,
+        "endChar": 39
+      },
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1a9bbf_c214b503",
+        "filename": "cmds/dumpstate/dumpstate.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T17:09:57Z",
+      "side": 1,
+      "message": "nit: I would avoid this \u0027if\u0027 and always run \u0027alloctop\u0027, and have \u0027alloctop\u0027 maintain the details of /proc/allocinfo. For instance, if the kernel endpoint changes, if you decide te simulate the kernel behavior later, that will allow you to do so independently from the dumpstate program. Additionally, if the section \u0027KERNEL MEMORY ALLOCATIONS\u0027 is always present in bugreports, it will be nicer in the Android Bug Tool, to always see that section. If the section is missing, without checking the Android/kernel version, it\u0027s ambiguous if the kernel does not support it, or if the Android device does not have this patch. Always having the section also allows you to print instructions from \u0027alloctop\u0027 on how to enable that mode, and it would provide discoverability of the feature.",
+      "range": {
+        "startLine": 1261,
+        "startChar": 0,
+        "endLine": 1261,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cddded30_8794691e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "cmds/dumpstate/dumpstate.cpp",
+              "range": {
+                "startLine": 1261,
+                "startChar": 0,
+                "endLine": 1267,
+                "endChar": 0
+              },
+              "replacement": "    // Print the top 100 biggest memory allocations of at least one byte.\n    // The output is sorted by size, descending.\n    RunCommand(\"KERNEL MEMORY ALLOCATIONS\",\n               {\"alloctop\", \"--once\", \"--sort\", \"s\", \"--min\", \"1\", \"--lines\", \"100\"});\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9e332a7f3c80166e612f86a3ed99174ea3486728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
