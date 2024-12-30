@@ -1009,6 +1009,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea8f7ff4_da65479b",
+        "filename": "libs/binder/include/binder/BinderGenl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "Friendly ping on this, can you merge the kernel headers into binder_module.h?",
+      "parentUuid": "a45f47ef_df87a404",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "b7525b92ccd0f59202768c73aaad0d22891fd858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9e13472_d43d69d1",
         "filename": "libs/binder/include/binder/BinderGenl.h",
         "patchSetId": 7

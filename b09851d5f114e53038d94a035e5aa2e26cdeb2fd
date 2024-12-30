@@ -16,6 +16,790 @@
       "message": "This version depends on https://lore.kernel.org/all/20241218212935.4162907-1-dualli@chromium.org/",
       "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35f9fbc8_15269212",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "add \u0027| SOCK_CLOEXEC\u0027 to prevent FD leaks into executed programs.",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e3ec2c4d_9822ca57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "    mFd.reset(socket(AF_NETLINK, SOCK_RAW | SOCK_CLOEXEC, NETLINK_GENERIC));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4acba42e_3093c802",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "Can we remove the local member, since getpid is very fast? It should already be cached in memory in libc, right?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f348c441_c342954d",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "rather than reset this each path, which may be forgotton, could you create unique_fd here, and then only set mFd if it\u0027s needed?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d48d320a_4090270c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "    unique_fd fd(socket(AF_NETLINK, SOCK_RAW, NETLINK_GENERIC));\n    if (!fd.ok()) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "    ALOGV(\"Binding binder netlink socket %d\", fd.get());\n    if (bind(fd.get(), reinterpret_cast\u003cstruct sockaddr*\u003e(\u0026sa), sizeof(sa)) \u003c 0) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "    if (getFamilyId(fd.get()) \u003c 0) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "    ALOGD(\"Binder Netlink socket[%d]: %d\", mPid, fd.get());\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "    mFd \u003d std::move(fd);\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "    int ret \u003d sendto(mFd.get(), \u0026msg, msg.nlh.nlmsg_len, 0,\n                     reinterpret_cast\u003cstruct sockaddr*\u003e(\u0026sa), sizeof(sa));\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 149,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "    int ret \u003d sendto(mFd.get(), \u0026msg, msg.nlh.nlmsg_len, 0,\n                     reinterpret_cast\u003cstruct sockaddr*\u003e(\u0026sa), sizeof(sa));\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 162,
+                "endChar": 0
+              },
+              "replacement": "int BinderNetlink::recv(struct GenlMsg* msg, int len, int flags) {\n    int ret \u003d ::recv(mFd.get(), msg, len, flags);\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "int BinderNetlink::getFamilyId(int fd) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "    int ret \u003d send(fd, GENL_ID_CTRL, CTRL_CMD_GETFAMILY, CTRL_ATTR_FAMILY_NAME,\n                   BINDER_FAMILY_NAME, strlen(BINDER_FAMILY_NAME) + 1);\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "    if (recv(\u0026msg, sizeof(msg), 0) \u003c 0) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 219,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "int BinderNetlink::setReport(int fd, const char* context, __u32 pid, __u32 flags) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 237,
+                "startChar": 0,
+                "endLine": 238,
+                "endChar": 0
+              },
+              "replacement": "    int ret \u003d send(fd, mId, BINDER_CMD_SET, type, data, len, 3);\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 244,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": "    if (recv(\u0026msg, sizeof(msg), 0) \u003c 0) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 292,
+                "startChar": 0,
+                "endLine": 293,
+                "endChar": 0
+              },
+              "replacement": "int BinderNetlink::getReport(int fd, char* context, int size,\n                             __u32 report[__BINDER_A_REPORT_MAX]) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 294,
+                "startChar": 0,
+                "endLine": 295,
+                "endChar": 0
+              },
+              "replacement": "    if (recv(\u0026msg, sizeof(msg), 0) \u003c 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e888a1ec_f55d8c5c",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "Remove this log, as it always logs in the function?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e4e46ec3_964cafb6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"Failed to get binder netlink family id\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6328d42_64f5d813",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "can this be implemented by calling \u0027int BinderNetlink::send(__u16 nlmsgType, __u8 cmd, __u16 nlaType[], const void* nlaData[],\n                        __u16 nlaLen[], int n)\u0027 with \u0027n \u003d 1\u0027? to avoid maintaining two copies of this code? It seems mostly the same.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "52011896_24aa8d58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "    __u16 nlaLen[] \u003d { nlaLen };\n    __u16 nlaType[] \u003d { nlaType };\n    return send(nlmsgType, cmd, nlaType, nlaData, nlaLen, 1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb69f62_38c10a07",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "The return value from this function is a bit strange:\n- \u0027-ENOMEM\u0027 is like -errno, is like status_t\n- \u0027ret\u0027 from \u0027sendto\u0027 is -1 on error\n\nCould you always use -errno then? Maybe also s/int/status_t/ for clarity?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 3
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5e6336_738983a1",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "If this overflows u16, it will also abort, due to integer sanitization. Would you need to check overflow as well?",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e9f019b_38b7e932",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "nit: print size",
+      "range": {
+        "startLine": 69,
+        "startChar": 52,
+        "endLine": 69,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cb46405a_8899ef2c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "        ALOGE(\"Oversized binder netlink data to send: %d \u003e %d\", NLA_ALIGN(nlaLen) + NLA_HDRLEN,\n              BINDER_MSG_SIZE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869d823b_ee8e4737",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "Is NLA_ALIGN needed here?",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb66231_b8b67f79",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "can you assert the length does not overflow the buffer?",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "004199d4_238a89e3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "    __u32 len \u003d NLA_ALIGN(nlaLen) + NLA_HDRLEN;\n    if (len \u003e BINDER_MSG_SIZE) {\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "                        .nlmsg_len \u003d NLMSG_LENGTH(len),\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "    nla-\u003enla_len \u003d len;\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "                        .nlmsg_len \u003d NLMSG_LENGTH(len),\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "        nla-\u003enla_len \u003d NLA_ALIGN(nlaLen[i]) + NLA_HDRLEN;\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc2b042_351b30c2",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "this is also different than \u0027-1\u0027 from recv. Should we switch this function to status_t as well?",
+      "range": {
+        "startLine": 175,
+        "startChar": 14,
+        "endLine": 175,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d2d041c3_1d7e9870",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "        return -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "929ab233_d5ca2c44",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "Could you use strnlen with the buffer size?\n\nSame below with casts of __u32, verify the buffer size is expected?",
+      "range": {
+        "startLine": 259,
+        "startChar": 16,
+        "endLine": 259,
+        "endChar": 20
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8321dd_2cb250ef",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "should we verify the length of this data is as expected? same elsewhere",
+      "range": {
+        "startLine": 270,
+        "startChar": 44,
+        "endLine": 270,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "82cf13c2_0b24cb16",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 259,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "    if (nla-\u003enla_len \u003c strlen(context) + 1) {\n        ALOGE(\"Wrong nla len %d, expect %d\", nla-\u003enla_len, strlen(context) + 1);\n        return -1;\n    }\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 270,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "    if (nla-\u003enla_len !\u003d sizeof(pid)) {\n        ALOGE(\"Wrong nla len %d, expect %d\", nla-\u003enla_len, sizeof(pid));\n        return -1;\n    }\n"
+            },
+            {
+              "path": "libs/binder/BinderNetlink.cpp",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 281,
+                "endChar": 0
+              },
+              "replacement": "    if (nla-\u003enla_len !\u003d sizeof(flags)) {\n        ALOGE(\"Wrong nla len %d, expect %d\", nla-\u003enla_len, sizeof(flags));\n        return -1;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e5b640_35e7a770",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "return error?",
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d68328_f7ae1a49",
+        "filename": "libs/binder/BinderNetlink.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "s/MAX/EXPECTED/ ?",
+      "range": {
+        "startLine": 326,
+        "startChar": 16,
+        "endLine": 326,
+        "endChar": 35
+      },
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37510dc7_748f9a26",
+        "filename": "libs/binder/include/binder/BinderNetlink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-30T18:29:28Z",
+      "side": 1,
+      "message": "move these into the .cpp?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b4f227de_eaa091a4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/include/binder/BinderNetlink.h",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/include/binder/BinderNetlink.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "    char buf[1024];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b09851d5f114e53038d94a035e5aa2e26cdeb2fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
