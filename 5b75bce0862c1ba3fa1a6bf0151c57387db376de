@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253a620f_cbe10d39",
+        "filename": "services/inputflinger/dispatcher/InputDispatcher.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4903,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "gesture",
+      "range": {
+        "startLine": 4903,
+        "startChar": 76,
+        "endLine": 4903,
+        "endChar": 83
+      },
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89fa4fe5_dd882ca0",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14672,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"alredy\" -- should it be \"already\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"alredy\" -- should it be \"already\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 14672,
+        "startChar": 51,
+        "endLine": 14672,
+        "endChar": 57
+      },
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df437ba_929002f0",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14673,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"Alrady\" -- should it be \"Already\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"Alrady\" -- should it be \"Already\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 14673,
+        "startChar": 63,
+        "endLine": 14673,
+        "endChar": 69
+      },
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabac43e_92d1061b",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14704,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "without the POLICY_FLAG_PASS_TO_USER (to simulate policy behaviour when screen is  off)",
+      "range": {
+        "startLine": 14704,
+        "startChar": 28,
+        "endLine": 14704,
+        "endChar": 87
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d28c38cd_0075a219",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14704,
+                "startChar": 0,
+                "endLine": 14705,
+                "endChar": 0
+              },
+              "replacement": "    // Inject UP event, without the POLICY_FLAG_PASS_TO_USER (to simulate policy behaviour when\n    // screen is off).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8c05a2_c3293505",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14706,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "`/*policyFlags\u003d*/0`",
+      "range": {
+        "startLine": 14706,
+        "startChar": 8,
+        "endLine": 14706,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4803339f_7a52ef9a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14672,
+                "startChar": 0,
+                "endLine": 14674,
+                "endChar": 0
+              },
+              "replacement": "// Still send inject motion events to window which already be touched.\nTEST_F(InputDispatcherTest, AlwaysDispatchInjectMotionEventWhenAlreadyDownForWindow) {\n"
+            },
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14706,
+                "startChar": 0,
+                "endLine": 14707,
+                "endChar": 0
+              },
+              "replacement": "        /*policyFlags\u003d*/0);\n"
+            },
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14720,
+                "startChar": 0,
+                "endLine": 14721,
+                "endChar": 0
+              },
+              "replacement": "        /*policyFlags\u003d*/0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897dae7f_2ca86805",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14718,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "eventDown2?",
+      "range": {
+        "startLine": 14718,
+        "startChar": 18,
+        "endLine": 14718,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bea91528_570879ce",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14718,
+                "startChar": 0,
+                "endLine": 14719,
+                "endChar": 0
+              },
+              "replacement": "        .downTime(eventDown2.getDownTime()).build();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "742f5821_8ce94542",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 14723,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2024-12-31T06:20:39Z",
+      "side": 1,
+      "message": "just to double check, is this part of the repro?",
+      "range": {
+        "startLine": 14723,
+        "startChar": 4,
+        "endLine": 14723,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7bd81c2e_3541f432",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14672,
+                "startChar": 0,
+                "endLine": 14674,
+                "endChar": 0
+              },
+              "replacement": "// Still send inject motion events to window which already be touched.\nTEST_F(InputDispatcherTest, AlwaysDispatchInjectMotionEventWhenAlreadyDownForWindow) {\n"
+            },
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 14723,
+                "startChar": 0,
+                "endLine": 14724,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "5b75bce0862c1ba3fa1a6bf0151c57387db376de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
