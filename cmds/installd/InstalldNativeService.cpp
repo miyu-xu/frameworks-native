@@ -119,7 +119,7 @@ static constexpr const char* kFuseProp = "persist.sys.fuse";
  */
 static constexpr const char* kAppDataIsolationEnabledProperty = "persist.zygote.app_data_isolation";
 static constexpr const char* kMntSdcardfs = "/mnt/runtime/default/";
-static constexpr const char* kMntFuse = "/mnt/pass_through/0/";
+static constexpr const char* kMntFuse = "/mnt/pass_through/";
 
 static std::atomic<bool> sAppDataIsolationEnabled(false);
 
