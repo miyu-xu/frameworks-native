@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2982eb00_6954e8ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-01-03T17:04:13Z",
+      "side": 1,
+      "message": "please add a bug id describing the issue that this fixes",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "d9e514716d64ae258e9ec5cf7ffa15204080fd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d1afde0_f56c6b2e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
