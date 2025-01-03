@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a51278_be84b8f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-03T00:23:14Z",
+      "side": 1,
+      "message": "I solemnly swear I know what I\u0027m doing and also b/334142365.",
+      "revId": "3ef1c067f025afec703091095674ed9848ae18f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
