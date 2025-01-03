@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <android-base/macros.h>
 #include <json/json.h>
 
 #include <algorithm>

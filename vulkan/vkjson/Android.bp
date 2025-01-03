@@ -13,6 +13,9 @@ cc_defaults {
         "libjsoncpp",
         "libvulkan",
     ],
+    header_libs: [
+        "libbase_headers",
+    ],
 }
 
 cc_library_static {
