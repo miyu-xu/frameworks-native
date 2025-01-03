@@ -61,6 +61,7 @@ cc_library_static {
         "libjsoncpp_ndk",
     ],
     header_libs: [
+        "libbase_headers",
         "vulkan_headers",
     ],
     sdk_version: "24",
