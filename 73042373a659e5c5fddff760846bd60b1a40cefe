@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc72aa3_7f060bee",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 64
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-03T19:35:12Z",
+      "side": 1,
+      "message": "This is kind of odd here. Looks like we\u0027ve had this behavior since 2019: http://ac/frameworks/native/libs/binder/IServiceManager.cpp?l\u003d618\n\nstatus_t and the EX_* codes are not compatibile, and I haven\u0027t looked through all the code paths to understand which ones can return.\n\nI added this new possible return value in this CL though. Is there a better Status::... to return from BackendUnifiedServiceManager::addService that would translate to a better status_t?",
+      "range": {
+        "startLine": 1677,
+        "startChar": 0,
+        "endLine": 1678,
+        "endChar": 93
+      },
+      "revId": "73042373a659e5c5fddff760846bd60b1a40cefe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
