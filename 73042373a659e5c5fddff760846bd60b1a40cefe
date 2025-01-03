@@ -46,6 +46,30 @@
       },
       "revId": "73042373a659e5c5fddff760846bd60b1a40cefe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1fd2626_cb3f4d71",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 64
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-03T21:38:09Z",
+      "side": 1,
+      "message": "Thanks for the context!\n\n`Status::Exception::EX_UNSUPPORTED_OPERATION \u003d -7` and there is no equivalent value in `status_t` except for `BAD_INDEX \u003d -E2BIG,` on `_WIN32` builds.\n\nI don\u0027t see any good `Status::Exception` codes that would translate to a `status_t` here, so I guess I\u0027ll keep this return value and document it for now.\nIt\u0027s a pretty specific case and only addService has this problem right now.",
+      "parentUuid": "d429fbb3_110c13e4",
+      "range": {
+        "startLine": 1677,
+        "startChar": 0,
+        "endLine": 1678,
+        "endChar": 93
+      },
+      "revId": "73042373a659e5c5fddff760846bd60b1a40cefe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
