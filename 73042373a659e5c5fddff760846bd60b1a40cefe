@@ -22,6 +22,30 @@
       },
       "revId": "73042373a659e5c5fddff760846bd60b1a40cefe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d429fbb3_110c13e4",
+        "filename": "libs/binder/tests/binderLibTest.cpp",
+        "patchSetId": 64
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-03T19:42:55Z",
+      "side": 1,
+      "message": "There are many old libbinder SM APIs and also pingBinder which mix EX_* and status_t. Theoretically, the error codes could even conflict, though I never found a case where this was a problem in practice. I\u0027ve looked at unmixing them before (e.g. b/115654595 - looks like I didn\u0027t leave many notes...), especially when I was originally making libbinder_ndk, because it uses many \u0027prune\u0027 functions to make sure only recognized codes are returned. However, I believe CPP/Java backends are too far gone to properly unmix these codes, and changing them now may cause app compat issues. So I think baring technological progress in automated refactoring, given that they do work, the indefinite policy should be to freeze and document them.",
+      "parentUuid": "bdc72aa3_7f060bee",
+      "range": {
+        "startLine": 1677,
+        "startChar": 0,
+        "endLine": 1678,
+        "endChar": 93
+      },
+      "revId": "73042373a659e5c5fddff760846bd60b1a40cefe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
