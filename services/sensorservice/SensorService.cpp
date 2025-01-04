@@ -2650,7 +2650,7 @@ bool SensorService::isRateCappedBasedOnPermission(const String16& opPackageName)
             IPCThreadState::self()->getCallingPid(),
             IPCThreadState::self()->getCallingUid(),
             /*logPermissionFailure=*/ false);
-    if (targetSdk < __ANDROID_API_S__ ||
+    if ((targetSdk > 0 && targetSdk < __ANDROID_API_S__) ||
             (targetSdk >= __ANDROID_API_S__ && hasSamplingRatePermission)) {
         return false;
     }
