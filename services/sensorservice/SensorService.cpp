@@ -2354,7 +2354,7 @@ bool SensorService::hasPermissionForSensor(const Sensor& sensor) {
         hasPermission = checkPermission(String16(requiredPermission),
                 IPCThreadState::self()->getCallingPid(),
                 IPCThreadState::self()->getCallingUid(),
-                /*logPermissionFailure=*/ false);
+                /*logPermissionFailure=*/ true);
     } else {
         hasPermission = PermissionCache::checkCallingPermission(String16(requiredPermission));
     }
@@ -2649,8 +2649,8 @@ bool SensorService::isRateCappedBasedOnPermission(const String16& opPackageName)
     bool hasSamplingRatePermission = checkPermission(sAccessHighSensorSamplingRatePermission,
             IPCThreadState::self()->getCallingPid(),
             IPCThreadState::self()->getCallingUid(),
-            /*logPermissionFailure=*/ false);
-    if (targetSdk < __ANDROID_API_S__ ||
+            /*logPermissionFailure=*/ true);
+    if ((targetSdk > 0 && targetSdk < __ANDROID_API_S__) ||
             (targetSdk >= __ANDROID_API_S__ && hasSamplingRatePermission)) {
         return false;
     }
