@@ -16,6 +16,23 @@
       "message": "Removing myself from reviewers list, I\u0027m not an owner here.",
       "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebcfe554_ab8dc643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967450
+      },
+      "writtenOn": "2025-01-06T16:49:49Z",
+      "side": 1,
+      "message": "Removing myself from the reviewers list since I\u0027m not an owner.",
+      "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
