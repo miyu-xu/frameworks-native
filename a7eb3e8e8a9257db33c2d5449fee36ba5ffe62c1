@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14dec7af_860696ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2025-01-06T15:26:07Z",
+      "side": 1,
+      "message": "Removing myself from reviewers list, I\u0027m not an owner here.",
+      "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
