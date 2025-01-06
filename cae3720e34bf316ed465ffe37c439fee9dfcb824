@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b15b37_8c85bdbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-06T10:08:45Z",
+      "side": 1,
+      "message": "Hi Steven, PTAL. This fixes the problem for reflective usages with `checkService` in 3p apps.",
+      "revId": "cae3720e34bf316ed465ffe37c439fee9dfcb824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
