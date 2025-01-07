@@ -46,6 +46,30 @@
       },
       "revId": "7e6edf5c583853939df59898faea0ac5590d9090",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb920124_8f36d41b",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-07T13:38:13Z",
+      "side": 0,
+      "message": "I see. We always have this annotation for `checkService` in AIDL, but not its implementations.",
+      "parentUuid": "1802426b_cfde9a2a",
+      "range": {
+        "startLine": 89,
+        "startChar": 5,
+        "endLine": 89,
+        "endChar": 24
+      },
+      "revId": "7e6edf5c583853939df59898faea0ac5590d9090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
