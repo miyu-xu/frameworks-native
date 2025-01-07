@@ -34,6 +34,24 @@
       "parentUuid": "82347705_97014c25",
       "revId": "400f6407e3add3e641fbc4dd87727f3914ed0f11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d13cc5_32c72d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-07T01:03:00Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll add partition now, good idea. Partners never added custom partitions with HIDL, but if it\u0027s an issue, we can ignore \u0027UNKNOWN\u0027 partitions in the other test.",
+      "parentUuid": "73ce9fff_eda9abfe",
+      "revId": "400f6407e3add3e641fbc4dd87727f3914ed0f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
