@@ -16,6 +16,24 @@
       "message": "We might also want the product partition in another follow-up, and what about custom partitions that vendors add themselves?",
       "revId": "400f6407e3add3e641fbc4dd87727f3914ed0f11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ce9fff_eda9abfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-01-07T00:54:47Z",
+      "side": 1,
+      "message": "@dvander@google.com to answer this",
+      "parentUuid": "82347705_97014c25",
+      "revId": "400f6407e3add3e641fbc4dd87727f3914ed0f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
