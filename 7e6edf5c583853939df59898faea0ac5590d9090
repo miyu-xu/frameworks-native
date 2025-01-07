@@ -22,6 +22,30 @@
       },
       "revId": "7e6edf5c583853939df59898faea0ac5590d9090",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1802426b_cfde9a2a",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-07T08:30:48Z",
+      "side": 0,
+      "message": "You are right. It wasn\u0027t UnsupportedAppUsage. I only changed the return type and never touched annotation. https://r.android.com/3085505 is the cl that made the change.\n\nhttp://screen/3T2DsdXyjxMxaGh",
+      "parentUuid": "7035e67b_deec2c4c",
+      "range": {
+        "startLine": 89,
+        "startChar": 5,
+        "endLine": 89,
+        "endChar": 24
+      },
+      "revId": "7e6edf5c583853939df59898faea0ac5590d9090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
