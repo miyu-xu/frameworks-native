@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82347705_97014c25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-07T00:53:36Z",
+      "side": 1,
+      "message": "We might also want the product partition in another follow-up, and what about custom partitions that vendors add themselves?",
+      "revId": "400f6407e3add3e641fbc4dd87727f3914ed0f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
