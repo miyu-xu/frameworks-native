@@ -16,6 +16,23 @@
       "message": "Fixed.",
       "revId": "f123ac0cec127b99f3d856752dd6066a522f2a87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14e5ffa0_bebb5f39",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2025-01-07T20:52:00Z",
+      "side": 1,
+      "message": "could you please move this new test to here? Hopefully this will help prevent the merge conflict. If there\u0027s still a merge conflict after this, then I will just manually cherry-pick your CL internally.",
+      "revId": "f123ac0cec127b99f3d856752dd6066a522f2a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
