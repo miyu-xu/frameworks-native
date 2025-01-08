@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdff84f_bbd79fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-08T16:54:44Z",
+      "side": 1,
+      "message": "100% agreed. I\u0027ll be able to fix the first thing in b/385355208 once we support APEXes and other things. Howeve, the first two checks (checkService + getDebugPid), these are not actually guaranteed to pass on arbitrary service, since processes are allowed to restart in Android. So, maybe I could count the number of services that pass, and throw an error if very few of them do, but I\u0027m really not sure how to improve them and think the extra test coverage is better.",
+      "parentUuid": "2af3d701_8a4ecceb",
+      "revId": "dd69b8e39cbdcdb3204fcbd4f4363659213c52b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd4037de_6e8da261",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-01-08T03:26:09Z",
       "side": 1,
       "message": "maybe use `std::isalnum`",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 52
+      },
+      "revId": "dd69b8e39cbdcdb3204fcbd4f4363659213c52b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "508865fe_6e08af16",
+        "filename": "libs/binder/tests/binderStabilityIntegrationTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-08T16:54:44Z",
+      "side": 1,
+      "message": "Agreed, but paranoid about the locale.",
+      "parentUuid": "fd4037de_6e8da261",
       "range": {
         "startLine": 76,
         "startChar": 0,
