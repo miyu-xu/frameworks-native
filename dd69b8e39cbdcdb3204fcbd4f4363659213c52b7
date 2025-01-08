@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af3d701_8a4ecceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-08T03:26:09Z",
+      "side": 1,
+      "message": "this raises a lot of testing red flags for me since it very non hermetic and fails open, but i can see how it might be a nice low effort way to catch some bugs",
+      "revId": "dd69b8e39cbdcdb3204fcbd4f4363659213c52b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4037de_6e8da261",
+        "filename": "libs/binder/tests/binderStabilityIntegrationTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-08T03:26:09Z",
+      "side": 1,
+      "message": "maybe use `std::isalnum`",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 52
+      },
+      "revId": "dd69b8e39cbdcdb3204fcbd4f4363659213c52b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
