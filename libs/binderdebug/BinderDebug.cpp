@@ -18,6 +18,7 @@
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
 #include <binder/Binder.h>
+#include <binder/ProcessState.h>
 #include <sys/types.h>
 #include <fstream>
 #include <regex>
@@ -65,8 +66,9 @@ static status_t scanBinderContext(pid_t pid, const std::string& contextName,
 }
 
 // Examples of what we are looking at:
-// node 66730: u00007590061890e0 c0000759036130950 pri 0:120 hs 1 hw 1 ls 0 lw 0 is 2 iw 2 tr 1 proc 2300 1790
-// thread 2999: l 00 need_return 1 tr 0
+// node 66730: u00007590061890e0 c0000759036130950 pri 0:120 hs 1 hw 1 ls 0 lw 0 is 2 iw 2 tr 1 proc
+// 2300 1790 node 29413: u00007803fc982e80 c000078042c982210 pri 0:139 hs 1 hw 1 ls 0 lw 0 is 2 iw 2
+// tr 1 dn <debug_name> proc 488 683 thread 2999: l 00 need_return 1 tr 0
 status_t getBinderPidInfo(BinderDebugContext context, pid_t pid, BinderPidInfo* pidInfo) {
     std::smatch match;
     static const std::regex kReferencePrefix("^\\s*node \\d+:\\s+u([0-9a-f]+)\\s+c([0-9a-f]+)\\s+");
@@ -76,7 +78,9 @@ status_t getBinderPidInfo(BinderDebugContext context, pid_t pid, BinderPidInfo* 
         if (base::StartsWith(line, "  node")) {
             std::vector<std::string> splitString = base::Tokenize(line, " ");
             bool pids = false;
+            bool hasDebugName = false;
             uint64_t ptr = 0;
+            ALOGE("ryan: line=%s", line.c_str());
             for (const auto& token : splitString) {
                 if (base::StartsWith(token, "u")) {
                     const std::string ptrString = "0x" + token.substr(1);
@@ -99,6 +103,22 @@ status_t getBinderPidInfo(BinderDebugContext context, pid_t pid, BinderPidInfo* 
                             return;
                         }
                         pidInfo->refPids[ptr].push_back(pid);
+                    }
+
+                    if (token == "dn") {
+                        hasDebugName = true;
+                    } else if (hasDebugName) {
+                        if (ptr == 0) {
+                            LOG(ERROR) << "We failed to parse the pointer, so we can't map the "
+                                          "debugName";
+                            return;
+                        }
+                        // dn token will always appear, we don't want to set the debug name
+                        // to proc if a debug name wasn't actually set
+                        if (token != "proc") {
+                            pidInfo->debugNames[ptr] = token;
+                        }
+                        hasDebugName = false;
                     }
                 }
             }
@@ -182,6 +202,7 @@ status_t getBinderClientPids(BinderDebugContext context, pid_t pid, pid_t servic
         if (node != matchedNode) {
             return;
         }
+
         bool pidsSection = false;
         for (const auto& token : splitString) {
             if (token == "proc") {
@@ -224,6 +245,10 @@ status_t getBinderTransactions(pid_t pid, std::string& transactionsOutput) {
     }
 
     return NAME_NOT_FOUND;
+}
+
+status_t setBinderDebugName(sp<BBinder> binder, std::string debug_name) {
+    return ProcessState::self()->setBinderDebugName(binder, debug_name);
 }
 
 } // namespace  android

@@ -60,6 +60,31 @@ TEST(BinderDebugTests, BinderThreads) {
     EXPECT_GE(pidInfo.threadCount, 1);
 }
 
+TEST(BinderDebugTests, SetNodeDebugName) {
+    if (!android::ProcessState::self()->isDriverFeatureEnabled(
+                android::ProcessState::DriverFeature::DEBUG_NAME)) {
+        GTEST_SKIP_("Skipping debug node test as debug_name flag is not enabled");
+    }
+    class TestBinder : public BBinder {
+    public:
+        virtual ~TestBinder() override { BBinder::~BBinder(); }
+    };
+    sp<TestBinder> binder_one = sp<TestBinder>::make();
+    setBinderDebugName(binder_one, "test_node");
+
+    BinderPidInfo pidInfo;
+    const auto& status = getBinderPidInfo(BinderDebugContext::BINDER, getpid(), &pidInfo);
+    ASSERT_EQ(status, OK);
+    EXPECT_EQ(pidInfo.debugNames.size(), 1);
+    std::vector<std::string> values;
+
+    for (auto& [k, v] : pidInfo.debugNames) {
+        values.push_back(v.value());
+    }
+
+    EXPECT_STREQ(values.at(0).c_str(), "test_node");
+}
+
 } // namespace  test
 } // namespace  binderdebug
 } // namespace  android
