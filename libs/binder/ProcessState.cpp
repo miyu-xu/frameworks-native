@@ -535,6 +535,10 @@ bool ProcessState::isDriverFeatureEnabled(const DriverFeature feature) {
         static bool enabled = readDriverFeatureFile(DRIVER_FEATURES_PATH "freeze_notification");
         return enabled;
     }
+    if (feature == DriverFeature::DEBUG_NAME) {
+        static bool enabled = readDriverFeatureFile(DRIVER_FEATURES_PATH "debug_name");
+        return enabled;
+    }
     return false;
 }
 
@@ -545,6 +549,13 @@ status_t ProcessState::enableOnewaySpamDetection(bool enable) {
         return -errno;
     }
     return NO_ERROR;
+}
+
+status_t ProcessState::setBinderDebugName(sp<BBinder> binder, std::string debug_name) {
+    binder_node_debug_name binder_info = {};
+    binder->binder_info.ptr = reinterpret_cast<binder_uintptr_t>(binder->getWeakRefs());
+    strncpy(binder_info.debug_name, debug_name.c_str(), debug_name.size());
+    return ioctl(mDriverFD, BINDER_SET_DEBUG_NAME, &binder_info);
 }
 
 void ProcessState::giveThreadPoolName() {

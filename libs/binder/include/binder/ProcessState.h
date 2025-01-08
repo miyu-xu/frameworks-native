@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include <binder/Binder.h>
 #include <binder/Common.h>
 #include <binder/IBinder.h>
 #include <utils/String16.h>
@@ -134,9 +135,12 @@ public:
         ONEWAY_SPAM_DETECTION,
         EXTENDED_ERROR,
         FREEZE_NOTIFICATION,
+        DEBUG_NAME,
     };
     // Determine whether a feature is supported by the binder driver.
     LIBBINDER_EXPORTED static bool isDriverFeatureEnabled(const DriverFeature feature);
+
+    LIBBINDER_EXPORTED status_t setBinderDebugName(sp<BBinder> binder, std::string debug_name);
 
 private:
     static sp<ProcessState> init(const char* defaultDriver, bool requireDefault);

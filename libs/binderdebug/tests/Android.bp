@@ -32,8 +32,12 @@ cc_test {
         "libbase",
         "libbinder",
         "libutils",
+        "liblog",
     ],
     static_libs: ["libbinderdebug"],
-    cflags: ["-Wall", "-Werror"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
     require_root: true,
 }

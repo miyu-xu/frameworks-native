@@ -15,6 +15,7 @@
  */
 #pragma once
 
+#include <binder/Binder.h>
 #include <utils/Errors.h>
 
 #include <map>
@@ -24,6 +25,7 @@ namespace android {
 
 struct BinderPidInfo {
     std::map<uint64_t, std::vector<pid_t>> refPids; // cookie -> processes which hold binder
+    std::map<uint64_t, std::optional<std::string>> debugNames; // cookie -> binder debug names
     uint32_t threadUsage;                           // number of threads in use
     uint32_t threadCount;                           // number of threads total
 };
@@ -51,5 +53,14 @@ status_t getBinderClientPids(BinderDebugContext context, pid_t pid, pid_t servic
  *         NAME_NOT_FOUND if the pid wasn't found in the file
  */
 status_t getBinderTransactions(pid_t pid, std::string& transactionOutput);
+
+/**
+ * Sets the debug name for a binder node. That name can then be references in debug
+ * logs/messaging.
+ *
+ * Return: OK if the debug name was properly set.
+ *         -errno if there were any issues assigning a debug name
+ */
+status_t setBinderDebugName(sp<BBinder> binder, std::string debug_name);
 
 } // namespace  android
