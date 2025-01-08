@@ -68,6 +68,23 @@
       "parentUuid": "85412dda_0921f9e2",
       "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7f05d0_fb215bc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1098333
+      },
+      "writtenOn": "2025-01-08T18:33:35Z",
+      "side": 1,
+      "message": "Hi Avi,\n\nI see VK_FORMAT_*\u0027s mentioned in this change, but I don\u0027t see those in either the published Vulkan spec, nor in any spec merge requests.  Can you provide more information about the timing of when these formats will be added to the Vulkan spec?",
+      "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
