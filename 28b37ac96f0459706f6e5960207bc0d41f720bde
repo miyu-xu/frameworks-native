@@ -22,6 +22,53 @@
       },
       "revId": "28b37ac96f0459706f6e5960207bc0d41f720bde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a253bec_d3f7539c",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-08T00:38:12Z",
+      "side": 1,
+      "message": "We have the same thing in `getService` already.\n\nI guess the call to `toBinderService()` in the `2` flavors is protecting us from the crash when `status.isOk()` from `mTheRealServiceManager`.\n\nIt would be good to check this in both of these methods.",
+      "parentUuid": "ebc56928_28063a8e",
+      "range": {
+        "startLine": 245,
+        "startChar": 28,
+        "endLine": 245,
+        "endChar": 74
+      },
+      "revId": "28b37ac96f0459706f6e5960207bc0d41f720bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8327500_750183d6",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-08T00:38:12Z",
+      "side": 1,
+      "message": "`checkService2`?",
+      "range": {
+        "startLine": 88,
+        "startChar": 42,
+        "endLine": 88,
+        "endChar": 53
+      },
+      "revId": "28b37ac96f0459706f6e5960207bc0d41f720bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
