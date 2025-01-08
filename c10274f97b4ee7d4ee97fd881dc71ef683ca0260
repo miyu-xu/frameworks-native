@@ -50,6 +50,24 @@
       "message": "I\u0027ll leave this to Ian / Chris / John who are more directly responsible for some of this. But comments from the sidelines:\n\nThe Vulkan format equivalents listed don\u0027t actually exist in Vulkan. It\u0027s unclear how pixels of these formats are are packed in memory (for cpu mappings). There\u0027s usually several other changes necessary to make formats available via AHB, e.g. changes to the a.h.g.{allocator,mapper} HALs, updating the equivalent Java/Kotlin APIs, and so on. Adding public-API formats usually needs some justification in the form of use cases and availability in hardware.",
       "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda72a2e_e4a7ec12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3790621
+      },
+      "writtenOn": "2025-01-08T08:47:38Z",
+      "side": 1,
+      "message": "Thanks for the comment.\nThe additions were done according to google instrctitions for both the pixel and vulkan formats. \nThe goal of this set of patches is to add the six formats to the Android release as these are planned to be supported in our future GPUs.",
+      "parentUuid": "85412dda_0921f9e2",
+      "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
