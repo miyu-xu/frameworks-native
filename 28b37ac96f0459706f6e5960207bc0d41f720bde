@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "037fad45_1c869425",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-08T09:02:28Z",
+      "side": 1,
+      "message": "Right. `toBinderService()` converts all service types into `serviceWithMetadata`.  Therefore, a successful call should always result in this tag. I\u0027ve added a `status.isOk()` check beforehand to ensure this.\n\n`getService` is addressed in https://r.android.com/3441659",
+      "parentUuid": "2a253bec_d3f7539c",
+      "range": {
+        "startLine": 245,
+        "startChar": 28,
+        "endLine": 245,
+        "endChar": 74
+      },
+      "revId": "28b37ac96f0459706f6e5960207bc0d41f720bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8327500_750183d6",
@@ -61,6 +85,30 @@
       "writtenOn": "2025-01-08T00:38:12Z",
       "side": 1,
       "message": "`checkService2`?",
+      "range": {
+        "startLine": 88,
+        "startChar": 42,
+        "endLine": 88,
+        "endChar": 53
+      },
+      "revId": "28b37ac96f0459706f6e5960207bc0d41f720bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1babba4_a8579c11",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-08T09:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8327500_750183d6",
       "range": {
         "startLine": 88,
         "startChar": 42,
