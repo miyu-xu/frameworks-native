@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a4a3b8_ba11db7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1094493
+      },
+      "writtenOn": "2025-01-09T16:11:09Z",
+      "side": 1,
+      "message": "I don\u0027t see a memory leak from this piece of code: the `sensorsFound` vector is allocated on-demand and its memory lifetime is controlled by the caller (and return value optimization should result in no copies being made). In the AOSP SensorService, this function is only called from `SensorDevice::initializeSensorList()` which uses the vector only within the function then lets it go out of scope (so the memory gets freed shortly after being used).\n\nHowever, upon further review I noticed that `convertToSensor()` will allocate multiple strings via `strdup()` which do not appear to be freed. This would require a different change to resolve. Is this the real issue you are looking to fix?",
+      "revId": "863fa02aadec5f08e5b9a0dcfeb9dcad49e7776b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
