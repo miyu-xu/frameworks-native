@@ -88,7 +88,7 @@ private:
     std::array<::aidl::android::hardware::sensors::Event,
                ::android::SensorEventQueue::MAX_RECEIVE_BUFFER_EVENT_COUNT>
             mEventBuffer;
-
+    std::vector<sensor_t> sensorsFound;
     ndk::ScopedAIBinder_DeathRecipient mDeathRecipient;
 };
 
