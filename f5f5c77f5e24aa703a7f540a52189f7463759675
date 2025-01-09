@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae11315_2efe3576",
+        "filename": "libs/binder/include/binder/BpBinder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-09T00:34:34Z",
+      "side": 1,
+      "message": "we could also move it internally into libbinder and not export it in the headers.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 79
+      },
+      "revId": "f5f5c77f5e24aa703a7f540a52189f7463759675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
