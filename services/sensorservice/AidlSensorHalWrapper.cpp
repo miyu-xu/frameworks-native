@@ -209,8 +209,9 @@ ssize_t AidlSensorHalWrapper::pollFmq(sensors_event_t *buffer, size_t maxNumEven
 }
 
 std::vector<sensor_t> AidlSensorHalWrapper::getSensorsList() {
-    std::vector<sensor_t> sensorsFound;
-
+    if (!sensorsFound.empty()) {
+        sensorsFound.clear();
+    }
     if (mSensors != nullptr) {
         std::vector<SensorInfo> list;
         mSensors->getSensorsList(&list);
