@@ -46,7 +46,10 @@ RenderEngineThreaded::RenderEngineThreaded(CreateInstanceFactory factory)
 }
 
 RenderEngineThreaded::~RenderEngineThreaded() {
-    mRunning = false;
+    {
+        std::lock_guard lock(mThreadMutex);
+        mRunning = false;
+    }
     mCondition.notify_one();
 
     if (mThread.joinable()) {
