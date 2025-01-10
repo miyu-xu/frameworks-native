@@ -83,20 +83,11 @@ interface IServiceManager {
 
     /**
      * Retrieve an existing service called @a name from the service
-     * manager. Non-blocking. Returns null if the service does not exist.
-     *
-     * @deprecated TODO(b/355394904): Use checkService2 instead. This does not
-     * return metadata that is included in ServiceWithMetadata
-     */
-    @UnsupportedAppUsage
-    @nullable IBinder checkService(@utf8InCpp String name);
-
-    /**
-     * Retrieve an existing service called @a name from the service
      * manager. Non-blocking. Returns null if the service does not
      * exist.
      */
-    Service checkService2(@utf8InCpp String name);
+    @UnsupportedAppUsage
+    Service checkService(@utf8InCpp String name);
 
     /**
      * Place a new @a service called @a name into the service
