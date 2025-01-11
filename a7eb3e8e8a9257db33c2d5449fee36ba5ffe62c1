@@ -105,6 +105,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a40fc302_882f17a2",
+        "filename": "services/sensorservice/SensorService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2357,
+      "author": {
+        "id": 1869677
+      },
+      "writtenOn": "2025-01-11T02:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0133b76b_a71d9530",
+      "range": {
+        "startLine": 2357,
+        "startChar": 42,
+        "endLine": 2357,
+        "endChar": 46
+      },
+      "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e8895d3d_8c9e3775",
         "filename": "services/sensorservice/SensorService.cpp",
         "patchSetId": 1
