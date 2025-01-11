@@ -50,6 +50,80 @@
       "message": "Please help review.",
       "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0133b76b_a71d9530",
+        "filename": "services/sensorservice/SensorService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2357,
+      "author": {
+        "id": 1094493
+      },
+      "writtenOn": "2025-01-11T01:36:46Z",
+      "side": 1,
+      "message": "Please keep these as `false`, which avoids log spam in some scenarios.",
+      "range": {
+        "startLine": 2357,
+        "startChar": 42,
+        "endLine": 2357,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d5a58b9c_cc3474d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/sensorservice/SensorService.cpp",
+              "range": {
+                "startLine": 2357,
+                "startChar": 0,
+                "endLine": 2358,
+                "endChar": 0
+              },
+              "replacement": "                /*logPermissionFailure\u003d*/ false);\n"
+            },
+            {
+              "path": "services/sensorservice/SensorService.cpp",
+              "range": {
+                "startLine": 2652,
+                "startChar": 0,
+                "endLine": 2653,
+                "endChar": 0
+              },
+              "replacement": "            /*logPermissionFailure\u003d*/ false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8895d3d_8c9e3775",
+        "filename": "services/sensorservice/SensorService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2653,
+      "author": {
+        "id": 1094493
+      },
+      "writtenOn": "2025-01-11T01:36:46Z",
+      "side": 1,
+      "message": "I\u0027ll +2 this CL but note that we plan to remove this backwards compatibility behavior entirely in Android 16.",
+      "range": {
+        "startLine": 2653,
+        "startChar": 8,
+        "endLine": 2653,
+        "endChar": 56
+      },
+      "revId": "a7eb3e8e8a9257db33c2d5449fee36ba5ffe62c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
