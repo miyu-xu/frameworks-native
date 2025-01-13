@@ -596,7 +596,7 @@ bool GraphicsEnv::shouldUseAngle() {
 // If path is set to nonempty and shouldUseNativeDriver is true, ANGLE will be used regardless.
 void GraphicsEnv::setAngleInfo(const std::string& path, const bool shouldUseNativeDriver,
                                const std::string& packageName,
-                               const std::vector<std::string>& eglFeatures) {
+                               const std::vector<std::string> eglFeatures) {
     if (mShouldUseAngle) {
         // ANGLE is already set up for this application process, even if the application
         // needs to switch from apk to system or vice versa, the application process must
@@ -606,11 +606,11 @@ void GraphicsEnv::setAngleInfo(const std::string& path, const bool shouldUseNati
         return;
     }
 
-    mAngleEglFeatures = eglFeatures;
+    mAngleEglFeatures = std::move(eglFeatures);
     ALOGV("setting ANGLE path to '%s'", path.c_str());
-    mAnglePath = path;
+    mAnglePath = std::move(path);
     ALOGV("setting app package name to '%s'", packageName.c_str());
-    mPackageName = packageName;
+    mPackageName = std::move(packageName);
     if (mAnglePath == "system") {
         mShouldUseSystemAngle = true;
     }
