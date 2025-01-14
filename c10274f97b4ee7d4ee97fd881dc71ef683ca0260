@@ -103,6 +103,52 @@
       "parentUuid": "1e7f05d0_fb215bc3",
       "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f12e9d_48b9a20f",
+        "filename": "libs/nativewindow/AHardwareBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-01-14T21:45:13Z",
+      "side": 1,
+      "message": "PixelFormat::R_12_UINT doesn\u0027t exist - are there other patches as part of this? I\u0027d expect so (such as the additions to hardware/interfaces). Can you put all the CLs into a single topic so it\u0027s both more clear what\u0027s going on but also so that they are submitted together atomically to avoid any build breakages",
+      "range": {
+        "startLine": 119,
+        "startChar": 74,
+        "endLine": 119,
+        "endChar": 96
+      },
+      "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a93873_a949c2de",
+        "filename": "libs/nativewindow/include/android/hardware_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-01-14T21:45:13Z",
+      "side": 1,
+      "message": "Let\u0027s stick with the naming scheme established by R10G10B10A10 and not include any X2/X4 in this or the other new fields. Document the CPU layout as a comment, which would include the padding bits, but otherwise omit it from the format enum name.",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 37
+      },
+      "revId": "c10274f97b4ee7d4ee97fd881dc71ef683ca0260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
