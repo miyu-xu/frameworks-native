@@ -84,9 +84,10 @@ MODULE_EXPORT_COMPILEFLAGS += \
 	$(BINDER_EXTRA_COMPILE_FLAGS)
 
 # libbinder has some deprecated declarations that we want to produce warnings
-# not errors
+# not errors. Similarly, we do not want errors for unused but set variables.
 MODULE_EXPORT_COMPILEFLAGS += \
 	-Wno-error=deprecated-declarations \
+	-Wno-error=unused-but-set-variable \
 
 MODULE_LIBRARY_DEPS += \
 	trusty/user/base/lib/libstdc++-trusty \
