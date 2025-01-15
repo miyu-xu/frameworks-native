@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c571f4_6c17df77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2025-01-15T17:38:33Z",
+      "side": 1,
+      "message": "why do we need to restrict automerge? `Merged-In` should be enough",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
