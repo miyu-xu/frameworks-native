@@ -22,6 +22,30 @@
       },
       "revId": "71c26316ca618117fc23d4425d64701bf6557e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3e770a1_6bdc79df",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-15T22:57:24Z",
+      "side": 1,
+      "message": "I created a bug but apologies if its not in the right component; I wasn\u0027t 100% sure. I think the build failed because it was in a topic with CLs that can\u0027t land; let\u0027s try to land it on its own.",
+      "parentUuid": "e19cd08b_b49192d5",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "71c26316ca618117fc23d4425d64701bf6557e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
