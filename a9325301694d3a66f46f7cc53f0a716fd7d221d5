@@ -70,6 +70,30 @@
       },
       "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22d8457_cd61b11d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1812805
+      },
+      "writtenOn": "2025-01-15T17:51:02Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a bug fix. Removed the restrict automerge.",
+      "parentUuid": "2a9c8df6_476898d1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
