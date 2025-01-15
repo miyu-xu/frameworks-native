@@ -46,6 +46,30 @@
       },
       "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9c8df6_476898d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2025-01-15T17:49:13Z",
+      "side": 1,
+      "message": "But would we want to keep the change API level bound? This is juat a bug fix, isn\u0027t it? (which is also fixed on main by the exact same change)",
+      "parentUuid": "ccb3e09c_f6a1ed38",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
