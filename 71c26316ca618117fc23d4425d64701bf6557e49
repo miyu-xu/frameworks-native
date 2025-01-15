@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19cd08b_b49192d5",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-15T20:58:38Z",
+      "side": 1,
+      "message": "We do want them, but it\u0027s failing the build. Can you open a bug on binder for this and share what the errors are?",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "71c26316ca618117fc23d4425d64701bf6557e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
