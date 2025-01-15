@@ -16,6 +16,24 @@
       "message": "+2 - is there a bug tracking the stress? Maybe optimizations could be looked at somewhere by the team",
       "revId": "2446f1d6384d3d4dccedd7fb857aec39278fef19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "835cb560_8ad0c8ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-15T00:43:37Z",
+      "side": 1,
+      "message": "I believe it\u0027s actually due to b/389067592 now, causing bad performance of the entire system. Have separate thread for what we can do about these flakes, but might as well submit this. Thanks.",
+      "parentUuid": "9834750a_87b896be",
+      "revId": "2446f1d6384d3d4dccedd7fb857aec39278fef19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
