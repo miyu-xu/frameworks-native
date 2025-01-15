@@ -552,7 +552,7 @@ status_t Parcel::appendFrom(const Parcel* parcel, size_t offset, size_t len) {
 
     err = NO_ERROR;
 
-    if (auto* kernelFields = maybeKernelFields()) {
+    if (auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         auto* otherKernelFields = parcel->maybeKernelFields();
         LOG_ALWAYS_FATAL_IF(otherKernelFields == nullptr);
@@ -779,7 +779,7 @@ std::vector<sp<IBinder>> Parcel::debugReadAllStrongBinders() const {
 std::vector<int> Parcel::debugReadAllFileDescriptors() const {
     std::vector<int> ret;
 
-    if (const auto* kernelFields = maybeKernelFields()) {
+    if (const auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         size_t initPosition = dataPosition();
         for (size_t i = 0; i < kernelFields->mObjectsSize; i++) {
@@ -818,7 +818,7 @@ status_t Parcel::hasBindersInRange(size_t offset, size_t len, bool* result) cons
         return BAD_VALUE;
     }
     *result = false;
-    if (const auto* kernelFields = maybeKernelFields()) {
+    if (const auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         for (size_t i = 0; i < kernelFields->mObjectsSize; i++) {
             size_t pos = kernelFields->mObjects[i];
@@ -841,7 +841,7 @@ status_t Parcel::hasBindersInRange(size_t offset, size_t len, bool* result) cons
         LOG_ALWAYS_FATAL("Binder kernel driver disabled at build time");
         return INVALID_OPERATION;
 #endif // BINDER_WITH_KERNEL_IPC
-    } else if (const auto* rpcFields = maybeRpcFields()) {
+    } else if (maybeRpcFields()) {
         return INVALID_OPERATION;
     }
     return NO_ERROR;
@@ -858,7 +858,7 @@ status_t Parcel::hasFileDescriptorsInRange(size_t offset, size_t len, bool* resu
         return BAD_VALUE;
     }
     *result = false;
-    if (const auto* kernelFields = maybeKernelFields()) {
+    if (const auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         for (size_t i = 0; i < kernelFields->mObjectsSize; i++) {
             size_t pos = kernelFields->mObjects[i];
@@ -961,7 +961,7 @@ status_t Parcel::writeInterfaceToken(const String16& interface)
 }
 
 status_t Parcel::writeInterfaceToken(const char16_t* str, size_t len) {
-    if (auto* kernelFields = maybeKernelFields()) {
+    if (auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         const IPCThreadState* threadState = IPCThreadState::self();
         writeInt32(threadState->getStrictModePolicy() | STRICT_MODE_PENALTY_GATHER);
@@ -1028,7 +1028,7 @@ bool Parcel::enforceInterface(const char16_t* interface,
                               size_t len,
                               IPCThreadState* threadState) const
 {
-    if (auto* kernelFields = maybeKernelFields()) {
+    if (auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         // StrictModePolicy.
         int32_t strictPolicy = readInt32();
@@ -2672,7 +2672,7 @@ const flat_binder_object* Parcel::readObject(bool nullMetaData) const
 #endif // BINDER_WITH_KERNEL_IPC
 
 void Parcel::closeFileDescriptors() {
-    if (auto* kernelFields = maybeKernelFields()) {
+    if (auto* kernelFields __attribute__((unused)) = maybeKernelFields()) {
 #ifdef BINDER_WITH_KERNEL_IPC
         size_t i = kernelFields->mObjectsSize;
         if (i > 0) {
