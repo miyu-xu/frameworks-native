@@ -22,6 +22,30 @@
       },
       "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb3e09c_f6a1ed38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1812805
+      },
+      "writtenOn": "2025-01-15T17:45:38Z",
+      "side": 1,
+      "message": "I saw that mentioned in the tip here : go/xts-repo#cts-vts-quarterly",
+      "parentUuid": "30c571f4_6c17df77",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "a9325301694d3a66f46f7cc53f0a716fd7d221d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
