@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "220f727d_d963d098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812805
+      },
+      "writtenOn": "2025-01-15T17:35:41Z",
+      "side": 1,
+      "message": "Chrrypick the change on android15-test-dev",
+      "revId": "2ea061c136d2d62bc1807371c9b40d967228b281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
