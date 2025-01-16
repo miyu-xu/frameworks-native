@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd8ad735_f82e5ceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2025-01-16T19:09:43Z",
+      "side": 1,
+      "message": "LGTM for unsafe rust modulo a missing `unsafe` and safety comment.",
+      "revId": "d812a1971706ba03bc1d027b512b3db9147e1276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820abb24_b544431d",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2025-01-16T19:09:43Z",
+      "side": 1,
+      "message": "nit: This function should also be `unsafe` as calling it requires that `get_func` behave a particular way with the provided pointers.\n\nIt should also document the expected contract of `get_func`.",
+      "revId": "d812a1971706ba03bc1d027b512b3db9147e1276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
