@@ -22,14 +22,16 @@ use crate::{
 };
 use binder_ndk_sys::{
     APersistableBundle, APersistableBundle_delete, APersistableBundle_dup,
-    APersistableBundle_erase, APersistableBundle_getBoolean, APersistableBundle_getDouble,
-    APersistableBundle_getInt, APersistableBundle_getLong, APersistableBundle_isEqual,
-    APersistableBundle_new, APersistableBundle_putBoolean, APersistableBundle_putBooleanVector,
-    APersistableBundle_putDouble, APersistableBundle_putDoubleVector, APersistableBundle_putInt,
-    APersistableBundle_putIntVector, APersistableBundle_putLong, APersistableBundle_putLongVector,
+    APersistableBundle_erase, APersistableBundle_getBoolean, APersistableBundle_getBooleanVector,
+    APersistableBundle_getDouble, APersistableBundle_getDoubleVector, APersistableBundle_getInt,
+    APersistableBundle_getIntVector, APersistableBundle_getLong, APersistableBundle_getLongVector,
+    APersistableBundle_isEqual, APersistableBundle_new, APersistableBundle_putBoolean,
+    APersistableBundle_putBooleanVector, APersistableBundle_putDouble,
+    APersistableBundle_putDoubleVector, APersistableBundle_putInt, APersistableBundle_putIntVector,
+    APersistableBundle_putLong, APersistableBundle_putLongVector,
     APersistableBundle_putPersistableBundle, APersistableBundle_putString,
     APersistableBundle_putStringVector, APersistableBundle_readFromParcel, APersistableBundle_size,
-    APersistableBundle_writeToParcel,
+    APersistableBundle_writeToParcel, APERSISTABLEBUNDLE_KEY_NOT_FOUND,
 };
 use std::ffi::{CString, NulError};
 use std::ptr::{null_mut, NonNull};
@@ -367,6 +369,78 @@ impl PersistableBundle {
             Ok(None)
         }
     }
+
+    /// Gets the vector of `T` associated with the given key.
+    ///
+    /// Returns an error if the key contains a NUL character, or `Ok(None)` if the key doesn't exist
+    /// in the bundle.
+    fn get_vec<T: Clone + Default>(
+        &self,
+        key: &str,
+        get_func: unsafe extern "C" fn(*const APersistableBundle, *const u8, *mut T, i32) -> i32,
+    ) -> Result<Option<Vec<T>>, NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`. A null pointer is allowed for the buffer.
+        let required_buffer_size =
+            unsafe { get_func(self.0.as_ptr(), key.as_ptr(), null_mut(), 0) };
+
+        if required_buffer_size == APERSISTABLEBUNDLE_KEY_NOT_FOUND {
+            Ok(None)
+        } else {
+            let mut value = vec![
+                T::default();
+                usize::try_from(required_buffer_size)
+                    .expect("APersistableBundle_get*Vector returned invalid size")
+                    / size_of::<T>()
+            ];
+            // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+            // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is
+            // guaranteed to be valid for the lifetime of `key`.
+            unsafe {
+                get_func(
+                    self.0.as_ptr(),
+                    key.as_ptr(),
+                    value.as_mut_ptr(),
+                    (value.len() * size_of::<T>()).try_into().unwrap(),
+                )
+            };
+            Ok(Some(value))
+        }
+    }
+
+    /// Gets the boolean vector value associated with the given key.
+    ///
+    /// Returns an error if the key contains a NUL character, or `Ok(None)` if the key doesn't exist
+    /// in the bundle.
+    pub fn get_bool_vec(&self, key: &str) -> Result<Option<Vec<bool>>, NulError> {
+        self.get_vec(key, APersistableBundle_getBooleanVector)
+    }
+
+    /// Gets the i32 vector value associated with the given key.
+    ///
+    /// Returns an error if the key contains a NUL character, or `Ok(None)` if the key doesn't exist
+    /// in the bundle.
+    pub fn get_int_vec(&self, key: &str) -> Result<Option<Vec<i32>>, NulError> {
+        self.get_vec(key, APersistableBundle_getIntVector)
+    }
+
+    /// Gets the i64 vector value associated with the given key.
+    ///
+    /// Returns an error if the key contains a NUL character, or `Ok(None)` if the key doesn't exist
+    /// in the bundle.
+    pub fn get_long_vec(&self, key: &str) -> Result<Option<Vec<i64>>, NulError> {
+        self.get_vec(key, APersistableBundle_getLongVector)
+    }
+
+    /// Gets the f64 vector value associated with the given key.
+    ///
+    /// Returns an error if the key contains a NUL character, or `Ok(None)` if the key doesn't exist
+    /// in the bundle.
+    pub fn get_double_vec(&self, key: &str) -> Result<Option<Vec<f64>>, NulError> {
+        self.get_vec(key, APersistableBundle_getDoubleVector)
+    }
 }
 
 // SAFETY: The underlying *APersistableBundle can be moved between threads.
@@ -459,6 +533,10 @@ mod test {
         assert_eq!(bundle.get_int("foo"), Ok(None));
         assert_eq!(bundle.get_long("foo"), Ok(None));
         assert_eq!(bundle.get_double("foo"), Ok(None));
+        assert_eq!(bundle.get_bool_vec("foo"), Ok(None));
+        assert_eq!(bundle.get_int_vec("foo"), Ok(None));
+        assert_eq!(bundle.get_long_vec("foo"), Ok(None));
+        assert_eq!(bundle.get_double_vec("foo"), Ok(None));
     }
 
     #[test]
@@ -516,7 +594,7 @@ mod test {
     }
 
     #[test]
-    fn insert_vec() {
+    fn insert_get_vec() {
         let mut bundle = PersistableBundle::new();
 
         assert_eq!(bundle.insert_bool_vec("bool", &[]), Ok(()));
@@ -526,6 +604,11 @@ mod test {
         assert_eq!(bundle.insert_string_vec("string", &["foo", "bar", "baz"]), Ok(()));
 
         assert_eq!(bundle.size(), 5);
+
+        assert_eq!(bundle.get_bool_vec("bool"), Ok(Some(vec![])));
+        assert_eq!(bundle.get_int_vec("int"), Ok(Some(vec![42])));
+        assert_eq!(bundle.get_long_vec("long"), Ok(Some(vec![66, 67, 68])));
+        assert_eq!(bundle.get_double_vec("double"), Ok(Some(vec![123.4])));
     }
 
     #[test]
