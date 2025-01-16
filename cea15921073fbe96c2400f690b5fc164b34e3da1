@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab490ffc_fa148f58",
+        "filename": "libs/binder/rust/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-01-16T17:10:18Z",
+      "side": 1,
+      "message": "Why is this not in trusty?",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 19
+      },
+      "revId": "cea15921073fbe96c2400f690b5fc164b34e3da1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
