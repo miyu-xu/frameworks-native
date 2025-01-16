@@ -70,6 +70,23 @@
       },
       "revId": "6933c0d931b431c998fa847f9518425c8a7a0d2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c999ca45_56db9a6a",
+        "filename": "cmds/installd/InstalldNativeService.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 3699,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2025-01-16T17:28:39Z",
+      "side": 1,
+      "message": "Please make this a constant in line 122. Also make the string a raw string so you don\u0027t have to add additional escapes.\n\nconst std::regex kMntFuseRe \u003d std::regex(R\"^/mnt/pass_through/(0|[0-9]+/[A-Z0-9]{4}-[A-Z0-9]{4}).*\");",
+      "revId": "6933c0d931b431c998fa847f9518425c8a7a0d2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
