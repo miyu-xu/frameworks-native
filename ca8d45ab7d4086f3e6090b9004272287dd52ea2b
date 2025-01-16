@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85291297_c1832e3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-16T09:31:51Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM!",
+      "revId": "ca8d45ab7d4086f3e6090b9004272287dd52ea2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af1d9e8_feaed2f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-16T09:31:51Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM",
+      "revId": "ca8d45ab7d4086f3e6090b9004272287dd52ea2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
