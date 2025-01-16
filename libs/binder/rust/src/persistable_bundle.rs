@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
+use crate::{
+    binder::AsNative,
+    error::{status_result, StatusCode},
+    parcel::{BorrowedParcel, UnstructuredParcelable},
+};
 use binder_ndk_sys::{
     APersistableBundle, APersistableBundle_delete, APersistableBundle_dup,
-    APersistableBundle_isEqual, APersistableBundle_new, APersistableBundle_size,
+    APersistableBundle_isEqual, APersistableBundle_new, APersistableBundle_readFromParcel,
+    APersistableBundle_size, APersistableBundle_writeToParcel,
 };
-use std::ptr::NonNull;
+use std::ptr::{null_mut, NonNull};
 
 /// A mapping from string keys to values of various types.
 #[derive(Debug)]
@@ -70,6 +76,31 @@ impl PartialEq for PersistableBundle {
         // SAFETY: The wrapped `APersistableBundle` pointers are guaranteed to be valid for the
         // lifetime of the `PersistableBundle`s.
         unsafe { APersistableBundle_isEqual(self.0.as_ptr(), other.0.as_ptr()) }
+    }
+}
+
+impl UnstructuredParcelable for PersistableBundle {
+    fn write_to_parcel(&self, parcel: &mut BorrowedParcel) -> Result<(), StatusCode> {
+        let status =
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. `parcel.as_native_mut()` always returns a valid
+        // parcel pointer.
+            unsafe { APersistableBundle_writeToParcel(self.0.as_ptr(), parcel.as_native_mut()) };
+        status_result(status)
+    }
+
+    fn from_parcel(parcel: &BorrowedParcel) -> Result<Self, StatusCode> {
+        let mut bundle = null_mut();
+
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. `parcel.as_native()` always returns a valid parcel
+        // pointer.
+        let status = unsafe { APersistableBundle_readFromParcel(parcel.as_native(), &mut bundle) };
+        status_result(status)?;
+
+        Ok(Self(NonNull::new(bundle).expect(
+            "APersistableBundle_readFromParcel returned success but didn't allocate bundle",
+        )))
     }
 }
 
