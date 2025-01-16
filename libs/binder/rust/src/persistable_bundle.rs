@@ -24,9 +24,12 @@ use binder_ndk_sys::{
     APersistableBundle, APersistableBundle_delete, APersistableBundle_dup,
     APersistableBundle_erase, APersistableBundle_getBoolean, APersistableBundle_getDouble,
     APersistableBundle_getInt, APersistableBundle_getLong, APersistableBundle_isEqual,
-    APersistableBundle_new, APersistableBundle_putBoolean, APersistableBundle_putDouble,
-    APersistableBundle_putInt, APersistableBundle_putLong, APersistableBundle_readFromParcel,
-    APersistableBundle_size, APersistableBundle_writeToParcel,
+    APersistableBundle_new, APersistableBundle_putBoolean, APersistableBundle_putBooleanVector,
+    APersistableBundle_putDouble, APersistableBundle_putDoubleVector, APersistableBundle_putInt,
+    APersistableBundle_putIntVector, APersistableBundle_putLong, APersistableBundle_putLongVector,
+    APersistableBundle_putPersistableBundle, APersistableBundle_putString,
+    APersistableBundle_putStringVector, APersistableBundle_readFromParcel, APersistableBundle_size,
+    APersistableBundle_writeToParcel,
 };
 use std::ffi::{CString, NulError};
 use std::ptr::{null_mut, NonNull};
@@ -124,6 +127,171 @@ impl PersistableBundle {
         // to be valid for the lifetime of `key`.
         unsafe {
             APersistableBundle_putDouble(self.0.as_ptr(), key.as_ptr(), value);
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key or value contains a NUL character.
+    pub fn insert_string(&mut self, key: &str, value: &str) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        let value = CString::new(value)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `CStr::as_ptr` is guaranteed
+        // to be valid for the lifetime of `key` or `value`.
+        unsafe {
+            APersistableBundle_putString(self.0.as_ptr(), key.as_ptr(), value.as_ptr());
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_bool_vec(&mut self, key: &str, value: &[bool]) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`, and likewise the pointer returned by
+        // `value.as_ptr()` is guaranteed to be valid for at least `value.len()` values for the
+        // lifetime of `value`.
+        unsafe {
+            APersistableBundle_putBooleanVector(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                value.as_ptr(),
+                value.len().try_into().unwrap(),
+            );
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_int_vec(&mut self, key: &str, value: &[i32]) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`, and likewise the pointer returned by
+        // `value.as_ptr()` is guaranteed to be valid for at least `value.len()` values for the
+        // lifetime of `value`.
+        unsafe {
+            APersistableBundle_putIntVector(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                value.as_ptr(),
+                value.len().try_into().unwrap(),
+            );
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_long_vec(&mut self, key: &str, value: &[i64]) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`, and likewise the pointer returned by
+        // `value.as_ptr()` is guaranteed to be valid for at least `value.len()` values for the
+        // lifetime of `value`.
+        unsafe {
+            APersistableBundle_putLongVector(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                value.as_ptr(),
+                value.len().try_into().unwrap(),
+            );
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_double_vec(&mut self, key: &str, value: &[f64]) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`, and likewise the pointer returned by
+        // `value.as_ptr()` is guaranteed to be valid for at least `value.len()` values for the
+        // lifetime of `value`.
+        unsafe {
+            APersistableBundle_putDoubleVector(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                value.as_ptr(),
+                value.len().try_into().unwrap(),
+            );
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_string_vec(
+        &mut self,
+        key: &str,
+        value: &[impl Into<Vec<u8>> + Copy],
+    ) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // We need to collect the new `CString`s into something first so that they live long enough
+        // for their pointers to be valid for the `APersistableBundle_putStringVector` call below.
+        let c_strings =
+            value.iter().map(|s| CString::new(*s)).collect::<Result<Vec<_>, NulError>>()?;
+        let char_pointers = c_strings.iter().map(|s| s.as_ptr()).collect::<Vec<_>>();
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. The pointer returned by `key.as_ptr()` is guaranteed
+        // to be valid for the lifetime of `key`, and likewise the pointer returned by
+        // `value.as_ptr()` is guaranteed to be valid for at least `value.len()` values for the
+        // lifetime of `value`.
+        unsafe {
+            APersistableBundle_putStringVector(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                char_pointers.as_ptr(),
+                char_pointers.len().try_into().unwrap(),
+            );
+        }
+        Ok(())
+    }
+
+    /// Inserts a key-value pair into the bundle.
+    ///
+    /// If the key is already present then its value will be overwritten by the given value.
+    ///
+    /// Returns an error if the key contains a NUL character.
+    pub fn insert_persistable_bundle(
+        &mut self,
+        key: &str,
+        value: &PersistableBundle,
+    ) -> Result<(), NulError> {
+        let key = CString::new(key)?;
+        // SAFETY: The wrapped `APersistableBundle` pointers are guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`s. The pointer returned by `CStr::as_ptr` is
+        // guaranteed to be valid for the lifetime of `key` or `value`.
+        unsafe {
+            APersistableBundle_putPersistableBundle(
+                self.0.as_ptr(),
+                key.as_ptr(),
+                value.0.as_ptr(),
+            );
         }
         Ok(())
     }
@@ -338,5 +506,25 @@ mod test {
         assert_eq!(bundle.get_long("long"), Ok(None));
         assert_eq!(bundle.get_double("double"), Ok(None));
         assert_eq!(bundle.size(), 0);
+    }
+
+    #[test]
+    fn insert_string() {
+        let mut bundle = PersistableBundle::new();
+        assert_eq!(bundle.insert_string("string", "foo"), Ok(()));
+        assert_eq!(bundle.size(), 1);
+    }
+
+    #[test]
+    fn insert_vec() {
+        let mut bundle = PersistableBundle::new();
+
+        assert_eq!(bundle.insert_bool_vec("bool", &[]), Ok(()));
+        assert_eq!(bundle.insert_int_vec("int", &[42]), Ok(()));
+        assert_eq!(bundle.insert_long_vec("long", &[66, 67, 68]), Ok(()));
+        assert_eq!(bundle.insert_double_vec("double", &[123.4]), Ok(()));
+        assert_eq!(bundle.insert_string_vec("string", &["foo", "bar", "baz"]), Ok(()));
+
+        assert_eq!(bundle.size(), 5);
     }
 }
