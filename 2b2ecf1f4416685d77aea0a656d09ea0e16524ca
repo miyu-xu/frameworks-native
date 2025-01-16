@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343c6d2a_6028dae2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2025-01-16T17:29:48Z",
+      "side": 1,
+      "message": "Please move these into seperate lines.\n\n```suggestion\nTest: atest ExternalStorageHostTest\nFixes: 299996244\nFlag: EXEMPT refactor\n```",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "2b2ecf1f4416685d77aea0a656d09ea0e16524ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
