@@ -46,6 +46,30 @@
       },
       "revId": "71c26316ca618117fc23d4425d64701bf6557e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3813cb36_8d920f32",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-16T05:54:08Z",
+      "side": 1,
+      "message": "Putting it back on the rust-1.82 topic since we need to roll the C compiler at the same time which in turn requires this CL. Sorry for the extra noise.",
+      "parentUuid": "f3e770a1_6bdc79df",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "71c26316ca618117fc23d4425d64701bf6557e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
