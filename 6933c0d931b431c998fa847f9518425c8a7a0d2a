@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd3f35e_867f7adf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2025-01-16T17:21:56Z",
+      "side": 1,
+      "message": "Is this logic introduced by the CL or already present in the code base?\n\nIf it is latter, please remove this from the commit message as it is confusing to mention but not reflected in the change?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 38
+      },
+      "revId": "6933c0d931b431c998fa847f9518425c8a7a0d2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
