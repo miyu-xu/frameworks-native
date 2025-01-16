@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c517a5c0_04f3894c",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T11:26:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81a79327_203e7b39",
+      "revId": "684fbd874f9a592d338d38eeedc09252bb5408a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6023223_80c65ef6",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-01-16T09:11:10Z",
       "side": 1,
       "message": "Nit: Moving the semicolon outside the unsafe block will format this in a slightly nicer way.\n```\nunsafe { APersistableBundle_delete(self.0.as_ptr()) };\n```",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "684fbd874f9a592d338d38eeedc09252bb5408a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f520395_96fefee3",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T11:26:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6023223_80c65ef6",
       "range": {
         "startLine": 53,
         "startChar": 0,
