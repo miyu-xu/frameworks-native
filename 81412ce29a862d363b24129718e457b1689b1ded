@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3136096a_401a5395",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-17T15:39:39Z",
+      "side": 1,
+      "message": "One option is to take `\u0026CStr` as the argument to this function. That will eliminate these allocations and error paths. It will also permit non-utf8 values.\n\nRust has `c\"my_string\"` syntax for easily creating c strings.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 41
+      },
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb82e238_c9a7b60e",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-17T15:39:39Z",
+      "side": 1,
+      "message": "I\u0027d probably say \"duration of this call\" rather than \"lifetime of key\".",
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe65dac_b27d8199",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-17T15:39:39Z",
+      "side": 1,
+      "message": "I would probably use a type like `impl IntoIterator\u003cItem \u003d T\u003e` with `\u003cT: ToString\u003e`. Or if you switch the other APIs to `\u0026CStr`, then `\u003cT: AsRef\u003cCStr\u003e\u003e`.",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 31
+      },
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34cf82ba_74ff5175",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-17T15:39:39Z",
+      "side": 1,
+      "message": "This only requires `value` to be valid for the duration of this call? E.g., does it copy `value`?",
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
