@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d2e254_a6ffe579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-17T14:09:49Z",
+      "side": 1,
+      "message": "Unsafe Rust looks nice, the rest also seems reasonable to my eye.",
+      "revId": "e9462c49f8c57a51eb5fe7a1d1e55414e5171a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
