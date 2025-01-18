@@ -46,6 +46,30 @@
       },
       "revId": "ed08e524a9afa4fefb46f3371c8513dd2f613dbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d98b3a7_3d54d21b",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-18T10:03:02Z",
+      "side": 1,
+      "message": "Derp. Second sentence should read:\n\n\u003e In some builds, variables are indeed unused but in others, the variables are used.",
+      "parentUuid": "f0971f42_aaad54f4",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "ed08e524a9afa4fefb46f3371c8513dd2f613dbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
