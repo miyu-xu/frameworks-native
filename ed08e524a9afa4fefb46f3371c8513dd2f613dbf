@@ -22,6 +22,30 @@
       },
       "revId": "ed08e524a9afa4fefb46f3371c8513dd2f613dbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0971f42_aaad54f4",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-18T09:57:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure there is anything to fix per se. In some builds, variables are unused but in others, the variables are indeed unused. I can see why the new lint can be useful but it isn\u0027t surfacing variables that are unintentionally unused in all software product lines. \n\nI\u0027ve marked the varibles in question as unused via an attribute. This is a more targeted solution than simply treating all instances of this lint as a warning.\n\nSorry if my previous commit message didn\u0027t make this clear, the bug has more detail.",
+      "parentUuid": "9447c80c_c7f67d08",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "ed08e524a9afa4fefb46f3371c8513dd2f613dbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
