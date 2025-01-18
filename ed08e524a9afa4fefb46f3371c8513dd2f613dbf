@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9447c80c_c7f67d08",
+        "filename": "libs/binder/trusty/rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-18T04:12:14Z",
+      "side": 1,
+      "message": "(I know we talked on chat, but got to this in my normal review pass) can you update this to say, \"We need to fix the errors for unused but set variables\" or fix them?",
+      "range": {
+        "startLine": 87,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 76
+      },
+      "revId": "ed08e524a9afa4fefb46f3371c8513dd2f613dbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
