@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a822e07_8cfdec04",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-20T14:03:12Z",
+      "side": 1,
+      "message": "`APersistableBundle` requires that all keys and string values are UTF-8.\n\nI did consider using `\u0026CStr` for the API, but I think that is a less useful API to provide to callers, as it makes more work for them to convert from Rust strings.",
+      "parentUuid": "3136096a_401a5395",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 41
+      },
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb82e238_c9a7b60e",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-01-17T15:39:39Z",
       "side": 1,
       "message": "I\u0027d probably say \"duration of this call\" rather than \"lifetime of key\".",
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a40e251_b7cb0416",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-20T14:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb82e238_c9a7b60e",
       "revId": "81412ce29a862d363b24129718e457b1689b1ded",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dfeacfe_977d5568",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-20T14:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfe65dac_b27d8199",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 31
+      },
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34cf82ba_74ff5175",
@@ -77,6 +143,24 @@
       "writtenOn": "2025-01-17T15:39:39Z",
       "side": 1,
       "message": "This only requires `value` to be valid for the duration of this call? E.g., does it copy `value`?",
+      "revId": "81412ce29a862d363b24129718e457b1689b1ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e424c79a_253eb0f3",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-20T14:03:12Z",
+      "side": 1,
+      "message": "Yes, `APersistableBundle_putPersistableBundle` does a deep copy. Mentioned that in the safety comment now.",
+      "parentUuid": "34cf82ba_74ff5175",
       "revId": "81412ce29a862d363b24129718e457b1689b1ded",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
