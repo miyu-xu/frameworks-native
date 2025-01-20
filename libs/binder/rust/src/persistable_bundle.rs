@@ -22,9 +22,10 @@ use crate::{
 };
 use binder_ndk_sys::{
     APersistableBundle, APersistableBundle_delete, APersistableBundle_dup,
-    APersistableBundle_erase, APersistableBundle_getBoolean, APersistableBundle_getBooleanVector,
-    APersistableBundle_getDouble, APersistableBundle_getDoubleVector, APersistableBundle_getInt,
-    APersistableBundle_getIntVector, APersistableBundle_getLong, APersistableBundle_getLongVector,
+    APersistableBundle_erase, APersistableBundle_getBoolean, APersistableBundle_getBooleanKeys,
+    APersistableBundle_getBooleanVector, APersistableBundle_getDouble,
+    APersistableBundle_getDoubleVector, APersistableBundle_getInt, APersistableBundle_getIntVector,
+    APersistableBundle_getLong, APersistableBundle_getLongVector,
     APersistableBundle_getPersistableBundle, APersistableBundle_getString,
     APersistableBundle_getStringVector, APersistableBundle_isEqual, APersistableBundle_new,
     APersistableBundle_putBoolean, APersistableBundle_putBooleanVector,
@@ -589,6 +590,68 @@ impl PersistableBundle {
             Ok(None)
         }
     }
+
+    /// Gets all the keys associated with boolean values.
+    pub fn get_bool_keys(&self) -> Vec<String> {
+        // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for the
+        // lifetime of the `PersistableBundle`. A null pointer is allowed for the buffer.
+        match unsafe {
+            APersistableBundle_getBooleanKeys(
+                self.0.as_ptr(),
+                null_mut(),
+                0,
+                Some(string_allocator),
+                null_mut(),
+            )
+        } {
+            APERSISTABLEBUNDLE_ALLOCATOR_FAILED => {
+                panic!("APersistableBundle_getBooleanKeys failed to allocate string");
+            }
+            required_buffer_size => {
+                let mut keys = vec![
+                    null_mut();
+                    usize::try_from(required_buffer_size).expect(
+                        "APersistableBundle_getBooleanKeys returned invalid size"
+                    ) / size_of::<*mut c_char>()
+                ];
+                // SAFETY: The wrapped `APersistableBundle` pointer is guaranteed to be valid for
+                // the lifetime of the `PersistableBundle`. The keys buffer pointer is valid as it
+                // comes from the Vec we just allocated.
+                if unsafe {
+                    APersistableBundle_getBooleanKeys(
+                        self.0.as_ptr(),
+                        keys.as_mut_ptr(),
+                        (keys.len() * size_of::<*mut c_char>()).try_into().unwrap(),
+                        Some(string_allocator),
+                        null_mut(),
+                    )
+                } == APERSISTABLEBUNDLE_ALLOCATOR_FAILED
+                {
+                    panic!("APersistableBundle_getBooleanKeys failed to allocate string");
+                }
+                keys.into_iter()
+                    .map(|key| {
+                        // SAFETY: The pointer was returned from `string_allocator`, which used
+                        // `Box::into_raw`, and `APersistableBundle_getStringVector` should have
+                        // written valid bytes to it including a NUL terminator in the last
+                        // position.
+                        let string_length = unsafe { CStr::from_ptr(key) }.count_bytes();
+                        let raw_slice = slice_from_raw_parts_mut(key, string_length + 1);
+                        // SAFETY: The pointer was returned from `string_allocator`, which used
+                        // `Box::into_raw`, and we've got the appropriate size back by checking the
+                        // length of the string.
+                        let boxed_slice: Box<[c_char]> = unsafe { Box::from_raw(raw_slice) };
+                        let c_string = CString::from_vec_with_nul(boxed_slice.into()).expect(
+                            "APersistableBundle_getBooleanKeys returned string missing NUL byte",
+                        );
+                        c_string
+                            .into_string()
+                            .expect("APersistableBundle_getBooleanKeys returned invalid UTF-8")
+                    })
+                    .collect()
+            }
+        }
+    }
 }
 
 /// Wrapper around `APersistableBundle_getStringVector` to pass `string_allocator` and a null
@@ -846,5 +909,18 @@ mod test {
         assert_eq!(bundle.insert_persistable_bundle("bundle", &sub_bundle), Ok(()));
 
         assert_eq!(bundle.get_persistable_bundle("bundle"), Ok(Some(sub_bundle)));
+    }
+
+    #[test]
+    fn get_keys() {
+        let mut bundle = PersistableBundle::new();
+
+        assert_eq!(bundle.get_bool_keys(), Vec::<String>::new());
+
+        assert_eq!(bundle.insert_bool("bool1", false), Ok(()));
+        assert_eq!(bundle.insert_bool("bool2", true), Ok(()));
+        assert_eq!(bundle.insert_int("int", 42), Ok(()));
+
+        assert_eq!(bundle.get_bool_keys(), vec!["bool1".to_string(), "bool2".to_string()]);
     }
 }
