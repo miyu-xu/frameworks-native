@@ -33,6 +33,24 @@
       "message": "nit: This function should also be `unsafe` as calling it requires that `get_func` behave a particular way with the provided pointers.\n\nIt should also document the expected contract of `get_func`.",
       "revId": "d812a1971706ba03bc1d027b512b3db9147e1276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cad171e_66cbe744",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-20T14:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "820abb24_b544431d",
+      "revId": "d812a1971706ba03bc1d027b512b3db9147e1276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
