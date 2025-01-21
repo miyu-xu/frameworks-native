@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d89fae_f18f5759",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-21T09:45:35Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM, but I think it can be simplied as mentioned in my comment.",
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "486d54fb_8efb0abe",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-21T09:45:35Z",
+      "side": 1,
+      "message": "I haven\u0027t double-checked the types here, but it looks to me like this is the same as [`Cstr::to_bytes_with_nul`](https://doc.rust-lang.org/stable/std/ffi/struct.CStr.html#method.to_bytes_with_nul)?",
+      "range": {
+        "startLine": 551,
+        "startChar": 24,
+        "endLine": 551,
+        "endChar": 94
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155b0450_327516b1",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-21T09:45:35Z",
+      "side": 1,
+      "message": "Reading further, is this not the same as `CStr::from_ptr(s).to_owned()`?\n\nThat is, the unsafe and dangerous part is asserting that `s` points to a NUL-terminated string. From that point on, the safe `to_owned` method can be used.",
+      "range": {
+        "startLine": 556,
+        "startChar": 24,
+        "endLine": 556,
+        "endChar": 65
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e121d5_2be92892",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-21T09:45:35Z",
+      "side": 1,
+      "message": "Perhaps an early return would be nice here?",
+      "range": {
+        "startLine": 565,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 20
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
