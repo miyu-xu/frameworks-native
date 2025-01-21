@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adaa71cc_4ecf7e2f",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-21T22:36:48Z",
+      "side": 1,
+      "message": "If msg containded any handles they have already been sent. I don\u0027t think you should send them again.",
+      "revId": "bf7ec6009ffd2c76c2aacb84adbb94227a52b67f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
