@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60142cb_c4c344e1",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-21T08:04:02Z",
+      "side": 1,
+      "message": "Why not just pass `required_buffer_size` here?",
+      "revId": "09d0eea3ab159dee508566fa5ac8246861778c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de027cc_0e85a3c7",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-21T08:04:02Z",
+      "side": 1,
+      "message": "Unsafe Rust Review: How do you know that the allocation fits the nul-terminated string exactly? The library could have allocated more memory than the string takes up.",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 89
+      },
+      "revId": "09d0eea3ab159dee508566fa5ac8246861778c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
