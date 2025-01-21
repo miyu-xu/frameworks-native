@@ -16,6 +16,24 @@
       "message": "Might be easier to just add `(void)kernelFields;` here.",
       "revId": "3cc2e966d7e4119a71974acecd3770e5a79c7adc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac49449_b741b286",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-21T22:02:09Z",
+      "side": 1,
+      "message": "Done. Seems more consistent with other parts of this file.",
+      "parentUuid": "c208ed24_ce5c5d53",
+      "revId": "3cc2e966d7e4119a71974acecd3770e5a79c7adc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
