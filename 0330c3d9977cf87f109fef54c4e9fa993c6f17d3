@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f7f7afa_d39f5373",
+        "filename": "services/sensorservice/OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1094493
+      },
+      "writtenOn": "2025-01-22T00:11:51Z",
+      "side": 1,
+      "message": "Can you put me first? Some tools will auto-assign bugs to the first person in the OWNERS list, etc.",
+      "revId": "0330c3d9977cf87f109fef54c4e9fa993c6f17d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
