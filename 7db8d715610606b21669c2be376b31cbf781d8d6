@@ -16,6 +16,24 @@
       "message": "I don\u0027t think these are quite right (based on the bot failures), but I\u0027m also not sure what would be the correct flags to use. Would appreciate any guidance you have!",
       "revId": "7db8d715610606b21669c2be376b31cbf781d8d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c50a124_7b7b0c5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-22T22:26:03Z",
+      "side": 1,
+      "message": "We have good presubmit coverage here. Perhaps you could create a target that mocks the Fuschia setup, so it\u0027s covered here and the options are visible?",
+      "parentUuid": "b9f1974c_181944c2",
+      "revId": "7db8d715610606b21669c2be376b31cbf781d8d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
