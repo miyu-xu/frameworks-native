@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40ae8dbe_cafd1790",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-22T22:20:27Z",
+      "side": 1,
+      "message": "\u003e  are there docs for Trusty\u0027s wait? \n\nYes, https://source.android.com/docs/security/features/trusty/trusty-ref#wait, but I usually look at the source in case the docs are not updated (definitly the case here)/correct: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:trusty/kernel/lib/trusty/uctx.c;l\u003d528\n\nYou can set an event mask on handles in a handle set, but not on the wait call itself. It might be useful to add support for this in this syscall, but waiting here instead of returning to the event loop in this case, is a bug that should be fixed. The TODO comment copied above hints at this, but I don\u0027t know what \"tipc supports a send-unblocked handler\" means. tipc does support waiting for this event, but the library would need to save the state so it can resume the operation when it gets the IPC_HANDLE_POLL_SEND_UNBLOCKED event.",
+      "parentUuid": "57c6c4df_80a3111f",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 72
+      },
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03003471_9fbd89b7",
         "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
         "patchSetId": 13
@@ -60,6 +84,24 @@
       "writtenOn": "2025-01-22T21:50:03Z",
       "side": 1,
       "message": "is `sent_bytes \u003d\u003d 0` possible if the FD is closed on the other side? if so, it might turn into a busy loop",
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6821b523_14be1981",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-22T22:20:27Z",
+      "side": 1,
+      "message": "I don\u0027t think so. You should get ERR_CHANNEL_CLOSED in that case.",
+      "parentUuid": "03003471_9fbd89b7",
       "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
