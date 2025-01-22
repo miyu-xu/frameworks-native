@@ -382,6 +382,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68427476_bec63965",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-22T21:50:03Z",
+      "side": 1,
+      "message": "Thanks. So, if the message is too big, then `send_msg` will succeed and use the return value to indicate how many bytes were actually sent, right?",
+      "parentUuid": "11100136_41ba796e",
+      "revId": "9e87b8758edb43eb2524a4e4e7cafe0b24b84b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e973027d_492794f0",

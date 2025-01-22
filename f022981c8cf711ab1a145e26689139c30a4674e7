@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc7dc22_967ef997",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-22T21:50:03Z",
+      "side": 1,
+      "message": "`current_iov` isn\u0027t used. i think you can probably do `while (true)` or `while (offset \u003e 0)` instead",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 77
+      },
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c6c4df_80a3111f",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-22T21:50:03Z",
+      "side": 1,
+      "message": "are there docs for Trusty\u0027s `wait`? in unix, when you `poll`, you have to say which events you are interested in, but i don\u0027t see you doing that here. does it listen for all event types? if so, then if a msg is available to read, this looks like it will turn into a busy loop",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 72
+      },
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03003471_9fbd89b7",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-22T21:50:03Z",
+      "side": 1,
+      "message": "is `sent_bytes \u003d\u003d 0` possible if the FD is closed on the other side? if so, it might turn into a busy loop",
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
