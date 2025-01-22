@@ -16,6 +16,24 @@
       "message": "Generally LGTM, just would be nice if we could simplify it somehow.",
       "revId": "dca559e7ecb8e0c0cead37398aa7b9860d9de3ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8edc6d3d_95058563",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2025-01-22T00:39:08Z",
+      "side": 1,
+      "message": "I think it is simpler now.",
+      "parentUuid": "cf07399c_e64d57a2",
+      "revId": "dca559e7ecb8e0c0cead37398aa7b9860d9de3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
