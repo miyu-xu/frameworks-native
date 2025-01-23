@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9762aab3_be410ffe",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T00:03:56Z",
+      "side": 1,
+      "message": "thanks. binder doesn\u0027t support integrating into an event loop yet unfortunately. there is a small one in `interruptableWriteFully` that allows another thread to interrupt a blocked send, but i\u0027d guess tha is unusable in trusty if it is single threaded only",
+      "parentUuid": "40ae8dbe_cafd1790",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 72
+      },
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03003471_9fbd89b7",
@@ -102,6 +126,24 @@
       "side": 1,
       "message": "I don\u0027t think so. You should get ERR_CHANNEL_CLOSED in that case.",
       "parentUuid": "03003471_9fbd89b7",
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596d02da_cf5c1137",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T00:03:56Z",
+      "side": 1,
+      "message": "thanks, resolving",
+      "parentUuid": "6821b523_14be1981",
       "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
