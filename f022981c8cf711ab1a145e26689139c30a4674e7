@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c262b01_e78a1e47",
+        "filename": "libs/binder/trusty/RpcTransportTipcTrusty.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2025-01-23T14:38:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc7dc22_967ef997",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 77
+      },
+      "revId": "f022981c8cf711ab1a145e26689139c30a4674e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c6c4df_80a3111f",
