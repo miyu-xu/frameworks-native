@@ -16,6 +16,24 @@
       "message": "Can you put me first? Some tools will auto-assign bugs to the first person in the OWNERS list, etc.",
       "revId": "0330c3d9977cf87f109fef54c4e9fa993c6f17d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d06b6d5_b92b0a06",
+        "filename": "services/sensorservice/OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958153
+      },
+      "writtenOn": "2025-01-23T08:25:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f7f7afa_d39f5373",
+      "revId": "0330c3d9977cf87f109fef54c4e9fa993c6f17d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
