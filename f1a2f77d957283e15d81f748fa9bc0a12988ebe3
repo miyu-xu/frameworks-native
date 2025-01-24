@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e116cc5e_6d61aa2c",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-24T18:42:14Z",
+      "side": 1,
+      "message": "Btw - \"ANDROID_OR_FUSCHIA\" is a restatement of the same information. It doesn\u0027t tell us what is different (e.g. BINDER_IOCTLS). I would want to understand what this category of things is. For instance, is it every `__ANDROID__`?",
+      "parentUuid": "31aa0027_04966e5a",
+      "range": {
+        "startLine": 1218,
+        "startChar": 12,
+        "endLine": 1218,
+        "endChar": 34
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d26c0837_fb100f25",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 6
