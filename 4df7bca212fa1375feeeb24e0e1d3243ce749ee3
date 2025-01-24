@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5246bc6_d732aadb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-24T23:58:23Z",
+      "side": 1,
+      "message": "Wait - yeah - this is mirrored in the headers as well:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/include/binder/IServiceManager.h;l\u003d332;drc\u003d3c93111ce80d2d7ea3375c39d75bf7dd54f3e15b\n\nIn this case, on Fuschia, that would only cause linking errors, but did you grep the code for other uses of `__ANDROID__`? If Fuschia diverges from any of them, it could introduce runtime failure, undefined behavior, or security issues.",
+      "parentUuid": "7d306a4b_a0997457",
+      "range": {
+        "startLine": 907,
+        "startChar": 0,
+        "endLine": 907,
+        "endChar": 32
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f182a7b_1cfea4c8",
         "filename": "libs/binder/ProcessState.cpp",
         "patchSetId": 9
