@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31aa0027_04966e5a",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-24T00:56:44Z",
+      "side": 1,
+      "message": "Are you sure there are no environments where \"__ANDROID__\" is set but \"BINDER_WITH_KERNEL_IPC\" is not? Please add a static assert to support this assumption (e.g. \"if definde(BINDER_WITH_KERNEL_IPC) and !defined(__ANDROID__) and !defined(__Fuschia___) ... error...\"). That way, the build will tell us that there is a behavior change here.\n\nIf that doesn\u0027t pan out, what I imagined was you doing \"__ANDROID__ || __FUSCHIA__\" (and similar everywhere), and then, since it is repeated maybe factor it out with:\n\n```\n#if defined(__ANDROID__) || defined(__FUSCHIA__)\n#define BINDER_IOCTLS\n#endif\n```\n\nThough, if we can re-isue BINDER_WITH_KERNEL_IPC, agree it\u0027s much better.",
+      "range": {
+        "startLine": 1218,
+        "startChar": 12,
+        "endLine": 1218,
+        "endChar": 34
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26c0837_fb100f25",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-24T00:56:44Z",
+      "side": 1,
+      "message": "This would require 100s and 100s of changes all throughout Android, right? Can you define __ANDROID__ in your build and bring it up like that?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 48
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb670fb_0a10c6b4",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-24T00:56:44Z",
+      "side": 1,
+      "message": "maybe since this (and it\u0027s opposite is repeated) we can factor it out? see other comment",
+      "range": {
+        "startLine": 905,
+        "startChar": 3,
+        "endLine": 905,
+        "endChar": 50
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
