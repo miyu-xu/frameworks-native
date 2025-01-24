@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08de7809_7b47ea73",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1218,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-24T19:24:50Z",
+      "side": 1,
+      "message": "The presubmits seem happy with it now, and I added the static assert you suggested.",
+      "parentUuid": "31aa0027_04966e5a",
+      "range": {
+        "startLine": 1218,
+        "startChar": 12,
+        "endLine": 1218,
+        "endChar": 34
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d26c0837_fb100f25",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6a1aeb_b0fd82d1",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-24T19:24:50Z",
+      "side": 1,
+      "message": "We only build a very small subset of Android (basically just libbinder) for Fuchsia specifically. We build the binder library targeting Fuchsia specifically to enable Fuchsia components to serve HAL interfaces.\n\nOtherwise Android is built targeting Linux, even when run on Fuchsia.",
+      "parentUuid": "d26c0837_fb100f25",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 48
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eb670fb_0a10c6b4",
@@ -84,6 +132,30 @@
       "writtenOn": "2025-01-24T00:56:44Z",
       "side": 1,
       "message": "maybe since this (and it\u0027s opposite is repeated) we can factor it out? see other comment",
+      "range": {
+        "startLine": 905,
+        "startChar": 3,
+        "endLine": 905,
+        "endChar": 50
+      },
+      "revId": "f1a2f77d957283e15d81f748fa9bc0a12988ebe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a82bf3_4ffdc806",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-24T19:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb670fb_0a10c6b4",
       "range": {
         "startLine": 905,
         "startChar": 3,
