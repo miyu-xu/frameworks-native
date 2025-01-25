@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f222a5ca_7722272f",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-25T00:01:10Z",
+      "side": 1,
+      "message": "can you do:\n\n```\n#else if defined(__Fuchsia__)\nconstexpr int32_t kHeader \u003d B_PACK_CHARS(\u0027F\u0027, \u0027C\u0027, \u0027S\u0027, \u0027A\u0027)\n```\n\nIf Fuchsia has multiple copies of libbinder, each copy should have this. This ensures that libbinder copies are not mixed. If libbinder copies built at different times are mixed, it may lead to undefined behavior.\n\nNote this change also can also be submitted independently?",
+      "range": {
+        "startLine": 957,
+        "startChar": 0,
+        "endLine": 957,
+        "endChar": 39
+      },
+      "revId": "76c58cb2e51e5ee9f82ded0fdeb4576f199b4429",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
