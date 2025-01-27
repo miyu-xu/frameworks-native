@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a872c63_0c233372",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-27T14:00:14Z",
+      "side": 1,
+      "message": "`Cstr::to_bytes_with_nul` returns a slice reference, what I need here is a raw slice pointer to pass to `Box::from_raw`.",
+      "parentUuid": "486d54fb_8efb0abe",
+      "range": {
+        "startLine": 551,
+        "startChar": 24,
+        "endLine": 551,
+        "endChar": 94
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155b0450_327516b1",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4331fc4b_716e91b6",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-27T14:00:14Z",
+      "side": 1,
+      "message": "`Cstr::to_owned` clones the character array. I want to take ownership of it instead, both to avoid the extra clone (there\u0027s already one unavoidable clone in the `into_string` call below, but I\u0027d rather not have two), and to take care of freeing the allocation.",
+      "parentUuid": "155b0450_327516b1",
+      "range": {
+        "startLine": 556,
+        "startChar": 24,
+        "endLine": 556,
+        "endChar": 65
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12e121d5_2be92892",
@@ -77,6 +125,30 @@
       "writtenOn": "2025-01-21T09:45:35Z",
       "side": 1,
       "message": "Perhaps an early return would be nice here?",
+      "range": {
+        "startLine": 565,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 20
+      },
+      "revId": "9d71c0c41b9d59f4ce7c9c889dd2c1ca3621f135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c114ae2_c1dfd3a8",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-27T14:00:14Z",
+      "side": 1,
+      "message": "I prefer the symmetry of this approach, and there aren\u0027t any nested conditionals here.",
+      "parentUuid": "12e121d5_2be92892",
       "range": {
         "startLine": 565,
         "startChar": 10,
