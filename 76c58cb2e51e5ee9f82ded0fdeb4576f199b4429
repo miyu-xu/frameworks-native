@@ -22,6 +22,30 @@
       },
       "revId": "76c58cb2e51e5ee9f82ded0fdeb4576f199b4429",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191a8f7b_9f44d2b9",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-27T14:00:57Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll rebase this on main instead, I just kept them stacked for convenience.\n\nI don\u0027t think that will work for our use case. IIUC, service manager will reject communication attempts between clients with different headers. We want Fuchsia components to be able to speak to Android programs via service manager.\n\nThis allows us to run Android unmodified on Fuchsia, while replacing some HAL implementations with native Fuchsia components.",
+      "parentUuid": "f222a5ca_7722272f",
+      "range": {
+        "startLine": 957,
+        "startChar": 0,
+        "endLine": 957,
+        "endChar": 39
+      },
+      "revId": "76c58cb2e51e5ee9f82ded0fdeb4576f199b4429",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
