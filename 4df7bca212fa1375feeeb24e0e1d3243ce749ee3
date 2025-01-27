@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0bfbee_ec9d0096",
+        "filename": "libs/binder/IPCThreadState.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-27T15:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea5f6c7_ac17ef78",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d306a4b_a0997457",
@@ -90,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fff27dbd_b961755f",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-27T15:06:09Z",
+      "side": 1,
+      "message": "I renamed as you suggested here.\n\nI\u0027ve also tested the latest patch set on Fuchsia to make sure that we don\u0027t get any build or runtime errors.\n\nThe rest of the `__ANDROID__` usages don\u0027t look like they would cause issues for our use case.",
+      "parentUuid": "f5246bc6_d732aadb",
+      "range": {
+        "startLine": 907,
+        "startChar": 0,
+        "endLine": 907,
+        "endChar": 32
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f182a7b_1cfea4c8",
         "filename": "libs/binder/ProcessState.cpp",
         "patchSetId": 9
@@ -101,6 +149,30 @@
       "writtenOn": "2025-01-24T23:56:21Z",
       "side": 1,
       "message": "I\u0027m thinking this one should be `BINDER_WITH_KERNEL_IPC`. Otherwise, there could be some issues. If you don\u0027t want to change it here, could you file a bug?",
+      "range": {
+        "startLine": 616,
+        "startChar": 12,
+        "endLine": 616,
+        "endChar": 30
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb73912_9ba75770",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1958866
+      },
+      "writtenOn": "2025-01-27T15:06:09Z",
+      "side": 1,
+      "message": "I had this before, but it seems to cause issuse with the host tests.\n\nSee for example: https://android-build.corp.google.com/test_investigate/invocation/I59700010359317017/test/TR92929603919877993/?blocking\u003dblocking\u0026status\u003dnone",
+      "parentUuid": "7f182a7b_1cfea4c8",
       "range": {
         "startLine": 616,
         "startChar": 12,
