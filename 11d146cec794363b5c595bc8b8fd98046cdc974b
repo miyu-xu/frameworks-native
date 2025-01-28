@@ -98,6 +98,30 @@
       },
       "revId": "11d146cec794363b5c595bc8b8fd98046cdc974b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2967e305_83fc337b",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8136,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2025-01-28T01:30:03Z",
+      "side": 1,
+      "message": "Ah okay, yeah in that case adding virtual destructors makes sense to me. Another option is to use std::variant to represent these, although i haven\u0027t studied in detail what repercussions that might have.",
+      "parentUuid": "95ff2ecb_433d82d4",
+      "range": {
+        "startLine": 8136,
+        "startChar": 4,
+        "endLine": 8136,
+        "endChar": 49
+      },
+      "revId": "11d146cec794363b5c595bc8b8fd98046cdc974b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
