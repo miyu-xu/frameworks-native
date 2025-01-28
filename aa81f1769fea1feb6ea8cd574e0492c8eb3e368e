@@ -52,6 +52,24 @@
       "parentUuid": "c0999542_799d41ec",
       "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde38631_4404feb6",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-28T01:38:50Z",
+      "side": 1,
+      "message": "\u003e also there\u0027s a Rust fork of part of this test?\n\nThere is, we have a Rust port of binderRpcTest. As a follow-up, would it make sense to move it out of `trusty/` and use it on Android too?",
+      "parentUuid": "533f6f2b_ae31a32c",
+      "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
