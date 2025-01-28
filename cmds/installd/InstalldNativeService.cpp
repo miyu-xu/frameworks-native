@@ -119,6 +119,7 @@ static constexpr const char* kFuseProp = "persist.sys.fuse";
  */
 static constexpr const char* kAppDataIsolationEnabledProperty = "persist.zygote.app_data_isolation";
 static constexpr const char* kMntSdcardfs = "/mnt/runtime/default/";
+static constexpr const char* kMntFuse = "/mnt/pass_through/0/";
 
 static std::atomic<bool> sAppDataIsolationEnabled(false);
 
@@ -3696,9 +3697,7 @@ binder::Status InstalldNativeService::invalidateMounts() {
         std::getline(in, ignored);
 
         if (android::base::GetBoolProperty(kFuseProp, false)) {
-            const std::regex kMntFuseRe =
-                    std::regex(R"(^/mnt/pass_through/(0|[0-9]+/[A-Z0-9]{4}-[A-Z0-9]{4}).*)");
-            if (std::regex_match(target, kMntFuseRe)) {
+            if (target.find(kMntFuse) == 0) {
                 LOG(DEBUG) << "Found storage mount " << source << " at " << target;
                 mStorageMounts[source] = target;
             }
