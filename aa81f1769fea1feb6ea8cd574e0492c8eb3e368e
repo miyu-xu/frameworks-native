@@ -88,6 +88,24 @@
       "parentUuid": "bde38631_4404feb6",
       "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2831c813_c16cd4b3",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-28T23:21:34Z",
+      "side": 1,
+      "message": "```\nsecure os: ubsan panic: UBSan violation\n...\nsecure os: 0x4005aff4 kSP+0x0ff4: 0x00052d9e/0x00052d9e ubsan_fail+0x1d/0x22\nsecure os: 0x00005858 uSP+0x4858: 0x00053081/0x00053081 __ubsan_handle_cfi_check_fail_abort+0xac/0x130\nsecure os: 0x00005cc8 uSP+0x4cc8: 0x0009d22d/0x0009d22d _ZnwjRKSt9nothrow_t+0x0/0x4\nsecure os: 0x00005cd8 uSP+0x4cd8: 0x0006e581/0x0006e581 _ZNSt3__16vectorIhNS_9allocatorIhEEE11__vallocateEj+0x1c/0x6e\nsecure os: 0x00005ce8 uSP+0x4ce8: 0x00059273/0x00059273 _ZNSt3__16vectorIhNS_9allocatorIhEEEC2EjRKh+0x18/0x24\n```\n\nI\u0027m assuming this is due to the size, still not large enough? I can try making the space even larger, though curious if you see something else.",
+      "parentUuid": "d629a41d_3f3fd8ad",
+      "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
