@@ -124,6 +124,24 @@
       "parentUuid": "2831c813_c16cd4b3",
       "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28279943_8c640992",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-28T23:41:00Z",
+      "side": 1,
+      "message": "The crash is from the test client, not the service. You probably need to increase the heap size in `trusty/binderRpcTest/manifest.json` as well.",
+      "parentUuid": "699120df_99c767c0",
+      "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
