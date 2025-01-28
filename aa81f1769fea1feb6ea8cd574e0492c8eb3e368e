@@ -70,6 +70,24 @@
       "parentUuid": "533f6f2b_ae31a32c",
       "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d629a41d_3f3fd8ad",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-28T01:55:44Z",
+      "side": 1,
+      "message": "It doesn\u0027t build when I `mma` in Android, and it is sharing the AIDL interface of binderRpcTest.\n\nThe main thing I want is all Trusty stuff to be tested in Android as well, but if it\u0027s forked, do we need it? If we really need it, working or compiling in Android would be a good step! :D",
+      "parentUuid": "bde38631_4404feb6",
+      "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
