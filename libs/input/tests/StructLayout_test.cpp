@@ -167,13 +167,18 @@ void CalculateSinglePointerInputMessageSize() {
 // Ensure that VerifiedInputEvent, VerifiedKeyEvent, VerifiedMotionEvent are packed.
 // We will treat them as byte collections when signing them. There should not be any uninitialized
 // data in-between fields. Otherwise, the padded data will affect the hmac value and verifications
-// will fail.
-
+// will fail.  The size calculation also accounts for the vtable.
+#if defined(__LP64__)
+#define VTABLE_SIZE 8
+#else
+#define VTABLE_SIZE 4
+#endif
 void TestVerifiedEventSize() {
     // VerifiedInputEvent
     constexpr size_t VERIFIED_INPUT_EVENT_SIZE = sizeof(VerifiedInputEvent::type) +
             sizeof(VerifiedInputEvent::deviceId) + sizeof(VerifiedInputEvent::eventTimeNanos) +
-            sizeof(VerifiedInputEvent::source) + sizeof(VerifiedInputEvent::displayId);
+            sizeof(VerifiedInputEvent::source) + sizeof(VerifiedInputEvent::displayId) +
+            VTABLE_SIZE;
     static_assert(sizeof(VerifiedInputEvent) == VERIFIED_INPUT_EVENT_SIZE);
 
     // VerifiedKeyEvent
