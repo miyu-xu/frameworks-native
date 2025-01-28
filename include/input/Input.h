@@ -1095,6 +1095,16 @@ struct __attribute__((__packed__)) VerifiedInputEvent {
     nsecs_t eventTimeNanos;
     uint32_t source;
     ui::LogicalDisplayId displayId;
+
+    VerifiedInputEvent(Type _type, DeviceId _deviceId, nsecs_t _eventTimeNanos, uint32_t _source,
+                       ui::LogicalDisplayId _displayId)
+          : type(_type),
+            deviceId(_deviceId),
+            eventTimeNanos(_eventTimeNanos),
+            source(_source),
+            displayId(_displayId) {}
+
+    virtual ~VerifiedInputEvent() {}
 };
 
 /**
@@ -1109,6 +1119,18 @@ struct __attribute__((__packed__)) VerifiedKeyEvent : public VerifiedInputEvent 
     int32_t scanCode;
     int32_t metaState;
     int32_t repeatCount;
+
+    VerifiedKeyEvent(VerifiedInputEvent _verified, int32_t _action, int32_t _flags,
+                     nsecs_t _downTimeNanos, int32_t _keyCode, int32_t _scanCode,
+                     int32_t _metaState, int32_t _repeatCount)
+          : VerifiedInputEvent(_verified),
+            action(_action),
+            flags(_flags),
+            downTimeNanos(_downTimeNanos),
+            keyCode(_keyCode),
+            scanCode(_scanCode),
+            metaState(_metaState),
+            repeatCount(_repeatCount) {}
 };
 
 /**
@@ -1123,6 +1145,18 @@ struct __attribute__((__packed__)) VerifiedMotionEvent : public VerifiedInputEve
     nsecs_t downTimeNanos;
     int32_t metaState;
     int32_t buttonState;
+
+    VerifiedMotionEvent(VerifiedInputEvent _verified, float _rawX, float _rawY,
+                        int32_t _actionMasked, int32_t _flags, nsecs_t _downTimeNanos,
+                        int32_t _metaState, int32_t _buttonState)
+          : VerifiedInputEvent(_verified),
+            rawX(_rawX),
+            rawY(_rawY),
+            actionMasked(_actionMasked),
+            flags(_flags),
+            downTimeNanos(_downTimeNanos),
+            metaState(_metaState),
+            buttonState(_buttonState) {}
 };
 
 VerifiedKeyEvent verifiedKeyEventFromKeyEvent(const KeyEvent& event);
