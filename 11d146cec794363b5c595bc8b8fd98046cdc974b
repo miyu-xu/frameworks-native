@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538f764a_263d2884",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8136,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2025-01-28T01:24:12Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. `verified` is a unique_ptr. What\u0027s preventing this `unique_ptr` to no longer invoke the destructor of the subclass properly?",
+      "range": {
+        "startLine": 8136,
+        "startChar": 4,
+        "endLine": 8136,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dbbcbf4a_d299855e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 8135,
+                "startChar": 0,
+                "endLine": 8137,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "services/inputflinger/tests/InputDispatcher_test.cpp",
+              "range": {
+                "startLine": 8184,
+                "startChar": 0,
+                "endLine": 8186,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "11d146cec794363b5c595bc8b8fd98046cdc974b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
