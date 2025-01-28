@@ -8132,6 +8132,8 @@ TEST_F(InputDispatcherTest, VerifyInputEvent_KeyEvent) {
     ASSERT_EQ(keyArgs.scanCode, verifiedKey.scanCode);
     ASSERT_EQ(keyArgs.metaState, verifiedKey.metaState);
     ASSERT_EQ(0, verifiedKey.repeatCount);
+
+    delete (VerifiedKeyEvent*)verified.release();
 }
 
 TEST_F(InputDispatcherTest, VerifyInputEvent_MotionEvent) {
@@ -8179,6 +8181,8 @@ TEST_F(InputDispatcherTest, VerifyInputEvent_MotionEvent) {
     EXPECT_EQ(motionArgs.downTime, verifiedMotion.downTimeNanos);
     EXPECT_EQ(motionArgs.metaState, verifiedMotion.metaState);
     EXPECT_EQ(motionArgs.buttonState, verifiedMotion.buttonState);
+
+    delete (VerifiedMotionEvent*)verified.release();
 }
 
 /**
