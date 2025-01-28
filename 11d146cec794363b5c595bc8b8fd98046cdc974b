@@ -122,6 +122,30 @@
       },
       "revId": "11d146cec794363b5c595bc8b8fd98046cdc974b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8527850d_aec19c51",
+        "filename": "services/inputflinger/tests/InputDispatcher_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8136,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2025-01-28T17:44:24Z",
+      "side": 1,
+      "message": "The static asserts about the struct sizes now fail due to the extra vtable.  The latest patchset accounts for the new size due to the vtable.  This shouldn\u0027t break the test that the members are packed.",
+      "parentUuid": "2967e305_83fc337b",
+      "range": {
+        "startLine": 8136,
+        "startChar": 4,
+        "endLine": 8136,
+        "endChar": 49
+      },
+      "revId": "11d146cec794363b5c595bc8b8fd98046cdc974b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
