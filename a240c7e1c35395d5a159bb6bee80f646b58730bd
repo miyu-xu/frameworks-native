@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e45e55f_4b788797",
+        "filename": "libs/binder/tests/binderRpcTestService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-28T00:35:37Z",
+      "side": 1,
+      "message": "(this one is the one that was getting me, I don\u0027t think binderRpcTest sets up stderr for subprocesses)",
+      "revId": "a240c7e1c35395d5a159bb6bee80f646b58730bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
