@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02798aad_6c17943b",
+        "filename": "libs/binder/trusty/binderRpcTest/service/manifest.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-28T23:54:40Z",
+      "side": 1,
+      "message": "This seems to work for both the service (here) and the client (`manifest.json` in the parent directory).",
+      "revId": "13c8bdbf7f8050712af2a655199dbee8d6a07e8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
