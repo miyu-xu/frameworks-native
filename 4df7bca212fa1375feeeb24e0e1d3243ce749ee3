@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f61928cc_2d7bfcad",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-28T01:38:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fff27dbd_b961755f",
+      "range": {
+        "startLine": 907,
+        "startChar": 0,
+        "endLine": 907,
+        "endChar": 32
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f182a7b_1cfea4c8",
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "I had this before, but it seems to cause issuse with the host tests.\n\nSee for example: https://android-build.corp.google.com/test_investigate/invocation/I59700010359317017/test/TR92929603919877993/?blocking\u003dblocking\u0026status\u003dnone",
       "parentUuid": "7f182a7b_1cfea4c8",
+      "range": {
+        "startLine": 616,
+        "startChar": 12,
+        "endLine": 616,
+        "endChar": 30
+      },
+      "revId": "4df7bca212fa1375feeeb24e0e1d3243ce749ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6662ed4_057c2b8d",
+        "filename": "libs/binder/ProcessState.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-28T01:38:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bdb73912_9ba75770",
       "range": {
         "startLine": 616,
         "startChar": 12,
