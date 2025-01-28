@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896fddae_38aa50c9",
+        "filename": "libs/binder/tests/binderRpcUniversalTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-28T01:09:28Z",
+      "side": 1,
+      "message": "This is a big transaction for Trusty, let\u0027s see if it passes. You might at least need to increase the service\u0027s heap limit in `trusty/binderRpcTest/service/manifest.json`.",
+      "revId": "aa81f1769fea1feb6ea8cd574e0492c8eb3e368e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
