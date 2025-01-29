@@ -209,10 +209,10 @@ cc_library {
         "-Wextra",
         "-Werror",
         "-Wno-unused-parameter",
+        "-Wno-shadow-uncaptured-local",
         "-Wthread-safety",
         "-Wshadow",
         "-Wshadow-field-in-constructor-modified",
-        "-Wshadow-uncaptured-local",
         "-DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION",
     ],
     srcs: [
