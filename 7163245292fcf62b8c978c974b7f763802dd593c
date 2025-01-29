@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7412a2a6_f2a1e0b5",
+        "filename": "libs/input/tests/StructLayout_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2025-01-29T02:03:03Z",
+      "side": 1,
+      "message": "Thinking about this some more, I don\u0027t think the current solution will work. We can\u0027t have arbitrary data in this struct because this data is getting signed; this would break event verifications. We need to have a POD either here, or at least at the point where it will be getting signed.\n\nIn the interest of time, can we simply go back to the initial solution with `delete`? Please also include an explanation in the code about why it\u0027s needed, and why simply adding constructors is not sufficient.\n\nTo fix this, we should either consider using std::variant in some way, or introduce an intermediate POD data structure that we will put the data into just prior to signing.\n\n\nSorry for the back and forth.",
+      "range": {
+        "startLine": 168,
+        "startChar": 3,
+        "endLine": 168,
+        "endChar": 60
+      },
+      "revId": "7163245292fcf62b8c978c974b7f763802dd593c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
