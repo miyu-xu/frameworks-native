@@ -23,7 +23,6 @@
 #include <binder/IPCThreadState.h>
 #include <binder/RpcServer.h>
 
-#include "Constants.h"
 #include "Debug.h"
 #include "RpcWireFormat.h"
 #include "Utils.h"
@@ -338,8 +337,6 @@ std::string RpcState::BinderNode::toString() const {
 }
 
 RpcState::CommandData::CommandData(size_t size) : mSize(size) {
-    if (size == 0) return;
-
     // The maximum size for regular binder is 1MB for all concurrent
     // transactions. A very small proportion of transactions are even
     // larger than a page, but we need to avoid allocating too much
@@ -351,11 +348,11 @@ RpcState::CommandData::CommandData(size_t size) : mSize(size) {
     // transaction (in some cases, additional fixed size amounts are added),
     // though for rough consistency, we should avoid cases where this data type
     // is used for multiple dynamic allocations for a single transaction.
-    if (size > binder::kRpcTransactionLimitBytes) {
-        ALOGE("Transaction requested too much data allocation: %zu bytes, failing.", size);
+    constexpr size_t kMaxTransactionAllocation = 100 * 1000;
+    if (size == 0) return;
+    if (size > kMaxTransactionAllocation) {
+        ALOGW("Transaction requested too much data allocation %zu", size);
         return;
-    } else if (size > binder::kLogTransactionsOverBytes) {
-        ALOGW("Transaction too large: inefficient and in danger of breaking: %zu bytes.", size);
     }
     mData.reset(new (std::nothrow) uint8_t[size]);
 }
