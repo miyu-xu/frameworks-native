@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11db181a_28a64c02",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T11:55:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d60142cb_c4c344e1",
+      "revId": "09d0eea3ab159dee508566fa5ac8246861778c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3de027cc_0e85a3c7",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-01-21T08:04:02Z",
       "side": 1,
       "message": "Unsafe Rust Review: How do you know that the allocation fits the nul-terminated string exactly? The library could have allocated more memory than the string takes up.",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 89
+      },
+      "revId": "09d0eea3ab159dee508566fa5ac8246861778c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec54872_5bcfeaf2",
+        "filename": "libs/binder/rust/src/persistable_bundle.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T11:55:20Z",
+      "side": 1,
+      "message": "As the safety comment on line 728 says, we need to assume that `APersistableBundle_getStringVector` requests allocations of exactly the size that it requires for the strings, so the NUL terminator is at last position in the allocation. Unfortunately I can\u0027t think of anything better we can do here to verify this.",
+      "parentUuid": "3de027cc_0e85a3c7",
       "range": {
         "startLine": 732,
         "startChar": 0,
