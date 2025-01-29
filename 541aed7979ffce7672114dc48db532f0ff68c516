@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6844a69a_5e9c532f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-01-29T07:23:02Z",
+      "side": 1,
+      "message": "Tested this manually, it fixes the breakage. We can wait until we add the test to presubmit and re-enable before landing this, if you want to make sure.",
+      "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
