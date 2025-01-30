@@ -110,6 +110,8 @@ protected:
     LIBBINDER_EXPORTED virtual status_t onTransact(uint32_t code, const Parcel& data, Parcel* reply,
                                                    uint32_t flags = 0);
 
+    LIBBINDER_EXPORTED virtual const std::string getTransactionName(int transactionCode);
+
 private:
                         BBinder(const BBinder& o);
             BBinder&    operator=(const BBinder& o);
