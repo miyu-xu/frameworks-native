@@ -27,6 +27,7 @@
 #include <binder/Parcel.h>
 #include <binder/RecordedTransaction.h>
 #include <binder/RpcServer.h>
+#include <binder/Trace.h>
 #include <binder/unique_fd.h>
 #include <pthread.h>
 
@@ -405,6 +406,10 @@ status_t BBinder::transact(
             break;
         }
         default:
+            std::string name = "BBinder: potential binder observation";
+
+            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
+                                          (name + " " + getTransactionName(code)).c_str());
             err = onTransact(code, data, reply, flags);
             break;
     }
@@ -817,6 +822,10 @@ status_t BBinder::onTransact(
         default:
             return UNKNOWN_TRANSACTION;
     }
+}
+
+const std::string BBinder::getTransactionName(int transactionCode) {
+    return std::to_string(transactionCode);
 }
 
 BBinder::Extras* BBinder::getOrCreateExtras()
