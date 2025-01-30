@@ -34,6 +34,23 @@
       "parentUuid": "6844a69a_5e9c532f",
       "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b5512a_3c759494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-30T23:29:32Z",
+      "side": 1,
+      "message": "Which is the binary which is prebuilt that adds this dependency, and how is it installed/updatable? We shouldn\u0027t have unstable API in the test interface.",
+      "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
