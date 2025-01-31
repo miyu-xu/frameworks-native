@@ -22,22 +22,41 @@
 #include <binder/RpcServer.h>
 #include <binder/RpcSession.h>
 #include <cutils/trace.h>
+#include <gtest/gtest-spi.h>
 #include <gtest/gtest.h>
 #include <utils/CallStack.h>
 
 #include <malloc.h>
 #include <functional>
+#include <numeric>
 #include <vector>
 
 using namespace android::binder::impl;
 
 static android::String8 gEmpty(""); // make sure first allocation from optimization runs
 
+struct State {
+    State(std::vector<size_t>&& expectedMallocs) : expectedMallocs(std::move(expectedMallocs)) {}
+    std::vector<size_t> expectedMallocs;
+    size_t numMallocs;
+};
+
 struct DestructionAction {
-    DestructionAction(std::function<void()> f) : mF(std::move(f)) {}
-    ~DestructionAction() { mF(); };
+    DestructionAction(std::function<void()> f, const std::shared_ptr<State>& state)
+          : mF(std::move(f)), mState(state) {}
+    ~DestructionAction() {
+        mF();
+        if (mState) {
+            if (mState->expectedMallocs.size() != mState->numMallocs) {
+                ADD_FAILURE() << "Expected " << mState->expectedMallocs.size()
+                              << " allocations, but got " << mState->numMallocs;
+            }
+        }
+    };
+
 private:
     std::function<void()> mF;
+    std::shared_ptr<State> mState;
 };
 
 // Group of hooks
@@ -95,15 +114,38 @@ namespace LambdaHooks {
 
 // Action to execute when malloc is hit. Supports nesting. Malloc is not
 // restricted when the allocation hook is being processed.
-__attribute__((warn_unused_result))
-DestructionAction OnMalloc(LambdaHooks::AllocationHook f) {
+__attribute__((warn_unused_result)) DestructionAction
+OnMalloc(LambdaHooks::AllocationHook f, const std::shared_ptr<State>& state) {
     MallocHooks before = MallocHooks::save();
     LambdaHooks::lambdas.emplace_back(std::move(f));
     LambdaHooks::lambda_malloc_hooks.overwrite();
-    return DestructionAction([before]() {
-        before.overwrite();
-        LambdaHooks::lambdas.pop_back();
-    });
+    return DestructionAction(
+            [before]() {
+                before.overwrite();
+                LambdaHooks::lambdas.pop_back();
+            },
+            state);
+}
+
+DestructionAction setExpectedMallocs(std::vector<size_t>&& expected) {
+    auto state = std::make_shared<State>(std::move(expected));
+    LOG_ALWAYS_FATAL_IF(!state, "Failed to create State");
+    return OnMalloc(
+            [state = state](size_t bytes) {
+                if (state->numMallocs >= state->expectedMallocs.size() ||
+                    state->expectedMallocs[state->numMallocs] != bytes) {
+                    ADD_FAILURE()
+                            << "Unexpected allocation number " << state->numMallocs << " of size "
+                            << bytes << " bytes" << std::endl
+                            << android::CallStack::stackToString("UNEXPECTED ALLOCATION",
+                                                                 android::CallStack::getCurrent(
+                                                                         4 /*ignoreDepth*/)
+                                                                         .get())
+                            << std::endl;
+                }
+                state->numMallocs++;
+            },
+            state);
 }
 
 // exported symbol, to force compiler not to optimize away pointers we set here
@@ -112,25 +154,67 @@ const void* imaginary_use;
 TEST(TestTheTest, OnMalloc) {
     size_t mallocs = 0;
     {
-        const auto on_malloc = OnMalloc([&](size_t bytes) {
-            mallocs++;
-            EXPECT_EQ(bytes, 40u);
-        });
+        const auto on_malloc = OnMalloc(
+                [&](size_t bytes) {
+                    mallocs++;
+                    EXPECT_EQ(bytes, 40u);
+                },
+                nullptr);
 
         imaginary_use = new int[10];
     }
+    delete[] reinterpret_cast<const int*>(imaginary_use);
     EXPECT_EQ(mallocs, 1u);
 }
 
+TEST(TestTheTest, OnMallocWithExpectedMallocs) {
+    std::vector<size_t> expectedMallocs = {
+            4,
+            16,
+            8,
+    };
+    {
+        const auto on_malloc = setExpectedMallocs(std::move(expectedMallocs));
+        imaginary_use = new int32_t[1];
+        delete[] reinterpret_cast<const int*>(imaginary_use);
+        imaginary_use = new int32_t[4];
+        delete[] reinterpret_cast<const int*>(imaginary_use);
+        imaginary_use = new int32_t[2];
+        delete[] reinterpret_cast<const int*>(imaginary_use);
+    }
+}
+
+TEST(TestTheTest, OnMallocWithExpectedMallocsWrongSize) {
+    std::vector<size_t> expectedMallocs = {
+            4,
+            16,
+            100000,
+    };
+    EXPECT_NONFATAL_FAILURE(
+            {
+                const auto on_malloc = setExpectedMallocs(std::move(expectedMallocs));
+                imaginary_use = new int32_t[1];
+                delete[] reinterpret_cast<const int*>(imaginary_use);
+                imaginary_use = new int32_t[4];
+                delete[] reinterpret_cast<const int*>(imaginary_use);
+                imaginary_use = new int32_t[2];
+                delete[] reinterpret_cast<const int*>(imaginary_use);
+            },
+            "Unexpected allocation number 2 of size 8 bytes");
+}
 
 __attribute__((warn_unused_result))
 DestructionAction ScopeDisallowMalloc() {
-    return OnMalloc([&](size_t bytes) {
-        ADD_FAILURE() << "Unexpected allocation: " << bytes;
-        using android::CallStack;
-        std::cout << CallStack::stackToString("UNEXPECTED ALLOCATION", CallStack::getCurrent(4 /*ignoreDepth*/).get())
-                  << std::endl;
-    });
+    return OnMalloc(
+            [&](size_t bytes) {
+                FAIL() << "Unexpected allocation: " << bytes;
+                using android::CallStack;
+                std::cout
+                        << CallStack::stackToString("UNEXPECTED ALLOCATION",
+                                                    CallStack::getCurrent(4 /*ignoreDepth*/).get())
+                        << std::endl;
+            },
+            nullptr);
 }
 
 using android::BBinder;
@@ -191,16 +275,18 @@ TEST(BinderAllocation, InterfaceDescriptorTransaction) {
     sp<IBinder> a_binder = GetRemoteBinder();
 
     size_t mallocs = 0;
-    const auto on_malloc = OnMalloc([&](size_t bytes) {
-        mallocs++;
+    const auto on_malloc = OnMalloc(
+            [&](size_t bytes) {
+                mallocs++;
         // Happens to be SM package length. We could switch to forking
         // and registering our own service if it became an issue.
 #if defined(__LP64__)
-        EXPECT_EQ(bytes, 78u);
+                EXPECT_EQ(bytes, 78u);
 #else
-        EXPECT_EQ(bytes, 70u);
+                EXPECT_EQ(bytes, 70u);
 #endif
-    });
+            },
+            nullptr);
 
     a_binder->getInterfaceDescriptor();
     a_binder->getInterfaceDescriptor();
@@ -214,14 +300,61 @@ TEST(BinderAllocation, SmallTransaction) {
     sp<IServiceManager> manager = defaultServiceManager();
 
     size_t mallocs = 0;
-    const auto on_malloc = OnMalloc([&](size_t bytes) {
-        mallocs++;
-        // Parcel should allocate a small amount by default
-        EXPECT_EQ(bytes, 128u);
-    });
+    const auto on_malloc = OnMalloc(
+            [&](size_t bytes) {
+                mallocs++;
+                // Parcel should allocate a small amount by default
+                EXPECT_EQ(bytes, 128u);
+            },
+            nullptr);
     manager->checkService(empty_descriptor);
 
     EXPECT_EQ(mallocs, 1u);
+}
+
+TEST(BinderAccessorAllocation, AddAccessorCheckService) {
+    // Need to call defaultServiceManager() before checking malloc because it
+    // will allocate an instance in the call_once
+    const auto sm = defaultServiceManager();
+    const std::string kInstanceName1 = "foo.bar.IFoo/default";
+    const std::string kInstanceName2 = "foo.bar.IFoo2/default";
+    const String16 kInstanceName16(kInstanceName1.c_str());
+    std::vector<size_t> expectedMallocs = {
+            // addAccessorProvider
+            112, // new AccessorProvider
+            16,  // new AccessorProviderEntry
+            // checkService
+            45,  // String8 from String16 in CppShim::checkService
+            128, // writeInterfaceToken
+            16,  // getInjectedAccessor, new AccessorProviderEntry
+            66,  // getInjectedAccessor, String16
+            45,  // String8 from String16 in AccessorProvider::provide
+    };
+    std::set<std::string> supportedInstances = {kInstanceName1, kInstanceName2};
+    auto onMalloc = setExpectedMallocs(std::move(expectedMallocs));
+
+    auto receipt =
+            android::addAccessorProvider(std::move(supportedInstances),
+                                         [&](const String16&) -> sp<IBinder> { return nullptr; });
+    EXPECT_FALSE(receipt.expired());
+
+    sp<IBinder> binder = sm->checkService(kInstanceName16);
+
+    status_t status = android::removeAccessorProvider(receipt);
+}
+
+TEST(BinderAccessorAllocation, AddAccessorEmpty) {
+    std::vector<size_t> expectedMallocs = {
+            48, // From ALOGE with empty set of instances
+    };
+    std::set<std::string> supportedInstances = {};
+    auto onMalloc = setExpectedMallocs(std::move(expectedMallocs));
+
+    auto receipt =
+            android::addAccessorProvider(std::move(supportedInstances),
+                                         [&](const String16&) -> sp<IBinder> { return nullptr; });
+
+    EXPECT_TRUE(receipt.expired());
 }
 
 TEST(RpcBinderAllocation, SetupRpcServer) {
@@ -244,10 +377,12 @@ TEST(RpcBinderAllocation, SetupRpcServer) {
 
     size_t mallocs = 0, totalBytes = 0;
     {
-        const auto on_malloc = OnMalloc([&](size_t bytes) {
-            mallocs++;
-            totalBytes += bytes;
-        });
+        const auto on_malloc = OnMalloc(
+                [&](size_t bytes) {
+                    mallocs++;
+                    totalBytes += bytes;
+                },
+                nullptr);
         ASSERT_EQ(OK, remoteBinder->pingBinder());
     }
     EXPECT_EQ(mallocs, 1u);
@@ -255,6 +390,10 @@ TEST(RpcBinderAllocation, SetupRpcServer) {
 }
 
 int main(int argc, char** argv) {
+    // liblog has static variables that are allocated and logging in the
+    // malloc hook will cause a recursive initialization
+    // __cxa_guard_acquire will catch and abort on. So log once here.
+    LOG(INFO) << "Starting binderAllocationLimits test";
     if (getenv("LIBC_HOOKS_ENABLE") == nullptr) {
         CHECK(0 == setenv("LIBC_HOOKS_ENABLE", "1", true /*overwrite*/));
         execv(argv[0], argv);
