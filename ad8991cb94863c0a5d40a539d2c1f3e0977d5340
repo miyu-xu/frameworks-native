@@ -16,6 +16,23 @@
       "message": "thanks for the fix!",
       "revId": "ad8991cb94863c0a5d40a539d2c1f3e0977d5340",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5281c34f_6f5ae4f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-01-31T06:42:07Z",
+      "side": 1,
+      "message": "Hi Dalin, could you fix the auto-merge conflict error shown in the presubmit checks se we can merge your change in?",
+      "revId": "ad8991cb94863c0a5d40a539d2c1f3e0977d5340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
