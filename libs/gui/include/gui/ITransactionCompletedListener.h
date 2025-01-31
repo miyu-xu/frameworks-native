@@ -172,7 +172,7 @@ public:
     virtual void onTransactionCompleted(ListenerStats stats) = 0;
 
     virtual void onReleaseBuffer(ReleaseCallbackId callbackId, sp<Fence> releaseFence,
-                                 uint32_t currentMaxAcquiredBufferCount) = 0;
+                                 uint32_t currentMaxAcquiredBufferCount, bool removeFromCache) = 0;
 
     virtual void onTransactionQueueStalled(const String8& name) = 0;
 

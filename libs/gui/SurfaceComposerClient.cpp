@@ -636,7 +636,8 @@ void TransactionCompletedListener::removeQueueStallListener(void* id) {
 
 void TransactionCompletedListener::onReleaseBuffer(ReleaseCallbackId callbackId,
                                                    sp<Fence> releaseFence,
-                                                   uint32_t currentMaxAcquiredBufferCount) {
+                                                   uint32_t currentMaxAcquiredBufferCount,
+                                                   bool removeFromCache) {
     ReleaseBufferCallback callback;
     {
         std::scoped_lock<std::mutex> lock(mMutex);
@@ -646,6 +647,10 @@ void TransactionCompletedListener::onReleaseBuffer(ReleaseCallbackId callbackId,
         ALOGE("Could not call release buffer callback, buffer not found %s",
               callbackId.to_string().c_str());
         return;
+    }
+    if (removeFromCache) {
+        ALOGV("Dropping buffer %" PRIu64 " from cache", callbackId.bufferId);
+        SurfaceComposerClient::getDefault()->removeBufferFromLocalCache(callbackId.bufferId);
     }
     std::optional<uint32_t> optionalMaxAcquiredBufferCount =
             currentMaxAcquiredBufferCount == UINT_MAX
@@ -775,9 +780,9 @@ public:
         return buffer->getId();
     }
 
-    void uncache(uint64_t cacheId) {
+    void uncache(uint64_t cacheId, bool uncacheInSf) {
         std::lock_guard<std::mutex> lock(mMutex);
-        if (mBuffers.erase(cacheId)) {
+        if (mBuffers.erase(cacheId) && uncacheInSf) {
             SurfaceComposerClient::doUncacheBufferTransaction(cacheId);
         }
     }
@@ -817,7 +822,7 @@ ANDROID_SINGLETON_STATIC_INSTANCE(BufferCache);
 
 void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId) {
     // GraphicBuffer id's are used as the cache ids.
-    BufferCache::getInstance().uncache(graphicBufferId);
+    BufferCache::getInstance().uncache(graphicBufferId, true /* uncacheInSf */);
 }
 
 // ---------------------------------------------------------------------------
@@ -1045,22 +1050,31 @@ status_t SurfaceComposerClient::Transaction::writeToParcel(Parcel* parcel) const
 }
 
 void SurfaceComposerClient::Transaction::releaseBufferIfOverwriting(const layer_state_t& state) {
-    if (!(state.what & layer_state_t::eBufferChanged) || !state.bufferData->hasBuffer()) {
+    if (!(state.what & layer_state_t::eBufferChanged)) {
         return;
     }
 
     auto listener = state.bufferData->releaseBufferListener;
     sp<Fence> fence =
             state.bufferData->acquireFence ? state.bufferData->acquireFence : Fence::NO_FENCE;
+    // Tell the owning process to remove the buffer from the cache if the buffer being dropped was
+    // going to be added to the SurfaceFlinger cache. Without this, it causes issues where the
+    // client thinks it's cached the buffer correctly, but it was never cached in SF causing
+    // subsequent look ups to fail.
+    bool removeFromCache =
+            (state.bufferData->hasBuffer() && state.bufferData->cachedBuffer.isValid());
+    ReleaseCallbackId releaseCallbackId = state.bufferData->generateReleaseCallbackId();
+    ALOGV("dropping buffer=%" PRIu64 " and removeFromCache=%d", releaseCallbackId.bufferId,
+          removeFromCache);
     if (state.bufferData->releaseBufferEndpoint ==
         IInterface::asBinder(TransactionCompletedListener::getIInstance())) {
         // if the callback is in process, run on a different thread to avoid any lock contigency
         // issues in the client.
         SurfaceComposerClient::getDefault()
-                ->mReleaseCallbackThread
-                .addReleaseCallback(state.bufferData->generateReleaseCallbackId(), fence);
+                ->mReleaseCallbackThread.addReleaseCallback(releaseCallbackId, fence,
+                                                            removeFromCache);
     } else {
-        listener->onReleaseBuffer(state.bufferData->generateReleaseCallbackId(), fence, UINT_MAX);
+        listener->onReleaseBuffer(releaseCallbackId, fence, UINT_MAX, removeFromCache);
     }
 }
 
@@ -3375,6 +3389,11 @@ status_t SurfaceComposerClient::removeWindowInfosListener(
 void SurfaceComposerClient::notifyShutdown() {
     ComposerServiceAIDL::getComposerService()->notifyShutdown();
 }
+
+void SurfaceComposerClient::removeBufferFromLocalCache(uint64_t bufferId) {
+    BufferCache::getInstance().uncache(bufferId, false /* uncacheInSf */);
+}
+
 // ----------------------------------------------------------------------------
 
 status_t ScreenshotClient::captureDisplay(const DisplayCaptureArgs& captureArgs,
@@ -3415,20 +3434,20 @@ status_t ScreenshotClient::captureLayers(const LayerCaptureArgs& captureArgs,
 // ---------------------------------------------------------------------------------
 
 void ReleaseCallbackThread::addReleaseCallback(const ReleaseCallbackId callbackId,
-                                               sp<Fence> releaseFence) {
+                                               sp<Fence> releaseFence, bool removeFromCache) {
     std::scoped_lock<std::mutex> lock(mMutex);
     if (!mStarted) {
         mThread = std::thread(&ReleaseCallbackThread::threadMain, this);
         mStarted = true;
     }
 
-    mCallbackInfos.emplace(callbackId, std::move(releaseFence));
+    mCallbackInfos.emplace(callbackId, std::move(releaseFence), removeFromCache);
     mReleaseCallbackPending.notify_one();
 }
 
 void ReleaseCallbackThread::threadMain() {
     const auto listener = TransactionCompletedListener::getInstance();
-    std::queue<std::tuple<const ReleaseCallbackId, const sp<Fence>>> callbackInfos;
+    std::queue<std::tuple<const ReleaseCallbackId, const sp<Fence>, bool>> callbackInfos;
     while (true) {
         {
             std::unique_lock<std::mutex> lock(mMutex);
@@ -3438,8 +3457,9 @@ void ReleaseCallbackThread::threadMain() {
         }
 
         while (!callbackInfos.empty()) {
-            auto [callbackId, releaseFence] = callbackInfos.front();
-            listener->onReleaseBuffer(callbackId, std::move(releaseFence), UINT_MAX);
+            auto [callbackId, releaseFence, removeFromCache] = callbackInfos.front();
+            listener->onReleaseBuffer(callbackId, std::move(releaseFence), UINT_MAX,
+                                      removeFromCache);
             callbackInfos.pop();
         }
 
