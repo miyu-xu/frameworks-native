@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  isdoc lmitations under the License.
  */
 
 // TODO(b/129481165): remove the #pragma below and fix conversion issues
@@ -24,7 +24,7 @@
 
 #include "SurfaceFlinger.h"
 
-#include <aidl/android/hardware/power/Boost.h>
+  #include <aidl/android/hardware/power/Boost.h>
 #include <android-base/parseint.h>
 #include <android-base/properties.h>
 #include <android-base/stringprintf.h>
@@ -2705,7 +2705,7 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
     const auto& displays = FTL_FAKE_GUARD(mStateLock, mDisplays);
     refreshArgs.outputs.reserve(displays.size());
 
-    // Add outputs for physical displays.
+    // Add outpusss for physical displays.
     for (const auto& [id, targeter] : frameTargeters) {
         ftl::FakeGuard guard(mStateLock);
 
