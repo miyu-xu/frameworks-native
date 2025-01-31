@@ -27,6 +27,7 @@
 
 #include <malloc.h>
 #include <functional>
+#include <numeric>
 #include <vector>
 
 using namespace android::binder::impl;
@@ -95,6 +96,10 @@ namespace LambdaHooks {
 
 // Action to execute when malloc is hit. Supports nesting. Malloc is not
 // restricted when the allocation hook is being processed.
+//
+// Note: If logging inside the lambda, be sure to log something before setting
+// this up, as liblog has static variables that are allocated and that will
+// cause a recursive initialization __cxa_guard_acquire will catch and abort on.
 __attribute__((warn_unused_result))
 DestructionAction OnMalloc(LambdaHooks::AllocationHook f) {
     MallocHooks before = MallocHooks::save();
@@ -222,6 +227,108 @@ TEST(BinderAllocation, SmallTransaction) {
     manager->checkService(empty_descriptor);
 
     EXPECT_EQ(mallocs, 1u);
+}
+
+class BinderAccessorAllocation : public testing::Test {
+public:
+    DestructionAction setExpectedMallocs(const std::vector<size_t>& expected) {
+        gExpectedMallocs = std::move(expected);
+        gNumMallocs = 0;
+        gMallocBytes = 0;
+        // Make sure we log once before setting this malloc hook because of some
+        // static variables that are allocated in liblog.
+        LOG(WARNING) << "Setting expected mallocs callback with " << expected.size()
+                     << " expected allocations";
+
+        return OnMalloc([&](size_t bytes) {
+            if (gExpectedMallocs.size() <= gNumMallocs || gExpectedMallocs[gNumMallocs] != bytes) {
+                LOG(ERROR) << "Unexpected allocation number " << gNumMallocs << " of size " << bytes
+                           << " bytes" << std::endl
+                           << android::CallStack::stackToString("UNEXPECTED ALLOCATION",
+                                                                android::CallStack::getCurrent(
+                                                                        4 /*ignoreDepth*/)
+                                                                        .get())
+                           << std::endl;
+            }
+            gNumMallocs++;
+            gMallocBytes += bytes;
+        });
+    }
+    std::vector<size_t> gExpectedMallocs;
+    size_t gNumMallocs = 0;
+    size_t gMallocBytes = 0;
+};
+
+TEST_F(BinderAccessorAllocation, AddAccessorCheckService) {
+    // Need to call defaultServiceManager() before checking malloc because it
+    // will allocate an instance in the call_once
+    const auto sm = defaultServiceManager();
+    const std::string kInstanceName1 = "foo.bar.IFoo/default";
+    const std::string kInstanceName2 = "foo.bar.IFoo2/default";
+    const String16 kInstanceName16(kInstanceName1.c_str());
+    const std::vector<size_t> kExpectedMallocs = {
+            // addAccessorProvider
+            112, // new AccessorProvider
+            16,  // new AccessorProviderEntry
+            // checkService
+            45,  // String8 from String16 in CppShim::checkService
+            128, // writeInterfaceToken
+            16,  // getInjectedAccessor, new AccessorProviderEntry
+            66,  // getInjectedAccessor, String16
+            45,  // String8 from String16 in AccessorProvider::provide
+    };
+    const size_t expectedNumMallocs = kExpectedMallocs.size();
+    std::set<std::string> supportedInstances = {kInstanceName1, kInstanceName2};
+    auto onMalloc = setExpectedMallocs(kExpectedMallocs);
+
+    EXPECT_EQ(gNumMallocs, 0u);
+    EXPECT_EQ(gMallocBytes, 0u);
+    auto receipt =
+            android::addAccessorProvider(std::move(supportedInstances),
+                                         [&](const String16&) -> sp<IBinder> { return nullptr; });
+
+    EXPECT_EQ(gNumMallocs, 2u);
+    size_t totalBytes = kExpectedMallocs[0] + kExpectedMallocs[1];
+    EXPECT_EQ(gMallocBytes, totalBytes);
+
+    EXPECT_FALSE(receipt.expired());
+
+    EXPECT_EQ(gNumMallocs, 2u);
+    EXPECT_EQ(gMallocBytes, totalBytes);
+
+    sp<IBinder> binder = sm->checkService(kInstanceName16);
+    EXPECT_EQ(binder, nullptr);
+
+    EXPECT_EQ(gNumMallocs, 7u);
+    totalBytes = std::accumulate(kExpectedMallocs.begin(), kExpectedMallocs.end(), 0);
+    EXPECT_EQ(gMallocBytes, totalBytes);
+
+    status_t status = android::removeAccessorProvider(receipt);
+
+    EXPECT_EQ(gNumMallocs, 7u);
+    EXPECT_EQ(gMallocBytes, totalBytes);
+}
+
+TEST_F(BinderAccessorAllocation, AddAccessorEmpty) {
+    const std::vector<size_t> kExpectedMallocs = {
+            48, // From ALOGE with empty set of instances
+    };
+    std::set<std::string> supportedInstances = {};
+    auto onMalloc = setExpectedMallocs(kExpectedMallocs);
+
+    EXPECT_EQ(gNumMallocs, 0u);
+    EXPECT_EQ(gMallocBytes, 0u);
+    auto receipt =
+            android::addAccessorProvider(std::move(supportedInstances),
+                                         [&](const String16&) -> sp<IBinder> { return nullptr; });
+
+    EXPECT_EQ(gNumMallocs, 1u);
+    // Don't expect an exact size in case ALOGE implementation changes in future
+    // It is consistantly 48 bytes in my testing and we will get logs if it
+    // changes
+    // EXPECT_EQ(gMallocBytes, kExpectedMallocs[0]);
+
+    EXPECT_TRUE(receipt.expired());
 }
 
 TEST(RpcBinderAllocation, SetupRpcServer) {
