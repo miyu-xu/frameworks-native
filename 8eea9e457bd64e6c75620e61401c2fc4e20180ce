@@ -22,6 +22,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f27fb86_4318ac7d",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-03T22:49:08Z",
+      "side": 1,
+      "message": "That sound like a Soong question? We could try to run `soong_ui` directly, but I\u0027m not sure that buys us anything.\n\nRe `build.py`: that takes a few minutes on the first run, but much faster on incremental builds.",
+      "parentUuid": "91854ffd_67e87419",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
