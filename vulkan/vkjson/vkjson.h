@@ -106,6 +106,8 @@ struct VkJsonDevice {
            sizeof(VkPhysicalDeviceProtectedMemoryFeatures));
     memset(&sampler_ycbcr_conversion_features, 0,
            sizeof(VkPhysicalDeviceSamplerYcbcrConversionFeatures));
+    memset(&image_2D_view_of_3D_features_EXT, 0,
+           sizeof(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT));
     memset(&shader_draw_parameter_features, 0,
            sizeof(VkPhysicalDeviceShaderDrawParameterFeatures));
     memset(&core12, 0, sizeof(VkJsonCore12));
@@ -132,6 +134,7 @@ struct VkJsonDevice {
   VkPhysicalDeviceProtectedMemoryFeatures protected_memory_features;
   VkPhysicalDeviceSamplerYcbcrConversionFeatures
       sampler_ycbcr_conversion_features;
+  VkPhysicalDeviceImage2DViewOf3DFeaturesEXT image_2D_view_of_3D_features_EXT;
   VkPhysicalDeviceShaderDrawParameterFeatures shader_draw_parameter_features;
   std::map<VkExternalFenceHandleTypeFlagBits, VkExternalFenceProperties>
       external_fence_properties;
