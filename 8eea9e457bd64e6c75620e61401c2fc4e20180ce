@@ -118,6 +118,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3cfdd0_55b392c0",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-03T23:51:08Z",
+      "side": 1,
+      "message": "Plus wouldn\u0027t Soong reuse the intermediates between different arm64 builds if the build flags match? (Although they probably aren\u0027t identical)\n\nWe could try to use something like `aosp_arm64` here, but the first problem is that we have a `ramdisk.img` now with a bunch of kernel modules that are needed for boot.",
+      "parentUuid": "adcb00df_387c7b89",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
