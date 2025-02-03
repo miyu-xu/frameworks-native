@@ -70,6 +70,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097ee313_3f2dd4b8",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-03T23:04:55Z",
+      "side": 1,
+      "message": "\u003e Does it need to be qemu_trusty_arm64-trunk_staging-userdebug\n\nThat one already has some of the Trusty vendor packages (`libtrusty`, `trusty-ut-ctrl`). We could try adding those to the CF builds, but does that make sense? Trusty is only for arm64 so it would have to be one of the `cf_arm64` builds, do many people build them?",
+      "parentUuid": "08ecfe3e_b7511b88",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
