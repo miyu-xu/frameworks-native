@@ -46,6 +46,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08ecfe3e_b7511b88",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-03T23:00:08Z",
+      "side": 1,
+      "message": "You can run soong_ui directly, https://cs.android.com/search?q\u003df:sh%20soong_ui.*make-mode%20f:binder%7Caidl\u0026sq\u003d\n\nDoes it need to be qemu_trusty_arm64-trunk_staging-userdebug? Could it be any other target, e.g. CF which could build the targets you need? or does it need to be that exact lunch target?",
+      "parentUuid": "5f27fb86_4318ac7d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
