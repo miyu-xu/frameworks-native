@@ -1,0 +1,9 @@
+package: "com.android.libbinder.flags"
+container: "system"
+
+flag {
+  name: "turn_on_libbinder_observer"
+  namespace: "system_performance"
+  description: "This flag controls usage of observer in libbinder"
+  bug: "299356196"
+}

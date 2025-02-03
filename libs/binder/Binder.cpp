@@ -31,6 +31,12 @@
 #include <binder/unique_fd.h>
 #include <pthread.h>
 
+#if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__) && \
+        !defined(__ANDROID_NATIVE_BRIDGE__) && !defined(__TRUSTY__)
+#include <com_android_libbinder_flags.h>
+namespace libbinder_flags = com::android::libbinder::flags;
+#endif
+
 #include <inttypes.h>
 #include <stdio.h>
 
@@ -43,6 +49,14 @@
 #include "OS.h"
 #include "RpcState.h"
 
+bool enableBinderObserver() {
+#if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__) && \
+        !defined(__ANDROID_NATIVE_BRIDGE__) && !defined(__TRUSTY__)
+    return libbinder_flags::turn_on_libbinder_observer();
+#else
+    return false;
+#endif
+}
 namespace android {
 
 using android::binder::unique_fd;
@@ -405,11 +419,15 @@ status_t BBinder::transact(
             break;
         }
         default:
-            std::string name = "BBinder: potential binder observation";
-
-            binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                          (name + " " + getTransactionName(code)).c_str());
+            if (enableBinderObserver()) {
+                std::string name = "BBinder: potential binder observation";
+                binder::os::trace_begin(ATRACE_TAG_AIDL,
+                                        (name + " " + getTransactionName(code)).c_str());
+            }
             err = onTransact(code, data, reply, flags);
+            if (enableBinderObserver()) {
+                binder::os::trace_end(ATRACE_TAG_AIDL);
+            }
             break;
     }
 
