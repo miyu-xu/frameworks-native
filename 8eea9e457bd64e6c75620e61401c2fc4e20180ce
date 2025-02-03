@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91854ffd_67e87419",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-03T22:45:05Z",
+      "side": 1,
+      "message": "is there a way to run these without needing to wait 5-10min to rebuild ninja after lunching?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
