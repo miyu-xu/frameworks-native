@@ -583,6 +583,7 @@ cc_test {
         "libbinder_rpc_no_kernel",
         "libbinder_trusty",
         "libtrusty",
+        "binder_flags_c_lib",
     ],
 
     test_suites: ["device-tests"],

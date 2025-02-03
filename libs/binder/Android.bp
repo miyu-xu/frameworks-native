@@ -276,6 +276,13 @@ cc_defaults {
         "-fvisibility=hidden",
         "-DBUILDING_LIBBINDER",
     ],
+    shared_libs: [
+        "server_configurable_flags",
+    ],
+    static_libs: [
+        "binder_flags_c_lib",
+        "libaconfig_storage_read_api_cc",
+    ],
 
     target: {
         vendor: {
@@ -283,6 +290,28 @@ cc_defaults {
             // disable it for the vendor variant for now. http://b/349657329
             // TODO: Fix the issue and remove this override.
             cflags: ["-fvisibility=default"],
+        },
+        recovery: {
+            // Flags are not supported in recovery.
+            exclude_shared_libs: ["server_configurable_flags"],
+            exclude_static_libs: [
+                "binder_flags_c_lib",
+                "libaconfig_storage_read_api_cc",
+            ],
+        },
+        host: {
+            exclude_shared_libs: ["server_configurable_flags"],
+            exclude_static_libs: [
+                "binder_flags_c_lib",
+                "libaconfig_storage_read_api_cc",
+            ],
+        },
+        native_bridge: {
+            exclude_shared_libs: ["server_configurable_flags"],
+            exclude_static_libs: [
+                "binder_flags_c_lib",
+                "libaconfig_storage_read_api_cc",
+            ],
         },
     },
 }
@@ -1002,5 +1031,22 @@ cc_binary {
         "liblog",
         "libutils",
         "android.debug_aidl-cpp",
+    ],
+}
+
+aconfig_declarations {
+    name: "binder_flags",
+    package: "com.android.libbinder.flags",
+    container: "system",
+    srcs: ["binder_flags.aconfig"],
+}
+
+cc_aconfig_library {
+    name: "binder_flags_c_lib",
+    aconfig_declarations: "binder_flags",
+    vendor_available: true,
+    host_supported: false,
+    visibility: [
+        ":__subpackages__",
     ],
 }
