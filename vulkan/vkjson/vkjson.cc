@@ -973,6 +973,13 @@ inline bool Iterate(Visitor* visitor,
 
 template <typename Visitor>
 inline bool Iterate(Visitor* visitor,
+                    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT* features) {
+  return visitor->Visit("image2DViewOf3D", &features->image2DViewOf3D) &&
+         visitor->Visit("sampler2DViewOf3D", &features->sampler2DViewOf3D);
+}
+
+template <typename Visitor>
+inline bool Iterate(Visitor* visitor,
                     VkPhysicalDeviceShaderDrawParameterFeatures* features) {
   return visitor->Visit("shaderDrawParameters",
                         &features->shaderDrawParameters);
@@ -1075,6 +1082,8 @@ inline bool Iterate(Visitor* visitor, VkJsonDevice* device) {
                          &device->protected_memory_features) &&
           visitor->Visit("samplerYcbcrConversionFeatures",
                          &device->sampler_ycbcr_conversion_features) &&
+          visitor->Visit("image2DViewOf3DFeaturesEXT",
+                         &device->image_2D_view_of_3D_features_EXT) &&
           visitor->Visit("shaderDrawParameterFeatures",
                          &device->shader_draw_parameter_features) &&
           visitor->Visit("externalFenceProperties",
