@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1b410e_0d956bfa",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T20:59:10Z",
+      "side": 1,
+      "message": "is this possible? C++ throws exceptions on allocation failures and we have exceptions turned off, so it just aborts AFAIK",
+      "revId": "d217f2a34af047ec01e1c6d0788fae457ad1b36d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
