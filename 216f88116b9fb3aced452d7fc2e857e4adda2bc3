@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f5e410_71d173b3",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-04T18:05:34Z",
+      "side": 1,
+      "message": "nit: this is verifying the state of mState - I would put it in the destructor of State, rather than inspecting that object. That way, you can capture it in the lambda, and the test will still run when \u0027mF\u0027 is destroyed. No need to modify DestructionAction (which is quite generic - for instance - for other custom logic here, you could pass a lambda w/ code in L50-L53, and it would already run that in the destructor) This would also save some changes below which couple \u0027State\u0027 in every testcase, even when it\u0027s not needed/used.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "216f88116b9fb3aced452d7fc2e857e4adda2bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b895c9_e0882026",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-04T18:05:34Z",
+      "side": 1,
+      "message": "nit: can make self-descriptive w/o comment `LOG(INFO) \u003c\u003c \"Priming static log variables for binderAllocationLimits.\"`",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 56
+      },
+      "revId": "216f88116b9fb3aced452d7fc2e857e4adda2bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
