@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e924ec35_0919f693",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T21:50:59Z",
+      "side": 1,
+      "message": "Done. Might as well be prepared!",
+      "parentUuid": "3d0a376d_e57dd434",
+      "revId": "d217f2a34af047ec01e1c6d0788fae457ad1b36d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d1b410e_0d956bfa",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-02-04T20:59:10Z",
       "side": 1,
       "message": "is this possible? C++ throws exceptions on allocation failures and we have exceptions turned off, so it just aborts AFAIK",
+      "revId": "d217f2a34af047ec01e1c6d0788fae457ad1b36d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61bca7d_3251a3e0",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T21:50:59Z",
+      "side": 1,
+      "message": "Nope! For some reason I thought it would return nullptr with no exceptions, but @smoreland just comfirmed it will abort instead. Removed.",
+      "parentUuid": "2d1b410e_0d956bfa",
       "revId": "d217f2a34af047ec01e1c6d0788fae457ad1b36d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
