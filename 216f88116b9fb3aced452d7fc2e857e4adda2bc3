@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65dfa2a_2bb7a385",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T18:21:52Z",
+      "side": 1,
+      "message": "Done. Thanks for the detailed explanation!",
+      "parentUuid": "60f5e410_71d173b3",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "216f88116b9fb3aced452d7fc2e857e4adda2bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1b895c9_e0882026",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-04T18:05:34Z",
       "side": 1,
       "message": "nit: can make self-descriptive w/o comment `LOG(INFO) \u003c\u003c \"Priming static log variables for binderAllocationLimits.\"`",
+      "range": {
+        "startLine": 393,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 56
+      },
+      "revId": "216f88116b9fb3aced452d7fc2e857e4adda2bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26538472_31d3dd50",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T18:21:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1b895c9_e0882026",
       "range": {
         "startLine": 393,
         "startChar": 0,
