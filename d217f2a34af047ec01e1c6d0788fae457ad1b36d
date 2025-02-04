@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0a376d_e57dd434",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-04T21:01:46Z",
+      "side": 1,
+      "message": "not a blocker: we should probably use `std::atomic\u003csize_t\u003e` here and `fetch_add` to interact with it. ofc, if concurrency is involved, this probably won\u0027t work reliably anyways, but it would at least manifest in a well defined way",
+      "revId": "d217f2a34af047ec01e1c6d0788fae457ad1b36d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d1b410e_0d956bfa",
