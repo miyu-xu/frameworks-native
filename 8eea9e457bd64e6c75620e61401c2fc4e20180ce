@@ -166,6 +166,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4937cb33_ea018119",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-04T00:19:37Z",
+      "side": 1,
+      "message": "(however, it seems like the images needed are in the device builds themselves, not easy to build w/o relunching or changing CF)",
+      "parentUuid": "b5b33627_149f9d0f",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
