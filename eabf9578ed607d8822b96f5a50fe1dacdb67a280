@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6630c365_1f7aeeb0",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01cd12fc_b61aef7e",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 80
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "133b5d83_94a175ab",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-03T23:29:04Z",
       "side": 1,
       "message": "use \u0027mNumMallocs\u0027 for member field, but the thing is, this will override previous values, and you have to clear out the state.\n\nAlso, nit: Consider something like:\n\n```\nstruct State {\n   std::vector\u003csize_t\u003e expectedMallocs;\n};\nauto state \u003d std::make_shared\u003cState\u003e();\nreturn OnMalloc([state\u003dstate](size_t bytes) {\n    state-\u003eexpectedMallocs;\n});\n```\n\nThat way, it\u0027s owned by the lambda. In this way, you can also avoid subclassing \u0027Test\u0027 and TEST_F, so that they are all raw tests (and no one is tempted to add shared \u0027SetUp\u0027 etc..",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 19
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6c958c_d2716557",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "133b5d83_94a175ab",
       "range": {
         "startLine": 236,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f394b965_d7e9ce25",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cd10a66_ca0f8e44",
+      "range": {
+        "startLine": 244,
+        "startChar": 16,
+        "endLine": 244,
+        "endChar": 53
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef2b2ae6_1abb2036",
@@ -100,6 +172,30 @@
       "writtenOn": "2025-02-03T23:29:04Z",
       "side": 1,
       "message": "Use ADD_FAILURE(), so that this is guaranteed to cause the test to fail, not LOG(ERROR), which can happen, but may not be a test failure. I know you have one case which is not an error below, but still.",
+      "range": {
+        "startLine": 245,
+        "startChar": 16,
+        "endLine": 251,
+        "endChar": 40
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1b951e_57ea1797",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done.\n\n\u003e I know you have one case which is not an error below\n\nYeah I suppose it\u0027s unlikley for that to be a common problem.",
+      "parentUuid": "ef2b2ae6_1abb2036",
       "range": {
         "startLine": 245,
         "startChar": 16,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92465857_e900b642",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "950b356c_f1e36f3a",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 32
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e01d5feb_ec49ea67",
@@ -146,6 +266,30 @@
       "writtenOn": "2025-02-03T23:29:04Z",
       "side": 1,
       "message": "nit: remove these - as generic tests in setExpectedMallocs can cover everything, checking the size of each is the same as checking the running total - you don\u0027t need the sum, will make the test a lot shorter, up to you",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 0
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce39a58e_05f9a9be",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Good point, totally unneccessary! I was using these before I switched to checking each malloc.",
+      "parentUuid": "e01d5feb_ec49ea67",
       "range": {
         "startLine": 290,
         "startChar": 0,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daeaa797_c3d28d2c",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cd2f6aa_a7885983",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 40
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16a254e7_92127e69",
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cbc0b92_fe1f2b87",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done. I used ADD_FAILURE() which can\u0027t be tested EXPECT_NONFATAL_FAILURE() like OnMallocWithExpectedMallocsWrongSize. The FAIL/EXPECT/ASSERT macros couldn\u0027t be used in the dtor.\n\nI tried LOG(FATAL) with EXPECT_DEATH - it worked, but makes debugging the actual test failures annoying so decided on ADD_FAILURE() and made sure it fails if an expected allocation is missing.",
+      "parentUuid": "16a254e7_92127e69",
+      "range": {
+        "startLine": 302,
+        "startChar": 27,
+        "endLine": 302,
+        "endChar": 29
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d37a1ce_8dfceed1",
@@ -215,6 +407,30 @@
       "writtenOn": "2025-02-03T23:29:04Z",
       "side": 1,
       "message": "not needed, since L306 is still in scope of setExpectedMallocs, if you make it fatal there",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 40
+      },
+      "revId": "eabf9578ed607d8822b96f5a50fe1dacdb67a280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "769b26aa_d9260053",
+        "filename": "libs/binder/tests/binderAllocationLimits.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-04T16:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d37a1ce_8dfceed1",
       "range": {
         "startLine": 308,
         "startChar": 0,
