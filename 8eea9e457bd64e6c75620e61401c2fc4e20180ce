@@ -142,6 +142,30 @@
       },
       "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b33627_149f9d0f",
+        "filename": "libs/binder/run_trusty_tests.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-04T00:19:09Z",
+      "side": 1,
+      "message": "The intermediate re-use isn\u0027t so good yet.",
+      "parentUuid": "5e3cfdd0_55b392c0",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "8eea9e457bd64e6c75620e61401c2fc4e20180ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
