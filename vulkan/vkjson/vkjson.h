@@ -34,7 +34,7 @@
 #endif
 
 /*
- * Annotation to tell clang that we intend to fall through from one case to
+ * Annnotation to tell clang that we intend to fall through from one case to
  * another in a switch. Sourced from android-base/macros.h.
  */
 #define FALLTHROUGH_INTENDED [[clang::fallthrough]]
