@@ -725,6 +725,19 @@ mod tests {
         (bools, death_recipient)
     }
 
+    /// is_thread_pool_started returns the correct status of the thread pool
+    #[test]
+    fn is_thread_pool_started() {
+        // Initially, the thread pool should not be started.
+        assert!(!binder::ProcessState::is_thread_pool_started());
+
+        // Start the thread pool.
+        binder::ProcessState::start_thread_pool();
+
+        // Now, the thread pool should be started.
+        assert!(binder::ProcessState::is_thread_pool_started());
+    }
+
     /// Killing a remote service should unregister the service and trigger
     /// death notifications.
     #[test]

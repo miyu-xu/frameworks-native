@@ -67,6 +67,12 @@ impl ProcessState {
             sys::ABinderProcess_joinThreadPool();
         }
     }
+
+    /// Checks if the Binder IPC thread pool has been started.
+    pub fn is_thread_pool_started() -> bool {
+        // Safety: Safe FFI call, no memory management involved.
+        unsafe { sys::ABinderProcess_isThreadPoolStarted() }
+    }
 }
 
 /// Static utility functions to manage Binder thread state.
