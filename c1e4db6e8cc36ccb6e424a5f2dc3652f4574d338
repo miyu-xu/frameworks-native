@@ -34,6 +34,24 @@
       "parentUuid": "2ecf66f8_3dc059d7",
       "revId": "c1e4db6e8cc36ccb6e424a5f2dc3652f4574d338",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d88d55_94891806",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-07T21:35:03Z",
+      "side": 1,
+      "message": "Thanks! `get()` sounds good to me.",
+      "parentUuid": "32457e98_d547cf4a",
+      "revId": "c1e4db6e8cc36ccb6e424a5f2dc3652f4574d338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
