@@ -1160,6 +1160,10 @@ macro_rules! declare_binder_enum {
             pub const fn enum_values() -> [Self; $size] {
                 [$(Self::$name),*]
             }
+
+            pub const fn to_backing_type(&self) -> $backing {
+                self.0
+            }
         }
 
         impl std::fmt::Debug for $enum {
