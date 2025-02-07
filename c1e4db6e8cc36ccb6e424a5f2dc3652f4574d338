@@ -16,6 +16,24 @@
       "message": "A function like this is usually called `inner` in Rust, but otherwise LGTM.",
       "revId": "c1e4db6e8cc36ccb6e424a5f2dc3652f4574d338",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32457e98_d547cf4a",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-07T20:33:23Z",
+      "side": 1,
+      "message": "`get` could also work, e.g. https://doc.rust-lang.org/stable/std/num/struct.NonZero.html#method.get.",
+      "parentUuid": "2ecf66f8_3dc059d7",
+      "revId": "c1e4db6e8cc36ccb6e424a5f2dc3652f4574d338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
