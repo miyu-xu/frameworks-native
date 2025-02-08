@@ -113,7 +113,7 @@ not_valid_surface:
     if (producer == NULL)
         goto not_valid_surface;
 
-    window = android::sp<android::Surface>::make(producer, true);
+    window = new android::Surface(producer, true);
 
     if (window == NULL)
         goto not_valid_surface;
