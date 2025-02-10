@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e440b56_11b67305",
+        "filename": "cmds/installd/otapreopt_script.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2025-02-10T13:49:51Z",
+      "side": 1,
+      "message": "Not directly related, but something I\u0027m not sure I thought about in the earlier review is that stdin has a limited buffer, and if the process doesn\u0027t read it then I suspect this will eventually fail and thus exit the script before the child process has finished, although it\u0027ll take a really long time and is quite unlikely to happen in practice. However, I wonder wouldn\u0027t it work just as well to not write anything at all here? Afaik there\u0027s no \"autoclosing\" of the standard fd\u0027s just because they\u0027re idle.",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "f33e7f44b9296a9964bf079a0fc3da23a4fd1baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
