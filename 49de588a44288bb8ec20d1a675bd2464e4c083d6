@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0f7af1a_baf3dbd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-10T17:25:17Z",
+      "side": 1,
+      "message": "The numbers don\u0027t make sense to me. Maybe I\u0027m looking at the wrong output.\n\n`aidl-test-interface-rust` is only used as an rlib. I don\u0027t see any other AIDL generated Rust .so files on Cuttlefish to check.\n\n`m aidl-test-interface-rust aidl_test_rust_client` before and after these changes.\n\n`aidl-test-interface-rust/android_x86_64_silvermont_dylib/libaidl_test_interface.dylib.so`\n- 582456 bytes to 582456 - +0 bytes (maybe because nothing uses it?)\n\n`aidl_test_rust_client/android_x86_64_silvermont/aidl_test_rust_client64`\n- 1506808 to 1506736 - -72 bytes\n\n`aidl-test-interface-rust/android_x86_64_silvermont_rlib_rlib-std/libaidl_test_interface.rlib`\n- 17569644 bytes to 17657660 - +88016 bytes\n\nThe intemediate rlib goes up a lot, but I think it contains a lot of extra info that isn\u0027t used in final binary.\n\nThe final test binary goes _down_ in size. That seems odd to me. Maybe the compiler can do fancier things with these operators defined?",
+      "parentUuid": "d1b7b6d6_6450b088",
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a59d2b58_05ecea56",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2025-02-10T14:53:26Z",
       "side": 1,
       "message": "no bitand_assign?",
+      "range": {
+        "startLine": 1220,
+        "startChar": 15,
+        "endLine": 1220,
+        "endChar": 27
+      },
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b987c7_d1825b5f",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-10T17:25:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a59d2b58_05ecea56",
       "range": {
         "startLine": 1220,
         "startChar": 15,
