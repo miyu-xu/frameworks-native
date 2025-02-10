@@ -16,6 +16,23 @@
       "message": "Unsafe Rust LGTM.",
       "revId": "896cb54ce46783e0520c2d850abb3fea1b021395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef767a7e_a98d90ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-10T15:06:02Z",
+      "side": 1,
+      "message": "Hi - I am not sure we want to expose this API. Whether a thread pool is started won\u0027t tell you if there is a thread available. If a process only calls \u0027joinThreadPool\u0027 this will still be fals.\n\nThe logic you want for this check is as in IServiceManager.cpp:\n```\n        sp\u003cProcessState\u003e self \u003d ProcessState::selfOrNull();\n        if (self \u0026\u0026 0 \u003d\u003d self-\u003egetThreadPoolMaxTotalThreadCount()) {\n            ALOGW(\"Got service, but may be racey because we could not wait efficiently for it. \"\n                  \"Threadpool has 0 guaranteed threads. \"\n                  \"Is the threadpool configured properly? \"\n                  \"See ProcessState::startThreadPool and \"\n                  \"ProcessState::setThreadPoolMaxThreadCount.\");\n        }\n```\n\nThat is - getThreadPoolMaxTotalThreadCount - this API will print the number of threads guaranteed to be started from any source (threadpool or not). From your doc, it seems you may be more interested in this?\n\nIf you want a more specific API, you might consider adding \u0027requireBinderThreads\u0027 based on this, as that could be easier to improve in the future.\n\nOne common anti-pattern is `if !isThreadPoolStarted: startThreadPool`. In libraries, due to ordering, this can sometimes cause more threads than expected to be started.",
+      "revId": "896cb54ce46783e0520c2d850abb3fea1b021395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
