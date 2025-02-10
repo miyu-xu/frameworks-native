@@ -51,6 +51,47 @@
       "parentUuid": "ef767a7e_a98d90ab",
       "revId": "896cb54ce46783e0520c2d850abb3fea1b021395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf871b3_e1dcd89c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-10T17:00:03Z",
+      "side": 1,
+      "message": "-\u003e http://r.android.com/3487390\n\nIf SDV is using platform code, you could also add getThreadPoolMaxTotalThreadCount here:\nhttps://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/ndk/libbinder_ndk.map.txt;l\u003d225;drc\u003dbbd4088dd5d5631b06df1b487dec23c0625d19b7\n\nCould you confirm you do need to use this from systemapi or llndk? If you only need to use this from system image, you could add that API now. If you can do that, please do that, otherwise ff to merge this, thanks!",
+      "parentUuid": "b52ca9fb_2ee9d297",
+      "revId": "896cb54ce46783e0520c2d850abb3fea1b021395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "400a4ee9_fed62b2e",
+        "filename": "libs/binder/rust/src/state.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-10T17:00:03Z",
+      "side": 1,
+      "message": "nit: maybe note - if you call \u0027join_thread_pool\u0027 this won\u0027t become true, so it\u0027s not the same as having a binder thread available",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 62
+      },
+      "revId": "896cb54ce46783e0520c2d850abb3fea1b021395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
