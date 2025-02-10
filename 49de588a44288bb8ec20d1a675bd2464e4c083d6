@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c68f082_85c55b4f",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-10T21:39:14Z",
+      "side": 1,
+      "message": "There are also `BitAndAssign` and `BitXorAssign`, do you not need those?",
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a59d2b58_05ecea56",
         "filename": "libs/binder/rust/src/binder.rs",
         "patchSetId": 1
