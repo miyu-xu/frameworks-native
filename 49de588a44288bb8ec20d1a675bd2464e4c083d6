@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b7b6d6_6450b088",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-10T14:53:26Z",
+      "side": 1,
+      "message": "Any code size impact of this? Might check library size before/after to double check - I\u0027m curious if it\u0027s any increase at all.",
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59d2b58_05ecea56",
+        "filename": "libs/binder/rust/src/binder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-10T14:53:26Z",
+      "side": 1,
+      "message": "no bitand_assign?",
+      "range": {
+        "startLine": 1220,
+        "startChar": 15,
+        "endLine": 1220,
+        "endChar": 27
+      },
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
