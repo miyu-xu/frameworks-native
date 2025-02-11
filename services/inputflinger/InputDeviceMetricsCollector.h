@@ -93,7 +93,8 @@ public:
         int32_t keyboardType;
     };
     virtual void logInputDeviceUsageReported(const MetricsDeviceInfo&,
-                                             const DeviceUsageReport&) = 0;
+                                             const DeviceUsageReport&,
+                                             bool isSnapshot = false) = 0;
     virtual ~InputDeviceMetricsLogger() = default;
 };
 
@@ -125,6 +126,7 @@ private:
     InputListenerInterface& mNextListener;
     InputDeviceMetricsLogger& mLogger GUARDED_BY(mLock);
     const std::chrono::nanoseconds mUsageSessionTimeout;
+    std::chrono::nanoseconds mLastSessionSnapshotTime{};
 
     // Type-safe wrapper for input device id.
     struct DeviceId : ftl::Constructible<DeviceId, std::int32_t>,
@@ -151,6 +153,7 @@ private:
         void recordUsage(std::chrono::nanoseconds eventTime, InputDeviceUsageSource source);
         void recordInteraction(const Interaction&);
         bool checkIfCompletedAt(std::chrono::nanoseconds timestamp);
+        InputDeviceMetricsLogger::DeviceUsageReport getSnapshot();
         InputDeviceMetricsLogger::DeviceUsageReport finishSession();
 
     private:
@@ -180,6 +183,7 @@ private:
                             const SourceProvider& getSources) REQUIRES(mLock);
     void onInputDeviceInteraction(const Interaction&) REQUIRES(mLock);
     void reportCompletedSessions() REQUIRES(mLock);
+    void reportSessionSnapshot(std::chrono::nanoseconds currentTime) REQUIRES(mLock);
 };
 
 } // namespace android

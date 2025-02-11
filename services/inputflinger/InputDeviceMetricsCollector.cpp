@@ -31,6 +31,7 @@ using std::chrono_literals::operator""ns;
 namespace {
 
 constexpr nanoseconds DEFAULT_USAGE_SESSION_TIMEOUT = std::chrono::minutes(2);
+constexpr nanoseconds DEFAULT_USAGE_SESSION_SNAPSHOT_INTERVAL = std::chrono::minutes(5);
 
 /**
  * Log debug messages about metrics events logged to statsd.
@@ -64,7 +65,8 @@ class : public InputDeviceMetricsLogger {
     nanoseconds getCurrentTime() override { return nanoseconds(systemTime(SYSTEM_TIME_MONOTONIC)); }
 
     void logInputDeviceUsageReported(const MetricsDeviceInfo& info,
-                                     const DeviceUsageReport& report) override {
+                                     const DeviceUsageReport& report,
+                                     bool isSnapshot) override {
         const int32_t durationMillis =
                 std::chrono::duration_cast<std::chrono::milliseconds>(report.usageDuration).count();
         const static std::vector<int32_t> empty;
@@ -94,7 +96,11 @@ class : public InputDeviceMetricsLogger {
             ALOGD_IF(DEBUG, "        - uid: %s\t duration: %dms", uid.toString().c_str(),
                      durMillis);
         }
-        util::stats_write(util::INPUTDEVICE_USAGE_REPORTED, info.vendor, info.product, info.version,
+        auto atom = isSnapshot
+            ? util::INPUTDEVICE_USAGE_SNAPSHOT
+            : util::INPUTDEVICE_USAGE_REPORTED;
+
+        util::stats_write(atom, info.vendor, info.product, info.version,
                           linuxBusToInputDeviceBusEnum(info.bus, info.isUsiStylus), durationMillis,
                           sources, durationsPerSource, uids, durationsPerUid);
     }
@@ -305,6 +311,11 @@ void InputDeviceMetricsCollector::reportCompletedSessions() {
         }
     }
 
+    if (completedUsageSessions.empty()) {
+        reportSessionSnapshot(currentTime);
+        return;
+    }
+
     // Close out and log all expired usage sessions.
     for (DeviceId deviceId : completedUsageSessions) {
         const auto infoIt = mLoggedDeviceInfos.find(deviceId);
@@ -315,6 +326,28 @@ void InputDeviceMetricsCollector::reportCompletedSessions() {
         auto& [_, activeSession] = *activeSessionIt;
         mLogger.logInputDeviceUsageReported(infoIt->second, activeSession.finishSession());
         mActiveUsageSessions.erase(activeSessionIt);
+    }
+}
+
+void InputDeviceMetricsCollector::reportSessionSnapshot(std::chrono::nanoseconds currentTime) {
+    if (mLastSessionSnapshotTime != 0ns &&
+            currentTime - mLastSessionSnapshotTime < DEFAULT_USAGE_SESSION_SNAPSHOT_INTERVAL) {
+        // Not enough time has passed since the last interaction
+        return;
+    }
+
+    for (auto& [deviceId, activeSession] : mActiveUsageSessions) {
+        const auto infoIt = mLoggedDeviceInfos.find(deviceId);
+        LOG_ALWAYS_FATAL_IF(infoIt == mLoggedDeviceInfos.end());
+
+        mLogger.logInputDeviceUsageReported(infoIt->second,
+                                            activeSession.getSnapshot(),
+                                            true /*isSnapshot*/);
+    }
+
+    // Update the snapshot time if at least 1 snapshot was logged
+    if (!mActiveUsageSessions.empty()) {
+        mLastSessionSnapshotTime = currentTime;
     }
 }
 
@@ -383,6 +416,23 @@ bool InputDeviceMetricsCollector::ActiveSession::checkIfCompletedAt(nanoseconds 
 
     // This active session has expired if there are no more active source sessions tracked.
     return mActiveSessionsBySource.empty();
+}
+
+InputDeviceMetricsLogger::DeviceUsageReport
+InputDeviceMetricsCollector::ActiveSession::getSnapshot() {
+    InputDeviceMetricsLogger::SourceUsageBreakdown sourceUsageBreakdown{};
+    InputDeviceMetricsLogger::UidUsageBreakdown uidUsageBreakdown{};
+    const auto deviceUsageDuration = mDeviceSession.end - mDeviceSession.start;
+
+    for (const auto& [source, sourceSession] : mActiveSessionsBySource) {
+        sourceUsageBreakdown.emplace_back(source, sourceSession.end - sourceSession.start);
+    }
+
+    for (const auto& [uid, uidSession] : mActiveSessionsByUid) {
+        uidUsageBreakdown.emplace_back(uid, uidSession.end - uidSession.start);
+    }
+
+    return {deviceUsageDuration, sourceUsageBreakdown, uidUsageBreakdown};
 }
 
 InputDeviceMetricsLogger::DeviceUsageReport
