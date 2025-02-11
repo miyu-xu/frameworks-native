@@ -22,6 +22,30 @@
       },
       "revId": "f33e7f44b9296a9964bf079a0fc3da23a4fd1baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8c6324b_fdb690a2",
+        "filename": "cmds/installd/otapreopt_script.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2025-02-11T11:37:54Z",
+      "side": 1,
+      "message": "I thought about the same, and I eventually came to this because I couldn\u0027t find a better way. The problem is not to \"keep the pipe alive\", but to terminate the source when the child process exits. If the source just waits forever, the script will hang even if the child process exits normally. The loop here is a polling mechanism to check the child process every second and terminate the source when the child process is gone (when `echo` returns non-zero). The child process [keeps consuming the dummy inputs](https://cs.android.com/android/platform/superproject/main/+/main:art/libartservice/service/java/com/android/server/art/ArtShellCommand.java;l\u003d810;drc\u003d2bd1c1b20871bcf4ef4660beaa218f2c2bce4630), so we won\u0027t run out of buffer. Maybe there is a better way to do this, but I\u0027m just not aware of it.",
+      "parentUuid": "9e440b56_11b67305",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "f33e7f44b9296a9964bf079a0fc3da23a4fd1baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
