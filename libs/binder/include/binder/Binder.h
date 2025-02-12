@@ -28,6 +28,26 @@ namespace internal {
 class Stability;
 }
 
+/**
+ * An observer that can be registered to a binder object.
+ */
+class IBinderObserver {
+public:
+    virtual ~IBinderObserver() = default;
+    /**
+     * should be called when a binder call starts.
+     *
+     */
+    virtual CallSession onCallStarted() = 0;
+    /**
+     * Should be called when a binder call stops.
+     *
+     * <li>This method will be called even when an exception is thrown by the binder stub
+     * implementation.
+     */
+    virtual void onCallEnded(const CallSession& callSession, uint32_t tranasationCode, const std::string& transactionName, uint32_t workSourceUid, int parcelRequestSize, int parcelReplySize, bool isExceptionThrown) = 0;
+};
+
 class BBinder : public IBinder {
 public:
     LIBBINDER_EXPORTED BBinder();
@@ -110,6 +130,7 @@ protected:
     LIBBINDER_EXPORTED virtual status_t onTransact(uint32_t code, const Parcel& data, Parcel* reply,
                                                    uint32_t flags = 0);
 
+    LIBBINDER_EXPORTED virtual const std::string getTransactionName(int transactionCode);
 private:
                         BBinder(const BBinder& o);
             BBinder&    operator=(const BBinder& o);
