@@ -18,6 +18,7 @@
 
 #include <atomic>
 #include <set>
+#include <string>
 
 #include <binder/BpBinder.h>
 #include <binder/IInterface.h>
@@ -53,10 +54,10 @@ constexpr uid_t kUidRoot = 0;
 // in prebuilts.
 #ifdef __LP64__
 static_assert(sizeof(IBinder) == 24);
-static_assert(sizeof(BBinder) == 40);
+static_assert(sizeof(BBinder) == 56);
 #else
 static_assert(sizeof(IBinder) == 12);
-static_assert(sizeof(BBinder) == 20);
+static_assert(sizeof(BBinder) == 24);
 #endif
 
 // global b/c b/230079120 - consistent symbol table
@@ -406,10 +407,27 @@ status_t BBinder::transact(
         }
         default:
             std::string name = "BBinder: potential binder observation";
-
+            std::string transactionName = getTransactionName(code);
             binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                          (name + " " + getTransactionName(code)).c_str());
+                                          (name + " " + transactionName).c_str());
+            CallSession callSession;
+            if (mObservers) {
+                callSession = mObservers->onCallStarted();
+            }
+            // for (auto& observer : mObservers) {
+            //     if (observer) {
+            //         observer->onCallStarted();
+            //     }
+            // }
             err = onTransact(code, data, reply, flags);
+            if (mObservers) {
+                mObservers->onCallEnded(callSession, code, transactionName, IPCThreadState::self()->getCallingUid(), data.dataSize(), reply ? reply->dataSize() : 0, err != NO_ERROR);
+            }
+            // for (auto& observer : mObservers) {
+            //     if (observer) {
+            //         observer->onCallEnded(transactionName, IPCThreadState::self()->getCallingUid(), data.dataSize(), reply ? reply->dataSize() : 0, err != NO_ERROR);
+            //     }
+            // }
             break;
     }
 
@@ -823,7 +841,7 @@ status_t BBinder::onTransact(
     }
 }
 
-const std::string BBinder::getTransactionName(int transactionCode) {
+const std::string BBinder::getTransactionName(uint32_t transactionCode) {
     return std::to_string(transactionCode);
 }
 
