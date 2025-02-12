@@ -50,6 +50,30 @@
       ],
       "revId": "6ff6b9bef78965002218d998f2c5a4845177bb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25090573_2a43b571",
+        "filename": "libs/binder/ndk/include_platform/android/binder_stability.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-12T17:19:38Z",
+      "side": 1,
+      "message": "IIUC, that\u0027s what Steven is trying to make sure of with this CL.",
+      "parentUuid": "a1ff2bed_0f51179c",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "6ff6b9bef78965002218d998f2c5a4845177bb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
