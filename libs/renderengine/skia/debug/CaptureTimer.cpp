@@ -30,7 +30,13 @@ namespace skia {
 
 void CaptureTimer::setTimeout(TimeoutCallback function, std::chrono::milliseconds delay) {
     this->clear = false;
+<<<<<<< PATCH SET (1ae463 Wreorder-init-list: Fix the order of initialization)
+    CommonPool::post([=, this]() {
+||||||| BASE
+    CommonPool::post([this]() {
+=======
     CommonPool::post([=,this]() {
+>>>>>>> BASE      (870725 Implicit capture of 'this' with a capture default of '=' is )
         if (this->clear) return;
         std::this_thread::sleep_for(delay);
         if (this->clear) return;
