@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ff2bed_0f51179c",
+        "filename": "libs/binder/ndk/include_platform/android/binder_stability.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2025-02-12T01:43:41Z",
+      "side": 1,
+      "message": "These two are exclusive.\nYou may add this check outside of `__ANDROID_VENDOR__` macro.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f876fa7f_96185f8a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_stability.h",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/binder/ndk/include_platform/android/binder_stability.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "#if defined(__ANDROID_VENDOR__)\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6ff6b9bef78965002218d998f2c5a4845177bb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
