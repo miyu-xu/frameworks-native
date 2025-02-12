@@ -22,6 +22,30 @@
       },
       "revId": "e085f2fe1e60b609730c50ddbe60158a01d3608b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c11ba0_385cc714",
+        "filename": "libs/renderengine/skia/debug/CaptureTimer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2025-02-12T18:00:41Z",
+      "side": 1,
+      "message": "yes but it should have been in the previous patch. I got confused with cider-v\u0027s interface. my bad, I\u0027ll fix it.",
+      "parentUuid": "c5763878_ac5d2adf",
+      "range": {
+        "startLine": 33,
+        "startChar": 22,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "e085f2fe1e60b609730c50ddbe60158a01d3608b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
