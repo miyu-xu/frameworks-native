@@ -74,6 +74,30 @@
       },
       "revId": "6ff6b9bef78965002218d998f2c5a4845177bb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f681b7a1_7babdb74",
+        "filename": "libs/binder/ndk/include_platform/android/binder_stability.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-12T21:53:48Z",
+      "side": 1,
+      "message": "Right, I\u0027m trying to catch a build system issue where they may not be exclusive. b/385007343 hints it could happen. Though I agree the other check may catch other types of issues, I\u0027ll go ahead and merge this first to see.",
+      "parentUuid": "25090573_2a43b571",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "6ff6b9bef78965002218d998f2c5a4845177bb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
