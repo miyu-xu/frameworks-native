@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3956fb_eabfd850",
+        "filename": "libs/gui/BLASTBufferQueue.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-02-12T19:54:10Z",
+      "side": 0,
+      "message": "note that these are initialized in the header, so this change is save:\n\n```\n    int32_t mNumFrameAvailable GUARDED_BY(mMutex) \u003d 0;\n    int32_t mNumAcquired GUARDED_BY(mMutex) \u003d 0;\n```",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 0
+      },
+      "revId": "c8ca54a3fa4c989489546fe919bb93295928ff9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -16,6 +16,23 @@
       "message": "Please take time to review this patch, thank you very much.",
       "revId": "a576ccd2e572fead186fefdcc93f36960004461c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6421981_f87e1fe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-02-12T19:54:10Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a576ccd2e572fead186fefdcc93f36960004461c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
