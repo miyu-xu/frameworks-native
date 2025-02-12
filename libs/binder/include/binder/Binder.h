@@ -27,7 +27,9 @@ namespace android {
 namespace internal {
 class Stability;
 }
-
+struct CallSession {
+    std::chrono::nanoseconds timeOfCallSinceEpoch;
+};
 /**
  * An observer that can be registered to a binder object.
  */
@@ -130,7 +132,7 @@ protected:
     LIBBINDER_EXPORTED virtual status_t onTransact(uint32_t code, const Parcel& data, Parcel* reply,
                                                    uint32_t flags = 0);
 
-    LIBBINDER_EXPORTED virtual const std::string getTransactionName(int transactionCode);
+    LIBBINDER_EXPORTED virtual const std::string getTransactionName(uint32_t transactionCode);
 private:
                         BBinder(const BBinder& o);
             BBinder&    operator=(const BBinder& o);
@@ -151,6 +153,7 @@ private:
     int16_t mStability;
     bool mParceled;
     bool mRecordingOn;
+    std::unique_ptr<IBinderObserver> mObserver;
 
 #ifdef __LP64__
     int32_t mReserved1;
