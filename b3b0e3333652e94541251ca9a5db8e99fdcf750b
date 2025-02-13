@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea200e5d_8ca13b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-02-13T19:36:45Z",
+      "side": 1,
+      "message": "connections are an implementation detail of the session. why can\u0027t you use the session API?",
+      "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
