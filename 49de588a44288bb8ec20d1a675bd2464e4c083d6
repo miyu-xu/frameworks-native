@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d29f77f3_bfd6d0cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-14T20:12:01Z",
+      "side": 1,
+      "message": "The important bit would be like aidl_test_rust_client. These are statically included. Who knows how it affects optimizations.",
+      "parentUuid": "a0f7af1a_baf3dbd8",
+      "revId": "49de588a44288bb8ec20d1a675bd2464e4c083d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c68f082_85c55b4f",
