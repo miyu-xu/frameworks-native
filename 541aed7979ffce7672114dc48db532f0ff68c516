@@ -123,6 +123,24 @@
       "parentUuid": "4ab25552_699ededa",
       "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b72ff2_362f3584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-15T00:34:38Z",
+      "side": 1,
+      "message": "This would mean the tests also need to check for compatibility to be able to run. It\u0027s a lot of complexity. I\u0027d like to understand why we need a prebuilt for this stuff if Trusty and binder are in source - can we get away from that?",
+      "parentUuid": "cb02eb79_0ac6cb70",
+      "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
