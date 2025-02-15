@@ -105,6 +105,24 @@
       "parentUuid": "0ffd2fc2_95ab5444",
       "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb02eb79_0ac6cb70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-15T00:22:03Z",
+      "side": 1,
+      "message": "\u003e (can we update it instead?)\n\nSure, but that\u0027s a manual process that happens post-submit right now.\n\nThe prebuilts were updated recently in https://r.android.com/3487932, so I think we can re-enable the test.\n\n\u003e I\u0027m not sure why the test needs to be forked, but if that is the only reason why this is stuck in prebuilts, maybe fork the interface as well so the test isn\u0027t locked down.\n\nThe sources of the test aren\u0027t forked, it uses\n```\n    srcs: [\n        \"binderRpcTest.cpp\",\n        \"binderRpcTestCommon.cpp\",\n        \"binderRpcUniversalTests.cpp\",\n    ],\n```\n\nWe produce a separate client binary because that needs 1) to be vendor, and 2) it\u0027s really only meant for `qemu_trusty_arm64`, no point in running those tests on Cuttlefish.\n\nMaybe we could have `IBinderRpcTest` be versioned, and for that test and the in-Trusty ones to use v0, and the rest to use `current`?",
+      "parentUuid": "4ab25552_699ededa",
+      "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
