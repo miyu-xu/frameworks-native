@@ -141,6 +141,24 @@
       "parentUuid": "cb02eb79_0ac6cb70",
       "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe7ae90_db13d746",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-15T00:36:37Z",
+      "side": 1,
+      "message": "\u003e can we get away from that?\n\nActually, yes, that would be the ideal way forward. Now that we can build Android+Trusty from the same source tree, we should move away from the prebuilts. Integrating that into CI might be a bit of work, but it makes sense.",
+      "parentUuid": "90b72ff2_362f3584",
+      "revId": "541aed7979ffce7672114dc48db532f0ff68c516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
