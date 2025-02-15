@@ -79,11 +79,40 @@ public:
             const std::optional<SmallFunction<status_t()>>& altPoll,
             const std::vector<std::variant<unique_fd, borrowed_fd>>* ancillaryFds) override {
         auto writeFn = [&](iovec* iovs, size_t niovs) -> ssize_t {
+            // The Trusty driver on Android refuses to send messages larger than
+            // PAGE_SIZE and returns EMSGSIZE if we try. Truncate them here
+            // which should be safe to do because the Trusty side reassembles
+            // them anyway. We also reserve a bit of the page for Trusty's
+            // protocol headers.
+            constexpr size_t kPageReservedSize = 64;
+            static const size_t maxMsgSize = sysconf(_SC_PAGE_SIZE) - kPageReservedSize;
+            size_t niovsMsg;
+            size_t currSize = 0;
+            size_t cutSize = 0;
+            for (niovsMsg = 0; niovsMsg < niovs; niovsMsg++) {
+                currSize += iovs[niovsMsg].iov_len;
+                if (currSize >= maxMsgSize) {
+                    // Truncate the last iov but restore it at the end
+                    // so the caller can continue where we left off.
+                    cutSize = currSize - maxMsgSize;
+                    iovs[niovsMsg].iov_len -= cutSize;
+                    niovsMsg++;
+                    break;
+                }
+            }
+
             // TODO: send ancillaryFds. For now, we just abort if anyone tries
             // to send any.
             LOG_ALWAYS_FATAL_IF(ancillaryFds != nullptr && !ancillaryFds->empty(),
                                 "File descriptors are not supported on Trusty yet");
-            return TEMP_FAILURE_RETRY(tipc_send(mSocket.fd.get(), iovs, niovs, nullptr, 0));
+            status_t ret =
+                    TEMP_FAILURE_RETRY(tipc_send(mSocket.fd.get(), iovs, niovsMsg, nullptr, 0));
+
+            if (niovsMsg > 0) {
+                iovs[niovsMsg - 1].iov_len += cutSize;
+            }
+
+            return ret;
         };
 
         status_t status = interruptableReadOrWrite(mSocket, fdTrigger, iovs, niovs, writeFn,
