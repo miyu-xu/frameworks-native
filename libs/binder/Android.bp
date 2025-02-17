@@ -230,6 +230,13 @@ filegroup {
     ],
 }
 
+filegroup {
+    name: "libbinder_observer_sources",
+    srcs: [
+        "BinderObserver.cpp",
+    ],
+}
+
 cc_defaults {
     name: "libbinder_common_defaults",
     host_supported: true,
@@ -253,6 +260,7 @@ cc_defaults {
         "TextOutput.cpp",
         "Utils.cpp",
         "file.cpp",
+        ":libbinder_observer_sources",
     ],
 
     header_libs: [
