@@ -16,6 +16,105 @@
       "message": "Makes sense to me, but I think this needs a review from someone more familiar with how this library works.",
       "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1bda867_18cd5462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-02-19T20:02:05Z",
+      "side": 1,
+      "message": "+Jim for Surface stuff.\n\nAndrew: out of curiosity what sort of component is drawing this cursor?",
+      "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8955d002_9213c5eb",
+        "filename": "libs/gui/Surface.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2636,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-02-19T20:02:05Z",
+      "side": 1,
+      "message": "note that this means you only get cursor layers for content that\u0027s software-rendered. Is that what\u0027s intended?",
+      "range": {
+        "startLine": 2635,
+        "startChar": 8,
+        "endLine": 2636,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c836f3d8_46971ae9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/gui/Surface.cpp",
+              "range": {
+                "startLine": 2634,
+                "startChar": 0,
+                "endLine": 2637,
+                "endChar": 0
+              },
+              "replacement": "        // we\u0027re intending to do software rendering from this point.\n        // Note that this means we only get cursor layers for content that\u0027s\n        // software-rendererd.\n        setUsage(GRALLOC_USAGE_SW_READ_OFTEN | GRALLOC_USAGE_SW_WRITE_OFTEN);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275980ca_71db7b70",
+        "filename": "libs/gui/include/gui/Surface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-02-19T20:02:05Z",
+      "side": 1,
+      "message": "camelCase is the style here",
+      "range": {
+        "startLine": 266,
+        "startChar": 9,
+        "endLine": 266,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d2dd2676_dd5e34f3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/gui/include/gui/Surface.h",
+              "range": {
+                "startLine": 266,
+                "startChar": 0,
+                "endLine": 267,
+                "endChar": 0
+              },
+              "replacement": "    void setIsForCursor(bool isForCursor) { mIsForCursor \u003d isForCursor; }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
