@@ -149,6 +149,30 @@
       ],
       "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6decaf64_0408a49b",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-19T18:54:38Z",
+      "side": 1,
+      "message": "I\u0027m picking this CL up as it\u0027s needed to enable trusty FDs to be transferred between a trusty binder rpc session and a trusty binder rpc server.\n\nI can think of a couple of ways forward on this concern. They\u0027re stated here in order of my preference, but please let me know what you think. I don\u0027t have as much insight into the history or planned future for binder to know what\u0027s best.\n\n1. Add a static assert that ARpcServer is an empty struct. This gives some level of confidence that this cast continues to be safe as long as ARpcServer remains empty and if `ArpcServer` ever changes, we\u0027ll know it breaks this function at compile time. Of course, this could kick the can down the road. If `ARpcServer` changes, we\u0027ll need to find a way to do this conversion safely.\n\n2. Have `RpcServer` expose methods to translate from `ARpcServer` and back. Currently these methods are an implementation detail [1] of `ARpcServer`, but exposing them would allow us to avoid assuming how to convert between the two.\n\n3. Don\u0027t take this approach of trying to resolve and delegate to `ARpcServer` from `ARpcServerTrusty`. Instead, implement `ARpcServerTrusty_setSupportedFileDescriptorTransportMode` directly. Note this essentially involves copying `ARpcServer_setSupportedFileDescriptorTransportMode` [2].\n\n[1]https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/libbinder_rpc_unstable.cpp;l\u003d43-61;drc\u003daee4e9d7b750d88b048ae74e371e2859a788fdc6\n\n[2]https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/libbinder_rpc_unstable.cpp;l\u003d157;drc\u003daee4e9d7b750d88b048ae74e371e2859a788fdc6",
+      "parentUuid": "347cfe7d_e304596d",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 65
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
