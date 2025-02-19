@@ -16,6 +16,23 @@
       "message": "ping",
       "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de16535b_b0dc972e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3790621
+      },
+      "writtenOn": "2025-02-19T14:21:27Z",
+      "side": 1,
+      "message": "How could I overcome the latest error? \nAs I have uploaded the patches according to google guidance and the approval is by google team.",
+      "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
