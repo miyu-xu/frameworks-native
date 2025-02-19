@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb8583f_a4818b5b",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-19T21:52:38Z",
+      "side": 1,
+      "message": "I don\u0027t think so at this time, since this code is dependent on tipc ( @ahomescu@google.com please correct me if I\u0027m misunderstanding). The approach in this CL of delegating to `ARpcServer` does avoid copying implementation details between the two server implementations, though.",
+      "parentUuid": "4f5aacc1_9ad3bf04",
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4a237761_72dc4b65",
@@ -89,6 +107,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad83c812_a2f1cbcf",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-19T21:52:38Z",
+      "side": 1,
+      "message": "@ahomescu@google.com do you know the history on this? It looks like `binder_rpc_server_bindgen` is indeed trusty only but I don\u0027t have context as to why this approach was taken vs. a single target with conditional inclusion of the trusty bits. I\u0027m inclined not to change this in the scope of this CL, regardless.",
+      "parentUuid": "369c7d24_1d7aa7db",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4c6c5e9_6bd97c92",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-19T21:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b91124b7_921cafcb",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1aa236e1_64394564",
         "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
         "patchSetId": 1
@@ -100,6 +166,30 @@
       "writtenOn": "2024-09-03T21:12:00Z",
       "side": 1,
       "message": "this doesn\u0027t seem right, there is no opaque pointer argument of ARpcServer_setSupportedFileDescriptorTransportModes",
+      "range": {
+        "startLine": 83,
+        "startChar": 35,
+        "endLine": 83,
+        "endChar": 86
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dff796b_420a2f4d",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-19T21:52:38Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "1aa236e1_64394564",
       "range": {
         "startLine": 83,
         "startChar": 35,
