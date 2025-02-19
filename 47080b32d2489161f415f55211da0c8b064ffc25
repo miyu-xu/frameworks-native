@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f43123b_4e023008",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3663186
+      },
+      "writtenOn": "2025-02-19T20:33:48Z",
+      "side": 1,
+      "message": "\u003e +Jim for Surface stuff.\n\n👋 Hi Jim!\n\n\u003e Andrew: out of curiosity what sort of component is drawing this cursor?\n\nThe cursor originates from [SpriteController](https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/libs/input/SpriteController.cpp;l\u003d343?q\u003dspritecontroller).",
+      "parentUuid": "e1bda867_18cd5462",
+      "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8955d002_9213c5eb",
@@ -89,6 +107,30 @@
           ]
         }
       ],
+      "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa2a343_e6dd9daf",
+        "filename": "libs/gui/Surface.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2636,
+      "author": {
+        "id": 3663186
+      },
+      "writtenOn": "2025-02-19T20:33:48Z",
+      "side": 1,
+      "message": "I wouldn\u0027t say that\u0027s intended per se. AFAICT the surface that gets created for the cursor will always pass through here, but I\u0027m open to being proven wrong.",
+      "parentUuid": "8955d002_9213c5eb",
+      "range": {
+        "startLine": 2635,
+        "startChar": 8,
+        "endLine": 2636,
+        "endChar": 60
+      },
       "revId": "47080b32d2489161f415f55211da0c8b064ffc25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
