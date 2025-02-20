@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da4a7bc_dcfbf38c",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-20T03:04:59Z",
+      "side": 1,
+      "message": "the lifetime of this would be defined by the lifetime of ARpcServerTrusty. Should we give a refcount to the client to keep them independent?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 10
+      },
+      "revId": "29a6bbe4aa7f7591258ac705a0de068dee7d8758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
