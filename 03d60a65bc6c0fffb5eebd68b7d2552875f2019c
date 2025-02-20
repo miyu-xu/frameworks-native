@@ -347,6 +347,30 @@
       },
       "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8819a7f_d93c65d5",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-20T15:49:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure I can avoid the reinterpret_cast, but please let me know if I misunderstood your recommendation! `ARpcServerTrusty.h` is already using declaration `struct ARpcServer;`.\n\nOnce I have the struct declaration in `ARpcServerTrusty`, which is needed because `ARpcServer*` is the return value of `ARpcServerTrusty_getARpcServer`, I can\u0027t then add a using statement since the compiler complains of a redefinition of `ARpcServer`.",
+      "parentUuid": "1f47c804_bf951620",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 65
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
