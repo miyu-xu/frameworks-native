@@ -22,6 +22,30 @@
       },
       "revId": "29a6bbe4aa7f7591258ac705a0de068dee7d8758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e860ac48_b6c764ff",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-20T17:30:11Z",
+      "side": 1,
+      "message": "\u003e Should we give a refcount to the client to keep them independent?\n\nDo you mean return a `sp` here instead or something else (apologies if that\u0027s naive, I\u0027m still familiarizing myself with the binder codebase)? I don\u0027t think a `sp` will work since these are extern C functions. \n\nI\u0027m not sure I can increment the ref count of `mRpcServer` before the reinterpret_cast either since this would require callers to decrement the refcount when they are finished. `ARpcServer_free` exists, but it shuts down the server in addition to decrementing the ref count.\n\nI\u0027ve added the lifetime constraint to the docstring in the header.",
+      "parentUuid": "6da4a7bc_dcfbf38c",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 10
+      },
+      "revId": "29a6bbe4aa7f7591258ac705a0de068dee7d8758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
