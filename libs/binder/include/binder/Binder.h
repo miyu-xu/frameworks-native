@@ -28,6 +28,33 @@ namespace internal {
 class Stability;
 }
 
+/**
+ * An observer that can be registered to a binder object.
+ */
+class IBinderObserver {
+public:
+    struct BinderObserverData {
+        int32_t handle;     // Target binder handle
+        uint32_t code;      // Transaction code
+        uint64_t size;      // Size of data
+        uint64_t startTime; // Start timestamp
+        uint64_t endTime;   // End timestamp
+        pid_t senderPid;    // Sender PID
+        uid_t senderUid;    // Sender UID
+        uint32_t flags;     // Transaction flags
+    };
+    virtual ~IBinderObserver() = default;
+    /**
+     * Add a Data point to the binder observer.
+     */
+    virtual void addDataPoint(const BinderObserverData& data) = 0;
+
+    /*
+     * Flushes data to data store.
+     **/
+    virtual void flushToDataStore() = 0;
+};
+
 class BBinder : public IBinder {
 public:
     LIBBINDER_EXPORTED BBinder();
@@ -103,6 +130,9 @@ public:
     [[nodiscard]] LIBBINDER_EXPORTED status_t setRpcClientDebug(binder::unique_fd clientFd,
                                                                 const sp<IBinder>& keepAliveBinder);
 
+    void addObserverData(const IBinderObserver::BinderObserverData& record);
+    void flushObserverData();
+
 protected:
     LIBBINDER_EXPORTED virtual ~BBinder();
 
@@ -136,6 +166,7 @@ private:
 #ifdef __LP64__
     int32_t mReserved1;
 #endif
+    std::unique_ptr<IBinderObserver> mObserver;
 };
 
 // ---------------------------------------------------------------------------

@@ -69,6 +69,11 @@ namespace android {
 
 using namespace std::chrono_literals;
 
+uint64_t getCurrentTimestampNanos() {
+    using namespace std::chrono;
+    return duration_cast<nanoseconds>(steady_clock::now().time_since_epoch()).count();
+}
+
 // Static const and functions will be optimized out if not used,
 // when LOG_NDEBUG and references in IF_LOG_COMMANDS() are optimized out.
 static const char* kReturnStrings[] = {
@@ -1467,6 +1472,7 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
                 std::string message = logStream.str();
                 ALOGI("%s", message.c_str());
             }
+            uint64_t startTime = getCurrentTimestampNanos();
             if (tr.target.ptr) {
                 // We only have a weak reference on the target object, so we must first try to
                 // safely acquire a strong reference before doing anything else with it.
@@ -1482,7 +1488,7 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
             } else {
                 error = the_context_object->transact(tr.code, buffer, &reply, tr.flags);
             }
-
+            uint64_t endTime = getCurrentTimestampNanos();
             //ALOGI("<<<< TRANSACT from pid %d restore pid %d sid %s uid %d\n",
             //     mCallingPid, origPid, (origSid ? origSid : "<N/A>"), origUid);
 
@@ -1519,7 +1525,27 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
                 }
                 LOG_ONEWAY("NOT sending reply to %d!", mCallingPid);
             }
+            IBinderObserver::BinderObserverData observerData;
+            observerData.handle = tr.target.ptr ? (int32_t)tr.cookie : 0;
+            observerData.code = tr.code;
+            observerData.size = tr.data_size;
+            observerData.startTime = startTime;
+            observerData.endTime = endTime;
+            observerData.senderPid = tr.sender_pid;
+            observerData.senderUid = tr.sender_euid;
+            observerData.flags = tr.flags;
 
+            if (tr.target.ptr) {
+                // We only have a weak reference on the target object, so we must first try to
+                // safely acquire a strong reference before doing anything else with it.
+                if (reinterpret_cast<RefBase::weakref_type*>(tr.target.ptr)
+                            ->attemptIncStrong(this)) {
+                    reinterpret_cast<BBinder*>(tr.cookie)->addObserverData(observerData);
+                    reinterpret_cast<BBinder*>(tr.cookie)->decStrong(this);
+                }
+            } else {
+                the_context_object->addObserverData(observerData);
+            }
             mServingStackPointer = origServingStackPointer;
             mCallingPid = origPid;
             mCallingSid = origSid;

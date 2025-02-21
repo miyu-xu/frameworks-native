@@ -30,6 +30,7 @@
 #include <binder/Trace.h>
 #include <binder/unique_fd.h>
 #include <pthread.h>
+#include "BinderObserver.h"
 
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__) && \
         !defined(__ANDROID_NATIVE_BRIDGE__) && !defined(__TRUSTY__)
@@ -67,10 +68,10 @@ constexpr uid_t kUidRoot = 0;
 // in prebuilts.
 #ifdef __LP64__
 static_assert(sizeof(IBinder) == 24);
-static_assert(sizeof(BBinder) == 40);
+static_assert(sizeof(BBinder) == 48);
 #else
 static_assert(sizeof(IBinder) == 12);
-static_assert(sizeof(BBinder) == 20);
+static_assert(sizeof(BBinder) == 24);
 #endif
 
 // global b/c b/230079120 - consistent symbol table
@@ -309,7 +310,9 @@ public:
 
 // ---------------------------------------------------------------------------
 
-BBinder::BBinder() : mExtras(nullptr), mStability(0), mParceled(false), mRecordingOn(false) {}
+BBinder::BBinder() : mExtras(nullptr), mStability(0), mParceled(false), mRecordingOn(false) {
+    mObserver = std::make_unique<BinderObserver>();
+}
 
 bool BBinder::isBinderAlive() const
 {
@@ -862,6 +865,18 @@ BBinder::Extras* BBinder::getOrCreateExtras()
     }
 
     return e;
+}
+
+void BBinder::addObserverData(const IBinderObserver::BinderObserverData& record) {
+    if (mObserver) {
+        mObserver->addDataPoint(record);
+    }
+}
+
+void BBinder::flushObserverData() {
+    if (mObserver) {
+        mObserver->flushToDataStore();
+    }
 }
 
 // ---------------------------------------------------------------------------
