@@ -21,6 +21,7 @@
 
 #include <binder/Binder.h>
 #include <binder/Trace.h>
+#include <android-base/properties.h>
 
 namespace android {
 CallSession BinderObserver::onCallStarted() {
@@ -28,11 +29,13 @@ CallSession BinderObserver::onCallStarted() {
 }
 
 void BinderObserver::flushDataForCurrentEpochSecond(std::chrono::seconds epochSecondBucket) {
+    int flush_prop = base::GetIntProperty("persist.device_config.binder_observer_native.flush_prop", -1);
+
     std::chrono::seconds bucketToFlush;
     std::vector<std::pair<uint32_t, DataPerTxnCode>> storageToFlush;
     storageToFlush.reserve(20);
-    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL,
-                                  "BinderObserver::flushDataForCurrentEpochSecond");
+    std::string log =  "BinderObserver::flushDataForCurrentEpochSecond " + std::to_string(flush_prop);
+    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, log.c_str());
 
     std::map<uint32_t, std::string> codeToName;
     {
