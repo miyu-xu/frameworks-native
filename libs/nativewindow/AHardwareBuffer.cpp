@@ -700,13 +700,6 @@ bool AHardwareBuffer_isValidDescription(const AHardwareBuffer_Desc* desc, bool l
         }
     }
 
-    if ((desc->usage & (AHARDWAREBUFFER_USAGE_CPU_READ_MASK | AHARDWAREBUFFER_USAGE_CPU_WRITE_MASK)) &&
-        (desc->usage & AHARDWAREBUFFER_USAGE_PROTECTED_CONTENT)) {
-        ALOGE_IF(log, "AHARDWAREBUFFER_USAGE_PROTECTED_CONTENT requires AHARDWAREBUFFER_USAGE_CPU_READ_NEVER "
-              "and AHARDWAREBUFFER_USAGE_CPU_WRITE_NEVER");
-        return false;
-    }
-
     if (desc->usage & AHARDWAREBUFFER_USAGE_GPU_CUBE_MAP) {
         if (desc->width != desc->height) {
             ALOGE_IF(log, "Cube maps must be square");
