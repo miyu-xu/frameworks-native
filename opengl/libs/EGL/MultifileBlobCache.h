@@ -135,7 +135,7 @@ private:
     size_t getFileSize(uint32_t entryHash);
     size_t getValueSize(uint32_t entryHash);
 
-    void increaseTotalCacheSize(size_t fileSize);
+    void increaseTotalCacheSize(size_t oldSize, size_t newSize);
     void decreaseTotalCacheSize(size_t fileSize);
 
     bool addToHotCache(uint32_t entryHash, int fd, uint8_t* entryBufer, size_t entrySize);

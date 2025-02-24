@@ -240,9 +240,6 @@ MultifileBlobCache::MultifileBlobCache(size_t maxKeySize, size_t maxValueSize, s
                 // Track details for rapid lookup later
                 trackEntry(entryHash, header.valueSize, fileSize, st.st_atime);
 
-                // Track the total size
-                increaseTotalCacheSize(fileSize);
-
                 // Preload the entry for fast retrieval
                 if ((mHotCacheSize + fileSize) < mHotCacheLimit) {
                     ALOGV("INIT: Populating hot cache with fd = %i, cacheEntry = %p for "
@@ -343,9 +340,6 @@ void MultifileBlobCache::set(const void* key, EGLsizeiANDROID keySize, const voi
 
     // Track the size and access time for quick recall
     trackEntry(entryHash, valueSize, fileSize, time(0));
-
-    // Update the overall cache size
-    increaseTotalCacheSize(fileSize);
 
     // Keep the entry in hot cache for quick retrieval
     ALOGV("SET: Adding %u to hot cache.", entryHash);
@@ -627,8 +621,16 @@ bool MultifileBlobCache::checkStatus(const std::string& baseDir) {
 
 void MultifileBlobCache::trackEntry(uint32_t entryHash, EGLsizeiANDROID valueSize, size_t fileSize,
                                     time_t accessTime) {
+    size_t oldSize = 0;
+
+    if (contains(entryHash)) {
+        oldSize = getEntryStats(entryHash).fileSize;
+    }
+
     mEntries.insert(entryHash);
     mEntryStats[entryHash] = {valueSize, fileSize, accessTime};
+
+    increaseTotalCacheSize(oldSize, fileSize);
 }
 
 bool MultifileBlobCache::contains(uint32_t hashEntry) const {
@@ -639,9 +641,10 @@ MultifileEntryStats MultifileBlobCache::getEntryStats(uint32_t entryHash) {
     return mEntryStats[entryHash];
 }
 
-void MultifileBlobCache::increaseTotalCacheSize(size_t fileSize) {
-    mTotalCacheSize += fileSize;
-    mTotalCacheEntries++;
+void MultifileBlobCache::increaseTotalCacheSize(size_t oldSize, size_t newSize) {
+    // Increase the total cache size by adding newly updated size
+    mTotalCacheSize = (mTotalCacheSize + newSize) - oldSize;
+    mTotalCacheEntries = (oldSize == 0) ? mTotalCacheEntries + 1 : mTotalCacheEntries;
 }
 
 void MultifileBlobCache::decreaseTotalCacheSize(size_t fileSize) {
