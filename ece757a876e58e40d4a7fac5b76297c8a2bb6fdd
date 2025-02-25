@@ -34,6 +34,24 @@
       "parentUuid": "f1de66f0_ef1f7ce9",
       "revId": "ece757a876e58e40d4a7fac5b76297c8a2bb6fdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365dee70_f01f01e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-02-25T16:01:21Z",
+      "side": 1,
+      "message": "Ah, SpriteImpl is using ABitmap, that makes sense.\n\nThis is the NDK header, though, so this would become public API which we don\u0027t want for an internal detail like that. You\u0027ll need to add this somewhere else, such as in frameworks/base/libs/hwui/apex/include/android/graphics/bitmap.h",
+      "parentUuid": "ca7cac0e_fe695619",
+      "revId": "ece757a876e58e40d4a7fac5b76297c8a2bb6fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
