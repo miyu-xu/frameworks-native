@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "283445dc_18a0109d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-02-25T17:31:35Z",
+      "side": 1,
+      "message": "Please add a test to cover what this function does in `frameworks/native/libs/gui/tests/Surface_test.cpp`",
+      "revId": "f3410a974c07f8748a72e265183e3c8eaac28d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cbffaf9_d72eeee1",
+        "filename": "libs/gui/include/gui/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-02-25T17:31:35Z",
+      "side": 1,
+      "message": "comment please!",
+      "range": {
+        "startLine": 266,
+        "startChar": 9,
+        "endLine": 266,
+        "endChar": 23
+      },
+      "revId": "f3410a974c07f8748a72e265183e3c8eaac28d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79626e7e_57d5437a",
+        "filename": "libs/gui/include/gui/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-02-25T17:31:35Z",
+      "side": 1,
+      "message": "comment please!",
+      "range": {
+        "startLine": 747,
+        "startChar": 22,
+        "endLine": 747,
+        "endChar": 23
+      },
+      "revId": "f3410a974c07f8748a72e265183e3c8eaac28d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
