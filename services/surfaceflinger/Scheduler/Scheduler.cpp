@@ -290,12 +290,17 @@ std::optional<Fps> Scheduler::getFrameRateOverride(uid_t uid) const {
 
 bool Scheduler::isVsyncValid(TimePoint expectedVsyncTime, uid_t uid) const {
     const auto frameRate = getFrameRateOverride(uid);
+
     if (!frameRate.has_value()) {
         return true;
     }
-
+    ALOGI("%s uid: %d frameRate: %s", __func__, uid, to_string(*frameRate).c_str());
+    ALOGI("%s uid: %d inPhase: %s", __func__, uid, getVsyncSchedule()->getTracker().isVSyncInPhase(expectedVsyncTime.ns(), *frameRate) ? "true" : "false");
     SFTRACE_FORMAT("%s uid: %d frameRate: %s", __func__, uid, to_string(*frameRate).c_str());
-    return getVsyncSchedule()->getTracker().isVSyncInPhase(expectedVsyncTime.ns(), *frameRate);
+    SFTRACE_FORMAT("%s uid: %d inPhase: %s", __func__, uid, getVsyncSchedule()->getTracker().isVSyncInPhase(expectedVsyncTime.ns(), *frameRate) ? "true" : "false");
+    return true;
+
+    // return getVsyncSchedule()->getTracker().isVSyncInPhase(expectedVsyncTime.ns(), *frameRate);
 }
 
 bool Scheduler::isVsyncInPhase(TimePoint expectedVsyncTime, Fps frameRate) const {
@@ -417,6 +422,9 @@ void Scheduler::onFrameRateOverridesChanged() {
 
     std::vector<FrameRateOverride> overrides =
             mFrameRateOverrideMappings.getAllFrameRateOverrides(supportsFrameRateOverrideByContent);
+  for (auto frameRateOverride : overrides) {
+    ALOGI("onFrameRateOverridesChanged: %d -- %f", frameRateOverride.uid, frameRateOverride.frameRateHz);
+  }
 
     eventThreadFor(Cycle::Render).onFrameRateOverridesChanged(pacesetterId, std::move(overrides));
 }
