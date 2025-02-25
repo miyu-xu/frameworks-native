@@ -16,6 +16,24 @@
       "message": "We shouldn\u0027t ever need this. These formats are only relevant for heap bitmaps, and we have no need or desire to support BGRA heap bitmaps.",
       "revId": "ece757a876e58e40d4a7fac5b76297c8a2bb6fdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7cac0e_fe695619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3663186
+      },
+      "writtenOn": "2025-02-25T15:38:51Z",
+      "side": 1,
+      "message": "I\u0027m using this format to convert the bitmap format in https://r.android.com/3503640, namely in `SpriteController::SpriteImpl::setIcon` and `nativeSetPointerIcon`. Is that not needed?",
+      "parentUuid": "f1de66f0_ef1f7ce9",
+      "revId": "ece757a876e58e40d4a7fac5b76297c8a2bb6fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
