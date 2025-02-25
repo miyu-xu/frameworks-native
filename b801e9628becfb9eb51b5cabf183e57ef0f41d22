@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "b801e9628becfb9eb51b5cabf183e57ef0f41d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e621c465_e2114e40",
+        "filename": "opengl/libs/EGL/MultifileBlobCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1836785
+      },
+      "writtenOn": "2025-02-25T14:11:54Z",
+      "side": 1,
+      "message": "nit: The name doesn\u0027t make sense anymore, and the parameters are misleading IMO. Like looking at the header, my immediate thought was \"why do you need the old size of the cache to increase it?\".\n\nMy suggestion is to call this `onAddOrModifyEntry` and also change `decreaseTotalCacheSize` to `onDeleteEntry`, that should make the intent clearer.",
+      "range": {
+        "startLine": 644,
+        "startChar": 25,
+        "endLine": 644,
+        "endChar": 47
+      },
+      "revId": "b801e9628becfb9eb51b5cabf183e57ef0f41d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
