@@ -16,6 +16,23 @@
       "message": "Based on https://b.corp.google.com/issues/382882341#comment48, could we remove cpu_read/cpu_write check for protected buffer allocation?",
       "revId": "69878771126cd9d2684fe53981c2d8ae7b4e3802",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f66b42a_5f6fe1d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-02-25T19:00:21Z",
+      "side": 1,
+      "message": "This is definitely an invalid combination and we should if anything be adding VTS tests that ensure that IAllocator correctly fails for this",
+      "revId": "69878771126cd9d2684fe53981c2d8ae7b4e3802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
