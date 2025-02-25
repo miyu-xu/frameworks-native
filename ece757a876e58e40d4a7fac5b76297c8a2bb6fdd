@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1de66f0_ef1f7ce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-02-25T15:33:06Z",
+      "side": 1,
+      "message": "We shouldn\u0027t ever need this. These formats are only relevant for heap bitmaps, and we have no need or desire to support BGRA heap bitmaps.",
+      "revId": "ece757a876e58e40d4a7fac5b76297c8a2bb6fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
