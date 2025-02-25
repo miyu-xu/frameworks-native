@@ -713,7 +713,7 @@ void TransactionCompletedListener::onTrustedPresentationChanged(int id,
 
 // ---------------------------------------------------------------------------
 
-void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId);
+void uncacheBufferOnDeathCallback(void* /*context*/, uint64_t graphicBufferId);
 
 /**
  * We use the BufferCache to reduce the overhead of exchanging GraphicBuffers with
@@ -767,7 +767,7 @@ public:
             mBuffers.erase(outUncacheBuffer->id);
         }
 
-        buffer->addDeathCallback(removeDeadBufferCallback, nullptr);
+        buffer->addDeathCallback(uncacheBufferOnDeathCallback, nullptr);
 
         mBuffers[buffer->getId()] = getCounter();
         return buffer->getId();
@@ -813,7 +813,7 @@ private:
 
 ANDROID_SINGLETON_STATIC_INSTANCE(BufferCache);
 
-void removeDeadBufferCallback(void* /*context*/, uint64_t graphicBufferId) {
+void uncacheBufferOnDeathCallback(void* /*context*/, uint64_t graphicBufferId) {
     // GraphicBuffer id's are used as the cache ids.
     BufferCache::getInstance().uncache(graphicBufferId);
 }
