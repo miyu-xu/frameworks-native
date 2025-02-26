@@ -24,6 +24,11 @@
 #include <private/android_filesystem_config.h>
 
 using android::binder::unique_fd;
+// From aidl.cpp
+const int kFirstCallTransaction = 1;
+const int kLastCallTransaction = 0x00ffffff;
+const int kFirstMetaMethodId = kLastCallTransaction - kFirstCallTransaction;
+const int kLastMetaMethodId = kFirstMetaMethodId - 99;
 
 namespace android {
 
@@ -64,13 +69,14 @@ void fuzzService(const std::vector<sp<IBinder>>& binders, FuzzedDataProvider&& p
         // Most of the AIDL services will have small set of transaction codes.
         // TODO(b/295942369) : Add remaining transact codes from IBinder.h
         uint32_t code = provider.ConsumeBool() ? provider.ConsumeIntegral<uint32_t>()
+                : provider.ConsumeBool()       ? provider.ConsumeIntegralInRange<uint32_t>(0, 100)
                 : provider.ConsumeBool()
-                ? provider.ConsumeIntegralInRange<uint32_t>(0, 100)
-                : provider.PickValueInArray<uint32_t>(
+                ? provider.PickValueInArray<uint32_t>(
                           {IBinder::DUMP_TRANSACTION, IBinder::PING_TRANSACTION,
                            IBinder::SHELL_COMMAND_TRANSACTION, IBinder::INTERFACE_TRANSACTION,
                            IBinder::SYSPROPS_TRANSACTION, IBinder::EXTENSION_TRANSACTION,
-                           IBinder::TWEET_TRANSACTION, IBinder::LIKE_TRANSACTION});
+                           IBinder::TWEET_TRANSACTION, IBinder::LIKE_TRANSACTION})
+                : provider.ConsumeIntegralInRange<uint32_t>(kLastMetaMethodId, kFirstMetaMethodId);
         uint32_t flags = provider.ConsumeIntegral<uint32_t>();
         Parcel data;
         // for increased fuzz coverage
