@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe72592_21efd5bc",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-26T23:34:26Z",
+      "side": 1,
+      "message": "The `SendTooManyFiles` test will test this case, if I remember correctly. A later Cl enables it for Trusty.",
+      "parentUuid": "2ccc3a92_3fec18d9",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 30
+      },
+      "revId": "58d651eccbf8581c33992f85766e6e5dd9227d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28a2b37c_0290140b",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-02-26T20:58:47Z",
       "side": 1,
       "message": "what if it is a partial send? (assuming this is like the normal send APIs), or otherwise what is the return value if it\u0027s not the message size?",
+      "range": {
+        "startLine": 105,
+        "startChar": 23,
+        "endLine": 105,
+        "endChar": 31
+      },
+      "revId": "58d651eccbf8581c33992f85766e6e5dd9227d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc38fce_3834ae97",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-26T23:34:26Z",
+      "side": 1,
+      "message": "The API either sends all of the handles, or none, even if only part of the data was successfully sent.",
+      "parentUuid": "28a2b37c_0290140b",
       "range": {
         "startLine": 105,
         "startChar": 23,
