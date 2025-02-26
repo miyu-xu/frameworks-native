@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9faf99cc_81c4b158",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T20:58:47Z",
+      "side": 1,
+      "message": "`\u003d {0}` explicitly so that if the FDs are not filled out, they will still be initialized to a known value.",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 45
+      },
+      "revId": "58d651eccbf8581c33992f85766e6e5dd9227d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ccc3a92_3fec18d9",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T20:58:47Z",
+      "side": 1,
+      "message": "this will be read and converted to status_t from interruptableWriteFully, right? Do we have a test for this case (doesn\u0027t have to be in the same CL)?",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 30
+      },
+      "revId": "58d651eccbf8581c33992f85766e6e5dd9227d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a2b37c_0290140b",
+        "filename": "libs/binder/RpcTransportTipcAndroid.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T20:58:47Z",
+      "side": 1,
+      "message": "what if it is a partial send? (assuming this is like the normal send APIs), or otherwise what is the return value if it\u0027s not the message size?",
+      "range": {
+        "startLine": 105,
+        "startChar": 23,
+        "endLine": 105,
+        "endChar": 31
+      },
+      "revId": "58d651eccbf8581c33992f85766e6e5dd9227d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
