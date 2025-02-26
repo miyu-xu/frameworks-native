@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0997aee0_3eadab45",
+        "filename": "libs/binder/trusty/include/binder/RpcServerTrusty.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T21:25:02Z",
+      "side": 0,
+      "message": "Please set it explicitly to a frozen version. We had an issue before when the unfrozen version was used.",
+      "range": {
+        "startLine": 97,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 63
+      },
+      "revId": "af488c06ec573957c4b5090d5ff2d41fdeda9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
