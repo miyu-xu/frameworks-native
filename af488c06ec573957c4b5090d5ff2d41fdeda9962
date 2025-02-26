@@ -22,6 +22,30 @@
       },
       "revId": "af488c06ec573957c4b5090d5ff2d41fdeda9962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02e2b81_5f2f3f44",
+        "filename": "libs/binder/trusty/include/binder/RpcServerTrusty.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-02-26T21:34:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0997aee0_3eadab45",
+      "range": {
+        "startLine": 97,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 63
+      },
+      "revId": "af488c06ec573957c4b5090d5ff2d41fdeda9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
