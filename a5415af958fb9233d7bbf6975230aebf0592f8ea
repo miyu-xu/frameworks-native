@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401b17bf_5a6766e4",
+        "filename": "libs/binder/tests/parcel_fuzzer/libbinder_driver.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T23:43:52Z",
+      "side": 1,
+      "message": "You can make cc_library_headers in AIDL with visibility restricted to there and here, and add a single header there called \u0027aidl_transaction_ids.h\u0027 so that you can export it here and don\u0027t have to keep both in sync.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 54
+      },
+      "revId": "a5415af958fb9233d7bbf6975230aebf0592f8ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7485ae84_d3d4c992",
+        "filename": "libs/binder/tests/parcel_fuzzer/libbinder_driver.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-02-26T23:43:52Z",
+      "side": 1,
+      "message": "this is hard to read now, I would recommend switching to if/else statements to make the precedence a little more clear.",
+      "range": {
+        "startLine": 71,
+        "startChar": 47,
+        "endLine": 79,
+        "endChar": 63
+      },
+      "revId": "a5415af958fb9233d7bbf6975230aebf0592f8ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
