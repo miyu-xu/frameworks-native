@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "952a28d7_37e27b5f",
+        "filename": "libs/gui/include/gui/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 3663186
+      },
+      "writtenOn": "2025-02-26T17:23:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cbffaf9_d72eeee1",
+      "range": {
+        "startLine": 266,
+        "startChar": 9,
+        "endLine": 266,
+        "endChar": 23
+      },
+      "revId": "f3410a974c07f8748a72e265183e3c8eaac28d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79626e7e_57d5437a",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-02-25T17:31:35Z",
       "side": 1,
       "message": "comment please!",
+      "range": {
+        "startLine": 747,
+        "startChar": 22,
+        "endLine": 747,
+        "endChar": 23
+      },
+      "revId": "f3410a974c07f8748a72e265183e3c8eaac28d2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c0fa5e_3cc09d97",
+        "filename": "libs/gui/include/gui/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 3663186
+      },
+      "writtenOn": "2025-02-26T17:23:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79626e7e_57d5437a",
       "range": {
         "startLine": 747,
         "startChar": 22,
