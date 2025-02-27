@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6737164_224dd16d",
+        "filename": "libs/binder/BinderObserver.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2025-02-27T13:01:42Z",
+      "side": 1,
+      "message": "I think as minimum we should ensure that producers (threads serving binder calls) do not contend between each other. Besides using some black box lock-free queue, I can think of two ways to acheve it:\n* Have a separate vector+mutex for each binder thread. Assuming these can be tracked somewhere (perhaps create the vector+mutex when the thread is spawned), then the flush function will need to traverse the vectors (up to 16) one by one and lock and unlock them one by one. Contention will be very unlikely in this model, and it can be later easily replaced by a lock free SPSC queue per thread.\n* Have an append-only buffer which uses atomics to ensure all producers don\u0027t contend (fixed size buffer + atomic get-and-increment should do). Then guard the whole thing with a shared_mutex: producess do lock_shared, but the flush mutex does an exclusive while it swaps the buffer. This might be easier to implement, but has a higher chance of contention.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 43
+      },
+      "revId": "e8d1c6c9c03abfb7bdaae568df0f94b1e116968c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3733861_05c18955",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2025-02-27T13:01:42Z",
+      "side": 1,
+      "message": "We may want to abstract out building the parameter, so that logic related to obtaining timestamp doesn\u0027t have to be intermingled with the transaction handling code.\n\nAlso, if the dynamic configuration knows that there is no need to log the method, we can save the cost of computing timestamps, etc.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 66
+      },
+      "revId": "e8d1c6c9c03abfb7bdaae568df0f94b1e116968c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b77dafd_b864f37d",
+        "filename": "libs/binder/include/binder/Binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2025-02-27T13:01:42Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have a separate observer for each binder object. It should be sufficient to have one observer for the entire process (maybe configured when the binder configuration is established in ProcessState::init)?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 47
+      },
+      "revId": "e8d1c6c9c03abfb7bdaae568df0f94b1e116968c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
