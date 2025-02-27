@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e85dfd7_f23f0102",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1061011
+      },
+      "writtenOn": "2025-02-27T12:29:12Z",
+      "side": 1,
+      "message": "I think Steven and Devin would be against adding these dependencies. What would this look if we only had a build-time (read only) master flag?",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 6
+      },
+      "revId": "239eb385ba6e71e90ba8d8168b42c165292d4275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
