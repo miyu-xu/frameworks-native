@@ -39,6 +39,30 @@
       },
       "revId": "47d29884515e7d59e0bef454016c90e3fd4c0a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ace0247_b77a96bc",
+        "filename": "services/surfaceflinger/CompositionEngine/src/ClientCompositionRequestCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2015495
+      },
+      "writtenOn": "2025-02-27T06:46:51Z",
+      "side": 1,
+      "message": "Yes, I noticed that the latest code of AOSP has added luts comparison in the layerSettings file. In theory, it needs to be synchronized. However, there is no newly added luts comparison in the layerSettings file in the aosp/main branch of my local repository. Adding it directly may cause compilation problems. Secondly, we don’t have a case for luts verification yet. If there is a luts comparison in aosp/main later, aosp internal colleagues can help verify the relevant scenarios before adding it. In summary, I suggest not adding luts comparison for this submission. Thank you!",
+      "parentUuid": "988e0ac1_6532e656",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 53
+      },
+      "revId": "47d29884515e7d59e0bef454016c90e3fd4c0a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
