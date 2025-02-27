@@ -22,6 +22,35 @@ package {
     default_team: "trendy_team_virtualization",
 }
 
+genrule {
+    name: "bindervendoratom.h",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --header $(out)" +
+        " --namespace android,hardware,google,pixel,PixelAtoms" +
+        " --vendor-proto hardware/google/pixel/pixelstats/pixelatoms.proto",
+    out: [
+        "bindervendoratom.h",
+    ],
+    // srcs: [
+    //     "pixelatoms.proto",
+    // ]
+}
+
+genrule {
+    name: "bindervendoratom.cpp",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --cpp $(out)" +
+        " --importHeader bindervendoratom.h" +
+        " --namespace android,hardware,google,pixel,PixelAtoms" +
+        " --vendor-proto hardware/google/pixel/pixelstats/pixelatoms.proto",
+    out: [
+        "bindervendoratom.cpp",
+    ],
+    // srcs: [
+    //     "pixelatoms.proto",
+    // ]
+}
+
 cc_library_headers {
     name: "libbinder_headers_base",
     export_include_dirs: ["include"],
@@ -235,6 +264,9 @@ filegroup {
     srcs: [
         "BinderObserver.cpp",
     ],
+    // shared_libs: [
+    //     "android.frameworks.stats-V2-ndk",
+    // ],
 }
 
 cc_defaults {
@@ -260,7 +292,7 @@ cc_defaults {
         "TextOutput.cpp",
         "Utils.cpp",
         "file.cpp",
-        ":libbinder_observer_sources",
+        // ":libbinder_observer_sources",
     ],
 
     header_libs: [
@@ -269,7 +301,6 @@ cc_defaults {
     export_header_lib_headers: [
         "libbinder_headers_base",
     ],
-
     cflags: [
         "-Wextra",
         "-Wextra-semi",
@@ -576,7 +607,9 @@ cc_defaults {
         ":libbinder_aidl",
         ":libbinder_accessor_aidl",
         ":libbinder_device_interface_sources",
+        ":libbinder_observer_sources",
     ],
+    static_libs: ["android.frameworks.stats-V2-ndk",],
     target: {
         vendor: {
             exclude_srcs: [

@@ -37,6 +37,7 @@
 
 #include "Utils.h"
 #include "binder_module.h"
+#include "BinderObserver.h"
 
 #if (defined(__ANDROID__) || defined(__Fuchsia__)) && !defined(BINDER_WITH_KERNEL_IPC)
 #error Android and Fuchsia are expected to have BINDER_WITH_KERNEL_IPC
@@ -68,6 +69,7 @@
 namespace android {
 
 using namespace std::chrono_literals;
+std::unique_ptr<IBinderObserver> gObserver = std::make_unique<BinderObserver>();
 
 uint64_t getCurrentTimestampNanos() {
     using namespace std::chrono;
@@ -1534,18 +1536,18 @@ status_t IPCThreadState::executeCommand(int32_t cmd)
             observerData.senderPid = tr.sender_pid;
             observerData.senderUid = tr.sender_euid;
             observerData.flags = tr.flags;
-
-            if (tr.target.ptr) {
-                // We only have a weak reference on the target object, so we must first try to
-                // safely acquire a strong reference before doing anything else with it.
-                if (reinterpret_cast<RefBase::weakref_type*>(tr.target.ptr)
-                            ->attemptIncStrong(this)) {
-                    reinterpret_cast<BBinder*>(tr.cookie)->addObserverData(observerData);
-                    reinterpret_cast<BBinder*>(tr.cookie)->decStrong(this);
-                }
-            } else {
-                the_context_object->addObserverData(observerData);
-            }
+            gObserver->addDataPoint(observerData);
+            // if (tr.target.ptr) {
+            //     // We only have a weak reference on the target object, so we must first try to
+            //     // safely acquire a strong reference before doing anything else with it.
+            //     if (reinterpret_cast<RefBase::weakref_type*>(tr.target.ptr)
+            //                 ->attemptIncStrong(this)) {
+            //         reinterpret_cast<BBinder*>(tr.cookie)->addObserverData(observerData);
+            //         reinterpret_cast<BBinder*>(tr.cookie)->decStrong(this);
+            //     }
+            // } else {
+            //     the_context_object->addObserverData(observerData);
+            // }
             mServingStackPointer = origServingStackPointer;
             mCallingPid = origPid;
             mCallingSid = origSid;

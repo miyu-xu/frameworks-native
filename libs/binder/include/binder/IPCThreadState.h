@@ -254,6 +254,7 @@ private:
             int32_t             mStrictModePolicy;
             int32_t             mLastTransactionBinderFlags;
             CallRestriction     mCallRestriction;
+    std::unique_ptr<IBinderObserver> mObserver;
 };
 
 } // namespace android

@@ -166,7 +166,6 @@ private:
 #ifdef __LP64__
     int32_t mReserved1;
 #endif
-    std::unique_ptr<IBinderObserver> mObserver;
 };
 
 // ---------------------------------------------------------------------------

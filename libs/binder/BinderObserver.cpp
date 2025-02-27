@@ -23,8 +23,16 @@
 #include <binder/Binder.h>
 #include <binder/Trace.h>
 #include <fstream>
+#include <aidl/android/frameworks/stats/IStats.h>
+#include <binder/IServiceManager.h>
+#include <bindervendoratoms.h>
+
 
 namespace android {
+using ::aidl::android::frameworks::stats::IStats;
+using ::aidl::android::frameworks::stats::VendorAtom;
+namespace PixelAtoms = android::hardware::google::pixel::vendor::PixelAtoms;
+
 
 struct LatencyStats {
     uint64_t count = 0;
@@ -68,8 +76,8 @@ bool BinderObserver::shouldFlush() {
 }
 
 void BinderObserver::addDataPoint(const IBinderObserver::BinderObserverData& data) {
-    ALOGI("Adding data point to store");
-    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "addDataPoint");
+    // ALOGI("Adding data point to store");
+    // binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "addDataPoint");
     {
         std::lock_guard lock(mStorageLock);
         if (mDataBuffer.size() >= maxSizeOfDataBuffer) {
@@ -84,7 +92,7 @@ void BinderObserver::addDataPoint(const IBinderObserver::BinderObserverData& dat
 }
 
 void BinderObserver::flushToDataStore() {
-    binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "flushToDataStore");
+    // binder::ScopedTrace aidlTrace(ATRACE_TAG_AIDL, "flushToDataStore");
 
     // IBinderObserver::BinderObserverData
     // newBuffer[4096/sizeof(IBinderObserver::BinderObserverData)] = {};
@@ -135,5 +143,25 @@ void BinderObserver::flushToDataStore() {
         ALOGI("  Handle %d: %" PRIu64 " calls, mean: %.2f us", sortedHandles[i].first,
               sortedHandles[i].second.count, sortedHandles[i].second.mean_ns() / 1000.0);
     }
+
+    const std::string statsServiceName =
+    std::string() + IStats::descriptor + "/default";
+    auto sm = IServiceManager::defaultServiceManager();
+    if (sm->isDeclared(statsServiceName.c_str())) {
+        LOG(ERROR) << "Stats service is not declared."
+                    << " Cannot log binder observer to statsd";
+    }
+    std::shared_ptrIStats> statsClient =
+    IStats::fromBinder(sm->waitForService(statsServiceName.c_str()));
+    const BinderVendorAtom atom = createBinderVendorAtom(88);
+
+    if (!statsClient) {
+        LOG(ERROR) << "Unable to connect to Stats service."
+                   << " Cannot log binder observer to statsd";
+        return;
+    }
+    statsClient->reportVendorAtom(atom);
+
+
 }
 } // namespace android
