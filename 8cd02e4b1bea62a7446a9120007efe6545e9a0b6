@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8241b0f6_94766ce4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-02-28T16:35:44Z",
+      "side": 1,
+      "message": "That\u0027s supprising! This is the only log from libbinder during these tests?\nWhich tests are these? \nThis is happening every time we send/receive/drop a new binder object over the interface? I wonder if there is something we can to reuse the binders so we don\u0027t need to shutdown the sessions so often.",
+      "range": {
+        "startLine": 11,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
