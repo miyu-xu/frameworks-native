@@ -86,6 +86,30 @@
       },
       "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4363e0_47b69087",
+        "filename": "libs/binder/rust/rpcbinder/src/session.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-28T22:16:08Z",
+      "side": 1,
+      "message": "I meant in the source file.",
+      "parentUuid": "b3adbad6_bd32a392",
+      "range": {
+        "startLine": 202,
+        "startChar": 20,
+        "endLine": 202,
+        "endChar": 42
+      },
+      "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
