@@ -22,6 +22,30 @@
       },
       "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f411348e_96baf55b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2025-02-28T17:08:29Z",
+      "side": 1,
+      "message": "yeah we could / should..right now the frequent shutdown is due to a function-wrapper connecting at each API.",
+      "parentUuid": "8241b0f6_94766ce4",
+      "range": {
+        "startLine": 11,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
