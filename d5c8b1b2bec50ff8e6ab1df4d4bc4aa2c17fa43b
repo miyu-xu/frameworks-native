@@ -62,6 +62,30 @@
       },
       "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3adbad6_bd32a392",
+        "filename": "libs/binder/rust/rpcbinder/src/session.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-02-28T21:59:12Z",
+      "side": 1,
+      "message": "It\u0027s right above: \"Double box the factory because trait objects aren\u0027t FFI safe\". Pointers to traits, e.g. `*mut dyn FnMut() -\u003e Option\u003cRawFd\u003e`, is convertable to `*mut c_void`, but the opposite `*mut c_void` can\u0027t be converted to `*mut dyn FnMut() -\u003e Option\u003cRawFd\u003e`. We need a double pointer to safely pass traits to C API.",
+      "parentUuid": "1a0594f7_901b1582",
+      "range": {
+        "startLine": 202,
+        "startChar": 20,
+        "endLine": 202,
+        "endChar": 42
+      },
+      "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
