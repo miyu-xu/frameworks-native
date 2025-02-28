@@ -1296,7 +1296,7 @@ sp<IBinder> RpcState::tryEraseNode(const sp<RpcSession>& session, RpcMutexUnique
     // LOCK IS RELEASED
 
     if (shouldShutdown) {
-        ALOGI("RpcState has no binders left, so triggering shutdown...");
+        ALOGD("RpcState has no binders left, so triggering shutdown...");
         (void)session->shutdownAndWait(false);
     }
 
