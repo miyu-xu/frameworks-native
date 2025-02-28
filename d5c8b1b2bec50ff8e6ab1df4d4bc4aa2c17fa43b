@@ -16,6 +16,52 @@
       "message": "Unsafe Rust LGTM.",
       "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de427961_191fceb0",
+        "filename": "libs/binder/include/binder/RpcSession.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-28T21:22:40Z",
+      "side": 1,
+      "message": "in plain English please",
+      "range": {
+        "startLine": 299,
+        "startChar": 22,
+        "endLine": 299,
+        "endChar": 92
+      },
+      "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0594f7_901b1582",
+        "filename": "libs/binder/rust/rpcbinder/src/session.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-02-28T21:22:40Z",
+      "side": 1,
+      "message": "I don\u0027t unerstand this part. Please elaborate in the comment.",
+      "range": {
+        "startLine": 202,
+        "startChar": 20,
+        "endLine": 202,
+        "endChar": 42
+      },
+      "revId": "d5c8b1b2bec50ff8e6ab1df4d4bc4aa2c17fa43b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
