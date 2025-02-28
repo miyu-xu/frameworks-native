@@ -19,6 +19,10 @@
 #include <android/os/IAccessor.h>
 #include <android/os/IServiceManager.h>
 #include <binder/RpcSession.h>
+// TODO remove these!
+#include <cutils/sockets.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
 #include <android-base/properties.h>
@@ -470,7 +474,7 @@ Status BackendUnifiedServiceManager::getServiceDebugInfo(
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
 [[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 
-static bool hasOutOfProcessServiceManager() {
+static bool hasKernelBinderServiceManager() {
 #ifndef BINDER_WITH_KERNEL_IPC
     return false;
 #else
@@ -482,26 +486,62 @@ static bool hasOutOfProcessServiceManager() {
 #endif // BINDER_WITH_KERNEL_IPC
 }
 
+// This is similar to the kernel binder servicemanager's context 0. It's the
+// known socket that we expect the Unix Domain Socket servicemanager to be listening on.
+// FIXME discuss in review - should we instead allow this to be configurable by
+// a library that a client can install?
+// - Create a new API to inject an IServiceManager accessor - it needs to be
+// handled differently from the other injected accessors, because we don't want
+// the clients to get ahold of this IServiceManager AIDL interface directly.
+// - a big benifit of a known name is not requiring a custom library included in
+// every guest process that wants to use these services. A big downside to this
+// is it is restrictive to UDS, or we have a check for every transport we
+// support.
+// - Could these details be inside the OS.h for libbinder? They could inject the
+// info into libbinder in the form of a sockaddr_t so it could be any type of
+// connection?
+const char kUdsServiceManagerName[] = ANDROID_SOCKET_DIR "/rpc_servicemanager";
+
+static sp<AidlServiceManager> getUdsServiceManager() {
+    auto session = RpcSession::make();
+    session->setFileDescriptorTransportMode(RpcSession::FileDescriptorTransportMode::UNIX);
+    auto status = session->setupUnixDomainClient(kUdsServiceManagerName);
+    if (status == OK) {
+        return interface_cast<AidlServiceManager>(session->getRootObject());
+    }
+    return nullptr;
+}
+
 sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
     std::call_once(gUSmOnce, []() {
 #if defined(__BIONIC__) && !defined(__ANDROID_VNDK__)
         /* wait for service manager */
-        if (hasOutOfProcessServiceManager()) {
-            using std::literals::chrono_literals::operator""s;
-            using android::base::WaitForProperty;
-            while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
-                ALOGE("Waited for servicemanager.ready for a second, waiting another...");
-            }
+        using std::literals::chrono_literals::operator""s;
+        using android::base::WaitForProperty;
+        while (!WaitForProperty("servicemanager.ready", "true", 1s)) {
+            ALOGE("Waited for servicemanager.ready for a second, waiting another...");
         }
 #endif
 
         sp<AidlServiceManager> sm = nullptr;
-        while (hasOutOfProcessServiceManager() && sm == nullptr) {
-            sm = interface_cast<AidlServiceManager>(
-                    ProcessState::self()->getContextObject(nullptr));
+        while (sm == nullptr) {
+            // There is either a kernel binder service manager, or an RPC binder
+            // service manager
+            if (hasKernelBinderServiceManager()) {
+                // Service management over kernel binder
+                sm = interface_cast<AidlServiceManager>(
+                        ProcessState::self()->getContextObject(nullptr));
+                if (sm) break;
+            } else {
+                // Check for service management over Unix Domain Sockets
+                sm = getUdsServiceManager();
+            }
+
             if (sm == nullptr) {
-                ALOGE("Waiting 1s on context object on %s.",
-                      ProcessState::self()->getDriverName().c_str());
+                std::string contextObjectName = hasKernelBinderServiceManager()
+                        ? ProcessState::self()->getDriverName()
+                        : kUdsServiceManagerName;
+                ALOGE("Waiting 1s on context object on %s.", contextObjectName.c_str());
                 sleep(1);
             }
         }

@@ -893,6 +893,9 @@ aidl_interface {
     srcs: [":libbinder_aidl"],
     vendor_available: true,
     backend: {
+        rust: {
+            enabled: true,
+        },
         java: {
             enabled: false,
         },
@@ -900,6 +903,7 @@ aidl_interface {
     visibility: [
         ":__subpackages__",
         "//system/tools/aidl:__subpackages__",
+        "//packages/modules/Virtualization:__subpackages__",
     ],
 }
 
