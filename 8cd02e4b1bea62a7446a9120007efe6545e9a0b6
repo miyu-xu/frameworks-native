@@ -46,6 +46,40 @@
       },
       "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cc67f3_fd80b794",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-01T01:58:27Z",
+      "side": 1,
+      "message": "It doesn\u0027t add up that this log is responsible for 50% of the performance overhead, since the overhead of the log should be smaller than the overhead of setting up and tearing down the session.\n\nCan you share the log, or the test setup where this happens? I suspect that",
+      "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6414fb5_cd912c10",
+        "filename": "libs/binder/RpcState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-01T01:58:27Z",
+      "side": 1,
+      "message": "(we do want this log to make it clear why we are shutting down a connection)\n\nIt shouldn\u0027t be possible for this log to be responsible for 50% of the performance overhead even if the test is creating/destroying sessions in the loop, since the overhead of creating and destroying the RpcSession should far exceed the overhead of one log (and we do want this log). The above code logic around \u0027shouldShutdown\u0027 should ensure this is only called once per RpcSession. So, if it is called more, that could indicate a bug (e.g. memory corruption). If it is responsible for this much performance, I\u0027m confused why the logging is so slow, but we wouldn\u0027t want to disable the log globally.\n\nCan you confirm the test and log in a bug?",
+      "revId": "8cd02e4b1bea62a7446a9120007efe6545e9a0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
