@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcab8f51_4b8a8b23",
+        "filename": "libs/binder/RpcSession.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-01T01:50:06Z",
+      "side": 1,
+      "message": "(note even though this captures \u0027this\u0027 we can change it later if we make connection setup async +1)",
+      "range": {
+        "startLine": 191,
+        "startChar": 24,
+        "endLine": 191,
+        "endChar": 25
+      },
+      "revId": "674ad09b47fd26af6bab3427a021f8612477f95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a1ea4f_9e0b66c0",
+        "filename": "libs/binder/libbinder_rpc_unstable.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-01T01:50:06Z",
+      "side": 1,
+      "message": "since you use move_only_function workaround, can you keep this as unique_ptr as well?",
+      "range": {
+        "startLine": 258,
+        "startChar": 9,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "674ad09b47fd26af6bab3427a021f8612477f95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
