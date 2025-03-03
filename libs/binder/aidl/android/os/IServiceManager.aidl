@@ -166,4 +166,9 @@ interface IServiceManager {
      * Get debug information for all currently registered services.
      */
     ServiceDebugInfo[] getServiceDebugInfo();
+
+    /**
+     * Check if this 'caller' has access for the 'permission' for a given service.
+     */
+    boolean checkServiceAccess(@utf8InCpp String caller, @utf8InCpp String service, @utf8InCpp String permission);
 }

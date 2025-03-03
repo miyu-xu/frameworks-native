@@ -133,6 +133,9 @@ public:
 
     void enableAddServiceCache(bool value) { mUnifiedServiceManager->enableAddServiceCache(value); }
 
+    bool checkServiceAccess(const String16& caller, const String16& service,
+                            const String16& permission) override;
+
 protected:
     sp<BackendUnifiedServiceManager> mUnifiedServiceManager;
     // AidlRegistrationCallback -> services that its been registered for
@@ -904,6 +907,21 @@ std::vector<IServiceManager::ServiceDebugInfo> CppBackendShim::getServiceDebugIn
         ret.emplace_back(retInfo);
     }
     return ret;
+}
+
+bool CppBackendShim::checkServiceAccess(const String16& caller, const String16& service,
+                                        const String16& permission) {
+    bool res = false;
+    if (Status status =
+                mUnifiedServiceManager->checkServiceAccess(String8(caller).c_str(),
+                                                           String8(service).c_str(),
+                                                           String8(permission).c_str(), &res);
+        !status.isOk()) {
+        ALOGW("%s Failed to check callers access to service %s for permission %s", __FUNCTION__,
+              String8(service).c_str(), String8(permission).c_str());
+        return false;
+    }
+    return res;
 }
 
 #if defined(BINDER_SERVICEMANAGEMENT_DELEGATION_SUPPORT)

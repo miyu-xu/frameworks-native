@@ -120,7 +120,7 @@ pub use persistable_bundle::{PersistableBundle, ValueType};
 pub use proxy::{DeathRecipient, SpIBinder, WpIBinder};
 #[cfg(not(any(trusty, android_ndk)))]
 pub use service::{
-    add_service, check_interface, check_service, force_lazy_services_persist,
+    add_service, check_interface, check_service, check_service_access, force_lazy_services_persist,
     get_declared_instances, is_declared, is_handling_transaction, register_lazy_service,
     wait_for_interface, wait_for_service, LazyServiceGuard,
 };

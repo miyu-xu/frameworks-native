@@ -1179,6 +1179,38 @@ Status ServiceManager::getServiceDebugInfo(std::vector<ServiceDebugInfo>* outRet
     return Status::ok();
 }
 
+Status ServiceManager::checkServiceAccess(const std::string& caller, const std::string& service,
+                                          const std::string& permission, bool* outReturn) {
+    // FIXME
+    (void)permission;
+
+    Access::CallingContext callerCtx = mAccess->getCallingContext();
+    if (mAccess->canFind(callerCtx, service)) {
+        ALOGE("asdf calling context (%s) CAN find %s", callerCtx.toDebugString().c_str(),
+              service.c_str());
+    } else {
+        ALOGE("asdf calling context (%s) CANNOT find %s", callerCtx.toDebugString().c_str(),
+              service.c_str());
+    }
+
+    callerCtx.debugPid = 0;
+    callerCtx.uid = 0;
+    callerCtx.sid = caller;
+
+    if (mAccess->canFind(callerCtx, service)) {
+        ALOGE("asdf calling context (%s) CAN find %s", callerCtx.toDebugString().c_str(),
+              service.c_str());
+    } else {
+        ALOGE("asdf calling context (%s) CANNOT find %s", callerCtx.toDebugString().c_str(),
+              service.c_str());
+    }
+
+    // FIXME hack
+    *outReturn = true;
+
+    return Status::ok();
+}
+
 void ServiceManager::clear() {
     mNameToService.clear();
     mNameToRegistrationCallback.clear();

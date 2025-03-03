@@ -471,6 +471,18 @@ Status BackendUnifiedServiceManager::getServiceDebugInfo(
                                      kUnsupportedOpNoServiceManager);
 }
 
+Status BackendUnifiedServiceManager::checkServiceAccess(const std::string& caller,
+                                                        const std::string& service,
+                                                        const std::string& permission,
+                                                        bool* _aidl_return) {
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->checkServiceAccess(caller, service, permission,
+                                                          _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
+}
+
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
 [[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 
@@ -524,24 +536,24 @@ sp<BackendUnifiedServiceManager> getBackendUnifiedServiceManager() {
 #endif
 
         sp<AidlServiceManager> sm = nullptr;
+        sp<ProcessState> ps = ProcessState::selfIfKernelBinderEnabled();
         while (sm == nullptr) {
             // There is either a kernel binder service manager, or an RPC binder
             // service manager
-            if (hasKernelBinderServiceManager()) {
+            if (ps) {
                 // Service management over kernel binder
-                sm = interface_cast<AidlServiceManager>(
-                        ProcessState::self()->getContextObject(nullptr));
+                sm = interface_cast<AidlServiceManager>(ps->getContextObject(nullptr));
                 if (sm) break;
-            } else {
-                // Check for service management over Unix Domain Sockets
-                sm = getUdsServiceManager();
             }
 
+            // Check for service management over Unix Domain Sockets
+            sm = getUdsServiceManager();
+
             if (sm == nullptr) {
-                std::string contextObjectName = hasKernelBinderServiceManager()
-                        ? ProcessState::self()->getDriverName()
+                std::string contextObjectName = ps
+                        ? ps->getDriverName() + ", " + kUdsServiceManagerName
                         : kUdsServiceManagerName;
-                ALOGE("Waiting 1s on context object on %s.", contextObjectName.c_str());
+                ALOGE("Waiting 1s on context object(s) on %s.", contextObjectName.c_str());
                 sleep(1);
             }
         }

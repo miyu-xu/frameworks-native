@@ -246,3 +246,19 @@ pub fn get_declared_instances(interface: &str) -> Result<Vec<String>> {
             StatusCode::BAD_VALUE
         })
 }
+
+/// Check the selinux access of a caller for a given permission for a service
+pub fn check_service_access(caller: &str, service: &str, permission: &str) -> Result<bool> {
+    let caller = CString::new(caller).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    let service = CString::new(service).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    let permission = CString::new(permission).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    // Safety: The CStrings are valid at this point and are only used during the duration
+    // of the call.
+    unsafe {
+        Ok(sys::AServiceManager_checkServiceAccess(
+            caller.as_ptr(),
+            service.as_ptr(),
+            permission.as_ptr(),
+        ))
+    }
+}
