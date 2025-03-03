@@ -22,6 +22,30 @@
       },
       "revId": "66b8422b1e1acf288096cb8083ce337a8d7d6299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f19ebb_49c2e7af",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T21:49:15Z",
+      "side": 1,
+      "message": "E.g.:\n\n```\nif (!self) {\n    ALOGW(\"Service retrieved before binder thread started. If they are started, consider starting binder threads earlier.\")\n    return false;\n} else if (self-\u003egetThreadPoolMaxTotalThreadCount() \u003c\u003d 0) {\n    ALOGW(\"Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be \"\n          \"implemented. serviceName: %s\",\n          serviceName.c_str());\n    return false;\n}\n```\n\nThat way, people still know to fix it? If the first log is spamming, we may want to remove it, but I\u0027m not sure that\u0027s the issue.\n\n(otherwise, caching may be disabled, but we won\u0027t realize it)",
+      "parentUuid": "854106ad_a4fcd4e5",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 55
+      },
+      "revId": "66b8422b1e1acf288096cb8083ce337a8d7d6299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
