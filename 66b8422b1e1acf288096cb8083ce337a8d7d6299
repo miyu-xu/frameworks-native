@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854106ad_a4fcd4e5",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T21:47:18Z",
+      "side": 1,
+      "message": "could we still log in this case, since it means there would also be a leak in binder (decrefs may not get cleaned up)? If you are using binder, there should be threads started.",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 55
+      },
+      "revId": "66b8422b1e1acf288096cb8083ce337a8d7d6299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
