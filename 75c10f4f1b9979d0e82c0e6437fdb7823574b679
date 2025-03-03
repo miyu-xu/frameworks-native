@@ -46,6 +46,30 @@
       },
       "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8f5799_b9fc61a8",
+        "filename": "libs/binder/tests/binderRpcTestCommon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T23:18:40Z",
+      "side": 0,
+      "message": "In general, if we can keep one implementation per declaration, that is recommeneded style so that we have more type checks. We\u0027ll also do this for OS interface this year.\n\nIs it possible to put primitives in the OS interface, so that we can build a mock file descriptor? (e.g. have Trusty version of \u0027pipe\u0027 rather than doing the high-level mock FD concept). Okay if not.",
+      "parentUuid": "af31b7fc_f7058ca0",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
