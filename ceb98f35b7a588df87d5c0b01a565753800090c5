@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9778aedd_6bc8f98d",
+        "filename": "libs/binder/tests/FileUtilsTrusty.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T23:21:17Z",
+      "side": 1,
+      "message": "is this a larger issue? do we need a way to hook into when the FD/memref is getting destroyed? I\u0027m confused how a client would clean up memory when they are done.",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9beead2f_54f69c2b",
+        "filename": "libs/binder/tests/FileUtilsTrusty.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T23:21:17Z",
+      "side": 1,
+      "message": "OOB check?",
+      "range": {
+        "startLine": 58,
+        "startChar": 69,
+        "endLine": 58,
+        "endChar": 89
+      },
+      "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
