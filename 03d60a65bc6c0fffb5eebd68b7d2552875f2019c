@@ -395,6 +395,30 @@
       },
       "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13eedc91_2d6cd5f6",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T22:56:34Z",
+      "side": 1,
+      "message": "And actually RpcServerTrusty already has setSupportedFileDescriptorTransportModes in the header as well.",
+      "parentUuid": "e7fc390f_fd2941fb",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 65
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
