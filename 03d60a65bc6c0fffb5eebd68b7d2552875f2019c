@@ -371,6 +371,30 @@
       },
       "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fc390f_fd2941fb",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T22:55:00Z",
+      "side": 1,
+      "message": "I see. The issue is in frameworks/native/libs/binder/libbinder_rpc_unstable.cpp which design requires reinterpret_cast here. I guess, technically you would want to use `createObjectHandle` in libbinder_rpc_unstable.cpp - and that includes the incStrong used here as well, and that\u0027s what it does to keep this stuff contained.\n\nThey did it this way, because ARpcServer and RpcServer have a different names (I erroneosly thought before \u0027using\u0027 could paper over this). So maybe I would have changed libbinder_rpc_unstable.cpp to be like this and in an internal header:\n\n```\nstruct ARpcServer {\n   sp\u003cRpcServer\u003e server;\n};\n```\n\nThen it would need no reinterpret_cast (though at the cost of an allocation), but this is probably out of scope.\n\nAnyway, it\u0027s a bit strange that this code also assumes the definition of ARpcServer, but it\u0027s defined in libbinder_rpc_unstable to be used with things like \u0027createObjectHandle\u0027. If possible, we should only have one file assuming the binary layout of this class. E.g. refactoring libbinder_rpc_unstable.cpp could be hard to find this code and cause UB here.\n\n---\n\nOkay, so anyway, I think the issue is that you don\u0027t need to use ARpcServer_*. That layer and this layer are both built on top of RpcServer (and you might need to redesign that a bit).\n\nInstead, can you call RpcServerTrusty::mRpcServer-\u003esetFileDescriptorMode\n\n(that is - you have access to the RPC server logic directly here, so no need to assume the definition of ARpcServer w/ reinterpret_cast here)",
+      "parentUuid": "f8819a7f_d93c65d5",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 65
+      },
+      "revId": "03d60a65bc6c0fffb5eebd68b7d2552875f2019c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

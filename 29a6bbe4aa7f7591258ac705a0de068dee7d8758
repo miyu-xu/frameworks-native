@@ -46,6 +46,30 @@
       },
       "revId": "29a6bbe4aa7f7591258ac705a0de068dee7d8758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b3ac2d_7d6a505d",
+        "filename": "libs/binder/trusty/rust/binder_rpc_server_bindgen/cpp/ARpcServerTrusty.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-03T22:55:00Z",
+      "side": 1,
+      "message": "I mean, call \u0027incStrong\u0027 on it before returning it, and require the caller to call \u0027decStrong\u0027",
+      "parentUuid": "e860ac48_b6c764ff",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 10
+      },
+      "revId": "29a6bbe4aa7f7591258ac705a0de068dee7d8758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
