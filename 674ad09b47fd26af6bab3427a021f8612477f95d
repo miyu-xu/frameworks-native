@@ -45,6 +45,30 @@
       },
       "revId": "674ad09b47fd26af6bab3427a021f8612477f95d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060e867a_74426981",
+        "filename": "libs/binder/libbinder_rpc_unstable.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-03-04T00:45:37Z",
+      "side": 1,
+      "message": "I could do the template workaround because `RpcSession::setupClient` is a private function. `RpcSession::setupPreconnectedClient` is a public function so I can\u0027t use templates unless I put the definition in the header file. Probably that\u0027s worse than simply using `std::shared_ptr` here.\n\nLet me add TODO instead!",
+      "parentUuid": "78a1ea4f_9e0b66c0",
+      "range": {
+        "startLine": 258,
+        "startChar": 9,
+        "endLine": 258,
+        "endChar": 19
+      },
+      "revId": "674ad09b47fd26af6bab3427a021f8612477f95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
