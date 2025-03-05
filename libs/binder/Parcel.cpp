@@ -1642,6 +1642,7 @@ status_t Parcel::writeDupFileDescriptor(int fd)
 {
     int dupFd;
     if (status_t err = binder::os::dupFileDescriptor(fd, &dupFd); err != OK) {
+        ALOGW("Failed to writeDupFileDescriptor %d: %s", fd, statusToString(err).c_str());
         return err;
     }
     status_t err = writeFileDescriptor(dupFd, true /*takeOwnership*/);
@@ -1661,6 +1662,7 @@ status_t Parcel::writeDupParcelFileDescriptor(int fd)
 {
     int dupFd;
     if (status_t err = binder::os::dupFileDescriptor(fd, &dupFd); err != OK) {
+        ALOGW("Failed to writeDupParcelFileDescriptor %d: %s", fd, statusToString(err).c_str());
         return err;
     }
     status_t err = writeParcelFileDescriptor(dupFd, true /*takeOwnership*/);
@@ -2484,6 +2486,7 @@ status_t Parcel::readUniqueFileDescriptor(unique_fd* val) const {
 
     int dupFd;
     if (status_t err = binder::os::dupFileDescriptor(got, &dupFd); err != OK) {
+        ALOGW("Failed to readUniqueFileDescriptor %d: %s", got, statusToString(err).c_str());
         return BAD_VALUE;
     }
 
@@ -2505,6 +2508,7 @@ status_t Parcel::readUniqueParcelFileDescriptor(unique_fd* val) const {
 
     int dupFd;
     if (status_t err = binder::os::dupFileDescriptor(got, &dupFd); err != OK) {
+        ALOGW("Failed to readUniqueParcelFileDescriptor %d: %s", got, statusToString(err).c_str());
         return BAD_VALUE;
     }
 
