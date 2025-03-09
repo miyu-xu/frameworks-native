@@ -16,6 +16,24 @@
       "message": "connections are an implementation detail of the session. why can\u0027t you use the session API?",
       "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "788a7a95_e85644bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-09T01:11:45Z",
+      "side": 1,
+      "message": "`RpcServerConnection` has the flag: #[cfg(target_os \u003d \"trusty\")]. So this is specific to Trusty. \n\nTrusty has a trait `UnbufferedService` which has an associated type: `Connection`. \n\nTrusty `RpcServer` implements `UnbufferedService` trait and `RpcServerConnection` is the associated type.\n\nWe need to reference this connection type from other places of trusty TA code. E.g. https://android-review.git.corp.google.com/c/trusty/app/authmgr/+/3525490/11/authmgr-be/lib/src/server.rs#25",
+      "parentUuid": "ea200e5d_8ca13b33",
+      "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
