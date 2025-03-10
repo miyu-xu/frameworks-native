@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15fa05bb_e79bf113",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-10T23:47:28Z",
+      "side": 1,
+      "message": "Hi Andrei,\n\nWe need to implement `Send` and `Sync`for `RpcServerConnection` because we pass it into handle_set_wrapper and we need to give a reference of handle_set_wrapper to a binder RPC server, which requires thread-safe constructs.\n\nI am not sure how to justify the SAFETY comment here though. Can you please share your thoughts? Thank you!",
+      "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
