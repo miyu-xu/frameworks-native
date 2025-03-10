@@ -34,6 +34,24 @@
       "parentUuid": "ea200e5d_8ca13b33",
       "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c3e649_cb5073b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-10T18:50:55Z",
+      "side": 1,
+      "message": "\u003e RpcServerConnection has the flag: #[cfg(target_os \u003d \"trusty\")]. So this is specific to Trusty.\n\nThat\u0027s not a license to do anything you want, esp since you are depending on libbinder internals\n\n\u003e We need to reference this connection type\n\nBut why? \"we need to use it because we are using it\" isn\u0027t a reason",
+      "parentUuid": "788a7a95_e85644bc",
+      "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
