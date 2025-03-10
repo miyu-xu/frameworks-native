@@ -19,6 +19,7 @@ use crate::error::{status_result, Result, StatusCode};
 use crate::proxy::SpIBinder;
 use crate::sys;
 
+use libc::{pid_t, uid_t};
 use std::ffi::{c_void, CStr, CString};
 use std::os::raw::c_char;
 use std::sync::Mutex;
@@ -245,4 +246,28 @@ pub fn get_declared_instances(interface: &str) -> Result<Vec<String>> {
             eprintln!("An interface instance name was not a valid UTF-8 string: {}", e);
             StatusCode::BAD_VALUE
         })
+}
+
+/// Check the selinux access of a caller for a given permission for a service
+pub fn check_service_access(
+    caller: &str,
+    caller_pid: pid_t,
+    caller_uid: uid_t,
+    service: &str,
+    permission: &str,
+) -> Result<bool> {
+    let caller = CString::new(caller).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    let service = CString::new(service).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    let permission = CString::new(permission).or(Err(StatusCode::UNEXPECTED_NULL))?;
+    // Safety: The CStrings are valid at this point and are only used during the duration
+    // of the call.
+    unsafe {
+        Ok(sys::AServiceManager_checkServiceAccess(
+            caller.as_ptr(),
+            caller_pid,
+            caller_uid,
+            service.as_ptr(),
+            permission.as_ptr(),
+        ))
+    }
 }
