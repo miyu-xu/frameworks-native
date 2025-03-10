@@ -52,6 +52,24 @@
       "parentUuid": "788a7a95_e85644bc",
       "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923c147a_03f95a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-10T23:13:11Z",
+      "side": 1,
+      "message": "\u003e But why?\n\nLet me try to explain in a bit more detail, with reference to the tipc-userspace library.\n\n1. The `HandleSetWrapper` takes a generic parameter  - which is any concrete type (S) implementing the `UnbufferedService` trait. (https://android-review.git.corp.google.com/c/trusty/lib/+/3395648/28/lib/tipc/rust/src/raw/handle_set_wrapper.rs#30)\n\n\n2. `ServiceHandle` uses in its fields: `S` as the service and `S::Connection` (the associated type of `UnbufferedService` trait) in the `HandleType` enum. (https://android-review.git.corp.google.com/c/trusty/lib/+/3395648/35/lib/tipc/rust/src/raw/service_handle.rs#26)\n\n(We could not pass in a dyn of `UnbufferedService` instead of the aforementioned generic parameter because of the issues with flat pointers)\n\n3. In AuthMgr BE TA, we have two different concrete types implementing `UnbufferedService` trait that need to be served by the aforementioned `HandeSetWrapper`: `AuthMgrService` and `RpcServer`. https://android-review.git.corp.google.com/c/trusty/app/authmgr/+/3525490/12/authmgr-be/lib/src/server.rs#210\n\n\n4. I do not know any other way to address the requirement in #4 above, without referencig `RpcServerConnection` in the implementation of the service/connection multiplexing mechanism here: https://android-review.git.corp.google.com/c/trusty/app/authmgr/+/3525490/12/authmgr-be/lib/src/server.rs#216\n\nI am open to any suggestions for alternative ways of achieving the above requrement without having to export `RpcServerConnection`, if there is any. Please let me know your thoughts. Thanks!",
+      "parentUuid": "d4c3e649_cb5073b1",
+      "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
