@@ -841,7 +841,7 @@ cc_library_static {
     ],
 }
 
-// AIDL interface between libbinder and framework.jar
+// ServiceManager AIDL interface between libbinder and framework.jar
 filegroup {
     name: "libbinder_aidl",
     srcs: [
@@ -888,12 +888,19 @@ aidl_interface {
 }
 
 aidl_interface {
-    name: "libbinder_aidl_test_stub",
+    name: "servicemanager_aidl",
     unstable: true,
     local_include_dir: "aidl",
     srcs: [":libbinder_aidl"],
     vendor_available: true,
     backend: {
+        cpp: {
+            // libbinder exports this type itself so use that
+            enabled: false,
+        },
+        rust: {
+            enabled: true,
+        },
         java: {
             enabled: false,
         },
@@ -901,6 +908,7 @@ aidl_interface {
     visibility: [
         ":__subpackages__",
         "//system/tools/aidl:__subpackages__",
+        "//packages/modules/Virtualization:__subpackages__",
     ],
 }
 
