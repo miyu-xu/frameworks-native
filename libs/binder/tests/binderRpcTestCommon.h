@@ -470,6 +470,7 @@ public:
     Status useKernelBinderCallingId() override { return Status::fromStatusT(UNKNOWN_TRANSACTION); }
 
     Status echoAsFile(const std::string& /*content*/,
+                      android::os::ParcelFileDescriptor* /* inout pfd */,
                       android::os::ParcelFileDescriptor* /*out*/) override {
         return Status::fromStatusT(UNKNOWN_TRANSACTION);
     }

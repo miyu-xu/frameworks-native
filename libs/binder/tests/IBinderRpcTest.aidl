@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@SuppressWarnings(value={"inout-parameter"})
 interface IBinderRpcTest {
     oneway void sendString(@utf8InCpp String str);
     @utf8InCpp String doubleString(@utf8InCpp String str);
@@ -70,7 +71,7 @@ interface IBinderRpcTest {
 
     void useKernelBinderCallingId();
 
-    ParcelFileDescriptor echoAsFile(@utf8InCpp String content);
+    ParcelFileDescriptor echoAsFile(@utf8InCpp String content, inout ParcelFileDescriptor pfd);
 
     ParcelFileDescriptor concatFiles(in List<ParcelFileDescriptor> files);
 
