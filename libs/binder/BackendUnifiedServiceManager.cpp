@@ -467,6 +467,17 @@ Status BackendUnifiedServiceManager::getServiceDebugInfo(
                                      kUnsupportedOpNoServiceManager);
 }
 
+Status BackendUnifiedServiceManager::checkServiceAccess(
+        const AidlServiceManager::CallerContext& callerCtx, const std::string& service,
+        const std::string& permission, bool* _aidl_return) {
+    if (mTheRealServiceManager) {
+        return mTheRealServiceManager->checkServiceAccess(callerCtx, service, permission,
+                                                          _aidl_return);
+    }
+    return Status::fromExceptionCode(Status::EX_UNSUPPORTED_OPERATION,
+                                     kUnsupportedOpNoServiceManager);
+}
+
 [[clang::no_destroy]] static std::once_flag gUSmOnce;
 [[clang::no_destroy]] static sp<BackendUnifiedServiceManager> gUnifiedServiceManager;
 

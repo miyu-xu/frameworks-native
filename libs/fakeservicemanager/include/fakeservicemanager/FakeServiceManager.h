@@ -66,6 +66,9 @@ public:
     std::vector<IServiceManager::ServiceDebugInfo> getServiceDebugInfo() override;
 
     void enableAddServiceCache(bool /*value*/) override {}
+
+    bool checkServiceAccess(const String16& caller, pid_t callerPid, uid_t callerUid,
+                                    const String16& service, const String16& permission) override;
     // Clear all of the registered services
     void clear();
 
