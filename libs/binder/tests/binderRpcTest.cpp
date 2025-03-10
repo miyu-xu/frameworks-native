@@ -998,7 +998,8 @@ TEST_P(BinderRpc, FileDescriptorTransportOptionalUnix) {
     });
 
     android::os::ParcelFileDescriptor out;
-    auto status = proc.rootIface->echoAsFile("hello", &out);
+    android::os::ParcelFileDescriptor inout;
+    auto status = proc.rootIface->echoAsFile("hello", &inout, &out);
     EXPECT_EQ(status.transactionError(), FDS_NOT_ALLOWED) << status;
 }
 
@@ -1014,7 +1015,8 @@ TEST_P(BinderRpc, ReceiveFile) {
     });
 
     android::os::ParcelFileDescriptor out;
-    auto status = proc.rootIface->echoAsFile("hello", &out);
+    android::os::ParcelFileDescriptor inout;
+    auto status = proc.rootIface->echoAsFile("hello", &inout, &out);
     if (!supportsFdTransport()) {
         EXPECT_EQ(status.transactionError(), BAD_VALUE) << status;
         return;

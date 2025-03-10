@@ -57,8 +57,10 @@ public:
         return Status::ok();
     }
 
-    Status echoAsFile(const std::string& content, android::os::ParcelFileDescriptor* out) override {
+    Status echoAsFile(const std::string& content,  android::os::ParcelFileDescriptor* pfd,
+                      android::os::ParcelFileDescriptor* out) override {
         out->reset(mockFileDescriptor(content));
+        pfd->reset(mockFileDescriptor(content));
         return Status::ok();
     }
 
