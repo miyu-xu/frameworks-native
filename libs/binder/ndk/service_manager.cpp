@@ -247,3 +247,14 @@ void AServiceManager_reRegister() {
     auto serviceRegistrar = android::binder::LazyServiceRegistrar::getInstance();
     serviceRegistrar.reRegister();
 }
+
+bool AServiceManager_checkServiceAccess(const char* caller, pid_t caller_pid, uid_t caller_uid,
+                                        const char* service, const char* permission) {
+    if (caller == nullptr || service == nullptr || permission == nullptr) {
+        ALOGE("Unexpected nullptr arguments to AServiceManager_checkServiceAccess");
+        return false;
+    }
+    sp<IServiceManager> sm = defaultServiceManager();
+    return sm->checkServiceAccess(String16(caller), caller_pid, caller_uid, String16(service),
+                                  String16(permission));
+}

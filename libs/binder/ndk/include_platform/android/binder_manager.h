@@ -311,4 +311,11 @@ bool AServiceManager_tryUnregister() __INTRODUCED_IN(31);
  */
 void AServiceManager_reRegister() __INTRODUCED_IN(31);
 
+/**
+ * Check if this 'caller' has access for the 'permission' for a given service.
+ */
+bool AServiceManager_checkServiceAccess(const char* caller, pid_t caller_pid, uid_t caller_uid,
+                                        const char* service, const char* permission)
+        __INTRODUCED_IN(37);
+
 __END_DECLS
