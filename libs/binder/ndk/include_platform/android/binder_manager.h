@@ -311,4 +311,23 @@ bool AServiceManager_tryUnregister() __INTRODUCED_IN(31);
  */
 void AServiceManager_reRegister() __INTRODUCED_IN(31);
 
+/**
+ * Check if this 'callerSid' has access for the 'permission' for a given service 'name'.
+ *
+ * This is useful when a process will be making calls to servicemanager on behalf of another
+ * process (callerCtx).
+ *
+ * @param caller_sid - SELinux context of the process that is being checked.
+ * @param caller_debug_pid - Debug PID of the process that is being checked.
+ *                         Used for logging denials.
+ * @param caller_uid - UID process that is being checked. Used for logging
+ *                    denials
+ * @param name - name of the service that the caller wants to interact with
+ * @param permission - the servicemanager SELinux permission that the process is
+ *                     interested in for the service. This is either "find", "list", or "add".
+ */
+bool AServiceManager_checkServiceAccess(const char* caller_sid, pid_t caller_debug_pid,
+                                        uid_t caller_uid, const char* name, const char* permission)
+        __INTRODUCED_IN(37);
+
 __END_DECLS
