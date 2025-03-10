@@ -829,6 +829,7 @@ cc_library {
         "//hardware/interfaces/security/see:__subpackages__",
         "//system/core/trusty:__subpackages__",
         "//vendor:__subpackages__",
+        "//trusty/user/app:__subpackages__",
     ],
 }
 
