@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "38944728_6cbadc75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-03-10T22:57:54Z",
+      "side": 1,
+      "message": "Can you add\n\n`Bug: b/382620055`",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "970fc37a_1c3fa143",
@@ -48,6 +65,75 @@
       "writtenOn": "2025-03-10T22:02:14Z",
       "side": 1,
       "message": "sorry for the delay in responding. My main concern with this patch is it can leave things in an invalid state. If after applying a transaction, the",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ca4701_846bfb6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-03-10T22:57:54Z",
+      "side": 1,
+      "message": "If after applying a transaction, the hierarchy is updated with a transaction that fixes the cycle, then this change would leave the hierarchy in an invalid state that cannot be fixed. Or, if 2 transactions are merged and undos a cycle, that needs to be allowed too.",
+      "parentUuid": "76ff4f7c_48d4cc14",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533536c0_d76752ee",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-03-10T22:57:54Z",
+      "side": 1,
+      "message": "The cycle can really only happen during screenshots when an off-screen layer is passed as the root. So if you check hasRelZLoop where we do \n\n`auto root \u003d mLayerHierarchyBuilder.getPartialHierarchy(rootLayerId, childrenOnly);` in `SurfaceFlinger::getLayerSnapshotsForScreenshots`, that should be sufficient",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587c24b4_e36d1f88",
+        "filename": "services/surfaceflinger/FrontEnd/LayerLifecycleManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-03-10T22:57:54Z",
+      "side": 1,
+      "message": "You can instead use `LayerHierarchy::hasRelZLoop`",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b98c39_9a40285d",
+        "filename": "services/surfaceflinger/tests/unittests/LayerLifecycleManagerTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-03-10T22:57:54Z",
+      "side": 1,
+      "message": "Add a comment stating that reparenting to a descendant layer will cause a loop and is not allowed",
       "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
