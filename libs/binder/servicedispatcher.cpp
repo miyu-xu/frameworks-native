@@ -190,6 +190,12 @@ public:
             std::vector<android::os::ServiceDebugInfo>* _aidl_return) override {
         return mImpl->getServiceDebugInfo(_aidl_return);
     }
+    android::binder::Status checkServiceAccess(
+            const android::os::IServiceManager::CallerContext& callerCtx,
+            const std::string& service, const std::string& permission,
+            bool* _aidl_return) override {
+        return mImpl->checkServiceAccess(callerCtx, service, permission, _aidl_return);
+    }
 
 private:
     sp<android::os::IServiceManager> mImpl;

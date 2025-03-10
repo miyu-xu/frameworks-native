@@ -166,4 +166,19 @@ interface IServiceManager {
      * Get debug information for all currently registered services.
      */
     ServiceDebugInfo[] getServiceDebugInfo();
+
+    /**
+     * Caller context used when delegating access checks to service manager.
+     * This may not be the same context as the caller of this method.
+     */
+    parcelable CallerContext {
+        @utf8InCpp String sidName;
+        int debugPid;
+        int uid;
+    }
+
+    /**
+     * Check if this 'callerCtx' has access for the 'permission' for a given service.
+     */
+    boolean checkServiceAccess(in CallerContext callerCtx, @utf8InCpp String service, @utf8InCpp String permission);
 }

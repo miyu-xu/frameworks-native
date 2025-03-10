@@ -164,6 +164,12 @@ public:
      * Only used for testing. This is enabled by default.
      */
     virtual void enableAddServiceCache(bool value) = 0;
+
+    /**
+     * Check if this 'caller' has access for the 'permission' for a given service.
+     */
+    virtual bool checkServiceAccess(const String16& caller, pid_t callerPid, uid_t callerUid,
+                                    const String16& service, const String16& permission) = 0;
 };
 
 LIBBINDER_EXPORTED sp<IServiceManager> defaultServiceManager();
