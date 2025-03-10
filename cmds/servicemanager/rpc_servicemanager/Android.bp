@@ -1,0 +1,17 @@
+rust_library {
+    name: "librpc_servicemanager",
+    crate_name: "rpc_servicemanager",
+    srcs: ["rpc_servicemanager.rs"],
+    rustlibs: [
+        "android.system.virtualmachineservice-rust",
+        "libanyhow",
+        "liblibc",
+        "liblog_rust",
+        "libbinder_rs",
+        "librpcbinder_rs",
+        "librustutils",
+        "libvsock",
+        "servicemanager_aidl-rust",
+        "rpc_servicemanager_aidl-rust",
+    ],
+}
