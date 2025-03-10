@@ -33,6 +33,23 @@
       "message": "hi,Vishnu, any update?",
       "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ff4f7c_48d4cc14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1170688
+      },
+      "writtenOn": "2025-03-10T22:02:14Z",
+      "side": 1,
+      "message": "sorry for the delay in responding. My main concern with this patch is it can leave things in an invalid state. If after applying a transaction, the",
+      "revId": "e8b237ff3043d258873d2ce8ec64341a318445cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
