@@ -88,6 +88,24 @@
       "parentUuid": "923c147a_03f95a5f",
       "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "382744f0_18c10f4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-11T00:24:36Z",
+      "side": 1,
+      "message": "I\u0027m reading the `native/libs/binder/trusty/` more closely and it is just the naming throwing me off. It looks like `RpcServerConnection` is really just a single connection `RpcSession`. You aren\u0027t directly using the `RpcSession::RpcConnection` interface. The implementation details I was worried about are hidden behind the `ARpcServerTrusty_*` functions still, so I think this is OK.",
+      "parentUuid": "25036c4c_4d8c1bed",
+      "revId": "b3b0e3333652e94541251ca9a5db8e99fdcf750b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
