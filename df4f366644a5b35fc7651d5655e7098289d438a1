@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1663d560_b7dc5ad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T23:42:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15fa05bb_e79bf113",
+      "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbae6daf_eb2a08fc",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d33114_73bd1bd6",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T23:42:55Z",
+      "side": 1,
+      "message": "Thanks! I added the SAFETY note.",
+      "parentUuid": "fbae6daf_eb2a08fc",
+      "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56208b60_3af38fef",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-03-10T23:59:33Z",
       "side": 1,
       "message": "I\u0027m not sure about this one, I think it\u0027s safe because we inherit the C++ API\u0027s properties? The Binder classes are generally thread-safe.",
+      "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f8a41e_da2ac61c",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T23:42:55Z",
+      "side": 1,
+      "message": "This applies to the SAFETY notes of the `RpcServer` above because it contains the C++ ARpcServerTrusty. \n\nHowever, RpcServerConnection contains just an opaque handler which points to a heap allocation. So I thought we can just say that RpcServerConnection is Sync because \u0026RpcServerConnection is Send, according to the Send/Sync properties (https://doc.rust-lang.org/nomicon/send-and-sync.html).",
+      "parentUuid": "56208b60_3af38fef",
       "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
