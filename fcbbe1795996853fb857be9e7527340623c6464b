@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191ebc3b_3dec5ada",
+        "filename": "libs/binder/rust/rpcbinder/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-03-11T00:08:13Z",
+      "side": 1,
+      "message": "We might not need to export this, if we can grab it directly from `RpcServer`: `RpcServer::Connection` or `\u003cRpcServer as UnbufferedService\u003e::Connection`. We do need it for https://r.android.com/c/3525490/12.",
+      "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
