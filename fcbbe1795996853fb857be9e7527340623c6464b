@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa158773_49bf98df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T22:22:38Z",
+      "side": 1,
+      "message": "Hi @tkjos@google.com,\n\nCan you please provide code owener\u0027s vote? (Gerrit lists only three people as owners: you, Steven and Martijn and both Steven and Martijn are OOO at the moment).\n\nThank you!",
+      "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "191ebc3b_3dec5ada",
