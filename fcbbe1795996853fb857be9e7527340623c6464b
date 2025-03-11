@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e211ac2_06996e4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T20:19:21Z",
+      "side": 1,
+      "message": "Thanks Frederick and Andrei!",
+      "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "191ebc3b_3dec5ada",
@@ -14,6 +31,24 @@
       "writtenOn": "2025-03-11T00:08:13Z",
       "side": 1,
       "message": "We might not need to export this, if we can grab it directly from `RpcServer`: `RpcServer::Connection` or `\u003cRpcServer as UnbufferedService\u003e::Connection`. We do need it for https://r.android.com/c/3525490/12.",
+      "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a2e542_111e575c",
+        "filename": "libs/binder/rust/rpcbinder/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-11T20:19:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "191ebc3b_3dec5ada",
       "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
