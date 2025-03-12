@@ -104,6 +104,24 @@
       "parentUuid": "56208b60_3af38fef",
       "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9d5fc4_d3dd6ea7",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-12T00:25:01Z",
+      "side": 1,
+      "message": "\u003e The Binder classes are generally thread-safe.\n\nThat is true, but in this case you are directly playing with binder rpc internals that aren\u0027t thread safe. I\u0027ve started another comment thread with details.",
+      "parentUuid": "a8f8a41e_da2ac61c",
+      "revId": "df4f366644a5b35fc7651d5655e7098289d438a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
