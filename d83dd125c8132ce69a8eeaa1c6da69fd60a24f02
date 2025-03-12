@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb036c7f_b9526082",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-12T06:00:39Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. Actually, I realized that we do not need `Sync` for our requirement in AuthMgr BE, for which I had the above SAFETY comment. I removed the unsafe implementation of `Sync` for RpcServerConnection.\n\nAre you okay with the SAFETY of `Send`?",
+      "parentUuid": "ce266460_08314d74",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "d83dd125c8132ce69a8eeaa1c6da69fd60a24f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92d9f92d_6969a273",
         "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-12T00:22:52Z",
       "side": 1,
       "message": "Off topic, but, you need a `\u0026mut self` here. `handleConnect` is mutating the fields of `RpcServerTrusty` without a lock: https://cs.android.com/android/platform/superproject/main/+/feeaabff2282c7650c2adc5f2fc4abbc20bdd98a:frameworks/native/libs/binder/trusty/RpcServerTrusty.cpp;l\u003d105;drc\u003dfeeaabff2282c7650c2adc5f2fc4abbc20bdd98a",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 13
+      },
+      "revId": "d83dd125c8132ce69a8eeaa1c6da69fd60a24f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7409c4ce_d78db7d8",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-12T06:00:39Z",
+      "side": 1,
+      "message": "`on_connect()` is from the `UnbufferefedService` trait here:\nhttps://cs.android.com/android/platform/superproject/main/+/main:trusty/user/base/lib/tipc/rust/src/service.rs;l\u003d460\n\n`UnbufferefedService` trait is used in many places in trusty. Therefore, AFAIU, a change to this trait method would require a significant change.\n\nGiven that Trusty is currently single threaded, could this be a significant issue?\n\nI will let @ahomescu@google.com share his thoughts on this.",
+      "parentUuid": "92d9f92d_6969a273",
       "range": {
         "startLine": 137,
         "startChar": 0,
