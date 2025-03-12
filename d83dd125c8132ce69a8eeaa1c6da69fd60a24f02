@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd06694_03e9e055",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-12T17:47:35Z",
+      "side": 1,
+      "message": "I agree that `Send` is OK",
+      "parentUuid": "042468b4_66a08bbd",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "d83dd125c8132ce69a8eeaa1c6da69fd60a24f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d9f92d_6969a273",
