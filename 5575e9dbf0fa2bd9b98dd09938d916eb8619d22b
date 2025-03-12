@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff61c46d_fff6e38d",
+        "filename": "libs/binder/Parcel.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 3895889
+      },
+      "writtenOn": "2025-03-12T02:52:52Z",
+      "side": 1,
+      "message": "Audio has replaced abort with a track error，https://android-review.git.corp.google.com/c/platform/frameworks/av/+/3241440",
+      "range": {
+        "startLine": 1645,
+        "startChar": 8,
+        "endLine": 1645,
+        "endChar": 13
+      },
+      "revId": "5575e9dbf0fa2bd9b98dd09938d916eb8619d22b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
