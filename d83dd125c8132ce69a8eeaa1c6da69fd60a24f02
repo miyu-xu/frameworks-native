@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "042468b4_66a08bbd",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-12T16:57:10Z",
+      "side": 1,
+      "message": "I hope that I can resolve this comment because I no longer need unsafe impl Sync for RpcServerConnection. And AFAIU, Send is fine because it doesn\u0027t need synchronized interior mutability unlike Sync. \n\nPlease feel free re-open if you have further concerns. Thanks!",
+      "parentUuid": "fb036c7f_b9526082",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "d83dd125c8132ce69a8eeaa1c6da69fd60a24f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d9f92d_6969a273",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Right, good catch, `handleConnectInternal` is not thread-safe right now, which does contradict `unsafe impl Sync for RpcServer {}`. This is not a practical issue right now since Trusty apps are single-threaded, so we could leave it for a follow-up.\n\nWe could fix it now by wrapping `inner` in a `Mutex` (`inner: Mutex\u003c*mut binder_rpc_server_bindgen::ARpcServerTrusty\u003e,` or something like that) and then we wouldn\u0027t need the explicit `impl Sync`, but I\u0027m wondering if we could solve it on the C++ side instead.\n\nAnother reason it might not be worth thinking about this too hard is we\u0027re trying to get rid of `RpcServerTrusty` anyway, right? (speaking of, it might be worth bringing back https://r.android.com/2918760, although that one has the same problem).",
       "parentUuid": "7409c4ce_d78db7d8",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 13
+      },
+      "revId": "d83dd125c8132ce69a8eeaa1c6da69fd60a24f02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80709a8_572c88d0",
+        "filename": "libs/binder/rust/rpcbinder/src/server/trusty.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2025-03-12T16:57:10Z",
+      "side": 1,
+      "message": "I created a bug to track this discussion b/402764258. I hope that we can continue this discussion in the bug.",
+      "parentUuid": "8c6861c1_6f8e34c6",
       "range": {
         "startLine": 137,
         "startChar": 0,
