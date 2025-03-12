@@ -534,6 +534,8 @@ protected:
     void onBufferQueuedLocked(int slot, sp<Fence> fence,
             const IGraphicBufferProducer::QueueBufferOutput& output);
 
+    static ui::Dataspace translateDataspace(ui::Dataspace dataspace);
+
     struct BufferSlot {
         sp<GraphicBuffer> buffer;
         Region dirtyRegion;

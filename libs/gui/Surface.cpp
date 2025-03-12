@@ -1137,13 +1137,51 @@ void Surface::applyGrallocMetadataLocked(
         const IGraphicBufferProducer::QueueBufferInput& queueBufferInput) {
     ATRACE_CALL();
     auto& mapper = GraphicBufferMapper::get();
-    mapper.setDataspace(buffer->handle, static_cast<ui::Dataspace>(queueBufferInput.dataSpace));
+    ui::Dataspace inputDataSpace = translateDataspace(
+            static_cast<ui::Dataspace>(queueBufferInput.dataSpace));
+    ui::Dataspace grDataSpace = ui::Dataspace::UNKNOWN;
+    status_t err = OK;
+    err = mapper.getDataspace(buffer->handle, &grDataSpace);
+    if (err != OK || grDataSpace != inputDataSpace) {
+        mapper.setDataspace(buffer->handle, inputDataSpace);
+    }
     if (mHdrMetadataIsSet & HdrMetadata::SMPTE2086)
         mapper.setSmpte2086(buffer->handle, queueBufferInput.getHdrMetadata().getSmpte2086());
     if (mHdrMetadataIsSet & HdrMetadata::CTA861_3)
         mapper.setCta861_3(buffer->handle, queueBufferInput.getHdrMetadata().getCta8613());
     if (mHdrMetadataIsSet & HdrMetadata::HDR10PLUS)
         mapper.setSmpte2094_40(buffer->handle, queueBufferInput.getHdrMetadata().getHdr10Plus());
+}
+
+ui::Dataspace Surface::translateDataspace(ui::Dataspace dataspace) {
+    ui::Dataspace updatedDataspace = dataspace;
+    // translate legacy dataspaces to modern dataspaces
+    switch (dataspace) {
+        // Treat unknown dataspaces as V0_sRGB
+        case ui::Dataspace::UNKNOWN:
+        case ui::Dataspace::SRGB:
+            updatedDataspace = ui::Dataspace::V0_SRGB;
+            break;
+        case ui::Dataspace::SRGB_LINEAR:
+            updatedDataspace = ui::Dataspace::V0_SRGB_LINEAR;
+            break;
+        case ui::Dataspace::JFIF:
+            updatedDataspace = ui::Dataspace::V0_JFIF;
+            break;
+        case ui::Dataspace::BT601_625:
+            updatedDataspace = ui::Dataspace::V0_BT601_625;
+            break;
+        case ui::Dataspace::BT601_525:
+            updatedDataspace = ui::Dataspace::V0_BT601_525;
+            break;
+        case ui::Dataspace::BT709:
+            updatedDataspace = ui::Dataspace::V0_BT709;
+            break;
+        default:
+            break;
+    }
+
+    return updatedDataspace;
 }
 
 void Surface::onBufferQueuedLocked(int slot, sp<Fence> fence,
