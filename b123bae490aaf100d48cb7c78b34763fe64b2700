@@ -40,6 +40,30 @@
       ],
       "revId": "b123bae490aaf100d48cb7c78b34763fe64b2700",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51ed636_ec16bae6",
+        "filename": "vulkan/libvulkan/allocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-03-13T21:53:36Z",
+      "side": 1,
+      "message": "noinline seemed less magic/less likely to be messed up by future changes to this code, so i went with that. (but thanks, that was exactly the kind of thing i was nervous about that made me want your review!)",
+      "parentUuid": "6c71bea4_eacfb931",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "b123bae490aaf100d48cb7c78b34763fe64b2700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
