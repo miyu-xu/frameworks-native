@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c71bea4_eacfb931",
+        "filename": "vulkan/libvulkan/allocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2025-03-13T19:36:54Z",
+      "side": 1,
+      "message": "if this participates in ThinLTO, it\u0027s possible for `DefaultReallocate` to be inlined, which would allow LLVM to conditionally \u0027see through\u0027 some values of `ptr`.\n\nTo be safe it can be sanitized through a volatile:\n\n```suggestion\n    if (size \u003c\u003d old_size) {\n        // Store \u0026 load this through a volatile so LLVM can\u0027t infer an\n        // objectsize for FORTIFY through it. Ideally, there should instead\n        // be a `__builtin_assert_object_size(ptr, size)` or similar, but until\n        // then, \"we don\u0027t know the size,\" is more correct than \"the size is the\n        // same as if the realloc never happened\"\n\tvoid *volatile v \u003d ptr;\n        return v;\n    }\n```\n\n(feel free to reword the comment)\n\n(or you can add a `noinline` attr)",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5895d3d8_3c82c9be",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vulkan/libvulkan/allocator.cpp",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "    if (ptr \u0026\u0026 size \u003c\u003d old_size)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b123bae490aaf100d48cb7c78b34763fe64b2700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
