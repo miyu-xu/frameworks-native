@@ -68,6 +68,24 @@
       "parentUuid": "191ebc3b_3dec5ada",
       "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c2664cf_668c7380",
+        "filename": "libs/binder/rust/rpcbinder/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-13T02:15:44Z",
+      "side": 1,
+      "message": "So, can this be abandoned then?",
+      "parentUuid": "c9a2e542_111e575c",
+      "revId": "fcbbe1795996853fb857be9e7527340623c6464b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
