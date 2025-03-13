@@ -45,12 +45,29 @@ cc_library {
     target: {
         darwin: {
             enabled: false,
-        }
+        },
     },
 
     static_libs: [
         "libbase",
         "libcutils",
         "liblog",
+    ],
+}
+
+cc_test {
+    name: "libadbd_auth_test",
+    srcs: [
+        "adbd_auth_test.cpp",
+    ],
+    static_libs: [
+        "libadbd_auth",
+        "libbase",
+        "libcutils",
+        "liblog",
+    ],
+    test_suites: [
+        "cts",
+        "general-tests",
     ],
 }
