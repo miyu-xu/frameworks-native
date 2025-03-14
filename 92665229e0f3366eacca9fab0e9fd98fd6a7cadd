@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb8b64a_a33d8eac",
+        "filename": "libs/adbd_auth/adbd_auth.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-03-14T19:01:04Z",
+      "side": 1,
+      "message": "new indentation is wrong?",
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
