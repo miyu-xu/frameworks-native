@@ -1262,6 +1262,7 @@ status_t SurfaceFlinger::getDynamicDisplayInfoFromToken(const sp<IBinder>& displ
     Mutex::Autolock lock(mStateLock);
 
     const auto displayOpt = ftl::find_if(mPhysicalDisplays, PhysicalDisplay::hasToken(displayToken))
+<<<<<<< HEAD
                                     .transform(&ftl::to_mapped_ref<PhysicalDisplays>)
                                     .and_then(getDisplayDeviceAndSnapshot());
 
@@ -1269,6 +1270,25 @@ status_t SurfaceFlinger::getDynamicDisplayInfoFromToken(const sp<IBinder>& displ
         return NAME_NOT_FOUND;
     }
 
+=======
+    ui::FrameRateCategoryRate frameRateCategoryRate(normal.getValue(), high.getValue());
+    info->frameRateCategoryRate = frameRateCategoryRate;
+
+    if (info->hasArrSupport) {
+        info->supportedRefreshRates = display->refreshRateSelector().getSupportedFrameRates();
+    } else {
+        // On non-ARR devices, list the refresh rates same as the supported display modes.
+        std::vector<float> supportedFrameRates;
+        supportedFrameRates.reserve(info->supportedDisplayModes.size());
+        std::transform(info->supportedDisplayModes.begin(), info->supportedDisplayModes.end(),
+                       std::back_inserter(supportedFrameRates),
+                       [](ui::DisplayMode mode) { return mode.peakRefreshRate; });
+        info->supportedRefreshRates = supportedFrameRates;
+    }
+    info->activeColorMode = display->getCompositionDisplay()->getState().colorMode;
+    info->hdrCapabilities = filterOut4k30(display->getHdrCapabilities());
+
+>>>>>>> PATCH
     const auto& [display, snapshotRef] = *displayOpt;
     getDynamicDisplayInfoInternal(info, display, snapshotRef.get());
     return NO_ERROR;
