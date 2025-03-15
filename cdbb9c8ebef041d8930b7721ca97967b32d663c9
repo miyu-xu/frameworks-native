@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f142b9d3_7875c170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1496421
+      },
+      "writtenOn": "2025-03-15T00:02:06Z",
+      "side": 1,
+      "message": "Nice, but please also remove the `Acquire an instance` wording from `APerformanceHint_getManager()` which otherwise is very ambiguous. Acquiring implies inheriting ownership.",
+      "revId": "cdbb9c8ebef041d8930b7721ca97967b32d663c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
