@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11f9d99_5e2a4361",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-17T23:56:55Z",
+      "side": 1,
+      "message": "call \u0027debug_caller_pid\u0027 everywhere? due to TOCTOU, they can race, so we should emphasize it\u0027s badness everywhere.",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 22
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27872dce_74d752dd",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-17T23:56:55Z",
+      "side": 1,
+      "message": "this is the service name?",
+      "range": {
+        "startLine": 256,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 11
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dddabd4_6bc79aa2",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-17T23:56:55Z",
+      "side": 1,
+      "message": "like find/add/list?",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 14
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
