@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e43dd78_5aaf207b",
+        "filename": "libs/binder/ndk/include_platform/android/binder_manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:03:25Z",
+      "side": 1,
+      "message": "debug_pid here as well (and same comments on child CLs about naming)",
+      "range": {
+        "startLine": 317,
+        "startChar": 66,
+        "endLine": 317,
+        "endChar": 76
+      },
+      "revId": "41677a9673ec873c90fa147c79187d8430a85802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
