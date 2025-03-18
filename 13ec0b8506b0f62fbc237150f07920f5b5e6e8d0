@@ -51,6 +51,23 @@
       "parentUuid": "4706a503_edfa0c41",
       "revId": "13ec0b8506b0f62fbc237150f07920f5b5e6e8d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09bdd7ff_c657394c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097853
+      },
+      "writtenOn": "2025-03-18T02:16:25Z",
+      "side": 1,
+      "message": "AOSP main is correct then. We do almost all libvulkan development in internal main but it looks like there are no conflicts in this case.",
+      "revId": "13ec0b8506b0f62fbc237150f07920f5b5e6e8d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
