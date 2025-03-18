@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4ef3303_083bfabd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2025-03-18T23:57:42Z",
+      "side": 1,
+      "message": "I assume you refer to this section.\n\n```\nEven if the only test that can be written is a test that the API can be called\nthat is still a valuable test because it proves that the API was exposed to the\nNDK. Whenever possible though, the test should verify some observable behavior,\neven if that means adding more APIs to query state.\n```\n\nAre we talking about a `cc_test` (as opposite of `cc_test_host`) that would live in `adbd_auth`. Since the test runs on the devices that would prove that NDK can call it?",
+      "parentUuid": "97ab9e70_1a739b2f",
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bb8b64a_a33d8eac",
         "filename": "libs/adbd_auth/adbd_auth.cpp",
         "patchSetId": 3
