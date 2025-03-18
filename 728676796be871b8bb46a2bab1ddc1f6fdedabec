@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87df4d51_08ed7a5d",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:13:01Z",
+      "side": 1,
+      "message": "can/should we export this method for testing, and have a host-side test for this, so we can test this code without having to start a VM?",
+      "range": {
+        "startLine": 503,
+        "startChar": 30,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38e7d14f_a40fae15",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 3
