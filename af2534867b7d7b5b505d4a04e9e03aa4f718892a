@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e4ee074_5feec568",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:01:49Z",
+      "side": 1,
+      "message": "hey - can you avoid setting this? we should ensure that the \u0027sidName\u0027 is always there",
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f7014a3_86783f6d",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:01:49Z",
+      "side": 1,
+      "message": "nit: carry \u0027debug\u0027-ness everywhere in arg name",
+      "range": {
+        "startLine": 917,
+        "startChar": 0,
+        "endLine": 917,
+        "endChar": 35
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40541b29_34942837",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:01:49Z",
+      "side": 1,
+      "message": "if \u0027service\u0027 is service name, can you call it \u0027name\u0027 for consistency?",
+      "range": {
+        "startLine": 163,
+        "startChar": 48,
+        "endLine": 163,
+        "endChar": 52
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58df40b0_1786cb8e",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:01:49Z",
+      "side": 1,
+      "message": "can you specify the args content, especially about \u0027permission\u0027 since it\u0027s not Android permission, but it\u0027s the SELinux permission?",
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be04738_98596cdf",
+        "filename": "libs/fakeservicemanager/FakeServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:01:49Z",
+      "side": 1,
+      "message": "nit: use \u0027true\u0027 here, since FSM allows the client to get all services?",
+      "range": {
+        "startLine": 126,
+        "startChar": 11,
+        "endLine": 126,
+        "endChar": 16
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
