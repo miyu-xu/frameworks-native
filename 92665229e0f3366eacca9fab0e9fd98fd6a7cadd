@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97ab9e70_1a739b2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2025-03-18T19:39:52Z",
+      "side": 1,
+      "message": "go/android-ndk-api-guidelines#compatibilty-cts, specifically the last paragraph",
+      "parentUuid": "f70d9edc_5d6a3375",
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bb8b64a_a33d8eac",
         "filename": "libs/adbd_auth/adbd_auth.cpp",
         "patchSetId": 3
