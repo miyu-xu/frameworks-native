@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70d9edc_5d6a3375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2025-03-18T02:18:19Z",
+      "side": 1,
+      "message": "I am unsure how to test this. We have zero infrastructure to test Wifi stuff. The message won\u0027t be sent unless the device is connected to a wifi network.",
+      "parentUuid": "9ad94921_5ccfc819",
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bb8b64a_a33d8eac",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58d9886_6764c6a2",
+        "filename": "libs/adbd_auth/adbd_auth.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2025-03-18T02:18:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bb8b64a_a33d8eac",
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6ac6c9a_fab453d7",
@@ -48,6 +84,30 @@
       "writtenOn": "2025-03-14T19:36:15Z",
       "side": 1,
       "message": "Can this be const?",
+      "range": {
+        "startLine": 194,
+        "startChar": 36,
+        "endLine": 194,
+        "endChar": 51
+      },
+      "revId": "92665229e0f3366eacca9fab0e9fd98fd6a7cadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a75d7ea0_b619a312",
+        "filename": "libs/adbd_auth/include/adbd_auth.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2025-03-18T02:18:19Z",
+      "side": 1,
+      "message": "Not possible. The method pushes a message to an internal queue.",
+      "parentUuid": "b6ac6c9a_fab453d7",
       "range": {
         "startLine": 194,
         "startChar": 36,
