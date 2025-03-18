@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187001e2_ab60563c",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:10:36Z",
+      "side": 1,
+      "message": "what would it take to move the code that\u0027s using this into libbinder, so we can avoid adding one more place that needs to use it? (or why is it needed directly?)\n\nThis will apply to other environments using SM, so once we have Trusty using this, maybe CHRE, SDV, and this place, that would be +4 locations. If we can have one copy of the code to enable this, it\u0027ll keep it from getting even harder.",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 60
+      },
+      "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e7d14f_a40fae15",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-18T00:10:36Z",
+      "side": 1,
+      "message": "If \u0027ps\u0027 is non-null, we should not try to get UDS (this will cause us to try to get on host during boot today), and it may cause SELinux denails. So, I would \u0027continue\u0027 otherwise.",
+      "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
