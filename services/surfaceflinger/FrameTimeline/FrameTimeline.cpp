@@ -726,18 +726,21 @@ void SurfaceFrame::traceActuals(int64_t displayFrameToken, nsecs_t monoBootOffse
         auto packet = ctx.NewTracePacket();
         packet->set_timestamp_clock_id(perfetto::protos::pbzero::BUILTIN_CLOCK_BOOTTIME);
         // Actual start time is not yet available, so use expected start instead
-        if (mPredictionState == PredictionState::Expired) {
-            // If prediction is expired, we can't use the predicted start time. Instead, just use a
-            // start time a little earlier than the end time so that we have some info about this
-            // frame in the trace.
-            nsecs_t endTime =
-                    (mPresentState == PresentState::Dropped ? mDropTime : mActuals.endTime);
-            const auto timestamp = endTime - kPredictionExpiredStartTimeDelta;
-            packet->set_timestamp(static_cast<uint64_t>(timestamp + monoBootOffset));
+        if (mActuals.startTime == 0) {
+            if (mPredictionState == PredictionState::Expired) {
+                // If prediction is expired, we can't use the predicted start time. Instead, just use a
+                // start time a little earlier than the end time so that we have some info about this
+                // frame in the trace.
+                nsecs_t endTime =
+                (mPresentState == PresentState::Dropped ? mDropTime : mActuals.endTime);
+                const auto timestamp = endTime - kPredictionExpiredStartTimeDelta;
+                packet->set_timestamp(static_cast<uint64_t>(timestamp + monoBootOffset));
+            } else {
+                packet->set_timestamp(
+                        static_cast<uint64_t>(mPredictions.startTime + monoBootOffset));
+            }
         } else {
-            const auto timestamp =
-                    mActuals.startTime == 0 ? mPredictions.startTime : mActuals.startTime;
-            packet->set_timestamp(static_cast<uint64_t>(timestamp + monoBootOffset));
+            packet->set_timestamp(static_cast<uint64_t>(mActuals.startTime + monoBootOffset));
         }
 
         auto* event = packet->set_frame_timeline_event();
