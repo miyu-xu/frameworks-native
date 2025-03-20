@@ -856,6 +856,23 @@ void ASurfaceTransaction_setEnableBackPressure(ASurfaceTransaction* _Nonnull tra
 void ASurfaceTransaction_setFrameTimeline(ASurfaceTransaction* _Nonnull transaction,
                                           AVsyncId vsyncId) __INTRODUCED_IN(33);
 
+/**
+ * Indicate whether to mark the given SurfaceControl as secure.
+ *
+ * By default a SurfaceControl is not secure. When a SurfaceControl is marked as secure, its content
+ * will not be included in screen capture. This is useful for surfaces that contain sensitive
+ * information.
+ *
+ * Available since API level 37.
+ *
+ * \param transaction The transaction in which to make the change.
+ * \param surface_control The ASurfaceControl on which to set/unset the secure flag.
+ * \param isSecure Whether to set/unset the secure flag.
+ */
+void ASurfaceTransaction_setSecure(ASurfaceTransaction* _Nonnull transaction,
+                                   ASurfaceControl* _Nonnull surface_control, bool isSecure)
+                                   __INTRODUCED_IN(37);
+
 __END_DECLS
 
 #endif // ANDROID_SURFACE_CONTROL_H
