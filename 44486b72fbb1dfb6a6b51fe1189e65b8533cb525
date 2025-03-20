@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de2083e_f2975b2e",
+        "filename": "libs/binder/RpcState.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-20T19:44:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d1c54e_696a4ff0",
+      "range": {
+        "startLine": 1241,
+        "startChar": 20,
+        "endLine": 1241,
+        "endChar": 60
+      },
+      "revId": "44486b72fbb1dfb6a6b51fe1189e65b8533cb525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af4f559d_fb8e37e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-03T23:12:31Z",
       "side": 1,
       "message": "can you add a Trusty test that validates this?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "44486b72fbb1dfb6a6b51fe1189e65b8533cb525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f013f25_393ba8b6",
+        "filename": "libs/binder/RpcWireFormat.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-20T19:44:09Z",
+      "side": 1,
+      "message": "The `SendMaxFiles` and `SendTooManyFiles` tests validate this. I see them running as part of `binderRpcToTrustyTest`. They are enabled later in this CL chain.",
+      "parentUuid": "af4f559d_fb8e37e4",
       "range": {
         "startLine": 178,
         "startChar": 0,
