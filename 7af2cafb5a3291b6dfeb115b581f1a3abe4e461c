@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b3cb92_13518d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2025-03-21T19:11:05Z",
+      "side": 1,
+      "message": "Added `libs/adbd_auth/adbd_auth_test.cpp` for CTS testing.",
+      "revId": "7af2cafb5a3291b6dfeb115b581f1a3abe4e461c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
