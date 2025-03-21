@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "923c641e_ff3dfcc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3868244
+      },
+      "writtenOn": "2025-03-21T13:38:16Z",
+      "side": 1,
+      "message": "This is very likely the root cause of those \"failed to find buffer\" in ClientCache since it causes a mismatch in client cache and SF cache",
+      "revId": "2c29195c3f14bd2350054f0dbe3f2484ca9b8cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
