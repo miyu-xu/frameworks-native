@@ -45,6 +45,30 @@
       },
       "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1719d339_007e81f8",
+        "filename": "libs/binder/tests/FileUtilsTrusty.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-24T19:09:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9beead2f_54f69c2b",
+      "range": {
+        "startLine": 58,
+        "startChar": 69,
+        "endLine": 58,
+        "endChar": 89
+      },
+      "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
