@@ -62,17 +62,17 @@ cc_test {
         "binderCacheUnitTest.cpp",
     ],
     shared_libs: [
-        "liblog",
         "libbinder",
         "libcutils",
+        "liblog",
         "libutils",
     ],
     static_libs: [
         "libfakeservicemanager",
     ],
     defaults: [
-        "libbinder_client_cache_flag",
         "libbinder_addservice_cache_flag",
+        "libbinder_client_cache_flag",
         "libbinder_remove_cache_static_list_flag",
     ],
     test_suites: ["general-tests"],
@@ -89,12 +89,12 @@ cc_test {
         },
     },
     srcs: [
-        "binderParcelUnitTest.cpp",
         "binderBinderUnitTest.cpp",
-        "binderStatusUnitTest.cpp",
         "binderMemoryHeapBaseUnitTest.cpp",
-        "binderRecordedTransactionTest.cpp",
+        "binderParcelUnitTest.cpp",
         "binderPersistableBundleTest.cpp",
+        "binderRecordedTransactionTest.cpp",
+        "binderStatusUnitTest.cpp",
     ],
     shared_libs: [
         "libbinder",
@@ -113,14 +113,14 @@ cc_test {
     shared_libs: [
         "libbinder",
         "libcutils",
-        "libutils",
         "liblog",
+        "libutils",
     ],
     static_libs: [
-        "binderRecordReplayTestIface-cpp",
         "binderReadParcelIface-cpp",
-        "libbinder_random_parcel_seeds",
+        "binderRecordReplayTestIface-cpp",
         "libbinder_random_parcel",
+        "libbinder_random_parcel_seeds",
     ],
     test_suites: ["general-tests"],
     require_root: true,
@@ -278,11 +278,11 @@ cc_defaults {
     },
 
     static_libs: [
+        "binderRpcTestIface-cpp",
+        "binderRpcTestIface-ndk",
         "libbinder_test_utils",
         "libbinder_tls_static",
         "libbinder_tls_test_utils",
-        "binderRpcTestIface-cpp",
-        "binderRpcTestIface-ndk",
     ],
 }
 
@@ -347,12 +347,12 @@ cc_defaults {
     ],
 
     shared_libs: [
+        "libbase",
         "libbinder",
         "libbinder_ndk",
-        "libbase",
-        "libutils",
         "libcutils",
         "liblog",
+        "libutils",
     ],
 }
 
@@ -444,10 +444,10 @@ cc_binary {
     ],
 
     shared_libs: [
-        "libbinder_on_trusty_mock",
         "libbase",
-        "libutils",
+        "libbinder_on_trusty_mock",
         "libcutils",
+        "libutils",
     ],
 
     static_libs: [
@@ -462,16 +462,16 @@ cc_binary {
     ],
 
     srcs: [
-        "binderRpcUniversalTests.cpp",
         "binderRpcTestCommon.cpp",
         "binderRpcTestTrusty.cpp",
+        "binderRpcUniversalTests.cpp",
     ],
 
     shared_libs: [
-        "libbinder_on_trusty_mock",
         "libbase",
-        "libutils",
+        "libbinder_on_trusty_mock",
         "libcutils",
+        "libutils",
     ],
 
     static_libs: [
@@ -490,11 +490,11 @@ cc_test {
 
     // Add the Trusty mock library as a fake dependency so it gets built
     required: [
-        "libbinder_on_trusty_mock",
-        "libbinder_ndk_on_trusty_mock",
-        "libbinder_rs_on_trusty_mock",
         "binderRpcTestService_on_trusty_mock",
         "binderRpcTest_on_trusty_mock",
+        "libbinder_ndk_on_trusty_mock",
+        "libbinder_on_trusty_mock",
+        "libbinder_rs_on_trusty_mock",
     ],
 }
 
@@ -608,18 +608,18 @@ cc_test {
         "RpcTlsUtilsTest.cpp",
     ],
     shared_libs: [
-        "libbinder",
         "libbase",
-        "libutils",
+        "libbinder",
         "liblog",
+        "libutils",
     ],
     static_libs: [
-        "libbinder_tls_test_utils",
         "libbinder_tls_static",
+        "libbinder_tls_test_utils",
     ],
     test_suites: [
-        "general-tests",
         "device-tests",
+        "general-tests",
     ],
 }
 
@@ -636,8 +636,8 @@ cc_benchmark {
         },
     },
     srcs: [
-        "binderRpcBenchmark.cpp",
         "IBinderRpcBenchmark.aidl",
+        "binderRpcBenchmark.cpp",
     ],
     shared_libs: [
         "libbase",
@@ -646,8 +646,8 @@ cc_benchmark {
         "libutils",
     ],
     static_libs: [
-        "libbinder_tls_test_utils",
         "libbinder_tls_static",
+        "libbinder_tls_test_utils",
     ],
 }
 
@@ -669,11 +669,11 @@ cc_test {
         "binderRpcWireProtocolTest.cpp",
     ],
     shared_libs: [
-        "libbinder",
         "libbase",
-        "libutils",
+        "libbinder",
         "libcutils",
         "liblog",
+        "libutils",
     ],
     test_suites: ["general-tests"],
 }
@@ -687,10 +687,10 @@ cc_test {
         "libutils",
     ],
     cflags: [
-        "-g",
+        "-O3",
         "-Wno-missing-field-initializers",
         "-Wno-sign-compare",
-        "-O3",
+        "-g",
     ],
 }
 
@@ -699,9 +699,9 @@ cc_test {
     defaults: ["binder_test_defaults"],
     srcs: ["binderTextOutputTest.cpp"],
     shared_libs: [
+        "libbase",
         "libbinder",
         "libutils",
-        "libbase",
     ],
     test_suites: ["device-tests"],
 }
@@ -711,9 +711,9 @@ cc_test {
     defaults: ["binder_test_defaults"],
     srcs: ["schd-dbg.cpp"],
     shared_libs: [
+        "libbase",
         "libbinder",
         "libutils",
-        "libbase",
     ],
 }
 
@@ -785,8 +785,8 @@ cc_test {
 
     // critical that libbinder/libbinder_ndk are shared for VTS
     shared_libs: [
-        "libbinder_ndk",
         "libbinder",
+        "libbinder_ndk",
         "liblog",
         "libutils",
     ],
@@ -829,12 +829,12 @@ cc_test {
     defaults: ["binder_test_defaults"],
     srcs: ["binderAllocationLimits.cpp"],
     shared_libs: [
+        "libbase",
         "libbinder",
-        "liblog",
         "libcutils",
+        "liblog",
         "libutils",
         "libutilscallstack",
-        "libbase",
     ],
     test_suites: ["device-tests"],
     require_root: true,
@@ -928,15 +928,15 @@ cc_defaults {
     target: {
         android: {
             shared_libs: [
-                "libbinder_ndk",
                 "libbinder",
+                "libbinder_ndk",
                 "libutils",
             ],
         },
         host: {
             static_libs: [
-                "libbinder_ndk",
                 "libbinder",
+                "libbinder_ndk",
                 "libutils",
             ],
         },
