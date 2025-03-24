@@ -94,6 +94,30 @@
       },
       "revId": "3b30c632d3e52fda757f176ad02cd73c33ad32ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa578d52_27e44aec",
+        "filename": "libs/binder/tests/FileUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1135107
+      },
+      "writtenOn": "2025-03-24T21:10:24Z",
+      "side": 1,
+      "message": "+1, I didn\u0027t check and only based on Steven\u0027s comment. Maybe std::string wasn\u0027t that bad afterall? Assuming std::string has good std::move support.",
+      "parentUuid": "ead59561_f1c154b8",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 41
+      },
+      "revId": "3b30c632d3e52fda757f176ad02cd73c33ad32ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
