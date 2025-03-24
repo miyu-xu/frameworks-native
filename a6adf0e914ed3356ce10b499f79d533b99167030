@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac05e41_12428cf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2025-03-24T17:17:26Z",
+      "side": 1,
+      "message": "Can you please file a bug using https://issuetracker.google.com/ explaining what is the actual issue?",
+      "revId": "a6adf0e914ed3356ce10b499f79d533b99167030",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
