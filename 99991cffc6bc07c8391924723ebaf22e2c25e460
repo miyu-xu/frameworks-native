@@ -64,6 +64,23 @@
       },
       "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd1742f_354468ab",
+        "filename": "libs/binder/tests/FileUtils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-24T20:22:05Z",
+      "side": 1,
+      "message": "is this even usable on trusty, which have no threads?\n\ni think you\u0027ll have to rely on the pipe buffer being big enough to hold `contents`",
+      "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
