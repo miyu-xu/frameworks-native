@@ -142,6 +142,30 @@
       },
       "revId": "3b30c632d3e52fda757f176ad02cd73c33ad32ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7413d82_03f43619",
+        "filename": "libs/binder/tests/FileUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-03-25T22:16:44Z",
+      "side": 1,
+      "message": "If you want to change it to a ref, you need to change the implemention, you can\u0027t meaningfully `std::move` a `const std::string\u0026`. I suggest keeping it as `std::string`",
+      "parentUuid": "09c91a09_a5742e32",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 41
+      },
+      "revId": "3b30c632d3e52fda757f176ad02cd73c33ad32ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
