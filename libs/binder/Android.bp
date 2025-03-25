@@ -819,6 +819,7 @@ cc_library {
         ":__subpackages__",
         "//hardware/interfaces/security/see:__subpackages__",
         "//system/core/trusty:__subpackages__",
+        "//test/vts-testcase/hal/treble/vintf:__subpackages__",
         "//vendor:__subpackages__",
     ],
 }
