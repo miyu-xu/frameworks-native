@@ -16,6 +16,24 @@
       "message": "Can you please file a bug using https://issuetracker.google.com/ explaining what is the actual issue?",
       "revId": "a6adf0e914ed3356ce10b499f79d533b99167030",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36dac5c9_1032cfa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3778823
+      },
+      "writtenOn": "2025-03-25T01:57:02Z",
+      "side": 1,
+      "message": "Sorry，perhaps my commit message wasn\u0027t precise enough - this change is more of an optimization than an issue. In the current logic, when the prediction status is expired, the system always uses \"actual end time - kPredictionExpiredStartTimeDelta\" as the start time for the frame trace, regardless of whether the actual start time is valid. I think when the actual start time is valid, even if the prediction status is expired, we should still use the actual start time as the start time for the frame trace. This way, we can extract more useful information from the trace.",
+      "parentUuid": "eac05e41_12428cf0",
+      "revId": "a6adf0e914ed3356ce10b499f79d533b99167030",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
