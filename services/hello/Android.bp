@@ -1,0 +1,64 @@
+cc_library {
+    name: "libhello",
+    srcs: ["hello.cpp"],
+    shared_libs: [
+        "libinput",
+    ],
+}
+
+rust_bindgen {
+    name: "libhello_bindgen",
+    crate_name: "hello_bindgen",
+    wrapper_src: "wrapper.hpp",
+    source_stem: "bindings",
+    visibility: [":__subpackages__"],
+    bindgen_flags: [
+        "--verbose",
+        "--allowlist-var=AMOTION_EVENT_ACTION_CANCEL",
+        "--allowlist-type=.*InputEventType",
+        "--allowlist-type=.*PointerCoords",
+        "--allowlist-type=.*PointerProperties",
+        "--allowlist-type=InputEvent",
+        "--allowlist-type=.*KeyEvent",
+        "--allowlist-type=.*MotionEvent",
+        // "--allowlist-type=.*MotionEvent",
+        // "--allowlist-type=foo",
+        // "--allowlist-function=fizz",
+        // "--allowlist-function=hello",
+    ],
+    cpp_std: "c++20",
+    cflags: ["-DSOME_FLAG"],
+    static_libs: [
+        "inputconstants-cpp",
+        "libui-types",
+    ],
+    shared_libs: [
+        "libc++",
+        "libhello",
+        "libinput",
+    ],
+    header_libs: [
+        "native_headers",
+        "jni_headers",
+        "flatbuffer_headers",
+    ],
+}
+
+rust_binary {
+    name: "hello_bindgen",
+    srcs: ["main.rs"],
+    rustlibs: ["libhello_bindgen"],
+    shared_libs: [
+        "libhello",
+        "libinput",
+    ],
+}
+
+cc_binary {
+    name: "hello_cc",
+    srcs: ["main.cc"],
+    shared_libs: [
+        "libhello",
+        "libinput",
+    ],
+}
