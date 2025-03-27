@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fc24c4e_b6e5355b",
+        "filename": "libs/binder/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T19:17:04Z",
+      "side": 1,
+      "message": "I moved it. It relies on a small interface to get connection info from something off the device (virtmgr in this case for microdroid_mgr in the VM that uses this). So I split that into its own interface and added it to the `IVirtualMachineService.aidl` interface.\n\nI think there\u0027s probably a way to add this Rust `rpc_servicemanager` functionality to the C++ servicemanager and create rust bindings so we don\u0027t need two different implementaions there too. That\u0027s a lot of work... for later. But we can change it later if it makes sense.",
+      "parentUuid": "187001e2_ab60563c",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 60
+      },
+      "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87df4d51_08ed7a5d",
         "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
         "patchSetId": 3
@@ -60,6 +84,24 @@
       "writtenOn": "2025-03-18T00:10:36Z",
       "side": 1,
       "message": "If \u0027ps\u0027 is non-null, we should not try to get UDS (this will cause us to try to get on host during boot today), and it may cause SELinux denails. So, I would \u0027continue\u0027 otherwise.",
+      "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e940d4_53c3ec34",
+        "filename": "libs/binder/BackendUnifiedServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T19:17:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38e7d14f_a40fae15",
       "revId": "728676796be871b8bb46a2bab1ddc1f6fdedabec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
