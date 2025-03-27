@@ -39,6 +39,30 @@
       },
       "revId": "2895ad3574c5a4addbbdf102f5bcdbcc3260fbe7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964652d4_1ab5e473",
+        "filename": "libs/binder/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-03-27T00:38:24Z",
+      "side": 1,
+      "message": "(and if that\u0027s the only change, please abandon to avoid any merge conflicts, thanks!)",
+      "parentUuid": "88a3cd0d_baee7e4f",
+      "range": {
+        "startLine": 114,
+        "startChar": 7,
+        "endLine": 124,
+        "endChar": 6
+      },
+      "revId": "2895ad3574c5a4addbbdf102f5bcdbcc3260fbe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
