@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3805c9_48a2ccd3",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T19:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e11f9d99_5e2a4361",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 22
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27872dce_74d752dd",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d64e121_896d101b",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T19:17:00Z",
+      "side": 1,
+      "message": "Yeah, changed it to `name` to fit with the rest of the APIs.",
+      "parentUuid": "27872dce_74d752dd",
+      "range": {
+        "startLine": 256,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 11
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0dddabd4_6bc79aa2",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-03-17T23:56:55Z",
       "side": 1,
       "message": "like find/add/list?",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 14
+      },
+      "revId": "0d8f3328b124a58f3ca2db70a8c58dd3ef64463f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca819642_5a3c4bfa",
+        "filename": "libs/binder/rust/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T19:17:00Z",
+      "side": 1,
+      "message": "Yes, added that to the function description.",
+      "parentUuid": "0dddabd4_6bc79aa2",
       "range": {
         "startLine": 257,
         "startChar": 4,
