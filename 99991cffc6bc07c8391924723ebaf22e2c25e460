@@ -81,6 +81,24 @@
       "message": "is this even usable on trusty, which have no threads?\n\ni think you\u0027ll have to rely on the pipe buffer being big enough to hold `contents`",
       "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a43cc1_0cce065c",
+        "filename": "libs/binder/tests/FileUtils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-27T21:22:55Z",
+      "side": 1,
+      "message": "Yeah, since the write is going to happen synchronously here, we have to be able to fit all of `contents` into the pipe. The current Trusty `mockFileDescriptor` code already checks if `contents` fit into a page.",
+      "parentUuid": "bbd1742f_354468ab",
+      "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
