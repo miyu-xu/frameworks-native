@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a0cbf3d_860a7f7e",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Yeah we could avoid setting it, it looks like it\u0027s only used for logging the denials, but why avoid setting it? It can be helpful to see which process is being denied from the logs.\n\n\u003e  we should ensure that the \u0027sidName\u0027 is always there\n\nWhat happens if it\u0027s an empty string? I would expect `selinux_check_access` to deny any access to \"\". I added some validation for these strings either way!",
+      "parentUuid": "4e4ee074_5feec568",
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f7014a3_86783f6d",
         "filename": "libs/binder/IServiceManager.cpp",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-18T00:01:49Z",
       "side": 1,
       "message": "nit: carry \u0027debug\u0027-ness everywhere in arg name",
+      "range": {
+        "startLine": 917,
+        "startChar": 0,
+        "endLine": 917,
+        "endChar": 35
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec527943_78261fdb",
+        "filename": "libs/binder/IServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f7014a3_86783f6d",
       "range": {
         "startLine": 917,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ae4104_5cf32173",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40541b29_34942837",
+      "range": {
+        "startLine": 163,
+        "startChar": 48,
+        "endLine": 163,
+        "endChar": 52
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58df40b0_1786cb8e",
@@ -77,6 +143,24 @@
       "writtenOn": "2025-03-18T00:01:49Z",
       "side": 1,
       "message": "can you specify the args content, especially about \u0027permission\u0027 since it\u0027s not Android permission, but it\u0027s the SELinux permission?",
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac425bd_59563365",
+        "filename": "libs/binder/aidl/android/os/IServiceManager.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58df40b0_1786cb8e",
       "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db218ba0_256d049c",
+        "filename": "libs/binder/include/binder/IServiceManager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Yes, updated",
+      "parentUuid": "aef9a472_f7171fac",
+      "range": {
+        "startLine": 171,
+        "startChar": 52,
+        "endLine": 171,
+        "endChar": 58
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3be04738_98596cdf",
@@ -117,6 +225,30 @@
       "writtenOn": "2025-03-18T00:01:49Z",
       "side": 1,
       "message": "nit: use \u0027true\u0027 here, since FSM allows the client to get all services?",
+      "range": {
+        "startLine": 126,
+        "startChar": 11,
+        "endLine": 126,
+        "endChar": 16
+      },
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96baf227_fe58abe2",
+        "filename": "libs/fakeservicemanager/FakeServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-03-27T20:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3be04738_98596cdf",
       "range": {
         "startLine": 126,
         "startChar": 11,
