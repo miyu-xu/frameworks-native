@@ -1176,7 +1176,7 @@ void FrameTimeline::DisplayFrame::classifyJank(nsecs_t& deadlineDelta, nsecs_t& 
                         mJankType = JankType::SurfaceFlingerCpuDeadlineMissed;
                     }
                 }
-            } else {
+            } else if (!(mJankType & JankType::SurfaceFlingerStuffing)) {
                 // Finish time unknown
                 mJankType = JankType::Unknown;
             }
