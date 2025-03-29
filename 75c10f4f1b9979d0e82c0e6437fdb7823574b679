@@ -70,6 +70,30 @@
       },
       "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244431ea_3f8997bc",
+        "filename": "libs/binder/tests/binderRpcTestCommon.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-29T01:21:41Z",
+      "side": 0,
+      "message": "I\u0027ve been attempting this and don\u0027t really see a better way (though it could be a skill issue). A major complication is that a follow-up CL introduces a `DmaBuf`-backed mock FD. My understanding is that we would need to implement `pipe2`, and `read`/`write` for both `memref` and `libdmabufheap` FDs (which tend to get `mmap`ed). I\u0027m not sure that even makes sense, and increasing our attack surface for a test feels wrong regardless.",
+      "parentUuid": "0c8f5799_b9fc61a8",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 20
+      },
+      "revId": "75c10f4f1b9979d0e82c0e6437fdb7823574b679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

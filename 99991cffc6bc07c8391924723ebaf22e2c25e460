@@ -99,6 +99,24 @@
       "parentUuid": "bbd1742f_354468ab",
       "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9998b7b2_e89dc2cb",
+        "filename": "libs/binder/tests/FileUtils.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-29T01:21:41Z",
+      "side": 1,
+      "message": "I don\u0027t think Trusty should reuse this code, see other comment.",
+      "parentUuid": "a5a43cc1_0cce065c",
+      "revId": "99991cffc6bc07c8391924723ebaf22e2c25e460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
