@@ -70,6 +70,24 @@
       "parentUuid": "44ecb0fa_6cd89548",
       "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f379bc93_bcd8666c",
+        "filename": "libs/binder/tests/binderRpcFdTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-31T20:25:10Z",
+      "side": 1,
+      "message": "I see that there is already an effort to hide symbols that probably shouldn\u0027t be exported. I marked `dupFileDescriptor` with `LIBBINDER_INTERNAL_EXPORTED` for possibly splitting out into a static lib in the future.",
+      "parentUuid": "4a25c825_398d107e",
+      "revId": "0f5246e02e233b31677d24a6ad2e7b28e1d7b889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
