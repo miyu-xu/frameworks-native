@@ -43,6 +43,15 @@ flag {
 } # arr_setframerate_gte_enum
 
 flag {
+  name: "arr_surfacecontrol_setsecure_api"
+  namespace: "core_graphics"
+  description: "New SDK SurfaceControl.Transaction#setSecure API for Android 17"
+  bug: "407473726"
+  is_fixed_read_only: true
+  is_exported: true
+} # arr_surfacecontrol_setsecure_api
+
+flag {
   name: "arr_surfacecontrol_setframerate_api"
   namespace: "core_graphics"
   description: "New SDK SurfaceControl.Transaction#setFrameRate API for Android 16"
