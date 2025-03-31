@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab4e78e_ce6ae181",
+        "filename": "libs/binder/tests/FileUtilsTrusty.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2025-03-31T19:12:26Z",
+      "side": 1,
+      "message": "Here\u0027s my understanding of the relevant APIs:\n\nWhen the userspace calls `memref_create`, the kernel creates a ref-counted handle embedded into a `memref` struct. This handle can then be `mmap`ed. When the userspace `close`s the handle, or when the process exits, the ref count drops. When nothing references the `handle`, it is dropped and destroys the outer `memref` structure with it.\n\nTherefore, in this test, the clean up would happen on process exit. I assume that we have application-level APIs that indicate when Trusty is done using shared memory for actual TAs.\n\n@ahomescu@google.com, please correct me if I\u0027m wrong.",
+      "parentUuid": "9778aedd_6bc8f98d",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9beead2f_54f69c2b",
