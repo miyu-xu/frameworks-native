@@ -1005,7 +1005,9 @@ status_t BLASTBufferQueue::setFrameTimelineInfo(uint64_t frameNumber,
     ATRACE_FORMAT("%s(%s) frameNumber: %" PRIu64 " vsyncId: %" PRId64, __func__, mName.c_str(),
                   frameNumber, frameTimelineInfo.vsyncId);
     std::lock_guard _lock{mMutex};
-    mPendingFrameTimelines.push({frameNumber, frameTimelineInfo});
+    if (mTransactionReadyCallback == nullptr && mSyncedFrameNumbers.empty()) {
+        mPendingFrameTimelines.push({frameNumber, frameTimelineInfo});
+    }
     return OK;
 }
 
