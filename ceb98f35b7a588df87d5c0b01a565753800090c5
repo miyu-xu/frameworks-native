@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da1ab63e_292cfc81",
+        "filename": "libs/binder/tests/FileUtilsTrusty.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-01T19:30:16Z",
+      "side": 1,
+      "message": "Discussed offline but repeating it here for reference: Trusty unit test clients technically never terminate (unless they crash), they\u0027re actually services that spin waiting for more requests on the \"unit test port\".",
+      "parentUuid": "1ab4e78e_ce6ae181",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "ceb98f35b7a588df87d5c0b01a565753800090c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9beead2f_54f69c2b",
