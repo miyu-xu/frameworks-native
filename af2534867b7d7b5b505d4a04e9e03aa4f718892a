@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "338ffad3_e9d4e3ae",
+        "filename": "cmds/servicemanager/ServiceManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-04-10T20:16:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5a0cbf3d_860a7f7e",
+      "revId": "af2534867b7d7b5b505d4a04e9e03aa4f718892a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f7014a3_86783f6d",
