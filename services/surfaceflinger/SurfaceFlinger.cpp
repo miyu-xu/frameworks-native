@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ *f
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -2833,6 +2833,9 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
         mDrawingState.colorMatrixChanged = false;
     }
 
+    refreshArgs.colorTransformMatrix =
+            mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                 vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
     refreshArgs.devOptForceClientComposition = mDebugDisableHWC;
 
     if (mDebugFlashDelay != 0) {
@@ -7716,8 +7719,11 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                 .layers = std::move(layerFEs),
                 .updatingOutputGeometryThisFrame = true,
                 .updatingGeometryThisFrame = true,
-                .colorTransformMatrix = calculateColorMatrix(colorSaturation),
+                .colorTransformMatrix =
+                        mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                             vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f}),
         };
+        base::StringPrintf("%.2fadb", colorSaturation);
         compositionEngine->present(refreshArgs);
 
         return output->getRenderSurface()->getClientTargetAcquireFence();
