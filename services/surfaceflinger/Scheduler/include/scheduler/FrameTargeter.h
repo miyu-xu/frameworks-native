@@ -52,6 +52,7 @@ public:
     Duration expectedFrameDuration() const { return mExpectedPresentTime - mFrameBeginTime; }
 
     TimePoint expectedPresentTime() const { return mExpectedPresentTime; }
+    TimePoint scheduledPresentTime() const { return mScheduledPresentTime; }
 
     std::optional<TimePoint> debugPresentDelay() const { return mDebugPresentTimeDelay; }
 
@@ -71,6 +72,7 @@ protected:
     ~FrameTarget() = default;
 
     bool wouldPresentEarly(Period vsyncPeriod, Period minFramePeriod) const;
+    void UpdateExpectedPresentTime(TimePoint& expectedPresentTime, Period vsyncPeriod) const;
 
     // Equivalent to `pastVsyncTime` unless running N VSYNCs ahead.
     TimePoint previousFrameVsyncTime(Period minFramePeriod) const {
@@ -85,6 +87,7 @@ protected:
     VsyncId mVsyncId;
     TimePoint mFrameBeginTime;
     TimePoint mExpectedPresentTime;
+    TimePoint mScheduledPresentTime;
     std::optional<TimePoint> mEarliestPresentTime;
     std::optional<TimePoint> mDebugPresentTimeDelay;
 
@@ -166,7 +169,6 @@ private:
     const bool mBackpressureGpuComposition;
     const bool mSupportsExpectedPresentTime;
 
-    TimePoint mScheduledPresentTime;
     CompositionCoverageFlags mCompositionCoverage;
 
     std::atomic_uint mFrameMissedCount = 0;

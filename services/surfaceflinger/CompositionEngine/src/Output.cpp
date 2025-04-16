@@ -896,7 +896,7 @@ void Output::writeCompositionState(const compositionengine::CompositionRefreshAr
                                              return refreshArgs.frameTargets.get(id);
                                          })) {
         editState().earliestPresentTime = frameTargetPtrOpt->get()->earliestPresentTime();
-        editState().expectedPresentTime = frameTargetPtrOpt->get()->expectedPresentTime().ns();
+        editState().expectedPresentTime = frameTargetPtrOpt->get()->scheduledPresentTime().ns();
         const auto debugPresentDelay = frameTargetPtrOpt->get()->debugPresentDelay();
         if (debugPresentDelay) {
             SFTRACE_FORMAT_INSTANT("DEBUG delaying presentation by %.2fms",
