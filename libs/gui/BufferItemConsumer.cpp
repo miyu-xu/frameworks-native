@@ -87,7 +87,7 @@ status_t BufferItemConsumer::acquireBuffer(BufferItem *item,
 
     err = acquireBufferLocked(item, presentWhen);
     if (err != OK) {
-        if (err != NO_BUFFER_AVAILABLE) {
+        if (err != NO_BUFFER_AVAILABLE && err != PRESENT_LATER) {
             BI_LOGE("Error acquiring buffer: %s (%d)", strerror(err), err);
         }
         return err;

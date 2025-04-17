@@ -46,6 +46,7 @@ class BufferItemConsumer: public ConsumerBase
     enum { DEFAULT_MAX_BUFFERS = -1 };
     enum { INVALID_BUFFER_SLOT = BufferQueue::INVALID_BUFFER_SLOT };
     enum { NO_BUFFER_AVAILABLE = BufferQueue::NO_BUFFER_AVAILABLE };
+    enum { PRESENT_LATER = BufferQueue::PRESENT_LATER };
 
     // Create a new buffer item consumer. The consumerUsage parameter determines
     // the consumer usage flags passed to the graphics allocator. The
