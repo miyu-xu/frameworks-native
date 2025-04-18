@@ -31,6 +31,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <cstdlib>
 
 using namespace android;
 
@@ -99,7 +100,23 @@ int main(int argc, char* const argv[])
                 result = 10;
             }
         }
-        else if (strcmp(argv[optind], "list") == 0) {
+        if (strcmp(argv[optind], "getpid") == 0) {
+            optind++;
+            if (optind < argc) {
+                sp<IBinder> service = sm->checkService(String16(argv[optind]));
+                if (service == nullptr) {
+                    aout << "Service " << argv[optind] << ": not found" << endl;
+                }else {
+                    pid_t service_pid;
+                    service->getDebugPid(&service_pid);
+                    aout << service_pid << endl;
+                }
+            } else {
+                aerr << prog_name << ": No service specified for getpid" << endl;
+                wantsUsage = true;
+                result = 10;
+            }
+        } else if (strcmp(argv[optind], "list") == 0) {
             Vector<String16> services = sm->listServices();
             aout << "Found " << services.size() << " services:" << endl;
             for (unsigned i = 0; i < services.size(); i++) {
@@ -109,6 +126,29 @@ int main(int argc, char* const argv[])
                      << "\t" << name
                      << ": [" << (service ? service->getInterfaceDescriptor() : String16()) << "]"
                      << endl;
+            }
+        } else if (strcmp(argv[optind], "getservice") == 0) {
+            optind++;
+            int scan_pid = atoi(argv[optind]);
+            if (optind < argc) {
+                Vector<String16> services = sm->listServices();
+                for (unsigned i = 0; i < services.size(); i++) {
+                    String16 name = services[i];
+                    sp<IBinder> service = sm->checkService(name);
+                    if (service) {
+                        pid_t service_pid;
+                        service->getDebugPid(&service_pid);
+                        if (service_pid == scan_pid) {
+                            aout << name
+                                 << ": [" << service->getInterfaceDescriptor() << "]"
+                                 << endl;
+                        }
+                    }
+                }
+            }else {
+                aerr << prog_name << ": No pid specified for getservice" << endl;
+                wantsUsage = true;
+                result = 10;
             }
         } else if (strcmp(argv[optind], "call") == 0) {
             optind++;
@@ -340,6 +380,8 @@ int main(int argc, char* const argv[])
         aout << "Usage: " << prog_name << " [-h|-?]\n"
                 "       " << prog_name << " list\n"
                 "       " << prog_name << " check SERVICE\n"
+                "       " << prog_name << " getpid SERVICE\n"
+                "       " << prog_name << " getservice PID\n"
                 "       " << prog_name << " call SERVICE CODE [i32 N | i64 N | f N | d N | s16 STR"
                 " | null | fd f | nfd n | afd f ] ...\n"
                 "Options:\n"
