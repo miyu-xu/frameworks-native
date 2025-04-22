@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c50c5ad_2d463e49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1953840
+      },
+      "writtenOn": "2025-04-22T20:58:14Z",
+      "side": 1,
+      "message": "Add `Bug: b/412410961`",
+      "revId": "c9b395eb829d00514495a6bf85758b783e2baeac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
