@@ -278,11 +278,12 @@ public:
     }
 
     void onReleaseBuffer(ReleaseCallbackId callbackId, sp<Fence> releaseFence,
-                         uint32_t currentMaxAcquiredBufferCount) override {
+                         uint32_t currentMaxAcquiredBufferCount, bool removeFromCache) override {
         callRemoteAsync<decltype(&ITransactionCompletedListener::
                                          onReleaseBuffer)>(Tag::ON_RELEASE_BUFFER, callbackId,
                                                            releaseFence,
-                                                           currentMaxAcquiredBufferCount);
+                                                           currentMaxAcquiredBufferCount,
+                                                           removeFromCache);
     }
 
     void onTransactionQueueStalled(const String8& reason) override {

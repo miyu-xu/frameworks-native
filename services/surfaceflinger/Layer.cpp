@@ -19,7 +19,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wconversion"
 
-//#define LOG_NDEBUG 0
+// #define LOG_NDEBUG 0
 #undef LOG_TAG
 #define LOG_TAG "Layer"
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
@@ -208,7 +208,7 @@ Layer::~Layer() {
 sp<IBinder> Layer::getHandle() {
     Mutex::Autolock _l(mLock);
     if (mGetHandleCalled) {
-        ALOGE("Get handle called twice" );
+        ALOGE("Get handle called twice");
         return nullptr;
     }
     mGetHandleCalled = true;
@@ -720,7 +720,8 @@ void Layer::callReleaseBufferCallback(const sp<ITransactionCompletedListener>& l
             mFlinger->getMaxAcquiredBufferCountForCurrentRefreshRate(mOwnerUid);
 
     if (listener) {
-        listener->onReleaseBuffer(callbackId, fence, currentMaxAcquiredBufferCount);
+        listener->onReleaseBuffer(callbackId, fence, currentMaxAcquiredBufferCount,
+                                  false /* removeFromCache */);
     }
 
     if (!mBufferReleaseChannel) {
