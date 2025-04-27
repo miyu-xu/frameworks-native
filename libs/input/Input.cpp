@@ -773,6 +773,28 @@ void MotionEvent::scale(float globalScaleFactor) {
     }
 }
 
+void MotionEvent::setXY(float x, float y, int pointerIndex) {
+    PointerCoords& coords = mSamplePointerCoords[getHistorySize() * getPointerCount() + pointerIndex];
+    vec2 xy(x, y);
+
+    if (mTransform.getType() != ui::Transform::IDENTITY) {
+        ui::Transform transform(mTransform);
+        transform = transform.inverse();
+        xy = transform.transform(x, y);
+    }
+
+    coords.setAxisValue(AMOTION_EVENT_AXIS_X, xy.x);
+    coords.setAxisValue(AMOTION_EVENT_AXIS_Y, xy.y);
+
+    if (getHistorySize() > 0 ) {
+        for (size_t i = 0; i < getHistorySize(); i++) {
+            PointerCoords& hisCoords = mSamplePointerCoords[i * getPointerCount() + pointerIndex];
+            hisCoords.setAxisValue(AMOTION_EVENT_AXIS_X, xy.x);
+            hisCoords.setAxisValue(AMOTION_EVENT_AXIS_Y, xy.x);
+        }
+   }
+}
+
 void MotionEvent::transform(const std::array<float, 9>& matrix) {
     // We want to preserve the raw axes values stored in the PointerCoords, so we just update the
     // transform using the values passed in.

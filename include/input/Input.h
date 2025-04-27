@@ -761,6 +761,8 @@ public:
 
     float getAxisValue(int32_t axis, size_t pointerIndex) const;
 
+    void setXY(float x, float y, int pointerIndex);
+
     /**
      * Get the X coordinate of the latest sample in this MotionEvent for pointer 'pointerIndex'.
      * Identical to calling getHistoricalX(pointerIndex, getHistorySize()).
