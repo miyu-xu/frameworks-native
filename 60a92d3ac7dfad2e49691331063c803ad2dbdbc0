@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd732a1d_df0929c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1388190
+      },
+      "writtenOn": "2025-04-28T23:49:34Z",
+      "side": 1,
+      "message": "This seems like a very interesting change. Is there some design document to explain the problem and the suggested solution? If you can file an issuetracker for that it would be great. Thanks!",
+      "revId": "60a92d3ac7dfad2e49691331063c803ad2dbdbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
