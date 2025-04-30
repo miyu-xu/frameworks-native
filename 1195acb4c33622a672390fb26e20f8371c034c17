@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba22e034_38bbbf1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2025-04-30T16:45:08Z",
+      "side": 1,
+      "message": "This replaces the previous libbinder version that parses the netlink messages manually (https://android-review.git.corp.google.com/q/topic:%22BINDER_GENL_AOSP%22).",
+      "revId": "1195acb4c33622a672390fb26e20f8371c034c17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
