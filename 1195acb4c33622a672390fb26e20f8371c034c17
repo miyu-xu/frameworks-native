@@ -16,6 +16,47 @@
       "message": "This replaces the previous libbinder version that parses the netlink messages manually (https://android-review.git.corp.google.com/q/topic:%22BINDER_GENL_AOSP%22).",
       "revId": "1195acb4c33622a672390fb26e20f8371c034c17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "606500d4_437a58f9",
+        "filename": "libs/bindernetlink/include/bindernetlink/BinderNetlink.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2025-04-30T16:56:59Z",
+      "side": 1,
+      "message": "mPid is for the handcrafted version (https://r.android.com/3305462) and no longer required here. We can just remove it.",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "39e06cf2_f33c8909",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/bindernetlink/include/bindernetlink/BinderNetlink.h",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1195acb4c33622a672390fb26e20f8371c034c17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
