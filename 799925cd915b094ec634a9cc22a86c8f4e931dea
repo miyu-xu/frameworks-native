@@ -33,6 +33,157 @@
       "message": "How could I overcome the latest error? \nAs I have uploaded the patches according to google guidance and the approval is by google team.",
       "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c271e9d_f81c3b82",
+        "filename": "libs/nativewindow/include/android/hardware_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-05-05T18:44:38Z",
+      "side": 1,
+      "message": "hey so this format is not currently in vulkan.\n\nI see VK_FORMAT_R12X4_UNORM_PACK16 instead in https://registry.khronos.org/vulkan/specs/latest/man/html/VkFormat.html.\n\nIs this format instead a UNORM format? Or is UINT what is intended (and, are there plans to make UINT an official format)?",
+      "range": {
+        "startLine": 215,
+        "startChar": 17,
+        "endLine": 215,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fb345411_c084ae64",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R12X4_UNORM_PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 219,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R12_UNORM       \t    \u003d 0x3d,\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 222,
+                "startChar": 0,
+                "endLine": 223,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R14X2_UNORM_PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 225,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R14_UNORM               \u003d 0x3e,\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 229,
+                "startChar": 0,
+                "endLine": 230,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R12X4G12X4_UNORM_2PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R12G12_UNORM          \u003d 0x3f,\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R14X2G14X2_UNORM_2PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 239,
+                "startChar": 0,
+                "endLine": 240,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R14G14_UNORM          \u003d 0x40,\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 243,
+                "startChar": 0,
+                "endLine": 244,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R12X4G12X4B12X4A12X4_UNORM_4PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 246,
+                "startChar": 0,
+                "endLine": 247,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R12G12B12A12_UNORM\u003d 0x41,\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 250,
+                "startChar": 0,
+                "endLine": 251,
+                "endChar": 0
+              },
+              "replacement": "     *   Vulkan: VK_FORMAT_R14X2G14X2B14X2A14X2_UNORM_4PACK16\n"
+            },
+            {
+              "path": "libs/nativewindow/include/android/hardware_buffer.h",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": "    AHARDWAREBUFFER_FORMAT_R14G14B14A14_UNORM\u003d 0x42,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
