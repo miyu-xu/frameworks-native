@@ -184,6 +184,30 @@
       ],
       "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4eabf60_1959c877",
+        "filename": "libs/nativewindow/include/android/hardware_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1558734
+      },
+      "writtenOn": "2025-05-06T12:58:55Z",
+      "side": 1,
+      "message": "Hi, the Vulkan equivalents are working in progress, but not merged to the spec yet.",
+      "parentUuid": "1c271e9d_f81c3b82",
+      "range": {
+        "startLine": 215,
+        "startChar": 17,
+        "endLine": 215,
+        "endChar": 37
+      },
+      "revId": "799925cd915b094ec634a9cc22a86c8f4e931dea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
