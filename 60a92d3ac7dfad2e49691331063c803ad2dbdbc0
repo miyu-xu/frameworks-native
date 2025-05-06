@@ -34,6 +34,24 @@
       "parentUuid": "dd732a1d_df0929c4",
       "revId": "60a92d3ac7dfad2e49691331063c803ad2dbdbc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b47ba83_e42853b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1165870
+      },
+      "writtenOn": "2025-05-06T02:01:41Z",
+      "side": 1,
+      "message": "Could you help to check that ticket and review this patch again? Thanks.",
+      "parentUuid": "3b12611f_4a5284ea",
+      "revId": "60a92d3ac7dfad2e49691331063c803ad2dbdbc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
