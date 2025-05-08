@@ -117,7 +117,7 @@ void VsyncSchedule::dump(std::string& out) const {
 VsyncSchedule::TrackerPtr VsyncSchedule::createTracker(ftl::NonNull<DisplayModePtr> modePtr) {
     // TODO(b/144707443): Tune constants.
     constexpr size_t kHistorySize = 20;
-    constexpr size_t kMinSamplesForPrediction = 6;
+    constexpr size_t kMinSamplesForPrediction = 200;
     constexpr uint32_t kDiscardOutlierPercent = 20;
 
     return std::make_unique<VSyncPredictor>(std::make_unique<SystemClock>(), modePtr, kHistorySize,
