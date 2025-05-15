@@ -74,6 +74,7 @@ enum class LayerStateField : uint32_t {
     BlurRegions           = 1u << 18,
     HasProtectedContent   = 1u << 19,
     CachingHint           = 1u << 20,
+    BlursDisabled         = 1u << 21,
 };
 // clang-format on
 
@@ -234,7 +235,8 @@ public:
     Rect getDisplayFrame() const { return mDisplayFrame.get(); }
     const Region& getVisibleRegion() const { return mVisibleRegion.get(); }
     bool hasBlurBehind() const {
-        return mBackgroundBlurRadius.get() > 0 || !mBlurRegions.get().empty();
+        return (mBackgroundBlurRadius.get() > 0 || !mBlurRegions.get().empty()) &&
+                !mIsBlursDisabled.get();
     }
     int32_t getBackgroundBlurRadius() const { return mBackgroundBlurRadius.get(); }
     aidl::android::hardware::graphics::composer3::Composition getCompositionType() const {
@@ -502,7 +504,10 @@ private:
                              return std::vector<std::string>{toString(cachingHint)};
                          }};
 
-    static const constexpr size_t kNumNonUniqueFields = 19;
+    OutputLayerState<bool, LayerStateField::BlursDisabled> mIsBlursDisabled{
+            [](auto layer) { return layer->getState().ignoreBlur; }};
+
+    static const constexpr size_t kNumNonUniqueFields = 20;
 
     std::array<StateInterface*, kNumNonUniqueFields> getNonUniqueFields() {
         std::array<const StateInterface*, kNumNonUniqueFields> constFields =
@@ -520,7 +525,7 @@ private:
                 &mAlpha,        &mLayerMetadata,  &mVisibleRegion,        &mOutputDataspace,
                 &mPixelFormat,  &mColorTransform, &mCompositionType,      &mSidebandStream,
                 &mBuffer,       &mSolidColor,     &mBackgroundBlurRadius, &mBlurRegions,
-                &mFrameNumber,  &mIsProtected,    &mCachingHint};
+                &mFrameNumber,  &mIsProtected,    &mCachingHint,          &mIsBlursDisabled};
     }
 };
 
