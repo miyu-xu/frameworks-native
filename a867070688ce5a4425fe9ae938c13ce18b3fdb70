@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adb0dc1_90a4241e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891965
+      },
+      "writtenOn": "2025-05-17T16:15:12Z",
+      "side": 1,
+      "message": "Note to reviewers: I\u0027m not a Google employee, so two CR+2 votes are required, and someone will need to submit this on my behalf.\n\nThanks!",
+      "revId": "a867070688ce5a4425fe9ae938c13ce18b3fdb70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
