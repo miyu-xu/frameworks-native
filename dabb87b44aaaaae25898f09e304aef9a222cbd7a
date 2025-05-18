@@ -84,6 +84,23 @@
       "message": "sudo apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev libc6-dev-i386 x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig",
       "revId": "dabb87b44aaaaae25898f09e304aef9a222cbd7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb749488_28c39b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400223
+      },
+      "writtenOn": "2025-05-18T12:56:08Z",
+      "side": 1,
+      "message": "$ cd /usr/local/aosp/mirror\u003c/code\u003e\n$ repo sync\n$ cd /usr/local/aosp/android-latest-release\n$ repo sync",
+      "revId": "dabb87b44aaaaae25898f09e304aef9a222cbd7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
