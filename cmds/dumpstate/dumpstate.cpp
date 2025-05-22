@@ -2579,7 +2579,8 @@ static void DoDumpstateBoardAidl(
     descriptor_to_kill = dumpstate_hal_aidl::IDumpstateDevice::descriptor;
     dumpstate_board_task = DumpstateBoardTask([dumpstate_hal, &dumpstate_fds, dumpstate_hal_mode,
                                                timeout_sec]() -> bool {
-        auto status = dumpstate_hal->dumpstateBoard(dumpstate_fds, dumpstate_hal_mode, timeout_sec);
+        auto status = dumpstate_hal->dumpstateBoard(dumpstate_fds, dumpstate_hal_mode,
+                                                    SEC_TO_MSEC(timeout_sec));                                                    ;
 
         if (!status.isOk()) {
             MYLOGE("dumpstateBoard failed: %s\n", status.getDescription().c_str());
