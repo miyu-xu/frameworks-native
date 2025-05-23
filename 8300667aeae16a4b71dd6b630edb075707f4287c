@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7878872_0962eb06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967850
+      },
+      "writtenOn": "2025-05-23T17:04:08Z",
+      "side": 1,
+      "message": "Wale, long time no see :) Wanted to check if there is something we can do on our side to move forward and merge this diff?",
+      "revId": "8300667aeae16a4b71dd6b630edb075707f4287c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
