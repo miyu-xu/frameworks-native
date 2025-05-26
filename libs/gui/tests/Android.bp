@@ -91,6 +91,7 @@ cc_test {
         "TextureRenderer.cpp",
         "VsyncEventData_test.cpp",
         "WindowInfo_test.cpp",
+        "MultiViewBuffer_test.cpp",
     ],
 
     shared_libs: [
