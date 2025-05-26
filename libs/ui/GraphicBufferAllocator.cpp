@@ -35,6 +35,7 @@
 #include <ui/Gralloc3.h>
 #include <ui/Gralloc4.h>
 #include <ui/Gralloc5.h>
+#include <ui/Gralloc6.h>
 #include <ui/GraphicBufferMapper.h>
 
 namespace android {
