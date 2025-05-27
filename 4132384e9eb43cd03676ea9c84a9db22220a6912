@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3311cd49_eb248045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-05-27T17:43:07Z",
+      "side": 1,
+      "message": "Hey - I\u0027m guessing that implementations treat this as \u0027seconds\u0027 since we\u0027ve passed it at this value for so long? Since we need to make this interface backwards compatible, we may want to update the interface, rather than cause existing codebases to have 1000x as much time as they currently use.",
+      "revId": "4132384e9eb43cd03676ea9c84a9db22220a6912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
