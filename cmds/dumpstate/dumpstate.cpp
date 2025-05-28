@@ -799,7 +799,7 @@ uint64_t Dumpstate::ConsentCallback::getElapsedTimeMs() const {
 
 void Dumpstate::PrintHeader() const {
     std::string build, fingerprint, radio, bootloader, network, sdkversion;
-    char date[80];
+    char date[80], *save;
 
     build = android::base::GetProperty("ro.build.display.id", "(unknown)");
     fingerprint = android::base::GetProperty("ro.build.fingerprint", "(unknown)");
@@ -831,7 +831,7 @@ void Dumpstate::PrintHeader() const {
 
     printf("Kernel: ");
     DumpFileToFd(STDOUT_FILENO, "", "/proc/version");
-    printf("Command line: %s\n", strtok(cmdline_buf, "\n"));
+    printf("Command line: %s\n", strtok_r(cmdline_buf, "\n", &save));
     printf("Bootconfig: ");
     DumpFileToFd(STDOUT_FILENO, "", "/proc/bootconfig");
     printf("Uptime: ");

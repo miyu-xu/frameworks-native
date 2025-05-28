@@ -672,8 +672,8 @@ static bool verifyKernelTraceFuncs(const char* funcs)
     // Make sure that every function listed in funcs is in the list we just
     // read from the kernel, except for wildcard inputs.
     bool ok = true;
-    char* myFuncs = strdup(funcs);
-    char* func = strtok(myFuncs, ",");
+    char* myFuncs = strdup(funcs), *save;
+    char* func = strtok_r(myFuncs, ",", &save);
     while (func) {
         if (!strchr(func, '*')) {
             String8 fancyFunc = String8::format("\n%s\n", func);
@@ -684,7 +684,7 @@ static bool verifyKernelTraceFuncs(const char* funcs)
                 ok = false;
             }
         }
-        func = strtok(nullptr, ",");
+        func = strtok_r(nullptr, ",", &save);
     }
     free(myFuncs);
     return ok;
