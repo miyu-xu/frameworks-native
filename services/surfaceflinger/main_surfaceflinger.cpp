@@ -85,10 +85,6 @@ int main(int, char**) {
 
     startGraphicsAllocatorService();
 
-    // When SF is launched in its own process, limit the number of
-    // binder threads to 4.
-    ProcessState::self()->setThreadPoolMaxThreadCount(4);
-
     // Set uclamp.min setting on all threads, maybe an overkill but we want
     // to cover important threads like RenderEngine.
     if (SurfaceFlinger::setSchedAttr(true) != NO_ERROR) {
@@ -117,6 +113,9 @@ int main(int, char**) {
 
     // start the thread pool
     sp<ProcessState> ps(ProcessState::self());
+    // When SF is launched in its own process, limit the number of
+    // binder threads to 4.
+    ps->setThreadPoolMaxThreadCount(4)
     ps->startThreadPool();
 
     // Reset current thread's policy and priority
