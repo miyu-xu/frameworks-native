@@ -34,6 +34,24 @@
       "parentUuid": "3311cd49_eb248045",
       "revId": "4132384e9eb43cd03676ea9c84a9db22220a6912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0785d4_caeb4261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-06-04T22:40:01Z",
+      "side": 1,
+      "message": "I can\u0027t approve a backwards incompatible change w/o hard data, as we need to support existing implementations, and unfortunately  I haven\u0027t had a chance to look in detail. Please open a new ticket if you want to discuss in more detail, though I think you should be able to workaround in your implementation for now.",
+      "parentUuid": "4cb619c7_4a67a102",
+      "revId": "4132384e9eb43cd03676ea9c84a9db22220a6912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
