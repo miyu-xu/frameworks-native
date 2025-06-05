@@ -1022,6 +1022,10 @@ status_t IPCThreadState::removeFrozenStateChangeCallback(int32_t handle, BpBinde
     mOut.writeInt32((int32_t)handle);
     mOut.writePointer((uintptr_t)proxy);
     flushCommands();
+    if (mOut.dataSize() > 0) {
+        mOut.setDataSize(0);
+	return BAD_VALUE;
+    }
     return NO_ERROR;
 }
 
