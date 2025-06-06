@@ -218,6 +218,7 @@ private:
     ui::Size mSize GUARDED_BY(mMutex);
     ui::Size mRequestedSize GUARDED_BY(mMutex);
     int32_t mFormat GUARDED_BY(mMutex);
+    bool mSetBufferBarrier GUARDED_BY(mMutex) = false;
 
     struct BufferInfo {
         bool hasBuffer = false;
