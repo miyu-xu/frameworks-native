@@ -38,6 +38,7 @@
 #include <private/android_filesystem_config.h>
 #include <unistd.h>
 #include <utils/Trace.h>
+#include <cutils/properties.h>
 
 #include <cerrno>
 #include <cinttypes>
@@ -1687,7 +1688,9 @@ std::shared_ptr<KeyEntry> InputDispatcher::synthesizeKeyRepeatLocked(nsecs_t cur
     }
 
     mKeyRepeatState.lastKeyEntry = newEntry;
-    mKeyRepeatState.nextRepeatTime = currentTime + mConfig.keyRepeatDelay;
+
+    nsecs_t delay = milliseconds_to_nanoseconds(property_get_int64("sys.dynamic_key_repeat_delay_ms", 0));
+    mKeyRepeatState.nextRepeatTime = currentTime + (delay > 0 ? delay : mConfig.keyRepeatDelay);
     return newEntry;
 }
 
