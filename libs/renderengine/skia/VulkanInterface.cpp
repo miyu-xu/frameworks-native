@@ -13,29 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #undef LOG_TAG
 #define LOG_TAG "RenderEngine"
-
 #include "VulkanInterface.h"
-
 #include <include/gpu/GpuTypes.h>
 #include <include/gpu/vk/VulkanBackendContext.h>
-
 #include <log/log_main.h>
 #include <utils/Timers.h>
-
 #include <cinttypes>
+#include <cstring>
 #include <sstream>
-
 namespace android {
 namespace renderengine {
 namespace skia {
-
 VulkanBackendContext VulkanInterface::getGaneshBackendContext() {
     return this->getGraphiteBackendContext();
 };
-
 VulkanBackendContext VulkanInterface::getGraphiteBackendContext() {
     VulkanBackendContext backendContext;
     backendContext.fInstance = mInstance;
@@ -45,49 +38,42 @@ VulkanBackendContext VulkanInterface::getGraphiteBackendContext() {
     backendContext.fGraphicsQueueIndex = mQueueIndex;
     backendContext.fMaxAPIVersion = mApiVersion;
     backendContext.fVkExtensions = &mVulkanExtensions;
-    backendContext.fDeviceFeatures2 = mPhysicalDeviceFeatures2;
+    backendContext.fDeviceFeatures2 = &mPhysicalDeviceFeatures2;
     backendContext.fGetProc = mGrGetProc;
     backendContext.fProtectedContext = mIsProtected ? Protected::kYes : Protected::kNo;
     backendContext.fDeviceLostContext = this; // VulkanInterface is long-lived
     backendContext.fDeviceLostProc = onVkDeviceFault;
     return backendContext;
 };
-
 VkSemaphore VulkanInterface::createExportableSemaphore() {
     VkExportSemaphoreCreateInfo exportInfo;
     exportInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO;
     exportInfo.pNext = nullptr;
     exportInfo.handleTypes = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT;
-
     VkSemaphoreCreateInfo semaphoreInfo;
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
     semaphoreInfo.pNext = &exportInfo;
     semaphoreInfo.flags = 0;
-
     VkSemaphore semaphore;
     VkResult err = mFuncs.vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &semaphore);
     if (VK_SUCCESS != err) {
         ALOGE("%s: failed to create semaphore. err %d\n", __func__, err);
         return VK_NULL_HANDLE;
     }
-
     return semaphore;
 }
-
 // syncFd cannot be <= 0
 VkSemaphore VulkanInterface::importSemaphoreFromSyncFd(int syncFd) {
     VkSemaphoreCreateInfo semaphoreInfo;
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
     semaphoreInfo.pNext = nullptr;
     semaphoreInfo.flags = 0;
-
     VkSemaphore semaphore;
     VkResult err = mFuncs.vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &semaphore);
     if (VK_SUCCESS != err) {
         ALOGE("%s: failed to create import semaphore", __func__);
         return VK_NULL_HANDLE;
     }
-
     VkImportSemaphoreFdInfoKHR importInfo;
     importInfo.sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
     importInfo.pNext = nullptr;
@@ -95,20 +81,16 @@ VkSemaphore VulkanInterface::importSemaphoreFromSyncFd(int syncFd) {
     importInfo.flags = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT;
     importInfo.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT;
     importInfo.fd = syncFd;
-
     err = mFuncs.vkImportSemaphoreFdKHR(mDevice, &importInfo);
     if (VK_SUCCESS != err) {
         mFuncs.vkDestroySemaphore(mDevice, semaphore, nullptr);
         ALOGE("%s: failed to import semaphore", __func__);
         return VK_NULL_HANDLE;
     }
-
     return semaphore;
 }
-
 int VulkanInterface::exportSemaphoreSyncFd(VkSemaphore semaphore) {
     int res;
-
     VkSemaphoreGetFdInfoKHR getFdInfo;
     getFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
     getFdInfo.pNext = nullptr;
@@ -121,11 +103,9 @@ int VulkanInterface::exportSemaphoreSyncFd(VkSemaphore semaphore) {
     }
     return res;
 }
-
 void VulkanInterface::destroySemaphore(VkSemaphore semaphore) {
     mFuncs.vkDestroySemaphore(mDevice, semaphore, nullptr);
 }
-
 void VulkanInterface::onVkDeviceFault(void* callbackContext, const std::string& description,
                                       const std::vector<VkDeviceFaultAddressInfoEXT>& addressInfos,
                                       const std::vector<VkDeviceFaultVendorInfoEXT>& vendorInfos,
@@ -139,7 +119,6 @@ void VulkanInterface::onVkDeviceFault(void* callbackContext, const std::string& 
     ALOGE("VK_ERROR_DEVICE_LOST (%s context): %s", protectedStr.c_str(), description.c_str());
     std::stringstream crashMsg;
     crashMsg << "VK_ERROR_DEVICE_LOST (" << protectedStr;
-
     if (!addressInfos.empty()) {
         ALOGE("%zu VkDeviceFaultAddressInfoEXT:", addressInfos.size());
         crashMsg << ", " << addressInfos.size() << " address info (";
@@ -153,7 +132,6 @@ void VulkanInterface::onVkDeviceFault(void* callbackContext, const std::string& 
         crashMsg.seekp(-2, crashMsg.cur); // Move back to overwrite trailing ", "
         crashMsg << ")";
     }
-
     if (!vendorInfos.empty()) {
         ALOGE("%zu VkDeviceFaultVendorInfoEXT:", vendorInfos.size());
         crashMsg << ", " << vendorInfos.size() << " vendor info (";
@@ -171,7 +149,6 @@ void VulkanInterface::onVkDeviceFault(void* callbackContext, const std::string& 
         crashMsg.seekp(-2, crashMsg.cur); // Move back to overwrite trailing ", "
         crashMsg << ")";
     }
-
     if (!vendorBinaryData.empty()) {
         // TODO: b/322830575 - Log in base64, or dump directly to a file that gets put in bugreports
         ALOGE("%zu bytes of vendor-specific binary data (please notify Android's Core Graphics"
@@ -179,11 +156,9 @@ void VulkanInterface::onVkDeviceFault(void* callbackContext, const std::string& 
               vendorBinaryData.size());
         crashMsg << ", " << vendorBinaryData.size() << " bytes binary";
     }
-
     crashMsg << "): " << description;
     LOG_ALWAYS_FATAL("%s", crashMsg.str().c_str());
 };
-
 static skgpu::VulkanGetProc sGetProc = [](const char* proc_name,
                                           VkInstance instance,
                                           VkDevice device) {
@@ -192,24 +167,20 @@ static skgpu::VulkanGetProc sGetProc = [](const char* proc_name,
     }
     return vkGetInstanceProcAddr(instance, proc_name);
 };
-
 #define BAIL(fmt, ...)                                          \
     {                                                           \
         ALOGE("%s: " fmt ", bailing", __func__, ##__VA_ARGS__); \
         return;                                                 \
     }
-
 #define CHECK_NONNULL(expr)       \
     if ((expr) == nullptr) {      \
         BAIL("[%s] null", #expr); \
     }
-
 #define VK_CHECK(expr)                              \
     if ((expr) != VK_SUCCESS) {                     \
         BAIL("[%s] failed. err = %d", #expr, expr); \
         return;                                     \
     }
-
 #define VK_GET_PROC(F)                                                           \
     PFN_vk##F vk##F = (PFN_vk##F)vkGetInstanceProcAddr(VK_NULL_HANDLE, "vk" #F); \
     CHECK_NONNULL(vk##F)
@@ -219,32 +190,25 @@ static skgpu::VulkanGetProc sGetProc = [](const char* proc_name,
 #define VK_GET_DEV_PROC(device, F)                                     \
     PFN_vk##F vk##F = (PFN_vk##F)vkGetDeviceProcAddr(device, "vk" #F); \
     CHECK_NONNULL(vk##F)
-
 void VulkanInterface::init(bool protectedContent) {
     if (isInitialized()) {
         ALOGW("Called init on already initialized VulkanInterface");
         return;
     }
-
     const nsecs_t timeBefore = systemTime();
-
     VK_GET_PROC(EnumerateInstanceVersion);
     uint32_t instanceVersion;
     VK_CHECK(vkEnumerateInstanceVersion(&instanceVersion));
-
     if (instanceVersion < VK_MAKE_VERSION(1, 1, 0)) {
         BAIL("Vulkan instance API version %" PRIu32 ".%" PRIu32 ".%" PRIu32 " < 1.1.0",
              VK_VERSION_MAJOR(instanceVersion), VK_VERSION_MINOR(instanceVersion),
              VK_VERSION_PATCH(instanceVersion));
     }
-
     const VkApplicationInfo appInfo = {
             VK_STRUCTURE_TYPE_APPLICATION_INFO, nullptr, "surfaceflinger", 0, "android platform", 0,
-            VK_MAKE_VERSION(1, 1, 0),
+            VK_API_VERSION_1_1,
     };
-
     VK_GET_PROC(EnumerateInstanceExtensionProperties);
-
     uint32_t extensionCount = 0;
     VK_CHECK(vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr));
     std::vector<VkExtensionProperties> instanceExtensions(extensionCount);
@@ -252,12 +216,16 @@ void VulkanInterface::init(bool protectedContent) {
                                                     instanceExtensions.data()));
     std::vector<const char*> enabledInstanceExtensionNames;
     enabledInstanceExtensionNames.reserve(instanceExtensions.size());
-    mInstanceExtensionNames.reserve(instanceExtensions.size());
     for (const auto& instExt : instanceExtensions) {
         enabledInstanceExtensionNames.push_back(instExt.extensionName);
-        mInstanceExtensionNames.push_back(instExt.extensionName);
     }
-
+    // Let Skia enable instance extensions.
+    mVulkanFeatures.init(VK_API_VERSION_1_1);
+    mVulkanFeatures.addToInstanceExtensions(instanceExtensions.data(), instanceExtensions.size(), enabledInstanceExtensionNames);
+    mInstanceExtensionNames.reserve(enabledInstanceExtensionNames.size());
+    for (const char* instExt : enabledInstanceExtensionNames) {
+        mInstanceExtensionNames.push_back(instExt);
+    }
     const VkInstanceCreateInfo instanceCreateInfo = {
             VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
             nullptr,
@@ -268,11 +236,9 @@ void VulkanInterface::init(bool protectedContent) {
             (uint32_t)enabledInstanceExtensionNames.size(),
             enabledInstanceExtensionNames.data(),
     };
-
     VK_GET_PROC(CreateInstance);
     VkInstance instance;
     VK_CHECK(vkCreateInstance(&instanceCreateInfo, nullptr, &instance));
-
     VK_GET_INST_PROC(instance, DestroyInstance);
     mFuncs.vkDestroyInstance = vkDestroyInstance;
     VK_GET_INST_PROC(instance, EnumeratePhysicalDevices);
@@ -282,13 +248,11 @@ void VulkanInterface::init(bool protectedContent) {
     VK_GET_INST_PROC(instance, GetPhysicalDeviceQueueFamilyProperties2);
     VK_GET_INST_PROC(instance, GetPhysicalDeviceFeatures2);
     VK_GET_INST_PROC(instance, CreateDevice);
-
     uint32_t physdevCount;
     VK_CHECK(vkEnumeratePhysicalDevices(instance, &physdevCount, nullptr));
     if (physdevCount == 0) {
         BAIL("Could not find any physical devices");
     }
-
     physdevCount = 1;
     VkPhysicalDevice physicalDevice;
     VkResult enumeratePhysDevsErr =
@@ -297,7 +261,6 @@ void VulkanInterface::init(bool protectedContent) {
         BAIL("vkEnumeratePhysicalDevices failed with non-VK_INCOMPLETE error: %d",
              enumeratePhysDevsErr);
     }
-
     VkPhysicalDeviceProperties2 physDevProps = {
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
             0,
@@ -308,11 +271,9 @@ void VulkanInterface::init(bool protectedContent) {
             0,
             {},
     };
-
     if (protectedContent) {
         physDevProps.pNext = &protMemProps;
     }
-
     vkGetPhysicalDeviceProperties2(physicalDevice, &physDevProps);
     const uint32_t physicalDeviceApiVersion = physDevProps.properties.apiVersion;
     if (physicalDeviceApiVersion < VK_MAKE_VERSION(1, 1, 0)) {
@@ -320,7 +281,6 @@ void VulkanInterface::init(bool protectedContent) {
              VK_VERSION_MAJOR(physicalDeviceApiVersion), VK_VERSION_MINOR(physicalDeviceApiVersion),
              VK_VERSION_PATCH(physicalDeviceApiVersion));
     }
-
     // Check for syncfd support. Bail if we cannot both import and export them.
     VkPhysicalDeviceExternalSemaphoreInfo semInfo = {
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO,
@@ -331,13 +291,11 @@ void VulkanInterface::init(bool protectedContent) {
             VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES, nullptr, 0, 0, 0,
     };
     vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, &semInfo, &semProps);
-
     bool sufficientSemaphoreSyncFdSupport = (semProps.exportFromImportedHandleTypes &
                                              VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT) &&
             (semProps.compatibleHandleTypes & VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT) &&
             (semProps.externalSemaphoreFeatures & VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT) &&
             (semProps.externalSemaphoreFeatures & VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT);
-
     if (!sufficientSemaphoreSyncFdSupport) {
         BAIL("Vulkan device does not support sufficient external semaphore sync fd features. "
              "exportFromImportedHandleTypes 0x%x (needed 0x%x) "
@@ -359,13 +317,11 @@ void VulkanInterface::init(bool protectedContent) {
               VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT |
                       VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT);
     }
-
     uint32_t queueCount;
     vkGetPhysicalDeviceQueueFamilyProperties2(physicalDevice, &queueCount, nullptr);
     if (queueCount == 0) {
         BAIL("Could not find queues for physical device");
     }
-
     std::vector<VkQueueFamilyProperties2> queueProps(queueCount);
     std::vector<VkQueueFamilyGlobalPriorityPropertiesEXT> queuePriorityProps(queueCount);
     VkQueueGlobalPriorityKHR queuePriority = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR;
@@ -378,7 +334,6 @@ void VulkanInterface::init(bool protectedContent) {
         queueProps[i].pNext = &queuePriorityProps[i];
     }
     vkGetPhysicalDeviceQueueFamilyProperties2(physicalDevice, &queueCount, queueProps.data());
-
     int graphicsQueueIndex = -1;
     for (uint32_t i = 0; i < queueCount; ++i) {
         // Look at potential answers to the VK_EXT_global_priority query.  If answers were
@@ -396,88 +351,72 @@ void VulkanInterface::init(bool protectedContent) {
             break;
         }
     }
-
     if (graphicsQueueIndex == -1) {
         BAIL("Could not find a graphics queue family");
     }
-
     uint32_t deviceExtensionCount;
     VK_CHECK(vkEnumerateDeviceExtensionProperties(physicalDevice, nullptr, &deviceExtensionCount,
                                                   nullptr));
     std::vector<VkExtensionProperties> deviceExtensions(deviceExtensionCount);
     VK_CHECK(vkEnumerateDeviceExtensionProperties(physicalDevice, nullptr, &deviceExtensionCount,
                                                   deviceExtensions.data()));
-
     std::vector<const char*> enabledDeviceExtensionNames;
     enabledDeviceExtensionNames.reserve(deviceExtensions.size());
-    mDeviceExtensionNames.reserve(deviceExtensions.size());
-    for (const auto& devExt : deviceExtensions) {
-        enabledDeviceExtensionNames.push_back(devExt.extensionName);
-        mDeviceExtensionNames.push_back(devExt.extensionName);
+    mPhysicalDeviceFeatures2 = {};
+    mPhysicalDeviceFeatures2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+    void** tailPnext = &mPhysicalDeviceFeatures2.pNext;
+    if (protectedContent) {
+        mProtectedMemoryFeatures = {};
+        mProtectedMemoryFeatures.sType =
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
+        *tailPnext = &mProtectedMemoryFeatures;
+        tailPnext = &mProtectedMemoryFeatures.pNext;
     }
-
+    for (const VkExtensionProperties& ext : deviceExtensions) {
+        if (strcmp(ext.extensionName, VK_EXT_DEVICE_FAULT_EXTENSION_NAME) == 0) {
+            mDeviceFaultFeatures = {}
+            mDeviceFaultFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT;
+            *tailPnext = &mDeviceFaultFeatures;
+            tailPnext = &mDeviceFaultFeatures.pNext;
+            enabledDeviceExtensionNames.push_back(VK_EXT_DEVICE_FAULT_EXTENSION_NAME);
+            break;
+        }
+    }
+    // Let Skia add features to be queried.
+    mVulkanFeatures.addFeaturesToQuery(deviceExtensions.data(), deviceExtensions.size(), mPhysicalDeviceFeatures2);
+    vkGetPhysicalDeviceFeatures2(physicalDevice, &mPhysicalDeviceFeatures2);
+    // Looks like this would slow things down and we can't depend on it on all platforms
+    // Robust buffer access can reduce performance on some platforms. It is not needed by
+    // RenderEngine.
+    mPhysicalDeviceFeatures2.features.robustBufferAccess = VK_FALSE;
+    // Let Skia enable extensions and features.
+    mVulkanFeatures.addFeaturesToEnable(enabledDeviceExtensionNames, mPhysicalDeviceFeatures2);
+    mDeviceExtensionNames.reserve(enabledDeviceExtensionNames.size());
+    for (const char* devExt : enabledDeviceExtensionNames) {
+        mDeviceExtensionNames.push_back(devExt);
+    }
     mVulkanExtensions.init(sGetProc, instance, physicalDevice, enabledInstanceExtensionNames.size(),
                            enabledInstanceExtensionNames.data(), enabledDeviceExtensionNames.size(),
                            enabledDeviceExtensionNames.data());
-
     if (!mVulkanExtensions.hasExtension(VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME, 1)) {
         BAIL("Vulkan driver doesn't support external semaphore fd");
     }
-
-    mPhysicalDeviceFeatures2 = new VkPhysicalDeviceFeatures2;
-    mPhysicalDeviceFeatures2->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
-    mPhysicalDeviceFeatures2->pNext = nullptr;
-
-    mSamplerYcbcrConversionFeatures = new VkPhysicalDeviceSamplerYcbcrConversionFeatures;
-    mSamplerYcbcrConversionFeatures->sType =
-            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES;
-    mSamplerYcbcrConversionFeatures->pNext = nullptr;
-
-    mPhysicalDeviceFeatures2->pNext = mSamplerYcbcrConversionFeatures;
-    void** tailPnext = &mSamplerYcbcrConversionFeatures->pNext;
-
-    if (protectedContent) {
-        mProtectedMemoryFeatures = new VkPhysicalDeviceProtectedMemoryFeatures;
-        mProtectedMemoryFeatures->sType =
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
-        mProtectedMemoryFeatures->pNext = nullptr;
-        *tailPnext = mProtectedMemoryFeatures;
-        tailPnext = &mProtectedMemoryFeatures->pNext;
-    }
-
-    if (mVulkanExtensions.hasExtension(VK_EXT_DEVICE_FAULT_EXTENSION_NAME, 1)) {
-        mDeviceFaultFeatures = new VkPhysicalDeviceFaultFeaturesEXT;
-        mDeviceFaultFeatures->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT;
-        mDeviceFaultFeatures->pNext = nullptr;
-        *tailPnext = mDeviceFaultFeatures;
-        tailPnext = &mDeviceFaultFeatures->pNext;
-    }
-
-    vkGetPhysicalDeviceFeatures2(physicalDevice, mPhysicalDeviceFeatures2);
-    // Looks like this would slow things down and we can't depend on it on all platforms
-    mPhysicalDeviceFeatures2->features.robustBufferAccess = VK_FALSE;
-
     if (protectedContent && !mProtectedMemoryFeatures->protectedMemory) {
         BAIL("Protected memory not supported");
     }
-
     float queuePriorities[1] = {0.0f};
     void* queueNextPtr = nullptr;
-
     VkDeviceQueueGlobalPriorityCreateInfoEXT queuePriorityCreateInfo = {
             VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
             nullptr,
             // If queue priority is supported, RE should always have realtime priority.
             queuePriority,
     };
-
     if (mVulkanExtensions.hasExtension(VK_EXT_GLOBAL_PRIORITY_EXTENSION_NAME, 2)) {
         queueNextPtr = &queuePriorityCreateInfo;
     }
-
     VkDeviceQueueCreateFlags deviceQueueCreateFlags =
             (VkDeviceQueueCreateFlags)(protectedContent ? VK_DEVICE_QUEUE_CREATE_PROTECTED_BIT : 0);
-
     const VkDeviceQueueCreateInfo queueInfo = {
             VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
             queueNextPtr,
@@ -486,10 +425,9 @@ void VulkanInterface::init(bool protectedContent) {
             1,
             queuePriorities,
     };
-
     const VkDeviceCreateInfo deviceInfo = {
             VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-            mPhysicalDeviceFeatures2,
+            &mPhysicalDeviceFeatures2,
             0,
             1,
             &queueInfo,
@@ -499,24 +437,20 @@ void VulkanInterface::init(bool protectedContent) {
             enabledDeviceExtensionNames.data(),
             nullptr,
     };
-
     ALOGD("Trying to create Vk device with protectedContent=%d", protectedContent);
     VkDevice device;
     VK_CHECK(vkCreateDevice(physicalDevice, &deviceInfo, nullptr, &device));
     ALOGD("Trying to create Vk device with protectedContent=%d (success)", protectedContent);
-
     VkQueue graphicsQueue;
     VK_GET_DEV_PROC(device, GetDeviceQueue2);
     const VkDeviceQueueInfo2 deviceQueueInfo2 = {VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2, nullptr,
                                                  deviceQueueCreateFlags,
                                                  (uint32_t)graphicsQueueIndex, 0};
     vkGetDeviceQueue2(device, &deviceQueueInfo2, &graphicsQueue);
-
     VK_GET_DEV_PROC(device, DeviceWaitIdle);
     VK_GET_DEV_PROC(device, DestroyDevice);
     mFuncs.vkDeviceWaitIdle = vkDeviceWaitIdle;
     mFuncs.vkDestroyDevice = vkDestroyDevice;
-
     VK_GET_DEV_PROC(device, CreateSemaphore);
     VK_GET_DEV_PROC(device, ImportSemaphoreFdKHR);
     VK_GET_DEV_PROC(device, GetSemaphoreFdKHR);
@@ -525,7 +459,6 @@ void VulkanInterface::init(bool protectedContent) {
     mFuncs.vkImportSemaphoreFdKHR = vkImportSemaphoreFdKHR;
     mFuncs.vkGetSemaphoreFdKHR = vkGetSemaphoreFdKHR;
     mFuncs.vkDestroySemaphore = vkDestroySemaphore;
-
     // At this point, everything's succeeded and we can continue
     mInitialized = true;
     mInstance = instance;
@@ -533,19 +466,17 @@ void VulkanInterface::init(bool protectedContent) {
     mDevice = device;
     mQueue = graphicsQueue;
     mQueueIndex = graphicsQueueIndex;
-    mApiVersion = physicalDeviceApiVersion;
+    mApiVersion = std::min(physicalDeviceApiVersion, appInfo.apiVersion);
     // grExtensions already constructed
     // feature pointers already constructed
     mGrGetProc = sGetProc;
     mIsProtected = protectedContent;
     // mIsRealtimePriority already initialized by constructor
     // funcs already initialized
-
     const nsecs_t timeAfter = systemTime();
     const float initTimeMs = static_cast<float>(timeAfter - timeBefore) / 1.0E6;
     ALOGD("%s: Success init Vulkan interface in %f ms", __func__, initTimeMs);
 }
-
 bool VulkanInterface::takeOwnership() {
     if (!isInitialized() || mIsOwned) {
         return false;
@@ -553,7 +484,6 @@ bool VulkanInterface::takeOwnership() {
     mIsOwned = true;
     return true;
 }
-
 void VulkanInterface::teardown() {
     // Core resources that must be destroyed using Vulkan functions.
     if (mDevice != VK_NULL_HANDLE) {
@@ -565,27 +495,6 @@ void VulkanInterface::teardown() {
         mFuncs.vkDestroyInstance(mInstance, nullptr);
         mInstance = VK_NULL_HANDLE;
     }
-
-    // Optional features that can be deleted directly.
-    // TODO: b/293371537 - This section should likely be improved to walk the pNext chain of
-    // mPhysicalDeviceFeatures2 and free everything like HWUI's VulkanManager.
-    if (mProtectedMemoryFeatures) {
-        delete mProtectedMemoryFeatures;
-        mProtectedMemoryFeatures = nullptr;
-    }
-    if (mSamplerYcbcrConversionFeatures) {
-        delete mSamplerYcbcrConversionFeatures;
-        mSamplerYcbcrConversionFeatures = nullptr;
-    }
-    if (mPhysicalDeviceFeatures2) {
-        delete mPhysicalDeviceFeatures2;
-        mPhysicalDeviceFeatures2 = nullptr;
-    }
-    if (mDeviceFaultFeatures) {
-        delete mDeviceFaultFeatures;
-        mDeviceFaultFeatures = nullptr;
-    }
-
     // Misc. fields that can be trivially reset without special deletion:
     mInitialized = false;
     mIsOwned = false;
@@ -597,13 +506,13 @@ void VulkanInterface::teardown() {
     mGrGetProc = nullptr;
     mIsProtected = false;
     mIsRealtimePriority = false;
-
+    mPhysicalDeviceFeatures2 = {};
+    mProtectedMemoryFeatures = {};
+    mDeviceFaultFeatures = {};
     mFuncs = VulkanFuncs();
-
     mInstanceExtensionNames.clear();
     mDeviceExtensionNames.clear();
 }
-
 } // namespace skia
 } // namespace renderengine
 } // namespace android
