@@ -14,90 +14,91 @@
  * limitations under the License.
  */
 
-#pragma once
+ #pragma once
 
-#include <include/gpu/vk/VulkanBackendContext.h>
-#include <include/gpu/vk/VulkanExtensions.h>
-#include <include/gpu/vk/VulkanTypes.h>
+ #include <include/gpu/vk/VulkanBackendContext.h>
+ #include <include/gpu/vk/VulkanExtensions.h>
+ #include <include/gpu/vk/VulkanPreferredFeatures.h>
+ #include <include/gpu/vk/VulkanTypes.h>
 
-#include <vulkan/vulkan.h>
+ #include <vulkan/vulkan.h>
 
-using namespace skgpu;
+ using namespace skgpu;
 
-namespace android {
-namespace renderengine {
-namespace skia {
+ namespace android {
+ namespace renderengine {
+ namespace skia {
 
-class VulkanInterface {
-public:
-    // Create an uninitialized interface. Initialize with `init`.
-    VulkanInterface() = default;
-    ~VulkanInterface() = default;
-    VulkanInterface(const VulkanInterface&) = delete;
-    VulkanInterface& operator=(const VulkanInterface&) = delete;
-    VulkanInterface& operator=(VulkanInterface&&) = delete;
+ class VulkanInterface {
+ public:
+     // Create an uninitialized interface. Initialize with `init`.
+     VulkanInterface() = default;
+     ~VulkanInterface() = default;
+     VulkanInterface(const VulkanInterface&) = delete;
+     VulkanInterface& operator=(const VulkanInterface&) = delete;
+     VulkanInterface& operator=(VulkanInterface&&) = delete;
 
-    void init(bool protectedContent = false);
-    // Returns true and marks this VulkanInterface as "owned" if it is initialized but unused by any
-    // RenderEngine instances. Returns false if already owned, indicating that it must not be used
-    // by a new RE instance.
-    bool takeOwnership();
-    void teardown();
+     void init(bool protectedContent = false);
+     // Returns true and marks this VulkanInterface as "owned" if it is initialized but unused by any
+     // RenderEngine instances. Returns false if already owned, indicating that it must not be used
+     // by a new RE instance.
+     bool takeOwnership();
+     void teardown();
 
-    // TODO(b/309785258) Combine these into one now that they are the same implementation.
-    VulkanBackendContext getGaneshBackendContext();
-    VulkanBackendContext getGraphiteBackendContext();
-    VkSemaphore createExportableSemaphore();
-    VkSemaphore importSemaphoreFromSyncFd(int syncFd);
-    int exportSemaphoreSyncFd(VkSemaphore semaphore);
-    void destroySemaphore(VkSemaphore semaphore);
+     // TODO(b/309785258) Combine these into one now that they are the same implementation.
+     VulkanBackendContext getGaneshBackendContext();
+     VulkanBackendContext getGraphiteBackendContext();
+     VkSemaphore createExportableSemaphore();
+     VkSemaphore importSemaphoreFromSyncFd(int syncFd);
+     int exportSemaphoreSyncFd(VkSemaphore semaphore);
+     void destroySemaphore(VkSemaphore semaphore);
 
-    bool isInitialized() const { return mInitialized; }
-    bool isRealtimePriority() const { return mIsRealtimePriority; }
-    const std::vector<std::string>& getInstanceExtensionNames() { return mInstanceExtensionNames; }
-    const std::vector<std::string>& getDeviceExtensionNames() { return mDeviceExtensionNames; }
+     bool isInitialized() const { return mInitialized; }
+     bool isRealtimePriority() const { return mIsRealtimePriority; }
+     const std::vector<std::string>& getInstanceExtensionNames() { return mInstanceExtensionNames; }
+     const std::vector<std::string>& getDeviceExtensionNames() { return mDeviceExtensionNames; }
 
-private:
-    struct VulkanFuncs {
-        PFN_vkCreateSemaphore vkCreateSemaphore = nullptr;
-        PFN_vkImportSemaphoreFdKHR vkImportSemaphoreFdKHR = nullptr;
-        PFN_vkGetSemaphoreFdKHR vkGetSemaphoreFdKHR = nullptr;
-        PFN_vkDestroySemaphore vkDestroySemaphore = nullptr;
+ private:
+     struct VulkanFuncs {
+         PFN_vkCreateSemaphore vkCreateSemaphore = nullptr;
+         PFN_vkImportSemaphoreFdKHR vkImportSemaphoreFdKHR = nullptr;
+         PFN_vkGetSemaphoreFdKHR vkGetSemaphoreFdKHR = nullptr;
+         PFN_vkDestroySemaphore vkDestroySemaphore = nullptr;
 
-        PFN_vkDeviceWaitIdle vkDeviceWaitIdle = nullptr;
-        PFN_vkDestroyDevice vkDestroyDevice = nullptr;
-        PFN_vkDestroyInstance vkDestroyInstance = nullptr;
-    };
+         PFN_vkDeviceWaitIdle vkDeviceWaitIdle = nullptr;
+         PFN_vkDestroyDevice vkDestroyDevice = nullptr;
+         PFN_vkDestroyInstance vkDestroyInstance = nullptr;
+     };
 
-    static void onVkDeviceFault(void* callbackContext, const std::string& description,
-                                const std::vector<VkDeviceFaultAddressInfoEXT>& addressInfos,
-                                const std::vector<VkDeviceFaultVendorInfoEXT>& vendorInfos,
-                                const std::vector<std::byte>& vendorBinaryData);
+     static void onVkDeviceFault(void* callbackContext, const std::string& description,
+                                 const std::vector<VkDeviceFaultAddressInfoEXT>& addressInfos,
+                                 const std::vector<VkDeviceFaultVendorInfoEXT>& vendorInfos,
+                                 const std::vector<std::byte>& vendorBinaryData);
 
-    // Note: keep all field defaults in sync with teardown()
-    bool mInitialized = false;
-    bool mIsOwned = false;
-    VkInstance mInstance = VK_NULL_HANDLE;
-    VkPhysicalDevice mPhysicalDevice = VK_NULL_HANDLE;
-    VkDevice mDevice = VK_NULL_HANDLE;
-    VkQueue mQueue = VK_NULL_HANDLE;
-    int mQueueIndex = 0;
-    uint32_t mApiVersion = 0;
-    skgpu::VulkanExtensions mVulkanExtensions;
-    VkPhysicalDeviceFeatures2* mPhysicalDeviceFeatures2 = nullptr;
-    VkPhysicalDeviceSamplerYcbcrConversionFeatures* mSamplerYcbcrConversionFeatures = nullptr;
-    VkPhysicalDeviceProtectedMemoryFeatures* mProtectedMemoryFeatures = nullptr;
-    VkPhysicalDeviceFaultFeaturesEXT* mDeviceFaultFeatures = nullptr;
-    skgpu::VulkanGetProc mGrGetProc = nullptr;
-    bool mIsProtected = false;
-    bool mIsRealtimePriority = false;
+     // Note: keep all field defaults in sync with teardown()
+     bool mInitialized = false;
+     bool mIsOwned = false;
+     VkInstance mInstance = VK_NULL_HANDLE;
+     VkPhysicalDevice mPhysicalDevice = VK_NULL_HANDLE;
+     VkDevice mDevice = VK_NULL_HANDLE;
+     VkQueue mQueue = VK_NULL_HANDLE;
+     int mQueueIndex = 0;
+     uint32_t mApiVersion = 0;
+     skgpu::VulkanPreferredFeatures mVulkanFeatures;
+     skgpu::VulkanExtensions mVulkanExtensions;
+     VkPhysicalDeviceFeatures2 mPhysicalDeviceFeatures2 = {};
+     VkPhysicalDeviceProtectedMemoryFeatures mProtectedMemoryFeatures = {};
+     VkPhysicalDeviceFaultFeaturesEXT mDeviceFaultFeatures = {};
+     skgpu::VulkanGetProc mGrGetProc = nullptr;
+     bool mIsProtected = false;
+     bool mIsRealtimePriority = false;
 
-    VulkanFuncs mFuncs;
+     VulkanFuncs mFuncs;
 
-    std::vector<std::string> mInstanceExtensionNames;
-    std::vector<std::string> mDeviceExtensionNames;
-};
+     std::vector<std::string> mInstanceExtensionNames;
+     std::vector<std::string> mDeviceExtensionNames;
+ };
 
-} // namespace skia
-} // namespace renderengine
-} // namespace android
+ } // namespace skia
+ } // namespace renderengine
+ } // namespace android
