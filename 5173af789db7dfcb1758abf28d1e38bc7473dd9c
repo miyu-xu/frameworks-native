@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf73c17_86512697",
+        "filename": "libs/renderengine/skia/VulkanInterface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1836785
+      },
+      "writtenOn": "2025-06-18T01:46:23Z",
+      "side": 1,
+      "message": "Step 1: Add instance extensions. `mInstanceExtensionNames` should be initialized after this.",
+      "revId": "5173af789db7dfcb1758abf28d1e38bc7473dd9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b8ca07_02483b87",
+        "filename": "libs/renderengine/skia/VulkanInterface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1836785
+      },
+      "writtenOn": "2025-06-18T01:46:23Z",
+      "side": 1,
+      "message": "Step 2, only add things the application wants (not what Skia wants), Skia will add everything else.",
+      "revId": "5173af789db7dfcb1758abf28d1e38bc7473dd9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d293d67_09740524",
+        "filename": "libs/renderengine/skia/VulkanInterface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1836785
+      },
+      "writtenOn": "2025-06-18T01:46:23Z",
+      "side": 1,
+      "message": "Step 3: Let Skia add features to query",
+      "revId": "5173af789db7dfcb1758abf28d1e38bc7473dd9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28531cb6_57b1a202",
+        "filename": "libs/renderengine/skia/VulkanInterface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1836785
+      },
+      "writtenOn": "2025-06-18T01:46:23Z",
+      "side": 1,
+      "message": "Step 4: Let Skia enable features based on query results. `mDeviceExtensionNames` should be initialized after this.",
+      "revId": "5173af789db7dfcb1758abf28d1e38bc7473dd9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
