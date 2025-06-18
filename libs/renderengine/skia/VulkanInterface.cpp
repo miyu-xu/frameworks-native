@@ -26,6 +26,7 @@
 #include <utils/Timers.h>
 
 #include <cinttypes>
+#include <cstring>
 #include <sstream>
 
 namespace android {
@@ -45,7 +46,7 @@ VulkanBackendContext VulkanInterface::getGraphiteBackendContext() {
     backendContext.fGraphicsQueueIndex = mQueueIndex;
     backendContext.fMaxAPIVersion = mApiVersion;
     backendContext.fVkExtensions = &mVulkanExtensions;
-    backendContext.fDeviceFeatures2 = mPhysicalDeviceFeatures2;
+    backendContext.fDeviceFeatures2 = &mPhysicalDeviceFeatures2;
     backendContext.fGetProc = mGrGetProc;
     backendContext.fProtectedContext = mIsProtected ? Protected::kYes : Protected::kNo;
     backendContext.fDeviceLostContext = this; // VulkanInterface is long-lived
@@ -240,7 +241,7 @@ void VulkanInterface::init(bool protectedContent) {
 
     const VkApplicationInfo appInfo = {
             VK_STRUCTURE_TYPE_APPLICATION_INFO, nullptr, "surfaceflinger", 0, "android platform", 0,
-            VK_MAKE_VERSION(1, 1, 0),
+            VK_API_VERSION_1_1,
     };
 
     VK_GET_PROC(EnumerateInstanceExtensionProperties);
@@ -252,10 +253,17 @@ void VulkanInterface::init(bool protectedContent) {
                                                     instanceExtensions.data()));
     std::vector<const char*> enabledInstanceExtensionNames;
     enabledInstanceExtensionNames.reserve(instanceExtensions.size());
-    mInstanceExtensionNames.reserve(instanceExtensions.size());
     for (const auto& instExt : instanceExtensions) {
         enabledInstanceExtensionNames.push_back(instExt.extensionName);
-        mInstanceExtensionNames.push_back(instExt.extensionName);
+    }
+
+    // Let Skia enable instance extensions.
+    mVulkanFeatures.init(VK_API_VERSION_1_1);
+    mVulkanFeatures.addToInstanceExtensions(instanceExtensions.data(), instanceExtensions.size(), enabledInstanceExtensionNames);
+
+    mInstanceExtensionNames.reserve(enabledInstanceExtensionNames.size());
+    for (const char* instExt : enabledInstanceExtensionNames) {
+        mInstanceExtensionNames.push_back(instExt);
     }
 
     const VkInstanceCreateInfo instanceCreateInfo = {
@@ -410,10 +418,47 @@ void VulkanInterface::init(bool protectedContent) {
 
     std::vector<const char*> enabledDeviceExtensionNames;
     enabledDeviceExtensionNames.reserve(deviceExtensions.size());
-    mDeviceExtensionNames.reserve(deviceExtensions.size());
-    for (const auto& devExt : deviceExtensions) {
-        enabledDeviceExtensionNames.push_back(devExt.extensionName);
-        mDeviceExtensionNames.push_back(devExt.extensionName);
+
+    mPhysicalDeviceFeatures2 = {};
+    mPhysicalDeviceFeatures2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+    void** tailPnext = &mPhysicalDeviceFeatures2.pNext;
+
+    if (protectedContent) {
+        mProtectedMemoryFeatures = {};
+        mProtectedMemoryFeatures.sType =
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
+        *tailPnext = &mProtectedMemoryFeatures;
+        tailPnext = &mProtectedMemoryFeatures.pNext;
+    }
+
+    for (const VkExtensionProperties& ext : deviceExtensions) {
+        if (strcmp(ext.extensionName, VK_EXT_DEVICE_FAULT_EXTENSION_NAME) == 0) {
+            mDeviceFaultFeatures = {}
+            mDeviceFaultFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT;
+            *tailPnext = &mDeviceFaultFeatures;
+            tailPnext = &mDeviceFaultFeatures.pNext;
+
+            enabledDeviceExtensionNames.push_back(VK_EXT_DEVICE_FAULT_EXTENSION_NAME);
+
+            break;
+        }
+    }
+
+    // Let Skia add features to be queried.
+    mVulkanFeatures.addFeaturesToQuery(deviceExtensions.data(), deviceExtensions.size(), mPhysicalDeviceFeatures2);
+
+    vkGetPhysicalDeviceFeatures2(physicalDevice, &mPhysicalDeviceFeatures2);
+    // Looks like this would slow things down and we can't depend on it on all platforms
+    // Robust buffer access can reduce performance on some platforms. It is not needed by
+    // RenderEngine.
+    mPhysicalDeviceFeatures2.features.robustBufferAccess = VK_FALSE;
+
+    // Let Skia enable extensions and features.
+    mVulkanFeatures.addFeaturesToEnable(enabledDeviceExtensionNames, mPhysicalDeviceFeatures2);
+
+    mDeviceExtensionNames.reserve(enabledDeviceExtensionNames.size());
+    for (const char* devExt : enabledDeviceExtensionNames) {
+        mDeviceExtensionNames.push_back(devExt);
     }
 
     mVulkanExtensions.init(sGetProc, instance, physicalDevice, enabledInstanceExtensionNames.size(),
@@ -423,39 +468,6 @@ void VulkanInterface::init(bool protectedContent) {
     if (!mVulkanExtensions.hasExtension(VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME, 1)) {
         BAIL("Vulkan driver doesn't support external semaphore fd");
     }
-
-    mPhysicalDeviceFeatures2 = new VkPhysicalDeviceFeatures2;
-    mPhysicalDeviceFeatures2->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
-    mPhysicalDeviceFeatures2->pNext = nullptr;
-
-    mSamplerYcbcrConversionFeatures = new VkPhysicalDeviceSamplerYcbcrConversionFeatures;
-    mSamplerYcbcrConversionFeatures->sType =
-            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES;
-    mSamplerYcbcrConversionFeatures->pNext = nullptr;
-
-    mPhysicalDeviceFeatures2->pNext = mSamplerYcbcrConversionFeatures;
-    void** tailPnext = &mSamplerYcbcrConversionFeatures->pNext;
-
-    if (protectedContent) {
-        mProtectedMemoryFeatures = new VkPhysicalDeviceProtectedMemoryFeatures;
-        mProtectedMemoryFeatures->sType =
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
-        mProtectedMemoryFeatures->pNext = nullptr;
-        *tailPnext = mProtectedMemoryFeatures;
-        tailPnext = &mProtectedMemoryFeatures->pNext;
-    }
-
-    if (mVulkanExtensions.hasExtension(VK_EXT_DEVICE_FAULT_EXTENSION_NAME, 1)) {
-        mDeviceFaultFeatures = new VkPhysicalDeviceFaultFeaturesEXT;
-        mDeviceFaultFeatures->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT;
-        mDeviceFaultFeatures->pNext = nullptr;
-        *tailPnext = mDeviceFaultFeatures;
-        tailPnext = &mDeviceFaultFeatures->pNext;
-    }
-
-    vkGetPhysicalDeviceFeatures2(physicalDevice, mPhysicalDeviceFeatures2);
-    // Looks like this would slow things down and we can't depend on it on all platforms
-    mPhysicalDeviceFeatures2->features.robustBufferAccess = VK_FALSE;
 
     if (protectedContent && !mProtectedMemoryFeatures->protectedMemory) {
         BAIL("Protected memory not supported");
@@ -489,7 +501,7 @@ void VulkanInterface::init(bool protectedContent) {
 
     const VkDeviceCreateInfo deviceInfo = {
             VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-            mPhysicalDeviceFeatures2,
+            &mPhysicalDeviceFeatures2,
             0,
             1,
             &queueInfo,
@@ -533,7 +545,7 @@ void VulkanInterface::init(bool protectedContent) {
     mDevice = device;
     mQueue = graphicsQueue;
     mQueueIndex = graphicsQueueIndex;
-    mApiVersion = physicalDeviceApiVersion;
+    mApiVersion = std::min(physicalDeviceApiVersion, appInfo.apiVersion);
     // grExtensions already constructed
     // feature pointers already constructed
     mGrGetProc = sGetProc;
@@ -566,26 +578,6 @@ void VulkanInterface::teardown() {
         mInstance = VK_NULL_HANDLE;
     }
 
-    // Optional features that can be deleted directly.
-    // TODO: b/293371537 - This section should likely be improved to walk the pNext chain of
-    // mPhysicalDeviceFeatures2 and free everything like HWUI's VulkanManager.
-    if (mProtectedMemoryFeatures) {
-        delete mProtectedMemoryFeatures;
-        mProtectedMemoryFeatures = nullptr;
-    }
-    if (mSamplerYcbcrConversionFeatures) {
-        delete mSamplerYcbcrConversionFeatures;
-        mSamplerYcbcrConversionFeatures = nullptr;
-    }
-    if (mPhysicalDeviceFeatures2) {
-        delete mPhysicalDeviceFeatures2;
-        mPhysicalDeviceFeatures2 = nullptr;
-    }
-    if (mDeviceFaultFeatures) {
-        delete mDeviceFaultFeatures;
-        mDeviceFaultFeatures = nullptr;
-    }
-
     // Misc. fields that can be trivially reset without special deletion:
     mInitialized = false;
     mIsOwned = false;
@@ -597,6 +589,10 @@ void VulkanInterface::teardown() {
     mGrGetProc = nullptr;
     mIsProtected = false;
     mIsRealtimePriority = false;
+
+    mPhysicalDeviceFeatures2 = {};
+    mProtectedMemoryFeatures = {};
+    mDeviceFaultFeatures = {};
 
     mFuncs = VulkanFuncs();
 

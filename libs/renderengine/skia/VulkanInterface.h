@@ -18,6 +18,7 @@
 
 #include <include/gpu/vk/VulkanBackendContext.h>
 #include <include/gpu/vk/VulkanExtensions.h>
+#include <include/gpu/vk/VulkanPreferredFeatures.h>
 #include <include/gpu/vk/VulkanTypes.h>
 
 #include <vulkan/vulkan.h>
@@ -83,11 +84,11 @@ private:
     VkQueue mQueue = VK_NULL_HANDLE;
     int mQueueIndex = 0;
     uint32_t mApiVersion = 0;
+    skgpu::VulkanPreferredFeatures mVulkanFeatures;
     skgpu::VulkanExtensions mVulkanExtensions;
-    VkPhysicalDeviceFeatures2* mPhysicalDeviceFeatures2 = nullptr;
-    VkPhysicalDeviceSamplerYcbcrConversionFeatures* mSamplerYcbcrConversionFeatures = nullptr;
-    VkPhysicalDeviceProtectedMemoryFeatures* mProtectedMemoryFeatures = nullptr;
-    VkPhysicalDeviceFaultFeaturesEXT* mDeviceFaultFeatures = nullptr;
+    VkPhysicalDeviceFeatures2 mPhysicalDeviceFeatures2 = {};
+    VkPhysicalDeviceProtectedMemoryFeatures mProtectedMemoryFeatures = {};
+    VkPhysicalDeviceFaultFeaturesEXT mDeviceFaultFeatures = {};
     skgpu::VulkanGetProc mGrGetProc = nullptr;
     bool mIsProtected = false;
     bool mIsRealtimePriority = false;
