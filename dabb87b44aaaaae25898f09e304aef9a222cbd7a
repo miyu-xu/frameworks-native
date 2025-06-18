@@ -101,6 +101,23 @@
       "message": "$ cd /usr/local/aosp/mirror\u003c/code\u003e\n$ repo sync\n$ cd /usr/local/aosp/android-latest-release\n$ repo sync",
       "revId": "dabb87b44aaaaae25898f09e304aef9a222cbd7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a68a66c_26a77653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4155432
+      },
+      "writtenOn": "2025-06-18T01:41:48Z",
+      "side": 1,
+      "message": "Attention set",
+      "revId": "dabb87b44aaaaae25898f09e304aef9a222cbd7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
