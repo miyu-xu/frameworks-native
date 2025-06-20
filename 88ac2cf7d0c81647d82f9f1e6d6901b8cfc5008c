@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c57a4d_764ccfb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1346941
+      },
+      "writtenOn": "2025-06-20T17:25:40Z",
+      "side": 1,
+      "message": "There is a concern that making servicemanager RT can be disastrous on performance if an app spams it and it spins the cpu as RT.",
+      "revId": "88ac2cf7d0c81647d82f9f1e6d6901b8cfc5008c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
