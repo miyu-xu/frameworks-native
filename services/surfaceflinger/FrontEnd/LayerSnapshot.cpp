@@ -245,7 +245,9 @@ std::string LayerSnapshot::getIsVisibleReason() const {
     std::stringstream reason;
     if (sidebandStream != nullptr) reason << " sidebandStream";
     if (externalTexture != nullptr)
-        reason << " buffer=" << externalTexture->getId() << " frame=" << frameNumber;
+        reason << " buffer=" << externalTexture->getId()
+               << " format=" << externalTexture->getPixelFormat()
+               << " usage=" << externalTexture->getUsage() << " frame=" << frameNumber;
     if (fillsColor() || color.a > 0.0f) reason << " color{" << color << "}";
     if (drawShadows()) reason << " shadowSettings.length=" << shadowSettings.length;
     if (backgroundBlurRadius > 0) reason << " backgroundBlurRadius=" << backgroundBlurRadius;
