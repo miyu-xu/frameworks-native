@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed5e9255_0858d1b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-07-01T22:08:58Z",
+      "side": 1,
+      "message": "This has been fixed in future versions of Android. We can\u0027t apply a change on this branch.",
+      "revId": "eead89ee9f65524823de0a00723c3f93a11abf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
