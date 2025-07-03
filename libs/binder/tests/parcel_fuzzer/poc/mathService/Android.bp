@@ -1,0 +1,36 @@
+cc_library_shared {
+    name: "android.test.math-impl",
+
+    srcs: ["server.cpp"],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libutils",
+        "libcutils",
+        "libbinder",
+        "libbinder_ndk",
+        "android.test.math-V1-ndk",
+    ],
+}
+
+cc_fuzz {
+    name: "aidl_fuzzer_math_server",
+
+    srcs: ["fuzzer.cpp"],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libbase",
+        "libutils",
+        "libbinder",
+        "libbinder_ndk",
+        "android.test.math-impl",
+        "android.test.math-V1-ndk",
+    ],
+
+    static_libs: [
+        "libbinder_random_parcel",
+    ],
+}
