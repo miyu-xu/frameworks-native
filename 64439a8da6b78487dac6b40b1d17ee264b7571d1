@@ -16,6 +16,23 @@
       "message": "Serious modification can solve the problem",
       "revId": "64439a8da6b78487dac6b40b1d17ee264b7571d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d0a896_9a4d4941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969763
+      },
+      "writtenOn": "2025-07-07T07:57:00Z",
+      "side": 1,
+      "message": "partially back porting surfaceflinger.c patch  https://cs.android.com/android/_/android/platform/frameworks/native/+/dc83d4b7ba27a5096e19884b548eb05e432bc3f2 to android 15 in order to fix screen tearing",
+      "revId": "64439a8da6b78487dac6b40b1d17ee264b7571d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
