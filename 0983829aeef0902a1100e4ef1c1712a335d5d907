@@ -16,6 +16,24 @@
       "message": "Can you retest this with `Change-Id: Iee0e24a50e2ac7dcedc11d47b6a9678fd5220817` in `frameworks/native/libs`?\n\nShould be fixed already with that CL.\n\nhttps://googleplex-android-review.git.corp.google.com/c/platform/frameworks/native/+/34173231",
       "revId": "0983829aeef0902a1100e4ef1c1712a335d5d907",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f536e2b_fcdb4154",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3359900
+      },
+      "writtenOn": "2025-07-07T19:27:06Z",
+      "side": 1,
+      "message": "Hi, we dont have access to the google plex gerrit. Can you pls share a \"android-review.googlesource.com\" version of the same.",
+      "parentUuid": "8ebdcfed_bea4a553",
+      "revId": "0983829aeef0902a1100e4ef1c1712a335d5d907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
