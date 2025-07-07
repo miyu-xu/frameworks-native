@@ -46,6 +46,8 @@
 #include <ctime>
 #include <queue>
 #include <sstream>
+#include <string>
+#include <vector>
 
 #include "../InputDeviceMetricsSource.h"
 
@@ -95,6 +97,26 @@ std::unique_ptr<trace::InputTracingBackendInterface> createInputTracingBackendIf
     }
     return std::make_unique<trace::impl::ThreadedBackend<trace::impl::PerfettoBackend>>(
             trace::impl::PerfettoBackend());
+}
+
+// Helper to check the platform is Automotive or not.
+static bool isAutomotive() {
+    std::string characteristics = android::base::GetProperty("ro.build.characteristics", "");
+
+    // If the characteristics string is empty, it's not automotive.
+    if (characteristics.empty()) {
+        return false;
+    }
+
+    std::stringstream ss(characteristics);
+    std::string token;
+    while (std::getline(ss, token, ',')) {
+        if (token == "automotive") {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 template <class Entry>
@@ -4610,7 +4632,12 @@ void InputDispatcher::notifyMotion(const NotifyMotionArgs& args) {
                                            args.getPointerCount(), args.pointerProperties.data(),
                                            args.pointerCoords.data(), args.flags);
         if (!result.ok()) {
-            LOG(FATAL) << "Bad stream: " << result.error() << " caused by " << args.dump();
+            if (isAutomotive()) {
+                // For Automotive use case log it as error.
+                LOG(ERROR) << "Bad stream: " << result.error() << " caused by " << args.dump();
+            } else {
+                LOG(FATAL) << "Bad stream: " << result.error() << " caused by " << args.dump();
+            }
         }
     }
 
