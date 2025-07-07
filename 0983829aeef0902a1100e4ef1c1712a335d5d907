@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ebdcfed_bea4a553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2025-07-07T18:49:27Z",
+      "side": 1,
+      "message": "Can you retest this with `Change-Id: Iee0e24a50e2ac7dcedc11d47b6a9678fd5220817` in `frameworks/native/libs`?\n\nShould be fixed already with that CL.\n\nhttps://googleplex-android-review.git.corp.google.com/c/platform/frameworks/native/+/34173231",
+      "revId": "0983829aeef0902a1100e4ef1c1712a335d5d907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
