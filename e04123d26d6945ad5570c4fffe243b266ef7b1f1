@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce987d18_58fada41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2025-07-08T14:44:11Z",
+      "side": 1,
+      "message": "Nit: this should go down with the other footers (just above `Signed-off-by:`, otherwise not all tooling will detect it properly",
+      "revId": "e04123d26d6945ad5570c4fffe243b266ef7b1f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6a66ea_12d3e069",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2025-07-08T14:44:11Z",
+      "side": 1,
+      "message": "This is a problem with the mapper(s), probably `JoystickInputMapper`, that are being used with the gamepad. They should not be producing `MOVE`s without a `DOWN`, even if their device is faulty. Modifying the dispatcher to allow a bad event stream to pass through will at best mask the problem, and could cause problems elsewhere. We also don\u0027t want the dispatcher to change its behaviour based on build characteristics (e.g. if it\u0027s an Automotive build or not).\n\nPlease look into the mapper code and try to fix that, instead.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "e04123d26d6945ad5570c4fffe243b266ef7b1f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bd5056_5338ab98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2025-07-08T14:44:11Z",
+      "side": 1,
+      "message": "For future reference, please add the android-framework-input@ mailing list rather than just adding every owner.",
+      "revId": "e04123d26d6945ad5570c4fffe243b266ef7b1f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
