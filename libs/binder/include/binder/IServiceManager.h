@@ -25,6 +25,7 @@
 #include <utils/Vector.h>
 #include <optional>
 #include <set>
+#include <vector>
 
 namespace android {
 
