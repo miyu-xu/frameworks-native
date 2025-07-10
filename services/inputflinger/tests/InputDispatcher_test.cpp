@@ -1211,6 +1211,25 @@ TEST_F(InputDispatcherTest, MultiDeviceTouchTransferWithWallpaperWindows) {
                   WithFlags(EXPECTED_WALLPAPER_FLAGS | AMOTION_EVENT_FLAG_NO_FOCUS_CHANGE)));
 }
 
+/**
+* This test is intended to Address system_server crash, for Random MOVE event,
+* from joystick which do not have any ACTION_DOWN event prior to it.
+* Before execution set verification FALG by using the below command.
+* adb shell setprop log.tag.InputVerifierLogEvents DEBUG
+* adb shell setprop log.tag.InputDispatcherVerifyEvents DEBUG
+* With the current implementation this test will crash every time during execution
+*/
+TEST_F(InputDispatcherTest, CrashesOnMoveWithoutPriorDown) {
+    // Notify a RANDOM input MOVE event from joystick which do not have any ACTION_DOWN prior to it
+    const int32_t touchDeviceId = 4;
+    // Will cause the crash
+    ASSERT_NO_FATAL_FAILURE(mDispatcher->notifyMotion(MotionArgsBuilder(ACTION_MOVE, AINPUT_SOURCE_JOYSTICK)
+                                      .deviceId(touchDeviceId)
+                                      .policyFlags(DEFAULT_POLICY_FLAGS)
+                                      .pointer(PointerBuilder(0, ToolType::FINGER).x(0).y(0))
+                                      .build()));
+}
+
 class ShouldSplitTouchFixture : public InputDispatcherTest,
                                 public ::testing::WithParamInterface<bool> {};
 INSTANTIATE_TEST_SUITE_P(InputDispatcherTest, ShouldSplitTouchFixture,
