@@ -149,7 +149,7 @@ public:
     // For main functions - dangerous for libraries to use
     LIBBINDER_EXPORTED status_t setupPolling(int* fd);
     LIBBINDER_EXPORTED status_t handlePolledCommands();
-    LIBBINDER_EXPORTED void flushCommands();
+    LIBBINDER_EXPORTED status_t flushCommands();
     LIBBINDER_EXPORTED bool flushIfNeeded();
 
     // Adds the current thread into the binder threadpool.

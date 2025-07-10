@@ -626,15 +626,15 @@ void IPCThreadState::clearCaller()
     mCallingUid = getuid();
 }
 
-void IPCThreadState::flushCommands()
-{
+status_t IPCThreadState::flushCommands() {
     if (mProcess->mDriverFD < 0)
-        return;
+        return -EBADF;
 
     if (status_t res = talkWithDriver(false); res != OK) {
         // TODO: we may want to abort for some of these cases
         ALOGW("1st call to talkWithDriver returned error in flushCommands: %s",
               statusToString(res).c_str());
+        return res;
     }
 
     // The flush could have caused post-write refcount decrements to have
@@ -645,11 +645,14 @@ void IPCThreadState::flushCommands()
             // TODO: we may want to abort for some of these cases
             ALOGW("2nd call to talkWithDriver returned error in flushCommands: %s",
                   statusToString(res).c_str());
+            return res;
         }
     }
     if (mOut.dataSize() > 0) {
         ALOGW("mOut.dataSize() > 0 after flushCommands()");
     }
+
+    return NO_ERROR;
 }
 
 bool IPCThreadState::flushIfNeeded()
@@ -1022,7 +1025,11 @@ status_t IPCThreadState::addFrozenStateChangeCallback(int32_t handle, BpBinder* 
     mOut.writeInt32(BC_REQUEST_FREEZE_NOTIFICATION);
     mOut.writeInt32((int32_t)handle);
     mOut.writePointer((uintptr_t)proxy);
-    flushCommands();
+
+    if (status_t res = flushCommands(); res != OK) {
+        LOG_ALWAYS_FATAL("%s(%d): %s", __func__, handle, statusToString(res).c_str());
+    }
+
     return NO_ERROR;
 }
 
@@ -1035,7 +1042,11 @@ status_t IPCThreadState::removeFrozenStateChangeCallback(int32_t handle, BpBinde
     mOut.writeInt32(BC_CLEAR_FREEZE_NOTIFICATION);
     mOut.writeInt32((int32_t)handle);
     mOut.writePointer((uintptr_t)proxy);
-    flushCommands();
+
+    if (status_t res = flushCommands(); res != OK) {
+        LOG_ALWAYS_FATAL("%s(%d): %s", __func__, handle, statusToString(res).c_str());
+    }
+
     return NO_ERROR;
 }
 
