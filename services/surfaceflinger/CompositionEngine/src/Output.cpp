@@ -70,6 +70,9 @@ using CompositionStrategyPredictionState =
         OutputCompositionState::CompositionStrategyPredictionState;
 namespace {
 
+static constexpr auto P3_XRB = static_cast<ui::Dataspace>(
+    ui::Dataspace::STANDARD_DCI_P3 | ui::Dataspace::TRANSFER_SRGB | ui::Dataspace::RANGE_EXTENDED);
+
 template <typename T>
 class Reversed {
 public:
@@ -1024,6 +1027,7 @@ ui::Dataspace Output::getBestDataspace(ui::Dataspace* outHdrDataSpace,
             case ui::Dataspace::DISPLAY_BT2020:
                 bestDataSpace = ui::Dataspace::DISPLAY_BT2020;
                 break;
+            case P3_XRB:
             case ui::Dataspace::DISPLAY_P3:
                 bestDataSpace = ui::Dataspace::DISPLAY_P3;
                 break;
