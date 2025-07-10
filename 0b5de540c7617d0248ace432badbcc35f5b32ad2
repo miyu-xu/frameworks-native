@@ -16,6 +16,23 @@
       "message": "This change also should be done in git_main, not in AOSP I think.",
       "revId": "0b5de540c7617d0248ace432badbcc35f5b32ad2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0584f08_27635d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-10T02:55:12Z",
+      "side": 1,
+      "message": "Replaced by https://googleplex-android-review.git.corp.google.com/c/platform/frameworks/native/+/34424082",
+      "revId": "0b5de540c7617d0248ace432badbcc35f5b32ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
