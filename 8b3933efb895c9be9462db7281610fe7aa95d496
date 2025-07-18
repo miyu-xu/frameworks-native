@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c944a2_d14e1c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2025-07-18T16:51:02Z",
+      "side": 1,
+      "message": "Hi @qwandor@google.com, I tried to fix the issue mentioned in b/371874777#comment5. PTAL. Thanks!",
+      "revId": "8b3933efb895c9be9462db7281610fe7aa95d496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
