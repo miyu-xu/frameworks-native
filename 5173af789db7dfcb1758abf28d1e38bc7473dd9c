@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be947a3_65d1109d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2009970
+      },
+      "writtenOn": "2025-07-23T16:49:36Z",
+      "side": 1,
+      "message": "Needs to be abandoned, I don\u0027t have the option. Moved to internal code review.",
+      "revId": "5173af789db7dfcb1758abf28d1e38bc7473dd9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddf73c17_86512697",
