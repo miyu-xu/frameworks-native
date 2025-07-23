@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3b5f5e_e677452c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-07-23T20:31:56Z",
+      "side": 1,
+      "message": "Thanks for the contribution. We are working on upstreaming this internally, after which it will be made available to AOSP",
+      "revId": "1d2d43f12e4263599c1ebf95dbb95d1572f1ab2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
