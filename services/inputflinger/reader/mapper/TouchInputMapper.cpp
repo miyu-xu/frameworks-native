@@ -945,6 +945,7 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
 
         if (mDeviceMode == DeviceMode::DIRECT || mDeviceMode == DeviceMode::POINTER) {
             // Convert rotated viewport to the natural orientation.
+            int32_t naturalLogicalWidth, naturalLogicalHeight;
             int32_t naturalPhysicalWidth, naturalPhysicalHeight;
             int32_t naturalPhysicalLeft, naturalPhysicalTop;
             int32_t naturalDeviceWidth, naturalDeviceHeight;
@@ -956,6 +957,8 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
                     (mViewport.orientation - static_cast<int32_t>(mParameters.orientation) + 4) % 4;
             switch (naturalDeviceOrientation) {
                 case DISPLAY_ORIENTATION_90:
+                    naturalLogicalWidth = mViewport.logicalBottom - mViewport.logicalTop;
+                    naturalLogicalHeight = mViewport.logicalRight - mViewport.logicalLeft;
                     naturalPhysicalWidth = mViewport.physicalBottom - mViewport.physicalTop;
                     naturalPhysicalHeight = mViewport.physicalRight - mViewport.physicalLeft;
                     naturalPhysicalLeft = mViewport.deviceHeight - mViewport.physicalBottom;
@@ -964,6 +967,8 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
                     naturalDeviceHeight = mViewport.deviceWidth;
                     break;
                 case DISPLAY_ORIENTATION_180:
+                    naturalLogicalWidth = mViewport.logicalRight - mViewport.logicalLeft;
+                    naturalLogicalHeight = mViewport.logicalBottom - mViewport.logicalTop;
                     naturalPhysicalWidth = mViewport.physicalRight - mViewport.physicalLeft;
                     naturalPhysicalHeight = mViewport.physicalBottom - mViewport.physicalTop;
                     naturalPhysicalLeft = mViewport.deviceWidth - mViewport.physicalRight;
@@ -972,6 +977,8 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
                     naturalDeviceHeight = mViewport.deviceHeight;
                     break;
                 case DISPLAY_ORIENTATION_270:
+                    naturalLogicalWidth = mViewport.logicalBottom - mViewport.logicalTop;
+                    naturalLogicalHeight = mViewport.logicalRight - mViewport.logicalLeft;
                     naturalPhysicalWidth = mViewport.physicalBottom - mViewport.physicalTop;
                     naturalPhysicalHeight = mViewport.physicalRight - mViewport.physicalLeft;
                     naturalPhysicalLeft = mViewport.physicalTop;
@@ -981,6 +988,8 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
                     break;
                 case DISPLAY_ORIENTATION_0:
                 default:
+                    naturalLogicalWidth = mViewport.logicalRight - mViewport.logicalLeft;
+                    naturalLogicalHeight = mViewport.logicalBottom - mViewport.logicalTop;
                     naturalPhysicalWidth = mViewport.physicalRight - mViewport.physicalLeft;
                     naturalPhysicalHeight = mViewport.physicalBottom - mViewport.physicalTop;
                     naturalPhysicalLeft = mViewport.physicalLeft;
@@ -996,15 +1005,15 @@ void TouchInputMapper::configureInputDevice(nsecs_t when, bool* outResetNeeded) 
                 naturalPhysicalWidth = naturalPhysicalWidth == 0 ? 1 : naturalPhysicalWidth;
             }
 
-            mPhysicalWidth = naturalPhysicalWidth;
-            mPhysicalHeight = naturalPhysicalHeight;
-            mPhysicalLeft = naturalPhysicalLeft;
-            mPhysicalTop = naturalPhysicalTop;
+            mPhysicalWidth = naturalLogicalWidth;
+            mPhysicalHeight = naturalLogicalHeight;
+            mPhysicalLeft = naturalPhysicalLeft * naturalLogicalWidth / naturalPhysicalWidth;
+            mPhysicalTop = naturalPhysicalTop * naturalLogicalHeight / naturalPhysicalHeight;
 
             const int32_t oldDisplayWidth = mDisplayWidth;
             const int32_t oldDisplayHeight = mDisplayHeight;
-            mDisplayWidth = naturalDeviceWidth;
-            mDisplayHeight = naturalDeviceHeight;
+            mDisplayWidth = naturalLogicalWidth * naturalDeviceWidth / naturalPhysicalWidth;
+            mDisplayHeight = naturalLogicalHeight * naturalDeviceHeight / naturalPhysicalHeight;
 
             // InputReader works in the un-rotated display coordinate space, so we don't need to do
             // anything if the device is already orientation-aware. If the device is not
