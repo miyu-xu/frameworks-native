@@ -1060,7 +1060,7 @@ auto RefreshRateSelector::getFrameRateOverrides(const std::vector<LayerRequireme
                                         layer->vote != LayerVoteType::ExplicitExact &&
                                         layer->vote != LayerVoteType::ExplicitGte &&
                                         layer->vote != LayerVoteType::ExplicitCategory,
-                                "Invalid layer vote type for frame rate overrides");
+                            "Invalid layer vote type for frame rate overrides: %s", ftl::enum_string(layer->vote).c_str());
             for (auto& [fps, score] : scoredFrameRates) {
                 constexpr bool isSeamlessSwitch = true;
                 const auto layerScore = calculateLayerScoreLocked(*layer, fps, isSeamlessSwitch);
