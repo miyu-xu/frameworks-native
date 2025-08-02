@@ -277,6 +277,7 @@ void BLASTBufferQueue::update(const sp<SurfaceControl>& surface, uint32_t width,
     const bool surfaceControlChanged = !SurfaceControl::isSameSurface(mSurfaceControl, surface);
     if (surfaceControlChanged && mSurfaceControl != nullptr) {
         BQA_LOGD("Updating SurfaceControl without recreating BBQ");
+        mSetBufferBarrier = false;
     }
     bool applyTransaction = false;
 
@@ -703,8 +704,11 @@ status_t BLASTBufferQueue::acquireNextBufferLocked(
         t->setApplyToken(mApplyToken).apply(false, true);
         mAppliedLastTransaction = true;
         mLastAppliedFrameNumber = bufferItem.mFrameNumber;
+        mSetBufferBarrier = true;
     } else {
-        t->setBufferHasBarrier(mSurfaceControl, mLastAppliedFrameNumber);
+        if (mSetBufferBarrier) {
+          t->setBufferHasBarrier(mSurfaceControl, mLastAppliedFrameNumber);
+        }
         mAppliedLastTransaction = false;
     }
 
