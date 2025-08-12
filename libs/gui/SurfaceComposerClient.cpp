@@ -867,7 +867,7 @@ status_t SurfaceComposerClient::Transaction::writeToParcel(Parcel* parcel) const
     //    2. It was originall const! In this case not only was it useless, but it by definition
     //       contains no composer states and so cacheBuffers will not perform any writes.
 
-    const_cast<SurfaceComposerClient::Transaction*>(this)->cacheBuffers();
+    //const_cast<SurfaceComposerClient::Transaction*>(this)->cacheBuffers();
 
     parcel->writeUint64(mId);
     parcel->writeUint32(mTransactionNestCount);
