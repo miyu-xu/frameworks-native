@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76794bde_93ad9f4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969763
+      },
+      "writtenOn": "2025-08-20T12:42:28Z",
+      "side": 1,
+      "message": "hi hao, please provide a little more info in commit message. what is the change optimizing or fixing",
+      "revId": "41b35a2b0493c4c0bbb3f1047e3a7d3904fdb59a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
