@@ -16,6 +16,24 @@
       "message": "is this a bug fix?  what is the bug?  could you explain what will go wrong without this fix.  feel free to share here or in buganizer comment",
       "revId": "31ae373d74f60aaf25f561ab4fde91cb5eeeb4e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "520ae43d_26ba41eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-08-21T11:43:52Z",
+      "side": 1,
+      "message": "Yes, it is to solve the low probability that WindowInfosListenerInvoker takes a long time for some reason, resulting in TransactionCallbackInvoker not being executed in time, which will cause the release buffer on the application side to not be scheduled in time, and the queuebuffer wait problem on the application side will appear.",
+      "parentUuid": "0b30a6a2_4cc0ae80",
+      "revId": "31ae373d74f60aaf25f561ab4fde91cb5eeeb4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
