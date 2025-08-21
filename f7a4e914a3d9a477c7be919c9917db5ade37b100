@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1eb2152_1a5635b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-08-21T11:44:21Z",
+      "side": 1,
+      "message": "In order to solve the problem that the SurfaceFlinger binder thread has low priority and the CPU is preempted",
+      "revId": "f7a4e914a3d9a477c7be919c9917db5ade37b100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
