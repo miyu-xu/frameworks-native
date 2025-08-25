@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314b0a5c_14397757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-08-25T07:58:53Z",
+      "side": 1,
+      "message": "Create a BckgrndExec WL thread for WindowInfosListenerInvoker to use, \nand TransactionCallbackInvoker uses BckgrndExec HP",
+      "revId": "a0c656d4140277cc44e22d83262a83522b04527c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
