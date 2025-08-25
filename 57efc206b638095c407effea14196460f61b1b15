@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5f2ed0_fb9358d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1969763
+      },
+      "writtenOn": "2025-08-25T02:51:28Z",
+      "side": 1,
+      "message": "please describe how to test",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "57efc206b638095c407effea14196460f61b1b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
