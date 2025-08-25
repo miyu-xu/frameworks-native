@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff4b80e_5e55c307",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-08-25T08:07:27Z",
+      "side": 1,
+      "message": "Integrate the priority properties of SurfaceFlinger and set the binder thread to RT to ensure its scheduling priority",
+      "revId": "30697f92c23445eede21bad9cb8e0ed10a074e76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
