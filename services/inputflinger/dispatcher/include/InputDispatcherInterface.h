@@ -243,6 +243,8 @@ public:
      * Notify the dispatcher that the state of the input method connection changed.
      */
     virtual void setInputMethodConnectionIsActive(bool isActive) = 0;
+
+    virtual void setSwipeUpChannelRegion(const sp<IBinder>& token,const Region& region) = 0;
 };
 
 } // namespace android

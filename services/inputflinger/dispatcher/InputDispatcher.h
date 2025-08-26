@@ -131,6 +131,8 @@ public:
     bool transferTouchOnDisplay(const sp<IBinder>& destChannelToken,
                                 ui::LogicalDisplayId displayId) override;
 
+    void setSwipeUpChannelRegion(const sp<IBinder>& token,const Region& region);
+
     base::Result<std::unique_ptr<InputChannel>> createInputChannel(
             const std::string& name) override;
     void setFocusedWindow(const android::gui::FocusRequest&) override;
