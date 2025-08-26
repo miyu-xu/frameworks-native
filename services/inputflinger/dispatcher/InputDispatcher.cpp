@@ -76,6 +76,8 @@ using android::os::InputEventInjectionResult;
 using android::os::InputEventInjectionSync;
 namespace input_flags = com::android::input::flags;
 
+Region mSwipeUpChannelRegion;
+
 namespace android::inputdispatcher {
 
 namespace {
@@ -596,12 +598,31 @@ bool windowAcceptsTouchAt(const WindowInfo& windowInfo, ui::LogicalDisplayId dis
     // "bottom" of the window will be different in the display (un-rotated) space compared to in the
     // logical display in which WM determined the bounds. Perform the hit test in the logical
     // display space to ensure these edges are considered correctly in all orientations.
-    const auto touchableRegion = displayTransform.transform(windowInfo.touchableRegion);
-    const auto p = displayTransform.transform(x, y);
-    if (!touchableRegion.contains(std::floor(p.x), std::floor(p.y))) {
-        return false;
+    auto touchableRegion = displayTransform.transform(windowInfo.touchableRegion);
+    if (RECENT_SWIPEUP_REGION_ENABLED 
+        && windowInfo.name.find("[Gesture Monitor] swipe-up") != std::string::npos 
+        && !mSwipeUpChannelRegion.isEmpty()
+    ) {
+        touchableRegion = displayTransform.transform(mSwipeUpChannelRegion);
     }
     return true;
+}
+
+void InputDispatcher::setSwipeUpChannelRegion(const sp<IBinder>& token,const Region& region){
+    std::scoped_lock _l(mLock);
+    const std::shared_ptr<Connection> requestingConnection = getConnectionLocked(token);
+    if(!requestingConnection){
+       LOG(WARNING)
+           << "Attempted to update SwipeUpChannelRegion from an un-registered channel or invalid token";
+       return;
+    }
+    std::string str = requestingConnection->getInputChannelName().c_str();
+    if(str.find("swipe-up") == std::string::npos){
+       LOG(WARNING)
+           << "setSwipeUpChannelRegion error because " << requestingConnection->getInputChannelName() << " is not swipe-up";
+    }
+    ALOGD("setSwipeUpChannelRegion, getInputChannelName: %s ,SwipeUpChannelRegion: %s",str.c_str(),dumpRegion(region).c_str());
+    mSwipeUpChannelRegion = region;
 }
 
 // Returns true if the given window's frame can occlude pointer events at the given display
