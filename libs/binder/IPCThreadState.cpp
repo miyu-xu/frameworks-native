@@ -1008,7 +1008,7 @@ status_t IPCThreadState::addFrozenStateChangeCallback(int32_t handle, BpBinder* 
     mOut.writeInt32(BC_REQUEST_FREEZE_NOTIFICATION);
     mOut.writeInt32((int32_t)handle);
     mOut.writePointer((uintptr_t)proxy);
-    flushCommands();
+    flushIfNeeded();
     return NO_ERROR;
 }
 
@@ -1021,7 +1021,7 @@ status_t IPCThreadState::removeFrozenStateChangeCallback(int32_t handle, BpBinde
     mOut.writeInt32(BC_CLEAR_FREEZE_NOTIFICATION);
     mOut.writeInt32((int32_t)handle);
     mOut.writePointer((uintptr_t)proxy);
-    flushCommands();
+    flushIfNeeded();
     return NO_ERROR;
 }
 
