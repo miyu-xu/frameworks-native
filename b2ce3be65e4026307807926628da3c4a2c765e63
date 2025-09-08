@@ -16,6 +16,23 @@
       "message": "@jshargo@google.com",
       "revId": "b2ce3be65e4026307807926628da3c4a2c765e63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0f9272_1a0ba2b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060289
+      },
+      "writtenOn": "2025-09-08T17:50:03Z",
+      "side": 1,
+      "message": "Thanks for the patch! I think we need to do this a little differently and I\u0027ve got a patch that makes changes on the surface side.\n\nFundamentally the issue here is that we don\u0027t want to split the work and do it non-atomically in the consumer, I think, since those two operations are deeply related.",
+      "revId": "b2ce3be65e4026307807926628da3c4a2c765e63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
