@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "788b6b28_bb176f16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2015495
+      },
+      "writtenOn": "2025-09-10T08:07:06Z",
+      "side": 1,
+      "message": "Hi, Google team, please help review the change, thanks!",
+      "revId": "7f70b392ce93aa3cf92d818147ff2e731ffb0bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
