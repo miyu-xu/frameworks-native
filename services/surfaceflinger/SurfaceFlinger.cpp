@@ -751,7 +751,6 @@ void SurfaceFlinger::bootFinished() {
         ::tracing_perfetto::registerWithPerfetto();
     }
 
-    mInitBootPropsFuture.wait();
     mRenderEnginePrimeCacheFuture.wait();
 
     const nsecs_t now = systemTime();
@@ -1055,11 +1054,10 @@ void SurfaceFlinger::init() FTL_FAKE_GUARD(kMainThreadContext) {
         setSchedFifo(true, kWhence);
     }
 
-    // Avoid blocking the main thread on `init` to set properties.
     mInitBootPropsFuture.callOnce([this] {
         return std::async(std::launch::async, &SurfaceFlinger::initBootProperties, this);
     });
-
+    mInitBootPropsFuture.wait();
     initTransactionTraceWriter();
     ALOGV("Done initializing");
 }
