@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b370ff7c_04667cb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3349393
+      },
+      "writtenOn": "2025-09-15T11:20:32Z",
+      "side": 1,
+      "message": "Hi, aosp team.\nCould you please help review the patch?",
+      "revId": "0ad1dd9b5b10111e90280773f4b621ec6ffa30df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
