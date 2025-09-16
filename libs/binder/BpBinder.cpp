@@ -563,6 +563,22 @@ void BpBinder::sendObituary()
     }
 }
 
+void BpBinder::onFrozenStateChangeListenerRemoved() {
+    LOG_ALWAYS_FATAL_IF(isRpcBinder(),
+                        "onFrozenStateChangeListenerRemoved() is not supported for RPC Binder.");
+    LOG_ALWAYS_FATAL_IF(!kEnableKernelIpc, "Binder kernel driver disabled at build time");
+    {
+        RpcMutexUniqueLock _l(mLock);
+        if (mFrozen->callbacks.size() == 0) {
+            mFrozen.reset();
+        } else {
+            mFrozen->isPendingClear = false;
+            std::ignore =
+                    IPCThreadState::self()->addFrozenStateChangeCallback(binderHandle(), this);
+        }
+    }
+}
+
 status_t BpBinder::addFrozenStateChangeCallback(const wp<FrozenStateChangeCallback>& callback) {
     LOG_ALWAYS_FATAL_IF(isRpcBinder(),
                         "addFrozenStateChangeCallback() is not supported for RPC Binder.");
@@ -633,6 +649,9 @@ status_t BpBinder::removeFrozenStateChangeCallback(const wp<FrozenStateChangeCal
             mFrozen->callbacks.removeAt(i);
             if (mFrozen->callbacks.size() == 0) {
                 ALOGV("Clearing freeze notification: %p handle %d\n", this, binderHandle());
+                if (mFrozen->isPendingClear) {
+                    return NO_ERROR;
+                }
                 status_t status =
                         IPCThreadState::self()->removeFrozenStateChangeCallback(binderHandle(),
                                                                                 this);
@@ -642,7 +661,8 @@ status_t BpBinder::removeFrozenStateChangeCallback(const wp<FrozenStateChangeCal
                           "%p handle %d\n",
                           statusToString(status).c_str(), this, binderHandle());
                 }
-                mFrozen.reset();
+                mFrozen->isPendingClear = true;
+                mFrozen->initialStateReceived = false;
             }
             return NO_ERROR;
         }
@@ -660,6 +680,9 @@ void BpBinder::onFrozenStateChanged(bool isFrozen) {
 
     RpcMutexUniqueLock _l(mLock);
     if (!mFrozen) {
+        return;
+    }
+    if (mFrozen->isPendingClear) {
         return;
     }
     bool stateChanged = !mFrozen->initialStateReceived || mFrozen->isFrozen != isFrozen;
@@ -810,8 +833,14 @@ void BpBinder::onLastStrongRef(const void* /*id*/) {
         mObituaries = nullptr;
     }
     if (mFrozen != nullptr) {
-        std::ignore = IPCThreadState::self()->removeFrozenStateChangeCallback(binderHandle(), this);
-        mFrozen.reset();
+        if (!mFrozen->isPendingClear) {
+            std::ignore =
+                    IPCThreadState::self()->removeFrozenStateChangeCallback(binderHandle(),
+                                                                            this);
+            mFrozen->isPendingClear = true;
+            mFrozen->initialStateReceived = false;
+        }
+        mFrozen->callbacks.clear();
     }
     mLock.unlock();
 
