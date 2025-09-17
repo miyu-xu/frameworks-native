@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ec4e5260_380e80f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-09-17T11:20:30Z",
+      "side": 1,
+      "message": "1. Open systrace.\n2. Repeatedly launch and exit the app.\n3. Open systrace and check if the SurfaceFlinger binder thread is preempted.",
+      "parentUuid": "e0b5908f_b26ebdd5",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 125
+      },
+      "revId": "30697f92c23445eede21bad9cb8e0ed10a074e76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fff4b80e_5e55c307",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
