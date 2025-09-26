@@ -80,6 +80,24 @@
       "message": "Can you explain how changing where we do this helps the issue with low priority SF binder threads?",
       "revId": "30697f92c23445eede21bad9cb8e0ed10a074e76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c07d17d_711f5572",
+        "filename": "services/surfaceflinger/main_surfaceflinger.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4296509
+      },
+      "writtenOn": "2025-09-26T07:22:05Z",
+      "side": 1,
+      "message": "Start the Binder thread pool. The newly created child thread will inherit the priority setting of the main thread.",
+      "parentUuid": "4b28fa1b_cb9a0254",
+      "revId": "30697f92c23445eede21bad9cb8e0ed10a074e76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
