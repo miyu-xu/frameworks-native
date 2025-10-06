@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@ namespace idlcli {
 
 class IdlCli;
 
-class CommandVibrator : public CommandWithSubcommands<CommandVibrator> {
-    std::string getDescription() const override { return "Invoke Vibrator IDL APIs."; }
+class CommandKeyMint : public CommandWithSubcommands<CommandKeyMint> {
+    std::string getDescription() const override { return "Invoke KeyMint IDL APIs."; }
 
     std::string getUsageSummary() const override { return "<api> [arguments]"; }
 
     UsageDetails getUsageDetails() const override {
         UsageDetails details{
-                {"<api>", CommandRegistry<CommandVibrator>::List()},
+                {"<api>", CommandRegistry<CommandKeyMint>::List()},
         };
         return details;
     }
 };
 
-static const auto Command = CommandRegistry<IdlCli>::Register<CommandVibrator>("vibrator");
+static const auto Command = CommandRegistry<IdlCli>::Register<CommandKeyMint>("keymint");
 
 } // namespace idlcli
 } // namespace android
