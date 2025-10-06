@@ -17,7 +17,7 @@
 #ifndef FRAMEWORK_NATIVE_CMDS_IDLCLI_IDLCLI_H_
 #define FRAMEWORK_NATIVE_CMDS_IDLCLI_IDLCLI_H_
 
-#include "utils.h"
+#include "commands.h"
 
 namespace android {
 namespace idlcli {
