@@ -261,6 +261,10 @@ impl<T: Remotable> Interface for Binder<T> {
             SpIBinder::from_raw(self.ibinder).unwrap()
         }
     }
+
+    fn dump(&self, writer: &mut dyn Write, args: &[&CStr]) -> Result<()> {
+        self.on_dump(writer, args)
+    }
 }
 
 impl<T: Remotable> InterfaceClassMethods for Binder<T> {
