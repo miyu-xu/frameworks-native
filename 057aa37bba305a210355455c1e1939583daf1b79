@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd0fabb9_93bd11c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1608823
+      },
+      "writtenOn": "2025-10-07T10:04:45Z",
+      "side": 1,
+      "message": "Hi Steven,\n\nWe found that `binder::Interface::dump()` on in-process binder objects is not forwarded properly and this seems the fix. Could you take a look?\n\nFor more context, we want to use it in our camera HAL and this fix is verified with http://ag/36175771.\n\nThanks in advance!",
+      "revId": "057aa37bba305a210355455c1e1939583daf1b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
