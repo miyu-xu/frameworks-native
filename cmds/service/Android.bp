@@ -15,10 +15,13 @@ license {
     ],
 }
 
-cc_binary {
-    name: "service",
+cc_defaults {
+    name: "service_defaults",
 
-    srcs: ["service.cpp"],
+    srcs: [
+        "service.cpp",
+        "utils.cpp",
+    ],
 
     shared_libs: [
         "libcutils",
@@ -33,37 +36,20 @@ cc_binary {
 }
 
 cc_binary {
+    name: "service",
+    defaults: ["service_defaults"],
+}
+
+cc_binary {
     name: "vndservice",
-
+    defaults: ["service_defaults"],
     proprietary: true,
-    srcs: ["service.cpp"],
-
-    shared_libs: [
-        "libcutils",
-        "libutils",
-        "libbinder",
-    ],
-
     cflags: [
         "-DVENDORSERVICES",
-        "-Wall",
-        "-Werror",
     ],
 }
 
 cc_binary_host {
     name: "aservice",
-
-    srcs: ["service.cpp"],
-
-    shared_libs: [
-        "libcutils",
-        "libutils",
-        "libbinder",
-    ],
-
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
+    defaults: ["service_defaults"],
 }

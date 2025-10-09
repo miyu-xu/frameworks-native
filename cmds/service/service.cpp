@@ -32,19 +32,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-using namespace android;
+#include "utils.h"
 
-void writeString16(Parcel& parcel, const char* string)
-{
-    if (string != nullptr)
-    {
-        parcel.writeString16(String16(string));
-    }
-    else
-    {
-        parcel.writeInt32(-1);
-    }
-}
+using namespace android;
 
 int main(int argc, char* const argv[])
 {
@@ -100,15 +90,49 @@ int main(int argc, char* const argv[])
             }
         }
         else if (strcmp(argv[optind], "list") == 0) {
-            Vector<String16> services = sm->listServices();
-            aout << "Found " << services.size() << " services:" << endl;
-            for (unsigned i = 0; i < services.size(); i++) {
-                String16 name = services[i];
-                sp<IBinder> service = sm->checkService(name);
-                aout << i
-                     << "\t" << name
-                     << ": [" << (service ? service->getInterfaceDescriptor() : String16()) << "]"
-                     << endl;
+            static struct option long_options[] = {
+                {"pid", no_argument, 0, 'p'},
+                {"cmd", no_argument, 0, 'm'},
+                {0, 0, 0, 0}
+            };
+            bool printPids = false;
+            bool printCmds = false;
+
+            optind = 2;
+            int opt;
+            while ((opt = getopt_long(argc, argv, "pm", long_options, NULL)) != -1) {
+                switch (opt) {
+                    case 'p':
+                        printPids = true;
+                        break;
+                    case 'm':
+                        printCmds = true;
+                        break;
+                    default:
+                        wantsUsage = true;
+                }
+            }
+
+            if (!wantsUsage) {
+                Vector<String16> services = sm->listServices();
+                aout << "Found " << services.size() << " services:" << endl;
+                for (size_t i = 0; i < services.size(); i++) {
+                    const String16& name = services[i];
+                    sp<IBinder> service = sm->checkService(name);
+                    aout << i
+                        << "\t" << name
+                        << ": [" << (service ? service->getInterfaceDescriptor() : String16()) << "]";
+                    if (printPids || printCmds) {
+                        static const int NO_PID = -1;
+                        pid_t pid = NO_PID;
+                        service->getDebugPid(&pid);
+                        if (pid != NO_PID) {
+                            if (printPids) aout << "\tpid: " << pid;
+                            if (printCmds) aout << "\tcmd: " << getCmdline(pid);
+                        }
+                    }
+                    aout << endl;
+                }
             }
         } else if (strcmp(argv[optind], "call") == 0) {
             optind++;
@@ -338,11 +362,16 @@ int main(int argc, char* const argv[])
 
     if (wantsUsage) {
         aout << "Usage: " << prog_name << " [-h|-?]\n"
-                "       " << prog_name << " list\n"
+                "       " << prog_name << " list [-mp]\n"
                 "       " << prog_name << " check SERVICE\n"
                 "       " << prog_name << " call SERVICE CODE [i32 N | i64 N | f N | d N | s16 STR"
                 " | null | fd f | nfd n | afd f ] ...\n"
-                "Options:\n"
+                "\n"
+                "list options:\n"
+                "  -p, --pid: Print the PIDs.\n"
+                "  -m, --cmd: Print cmdlines.\n"
+                "\n"
+                "call options:\n"
                 "   i32: Write the 32-bit integer N into the send parcel.\n"
                 "   i64: Write the 64-bit integer N into the send parcel.\n"
                 "     f: Write the 32-bit single-precision number N into the send parcel.\n"
@@ -360,4 +389,3 @@ int main(int argc, char* const argv[])
 
     return result;
 }
-
