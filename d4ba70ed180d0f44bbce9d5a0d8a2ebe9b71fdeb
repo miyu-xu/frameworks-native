@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5ae9ac_418627fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-10T21:05:40Z",
+      "side": 1,
+      "message": "Why? Use `adb shell dumpsys --pid ...`. There are a few other cool features there as well (--threads, --clients, etc...)",
+      "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
