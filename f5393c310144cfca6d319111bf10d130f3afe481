@@ -34,6 +34,24 @@
       "parentUuid": "47985140_b379fecd",
       "revId": "f5393c310144cfca6d319111bf10d130f3afe481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b553e1bd_1f524d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-10T23:24:14Z",
+      "side": 1,
+      "message": "Oh, it\u0027s funny that you modified this too, but I mentioned it briefly in the other CL.\n\nThe thing that bothers me about idlcli and service is that (respectively), they are hard to maintain and hard to use.\n\nIf you look at the AIDL generated code (-aidl-analyzer), with a few additions, it would be easy for us to create a tool, such that by adding a single build line, we could add CLI support for using any AIDL interface, rather than, e.g. `-239, +479`. That is, I\u0027d really like if we had generic CLI \u003c-\u003e AIDL interface. Though, I haven\u0027t had time to invest in it. Though, if I had time, I would rather go that direction, since it would scale better.\n\n---\n\nfor getHardwareInfo specifically, have you confirmed this is not in the `::dump` output of keystore?",
+      "parentUuid": "bd830fc6_d6850f10",
+      "revId": "f5393c310144cfca6d319111bf10d130f3afe481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
