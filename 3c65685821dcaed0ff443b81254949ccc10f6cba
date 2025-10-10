@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e23724_8a3d68f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1841165
+      },
+      "writtenOn": "2025-10-10T10:40:26Z",
+      "side": 1,
+      "message": "Hey @cnorthrop@google.com could you please bless this with owner\u0027s approval?",
+      "revId": "3c65685821dcaed0ff443b81254949ccc10f6cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
