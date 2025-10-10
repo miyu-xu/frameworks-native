@@ -16,6 +16,24 @@
       "message": "Why? Use `adb shell dumpsys --pid ...`. There are a few other cool features there as well (--threads, --clients, etc...)",
       "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0be9c38_f3990395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-10T21:08:51Z",
+      "side": 1,
+      "message": "It also has tests, so I\u0027d recommend to abandon this.\n\nNote there is a brief mention of this support here, we could probably mention it more:\nhttps://source.android.com/docs/core/architecture/aidl/aidl-backends#dumpsys\n\n\nI have dreams of combining service/idlcli, and supporting arbitrary interactive AIDL commands over the commandline, but alas, as of now, this is a very crude tool.",
+      "parentUuid": "8e5ae9ac_418627fc",
+      "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
