@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38579dcf_21c7b982",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "(personally i\u0027ve always preferred the `return usage();` or `usage();` [with an implicit exit()] style myself, but \"not a regression\"...)",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9bd73c_bd4cfc5e",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "size_t",
+      "range": {
+        "startLine": 119,
+        "startChar": 21,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a47241f_470d1e58",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "POSIX style would be [-mp], but perhaps more importantly this implies that -m and -p are orthogonal, whereas in practice -m overrides -m because of the if-else.",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9e9095_65e05f2b",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "...and then you end up with this weird text.\n\nseems like a bug, unless there are scripts relying on the current behavior?\n\n(that is: -p should just print pids,  -m should just print command lines, and -m -p should either be rejected as an error or print _both_.)",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468ff756_faa4bb29",
+        "filename": "cmds/service/utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "also known as `content` to its friends...",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8a758a_4c3af0e9",
+        "filename": "cmds/service/utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T12:04:50Z",
+      "side": 1,
+      "message": "personally i\u0027ve always preferred something like \"\u003c$PATH: $STRERROR\u003e\" myself, because debugging an empty string is a huge PITA.",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
