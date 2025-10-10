@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e70a8d0_38ec01bb",
+        "filename": "cmds/service/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2025-10-10T20:09:31Z",
+      "side": 1,
+      "message": "`#pragma once`\n\n(plus we still require copyright headers in new files. though i do wonder why you\u0027re breaking these out ... does a later change in a different file also use these? otherwise you\u0027re better off just leaving them in service.cpp.)",
+      "revId": "fd8e80a784ae255928c4539cfc4e80a5474f19ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
