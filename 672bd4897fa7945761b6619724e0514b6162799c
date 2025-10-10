@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5d4d06c_7f849050",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:04:37Z",
+      "side": 1,
+      "message": "Yeah, going with the flow here...\n\nHowever, it seems that nobody really touched this code for 10 years, but now, with lshal effectively following HIDL into oblivion I could try to modernize and build this up a little to make life a bit easier when it comes to quickly checking on HALs",
+      "parentUuid": "38579dcf_21c7b982",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f9bd73c_bd4cfc5e",
         "filename": "cmds/service/service.cpp",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2025-10-10T12:04:50Z",
       "side": 1,
       "message": "size_t",
+      "range": {
+        "startLine": 119,
+        "startChar": 21,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f30ed452_eea7ab9e",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:04:37Z",
+      "side": 1,
+      "message": "absolutely",
+      "parentUuid": "7f9bd73c_bd4cfc5e",
       "range": {
         "startLine": 119,
         "startChar": 21,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5038cc6d_c3f9c900",
+        "filename": "cmds/service/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:04:37Z",
+      "side": 1,
+      "message": "I was actually going exactly for how they do it in lshal: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/cmds/lshal/ListCommand.cpp;l\u003d923,939\n\nand then they do this: https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/cmds/lshal/ListCommand.cpp;l\u003d1153-1162;drc\u003d61197364367c9e404c7da6900658f1b16c42d0da\n\nBut I do agree with that that is an innovative approach. Made -m and -p orthogonal here.",
+      "parentUuid": "dd9e9095_65e05f2b",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "468ff756_faa4bb29",
         "filename": "cmds/service/utils.cpp",
         "patchSetId": 4
@@ -88,6 +148,24 @@
       "writtenOn": "2025-10-10T12:04:50Z",
       "side": 1,
       "message": "also known as `content` to its friends...",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16aecc0_550e5cba",
+        "filename": "cmds/service/utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:04:37Z",
+      "side": 1,
+      "message": "oops, that\u0027s awkward 🙈 thanks!",
+      "parentUuid": "468ff756_faa4bb29",
       "revId": "672bd4897fa7945761b6619724e0514b6162799c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +183,24 @@
       "writtenOn": "2025-10-10T12:04:50Z",
       "side": 1,
       "message": "personally i\u0027ve always preferred something like \"\u003c$PATH: $STRERROR\u003e\" myself, because debugging an empty string is a huge PITA.",
+      "revId": "672bd4897fa7945761b6619724e0514b6162799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d96a25c_c874aae2",
+        "filename": "cmds/service/utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:04:37Z",
+      "side": 1,
+      "message": "Fair",
+      "parentUuid": "5d8a758a_4c3af0e9",
       "revId": "672bd4897fa7945761b6619724e0514b6162799c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
