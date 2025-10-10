@@ -16,6 +16,24 @@
       "message": "`#pragma once`\n\n(plus we still require copyright headers in new files. though i do wonder why you\u0027re breaking these out ... does a later change in a different file also use these? otherwise you\u0027re better off just leaving them in service.cpp.)",
       "revId": "fd8e80a784ae255928c4539cfc4e80a5474f19ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ae308df_bd20cba5",
+        "filename": "cmds/service/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T20:57:47Z",
+      "side": 1,
+      "message": "Added `#pragma once` and the copyright headers.\n\n---\n\n\u003e does a later change in a different file also use these?\n\nI\u0027d like to split the monolithic `main()` that handles all the commands, and does everything else (e.g. `usage()`); and have one command per a translation unit",
+      "parentUuid": "7e70a8d0_38ec01bb",
+      "revId": "fd8e80a784ae255928c4539cfc4e80a5474f19ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
