@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47985140_b379fecd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1418133
+      },
+      "writtenOn": "2025-10-10T00:26:57Z",
+      "side": 1,
+      "message": "I\u0027m no longer working in this area. Recusing myself.",
+      "revId": "f5393c310144cfca6d319111bf10d130f3afe481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
