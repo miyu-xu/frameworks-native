@@ -16,6 +16,24 @@
       "message": "I\u0027m no longer working in this area. Recusing myself.",
       "revId": "f5393c310144cfca6d319111bf10d130f3afe481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd830fc6_d6850f10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-10T02:32:11Z",
+      "side": 1,
+      "message": "Oh, have to say a huge \"thank you!\" for building the extensible framework here, rather than just a CLI for the one HAL you needed it for!\n\nAt the same time, do you happen to know who might be a good new owner/reviewer for this?",
+      "parentUuid": "47985140_b379fecd",
+      "revId": "f5393c310144cfca6d319111bf10d130f3afe481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
