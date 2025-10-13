@@ -34,6 +34,24 @@
       "parentUuid": "8e5ae9ac_418627fc",
       "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2212539e_bf8b3d90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3634481
+      },
+      "writtenOn": "2025-10-13T03:30:42Z",
+      "side": 1,
+      "message": "Oh, I actually didn\u0027t know about `dumpsys --pid`; \nI wish I learned about it earlier, occasionally it would have made my life a lot easier.. thanks you!\n\n---\n\n\u003e I have dreams of combining service/idlcli\n\nWe almost share a dream 😅\n\nHere is my motivation and I what I\u0027ve been thinking:\n\n#### `service` is the new `lshal`\n\nEver since project Treble, whenever I had to investigate anything to do with HALs I would start with `lshal`, which IMO is one the best tools we have in AOSP (unfortunately, neither `service`, nor `idlcli`, nor `cmd` are quite as well developed)\n\nHowever, since HIDL isn\u0027t a thing anymore, neither is `lshal`...\n\nSo I was thinking of building up some of the `lshal`\u0027s most useful features here in `service`.\nWhile `dumpsys --pid` does help a lot, if I wanted to find all the services registered by/hosted in a certain service there is still a number of hoops I need to jump, while with this I can simply do:\n```\n~ $ adb shell service list --cmd | grep bin/trackingservice\n144     horizonos.perception.surfacekeyboard.ISurfaceKeyboardControl/default: [horizonos.perception.surfacekeyboard.ISurfaceKeyboardControl]    cmd: /system_ext/bin/trackingservice\n145     horizonos.perception.surfacekeyboard.ISurfaceKeyboardOutput/default: [horizonos.perception.surfacekeyboard.ISurfaceKeyboardOutput]      cmd: /system_ext/bin/trackingservice\n212     oculus.internal.inputsettings.IInputSettingsService/default: [oculus.internal.inputsettings.IInputSettingsService]      cmd: /system_ext/bin/trackingservice\n213     oculus.internal.power.IDomainPowerGate/trackingserver: [oculus.internal.power.IDomainPowerGate] cmd: /system_ext/bin/trackingservice\n216     oculus.internal.tracking.IControllerTrackingService/default: [oculus.internal.tracking.IControllerTrackingService]      cmd: /system_ext/bin/trackingservice\n217     oculus.internal.tracking.IFaceEyeTrackingService/default: [oculus.internal.faceeye.IFaceEyeTrackingService]     cmd: /system_ext/bin/trackingservice\n219     oculus.internal.tracking.IHandTrackingService/default: [oculus.internal.tracking.IHandTrackingService]  cmd: /system_ext/bin/trackingservice\n220     oculus.internal.tracking.IHapticsService/default: [oculus.internal.tracking.IHapticsService]    cmd: /system_ext/bin/trackingservice\n...\n```\n\nIf I want to do it now, even with `dumpsys --pid`, I still need a script, which is, honestly, a bit annoying for such a trivial thing.\n\nSo, I could clean-up and modernize `service` a little to make it a simple tool, that has one clear job.\n\n#### the `idlcli` AOSP deserves\n\n\u003e idlcli ... supporting arbitrary interactive AIDL commands over the commandline\n\nYup, that\u0027s exactly what I dream of as well.\nAnd I think we can get time to make it a reality, if we can show that what we want to do is valuable to and supported by AOSP.\n\nThe reason I still want to have separate `service` and `idlcli`, is that when you say \n*\"arbitrary interactive AIDL commands\"*,\nyou probably refer to AOSP HALs (i.e. not proprietary ones), which is fair;\nbut I\u0027d like `service` to be agnostic to the origins of the services: everything that is registered with `servicemanager` gets the same support from `service`. Hence `service` would stay very-very simple.\n\n\u003e you probably refer to AOSP HALs (i.e. not proprietary ones)\n\nAnnoyingly, this is also the reason why I think we may want to keep `service call`, which is barely ever useful, but would love to hear what you guys think about it.\n\n--- \n\nSo please let me know what you think. \nOn out side we could clean-up/build-up `service` just a tiny bit more, and then move on to the `idlcli`.",
+      "parentUuid": "b0be9c38_f3990395",
+      "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
