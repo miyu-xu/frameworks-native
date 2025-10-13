@@ -52,6 +52,24 @@
       "parentUuid": "b0be9c38_f3990395",
       "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a99802f_a159a635",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-13T22:18:09Z",
+      "side": 1,
+      "message": "So, I had the same thoughts about lshal when I deprecated HIDL, but it\u0027s dumpsys that has filled the role of lshal. @elsk@google.com will appreciate your complements. Unfortunately, we have focused on simplification, so dumpsys has not quite caught up with lshal.\n\n\u003e if I wanted to find all the services registered by/hosted in a certain service there is still a number of hoops I need to jump\n\nOkay, but I still want to avoid maintaining duplicate functionality in \u0027service\u0027. I use `sed -n \u0027/DUMP/,$p\u0027 | sed \u0027N;s/:\\n/ /g\u0027` to collapse the dumpsys output to one line. However, if you want to add a machine-readable mode or one-line mode to dumpsys, that\u0027s fine. What I want to avoid is maintaining more tools or more versions of the same tools. `dumpsys` has a lot of other modes that would also benefit from this.\n\n\u003e is that when you say \"arbitrary interactive AIDL commands\", you probably refer to AOSP HALs (i.e. not proprietary ones), which is fair;\n\nNope, I do mean arbitrary ones (perhaps with an option to turn it off), and I don\u0027t think there\u0027s any reason to avoid this. To understand how this is possible (but not how we would actually implement this), consider if every binder object had a built-in method \"String getAidlInterface()\". Then with an AIDL compiler in \u0027dumpsys\u0027 we could implement the arbitrary functionality. However, we\u0027d need a simpler description, since that\u0027s just too complicated.\n\nThe other possible route is better support for a C++/Rust REPL in Android that could just import the right compiled AIDl interface and let you use it. If there is easier ways to use them, we could make this work. However, in 9+ years, I\u0027ve never managed to get one to work.\n\n\u003e Hence service would stay very-very simple.\n\nTo be clear, I\u0027d like to just delete it and replace it with dumpsys or a symlink to dumpsys. It only offers the binary commands, and it\u0027s very under-tested and under-developed compared to dumpsys. It should be easy to consolidate the tools (vs building out more here).",
+      "parentUuid": "2212539e_bf8b3d90",
+      "revId": "d4ba70ed180d0f44bbce9d5a0d8a2ebe9b71fdeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
