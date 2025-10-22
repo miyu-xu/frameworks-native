@@ -394,29 +394,55 @@ void SensorService::onFirstRef() {
             }
 
             if (isAutomotive()) {
-                if (hasAccel) {
-                    registerVirtualSensor(
-                            std::make_shared<LimitedAxesImuSensor>(
-                                    list, count, SENSOR_TYPE_ACCELEROMETER));
-               }
+                sp<content::pm::IPackageManagerNative> packageManager;
+                sp<IBinder> binder =  defaultServiceManager()->waitForService(String16("package_native"));
+                packageManager = interface_cast<content::pm::IPackageManagerNative>(binder);
+                if (packageManager == nullptr) {
+                    ALOGE("%s: unable to access native PackageManager", __func__);
+                } else {
+                    bool isAccelLimited = false;
+                    binder::Status status =
+                        packageManager->hasSystemFeature(String16("android.hardware.sensor.accelerometer_limited_axes"), 0,
+                                                        &isAccelLimited);
 
-               if (hasGyro) {
-                    registerVirtualSensor(
-                            std::make_shared<LimitedAxesImuSensor>(
-                                    list, count, SENSOR_TYPE_GYROSCOPE));
-               }
+                    bool isAccelUncalLimited = false;
+                    status =
+                        packageManager->hasSystemFeature(String16("android.hardware.sensor.accelerometer_limited_axes_uncalibrated"), 0,
+                                                        &isAccelLimited);
 
-               if (hasAccelUncalibrated) {
-                    registerVirtualSensor(
-                            std::make_shared<LimitedAxesImuSensor>(
-                                    list, count, SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED));
-               }
+                    bool isGyroLimited = false;
+                    status =
+                        packageManager->hasSystemFeature(String16("android.hardware.sensor.gyroscope_limited_axes"), 0,
+                                                        &isAccelLimited);
 
-               if (hasGyroUncalibrated) {
-                    registerVirtualSensor(
-                            std::make_shared<LimitedAxesImuSensor>(
-                                    list, count, SENSOR_TYPE_GYROSCOPE_UNCALIBRATED));
-               }
+                    bool isGyroUncalLimited = false;
+                    status =
+                        packageManager->hasSystemFeature(String16("android.hardware.sensor.gyroscope_limited_axes_uncalibrated"), 0,
+                                                        &isAccelLimited);
+                    if (hasAccel && isAccelLimited) {
+                        registerVirtualSensor(
+                                std::make_shared<LimitedAxesImuSensor>(
+                                        list, count, SENSOR_TYPE_ACCELEROMETER));
+                    }
+
+                    if (hasGyro && isGyroLimited) {
+                            registerVirtualSensor(
+                                    std::make_shared<LimitedAxesImuSensor>(
+                                            list, count, SENSOR_TYPE_GYROSCOPE));
+                    }
+
+                    if (hasAccelUncalibrated && isAccelUncalLimited) {
+                            registerVirtualSensor(
+                                    std::make_shared<LimitedAxesImuSensor>(
+                                            list, count, SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED));
+                    }
+
+                    if (hasGyroUncalibrated && isGyroUncalLimited) {
+                            registerVirtualSensor(
+                                    std::make_shared<LimitedAxesImuSensor>(
+                                            list, count, SENSOR_TYPE_GYROSCOPE_UNCALIBRATED));
+                    }
+                }
             }
 
             // Check if the device really supports batching by looking at the FIFO event
