@@ -139,6 +139,8 @@ std::optional<compositionengine::LayerFE::LayerSettings> LayerFE::prepareClientC
     layerSettings.alpha = mSnapshot->alpha;
     layerSettings.sourceDataspace = mSnapshot->dataspace;
 
+    ALOGD("Layer: %s dataspace: %d", getDebugName(), layerSettings.sourceDataspace);
+
     // Override the dataspace transfer from 170M to sRGB if the device configuration requests this.
     // We do this here instead of in buffer info so that dumpsys can still report layers that are
     // using the 170M transfer.
