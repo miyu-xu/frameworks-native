@@ -23,6 +23,7 @@
 #include <gui/GLConsumer.h>
 #include <math/vec3.h>
 #include <system/window.h>
+#include <ui/HdrRenderTypeUtils.h>
 
 #include "LayerFE.h"
 #include "SurfaceFlinger.h"
@@ -137,7 +138,16 @@ std::optional<compositionengine::LayerFE::LayerSettings> LayerFE::prepareClientC
     layerSettings.geometry.roundedCornersCrop = roundedCornerState.cropRect;
 
     layerSettings.alpha = mSnapshot->alpha;
-    layerSettings.sourceDataspace = mSnapshot->dataspace;
+    const bool hasHdrMetadata = mSnapshot->hdrMetadata.validTypes != 0;
+    auto pixelFormat = mSnapshot->buffer
+            ? std::make_optional(static_cast<ui::PixelFormat>(mSnapshot->buffer->getPixelFormat()))
+            : std::nullopt;
+    auto hdrRenderType = getHdrRenderType(mSnapshot->dataspace, pixelFormat, mSnapshot->desiredHdrSdrRatio, hasHdrMetadata);
+    if (mSnapshot->isColorspaceAgnostic && hdrRenderType == HdrRenderType::SDR) {
+        layerSettings.sourceDataspace = targetSettings.dataspace;
+    } else {
+        layerSettings.sourceDataspace = mSnapshot->dataspace;
+    }
 
     // Override the dataspace transfer from 170M to sRGB if the device configuration requests this.
     // We do this here instead of in buffer info so that dumpsys can still report layers that are
