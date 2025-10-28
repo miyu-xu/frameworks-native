@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801874fc_08546851",
+        "filename": "services/surfaceflinger/LayerFE.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1470474
+      },
+      "writtenOn": "2025-10-28T15:56:07Z",
+      "side": 1,
+      "message": "you need to check the destination dataspace too to be consistent with DPU https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp;l\u003d380;drc\u003df5f380b72a82042891e62d33219287763b148f75",
+      "fixSuggestions": [
+        {
+          "fixId": "26e11922_0f8f9d36",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "    ui::Dataspace effectiveSourceDataspace;\n"
+            },
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": "        effectiveSourceDataspace \u003d targetSettings.dataspace;\n"
+            },
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "        effectiveSourceDataspace \u003d mSnapshot-\u003edataspace;\n"
+            },
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "        (effectiveSourceDataspace \u0026 HAL_DATASPACE_TRANSFER_MASK) \u003d\u003d\n"
+            },
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 155,
+                "endChar": 0
+              },
+              "replacement": "        effectiveSourceDataspace \u003d static_cast\u003cui::Dataspace\u003e(\n                (effectiveSourceDataspace \u0026 HAL_DATASPACE_STANDARD_MASK) |\n                (effectiveSourceDataspace \u0026 HAL_DATASPACE_RANGE_MASK) |\n"
+            },
+            {
+              "path": "services/surfaceflinger/LayerFE.cpp",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "    if (effectiveSourceDataspace !\u003d targetSettings.dataspace) {\n        layerSettings.sourceDataspace \u003d effectiveSourceDataspace;\n    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d921506f8fe046cc0967a7e95cbf4f019412a8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
