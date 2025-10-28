@@ -137,7 +137,11 @@ std::optional<compositionengine::LayerFE::LayerSettings> LayerFE::prepareClientC
     layerSettings.geometry.roundedCornersCrop = roundedCornerState.cropRect;
 
     layerSettings.alpha = mSnapshot->alpha;
-    layerSettings.sourceDataspace = mSnapshot->dataspace;
+    if (mSnapshot->isColorspaceAgnostic) {
+        layerSettings.sourceDataspace = targetSettings.dataspace;
+    } else {
+        layerSettings.sourceDataspace = mSnapshot->dataspace;
+    }
 
     // Override the dataspace transfer from 170M to sRGB if the device configuration requests this.
     // We do this here instead of in buffer info so that dumpsys can still report layers that are
