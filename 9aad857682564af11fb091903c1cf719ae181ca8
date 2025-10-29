@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ccb459_3a8d40b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-29T21:43:45Z",
+      "side": 1,
+      "message": "were they included? does this require any additional SELinux?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b05da1_abc93610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-29T21:43:45Z",
+      "side": 1,
+      "message": "Overall LGTM!",
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "049ad012_9d50ec30",
+        "filename": "libs/dumputils/dump_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-29T21:43:45Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure why these functions use globals. Could we move the static global inside of the function and have the function return the initialized value? Okay if not.\n\nAlso, do we need to cache these values in globals? Can you confirm if they are called multiple times? This may be unnecessary caching.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 5
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b27984a_c81406fe",
+        "filename": "libs/dumputils/dump_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-10-29T21:43:45Z",
+      "side": 1,
+      "message": "If this is a set, could we use \u0027.find\u0027?",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 73
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
