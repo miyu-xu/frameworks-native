@@ -409,6 +409,7 @@ public:
     private:
         static sp<IBinder> sApplyToken;
         void releaseBufferIfOverwriting(const layer_state_t& state);
+        void releaseBufferIfOverwritingForUnsetBuffer(const layer_state_t& state);
         static void mergeFrameTimelineInfo(FrameTimelineInfo& t, const FrameTimelineInfo& other);
         static void clearFrameTimelineInfo(FrameTimelineInfo& t);
 

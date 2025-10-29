@@ -938,6 +938,28 @@ void SurfaceComposerClient::Transaction::releaseBufferIfOverwriting(const layer_
     }
 }
 
+void SurfaceComposerClient::Transaction::releaseBufferIfOverwritingForUnsetBuffer(const layer_state_t& state) {
+    if (!(state.what & layer_state_t::eBufferChanged) || !state.bufferData->hasBuffer()) {
+        return;
+    }
+
+    auto listener = state.bufferData->releaseBufferListener;
+    sp<Fence> fence =
+            state.bufferData->acquireFence ? state.bufferData->acquireFence : Fence::NO_FENCE;
+    if (state.bufferData->releaseBufferEndpoint ==
+        IInterface::asBinder(TransactionCompletedListener::getIInstance())) {
+        // if the callback is in process, run on a different thread to avoid any lock contigency
+        // issues in the client.
+        SurfaceComposerClient::getDefault()
+                ->mReleaseCallbackThread
+                .addReleaseCallback(state.bufferData->generateReleaseCallbackId(), fence);
+    } else {
+        if(listener){
+            listener->onReleaseBuffer(state.bufferData->generateReleaseCallbackId(), fence, UINT_MAX-1);
+        }
+    }
+}
+
 SurfaceComposerClient::Transaction& SurfaceComposerClient::Transaction::merge(Transaction&& other) {
     while (mMergedTransactionIds.size() + other.mMergedTransactionIds.size() >
                    MAX_MERGE_HISTORY_LENGTH - 1 &&
@@ -1736,7 +1758,7 @@ SurfaceComposerClient::Transaction& SurfaceComposerClient::Transaction::unsetBuf
         return *this;
     }
 
-    releaseBufferIfOverwriting(*s);
+    releaseBufferIfOverwritingForUnsetBuffer(*s);
 
     s->what &= ~layer_state_t::eBufferChanged;
     s->bufferData = nullptr;

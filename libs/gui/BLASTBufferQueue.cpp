@@ -435,6 +435,10 @@ void BLASTBufferQueue::releaseBufferCallbackLocked(
     // clients as others don't care about latency
     const auto it = mSubmitted.find(id);
     const bool isEGL = it != mSubmitted.end() && it->second.mApi == NATIVE_WINDOW_API_EGL;
+    if (currentMaxAcquiredBufferCount == UINT_MAX - 1) {
+        mSyncedFrameNumbers.erase(id.framenumber);
+        currentMaxAcquiredBufferCount = 0;
+    }
 
     if (currentMaxAcquiredBufferCount) {
         mCurrentMaxAcquiredBufferCount = *currentMaxAcquiredBufferCount;
