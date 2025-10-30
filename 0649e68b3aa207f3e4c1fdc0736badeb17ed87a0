@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f373e63a_b127471c",
+        "filename": "libs/ui/include/ui/Gralloc6.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-10-30T20:36:18Z",
+      "side": 1,
+      "message": "I think we can avoid a Gralloc6Mapper and just let Gralloc5 be forward compatible and internally do version checks. It\u0027ll massively reduce the amount of copy/pasted code going forward. The per-version gralloc* I think was more a result of HIDL kinda doing that as well, and we aren\u0027t using HIDL anymore.",
+      "revId": "0649e68b3aa207f3e4c1fdc0736badeb17ed87a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
