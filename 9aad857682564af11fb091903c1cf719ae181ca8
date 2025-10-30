@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5f149bf2_87c30c2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944626
+      },
+      "writtenOn": "2025-10-30T07:35:45Z",
+      "side": 1,
+      "message": "Yes, the vendor AIDL need to add SEPolicy rule allowing dumpstate to send signal to itself. This is implemented by the vendor as needed.",
+      "parentUuid": "94ccb459_3a8d40b3",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26b05da1_abc93610",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3316883b_e9f34e69",
+        "filename": "libs/dumputils/dump_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1944626
+      },
+      "writtenOn": "2025-10-30T07:35:45Z",
+      "side": 1,
+      "message": "should_dump_*_interface is called multiple times (once per service)\nThis is beneficial caching since reading properties is expensive.",
+      "parentUuid": "049ad012_9d50ec30",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 5
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b27984a_c81406fe",
@@ -77,6 +125,30 @@
       "writtenOn": "2025-10-29T21:43:45Z",
       "side": 1,
       "message": "If this is a set, could we use \u0027.find\u0027?",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 73
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b95576_a946244f",
+        "filename": "libs/dumputils/dump_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1944626
+      },
+      "writtenOn": "2025-10-30T07:35:45Z",
+      "side": 1,
+      "message": "set::find() performs an exact match , interfaces always contain string like \"/default\" so find will fail.\nFor example, aidl_interfaces_to_dump contains \"android.hardware.graphics.allocator.IAllocator\", interface \u0027android.hardware.graphics.allocator.IAllocator/default\u0027 does not match with find.",
+      "parentUuid": "0b27984a_c81406fe",
       "range": {
         "startLine": 170,
         "startChar": 0,
