@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b51607_75f75f2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-11-01T00:24:56Z",
+      "side": 1,
+      "message": "What about for the property itself?\n\nI hope to cherry-pick this soon, have not forgotten.",
+      "parentUuid": "5f149bf2_87c30c2e",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26b05da1_abc93610",
