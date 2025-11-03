@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8a073f81_c7454f22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1944626
+      },
+      "writtenOn": "2025-11-03T06:37:46Z",
+      "side": 1,
+      "message": "Based on system/sepolicy/private/property_contexts, both ro.dump.aidl.extra and ro.dump.hals.extra use the default SELinux label u:object_r:default_prop:s0.\nThe rule get_prop(dumpstate, property_type) in dumpstate.te allows dumpstate to read properties of this type, so accessing ro.dump.aidl.extra is not an issue.\nDo you want me to assign an additional SELinux label to ro.dump? \nPlease let me know if my understanding is correct.",
+      "parentUuid": "24b51607_75f75f2b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 26
+      },
+      "revId": "9aad857682564af11fb091903c1cf719ae181ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26b05da1_abc93610",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
