@@ -33,6 +33,24 @@
       "message": "@jreck@google.com Thanks a lot for your review. Will the patch be accepted into the main branch, or are there any further actions required from my side?",
       "revId": "3a6b182955bf9307981efb1b8d308843b4250b9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2b0c16_fd710fc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-11-07T16:36:50Z",
+      "side": 1,
+      "message": "It has been merged internally and will be in a future AOSP release, thanks!",
+      "parentUuid": "619c138f_9a042a13",
+      "revId": "3a6b182955bf9307981efb1b8d308843b4250b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
