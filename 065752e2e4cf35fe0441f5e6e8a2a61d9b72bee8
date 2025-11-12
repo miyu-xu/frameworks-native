@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1906fe8a_46606e1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3621465
+      },
+      "writtenOn": "2025-11-12T12:04:34Z",
+      "side": 1,
+      "message": "This change updates the APIs from CL:2918768 (https://partner-android-review.googlesource.com/c/platform/frameworks/native/+/2918768/4) (which already received +2 from Alec) to match the new interface requirements. The current patch includes Alec’s previously approved code, adapted for the updated API.",
+      "revId": "065752e2e4cf35fe0441f5e6e8a2a61d9b72bee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
