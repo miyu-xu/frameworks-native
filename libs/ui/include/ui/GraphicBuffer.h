@@ -26,6 +26,7 @@
 
 #include <android/hardware_buffer.h>
 #include <ui/ANativeObjectBase.h>
+#include <ui/BufferView.h>
 #include <ui/GraphicBufferAllocator.h>
 #include <ui/GraphicBufferMapper.h>
 #include <ui/PixelFormat.h>
@@ -228,6 +229,11 @@ public:
     }
 
     void addDeathCallback(GraphicBufferDeathCallback deathCallback, void* context);
+
+    DependencyMonitor& getDependencyMonitor() { return mDependencyMonitor; }
+    status_t getBaseView(BufferView* outView) const;
+    status_t getAuxiliaryViewInfo(BufferView* outViewList, size_t* outNumberOfViews) const;
+    sp<GraphicBuffer> getAuxiliaryBuffer(uint32_t viewIndex) const;
 
 private:
     ~GraphicBuffer();

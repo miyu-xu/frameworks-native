@@ -811,4 +811,34 @@ AHardwareBuffer* AHardwareBuffer_from_GraphicBuffer(GraphicBuffer* buffer) {
     return buffer->toAHardwareBuffer();
 }
 
+int AHardwareBuffer_getBaseView(const AHardwareBuffer* buffer, uint32_t* outView) {
+    if (!buffer) return BAD_VALUE;
+
+    return AHardwareBuffer_to_GraphicBuffer(buffer)->getBaseView(
+            reinterpret_cast<BufferView*>(outView));
+}
+
+int AHardwareBuffer_getAuxiliaryViewInfo(const AHardwareBuffer* buffer, uint32_t* outViewList,
+                                         size_t* outNumberOfViews) {
+    if (!buffer) return BAD_VALUE;
+
+    return AHardwareBuffer_to_GraphicBuffer(buffer)
+            ->getAuxiliaryViewInfo(reinterpret_cast<BufferView*>(outViewList), outNumberOfViews);
+}
+
+AHardwareBuffer* AHardwareBuffer_getAuxiliaryBuffer(AHardwareBuffer* buffer, uint32_t viewIndex) {
+    if (!buffer) return nullptr;
+
+    GraphicBuffer* gbuffer = AHardwareBuffer_to_GraphicBuffer(buffer);
+    sp<GraphicBuffer> gbufferAux = gbuffer->getAuxiliaryBuffer(viewIndex);
+
+    if (!gbufferAux) {
+        return nullptr;
+    }
+
+    AHardwareBuffer* auxAHB = AHardwareBuffer_from_GraphicBuffer(gbufferAux.get());
+    AHardwareBuffer_acquire(auxAHB);
+    return auxAHB;
+}
+
 } // namespace android

@@ -156,6 +156,14 @@ public:
             buffer_handle_t bufferHandle,
             std::optional<std::vector<uint8_t>> smpte2094_10) const override;
 
+    [[nodiscard]] status_t getBaseView(buffer_handle_t buffer, BufferView* outView) const override;
+
+    [[nodiscard]] status_t getMultiViewInfo(buffer_handle_t bufferHandle, BufferView* outViewList,
+                                            size_t* outNumberOfViews) const override;
+
+    [[nodiscard]] status_t importViewBuffer(buffer_handle_t multiViewHandle, uint32_t viewIndex,
+                                            buffer_handle_t* outBufferHandle) const;
+
 private:
     void unlockBlocking(buffer_handle_t bufferHandle) const;
 

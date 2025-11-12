@@ -1025,4 +1025,42 @@ status_t Gralloc5Mapper::setSmpte2094_10(buffer_handle_t bufferHandle,
                                                                    smpte2094_10);
 }
 
+status_t Gralloc5Mapper::getBaseView(buffer_handle_t buffer, BufferView* outViewIndex) const {
+#ifdef AIMAPPER_VERSION_6
+    if (mMapper && mMapper->version >= AIMAPPER_VERSION_6) {
+        AIMapper_Error error =
+                mMapper->v6.getBaseView(buffer, reinterpret_cast<uint32_t*>(outViewIndex));
+        return error;
+    }
+#endif
+    return AIMAPPER_ERROR_UNSUPPORTED;
+}
+
+status_t Gralloc5Mapper::getMultiViewInfo(buffer_handle_t bufferHandle, BufferView* outViewList,
+                                          size_t* outNumberOfViews) const {
+#ifdef AIMAPPER_VERSION_6
+    if (mMapper && mMapper->version >= AIMAPPER_VERSION_6) {
+        AIMapper_Error error =
+                mMapper->v6.getMultiViewInfo(bufferHandle,
+                                             reinterpret_cast<const uint32_t**>(
+                                                     const_cast<const BufferView**>(&outViewList)),
+                                             outNumberOfViews);
+        return error;
+    }
+#endif
+    return AIMAPPER_ERROR_UNSUPPORTED;
+}
+
+status_t Gralloc5Mapper::importViewBuffer(buffer_handle_t multiViewHandle, uint32_t viewIndex,
+                                          buffer_handle_t* outBufferHandle) const {
+#ifdef AIMAPPER_VERSION_6
+    if (mMapper && mMapper->version >= AIMAPPER_VERSION_6) {
+        AIMapper_Error error =
+                mMapper->v6.importViewBuffer(multiViewHandle, viewIndex, outBufferHandle);
+        return error;
+    }
+#endif
+    return AIMAPPER_ERROR_UNSUPPORTED;
+}
+
 } // namespace android

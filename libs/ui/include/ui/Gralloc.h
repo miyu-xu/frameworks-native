@@ -19,6 +19,7 @@
 
 #include <gralloctypes/Gralloc4.h>
 #include <hidl/HidlSupport.h>
+#include <ui/BufferView.h>
 #include <ui/GraphicTypes.h>
 #include <ui/PixelFormat.h>
 #include <ui/Rect.h>
@@ -199,6 +200,17 @@ public:
     }
     virtual status_t setSmpte2094_10(buffer_handle_t /*bufferHandle*/,
                                      std::optional<std::vector<uint8_t>> /*smpte2094_10*/) const {
+        return INVALID_OPERATION;
+    }
+    virtual status_t getBaseView(buffer_handle_t /*bufferHandle*/, BufferView* /*outView*/) const {
+        return INVALID_OPERATION;
+    }
+    virtual status_t getMultiViewInfo(buffer_handle_t /*bufferHandle*/, BufferView* /*outViewList*/,
+                                      size_t* /*outNumberOfViews*/) const {
+        return INVALID_OPERATION;
+    }
+    virtual status_t importViewBuffer(buffer_handle_t /*multiViewHandle*/, uint32_t /*viewIndex*/,
+                                      buffer_handle_t* /*outBufferHandle*/) const {
         return INVALID_OPERATION;
     }
 };

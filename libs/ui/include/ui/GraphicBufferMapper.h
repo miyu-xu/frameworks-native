@@ -23,6 +23,7 @@
 #include <memory>
 
 #include <android-base/unique_fd.h>
+#include <ui/BufferView.h>
 #include <ui/GraphicTypes.h>
 #include <ui/PixelFormat.h>
 #include <ui/Rect.h>
@@ -175,6 +176,12 @@ public:
     }
 
     Version getMapperVersion() const { return mMapperVersion; }
+
+    status_t getBaseView(buffer_handle_t bufferHandle, BufferView* outView);
+    status_t getMultiViewInfo(buffer_handle_t bufferHandle, BufferView* outViewList,
+                              size_t* outNumberOfViews);
+    status_t importViewBuffer(buffer_handle_t multiViewHandle, uint32_t viewIndex,
+                              buffer_handle_t* outBufferHandle);
 
 private:
     friend class Singleton<GraphicBufferMapper>;

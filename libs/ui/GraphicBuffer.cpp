@@ -620,6 +620,44 @@ void GraphicBuffer::addDeathCallback(GraphicBufferDeathCallback deathCallback, v
     mDeathCallbacks.emplace_back(deathCallback, context);
 }
 
+status_t GraphicBuffer::getBaseView(BufferView* outView) const {
+    if (handle == nullptr) {
+        ALOGE("getBaseView: Failed to get base view. Bad raw handle.");
+        return BAD_VALUE;
+    }
+
+    return mBufferMapper.getBaseView(handle, outView);
+}
+
+status_t GraphicBuffer::getAuxiliaryViewInfo(BufferView* outViewList,
+                                             size_t* outNumberOfViews) const {
+    if (handle == nullptr) {
+        ALOGE("getAuxiliaryViewInfo: Failed to get auxiliary view info. Bad raw handle.");
+        return BAD_VALUE;
+    }
+
+    return mBufferMapper.getMultiViewInfo(handle, outViewList, outNumberOfViews);
+}
+
+sp<GraphicBuffer> GraphicBuffer::getAuxiliaryBuffer(uint32_t viewIndex) const {
+    if (handle == nullptr) {
+        ALOGE("getAuxiliaryBuffer: Failed to get auxiliary buffer. Bad raw handle.");
+        return nullptr;
+    }
+
+    buffer_handle_t auxiliaryHandle = nullptr;
+    status_t error = mBufferMapper.importViewBuffer(handle, viewIndex, &auxiliaryHandle);
+    if (error != NO_ERROR) {
+        ALOGE("getAuxiliaryBuffer: import View Buffer failed: %d", error);
+        return nullptr;
+    }
+
+    sp<GraphicBuffer> gbufferAux =
+            new GraphicBuffer(auxiliaryHandle, GraphicBuffer::TAKE_HANDLE, width, height, format,
+                              layerCount, usage, stride);
+    return gbufferAux;
+}
+
 // ---------------------------------------------------------------------------
 
 }; // namespace android

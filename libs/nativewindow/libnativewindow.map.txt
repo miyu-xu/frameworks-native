@@ -76,5 +76,8 @@ LIBNATIVEWINDOW_PLATFORM {
       android::AHardwareBuffer_to_GraphicBuffer*;
       android::AHardwareBuffer_to_ANativeWindowBuffer*;
       android::AHardwareBuffer_from_GraphicBuffer*;
+      android::AHardwareBuffer_getBaseView*;
+      android::AHardwareBuffer_getAuxiliaryViewInfo*;
+      android::AHardwareBuffer_getAuxiliaryBuffer*;
     };
 } LIBNATIVEWINDOW;

@@ -60,6 +60,16 @@ const ANativeWindowBuffer* AHardwareBuffer_to_ANativeWindowBuffer(const AHardwar
 ANativeWindowBuffer* AHardwareBuffer_to_ANativeWindowBuffer(AHardwareBuffer* buffer);
 
 AHardwareBuffer* AHardwareBuffer_from_GraphicBuffer(GraphicBuffer* buffer);
+
+// Get the base view of the handle.
+int AHardwareBuffer_getBaseView(const AHardwareBuffer* buffer, uint32_t* outView);
+
+// Get list of all the views contained in this handle.
+int AHardwareBuffer_getAuxiliaryViewInfo(const AHardwareBuffer* buffer, uint32_t* outViewList,
+                                         size_t* outNumberOfViews);
+
+// Get the auxiliary view buffer at a given view index.
+AHardwareBuffer* AHardwareBuffer_getAuxiliaryBuffer(AHardwareBuffer* buffer, uint32_t viewIndex);
 } // namespace android
 
 #endif // ANDROID_PRIVATE_NATIVE_AHARDWARE_BUFFER_HELPERS_H
