@@ -34,6 +34,24 @@
       "parentUuid": "f373e63a_b127471c",
       "revId": "0649e68b3aa207f3e4c1fdc0736badeb17ed87a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "736047b3_823a97f5",
+        "filename": "libs/ui/include/ui/Gralloc6.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3621465
+      },
+      "writtenOn": "2025-11-12T12:06:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5bc3f2cb_3b9e36c8",
+      "revId": "0649e68b3aa207f3e4c1fdc0736badeb17ed87a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
