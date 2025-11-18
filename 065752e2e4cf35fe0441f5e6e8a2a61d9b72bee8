@@ -33,6 +33,24 @@
       "message": "Hi John,\nI’ve moved the new Mapper6 APIs into gralloc5.cpp.\nAre you suggesting this approach because stable-c lacks a versioning concept, meaning any future changes would remain under gralloc5/mapper5?\nWe’re considering whether it would be cleaner to introduce a dedicated structure for the new version, such as:\n\nGralloc6.h / Gralloc6.cpp\nA Gralloc6Mapper class inheriting from Gralloc5Mapper\n\nThis would make the additions for Mapper6 explicit and maintain clarity around version-specific changes. It seems like a more maintainable and transparent solution.\nPlease share your thoughts.",
       "revId": "065752e2e4cf35fe0441f5e6e8a2a61d9b72bee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45f50ffe_fbbbf628",
+        "filename": "libs/ui/Gralloc5.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-11-18T18:33:56Z",
+      "side": 1,
+      "message": "A Gralloc6 that inherits from Gralloc5 would work, yeah. I don\u0027t have a strong opinion on that vs. just having gralloc5.cpp internally do the version checks. I just don\u0027t want the entire class duplicated.\n\nI think what you have here is good enough for now, this works for me.",
+      "parentUuid": "37d2dcaa_0a6dc569",
+      "revId": "065752e2e4cf35fe0441f5e6e8a2a61d9b72bee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
