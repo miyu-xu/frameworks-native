@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce95e3a_3d316cbc",
+        "filename": "libs/gui/tests/MultiViewBuffer_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1975060
+      },
+      "writtenOn": "2025-11-18T09:09:21Z",
+      "side": 1,
+      "message": "Can you pls let us know where should allocateMultiView API be incorporated for GUI tests to use it?",
+      "revId": "0fe17401ae8dce453432c3700480eb590236951a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
