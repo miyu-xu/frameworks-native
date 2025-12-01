@@ -33,6 +33,23 @@
       "message": "Ping?",
       "revId": "2c29195c3f14bd2350054f0dbe3f2484ca9b8cc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be105e53_4726b435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1303480
+      },
+      "writtenOn": "2025-12-01T22:28:17Z",
+      "side": 1,
+      "message": "@pdwilliams@google.com Should this be now closed based on ag/34244186 ?",
+      "revId": "2c29195c3f14bd2350054f0dbe3f2484ca9b8cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
