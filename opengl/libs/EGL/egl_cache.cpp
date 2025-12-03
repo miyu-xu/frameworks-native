@@ -69,7 +69,10 @@ static EGLsizeiANDROID getBlob(const void* key, EGLsizeiANDROID keySize, void* v
 // egl_cache_t definition
 //
 egl_cache_t::egl_cache_t()
-      : mInitialized(false), mMultifileMode(false), mCacheByteLimit(kMaxMonolithicTotalSize) {}
+      : mInitialized(false),
+        mMultifileMode(false),
+        mCacheByteLimit(kMaxMonolithicTotalSize),
+        mCacheEntryLimit(kMaxMultifileTotalEntries) {}
 
 egl_cache_t::~egl_cache_t() {}
 
@@ -262,7 +265,21 @@ void egl_cache_t::updateMode() {
             mCacheByteLimit = debugCacheSize;
         }
 
-        ALOGV("Using multifile EGL blobcache limit of %zu bytes", mCacheByteLimit);
+        ALOGV("Using multifile EGL blobcache size limit of %zu bytes", mCacheByteLimit);
+
+        mCacheEntryLimit = static_cast<size_t>(
+                base::GetUintProperty<uint32_t>("ro.egl.blobcache.multifile_entry_limit",
+                                                kMaxMultifileTotalEntries));
+
+        // Check for a debug value
+        int debugCacheEntrySize = base::GetIntProperty("debug.egl.blobcache.multifile_entry_limit", -1);
+        if (debugCacheEntrySize >= 0) {
+            ALOGV("Overriding cache entry limit %zu with %i from debug.egl.blobcache.multifile_entry_limit",
+                  mCacheEntryLimit, debugCacheEntrySize);
+            mCacheEntryLimit = debugCacheEntrySize;
+        }
+
+        ALOGV("Using multifile EGL blobcache entry limit of %zu", mCacheEntryLimit);
     }
 }
 
@@ -278,7 +295,7 @@ MultifileBlobCache* egl_cache_t::getMultifileBlobCacheLocked() {
     if (mMultifileBlobCache == nullptr) {
         mMultifileBlobCache.reset(new MultifileBlobCache(kMaxMultifileKeySize,
                                                          kMaxMultifileValueSize, mCacheByteLimit,
-                                                         kMaxMultifileTotalEntries, mFilename));
+                                                         mCacheEntryLimit, mFilename));
     }
     return mMultifileBlobCache.get();
 }
