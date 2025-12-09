@@ -251,6 +251,26 @@ TEST_F(KeyEventTest, Properties) {
     ASSERT_EQ(newDisplayId, event.getDisplayId());
 }
 
+TEST_F(KeyEventTest, StreamOperator_WithUnknownKeycode) {
+    KeyEvent event;
+
+    static constexpr int32_t INVALID_KEYCODE = 9999;
+    static constexpr nsecs_t ARBITRARY_DOWN_TIME = 1;
+    static constexpr nsecs_t ARBITRARY_EVENT_TIME = 2;
+    const int32_t id = InputEvent::nextId();
+    // Initialize a KeyEvent with a keycode that is not in the list of known keycodes.
+    event.initialize(id, 0, AINPUT_SOURCE_GAMEPAD, DISPLAY_ID, INVALID_HMAC, AKEY_EVENT_ACTION_DOWN,
+                    AKEY_EVENT_FLAG_FROM_SYSTEM, INVALID_KEYCODE, 121, AMETA_ALT_ON, 1,
+                    ARBITRARY_DOWN_TIME, ARBITRARY_EVENT_TIME);
+    std::stringstream out;
+    out << event;
+
+    std::string expected =
+            "KeyEvent { action=DOWN, keycode=9999((unknown/null label)), metaState=2, "
+            "eventTime=2, downTime=1, flags=8, repeatCount=1, deviceId=0, source=GAMEPAD, displayId=0, eventId="+ std::to_string(event.getId()) + "}";
+    ASSERT_EQ(expected, out.str());
+}
+
 
 // --- MotionEventTest ---
 
