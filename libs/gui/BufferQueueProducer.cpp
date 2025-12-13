@@ -450,6 +450,8 @@ status_t BufferQueueProducer::dequeueBuffer(int* outSlot, sp<android::Fence>* ou
         return BAD_VALUE;
     }
 
+    BQ_LOGW("dequeueBuffer: dequeueTimeout=%lld", (long long)mDequeueTimeout);
+
     status_t returnFlags = NO_ERROR;
 #if !COM_ANDROID_GRAPHICS_LIBGUI_FLAGS(BQ_GL_FENCE_CLEANUP)
     EGLDisplay eglDisplay = EGL_NO_DISPLAY;
