@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce18fb07_3d0e531e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630008
+      },
+      "writtenOn": "2025-12-17T23:44:05Z",
+      "side": 1,
+      "message": "This is good, thank you for your patch. \n\nCan you add an unit test for this change ?\n\n\nIn frameworks/native/libs/input/tests/input_tests.cpp\n\nsome test like: \n```\nTEST(KeyEventTest, StreamOperator_WithUnknownKeycode) {\n    KeyEvent event;\n    // Initialize a KeyEvent with a keycode that is not in the list of known keycodes.\n    event.initialize(InputDeviceIdentifier(), /* deviceId */ 0, /* source */ 0,\n                     AKEY_EVENT_ACTION_DOWN, /* flags */ 0,\n                     /* keyCode\u003d */ 9999, /* scanCode */ 0, /* metaState */ 0,\n                     /* downTime */ 0, /* eventTime */ 0);\n\n    std::stringstream out;\n    out \u003c\u003c event;\n\n    std::string expected \u003d\n            \"KeyEvent { action\u003dDOWN, keycode\u003d9999((unknown/null label)), metaState\u003d0, \"\n            \"eventTime\u003d0, downTime\u003d0, flags\u003d0x0, repeatCount\u003d0, deviceId\u003d0 }\";\n    ASSERT_EQ(expected, out.str());\n}\n```",
+      "revId": "30586ce3bbe5c3222f5fa0909370e04ec2afecc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
