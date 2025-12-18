@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8601dcdf_33d5c21c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1630008
+      },
+      "writtenOn": "2025-12-18T18:00:46Z",
+      "side": 1,
+      "message": "I have cp\u0027ed internally. You may abandon this CL now.",
+      "revId": "85efcc8a11cf0c6ac04cef9171f927261b54a627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
