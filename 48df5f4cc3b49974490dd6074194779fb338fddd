@@ -16,6 +16,24 @@
       "message": "Thanks for the patch.\n\n1. Is this a cherry-pick from main? If so, please clearly explain that in the commit message.\n\n2. Do you have a bug number for this?\n\n3. Why do we need to change this behaviour on such an old Android branch?",
       "revId": "48df5f4cc3b49974490dd6074194779fb338fddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3cfa72_17bc9258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984380
+      },
+      "writtenOn": "2025-12-18T06:32:29Z",
+      "side": 1,
+      "message": "1. This is not cherry-pick from main. This issue is specific to Android 13. So, raised only for andorid13-dev branch.\n2. Updated part of commit message.\n3. As this issue is specific to Android 13 and could not see similar behaviour for next versions.",
+      "parentUuid": "ea98e106_e627ff2b",
+      "revId": "48df5f4cc3b49974490dd6074194779fb338fddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
