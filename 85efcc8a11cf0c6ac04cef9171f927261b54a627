@@ -16,6 +16,24 @@
       "message": "I have cp\u0027ed internally. You may abandon this CL now.",
       "revId": "85efcc8a11cf0c6ac04cef9171f927261b54a627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37e5a43_5e2614c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1303480
+      },
+      "writtenOn": "2025-12-18T18:04:17Z",
+      "side": 1,
+      "message": "I\u0027d suggest we wait until the CL is merged internally so that it accurately reflect the status. Thanks!",
+      "parentUuid": "8601dcdf_33d5c21c",
+      "revId": "85efcc8a11cf0c6ac04cef9171f927261b54a627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
