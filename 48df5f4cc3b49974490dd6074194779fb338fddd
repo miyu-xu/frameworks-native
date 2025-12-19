@@ -52,6 +52,24 @@
       "parentUuid": "0a3cfa72_17bc9258",
       "revId": "48df5f4cc3b49974490dd6074194779fb338fddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356baae3_d11cd130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2025-12-19T01:03:13Z",
+      "side": 1,
+      "message": "I see. From our team\u0027s point of view, I don\u0027t see the value of patching such an old branch, especially because the issue has already been fixed in subsequent versions, and there\u0027s no tests being included here (but even with tests, it seems risky).\n\nCan you just keep this patch in your copy of Android without merging it here?",
+      "parentUuid": "9c8be6ad_9edb2da6",
+      "revId": "48df5f4cc3b49974490dd6074194779fb338fddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
