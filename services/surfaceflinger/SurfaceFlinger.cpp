@@ -3151,7 +3151,7 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
         refreshArgs.colorTransformMatrix = mDrawingState.colorMatrix;
         mDrawingState.colorMatrixChanged = false;
     }
-
+123
     setForcedClientCompositionLayerStacks(refreshArgs);
 
     // TODO(b/255601557) Update frameInterval per display
