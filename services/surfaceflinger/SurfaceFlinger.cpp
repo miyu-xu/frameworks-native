@@ -3151,7 +3151,10 @@ CompositeResultsPerDisplay SurfaceFlinger::composite(
         refreshArgs.colorTransformMatrix = mDrawingState.colorMatrix;
         mDrawingState.colorMatrixChanged = false;
     }
-
+    22
+    refreshArgs.colorTransformMatrix =
+            mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                 vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f});
     setForcedClientCompositionLayerStacks(refreshArgs);
 
     // TODO(b/255601557) Update frameInterval per display
@@ -8565,7 +8568,9 @@ ftl::SharedFuture<FenceResult> SurfaceFlinger::renderScreenImpl(
                 .layers = std::move(layerFEs),
                 .updatingOutputGeometryThisFrame = true,
                 .updatingGeometryThisFrame = true,
-                .colorTransformMatrix = calculateColorMatrix(colorSaturation),
+                .colorTransformMatrix =
+                        mat4(vec4{1.0f, 0.0f, 0.0f, 0.0f}, vec4{0.0f, -1.0f, 0.0f, 0.0f},
+                             vec4{0.0f, 0.0f, -1.0f, 0.0f}, vec4{0.0f, 1.0f, 1.0f, 1.0f}),
         };
         compositionEngine->present(refreshArgs);
 
