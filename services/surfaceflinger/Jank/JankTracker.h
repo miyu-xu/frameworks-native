@@ -67,6 +67,8 @@ private:
         return instance;
     }
 
+    static bool processJankData(int32_t layerId, const gui::JankData&& jankData, bool quickpath);
+
     void addJankListenerLocked(int32_t layerId, sp<IBinder> listener) REQUIRES(mLock);
     void doFlushJankData(int32_t layerId);
     void markJankListenerForRemovalLocked(int32_t layerId, sp<IBinder> listener, int64_t afterVysnc)

@@ -59,31 +59,60 @@ void JankTracker::removeJankListener(int32_t layerId, sp<IBinder> listener, int6
             }});
 }
 
+bool JankTracker::processJankData(int32_t layerId, const gui::JankData&& jankData, bool quickpath) {
+    JankTracker& tracker = getInstance();
+
+    if (quickpath) {
+        if (!tracker.mLock.try_lock()) {
+            return false;
+        }
+    } else {
+        tracker.mLock.lock();
+    }
+    bool hasListeners = tracker.mJankListeners.count(layerId) > 0;
+    tracker.mLock.unlock();
+
+    if (!hasListeners && !sCollectAllJankDataForTesting) {
+        return true;
+    }
+
+    if (quickpath) {
+        if (!tracker.mJankDataLock.try_lock()) {
+            return false;
+        }
+    } else {
+        tracker.mJankDataLock.lock();
+    }
+    tracker.mJankData.emplace(layerId, jankData);
+    size_t count = tracker.mJankData.count(layerId);
+    tracker.mJankDataLock.unlock();
+
+    if (count >= kJankDataBatchSize && !sCollectAllJankDataForTesting) {
+        if (quickpath) {
+            BackgroundExecutor::getLowPriorityInstance().sendCallbacks(
+                {[layerId]() {
+                    getInstance().doFlushJankData(layerId);
+                }});
+        } else {
+            tracker.doFlushJankData(layerId);
+        }
+    }
+
+    return true;
+}
+
 void JankTracker::onJankData(int32_t layerId, gui::JankData data) {
     if (sListenerCount == 0) {
         return;
     }
 
+    if (processJankData(layerId, std::move(data), true /** quickpath */)) {
+        return;
+    }
+
     BackgroundExecutor::getLowPriorityInstance().sendCallbacks(
             {[layerId, data = std::move(data)]() {
-                JankTracker& tracker = getInstance();
-
-                tracker.mLock.lock();
-                bool hasListeners = tracker.mJankListeners.count(layerId) > 0;
-                tracker.mLock.unlock();
-
-                if (!hasListeners && !sCollectAllJankDataForTesting) {
-                    return;
-                }
-
-                tracker.mJankDataLock.lock();
-                tracker.mJankData.emplace(layerId, data);
-                size_t count = tracker.mJankData.count(layerId);
-                tracker.mJankDataLock.unlock();
-
-                if (count >= kJankDataBatchSize && !sCollectAllJankDataForTesting) {
-                    tracker.doFlushJankData(layerId);
-                }
+                processJankData(layerId, std::move(data), false /** quickpath */);
             }});
 }
 
