@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ae2396_cf17933a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2026-01-05T18:28:07Z",
+      "side": 1,
+      "message": "Instead of using magic strings in the native layer, ensure that the touchable region of the SPY window is correctly set. This should be possible to change via a transaction to the surfaceflinger.",
+      "revId": "bd40b8aefc2e51bc7390ecc83410ba54ea27fcdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
