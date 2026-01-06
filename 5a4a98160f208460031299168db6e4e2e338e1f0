@@ -16,6 +16,23 @@
       "message": "This change is ready for review.",
       "revId": "5a4a98160f208460031299168db6e4e2e338e1f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292e4e37_b032e065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1078923
+      },
+      "writtenOn": "2026-01-06T11:16:55Z",
+      "side": 1,
+      "message": "Thanks for the effort.\n\nHowever, this optimizes for the wrong thing. The processing of jank data is not time sensitive, which is why it\u0027s scheduled on the background thread. This change would move the processing work onto SF\u0027s main thread, which we want to avoid. The processing of the jank data involves binder calls into apps, so we really don\u0027t want to do that from the main thread.\n\nNote, there is no priority inversion, since the main thread never acquires the lock.",
+      "revId": "5a4a98160f208460031299168db6e4e2e338e1f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
