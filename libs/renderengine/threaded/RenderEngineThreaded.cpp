@@ -131,9 +131,9 @@ void RenderEngineThreaded::waitUntilInitialized() const {
 }
 
 std::future<void> RenderEngineThreaded::primeCache(PrimeCacheConfig config) {
+    SFTRACE_CALL();
     const auto resultPromise = std::make_shared<std::promise<void>>();
     std::future<void> resultFuture = resultPromise->get_future();
-    SFTRACE_CALL();
     // This function is designed so it can run asynchronously, so we do not need to wait
     // for the futures.
     {
