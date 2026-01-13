@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0295f7_8ae8ce8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2026-01-13T11:42:45Z",
+      "side": 1,
+      "message": "Do you have any more details on what\u0027s causing the same node to be noticed multiple times? For example, what sequence of events causes the race condition",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e407d5_c0d6a09d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2026-01-13T11:42:45Z",
+      "side": 1,
+      "message": "Nit: I assume you mean \"Suspend to RAM\". Please expand the acronym",
+      "range": {
+        "startLine": 15,
+        "startChar": 33,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
