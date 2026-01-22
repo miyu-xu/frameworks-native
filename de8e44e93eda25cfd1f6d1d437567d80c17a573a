@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5211bc6c_68b94dd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2026-01-22T20:07:26Z",
+      "side": 1,
+      "message": "I\u0027m also surprised about this possibility. I\u0027ve never seen such cases before. Would it make sense to add a LOG(FATAL) there instead, and check whether it\u0027s actually getting triggered?",
+      "parentUuid": "aa0295f7_8ae8ce8e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7e407d5_c0d6a09d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
