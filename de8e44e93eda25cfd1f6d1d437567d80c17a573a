@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3508e193_71b434ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1874672
+      },
+      "writtenOn": "2026-01-27T09:09:56Z",
+      "side": 1,
+      "message": "The reproduction steps at that time were as follows:\n1.Connect HDMI1 to an X-BOX One S (already powered on), then press the standby button to enter standby mode.\n2.Disconnect the X-BOX One S device, press the standby button to power on, and after powering on, enter the home screen.\n\nlog:\n07-09 13:32:12.389   811  1056 D EventHub: No input device configuration file found for device \u0027Mediatek\u0027.\n07-09 13:32:12.395   811  1056 W EventHub: Unable to disable kernel key repeat for /dev/input/event3: Function not implemented\n07-09 13:32:12.395   811  1056 I EventHub: usingClockIoctl\u003dtrue\n07-09 13:32:12.395   811  1056 I EventHub: New device: id\u003d18, fd\u003d497, path\u003d\u0027/dev/input/event3\u0027, name\u003d\u0027Mediatek\u0027, classes\u003dKEYBOARD | DPAD | EXTERNAL, configuration\u003d\u0027\u0027, keyLayout\u003d\u0027/vendor/usr/keylayout/Vendor_000d_Product_3838.kl\u0027, keyCharacterMap\u003d\u0027/system/usr/keychars/Generic.kcm\u0027, builtinKeyboard\u003dfalse, \n07-09 13:32:12.400   811  1056 I EventHub: Removing device \u0027/dev/input/event3\u0027 due to inotify event\n07-09 13:32:12.400   811  1056 D EventHub: No input device configuration file found for device \u0027Mediatek\u0027.\n07-09 13:32:12.407   811  1056 W EventHub: Unable to disable kernel key repeat for /dev/input/event3: Function not implemented\n07-09 13:32:12.407   811  1056 I EventHub: usingClockIoctl\u003dtrue\n07-09 13:32:12.407   811  1056 I EventHub: New device: id\u003d19, fd\u003d499, path\u003d\u0027/dev/input/event3\u0027, name\u003d\u0027Mediatek\u0027, classes\u003dKEYBOARD | DPAD | EXTERNAL, configuration\u003d\u0027\u0027, keyLayout\u003d\u0027/vendor/usr/keylayout/Vendor_000d_Product_3838.kl\u0027, keyCharacterMap\u003d\u0027/system/usr/keychars/Generic.kcm\u0027, builtinKeyboard\u003dfalse, \n07-09 13:32:12.408   811  1056 I InputReader: Device added: id\u003d19, eventHubId\u003d19, name\u003d\u0027Mediatek\u0027, descriptor\u003d\u00279f21dfc094796d4153bea24e1fabef8006453fa0\u0027,sources\u003dKEYBOARD | DPAD\n07-09 13:32:12.408   811  1056 I InputReader: Device added: id\u003d19, eventHubId\u003d18, name\u003d\u0027Mediatek\u0027, descriptor\u003d\u0027d8bacd9276f9423c37ec789169fc64b3b28f078b\u0027,sources\u003dKEYBOARD | DPAD\n\ndumpsys input\n    18: Mediatek\n      Classes: KEYBOARD | DPAD | EXTERNAL\n      Path: /dev/input/event3\n      Enabled: true\n      Descriptor: d8bacd9276f9423c37ec789169fc64b3b28f078b\n      Location: c0:e5:da:fc:db:89\n      ControllerNumber: 0\n      UniqueId: 10:63:a3:84:58:7d\n      Identifier: bus\u003d0x0005, vendor\u003d0x000d, product\u003d0x3838, version\u003d0x0000, bluetoothAddress\u003d10:63:A3:84:58:7D\n      KeyLayoutFile: /vendor/usr/keylayout/Vendor_000d_Product_3838.kl\n      KeyCharacterMapFile: /system/usr/keychars/Generic.kcm\n      LanguageTag: \n      LayoutType: \n      ConfigurationFile: \n      VideoDevice: \u003cnone\u003e\n      SysfsDevicePath: /sys/devices/virtual/misc/uhid/0005:000D:3838.0008\n    19: Mediatek\n      Classes: KEYBOARD | DPAD | EXTERNAL\n      Path: /dev/input/event3\n      Enabled: true\n      Descriptor: 9f21dfc094796d4153bea24e1fabef8006453fa0\n      Location: c0:e5:da:fc:db:89\n      ControllerNumber: 0\n      UniqueId: 10:63:a3:84:58:7d\n      Identifier: bus\u003d0x0005, vendor\u003d0x000d, product\u003d0x3838, version\u003d0x0000, bluetoothAddress\u003d10:63:A3:84:58:7D\n      KeyLayoutFile: /vendor/usr/keylayout/Vendor_000d_Product_3838.kl\n      KeyCharacterMapFile: /system/usr/keychars/Generic.kcm\n      LanguageTag: \n      LayoutType: \n      ConfigurationFile: \n      VideoDevice: \u003cnone\u003e\n      SysfsDevicePath: /sys/devices/virtual/misc/uhid/0005:000D:3838.0008",
+      "parentUuid": "aa0295f7_8ae8ce8e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7e407d5_c0d6a09d",
@@ -61,6 +85,30 @@
       "writtenOn": "2026-01-13T11:42:45Z",
       "side": 1,
       "message": "Nit: I assume you mean \"Suspend to RAM\". Please expand the acronym",
+      "range": {
+        "startLine": 15,
+        "startChar": 33,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fb1a80c_65c76316",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1874672
+      },
+      "writtenOn": "2026-01-27T09:09:56Z",
+      "side": 1,
+      "message": "Yes, it means suspend to RAM. Sorry, I didn\u0027t express it clearly.",
+      "parentUuid": "a7e407d5_c0d6a09d",
       "range": {
         "startLine": 15,
         "startChar": 33,

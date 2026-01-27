@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99ec3c5_39ca85e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874672
+      },
+      "writtenOn": "2026-01-27T09:09:56Z",
+      "side": 1,
+      "message": "I made the judgment based on this information when I discovered these logs.\nI InputReader: Device added: id\u003d19, eventHubId\u003d19, name\u003d\u0027Mediatek\u0027, descriptor\u003d\u00279f21dfc094796d4153bea24e1fabef8006453fa0\u0027,sources\u003dKEYBOARD | DPAD\nI InputReader: Device added: id\u003d19, eventHubId\u003d18, name\u003d\u0027Mediatek\u0027, descriptor\u003d\u0027d8bacd9276f9423c37ec789169fc64b3b28f078b\u0027,sources\u003dKEYBOARD | DPAD\n\nThese two added devices are the same, with only different descriptor values. \nThis indicates that the process has completed EventHub.cpp \n\nopenDeviceLocked -\u003e \nassignDescriptorLocked -\u003e \nhasDeviceWithDescriptorLocked.\n\nIn hasDeviceWithDescriptorLocked, there is a check to see if a device with the same descriptor exists, and if it does, a new descriptor value is generated for this same device. \nBased on this judgment, I believe that the duplicate check for mDevices at the start of openDeviceLocked is not sufficient, and a duplicate check for mOpeningDevices needs to be added.",
+      "revId": "004acdb5e80cb0a94dad8f2e253d0886e36c30f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
