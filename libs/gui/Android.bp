@@ -372,6 +372,7 @@ cc_library_static {
     cflags: [
         "-DNO_BINDER",
     ],
+<<<<<<< HEAD
 
     defaults: ["libgui_bufferqueue-defaults"],
 
@@ -379,7 +380,16 @@ cc_library_static {
         ":libgui_frame_event_aidl",
         ":inputconstants_aidl",
         ":libgui_bufferqueue_sources",
+=======
+        "-clang-analyzer-unix.BlockInCriticalSection",
+        "-clang-analyzer-unix.StdCLibraryFunctions",
+        "-clang-diagnostic-deprecated-declarations",
+        "-misc-header-include-cycle",
+        "-misc-include-cleaner",
+        "-misc-unconventional-assign-operator",
+>>>>>>> PATCH
     ],
+<<<<<<< HEAD
 
     aidl: {
         include_dirs: [
@@ -387,6 +397,15 @@ cc_library_static {
         ],
     },
 }
+=======
+        "android-*",
+        "bugprone-*",
+        "cert-*",
+        "clang-*",
+        "google-*",
+        "misc-*",
+        "performance*",
+>>>>>>> PATCH
 
 filegroup {
     name: "libgui_bufferqueue_sources",
