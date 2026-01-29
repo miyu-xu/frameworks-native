@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8497a375_2bb18112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1951823
+      },
+      "writtenOn": "2026-01-29T12:13:03Z",
+      "side": 1,
+      "message": "From these logs, we suspect that there\u0027s a race condition between the device removal at 13:32:12.400 and it being added again at 13:32:12.407. Please can you reproduce the issue, take a full bug report, and file a bug in the partner tracker so we can investigate?",
+      "parentUuid": "3508e193_71b434ee",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "de8e44e93eda25cfd1f6d1d437567d80c17a573a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7e407d5_c0d6a09d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
