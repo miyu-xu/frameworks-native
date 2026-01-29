@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b614f4_1646d22d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2026-01-29T15:28:17Z",
+      "side": 1,
+      "message": "This is just https://r.android.com/3787371 cherry-picked into android12-dev as well, for Mainline preloading purposes. PTAL.",
+      "revId": "79cb34448bfb37d93bfd82fdfdcafe4868e21950",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
