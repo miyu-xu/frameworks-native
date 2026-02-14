@@ -116,6 +116,7 @@ static const std::vector<std::string> aidl_interfaces_to_dump {
 /* list of extra hal interfaces to dump containing process during native dumps */
 // This is filled when dumpstate is called.
 static std::set<std::string> extra_hal_interfaces_to_dump;
+static std::set<std::string> extra_aidl_hal_interfaces_to_dump;
 
 static void read_extra_hals_to_dump_from_property() {
     // extra hals to dump are already filled
@@ -131,6 +132,22 @@ static void read_extra_hals_to_dump_from_property() {
         }
         extra_hal_interfaces_to_dump.insert(std::move(trimmed_token));
     }
+}
+
+static void read_extra_aidl_hals_to_dump_from_property() {
+       if (!extra_aidl_hal_interfaces_to_dump.empty()) {
+           return;
+       }
+
+       std::string value = android::base::GetProperty("ro.dump.aidl.hals.extra","");
+       std::vector<std::string> tokens = android::base::Split(value, ",");
+        for (const auto &token : tokens) {
+            std::string trimmed_token = android::base::Trim(token);
+             if(trimmed_token.length() == 0) {
+                continue;
+            }
+            extra_aidl_hal_interfaces_to_dump.insert(trimmed_token);
+       }
 }
 
 // check if interface is included in either default hal list or extra hal list
@@ -163,6 +180,7 @@ bool should_dump_native_traces(const char* path) {
 
 static void get_interesting_aidl_pids(std::set<int> &pids) {
     using ServiceDebugInfo = android::IServiceManager::ServiceDebugInfo;
+    read_extra_aidl_hals_to_dump_from_property();
     auto sm = android::defaultServiceManager();
     std::vector<ServiceDebugInfo> serviceDebugInfos = sm->getServiceDebugInfo();
     for (const auto & serviceDebugInfo : serviceDebugInfos) {
@@ -172,6 +190,12 @@ static void get_interesting_aidl_pids(std::set<int> &pids) {
                 pids.insert(serviceDebugInfo.pid);
             }
         }
+       for (const auto &aidl_prefix : extra_aidl_hal_interfaces_to_dump) {
+           // Check for prefix match with extra aidl interface to dump
+           if (serviceDebugInfo.name.rfind(aidl_prefix, 0) == 0) {
+                   pids.insert(serviceDebugInfo.pid);
+           }
+       }
     }
 }
 
