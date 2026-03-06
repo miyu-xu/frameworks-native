@@ -1225,6 +1225,9 @@ void Layer::updateTexImage(nsecs_t latchTime, bool bgColorOnly) {
         }
     }
 
+    Rect bounds = s.buffer->getBounds();
+    ALOGI("FEED_DATA_S: name=%s bounds=%d,%d,%d,%d", getName().c_str(), bounds.left, bounds.top, bounds.right, bounds.bottom);
+
     const int32_t layerId = getSequence();
     const uint64_t bufferId = mDrawingState.buffer->getId();
     const uint64_t frameNumber = mDrawingState.frameNumber;
