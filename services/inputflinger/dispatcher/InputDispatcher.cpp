@@ -2047,6 +2047,14 @@ bool InputDispatcher::dispatchMotionLocked(nsecs_t currentTime,
         entry->dispatchInProgress = true;
 
         logOutboundMotionDetails("dispatchMotion - ", *entry);
+
+        if (entry->getPointerCount() > 0) {
+            int32_t action = entry->action;
+            float x = entry->pointerCoords[0].getAxisValue(AMOTION_EVENT_AXIS_X);
+            float y = entry->pointerCoords[0].getAxisValue(AMOTION_EVENT_AXIS_Y);
+            unsigned long long eventTime = entry->eventTime;
+            ALOGI("FEED_DATA_T: act=%d x=%.1f y=%.1f t=%llu", action, x, y, eventTime);
+        }
     }
 
     // Clean up if dropping the event.
