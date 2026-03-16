@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e094c58_19f47ee4",
+        "filename": "services/inputflinger/dispatcher/InputDispatcher.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2026-03-16T19:05:29Z",
+      "side": 1,
+      "message": "They may not. Inputdispatcher expects to see a consistent input stream at all times. Please figure out who\u0027s sending these inconsistent events + fix the issue at that layer instead.",
+      "range": {
+        "startLine": 750,
+        "startChar": 52,
+        "endLine": 750,
+        "endChar": 79
+      },
+      "revId": "353af0c203ef6ead50c421b135eaf2e403a60a08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
