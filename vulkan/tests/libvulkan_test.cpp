@@ -917,6 +917,99 @@ TEST_F(AImageReaderVulkanSwapchainTest, SharedPresentTimingZeroedTest) {
     cleanUpSwapchainForTest();
 }
 
+
+TEST_F(AImageReaderVulkanSwapchainTest, PresentModeDefaultWouldBlockTest) {
+    // BUG: verify that setting present mode to DEFAULT correctly drops buffers
+    // and prevents WOULD_BLOCK (-11) when queuing multiple frames.
+    std::vector<const char*> instanceLayers = {};
+
+    createVulkanInstance(instanceLayers);
+    // Create an image reader with max 4 buffers, no listener (so frames pile up)
+    createAImageReader(640, 480, AIMAGE_FORMAT_PRIVATE, 4, false);
+    getANativeWindowFromReader();
+
+    int err = native_window_api_connect(mWindow, NATIVE_WINDOW_API_CPU);
+
+// A timeout of -1 propagates down to NATIVE_WINDOW_SET_DEQUEUE_TIMEOUT which
+// sets mCore->mDequeueBufferCannotBlock = dequeueBufferCannotBlock to true
+// then in the BufferQueueProducer::waitForFreeSlotThenRelock we return WOULD_BLOCK instead of waiting
+// https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/libs/gui/BufferQueueProducer.cpp;l=427?q=WOULD_BLOCK%20bufferqueueproducer&sq=git:googleplex-android%2Fplatform%2Fsuperproject%2Fmain@main
+    err = mWindow->perform(mWindow, NATIVE_WINDOW_SET_DEQUEUE_TIMEOUT, (int64_t)-1);
+
+    // set DEFAULT (this should restore mLegacyBufferDrop = true)
+    // If this fails, the patch is missing.
+    err = mWindow->perform(mWindow, NATIVE_WINDOW_SET_PRESENT_MODE, ANATIVEWINDOW_PRESENT_DEFAULT);
+    ASSERT_EQ(err, 0);
+
+    // Try to queue 10 frames.
+    // Because we are in DEFAULT mode, the queue should overwrite the oldest buffer
+    // instead of growing past its capacity. Thus, dequeueBuffer should never
+    // return WOULD_BLOCK (-11).
+    for (int i = 0; i < 10; ++i) {
+        ANativeWindowBuffer* buffer = nullptr;
+        int fenceFd = -1;
+        int res = mWindow->dequeueBuffer(mWindow, &buffer, &fenceFd);
+        ASSERT_EQ(res, 0) << " dequeueBuffer failed";
+
+        res = mWindow->queueBuffer(mWindow, buffer, fenceFd);
+        ASSERT_EQ(res, 0);
+    }
+
+    native_window_api_disconnect(mWindow, NATIVE_WINDOW_API_CPU);
+    cleanUpSwapchainForTest();
+}
+
+
+TEST_F(AImageReaderVulkanSwapchainTest, PresentModeDefaultWouldBlockTest2) {
+    // BUG: verify that setting present mode to DEFAULT correctly drops buffers
+    // and prevents WOULD_BLOCK (-11) when queuing multiple frames.
+    std::vector<const char*> instanceLayers = {};
+    std::vector<const char*> deviceLayers = {};
+
+    createVulkanInstance(instanceLayers);
+    // Create an image reader with max 4 buffers, no listener (so frames pile up)
+    createAImageReader(640, 480, AIMAGE_FORMAT_PRIVATE, 4, false);
+    getANativeWindowFromReader();
+    createVulkanSurface();
+    pickPhysicalDeviceAndQueueFamily();
+    createDeviceAndGetQueue(deviceLayers);
+
+    // Call createSwapchain(), which internally sets the present mode to
+    // ANATIVEWINDOW_PRESENT_DEFAULT. Without the patch, this failed to restore
+    // mLegacyBufferDrop to true.
+    createSwapchain();
+    ASSERT_NE(mSwapchain, (VkSwapchainKHR)VK_NULL_HANDLE);
+
+    // Try to acquire and queue 10 frames.
+    // We use a timeout of 0 to enable non-blocking behavior. Because we are in DEFAULT mode,
+    // the queue should overwrite the oldest buffer instead of growing past its capacity.
+    // Thus, vkAcquireNextImageKHR should never fail due to WOULD_BLOCK (-11).
+    for (int i = 0; i < 10; ++i) {
+        uint32_t imageIndex;
+        // A timeout of -1 propagates down to NATIVE_WINDOW_SET_DEQUEUE_TIMEOUT which
+        // sets mCore->mDequeueBufferCannotBlock = dequeueBufferCannotBlock to true
+        // then in the BufferQueueProducer::waitForFreeSlotThenRelock we return WOULD_BLOCK instead of waiting
+        // https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/libs/gui/BufferQueueProducer.cpp;l=427?q=WOULD_BLOCK%20bufferqueueproducer&sq=git:googleplex-android%2Fplatform%2Fsuperproject%2Fmain@main
+        VkResult res = vkAcquireNextImageKHR(mDevice, mSwapchain, -1, VK_NULL_HANDLE, VK_NULL_HANDLE, &imageIndex);
+
+        // We explicitly check for VK_ERROR_SURFACE_LOST_KHR, which is what
+        // vkAcquireNextImageKHR returns if dequeueBuffer fails with WOULD_BLOCK (-11).
+        EXPECT_NE(res, VK_ERROR_SURFACE_LOST_KHR) << "vkAcquireNextImageKHR returned VK_ERROR_SURFACE_LOST_KHR on iteration " << i;
+        ASSERT_EQ(res, VK_SUCCESS);
+
+        VkPresentInfoKHR presentInfo = {};
+        presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+        presentInfo.swapchainCount = 1;
+        presentInfo.pSwapchains = &mSwapchain;
+        presentInfo.pImageIndices = &imageIndex;
+
+        res = vkQueuePresentKHR(mPresentQueue, &presentInfo);
+        ASSERT_EQ(res, VK_SUCCESS);
+    }
+
+    cleanUpSwapchainForTest();
+}
+
 }  // namespace libvulkantest
 
 }  // namespace android
