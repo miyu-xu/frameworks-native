@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "239b3d0a_b7f351bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3788520
+      },
+      "writtenOn": "2026-03-20T11:06:54Z",
+      "side": 1,
+      "message": "I reworded the commit message as discussed in buganizer.",
+      "parentUuid": "336f09c5_bdc2afbd",
+      "revId": "87b1652b662c4ee67f19bc1711ad1a892bf5ceca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8e403087_eeff17dc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
