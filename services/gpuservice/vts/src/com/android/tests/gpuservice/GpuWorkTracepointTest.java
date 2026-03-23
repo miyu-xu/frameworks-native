@@ -26,6 +26,7 @@ import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
 
+import com.android.compatibility.common.util.FeatureUtil;
 import com.android.compatibility.common.util.PropertyUtil;
 import com.android.compatibility.common.util.VsrTest;
 
@@ -66,6 +67,8 @@ public class GpuWorkTracepointTest extends BaseHostJUnit4Test {
     @RequiresDevice
     @Test
     public void testGpuWorkPeriodTracepointFormat() throws Exception {
+        assumeTrue("Test does not apply for automotive devices",
+                !FeatureUtil.isAutomotive(getDevice()));
         CommandResult commandResult = getDevice().executeShellV2Command(
                 String.format("cat %s", GPU_WORK_PERIOD_TRACEPOINT_FORMAT_PATH));
 
