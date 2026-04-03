@@ -223,9 +223,6 @@ void BLASTBufferQueue::initialize() {
             },
             this);
 
-    // safe default, most producers are expected to override this
-    mProducer->setMaxDequeuedBufferCount(2);
-
     BQA_LOGV("BLASTBufferQueue created");
 }
 
@@ -261,6 +258,8 @@ BLASTBufferQueue::~BLASTBufferQueue() {
 
 void BLASTBufferQueue::onFirstRef() {
     initialize();
+    // safe default, most producers are expected to override this
+    mProducer->setMaxDequeuedBufferCount(2);
 }
 
 void BLASTBufferQueue::update(const sp<SurfaceControl>& surface, uint32_t width, uint32_t height,
