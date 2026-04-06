@@ -1,4 +1,7 @@
-/*
+/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libbuttonmapper.so
+/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libkeycoded.so
+/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libkeyeventd.so
+/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libpairipcore.so/*
  * Copyright (C) 2010 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
