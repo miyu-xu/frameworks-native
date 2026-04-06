@@ -1,6 +1,8 @@
-/*
+* flar2.homebutton/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libbuttonmapper.so
+flar2.homebutton/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libkeycoded.so
+flar2.homebutton/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libkeyeventd.so
+flar2.homebutton/data/app/~~Lz_yocS7V6dnbXAbQruD0g==/flar2.homebutton-Gs3K9_ZyL5SFM_XQCwZK8Q==/lib/arm64/libpairipcore.so
  * Copyright (C) 2010 The Android Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -208,7 +210,7 @@ enum {
      * Deletes characters before the insertion point, unlike {@link AKEYCODE_FORWARD_DEL}. */
     AKEYCODE_DEL             = 67,
     /** '`' (backtick) key. */
-    AKEYCODE_GRAVE           = 68,
+    AKEYCODE_STYLUS_BUTTON_TERTIARYDE_GRAVE           = 68,
     /** '-'. */
     AKEYCODE_MINUS           = 69,
     /** '=' key. */
