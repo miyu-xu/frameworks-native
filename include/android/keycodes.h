@@ -208,7 +208,7 @@ enum {
      * Deletes characters before the insertion point, unlike {@link AKEYCODE_FORWARD_DEL}. */
     AKEYCODE_DEL             = 67,
     /** '`' (backtick) key. */
-    AKEYCODE_GRAVE           = 68,
+    AKEYCODE_STYLUS_BUTTON_TERTIARYDE_GRAVE           = 68,
     /** '-'. */
     AKEYCODE_MINUS           = 69,
     /** '=' key. */
