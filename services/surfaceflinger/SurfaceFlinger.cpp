@@ -2609,7 +2609,45 @@ bool SurfaceFlinger::updateLayerSnapshots(VsyncId vsyncId, nsecs_t frameTimeNs,
         }
     });
 
+    for (auto& [id, layer] : mLegacyLayers) {
+        if (layer->isTrackingVideo()) {
+            frontend::LayerSnapshot* snapshot = mLayerSnapshotBuilder.getSnapshot(id);
+            bool isVisible = snapshot && snapshot->isVisible;
+            bool frameRecent = (systemTime() - layer->getLastFrameTime()) < ms2ns(500);
+
+            if (isVisible && frameRecent) {
+                if (!layer->isVideoPlaying()) {
+                    float layerWidth = snapshot->transformedBounds.getWidth();
+                    float layerHeight = snapshot->transformedBounds.getHeight();
+                    float area = layerWidth * layerHeight;
+
+                    const DisplayDevice* display = getDisplayFromLayerStack(snapshot->outputFilter.layerStack);
+                    float displayArea = display ? (display->getWidth() * display->getHeight()) : 0;
+
+                    if (displayArea > 0) {
+                        float ratio = area / displayArea;
+                        if (ratio >= 0.1f) {
+                            layer->setVideoPlaying(true);
+                            ALOGI("VIDEO_START: %s, Area: %.0f x %.0f, ScreenRatio: %.1f%%",
+                                  layer->getDebugName(), layerWidth, layerHeight, ratio * 100.0f);
+                        }
+                    }
+                }
+            } else {
+                if (layer->isVideoPlaying()) {
+                    layer->setVideoPlaying(false);
+                    ALOGI("VIDEO_STOP: %s", layer->getDebugName());
+                }
+            }
+        }
+    }
+
     for (auto& destroyedLayer : mLayerLifecycleManager.getDestroyedLayers()) {
+        auto it = mLegacyLayers.find(destroyedLayer->id);
+        if (it != mLegacyLayers.end() && it->second->isVideoPlaying()) {
+            ALOGI("VIDEO_STOP: %s", it->second->getDebugName());
+            it->second->setVideoPlaying(false);
+        }
         mLegacyLayers.erase(destroyedLayer->id);
     }
 

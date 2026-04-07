@@ -358,6 +358,11 @@ public:
 
     virtual uid_t getOwnerUid() const { return mOwnerUid; }
 
+    bool isTrackingVideo() const { return mIsTrackingVideo; }
+    bool isVideoPlaying() const { return mIsVideoPlaying; }
+    void setVideoPlaying(bool playing) { mIsVideoPlaying = playing; }
+    nsecs_t getLastFrameTime() const { return mLastFrameTime; }
+
     // Used to check if mUsedVsyncIdForRefreshRateSelection should be expired when it stop updating.
     nsecs_t mMaxTimeForUseVsyncId = 0;
     // True when DrawState.useVsyncIdForRefreshRateSelection previously set to true during updating
@@ -515,6 +520,10 @@ private:
     }
 
     bool mGetHandleCalled = false;
+
+    bool mIsTrackingVideo = false;
+    bool mIsVideoPlaying = false;
+    nsecs_t mLastFrameTime = 0;
 
     // The inherited shadow radius after taking into account the layer hierarchy. This is the
     // final shadow radius for this layer. If a shadow is specified for a layer, then effective

@@ -887,6 +887,22 @@ bool Layer::setBuffer(std::shared_ptr<renderengine::ExternalTexture>& buffer,
                       bool isAutoTimestamp, const FrameTimelineInfo& info, gui::GameMode gameMode) {
     SFTRACE_FORMAT("setBuffer %s - hasBuffer=%s", getDebugName(), (buffer ? "true" : "false"));
 
+    if (bufferData.buffer) {
+        int format = bufferData.buffer->getPixelFormat();
+        uint64_t usage = bufferData.buffer->getUsage();
+        bool isYuv = (format == HAL_PIXEL_FORMAT_YV12 ||
+                      format == HAL_PIXEL_FORMAT_YCrCb_420_SP ||
+                      (format == HAL_PIXEL_FORMAT_IMPLEMENTATION_DEFINED &&
+                       (usage & (GraphicBuffer::USAGE_HW_VIDEO_ENCODER | GRALLOC_USAGE_HW_CAMERA_ZSL | GRALLOC_USAGE_PROTECTED))));
+
+        if (isYuv) {
+            // we will mark it as tracking.
+            // The actual start logging will happen in SurfaceFlinger when visibility is calculated.
+            mIsTrackingVideo = true;
+            mLastFrameTime = systemTime();
+        }
+    }
+
     const bool frameNumberChanged =
             bufferData.flags.test(BufferData::BufferDataChange::frameNumberChanged);
     const uint64_t frameNumber =
