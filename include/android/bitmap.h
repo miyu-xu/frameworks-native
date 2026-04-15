@@ -45,7 +45,7 @@ enum {
     ANDROID_BITMAP_RESULT_SUCCESS           = 0,
     /** Bad parameter. */
     ANDROID_BITMAP_RESULT_BAD_PARAMETER     = -1,
-    /** JNI exception occured. */
+    /** JNI exception occurred. */
     ANDROID_BITMAP_RESULT_JNI_EXCEPTION     = -2,
     /** Allocation failed. */
     ANDROID_BITMAP_RESULT_ALLOCATION_FAILED = -3,
