@@ -131,13 +131,13 @@ class ICInterface : public SharedRefBase {
     virtual SpAIBinder asBinder() = 0;
 
     /**
-     * Returns whether this interface is in a remote process. If it cannot be determined locally,
+     * Returns whether this itf is in a remote process. If it cannot be determined locally,
      * this will be checked using AIBinder_isRemote.
      */
     virtual bool isRemote() = 0;
 
     /**
-     * Dumps information about the interface. By default, dumps nothing.
+     * Dumps information about the itf. By default, dumps nothing.
      *
      * This method is not given ownership of the FD.
      */
@@ -152,7 +152,7 @@ class ICInterface : public SharedRefBase {
 #endif
 
     /**
-     * Interprets this binder as this underlying interface if this has stored an ICInterface in the
+     * Interprets this binder as this underlying itf if this has stored an ICInterface in the
      * binder's user data.
      *
      * This does not do type checking and should only be used when the binder is known to originate
@@ -169,7 +169,7 @@ class ICInterface : public SharedRefBase {
    private:
     class ICInterfaceData {
        public:
-        std::shared_ptr<ICInterface> interface;
+        std::shared_ptr<ICInterface> itf;
 
         static inline std::shared_ptr<ICInterface> getInterface(AIBinder* binder);
 
@@ -262,7 +262,7 @@ AIBinder_Class* ICInterface::defineClass(const char* interfaceDescriptor,
         return nullptr;
     }
 
-    // We can't know if these methods are overridden by a subclass interface, so we must register
+    // We can't know if these methods are overridden by a subclass itf, so we must register
     // ourselves. The defaults are harmless.
     AIBinder_Class_setOnDump(clazz, ICInterfaceData::onDump);
 #ifdef HAS_BINDER_SHELL_COMMAND
@@ -283,12 +283,12 @@ std::shared_ptr<ICInterface> ICInterface::ICInterfaceData::getInterface(AIBinder
     void* userData = AIBinder_getUserData(binder);
     if (userData == nullptr) return nullptr;
 
-    return static_cast<ICInterfaceData*>(userData)->interface;
+    return static_cast<ICInterfaceData*>(userData)->itf;
 }
 
 void* ICInterface::ICInterfaceData::onCreate(void* args) {
-    std::shared_ptr<ICInterface> interface = static_cast<ICInterface*>(args)->ref<ICInterface>();
-    ICInterfaceData* data = new ICInterfaceData{interface};
+    std::shared_ptr<ICInterface> itf = static_cast<ICInterface*>(args)->ref<ICInterface>();
+    ICInterfaceData* data = new ICInterfaceData{itf};
     return static_cast<void*>(data);
 }
 
@@ -298,9 +298,9 @@ void ICInterface::ICInterfaceData::onDestroy(void* userData) {
 
 binder_status_t ICInterface::ICInterfaceData::onDump(AIBinder* binder, int fd, const char** args,
                                                      uint32_t numArgs) {
-    std::shared_ptr<ICInterface> interface = getInterface(binder);
-    if (interface != nullptr) {
-        return interface->dump(fd, args, numArgs);
+    std::shared_ptr<ICInterface> itf = getInterface(binder);
+    if (itf != nullptr) {
+        return itf->dump(fd, args, numArgs);
     }
     return STATUS_DEAD_OBJECT;
 }
@@ -309,9 +309,9 @@ binder_status_t ICInterface::ICInterfaceData::onDump(AIBinder* binder, int fd, c
 binder_status_t ICInterface::ICInterfaceData::handleShellCommand(AIBinder* binder, int in, int out,
                                                                  int err, const char** argv,
                                                                  uint32_t argc) {
-    std::shared_ptr<ICInterface> interface = getInterface(binder);
-    if (interface != nullptr) {
-        return interface->handleShellCommand(in, out, err, argv, argc);
+    std::shared_ptr<ICInterface> itf = getInterface(binder);
+    if (itf != nullptr) {
+        return itf->handleShellCommand(in, out, err, argv, argc);
     }
     return STATUS_DEAD_OBJECT;
 }

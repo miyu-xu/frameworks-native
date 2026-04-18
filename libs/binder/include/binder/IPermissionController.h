@@ -22,6 +22,10 @@
 #include <binder/IInterface.h>
 #include <stdlib.h>
 
+#ifdef PLATFORM_WINDOWS
+typedef int uid_t;
+#endif
+
 namespace android {
 
 // ----------------------------------------------------------------------

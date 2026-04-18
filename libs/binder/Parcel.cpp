@@ -954,9 +954,9 @@ constexpr int32_t kHeader = B_PACK_CHARS('U', 'N', 'K', 'N');
 #endif // BINDER_WITH_KERNEL_IPC
 
 // Write RPC headers.  (previously just the interface token)
-status_t Parcel::writeInterfaceToken(const String16& interface)
+status_t Parcel::writeInterfaceToken(const String16& i)
 {
-    return writeInterfaceToken(interface.c_str(), interface.size());
+    return writeInterfaceToken(i.c_str(), i.size());
 }
 
 status_t Parcel::writeInterfaceToken(const char16_t* str, size_t len) {
@@ -1017,13 +1017,13 @@ bool Parcel::checkInterface(IBinder* binder) const
     return enforceInterface(binder->getInterfaceDescriptor());
 }
 
-bool Parcel::enforceInterface(const String16& interface,
+bool Parcel::enforceInterface(const String16& i,
                               IPCThreadState* threadState) const
 {
-    return enforceInterface(interface.c_str(), interface.size(), threadState);
+    return enforceInterface(i.c_str(), i.size(), threadState);
 }
 
-bool Parcel::enforceInterface(const char16_t* interface,
+bool Parcel::enforceInterface(const char16_t* i,
                               size_t len,
                               IPCThreadState* threadState) const
 {
@@ -1068,7 +1068,7 @@ bool Parcel::enforceInterface(const char16_t* interface,
     size_t parcel_interface_len;
     const char16_t* parcel_interface = readString16Inplace(&parcel_interface_len);
     if (len == parcel_interface_len &&
-            (!len || !memcmp(parcel_interface, interface, len * sizeof (char16_t)))) {
+            (!len || !memcmp(parcel_interface, i, len * sizeof (char16_t)))) {
         return true;
     } else {
         if (mServiceFuzzing) {
@@ -1079,7 +1079,7 @@ bool Parcel::enforceInterface(const char16_t* interface,
             return true;
         } else {
             ALOGW("**** enforceInterface() expected '%s' but read '%s'",
-                  String8(interface, len).c_str(),
+                  String8(i, len).c_str(),
                   String8(parcel_interface, parcel_interface_len).c_str());
             return false;
         }
@@ -1217,6 +1217,18 @@ restart_write:
 
         // Need to pad at end?
         if (padded != len) {
+#ifdef PLATFORM_WINDOWS
+#if BYTE_ORDER_BIG_ENDIAN
+            static const uint32_t mask[4] = {
+                0x00000000, 0xffffff00, 0xffff0000, 0xff000000
+            };
+#endif
+#if BYTE_ORDER_LITTLE_ENDIAN
+            static const uint32_t mask[4] = {
+                0x00000000, 0x00ffffff, 0x0000ffff, 0x000000ff
+            };
+#endif
+#else
 #if BYTE_ORDER == BIG_ENDIAN
             static const uint32_t mask[4] = {
                 0x00000000, 0xffffff00, 0xffff0000, 0xff000000
@@ -1226,6 +1238,7 @@ restart_write:
             static const uint32_t mask[4] = {
                 0x00000000, 0x00ffffff, 0x0000ffff, 0x000000ff
             };
+#endif
 #endif
             //printf("Applying pad mask: %p to %p\n", (void*)mask[padded-len],
             //    *reinterpret_cast<void**>(data+padded-4));
@@ -2464,11 +2477,20 @@ int Parcel::readParcelFileDescriptor() const {
             DETACHED = 2,
         };
 
+#ifdef PLATFORM_WINDOWS
+#if BYTE_ORDER_BIG_ENDIAN
+        const int32_t message = ParcelFileDescriptorStatus::DETACHED;
+#endif
+#if BYTE_ORDER_LITTLE_ENDIAN
+        const int32_t message = __builtin_bswap32(ParcelFileDescriptorStatus::DETACHED);
+#endif
+#else
 #if BYTE_ORDER == BIG_ENDIAN
         const int32_t message = ParcelFileDescriptorStatus::DETACHED;
 #endif
 #if BYTE_ORDER == LITTLE_ENDIAN
         const int32_t message = __builtin_bswap32(ParcelFileDescriptorStatus::DETACHED);
+#endif
 #endif
 
         ssize_t written = TEMP_FAILURE_RETRY(

@@ -20,7 +20,21 @@ use binder_rpc_unstable_bindgen::ARpcServer;
 use foreign_types::{foreign_type, ForeignType, ForeignTypeRef};
 use std::ffi::CString;
 use std::io::{Error, ErrorKind};
+
+#[cfg(unix)]
 use std::os::unix::io::{IntoRawFd, OwnedFd};
+#[cfg(windows)]
+type OwnedFd = std::os::raw::c_int;
+#[cfg(windows)]
+trait IntoRawFd {
+    fn into_raw_fd(self) -> std::os::raw::c_int;
+}
+#[cfg(windows)]
+impl IntoRawFd for std::os::raw::c_int {
+    fn into_raw_fd(self) -> std::os::raw::c_int {
+        self
+    }
+}
 
 foreign_type! {
     type CType = binder_rpc_unstable_bindgen::ARpcServer;

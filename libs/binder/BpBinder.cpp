@@ -278,14 +278,17 @@ bool BpBinder::isRpcBinder() const {
 }
 
 uint64_t BpBinder::rpcAddress() const {
+    LOG_ALWAYS_FATAL_IF(!isRpcBinder(), "rpcAddress() called on kernel binder handle");
     return std::get<RpcHandle>(mHandle).address;
 }
 
 const sp<RpcSession>& BpBinder::rpcSession() const {
+    LOG_ALWAYS_FATAL_IF(!isRpcBinder(), "rpcSession() called on kernel binder handle");
     return std::get<RpcHandle>(mHandle).session;
 }
 
 int32_t BpBinder::binderHandle() const {
+    LOG_ALWAYS_FATAL_IF(isRpcBinder(), "binderHandle() called on RPC binder handle");
     return std::get<BinderHandle>(mHandle).handle;
 }
 
@@ -461,7 +464,8 @@ status_t BpBinder::linkToDeath(
                 if (!mObituaries) {
                     return NO_MEMORY;
                 }
-                ALOGV("Requesting death notification: %p handle %d\n", this, binderHandle());
+                ALOGV("Requesting death notification: %p handle %d\n", this,
+                      getDebugBinderHandle().value_or(-1));
                 if (!isRpcBinder()) {
                     if constexpr (kEnableKernelIpc) {
                         getWeakRefs()->incWeak(this);
@@ -506,7 +510,8 @@ status_t BpBinder::unlinkToDeath(
             }
             mObituaries->removeAt(i);
             if (mObituaries->size() == 0) {
-                ALOGV("Clearing death notification: %p handle %d\n", this, binderHandle());
+                ALOGV("Clearing death notification: %p handle %d\n", this,
+                      getDebugBinderHandle().value_or(-1));
                 if (!isRpcBinder()) {
                     if constexpr (kEnableKernelIpc) {
                         IPCThreadState* self = IPCThreadState::self();
@@ -531,8 +536,8 @@ void BpBinder::sendObituary()
         return;
     }
 
-    ALOGV("Sending obituary for proxy %p handle %d, mObitsSent=%s\n", this, binderHandle(),
-          mObitsSent ? "true" : "false");
+    ALOGV("Sending obituary for proxy %p handle %d, mObitsSent=%s\n", this,
+          getDebugBinderHandle().value_or(-1), mObitsSent ? "true" : "false");
 
     mAlive = 0;
     if (mObitsSent) return;
@@ -540,7 +545,8 @@ void BpBinder::sendObituary()
     mLock.lock();
     Vector<Obituary>* obits = mObituaries;
     if(obits != nullptr) {
-        ALOGV("Clearing sent death notification: %p handle %d\n", this, binderHandle());
+        ALOGV("Clearing sent death notification: %p handle %d\n", this,
+              getDebugBinderHandle().value_or(-1));
         if (!isRpcBinder()) {
             if constexpr (kEnableKernelIpc) {
                 IPCThreadState* self = IPCThreadState::self();

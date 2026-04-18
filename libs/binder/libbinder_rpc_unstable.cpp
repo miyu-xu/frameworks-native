@@ -25,9 +25,15 @@
 #include <cutils/sockets.h>
 #endif
 
-#ifdef __linux__
+#if defined(__linux__) || defined(PLATFORM_WINDOWS)
 #include <linux/vm_sockets.h>
-#endif // __linux__
+#elif defined(PLATFORM_MACOS)
+#include "vm_sockets.h"
+#endif
+
+#ifdef PLATFORM_WINDOWS
+#include "platform/namedpipe_rpc_transport.h"
+#endif
 
 using android::OK;
 using android::RpcServer;
@@ -81,14 +87,29 @@ RpcSession::FileDescriptorTransportMode toTransportMode(
 extern "C" {
 
 #ifndef __TRUSTY__
+#if defined(__linux__) || defined(PLATFORM_WINDOWS) || defined(PLATFORM_MACOS)
 ARpcServer* ARpcServer_newVsock(AIBinder* service, unsigned int cid, unsigned int port) {
+#ifdef PLATFORM_WINDOWS
+    auto server = RpcServer::make(std::make_unique<android::NamedPipeRpcTransportCtxFactory>());
+#else
     auto server = RpcServer::make();
+#endif
 
     unsigned int bindCid = VMADDR_CID_ANY; // bind to the remote interface
+#ifdef PLATFORM_WINDOWS
+    // Windows maps Binder RPC "vsock" endpoints to named pipes whose names include the bind CID.
+    // The guest virtio-vsock bridge connects to \\.\pipe\binder_rpc_vsock_{guest_cid}_{port}, so
+    // VM-scoped services must bind their real CID instead of VMADDR_CID_ANY.
+    bindCid = cid;
+    if (cid == VMADDR_CID_LOCAL) {
+        cid = VMADDR_CID_ANY;  // no peer-CID filter needed for the local interface
+    }
+#else
     if (cid == VMADDR_CID_LOCAL) {
         bindCid = VMADDR_CID_LOCAL; // bind to the local interface
         cid = VMADDR_CID_ANY;       // no need for a connection filter
     }
+#endif
 
     if (status_t status = server->setupVsockServer(bindCid, port); status != OK) {
         ALOGE("Failed to set up vsock server with port %u error: %s", port,
@@ -96,6 +117,9 @@ ARpcServer* ARpcServer_newVsock(AIBinder* service, unsigned int cid, unsigned in
         return nullptr;
     }
     if (cid != VMADDR_CID_ANY) {
+#if defined(PLATFORM_MACOS)
+        ALOGW("ARpcServer_newVsock: peer CID filter not supported on macOS UDS vsock emulation");
+#else
         server->setConnectionFilter([=](const void* addr, size_t addrlen) {
             LOG_ALWAYS_FATAL_IF(addrlen < sizeof(sockaddr_vm), "sockaddr is truncated");
             const sockaddr_vm* vaddr = reinterpret_cast<const sockaddr_vm*>(addr);
@@ -106,10 +130,17 @@ ARpcServer* ARpcServer_newVsock(AIBinder* service, unsigned int cid, unsigned in
             }
             return true;
         });
+#endif
     }
     server->setRootObject(AIBinder_toPlatformBinder(service));
     return createObjectHandle<ARpcServer>(server);
 }
+#else
+ARpcServer* ARpcServer_newVsock(AIBinder* /*service*/, unsigned int /*cid*/, unsigned int /*port*/) {
+    ALOGE("ARpcServer_newVsock is not supported on this platform");
+    return nullptr;
+}
+#endif
 
 ARpcServer* ARpcServer_newBoundSocket(AIBinder* service, int socketFd) {
     auto server = RpcServer::make();
@@ -191,7 +222,11 @@ void ARpcServer_free(ARpcServer* handle) {
 }
 
 ARpcSession* ARpcSession_new() {
+#ifdef PLATFORM_WINDOWS
+    auto session = RpcSession::make(std::make_unique<android::NamedPipeRpcTransportCtxFactory>());
+#else
     auto session = RpcSession::make();
+#endif
     return createObjectHandle<ARpcSession>(session);
 }
 
@@ -200,15 +235,25 @@ void ARpcSession_free(ARpcSession* handle) {
 }
 
 #ifndef __TRUSTY__
+#if defined(__linux__) || defined(PLATFORM_WINDOWS) || defined(PLATFORM_MACOS)
 AIBinder* ARpcSession_setupVsockClient(ARpcSession* handle, unsigned int cid, unsigned int port) {
     auto session = handleToStrongPointer<RpcSession>(handle);
+    ALOGE("ARpcSession_setupVsockClient: before setupVsockClient cid=%u port=%u", cid, port);
     if (status_t status = session->setupVsockClient(cid, port); status != OK) {
         ALOGE("Failed to set up vsock client with CID %u and port %u error: %s", cid, port,
               statusToString(status).c_str());
         return nullptr;
     }
+    ALOGE("ARpcSession_setupVsockClient: before getRootObject");
     return AIBinder_fromPlatformBinder(session->getRootObject());
 }
+#else
+AIBinder* ARpcSession_setupVsockClient(ARpcSession* /*handle*/, unsigned int /*cid*/,
+                                       unsigned int /*port*/) {
+    ALOGE("ARpcSession_setupVsockClient is not supported on this platform");
+    return nullptr;
+}
+#endif
 
 AIBinder* ARpcSession_setupUnixDomainClient(ARpcSession* handle, const char* name) {
     std::string pathname(name);

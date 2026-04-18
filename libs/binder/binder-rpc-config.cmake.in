@@ -1,0 +1,31 @@
+# binder-rpc CMake configuration file
+
+@PACKAGE_INIT@
+
+set_and_check(binder-rpc_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set_and_check(binder-rpc_LIB_DIR "@PACKAGE_LIB_INSTALL_DIR@")
+
+include("${CMAKE_CURRENT_LIST_DIR}/binder-rpc-targets.cmake")
+
+# 检查所有必需组件
+check_required_components(binder-rpc)
+
+# 提供导入目标
+if(NOT TARGET binder_rpc::binder_rpc)
+    add_library(binder_rpc::binder_rpc SHARED IMPORTED)
+    set_target_properties(binder_rpc::binder_rpc PROPERTIES
+        IMPORTED_LOCATION "${binder-rpc_LIB_DIR}/@CMAKE_SHARED_LIBRARY_PREFIX@binder_rpc@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        INTERFACE_INCLUDE_DIRECTORIES "${binder-rpc_INCLUDE_DIR}"
+    )
+    
+    # 平台特定依赖
+    if(WIN32)
+        set_target_properties(binder_rpc::binder_rpc PROPERTIES
+            INTERFACE_LINK_LIBRARIES "ws2_32"
+        )
+    else()
+        set_target_properties(binder_rpc::binder_rpc PROPERTIES
+            INTERFACE_LINK_LIBRARIES "pthread"
+        )
+    endif()
+endif()

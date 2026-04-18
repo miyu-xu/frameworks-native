@@ -32,10 +32,10 @@
 #include <linux/android/binder.h>
 #include <sys/ioctl.h>
 
-struct binder_frozen_state_info {
-    binder_uintptr_t cookie;
-    __u32 is_frozen;
-};
+// struct binder_frozen_state_info {
+//     binder_uintptr_t cookie;
+//     __u32 is_frozen;
+// };
 
 #ifndef BR_FROZEN_BINDER
 // Temporary definition of BR_FROZEN_BINDER until UAPI binder.h includes it.

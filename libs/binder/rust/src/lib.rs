@@ -118,7 +118,7 @@ pub use service::{
     get_declared_instances, get_interface, get_service, is_declared, is_handling_transaction,
     register_lazy_service, wait_for_interface, wait_for_service, LazyServiceGuard,
 };
-#[cfg(not(trusty))]
+// #[cfg(not(trusty))]
 pub use state::{ProcessState, ThreadState};
 
 /// Binder result containing a [`Status`] on error.

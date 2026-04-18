@@ -190,14 +190,14 @@ bool AServiceManager_isDeclared(const char* instance) {
     sp<IServiceManager> sm = defaultServiceManager();
     return sm->isDeclared(String16(instance));
 }
-void AServiceManager_forEachDeclaredInstance(const char* interface, void* context,
+void AServiceManager_forEachDeclaredInstance(const char* i, void* context,
                                              void (*callback)(const char*, void*)) {
-    LOG_ALWAYS_FATAL_IF(interface == nullptr, "interface == nullptr");
+    LOG_ALWAYS_FATAL_IF(i == nullptr, "interface == nullptr");
     // context may be nullptr
     LOG_ALWAYS_FATAL_IF(callback == nullptr, "callback == nullptr");
 
     sp<IServiceManager> sm = defaultServiceManager();
-    for (const String16& instance : sm->getDeclaredInstances(String16(interface))) {
+    for (const String16& instance : sm->getDeclaredInstances(String16(i))) {
         callback(String8(instance).c_str(), context);
     }
 }
@@ -221,12 +221,12 @@ void AServiceManager_getUpdatableApexName(const char* instance, void* context,
         callback(String8(updatableViaApex.value()).c_str(), context);
     }
 }
-void* AServiceManager_openDeclaredPassthroughHal(const char* interface, const char* instance,
+void* AServiceManager_openDeclaredPassthroughHal(const char* i, const char* instance,
                                                  int flag) {
-    LOG_ALWAYS_FATAL_IF(interface == nullptr, "interface == nullptr");
+    LOG_ALWAYS_FATAL_IF(i == nullptr, "interface == nullptr");
     LOG_ALWAYS_FATAL_IF(instance == nullptr, "instance == nullptr");
 
-    return openDeclaredPassthroughHal(String16(interface), String16(instance), flag);
+    return openDeclaredPassthroughHal(String16(i), String16(instance), flag);
 }
 void AServiceManager_forceLazyServicesPersist(bool persist) {
     auto serviceRegistrar = android::binder::LazyServiceRegistrar::getInstance();

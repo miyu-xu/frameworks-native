@@ -32,6 +32,9 @@ using android::base::unique_fd;
 #include <errno.h>
 #include <fcntl.h> // not needed for unique_fd, but a lot of users depend on open(3)
 #include <unistd.h>
+#ifdef PLATFORM_WINDOWS
+#include <fcntl_windows.h>
+#endif
 
 namespace android::binder {
 
@@ -62,7 +65,11 @@ public:
         return *this;
     }
 
+#if defined(__clang__)
     [[clang::reinitializes]] void reset(int new_value = -1) {
+#else
+    void reset(int new_value = -1) {
+#endif
         int previous_errno = errno;
 
         if (fd_ != -1) {
@@ -110,6 +117,10 @@ struct LIBBINDER_EXPORTED borrowed_fd {
 private:
     int fd_ = -1;
 };
+
+#ifdef PLATFORM_WINDOWS
+bool Pipe(unique_fd* read, unique_fd* write, int flags = O_CLOEXEC);
+#endif
 
 } // namespace android::binder
 

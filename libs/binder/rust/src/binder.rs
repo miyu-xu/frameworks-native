@@ -30,7 +30,10 @@ use std::fmt;
 use std::io::Write;
 use std::marker::PhantomData;
 use std::ops::Deref;
+#[cfg(unix)]
 use std::os::fd::AsRawFd;
+#[cfg(windows)]
+use std::os::windows::io::AsRawHandle;
 use std::os::raw::c_char;
 use std::ptr;
 
@@ -175,16 +178,16 @@ pub trait Remotable: Send + Sync + 'static {
 }
 
 /// First transaction code available for user commands (inclusive)
-pub const FIRST_CALL_TRANSACTION: TransactionCode = sys::FIRST_CALL_TRANSACTION;
+pub const FIRST_CALL_TRANSACTION: TransactionCode = sys::FIRST_CALL_TRANSACTION as u32;
 /// Last transaction code available for user commands (inclusive)
-pub const LAST_CALL_TRANSACTION: TransactionCode = sys::LAST_CALL_TRANSACTION;
+pub const LAST_CALL_TRANSACTION: TransactionCode = sys::LAST_CALL_TRANSACTION as u32;
 
 /// Corresponds to TF_ONE_WAY -- an asynchronous call.
-pub const FLAG_ONEWAY: TransactionFlags = sys::FLAG_ONEWAY;
+pub const FLAG_ONEWAY: TransactionFlags = sys::FLAG_ONEWAY as u32;
 /// Corresponds to TF_CLEAR_BUF -- clear transaction buffers after call is made.
-pub const FLAG_CLEAR_BUF: TransactionFlags = sys::FLAG_CLEAR_BUF;
+pub const FLAG_CLEAR_BUF: TransactionFlags = sys::FLAG_CLEAR_BUF as u32;
 /// Set to the vendor flag if we are building for the VNDK, 0 otherwise
-pub const FLAG_PRIVATE_LOCAL: TransactionFlags = sys::FLAG_PRIVATE_LOCAL;
+pub const FLAG_PRIVATE_LOCAL: TransactionFlags = sys::FLAG_PRIVATE_LOCAL as u32;
 
 /// Internal interface of binder local or remote objects for making
 /// transactions.
@@ -200,7 +203,10 @@ pub trait IBinderInternal: IBinder {
     fn set_requesting_sid(&mut self, enable: bool);
 
     /// Dump this object to the given file handle
+    #[cfg(unix)]
     fn dump<F: AsRawFd>(&mut self, fp: &F, args: &[&str]) -> Result<()>;
+    #[cfg(windows)]
+    fn dump<F: AsRawHandle>(&mut self, fp: &F, args: &[&str]) -> Result<()>;
 
     /// Get a new interface that exposes additional extension functionality, if
     /// available.

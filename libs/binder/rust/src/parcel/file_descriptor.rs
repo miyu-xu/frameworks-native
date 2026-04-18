@@ -22,48 +22,103 @@ use crate::binder::AsNative;
 use crate::error::{status_result, Result, StatusCode};
 use crate::sys;
 
+use std::mem::MaybeUninit;
+
+#[cfg(unix)]
 use std::os::fd::{AsRawFd, FromRawFd, IntoRawFd, OwnedFd, RawFd};
+#[cfg(windows)]
+use std::os::windows::io::{AsRawHandle, FromRawHandle, IntoRawHandle, OwnedHandle, RawHandle};
 
 /// Rust version of the Java class android.os.ParcelFileDescriptor
 #[derive(Debug)]
+#[cfg(unix)]
 pub struct ParcelFileDescriptor(OwnedFd);
+
+#[derive(Debug)]
+#[cfg(windows)]
+pub struct ParcelFileDescriptor(OwnedHandle);
 
 impl ParcelFileDescriptor {
     /// Create a new `ParcelFileDescriptor`
+    #[cfg(unix)]
     pub fn new<F: Into<OwnedFd>>(fd: F) -> Self {
+        Self(fd.into())
+    }
+    
+    /// Create a new `ParcelFileDescriptor`
+    #[cfg(windows)]
+    pub fn new<F: Into<OwnedHandle>>(fd: F) -> Self {
         Self(fd.into())
     }
 }
 
+#[cfg(unix)]
 impl AsRef<OwnedFd> for ParcelFileDescriptor {
     fn as_ref(&self) -> &OwnedFd {
         &self.0
     }
 }
 
+#[cfg(windows)]
+impl AsRef<OwnedHandle> for ParcelFileDescriptor {
+    fn as_ref(&self) -> &OwnedHandle {
+        &self.0
+    }
+}
+
+#[cfg(unix)]
 impl From<ParcelFileDescriptor> for OwnedFd {
     fn from(fd: ParcelFileDescriptor) -> OwnedFd {
         fd.0
     }
 }
 
+#[cfg(windows)]
+impl From<ParcelFileDescriptor> for OwnedHandle {
+    fn from(fd: ParcelFileDescriptor) -> OwnedHandle {
+        fd.0
+    }
+}
+
+#[cfg(unix)]
 impl AsRawFd for ParcelFileDescriptor {
     fn as_raw_fd(&self) -> RawFd {
         self.0.as_raw_fd()
     }
 }
 
+#[cfg(windows)]
+impl AsRawHandle for ParcelFileDescriptor {
+    fn as_raw_handle(&self) -> RawHandle {
+        self.0.as_raw_handle()
+    }
+}
+
+#[cfg(unix)]
 impl IntoRawFd for ParcelFileDescriptor {
     fn into_raw_fd(self) -> RawFd {
         self.0.into_raw_fd()
     }
 }
 
+#[cfg(windows)]
+impl IntoRawHandle for ParcelFileDescriptor {
+    fn into_raw_handle(self) -> RawHandle {
+        self.0.into_raw_handle()
+    }
+}
+
 impl PartialEq for ParcelFileDescriptor {
     // Since ParcelFileDescriptors own the FD, if this function ever returns true (and it is used to
     // compare two different objects), then it would imply that an FD is double-owned.
+    #[cfg(unix)]
     fn eq(&self, other: &Self) -> bool {
         self.as_raw_fd() == other.as_raw_fd()
+    }
+    
+    #[cfg(windows)]
+    fn eq(&self, other: &Self) -> bool {
+        self.as_raw_handle() == other.as_raw_handle()
     }
 }
 
@@ -71,7 +126,10 @@ impl Eq for ParcelFileDescriptor {}
 
 impl Serialize for ParcelFileDescriptor {
     fn serialize(&self, parcel: &mut BorrowedParcel<'_>) -> Result<()> {
-        let fd = self.0.as_raw_fd();
+        #[cfg(unix)]
+        let fd = self.0.as_raw_fd() as i32;
+        #[cfg(windows)]
+        let fd = self.0.as_raw_handle() as i32;
         // Safety: `Parcel` always contains a valid pointer to an
         // `AParcel`. Likewise, `ParcelFileDescriptor` always contains a
         // valid file, so we can borrow a valid file
@@ -116,22 +174,36 @@ impl DeserializeOption for ParcelFileDescriptor {
         if fd < 0 {
             Ok(None)
         } else {
-            // Safety: At this point, we know that the file descriptor was
-            // not -1, so must be a valid, owned file descriptor which we
-            // can safely turn into a `File`.
-            let file = unsafe { OwnedFd::from_raw_fd(fd) };
-            Ok(Some(ParcelFileDescriptor::new(file)))
+            #[cfg(unix)]
+            {
+                // Safety: At this point, we know that the file descriptor was
+                // not -1, so must be a valid, owned file descriptor which we
+                // can safely turn into a `File`.
+                let file = unsafe { OwnedFd::from_raw_fd(fd) };
+                Ok(Some(ParcelFileDescriptor::new(file)))
+            }
+            #[cfg(windows)]
+            {
+                // Safety: At this point, we know that the file descriptor was
+                // not -1, so must be a valid, owned handle which we
+                // can safely turn into a `File`.
+                let file = unsafe { OwnedHandle::from_raw_handle(fd as RawHandle) };
+                Ok(Some(ParcelFileDescriptor::new(file)))
+            }
         }
     }
 }
 
 impl Deserialize for ParcelFileDescriptor {
-    type UninitType = Option<Self>;
+    // `Option<Self>` is not guaranteed to match `Self` in size/alignment on all targets (e.g. Windows
+    // `OwnedHandle` does not niche-optimize with `Option`), but `Parcel` array deserialization
+    // requires `UninitType` to match `Self` — use `MaybeUninit` like other `repr(transparent)` pairs.
+    type UninitType = MaybeUninit<Self>;
     fn uninit() -> Self::UninitType {
-        Self::UninitType::default()
+        MaybeUninit::uninit()
     }
     fn from_init(value: Self) -> Self::UninitType {
-        Some(value)
+        MaybeUninit::new(value)
     }
 
     fn deserialize(parcel: &BorrowedParcel<'_>) -> Result<Self> {

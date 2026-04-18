@@ -73,7 +73,11 @@ enum {
 /**
  * This interface has the stability of the system image.
  */
+#if defined(PLATFORM_WINDOWS)
+void AIBinder_markSystemStability(AIBinder* binder);
+#else
 __attribute__((weak)) void AIBinder_markSystemStability(AIBinder* binder);
+#endif
 
 static inline void AIBinder_markCompilationUnitStability(AIBinder* binder) {
     if (AIBinder_markSystemStability == nullptr) return;

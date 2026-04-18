@@ -17,6 +17,7 @@
 #define LOG_TAG "ProcessState"
 
 #include <binder/ProcessState.h>
+#include <sys/mman.h>
 
 #include <android-base/strings.h>
 #include <binder/BpBinder.h>
@@ -30,50 +31,23 @@
 
 #include "Static.h"
 #include "Utils.h"
-#include "binder_module.h"
 
 #include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/ioctl.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <mutex>
 
-#define BINDER_VM_SIZE ((1 * 1024 * 1024) - sysconf(_SC_PAGE_SIZE) * 2)
 #define DEFAULT_MAX_BINDER_THREADS 15
-#define DEFAULT_ENABLE_ONEWAY_SPAM_DETECTION 1
 
-#ifdef __ANDROID_VNDK__
-const char* kDefaultDriver = "/dev/vndbinder";
-#else
-const char* kDefaultDriver = "/dev/binder";
-#endif
+
+
+
+
+
 
 // -------------------------------------------------------------------------
-
-namespace {
-bool readDriverFeatureFile(const char* filename) {
-    int fd = open(filename, O_RDONLY | O_CLOEXEC);
-    char on;
-    if (fd == -1) {
-        ALOGE_IF(errno != ENOENT, "%s: cannot open %s: %s", __func__, filename, strerror(errno));
-        return false;
-    }
-    if (read(fd, &on, sizeof(on)) == -1) {
-        ALOGE("%s: error reading to %s: %s", __func__, filename, strerror(errno));
-        close(fd);
-        return false;
-    }
-    close(fd);
-    return on == '1';
-}
-
-} // namespace
 
 namespace android {
 
@@ -100,12 +74,13 @@ protected:
 
 sp<ProcessState> ProcessState::self()
 {
-    return init(kDefaultDriver, false /*requireDefault*/);
+    return init(nullptr, false /*requireDefault*/);
 }
 
 sp<ProcessState> ProcessState::initWithDriver(const char* driver)
 {
-    return init(driver, true /*requireDefault*/);
+    // For RPC-only, driver is not used
+    return init(nullptr, true /*requireDefault*/);
 }
 
 sp<ProcessState> ProcessState::selfOrNull()
@@ -120,10 +95,6 @@ static void verifyNotForked(bool forked) {
     LOG_ALWAYS_FATAL_IF(forked, "libbinder ProcessState can not be used after fork");
 }
 
-bool ProcessState::isVndservicemanagerEnabled() {
-    return access("/vendor/bin/vndservicemanager", R_OK) == 0;
-}
-
 sp<ProcessState> ProcessState::init(const char* driver, bool requireDefault) {
     if (driver == nullptr) {
         std::lock_guard<std::mutex> l(gProcessMutex);
@@ -135,16 +106,6 @@ sp<ProcessState> ProcessState::init(const char* driver, bool requireDefault) {
 
     [[clang::no_destroy]] static std::once_flag gProcessOnce;
     std::call_once(gProcessOnce, [&](){
-        if (access(driver, R_OK) == -1) {
-            ALOGE("Binder driver %s is unavailable. Using /dev/binder instead.", driver);
-            driver = "/dev/binder";
-        }
-
-        if (0 == strcmp(driver, "/dev/vndbinder") && !isVndservicemanagerEnabled()) {
-            ALOGE("vndservicemanager is not started on this device, you can save resources/threads "
-                  "by not initializing ProcessState with /dev/vndbinder.");
-        }
-
         // we must install these before instantiating the gProcess object,
         // otherwise this would race with creating it, and there could be the
         // possibility of an invalid gProcess object forked by another thread
@@ -199,10 +160,6 @@ void ProcessState::childPostFork() {
     // the thread handler is installed
     if (gProcess) {
         gProcess->mForked = true;
-
-        // "O_CLOFORK"
-        close(gProcess->mDriverFD);
-        gProcess->mDriverFD = -1;
     }
     gProcessMutex.unlock();
 }
@@ -223,27 +180,9 @@ void ProcessState::startThreadPool()
 
 bool ProcessState::becomeContextManager()
 {
-    std::unique_lock<std::mutex> _l(mLock);
-
-    flat_binder_object obj {
-        .flags = FLAT_BINDER_FLAG_TXN_SECURITY_CTX,
-    };
-
-    int result = ioctl(mDriverFD, BINDER_SET_CONTEXT_MGR_EXT, &obj);
-
-    // fallback to original method
-    if (result != 0) {
-        android_errorWriteLog(0x534e4554, "121035042");
-
-        int unused = 0;
-        result = ioctl(mDriverFD, BINDER_SET_CONTEXT_MGR, &unused);
-    }
-
-    if (result == -1) {
-        ALOGE("Binder ioctl to become context manager failed: %s\n", strerror(errno));
-    }
-
-    return result == 0;
+    // For RPC-only, context manager functionality is not supported
+    ALOGW("becomeContextManager not supported in RPC-only mode");
+    return false;
 }
 
 // Get references to userspace objects held by the kernel binder driver
@@ -254,27 +193,9 @@ bool ProcessState::becomeContextManager()
 // already be invalid.
 ssize_t ProcessState::getKernelReferences(size_t buf_count, uintptr_t* buf)
 {
-    binder_node_debug_info info = {};
-
-    uintptr_t* end = buf ? buf + buf_count : nullptr;
-    size_t count = 0;
-
-    do {
-        status_t result = ioctl(mDriverFD, BINDER_GET_NODE_DEBUG_INFO, &info);
-        if (result < 0) {
-            return -1;
-        }
-        if (info.ptr != 0) {
-            if (buf && buf < end)
-                *buf++ = info.ptr;
-            count++;
-            if (buf && buf < end)
-                *buf++ = info.cookie;
-            count++;
-        }
-    } while (info.ptr != 0);
-
-    return count;
+    // For RPC-only, kernel references are not available
+    ALOGW("getKernelReferences not supported in RPC-only mode");
+    return -1;
 }
 
 // Queries the driver for the current strong reference count of the node
@@ -284,23 +205,9 @@ ssize_t ProcessState::getKernelReferences(size_t buf_count, uintptr_t* buf)
 ssize_t ProcessState::getStrongRefCountForNode(const sp<BpBinder>& binder) {
     if (binder->isRpcBinder()) return -1;
 
-    binder_node_info_for_ref info;
-    memset(&info, 0, sizeof(binder_node_info_for_ref));
-
-    info.handle = binder->getPrivateAccessor().binderHandle();
-
-    status_t result = ioctl(mDriverFD, BINDER_GET_NODE_INFO_FOR_REF, &info);
-
-    if (result != OK) {
-        static bool logged = false;
-        if (!logged) {
-          ALOGW("Kernel does not support BINDER_GET_NODE_INFO_FOR_REF.");
-          logged = true;
-        }
-        return -1;
-    }
-
-    return info.strong_count;
+    // For RPC-only, kernel reference counts are not available
+    ALOGW("getStrongRefCountForNode not supported in RPC-only mode");
+    return -1;
 }
 
 void ProcessState::setCallRestriction(CallRestriction restriction) {
@@ -442,12 +349,8 @@ status_t ProcessState::setThreadPoolMaxThreadCount(size_t maxThreads) {
     LOG_ALWAYS_FATAL_IF(mThreadPoolStarted && maxThreads < mMaxThreads,
            "Binder threadpool cannot be shrunk after starting");
     status_t result = NO_ERROR;
-    if (ioctl(mDriverFD, BINDER_SET_MAX_THREADS, &maxThreads) != -1) {
-        mMaxThreads = maxThreads;
-    } else {
-        result = -errno;
-        ALOGE("Binder ioctl to set max threads failed: %s", strerror(-result));
-    }
+    // For RPC-only, we just set the thread count without kernel interaction
+    mMaxThreads = maxThreads;
     return result;
 }
 
@@ -501,30 +404,14 @@ bool ProcessState::isThreadPoolStarted() const {
     return mThreadPoolStarted;
 }
 
-#define DRIVER_FEATURES_PATH "/dev/binderfs/features/"
 bool ProcessState::isDriverFeatureEnabled(const DriverFeature feature) {
-    // Use static variable to cache the results.
-    if (feature == DriverFeature::ONEWAY_SPAM_DETECTION) {
-        static bool enabled = readDriverFeatureFile(DRIVER_FEATURES_PATH "oneway_spam_detection");
-        return enabled;
-    }
-    if (feature == DriverFeature::EXTENDED_ERROR) {
-        static bool enabled = readDriverFeatureFile(DRIVER_FEATURES_PATH "extended_error");
-        return enabled;
-    }
-    if (feature == DriverFeature::FREEZE_NOTIFICATION) {
-        static bool enabled = readDriverFeatureFile(DRIVER_FEATURES_PATH "freeze_notification");
-        return enabled;
-    }
+    // For RPC-only, driver features are not available
     return false;
 }
 
 status_t ProcessState::enableOnewaySpamDetection(bool enable) {
-    uint32_t enableDetection = enable ? 1 : 0;
-    if (ioctl(mDriverFD, BINDER_ENABLE_ONEWAY_SPAM_DETECTION, &enableDetection) == -1) {
-        ALOGI("Binder ioctl to enable oneway spam detection failed: %s", strerror(errno));
-        return -errno;
-    }
+    // For RPC-only, oneway spam detection is not supported
+    ALOGW("enableOnewaySpamDetection not supported in RPC-only mode");
     return NO_ERROR;
 }
 
@@ -534,40 +421,6 @@ void ProcessState::giveThreadPoolName() {
 
 String8 ProcessState::getDriverName() {
     return mDriverName;
-}
-
-static unique_fd open_driver(const char* driver, String8* error) {
-    auto fd = unique_fd(open(driver, O_RDWR | O_CLOEXEC));
-    if (!fd.ok()) {
-        error->appendFormat("%d (%s) Opening '%s' failed", errno, strerror(errno), driver);
-        return {};
-    }
-    int vers = 0;
-    int result = ioctl(fd.get(), BINDER_VERSION, &vers);
-    if (result == -1) {
-        error->appendFormat("%d (%s) Binder ioctl to obtain version failed", errno,
-                            strerror(errno));
-        return {};
-    }
-    if (result != 0 || vers != BINDER_CURRENT_PROTOCOL_VERSION) {
-        error->appendFormat("Binder driver protocol(%d) does not match user space protocol(%d)! "
-                            "ioctl() return value: %d",
-                            vers, BINDER_CURRENT_PROTOCOL_VERSION, result);
-        return {};
-    }
-    size_t maxThreads = DEFAULT_MAX_BINDER_THREADS;
-    result = ioctl(fd.get(), BINDER_SET_MAX_THREADS, &maxThreads);
-    if (result == -1) {
-        ALOGE("Binder ioctl to set max threads failed: %s", strerror(errno));
-    }
-    uint32_t enable = DEFAULT_ENABLE_ONEWAY_SPAM_DETECTION;
-    result = ioctl(fd.get(), BINDER_ENABLE_ONEWAY_SPAM_DETECTION, &enable);
-    if (result == -1) {
-        ALOGE_IF(ProcessState::isDriverFeatureEnabled(
-                     ProcessState::DriverFeature::ONEWAY_SPAM_DETECTION),
-                 "Binder ioctl to enable oneway spam detection failed: %s", strerror(errno));
-    }
-    return fd;
 }
 
 ProcessState::ProcessState(const char* driver)
@@ -583,41 +436,35 @@ ProcessState::ProcessState(const char* driver)
         mThreadPoolStarted(false),
         mThreadPoolSeq(1),
         mCallRestriction(CallRestriction::NONE) {
-    String8 error;
-    unique_fd opened = open_driver(driver, &error);
+    // For RPC-only, we don't open any driver file
+    // Just initialize with default values
 
-    if (opened.ok()) {
-        // mmap the binder, providing a chunk of virtual address space to receive transactions.
-        mVMStart = mmap(nullptr, BINDER_VM_SIZE, PROT_READ, MAP_PRIVATE | MAP_NORESERVE,
-                        opened.get(), 0);
-        if (mVMStart == MAP_FAILED) {
-            // *sigh*
-            ALOGE("Using %s failed: unable to mmap transaction memory.", driver);
-            opened.reset();
-            mDriverName.clear();
-        }
-    }
 
-#ifdef __ANDROID__
-    LOG_ALWAYS_FATAL_IF(!opened.ok(),
-                        "Binder driver '%s' could not be opened. Error: %s. Terminating.",
-                        driver, error.c_str());
-#endif
 
-    if (opened.ok()) {
-        mDriverFD = opened.release();
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 ProcessState::~ProcessState()
 {
-    if (mDriverFD >= 0) {
-        if (mVMStart != MAP_FAILED) {
-            munmap(mVMStart, BINDER_VM_SIZE);
-        }
-        close(mDriverFD);
-    }
-    mDriverFD = -1;
+    // For RPC-only, no cleanup needed
 }
 
 } // namespace android

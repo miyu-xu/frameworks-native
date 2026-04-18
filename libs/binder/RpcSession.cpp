@@ -24,6 +24,7 @@
 #include <poll.h>
 #include <unistd.h>
 
+#include <string>
 #include <string_view>
 
 #include <binder/BpBinder.h>
@@ -42,6 +43,14 @@
 #include "RpcTransportUtils.h"
 #include "RpcWireFormat.h"
 #include "Utils.h"
+
+#ifdef PLATFORM_WINDOWS
+#include "platform/namedpipe_vsock.h"
+#include "platform/namedpipe_rpc_transport.h"
+#endif
+#ifdef PLATFORM_MACOS
+#include "platform/macos_uds_vsock_path.h"
+#endif
 
 #if defined(__ANDROID__) && !defined(__ANDROID_RECOVERY__)
 #include <jni.h>
@@ -149,7 +158,11 @@ status_t RpcSession::setupUnixDomainSocketBootstrapClient(unique_fd bootstrapFd)
             mCtx->newTransport(RpcTransportFd(std::move(bootstrapFd)), mShutdownTrigger.get());
     return setupClient([&](const std::vector<uint8_t>& sessionId, bool incoming) {
         int socks[2];
+#ifdef PLATFORM_WINDOWS
+        if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0, (SOCKET*)socks) < 0) {
+#else
         if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0, socks) < 0) {
+#endif
             int savedErrno = errno;
             ALOGE("Failed socketpair: %s", strerror(savedErrno));
             return -savedErrno;
@@ -173,7 +186,76 @@ status_t RpcSession::setupUnixDomainSocketBootstrapClient(unique_fd bootstrapFd)
 }
 
 status_t RpcSession::setupVsockClient(unsigned int cid, unsigned int port) {
+#ifdef PLATFORM_WINDOWS
+    return setupClient([&](const std::vector<uint8_t>& sessionId, bool incoming) -> status_t {
+        auto client = std::make_unique<NamedPipeVsockClient>();
+        if (client == nullptr) {
+            return UNKNOWN_ERROR;
+        }
+        
+        NamedPipeVsockAddress address(cid, port);
+        if (!client->connect(address)) {
+            return UNKNOWN_ERROR;
+        }
+        
+        auto vsockTransport = client->getTransport();
+        if (vsockTransport == nullptr) {
+            return UNKNOWN_ERROR;
+        }
+        
+        auto rpcTransport = std::make_unique<NamedPipeRpcTransport>(std::move(vsockTransport));
+        if (rpcTransport == nullptr) {
+            return UNKNOWN_ERROR;
+        }
+
+        RpcConnectionHeader header{
+            .version = mProtocolVersion.value_or(RPC_WIRE_PROTOCOL_VERSION),
+            .options = 0,
+            .fileDescriptorTransportMode = static_cast<uint8_t>(mFileDescriptorTransportMode),
+            .sessionIdSize = static_cast<uint16_t>(sessionId.size()),
+        };
+
+        if (incoming) {
+            header.options |= RPC_CONNECTION_OPTION_INCOMING;
+        }
+
+        iovec headerIov{&header, sizeof(header)};
+        auto sendHeaderStatus = rpcTransport->interruptableWriteFully(mShutdownTrigger.get(), &headerIov, 1,
+                                                                      std::nullopt, nullptr);
+        if (sendHeaderStatus != OK) {
+            ALOGE("Could not write connection header to named pipe: %s",
+                  statusToString(sendHeaderStatus).c_str());
+            return sendHeaderStatus;
+        }
+
+        if (sessionId.size() > 0) {
+            iovec sessionIov{const_cast<void*>(static_cast<const void*>(sessionId.data())),
+                             sessionId.size()};
+            auto sendSessionIdStatus =
+                    rpcTransport->interruptableWriteFully(mShutdownTrigger.get(), &sessionIov, 1,
+                                                          std::nullopt, nullptr);
+            if (sendSessionIdStatus != OK) {
+                ALOGE("Could not write session ID ('%s') to named pipe: %s",
+                      HexString(sessionId.data(), sessionId.size()).c_str(),
+                      statusToString(sendSessionIdStatus).c_str());
+                return sendSessionIdStatus;
+            }
+        }
+
+        if (incoming) {
+            return addIncomingConnection(std::move(rpcTransport));
+        }
+
+        return addOutgoingConnection(std::move(rpcTransport), true /*init*/);
+    });
+#elif defined(PLATFORM_MACOS)
+    {
+        std::string path = binderRpcVsockHostPath(cid, port);
+        return setupSocketClient(UnixSocketAddress(path.c_str()));
+    }
+#else
     return setupSocketClient(VsockSocketAddress(cid, port));
+#endif
 }
 
 status_t RpcSession::setupInetClient(const char* addr, unsigned int port) {
@@ -193,7 +275,9 @@ status_t RpcSession::setupPreconnectedClient(unique_fd fd, std::function<unique_
             fd = request();
             if (!fd.ok()) return BAD_VALUE;
         }
+#ifndef PLATFORM_WINDOWS
         if (status_t res = binder::os::setNonBlocking(fd); res != OK) return res;
+#endif
 
         RpcTransportFd transportFd(std::move(fd));
         status_t status = initAndAddConnection(std::move(transportFd), sessionId, incoming);
@@ -608,7 +692,11 @@ status_t singleSocketConnection(const RpcSocketAddress& addr,
         if (tries > 0) usleep(10000);
 
         unique_fd serverFd(TEMP_FAILURE_RETRY(
+#ifdef PLATFORM_WINDOWS
+                socket(addr.addr()->sa_family, SOCK_STREAM, 0)));
+#else
                 socket(addr.addr()->sa_family, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0)));
+#endif
         if (!serverFd.ok()) {
             int savedErrno = errno;
             ALOGE("Could not create socket at %s: %s", addr.toString().c_str(),
@@ -619,7 +707,11 @@ status_t singleSocketConnection(const RpcSocketAddress& addr,
         if (addr.addr()->sa_family == AF_INET || addr.addr()->sa_family == AF_INET6) {
             int noDelay = 1;
             int result =
+#ifdef PLATFORM_WINDOWS
+                    setsockopt(serverFd.get(), IPPROTO_TCP, TCP_NODELAY, (const char*)&noDelay, sizeof(noDelay));
+#else
                     setsockopt(serverFd.get(), IPPROTO_TCP, TCP_NODELAY, &noDelay, sizeof(noDelay));
+#endif
             if (result < 0) {
                 int savedErrno = errno;
                 ALOGE("Could not set TCP_NODELAY on %s: %s", addr.toString().c_str(),
@@ -629,6 +721,16 @@ status_t singleSocketConnection(const RpcSocketAddress& addr,
         }
 
         RpcTransportFd transportFd(std::move(serverFd));
+
+#ifdef PLATFORM_WINDOWS
+        unsigned int mode = 1;
+        if (ioctlsocket(transportFd.fd.get(), FIONBIO, &mode) != 0) {
+            int savedErrno = WSAGetLastError();
+            ALOGE("Could not set socket to non-blocking mode at %s: %s", addr.toString().c_str(),
+                  strerror(savedErrno));
+            return -savedErrno;
+        }
+#endif
 
         if (0 != TEMP_FAILURE_RETRY(connect(transportFd.fd.get(), addr.addr(), addr.addrSize()))) {
             int connErrno = errno;
@@ -643,8 +745,13 @@ status_t singleSocketConnection(const RpcSocketAddress& addr,
                 }
                 // Set connErrno to the errno that connect() would have set if the fd were blocking.
                 socklen_t connErrnoLen = sizeof(connErrno);
+#ifdef PLATFORM_WINDOWS
+                int ret = getsockopt(transportFd.fd.get(), SOL_SOCKET, SO_ERROR, 
+                                     reinterpret_cast<char*>(&connErrno), &connErrnoLen);
+#else
                 int ret = getsockopt(transportFd.fd.get(), SOL_SOCKET, SO_ERROR, &connErrno,
                                      &connErrnoLen);
+#endif
                 if (ret == -1) {
                     int savedErrno = errno;
                     ALOGE("Could not getsockopt() after connect() on non-blocking socket: %s. "

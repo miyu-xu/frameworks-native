@@ -1,0 +1,244 @@
+#ifndef __WIN32_LINUX_ANDROID_BINDER_H__
+#define __WIN32_LINUX_ANDROID_BINDER_H__
+
+#include <stdint.h>
+#include <sys/ioctl.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Type definitions for compatibility */
+typedef uintptr_t binder_uintptr_t;
+
+/* Binder type packing macros */
+#ifndef B_PACK_CHARS
+#define B_PACK_CHARS(c1, c2, c3, c4) \
+    ((((c1)<<24)) | (((c2)<<16)) | (((c3)<<8)) | (c4))
+#endif
+
+#ifndef B_TYPE_LARGE
+#define B_TYPE_LARGE 0x85
+#endif
+
+/* Binder transaction data structure */
+struct binder_transaction_data {
+    union {
+        size_t handle;
+        void *ptr;
+    } target;
+    void *cookie;
+    unsigned int code;
+    unsigned int flags;
+    pid_t sender_pid;
+    uid_t sender_euid;
+    size_t data_size;
+    size_t offsets_size;
+    union {
+        struct {
+            const void *buffer;
+            const void *offsets;
+        } ptr;
+        uint8_t buf[8];
+    } data;
+};
+
+/* Binder pointer cookie structure */
+struct binder_ptr_cookie {
+    void *ptr;
+    void *cookie;
+};
+
+/* Binder priority pointer cookie structure */
+struct binder_pri_ptr_cookie {
+    int priority;
+    void *ptr;
+    void *cookie;
+};
+
+/* Binder priority descriptor structure */
+struct binder_pri_desc {
+    int priority;
+    int desc;
+};
+
+/* Binder handle cookie structure */
+struct binder_handle_cookie {
+    uint32_t handle;
+    void *cookie;
+};
+
+/* Binder freeze info structure */
+struct binder_freeze_info {
+    uint32_t pid;
+    uint32_t enable;
+    uint32_t timeout_ms;
+};
+
+/* Binder frozen status info structure */
+struct binder_frozen_status_info {
+    uint32_t pid;
+    uint32_t sync_recv;
+    uint32_t async_recv;
+};
+
+/* Binder frozen state info structure */
+struct binder_frozen_state_info {
+    binder_uintptr_t cookie;
+    uint32_t is_frozen;
+    uint32_t sync_recv;
+    uint32_t async_recv;
+    uint32_t pending_async_size;
+};
+
+/* Binder extended error structure */
+struct binder_extended_error {
+    uint32_t id;
+    int32_t command;
+    int32_t param;
+};
+
+/* Binder transaction data with security context structure */
+struct binder_transaction_data_secctx {
+    struct binder_transaction_data transaction_data;
+    binder_uintptr_t secctx;
+};
+
+/* Binder version structure */
+struct binder_version {
+    int32_t protocol_version;
+};
+
+/* Binder node debug info structure */
+struct binder_node_debug_info {
+    binder_uintptr_t ptr;
+    binder_uintptr_t cookie;
+    uint32_t has_strong_ref;
+    uint32_t has_weak_ref;
+};
+
+/* Binder node info for ref structure */
+struct binder_node_info_for_ref {
+    binder_uintptr_t ptr;
+    binder_uintptr_t cookie;
+    uint32_t strong_count;
+    uint32_t weak_count;
+    uint32_t reserved1;
+    uint32_t reserved2;
+    uint32_t reserved3;
+};
+
+/* Binder write read structure */
+struct binder_write_read {
+    size_t write_size;
+    size_t write_consumed;
+    binder_uintptr_t write_buffer;
+    size_t read_size;
+    size_t read_consumed;
+    binder_uintptr_t read_buffer;
+};
+
+/* Flat binder object structure */
+struct flat_binder_object {
+    unsigned long type;
+    unsigned long flags;
+    union {
+        void *binder;
+        signed long handle;
+    };
+    void *cookie;
+};
+
+
+/* Binder driver command definitions */
+enum {
+    BR_ERROR = _IO('r', 0),
+    BR_OK = _IO('r', 1),
+    BR_TRANSACTION = _IOR('r', 2, struct binder_transaction_data),
+    BR_REPLY = _IOR('r', 3, struct binder_transaction_data),
+    BR_ACQUIRE_RESULT = _IOR('r', 4, int),
+    BR_DEAD_REPLY = _IO('r', 5),
+    BR_TRANSACTION_COMPLETE = _IO('r', 6),
+    BR_INCREFS = _IOR('r', 7, struct binder_ptr_cookie),
+    BR_ACQUIRE = _IOR('r', 8, struct binder_ptr_cookie),
+    BR_RELEASE = _IOR('r', 9, struct binder_ptr_cookie),
+    BR_DECREFS = _IOR('r', 10, struct binder_ptr_cookie),
+    BR_ATTEMPT_ACQUIRE = _IOR('r', 11, struct binder_pri_ptr_cookie),
+    BR_NOOP = _IO('r', 12),
+    BR_SPAWN_LOOPER = _IO('r', 13),
+    BR_FINISHED = _IO('r', 14),
+    BR_DEAD_BINDER = _IOR('r', 15, binder_uintptr_t),
+    BR_CLEAR_DEATH_NOTIFICATION_DONE = _IOR('r', 16, binder_uintptr_t),
+    BR_FAILED_REPLY = _IO('r', 17),
+    BR_FROZEN_REPLY = _IO('r', 18),
+    BR_ONEWAY_SPAM_SUSPECT = _IO('r', 19),
+    BR_TRANSACTION_PENDING_FROZEN = _IO('r', 20),
+    BR_TRANSACTION_SEC_CTX = _IOR('r', 21, struct binder_transaction_data_secctx),
+    BR_FROZEN_BINDER = _IOR('r', 22, binder_uintptr_t),
+    BR_CLEAR_FREEZE_NOTIFICATION_DONE = _IOR('r', 23, binder_uintptr_t),
+};
+
+enum {
+    BC_TRANSACTION = _IOW('c', 0, struct binder_transaction_data),
+    BC_REPLY = _IOW('c', 1, struct binder_transaction_data),
+    BC_ACQUIRE_RESULT = _IOW('c', 2, int),
+    BC_FREE_BUFFER = _IOW('c', 3, int),
+    BC_INCREFS = _IOW('c', 4, int),
+    BC_ACQUIRE = _IOW('c', 5, int),
+    BC_RELEASE = _IOW('c', 6, int),
+    BC_DECREFS = _IOW('c', 7, int),
+    BC_INCREFS_DONE = _IOW('c', 8, struct binder_ptr_cookie),
+    BC_ACQUIRE_DONE = _IOW('c', 9, struct binder_ptr_cookie),
+    BC_ATTEMPT_ACQUIRE = _IOW('c', 10, struct binder_pri_desc),
+    BC_REGISTER_LOOPER = _IO('c', 11),
+    BC_ENTER_LOOPER = _IO('c', 12),
+    BC_EXIT_LOOPER = _IO('c', 13),
+    BC_REQUEST_DEATH_NOTIFICATION = _IOW('c', 14, struct binder_handle_cookie),
+    BC_CLEAR_DEATH_NOTIFICATION = _IOW('c', 15, struct binder_handle_cookie),
+    BC_DEAD_BINDER_DONE = _IOW('c', 16, binder_uintptr_t),
+    BC_REQUEST_FREEZE_NOTIFICATION = _IOW('c', 17, struct binder_freeze_info),
+    BC_CLEAR_FREEZE_NOTIFICATION = _IOW('c', 18, struct binder_freeze_info),
+    BC_FREEZE_NOTIFICATION_DONE = _IOW('c', 19, binder_uintptr_t),
+};
+
+/* Binder transaction flags */
+enum {
+    TF_ONE_WAY = 0x01,
+    TF_ROOT_OBJECT = 0x04,
+    TF_STATUS_CODE = 0x08,
+    TF_ACCEPT_FDS = 0x10,
+    TF_CLEAR_BUF = 0x20,
+};
+
+/* Binder ioctl commands */
+#define BINDER_WRITE_READ _IOWR('b', 1, struct binder_write_read)
+#define BINDER_SET_IDLE_TIMEOUT _IOW('b', 3, int64_t)
+#define BINDER_SET_MAX_THREADS _IOW('b', 5, size_t)
+#define BINDER_SET_IDLE_PRIORITY _IOW('b', 6, int)
+#define BINDER_SET_CONTEXT_MGR _IOW('b', 7, int)
+#define BINDER_THREAD_EXIT _IOW('b', 8, int)
+#define BINDER_VERSION _IOWR('b', 9, struct binder_version)
+#define BINDER_GET_NODE_DEBUG_INFO _IOWR('b', 11, struct binder_node_debug_info)
+#define BINDER_GET_NODE_INFO_FOR_REF _IOWR('b', 12, struct binder_node_info_for_ref)
+#define BINDER_SET_CONTEXT_MGR_EXT _IOW('b', 13, struct flat_binder_object)
+#define BINDER_FREEZE _IOW('b', 14, struct binder_freeze_info)
+#define BINDER_GET_FROZEN_INFO _IOWR('b', 15, struct binder_frozen_status_info)
+#define BINDER_ENABLE_ONEWAY_SPAM_DETECTION _IOW('b', 16, uint32_t)
+
+/* Binder object types */
+enum {
+    BINDER_TYPE_BINDER = B_PACK_CHARS('s', 'b', '*', B_TYPE_LARGE),
+    BINDER_TYPE_WEAK_BINDER = B_PACK_CHARS('w', 'b', '*', B_TYPE_LARGE),
+    BINDER_TYPE_HANDLE = B_PACK_CHARS('s', 'h', '*', B_TYPE_LARGE),
+    BINDER_TYPE_WEAK_HANDLE = B_PACK_CHARS('w', 'h', '*', B_TYPE_LARGE),
+    BINDER_TYPE_FD = B_PACK_CHARS('f', 'd', '*', B_TYPE_LARGE),
+    BINDER_TYPE_FDA = B_PACK_CHARS('f', 'd', 'a', B_TYPE_LARGE),
+    BINDER_TYPE_PTR = B_PACK_CHARS('p', 't', '*', B_TYPE_LARGE),
+};
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __WIN32_LINUX_ANDROID_BINDER_H__

@@ -22,24 +22,24 @@
 using ::android::IPCThreadState;
 using ::android::ProcessState;
 
-void ABinderProcess_startThreadPool(void) {
+extern "C" void ABinderProcess_startThreadPool(void) {
     ProcessState::self()->startThreadPool();
     ProcessState::self()->giveThreadPoolName();
 }
-bool ABinderProcess_setThreadPoolMaxThreadCount(uint32_t numThreads) {
+extern "C" bool ABinderProcess_setThreadPoolMaxThreadCount(uint32_t numThreads) {
     return ProcessState::self()->setThreadPoolMaxThreadCount(numThreads) == 0;
 }
-bool ABinderProcess_isThreadPoolStarted(void) {
+extern "C" bool ABinderProcess_isThreadPoolStarted(void) {
     return ProcessState::self()->isThreadPoolStarted();
 }
-void ABinderProcess_joinThreadPool(void) {
+extern "C" void ABinderProcess_joinThreadPool(void) {
     IPCThreadState::self()->joinThreadPool();
 }
 
-binder_status_t ABinderProcess_setupPolling(int* fd) {
+extern "C" binder_status_t ABinderProcess_setupPolling(int* fd) {
     return IPCThreadState::self()->setupPolling(fd);
 }
 
-binder_status_t ABinderProcess_handlePolledCommands(void) {
+extern "C" binder_status_t ABinderProcess_handlePolledCommands(void) {
     return IPCThreadState::self()->handlePolledCommands();
 }

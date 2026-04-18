@@ -410,8 +410,8 @@ void AIBinder_Class_disableInterfaceTokenHeader(AIBinder_Class* clazz) {
     clazz->writeHeader = false;
 }
 
-void AIBinder_Class_setHandleShellCommand(AIBinder_Class* clazz,
-                                          AIBinder_handleShellCommand handleShellCommand) {
+extern "C" void AIBinder_Class_setHandleShellCommand(
+        AIBinder_Class* clazz, AIBinder_handleShellCommand handleShellCommand) {
     LOG_ALWAYS_FATAL_IF(clazz == nullptr, "setHandleShellCommand requires non-null clazz");
 
     clazz->handleShellCommand = handleShellCommand;
@@ -627,15 +627,15 @@ binder_status_t AIBinder_unlinkToDeath(AIBinder* binder, AIBinder_DeathRecipient
 }
 
 #ifdef BINDER_WITH_KERNEL_IPC
-uid_t AIBinder_getCallingUid() {
+extern "C" uid_t AIBinder_getCallingUid() {
     return ::android::IPCThreadState::self()->getCallingUid();
 }
 
-pid_t AIBinder_getCallingPid() {
+extern "C" pid_t AIBinder_getCallingPid() {
     return ::android::IPCThreadState::self()->getCallingPid();
 }
 
-bool AIBinder_isHandlingTransaction() {
+extern "C" bool AIBinder_isHandlingTransaction() {
     return ::android::IPCThreadState::self()->getServingStackPointer() != nullptr;
 }
 #endif
@@ -848,7 +848,7 @@ binder_status_t AIBinder_setExtension(AIBinder* binder, AIBinder* ext) {
 
 // platform methods follow
 
-void AIBinder_setRequestingSid(AIBinder* binder, bool requestingSid) {
+extern "C" void AIBinder_setRequestingSid(AIBinder* binder, bool requestingSid) {
     ABBinder* localBinder = binder->asABBinder();
     LOG_ALWAYS_FATAL_IF(localBinder == nullptr,
                         "AIBinder_setRequestingSid must be called on a local binder");
@@ -862,9 +862,11 @@ const char* AIBinder_getCallingSid() {
 }
 #endif
 
+#ifndef PLATFORM_WINDOWS
 void AIBinder_setMinSchedulerPolicy(AIBinder* binder, int policy, int priority) {
     binder->asABBinder()->setMinSchedulerPolicy(policy, priority);
 }
+#endif // PLATFORM_WINDOWS
 
 void AIBinder_setInheritRt(AIBinder* binder, bool inheritRt) {
     ABBinder* localBinder = binder->asABBinder();

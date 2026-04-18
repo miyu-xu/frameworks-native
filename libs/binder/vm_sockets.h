@@ -17,6 +17,14 @@
 #include <linux/vm_sockets.h>
 #else
 
+#ifdef PLATFORM_WINDOWS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+typedef ADDRESS_FAMILY sa_family_t;
+#elif !defined(__BIONIC__)
+#include <sys/socket.h>
+#endif
+
 #ifndef _UAPI_VM_SOCKETS_H
 #define _UAPI_VM_SOCKETS_H
 #define SO_VM_SOCKETS_BUFFER_SIZE 0
@@ -45,7 +53,10 @@ struct sockaddr_vm {
     unsigned char svm_zero[sizeof(struct sockaddr) - sizeof(sa_family_t) - sizeof(unsigned short) -
                            sizeof(unsigned int) - sizeof(unsigned int)];
 };
+#if !defined(__APPLE__) && !defined(PLATFORM_WINDOWS)
+#include <sys/ioctl.h>
 #define IOCTL_VM_SOCKETS_GET_LOCAL_CID _IO(7, 0xb9)
+#endif
 #ifndef AF_VSOCK
 #define AF_VSOCK 40
 #endif

@@ -39,8 +39,12 @@ enum {
  *
  * \param binder local server binder to request security contexts on
  */
+#if defined(PLATFORM_WINDOWS)
+void AIBinder_setRequestingSid(AIBinder* binder, bool requestingSid) __INTRODUCED_IN(31);
+#else
 __attribute__((weak)) void AIBinder_setRequestingSid(AIBinder* binder, bool requestingSid)
         __INTRODUCED_IN(31);
+#endif
 
 /**
  * Returns the selinux context of the callee.

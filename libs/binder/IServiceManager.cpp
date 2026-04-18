@@ -28,7 +28,7 @@
 
 #include <FdTrigger.h>
 #include <RpcSocketAddress.h>
-#include <android-base/properties.h>
+// #include <android-base/properties.h>
 #include <android/os/BnAccessor.h>
 #include <android/os/BnServiceCallback.h>
 #include <android/os/BnServiceManager.h>
@@ -85,7 +85,7 @@ const String16& IServiceManager::getInterfaceDescriptor() const {
 IServiceManager::IServiceManager() {}
 IServiceManager::~IServiceManager() {}
 
-// From the old libbinder IServiceManager interface to IServiceManager.
+// From the old libbinder IServiceManager itf to IServiceManager.
 class CppBackendShim : public IServiceManager {
 public:
     explicit CppBackendShim(const sp<BackendUnifiedServiceManager>& impl);
@@ -97,7 +97,7 @@ public:
     Vector<String16> listServices(int dumpsysPriority) override;
     sp<IBinder> waitForService(const String16& name16) override;
     bool isDeclared(const String16& name) override;
-    Vector<String16> getDeclaredInstances(const String16& interface) override;
+    Vector<String16> getDeclaredInstances(const String16& itf) override;
     std::optional<String16> updatableViaApex(const String16& name) override;
     Vector<String16> getUpdatableNames(const String16& apexName) override;
     std::optional<IServiceManager::ConnectionInfo> getConnectionInfo(const String16& name) override;
@@ -470,22 +470,22 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid, bool logP
 
 #endif //__ANDROID_VNDK__
 
-void* openDeclaredPassthroughHal(const String16& interface, const String16& instance, int flag) {
+void* openDeclaredPassthroughHal(const String16& itf, const String16& instance, int flag) {
 #if defined(__ANDROID__) && !defined(__ANDROID_VENDOR__) && !defined(__ANDROID_RECOVERY__) && \
         !defined(__ANDROID_NATIVE_BRIDGE__)
     sp<IServiceManager> sm = defaultServiceManager();
-    String16 name = interface + String16("/") + instance;
+    String16 name = itf + String16("/") + instance;
     if (!sm->isDeclared(name)) {
         return nullptr;
     }
-    String16 libraryName = interface + String16(".") + instance + String16(".so");
+    String16 libraryName = itf + String16(".") + instance + String16(".so");
     if (auto updatableViaApex = sm->updatableViaApex(name); updatableViaApex.has_value()) {
         return AApexSupport_loadLibrary(String8(libraryName).c_str(),
                                         String8(*updatableViaApex).c_str(), flag);
     }
     return android_load_sphal_library(String8(libraryName).c_str(), flag);
 #else
-    (void)interface;
+    (void)itf;
     (void)instance;
     (void)flag;
     return nullptr;
@@ -674,12 +674,12 @@ bool CppBackendShim::isDeclared(const String16& name) {
     return declared;
 }
 
-Vector<String16> CppBackendShim::getDeclaredInstances(const String16& interface) {
+Vector<String16> CppBackendShim::getDeclaredInstances(const String16& itf) {
     std::vector<std::string> out;
     if (Status status =
-                mUnifiedServiceManager->getDeclaredInstances(String8(interface).c_str(), &out);
+                mUnifiedServiceManager->getDeclaredInstances(String8(itf).c_str(), &out);
         !status.isOk()) {
-        ALOGW("Failed to getDeclaredInstances for %s: %s", String8(interface).c_str(),
+        ALOGW("Failed to getDeclaredInstances for %s: %s", String8(itf).c_str(),
               status.toString8().c_str());
         return {};
     }
@@ -825,7 +825,7 @@ std::vector<IServiceManager::ServiceDebugInfo> CppBackendShim::getServiceDebugIn
 
 #ifndef __ANDROID__
 // CppBackendShim for host. Implements the old libbinder android::IServiceManager API.
-// The internal implementation of the AIDL interface android::os::IServiceManager calls into
+// The internal implementation of the AIDL itf android::os::IServiceManager calls into
 // on-device service manager.
 class CppServiceManagerHostShim : public CppBackendShim {
 public:
@@ -854,12 +854,12 @@ sp<IServiceManager> createRpcDelegateServiceManager(
         ALOGE("getDeviceService(\"manager\") returns null");
         return nullptr;
     }
-    auto interface = AidlServiceManager::asInterface(binder);
-    if (interface == nullptr) {
+    auto itf = AidlServiceManager::asInterface(binder);
+    if (itf == nullptr) {
         ALOGE("getDeviceService(\"manager\") returns non service manager");
         return nullptr;
     }
-    return sp<CppServiceManagerHostShim>::make(interface, options);
+    return sp<CppServiceManagerHostShim>::make(itf, options);
 }
 #endif
 

@@ -22,9 +22,6 @@
 #include <utils/Errors.h>
 #include <utils/Vector.h>
 
-#if defined(_WIN32)
-typedef  int  uid_t;
-#endif
 
 // ---------------------------------------------------------------------------
 namespace android {

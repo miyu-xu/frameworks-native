@@ -41,6 +41,10 @@
 #include "OS.h"
 #include "RpcState.h"
 
+#ifdef PLATFORM_WINDOWS
+#include <time_windows.h>
+#endif
+
 namespace android {
 
 using android::binder::unique_fd;

@@ -337,10 +337,16 @@ impl<T: Remotable> InterfaceClassMethods for Binder<T> {
         if fd < 0 {
             return StatusCode::UNEXPECTED_NULL as status_t;
         }
-        use std::os::fd::FromRawFd;
-        // Safety: Our caller promised that fd is a file descriptor. We don't
-        // own this file descriptor, so we need to be careful not to drop it.
-        let mut file = unsafe { ManuallyDrop::new(std::fs::File::from_raw_fd(fd)) };
+    #[cfg(unix)]
+    use std::os::fd::FromRawFd;
+    #[cfg(windows)]
+    use std::os::windows::io::FromRawHandle;
+    // Safety: Our caller promised that fd is a file descriptor. We don't
+    // own this file descriptor, so we need to be careful not to drop it.
+    #[cfg(unix)]
+    let mut file = unsafe { ManuallyDrop::new(std::fs::File::from_raw_fd(fd)) };
+    #[cfg(windows)]
+    let mut file = unsafe { ManuallyDrop::new(std::fs::File::from_raw_handle(fd as std::os::windows::io::RawHandle)) };
 
         if args.is_null() && num_args != 0 {
             return StatusCode::UNEXPECTED_NULL as status_t;

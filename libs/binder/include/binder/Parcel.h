@@ -38,6 +38,13 @@
 #include <binder/IInterface.h>
 #include <binder/Parcelable.h>
 
+#ifdef PLATFORM_WINDOWS
+typedef int uid_t;
+inline uid_t getuid() {
+    return 0;
+}
+#endif
+
 //NOLINTNEXTLINE(google-runtime-int) b/173188702
 typedef unsigned long long binder_size_t;
 
@@ -135,7 +142,7 @@ public:
     LIBBINDER_EXPORTED bool isForRpc() const;
 
     // Writes the IPC/RPC header.
-    LIBBINDER_EXPORTED status_t writeInterfaceToken(const String16& interface);
+    LIBBINDER_EXPORTED status_t writeInterfaceToken(const String16& i);
     LIBBINDER_EXPORTED status_t writeInterfaceToken(const char16_t* str, size_t len);
 
     // Parses the RPC header, returning true if the interface name
@@ -145,9 +152,9 @@ public:
     // propagating the StrictMode policy mask, populating the current
     // IPCThreadState, which as an optimization may optionally be
     // passed in.
-    LIBBINDER_EXPORTED bool enforceInterface(const String16& interface,
+    LIBBINDER_EXPORTED bool enforceInterface(const String16& i,
                                              IPCThreadState* threadState = nullptr) const;
-    LIBBINDER_EXPORTED bool enforceInterface(const char16_t* interface, size_t len,
+    LIBBINDER_EXPORTED bool enforceInterface(const char16_t* i, size_t len,
                                              IPCThreadState* threadState = nullptr) const;
     LIBBINDER_EXPORTED bool checkInterface(IBinder*) const;
 

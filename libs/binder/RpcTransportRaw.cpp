@@ -41,7 +41,11 @@ public:
     status_t pollRead(void) override {
         uint8_t buf;
         ssize_t ret = TEMP_FAILURE_RETRY(
+#ifdef PLATFORM_WINDOWS
+                ::recv(mSocket.fd.get(), (char*)(&buf), sizeof(buf), MSG_PEEK | MSG_DONTWAIT));
+#else
                 ::recv(mSocket.fd.get(), &buf, sizeof(buf), MSG_PEEK | MSG_DONTWAIT));
+#endif
         if (ret < 0) {
             int savedErrno = errno;
             if (savedErrno == EAGAIN || savedErrno == EWOULDBLOCK) {

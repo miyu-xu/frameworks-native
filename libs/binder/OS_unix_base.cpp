@@ -23,6 +23,14 @@
 #include <string.h>
 #include <sys/socket.h>
 
+// Linux-specific sendmsg/recvmsg flags; omit on platforms that do not define them.
+#ifndef MSG_NOSIGNAL
+#define MSG_NOSIGNAL 0
+#endif
+#ifndef MSG_CMSG_CLOEXEC
+#define MSG_CMSG_CLOEXEC 0
+#endif
+
 using android::binder::ReadFully;
 
 namespace android::binder::os {

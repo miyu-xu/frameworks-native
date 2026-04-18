@@ -1,0 +1,18 @@
+[package]
+name = "binder_rpc_unstable_bindgen"
+version = "0.1.0"
+edition = "2021"
+description = "RPC Binder bindings for Android"
+license = "Apache-2.0"
+build = "build.rs"
+
+[dependencies]
+binder-ndk-sys = { package = "binder-ndk-sys", version = "0.1", path = "./../../sys" }
+
+
+[lib]
+path = "lib.rs"
+
+[build-dependencies]
+bindgen = "0.70.1"
+

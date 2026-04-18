@@ -32,7 +32,10 @@ use std::convert::TryInto;
 use std::ffi::{c_void, CString};
 use std::fmt;
 use std::mem;
+#[cfg(unix)]
 use std::os::fd::AsRawFd;
+#[cfg(windows)]
+use std::os::windows::io::AsRawHandle;
 use std::ptr;
 use std::sync::Arc;
 
@@ -307,6 +310,7 @@ impl<T: AsNative<sys::AIBinder>> IBinderInternal for T {
         unsafe { sys::AIBinder_setRequestingSid(self.as_native_mut(), enable) };
     }
 
+    #[cfg(unix)]
     fn dump<F: AsRawFd>(&mut self, fp: &F, args: &[&str]) -> Result<()> {
         let args: Vec<_> = args.iter().map(|a| CString::new(*a).unwrap()).collect();
         let mut arg_ptrs: Vec<_> = args.iter().map(|a| a.as_ptr()).collect();
@@ -323,7 +327,32 @@ impl<T: AsNative<sys::AIBinder>> IBinderInternal for T {
         let status = unsafe {
             sys::AIBinder_dump(
                 self.as_native_mut(),
-                fp.as_raw_fd(),
+                fp.as_raw_fd() as i32,
+                arg_ptrs.as_mut_ptr(),
+                arg_ptrs.len().try_into().unwrap(),
+            )
+        };
+        status_result(status)
+    }
+
+    #[cfg(windows)]
+    fn dump<F: AsRawHandle>(&mut self, fp: &F, args: &[&str]) -> Result<()> {
+        let args: Vec<_> = args.iter().map(|a| CString::new(*a).unwrap()).collect();
+        let mut arg_ptrs: Vec<_> = args.iter().map(|a| a.as_ptr()).collect();
+        // Safety: `SpIBinder` guarantees that `self` always contains a
+        // valid pointer to an `AIBinder`. `AsRawHandle` guarantees that the
+        // handle parameter is always be a valid open handle. The
+        // `args` pointer parameter is a valid pointer to an array of C
+        // strings that will outlive the call since `args` lives for the
+        // whole function scope.
+        //
+        // This call does not affect ownership of its binder pointer
+        // parameter and does not take ownership of the file or args array
+        // parameters.
+        let status = unsafe {
+            sys::AIBinder_dump(
+                self.as_native_mut(),
+                fp.as_raw_handle() as i32,
                 arg_ptrs.as_mut_ptr(),
                 arg_ptrs.len().try_into().unwrap(),
             )

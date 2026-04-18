@@ -80,12 +80,21 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
     transportFd.setPollingState(true);
     auto pollingStateGuard = make_scope_guard([&]() { transportFd.setPollingState(false); });
 
+#ifdef PLATFORM_WINDOWS
+    int ret = TEMP_FAILURE_RETRY(windows_poll(pfd, countof(pfd), -1));
+    if (ret < 0) {
+        int saved_errno = WSAGetLastError();
+        ALOGE("FdTrigger poll returned error: %d, with error: %d", ret, saved_errno);
+        return -saved_errno;
+    }
+#else
     int ret = TEMP_FAILURE_RETRY(poll(pfd, countof(pfd), -1));
     if (ret < 0) {
         int saved_errno = errno;
         ALOGE("FdTrigger poll returned error: %d, with error: %s", ret, strerror(saved_errno));
         return -saved_errno;
     }
+#endif
     LOG_ALWAYS_FATAL_IF(ret == 0, "poll(%d) returns 0 with infinite timeout", transportFd.fd.get());
 
     // At least one FD has events. Check them.
@@ -97,10 +106,18 @@ status_t FdTrigger::triggerablePoll(const android::RpcTransportFd& transportFd, 
     }
     // See unknown flags in trigger FD's revents (POLLERR / POLLNVAL).
     // Treat this error condition as UNKNOWN_ERROR.
+#ifdef PLATFORM_WINDOWS
+    // On Windows, POLLHUP might be reported as 4 instead of 0x010
+    if (pfd[1].revents != 0 && pfd[1].revents != 4) {
+        ALOGE("Unknown revents on trigger FD %d: revents = %d", pfd[1].fd, pfd[1].revents);
+        return UNKNOWN_ERROR;
+    }
+#else
     if (pfd[1].revents != 0) {
         ALOGE("Unknown revents on trigger FD %d: revents = %d", pfd[1].fd, pfd[1].revents);
         return UNKNOWN_ERROR;
     }
+#endif
 
     // pfd[1].revents is 0, hence pfd[0].revents must be set, and only possible values are
     // a subset of event | POLLHUP | POLLERR | POLLNVAL.

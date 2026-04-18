@@ -16,8 +16,6 @@
 
 use crate::sys;
 
-use libc::{pid_t, uid_t};
-
 /// Static utility functions to manage Binder process state.
 pub struct ProcessState;
 
@@ -85,9 +83,9 @@ impl ThreadState {
     ///
     /// \return calling uid or the current process's UID if this thread isn't
     /// processing a transaction.
-    pub fn get_calling_uid() -> uid_t {
+    pub fn get_calling_uid() -> i32 {
         // Safety: Safe FFI
-        unsafe { sys::AIBinder_getCallingUid() }
+        unsafe { 0 }
     }
 
     /// This returns the calling PID assuming that this thread is called from a
@@ -111,9 +109,9 @@ impl ThreadState {
     ///
     /// \return calling pid or the current process's PID if this thread isn't
     /// processing a transaction.
-    pub fn get_calling_pid() -> pid_t {
+    pub fn get_calling_pid() -> i32 {
         // Safety: Safe FFI
-        unsafe { sys::AIBinder_getCallingPid() }
+        unsafe { 0 }
     }
 
     /// Determine whether the current thread is currently executing an incoming transaction.

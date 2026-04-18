@@ -49,7 +49,11 @@ class IShellCallback;
  * (method calls, property get and set) is down through a low-level
  * protocol implemented on top of the transact() API.
  */
+#if defined(__clang__)
 class [[clang::lto_visibility_public]] LIBBINDER_EXPORTED IBinder : public virtual RefBase {
+#else
+class LIBBINDER_EXPORTED IBinder : public virtual RefBase {
+#endif
 public:
     enum {
         FIRST_CALL_TRANSACTION = 0x00000001,

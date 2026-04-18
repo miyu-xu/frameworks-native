@@ -32,6 +32,10 @@
 #include <sys/cdefs.h>
 #include <uchar.h>
 
+#ifdef PLATFORM_WINDOWS
+typedef int uid_t;
+#endif
+
 struct AIBinder;
 typedef struct AIBinder AIBinder;
 

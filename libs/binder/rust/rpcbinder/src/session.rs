@@ -17,8 +17,12 @@
 use binder::unstable_api::new_spibinder;
 use binder::{FromIBinder, SpIBinder, StatusCode, Strong};
 use foreign_types::{foreign_type, ForeignType, ForeignTypeRef};
-use std::os::fd::RawFd;
 use std::os::raw::{c_int, c_void};
+
+#[cfg(unix)]
+use std::os::fd::RawFd;
+#[cfg(windows)]
+type RawFd = std::os::raw::c_int;
 
 pub use binder_rpc_unstable_bindgen::ARpcSession_FileDescriptorTransportMode as FileDescriptorTransportMode;
 
@@ -130,7 +134,7 @@ impl RpcSessionRef {
 
     /// Connects to an RPC Binder server over a bootstrap Unix Domain Socket
     /// for a particular interface.
-    #[cfg(not(target_os = "trusty"))]
+    #[cfg(all(not(target_os = "trusty"), unix))]
     pub fn setup_unix_domain_bootstrap_client<T: FromIBinder + ?Sized>(
         &self,
         bootstrap_fd: std::os::fd::BorrowedFd,
@@ -218,7 +222,10 @@ impl RpcSessionRef {
         service: Option<SpIBinder>,
     ) -> Result<Strong<T>, StatusCode> {
         if let Some(service) = service {
-            FromIBinder::try_from(service)
+            eprintln!("rpcbinder: before FromIBinder::try_from");
+            let result = FromIBinder::try_from(service);
+            eprintln!("rpcbinder: after FromIBinder::try_from");
+            result
         } else {
             Err(StatusCode::NAME_NOT_FOUND)
         }

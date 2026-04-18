@@ -16,12 +16,14 @@
 
 #define LOG_TAG "RpcServer"
 
+#include <algorithm>
 #include <inttypes.h>
 #include <netinet/tcp.h>
 #include <poll.h>
 #include <sys/socket.h>
 #include <sys/un.h>
 
+#include <string>
 #include <thread>
 #include <vector>
 
@@ -30,6 +32,7 @@
 #include <binder/RpcServer.h>
 #include <binder/RpcTransportRaw.h>
 #include <log/log.h>
+#include <utils/String8.h>
 
 #include "BuildFlags.h"
 #include "FdTrigger.h"
@@ -39,6 +42,15 @@
 #include "RpcTransportUtils.h"
 #include "RpcWireFormat.h"
 #include "Utils.h"
+
+#ifdef PLATFORM_WINDOWS
+#include "platform/namedpipe_vsock.h"
+#include "platform/namedpipe_rpc_transport.h"
+#endif
+#ifdef PLATFORM_MACOS
+#include "platform/macos_uds_vsock_path.h"
+#include <unistd.h>
+#endif
 
 namespace android {
 
@@ -72,6 +84,44 @@ status_t RpcServer::setupUnixDomainServer(const char* path) {
 }
 
 status_t RpcServer::setupVsockServer(unsigned bindCid, unsigned port, unsigned* assignedPort) {
+#ifdef PLATFORM_WINDOWS
+    LOG_RPC_DETAIL("Setting up VSOCK server on Windows using named pipe (CID: %u, Port: %u)", bindCid, port);
+    
+    NamedPipeVsockAddress address(bindCid, port);
+    auto namedPipeServer = std::make_unique<NamedPipeVsockServer>();
+    bool success = namedPipeServer->start(address);
+    if (!success) {
+        ALOGE("Failed to start named pipe VSOCK server");
+        return UNKNOWN_ERROR;
+    }
+
+    if (assignedPort != nullptr) {
+        *assignedPort = namedPipeServer->getAddress().port;
+    }
+
+    mNamedPipeVsockServer = std::move(namedPipeServer);
+
+    unique_fd dummySocket(TEMP_FAILURE_RETRY(socket(AF_INET, SOCK_STREAM, 0)));
+    if (!dummySocket.ok()) {
+        ALOGE("Failed to create dummy socket for named pipe VSOCK server");
+        return UNKNOWN_ERROR;
+    }
+    
+    return setupExternalServer(std::move(dummySocket), [this](const RpcServer& server, RpcTransportFd* out) {
+        return this->acceptNamedPipeConnection(server, out);
+    });
+#elif defined(PLATFORM_MACOS)
+    LOG_RPC_DETAIL("Setting up VSOCK-emulated UDS server on macOS (bindCid: %u, Port: %u)", bindCid,
+                   port);
+    std::string path = binderRpcVsockHostPath(bindCid, port);
+    ::unlink(path.c_str());
+    status_t status = setupSocketServer(UnixSocketAddress(path.c_str()));
+    if (status != OK) return status;
+    if (assignedPort != nullptr) {
+        *assignedPort = port;
+    }
+    return OK;
+#else
     auto status = setupSocketServer(VsockSocketAddress(bindCid, port));
     if (status != OK) return status;
 
@@ -88,6 +138,7 @@ status_t RpcServer::setupVsockServer(unsigned bindCid, unsigned port, unsigned* 
                         static_cast<size_t>(len), sizeof(addr));
     *assignedPort = addr.svm_port;
     return OK;
+#endif
 }
 
 status_t RpcServer::setupInetServer(const char* address, unsigned int port,
@@ -178,7 +229,13 @@ void RpcServer::setPerSessionRootObject(
 
 void RpcServer::setConnectionFilter(std::function<bool(const void*, size_t)>&& filter) {
     RpcMutexLockGuard _l(mLock);
+#ifdef PLATFORM_WINDOWS
+    if (mNamedPipeVsockServer == nullptr) {
+        LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
+    }
+#else
     LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
+#endif
     mConnectionFilter = std::move(filter);
 }
 
@@ -214,6 +271,22 @@ void RpcServer::start() {
 }
 
 status_t RpcServer::acceptSocketConnection(const RpcServer& server, RpcTransportFd* out) {
+#ifdef PLATFORM_WINDOWS
+    unique_fd clientSocket(TEMP_FAILURE_RETRY(
+            accept(server.mServer.fd.get(), nullptr, nullptr)));
+    if (!clientSocket.ok()) {
+        int savedErrno = WSAGetLastError();
+        ALOGE("Could not accept socket: %d", savedErrno);
+        return -savedErrno;
+    }
+    
+    unsigned int mode = 1;
+    if (ioctlsocket(clientSocket.get(), FIONBIO, &mode) != 0) {
+        int savedErrno = WSAGetLastError();
+        ALOGE("Could not set non-blocking mode for accepted socket: %d", savedErrno);
+        return -savedErrno;
+    }
+#else
     RpcTransportFd clientSocket(unique_fd(TEMP_FAILURE_RETRY(
             accept4(server.mServer.fd.get(), nullptr, nullptr, SOCK_CLOEXEC | SOCK_NONBLOCK))));
     if (!clientSocket.fd.ok()) {
@@ -221,6 +294,7 @@ status_t RpcServer::acceptSocketConnection(const RpcServer& server, RpcTransport
         ALOGE("Could not accept4 socket: %s", strerror(savedErrno));
         return -savedErrno;
     }
+#endif
 
     *out = std::move(clientSocket);
     return OK;
@@ -245,26 +319,169 @@ status_t RpcServer::recvmsgSocketConnection(const RpcServer& server, RpcTranspor
         return -EINVAL;
     }
 
-    unique_fd fd(std::move(std::get<unique_fd>(fds.back())));
+    unique_fd fd = std::visit(
+            [](auto&& value) -> unique_fd {
+                using T = std::decay_t<decltype(value)>;
+                if constexpr (std::is_same_v<T, unique_fd>) {
+                    return std::move(value);
+                } else {
+                    int duplicated = -1;
+                    LOG_ALWAYS_FATAL_IF(binder::os::dupFileDescriptor(value.get(), &duplicated) != OK,
+                                        "Failed to duplicate borrowed fd for RPC transport");
+                    return unique_fd(duplicated);
+                }
+            },
+            std::move(fds.back()));
     if (status_t res = binder::os::setNonBlocking(fd); res != OK) return res;
 
     *out = RpcTransportFd(std::move(fd));
     return OK;
 }
 
+status_t RpcServer::acceptNamedPipeConnection(const RpcServer& server, RpcTransportFd* out) {
+#ifdef PLATFORM_WINDOWS
+    if (server.mNamedPipeVsockServer == nullptr) {
+        ALOGE("Named pipe VSOCK server is not initialized");
+        return INVALID_OPERATION;
+    }
+
+    HANDLE clientHandle = server.mNamedPipeVsockServer->accept();
+    if (clientHandle == INVALID_HANDLE_VALUE) {
+        ALOGE("Failed to accept named pipe connection");
+        return UNKNOWN_ERROR;
+    }
+
+    auto namedPipeTransport = std::make_unique<NamedPipeVsockTransport>(clientHandle);
+    if (namedPipeTransport == nullptr) {
+        ALOGE("Failed to create NamedPipeVsockTransport");
+        CloseHandle(clientHandle);
+        return UNKNOWN_ERROR;
+    }
+
+    auto rpcTransport = std::make_unique<NamedPipeRpcTransport>(std::move(namedPipeTransport));
+    if (rpcTransport == nullptr) {
+        ALOGE("Failed to create NamedPipeRpcTransport");
+        return UNKNOWN_ERROR;
+    }
+
+    unique_fd dummyFd(TEMP_FAILURE_RETRY(socket(AF_INET, SOCK_STREAM, 0)));
+    if (!dummyFd.ok()) {
+        ALOGE("Failed to create dummy socket for named pipe transport");
+        return UNKNOWN_ERROR;
+    }
+
+    int dummyFdValue = dummyFd.get();
+    NamedPipeRpcTransport* rawTransport = rpcTransport.get();
+    const_cast<RpcServer&>(server).mNamedPipeTransports.push_back(std::move(rpcTransport));
+    const_cast<RpcServer&>(server).mNamedPipeTransportMap[dummyFdValue] = rawTransport;
+    
+    *out = RpcTransportFd(std::move(dummyFd));
+    
+    LOG_RPC_DETAIL("Named pipe transport accepted and stored for dummy fd %d", dummyFdValue);
+    return OK;
+#else
+    ALOGE("acceptNamedPipeConnection should only be called on Windows platform");
+    return INVALID_OPERATION;
+#endif
+}
+
 void RpcServer::join() {
 
     {
         RpcMutexLockGuard _l(mLock);
+#ifdef PLATFORM_WINDOWS
+        if (mNamedPipeVsockServer == nullptr) {
+            LOG_ALWAYS_FATAL_IF(!mServer.fd.ok(), "RpcServer must be setup to join.");
+        }
+#else
         LOG_ALWAYS_FATAL_IF(!mServer.fd.ok(), "RpcServer must be setup to join.");
+#endif
         LOG_ALWAYS_FATAL_IF(mAcceptFn == nullptr, "RpcServer must have an accept() function");
+#ifdef PLATFORM_WINDOWS
+        if (mNamedPipeVsockServer == nullptr) {
+            LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
+        }
+#else
         LOG_ALWAYS_FATAL_IF(mShutdownTrigger != nullptr, "Already joined");
+#endif
         mJoinThreadRunning = true;
         mShutdownTrigger = FdTrigger::make();
         LOG_ALWAYS_FATAL_IF(mShutdownTrigger == nullptr, "Cannot create join signaler");
     }
 
     status_t status;
+#ifdef PLATFORM_WINDOWS
+    if (mNamedPipeVsockServer != nullptr) {
+        LOG_RPC_DETAIL("Using named pipe VSOCK join loop on Windows");
+        
+        while (!mShutdownTrigger->isTriggered()) {
+            RpcTransportFd clientSocket;
+            status_t acceptStatus = acceptNamedPipeConnection(*this, &clientSocket);
+            
+            if (acceptStatus == OK) {
+                LOG_RPC_DETAIL("Accepted named pipe connection, processing...");
+                
+                std::array<uint8_t, kRpcAddressSize> addr;
+                socklen_t addrLen = addr.size();
+                
+                {
+                    RpcMutexLockGuard _l(mLock);
+                    RpcMaybeThread thread =
+                            RpcMaybeThread(&RpcServer::establishConnection,
+                                           sp<RpcServer>::fromExisting(this), std::move(clientSocket), addr,
+                                           addrLen, RpcSession::join);
+
+                    auto& threadRef = mConnectingThreads[thread.get_id()];
+                    threadRef = std::move(thread);
+                    rpcJoinIfSingleThreaded(threadRef);
+                }
+            } else if (acceptStatus == WOULD_BLOCK) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            } else {
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            }
+        }
+    } else {
+        while ((status = mShutdownTrigger->triggerablePoll(mServer, POLLIN)) == OK) {
+            std::array<uint8_t, kRpcAddressSize> addr;
+            static_assert(addr.size() >= sizeof(sockaddr_storage), "kRpcAddressSize is too small");
+            socklen_t addrLen = addr.size();
+
+            RpcTransportFd clientSocket;
+            if ((status = mAcceptFn(*this, &clientSocket)) != OK) {
+                if (status == DEAD_OBJECT)
+                    break;
+                else
+                    continue;
+            }
+
+            LOG_RPC_DETAIL("accept on fd %d yields fd %d", mServer.fd.get(), clientSocket.fd.get());
+
+            if (getpeername(clientSocket.fd.get(), reinterpret_cast<sockaddr*>(addr.data()),
+                            &addrLen)) {
+                ALOGE("Could not getpeername socket: %s", strerror(errno));
+                continue;
+            }
+
+            if (mConnectionFilter != nullptr && !mConnectionFilter(addr.data(), addrLen)) {
+                ALOGE("Dropped client connection fd %d", clientSocket.fd.get());
+                continue;
+            }
+
+            {
+                RpcMutexLockGuard _l(mLock);
+                RpcMaybeThread thread =
+                        RpcMaybeThread(&RpcServer::establishConnection,
+                                       sp<RpcServer>::fromExisting(this), std::move(clientSocket), addr,
+                                       addrLen, RpcSession::join);
+
+                auto& threadRef = mConnectingThreads[thread.get_id()];
+                threadRef = std::move(thread);
+                rpcJoinIfSingleThreaded(threadRef);
+            }
+        }
+    }
+#else
     while ((status = mShutdownTrigger->triggerablePoll(mServer, POLLIN)) == OK) {
         std::array<uint8_t, kRpcAddressSize> addr;
         static_assert(addr.size() >= sizeof(sockaddr_storage), "kRpcAddressSize is too small");
@@ -303,6 +520,7 @@ void RpcServer::join() {
             rpcJoinIfSingleThreaded(threadRef);
         }
     }
+#endif
     LOG_RPC_DETAIL("RpcServer::join exiting with %s", statusToString(status).c_str());
 
     if constexpr (kEnableRpcThreads) {
@@ -325,6 +543,12 @@ bool RpcServer::shutdown() {
     }
 
     mShutdownTrigger->trigger();
+
+#ifdef PLATFORM_WINDOWS
+    if (mNamedPipeVsockServer != nullptr) {
+        mNamedPipeVsockServer->stop();
+    }
+#endif
 
     for (auto& [id, session] : mSessions) {
         (void)id;
@@ -360,6 +584,9 @@ bool RpcServer::shutdown() {
     }
 
     mServer = RpcTransportFd();
+#ifdef PLATFORM_WINDOWS
+    mNamedPipeVsockServer.reset();
+#endif
 
     LOG_RPC_DETAIL("Finished waiting on shutdown.");
 
@@ -394,6 +621,49 @@ void RpcServer::establishConnection(
     status_t status = OK;
 
     int clientFdForLog = clientFd.fd.get();
+#ifdef PLATFORM_WINDOWS
+    std::unique_ptr<RpcTransport> client;
+    if (server->mNamedPipeVsockServer != nullptr) {
+        int clientFdValue = clientFd.fd.get();
+        auto it = server->mNamedPipeTransportMap.find(clientFdValue);
+        if (it != server->mNamedPipeTransportMap.end()) {
+            NamedPipeRpcTransport* rawTransport = it->second;
+            server->mNamedPipeTransportMap.erase(it);
+            auto transportIt = std::find_if(
+                    server->mNamedPipeTransports.begin(), server->mNamedPipeTransports.end(),
+                    [&](const auto& transport) {
+                        return transport.get() == rawTransport;
+                    });
+            if (transportIt != server->mNamedPipeTransports.end()) {
+                client = std::move(*transportIt);
+                server->mNamedPipeTransports.erase(transportIt);
+                LOG_RPC_DETAIL("Using mapped named pipe transport %p for client fd %d", client.get(),
+                               clientFdForLog);
+            } else {
+                ALOGE("Mapped named pipe transport %p not found for client fd %d", rawTransport,
+                      clientFdForLog);
+                status = DEAD_OBJECT;
+            }
+        } else {
+            if (!server->mNamedPipeTransports.empty()) {
+                client = std::move(server->mNamedPipeTransports.back());
+                server->mNamedPipeTransports.pop_back();
+                LOG_RPC_DETAIL("Using fallback named pipe transport %p for client fd %d", client.get(), clientFdForLog);
+            } else {
+                ALOGE("No named pipe transport found for client fd %d", clientFdForLog);
+                status = DEAD_OBJECT;
+            }
+        }
+    } else {
+        client = server->mCtx->newTransport(std::move(clientFd), server->mShutdownTrigger.get());
+        if (client == nullptr) {
+            ALOGE("Dropping accept4()-ed socket because sslAccept fails");
+            status = DEAD_OBJECT;
+        } else {
+            LOG_RPC_DETAIL("Created RpcTransport %p for client fd %d", client.get(), clientFdForLog);
+        }
+    }
+#else
     auto client = server->mCtx->newTransport(std::move(clientFd), server->mShutdownTrigger.get());
     if (client == nullptr) {
         ALOGE("Dropping accept4()-ed socket because sslAccept fails");
@@ -402,6 +672,7 @@ void RpcServer::establishConnection(
     } else {
         LOG_RPC_DETAIL("Created RpcTransport %p for client fd %d", client.get(), clientFdForLog);
     }
+#endif
 
     RpcConnectionHeader header;
     if (status == OK) {
@@ -409,7 +680,9 @@ void RpcServer::establishConnection(
         status = client->interruptableReadFully(server->mShutdownTrigger.get(), &iov, 1,
                                                 std::nullopt, /*ancillaryFds=*/nullptr);
         if (status != OK) {
-            ALOGE("Failed to read ID for client connecting to RPC server: %s",
+            sp<IBinder> root = server->getRootObject();
+            ALOGE("Failed to read ID for client connecting to RPC server root=%s: %s",
+                  root != nullptr ? String8(root->getInterfaceDescriptor()).c_str() : "<null>",
                   statusToString(status).c_str());
             // still need to cleanup before we can return
         }
@@ -577,18 +850,41 @@ status_t RpcServer::setupSocketServer(const RpcSocketAddress& addr) {
     LOG_RPC_DETAIL("Setting up socket server %s", addr.toString().c_str());
     LOG_ALWAYS_FATAL_IF(hasServer(), "Each RpcServer can only have one server.");
 
+#ifdef PLATFORM_WINDOWS
+    unique_fd socket_fd(TEMP_FAILURE_RETRY(
+            socket(addr.addr()->sa_family, SOCK_STREAM, 0)));
+    if (socket_fd.ok()) {
+        unsigned int mode = 1;
+        if (ioctlsocket(socket_fd.get(), FIONBIO, &mode) != 0) {
+            int savedErrno = WSAGetLastError();
+            ALOGE("Could not set non-blocking mode at %s: %d", addr.toString().c_str(), savedErrno);
+            return -savedErrno;
+        }
+    }
+#else
     unique_fd socket_fd(TEMP_FAILURE_RETRY(
             socket(addr.addr()->sa_family, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0)));
+#endif
     if (!socket_fd.ok()) {
+#ifdef PLATFORM_WINDOWS
+        int savedErrno = WSAGetLastError();
+        ALOGE("Could not create socket at %s: %d", addr.toString().c_str(), savedErrno);
+#else
         int savedErrno = errno;
         ALOGE("Could not create socket at %s: %s", addr.toString().c_str(), strerror(savedErrno));
+#endif
         return -savedErrno;
     }
 
     if (addr.addr()->sa_family == AF_INET || addr.addr()->sa_family == AF_INET6) {
         int noDelay = 1;
+#ifdef _WIN32
+        int result =
+                setsockopt(socket_fd.get(), IPPROTO_TCP, TCP_NODELAY, (const char*)&noDelay, sizeof(noDelay));
+#else
         int result =
                 setsockopt(socket_fd.get(), IPPROTO_TCP, TCP_NODELAY, &noDelay, sizeof(noDelay));
+#endif
         if (result < 0) {
             int savedErrno = errno;
             ALOGE("Could not set TCP_NODELAY on  %s", strerror(savedErrno));
@@ -604,8 +900,13 @@ status_t RpcServer::setupSocketServer(const RpcSocketAddress& addr) {
     }
 
     if (0 != TEMP_FAILURE_RETRY(bind(socket_fd.get(), addr.addr(), addr.addrSize()))) {
+#ifdef PLATFORM_WINDOWS
+        int savedErrno = WSAGetLastError();
+        ALOGE("Could not bind socket at %s: %d", addr.toString().c_str(), savedErrno);
+#else
         int savedErrno = errno;
         ALOGE("Could not bind socket at %s: %s", addr.toString().c_str(), strerror(savedErrno));
+#endif
         return -savedErrno;
     }
 
@@ -620,8 +921,13 @@ status_t RpcServer::setupRawSocketServer(unique_fd socket_fd) {
     // TODO(b/189955605): Once we create threads dynamically & lazily, the backlog can be reduced
     //  to 1.
     if (0 != TEMP_FAILURE_RETRY(listen(socket_fd.get(), 50 /*backlog*/))) {
+#ifdef PLATFORM_WINDOWS
+        int savedErrno = WSAGetLastError();
+        ALOGE("Could not listen initialized Unix socket: %d", savedErrno);
+#else
         int savedErrno = errno;
         ALOGE("Could not listen initialized Unix socket: %s", strerror(savedErrno));
+#endif
         return -savedErrno;
     }
     if (status_t status = setupExternalServer(std::move(socket_fd)); status != OK) {
@@ -635,6 +941,16 @@ void RpcServer::onSessionAllIncomingThreadsEnded(const sp<RpcSession>& session) 
     const std::vector<uint8_t>& id = session->mId;
     LOG_ALWAYS_FATAL_IF(id.empty(), "Server sessions must be initialized with ID");
     LOG_RPC_DETAIL("Dropping session with address %s", HexString(id.data(), id.size()).c_str());
+
+    {
+        RpcMutexLockGuard sessionLock(session->mMutex);
+        if (!session->mConnections.mOutgoing.empty()) {
+            LOG_RPC_DETAIL("Keeping session %s alive with %zu outgoing connection(s)",
+                           HexString(id.data(), id.size()).c_str(),
+                           session->mConnections.mOutgoing.size());
+            return;
+        }
+    }
 
     RpcMutexLockGuard _l(mLock);
     auto it = mSessions.find(id);

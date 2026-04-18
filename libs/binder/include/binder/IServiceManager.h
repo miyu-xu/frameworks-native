@@ -19,11 +19,13 @@
 #include <binder/IInterface.h>
 // Trusty has its own definition of socket APIs from trusty_ipc.h
 #ifndef __TRUSTY__
-#include <sys/socket.h>
+// #include <sys/socket.h>
 #endif // __TRUSTY__
 #include <utils/String16.h>
 #include <utils/Vector.h>
 #include <optional>
+
+typedef int uid_t;
 
 namespace android {
 
@@ -109,7 +111,7 @@ public:
     /**
      * Get all instances of a service as declared in the VINTF manifest
      */
-    virtual Vector<String16> getDeclaredInstances(const String16& interface) = 0;
+    virtual Vector<String16> getDeclaredInstances(const String16& i) = 0;
 
     /**
      * If this instance is updatable via an APEX, returns the APEX with which
@@ -209,7 +211,7 @@ status_t getService(const String16& name, sp<INTERFACE>* outService)
     return NAME_NOT_FOUND;
 }
 
-LIBBINDER_EXPORTED void* openDeclaredPassthroughHal(const String16& interface,
+LIBBINDER_EXPORTED void* openDeclaredPassthroughHal(const String16& i,
                                                     const String16& instance, int flag);
 
 LIBBINDER_EXPORTED bool checkCallingPermission(const String16& permission);
@@ -220,7 +222,7 @@ LIBBINDER_EXPORTED bool checkPermission(const String16& permission, pid_t pid, u
 
 // ----------------------------------------------------------------------
 // Trusty's definition of the socket APIs does not include sockaddr types
-#ifndef __TRUSTY__
+#if !defined(__TRUSTY__)
 typedef std::function<status_t(const String16& name, sockaddr* outAddr, socklen_t addrSize)>
         RpcSocketAddressProvider;
 

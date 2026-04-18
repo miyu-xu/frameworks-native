@@ -40,11 +40,11 @@ extern "C" void AIBinder_markVendorStability(AIBinder* binder) {
     Stability::markVndk(binder->getBinder().get());
 }
 
-void AIBinder_markSystemStability(AIBinder* binder) {
+extern "C" void AIBinder_markSystemStability(AIBinder* binder) {
     Stability::markCompilationUnit(binder->getBinder().get());
 }
 
-void AIBinder_markVintfStability(AIBinder* binder) {
+extern "C" void AIBinder_markVintfStability(AIBinder* binder) {
     Stability::markVintf(binder->getBinder().get());
 }
 
@@ -53,6 +53,6 @@ extern "C" void AIBinder_forceDowngradeToVendorStability(AIBinder* binder) {
     Stability::forceDowngradeToVendorStability(binder->getBinder());
 }
 
-void AIBinder_forceDowngradeToSystemStability(AIBinder* binder) {
+extern "C" void AIBinder_forceDowngradeToSystemStability(AIBinder* binder) {
     Stability::forceDowngradeToSystemStability(binder->getBinder());
 }

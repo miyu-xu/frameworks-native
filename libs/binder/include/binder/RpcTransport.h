@@ -49,6 +49,8 @@ class RpcTransportCtxRaw;
 class RpcTransportCtxTls;
 class RpcTransportCtxTipcAndroid;
 class RpcTransportCtxTipcTrusty;
+class NamedPipeRpcTransport;
+class NamedPipeRpcTransportCtx;
 
 // Represents a socket connection.
 // No thread-safety is guaranteed for these APIs.
@@ -118,6 +120,7 @@ private:
     friend class ::android::RpcTransportTls;
     friend class ::android::RpcTransportTipcAndroid;
     friend class ::android::RpcTransportTipcTrusty;
+    friend class ::android::NamedPipeRpcTransport;
 
     RpcTransport() = default;
 };
@@ -149,6 +152,7 @@ private:
     friend class ::android::RpcTransportCtxTls;
     friend class ::android::RpcTransportCtxTipcAndroid;
     friend class ::android::RpcTransportCtxTipcTrusty;
+    friend class ::android::NamedPipeRpcTransportCtx;
 
     RpcTransportCtx() = default;
 };

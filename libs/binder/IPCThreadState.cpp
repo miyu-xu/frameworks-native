@@ -677,8 +677,8 @@ status_t IPCThreadState::getAndExecuteCommand()
 
     result = talkWithDriver();
     if (result >= NO_ERROR) {
-        size_t IN = mIn.dataAvail();
-        if (IN < sizeof(int32_t)) return result;
+        size_t available = mIn.dataAvail();
+        if (available < sizeof(int32_t)) return result;
         cmd = mIn.readInt32();
         IF_LOG_COMMANDS() {
             std::ostringstream logStream;
@@ -1292,14 +1292,26 @@ status_t IPCThreadState::writeTransactionData(int32_t cmd, uint32_t binderFlags,
     const status_t err = data.errorCheck();
     if (err == NO_ERROR) {
         tr.data_size = data.ipcDataSize();
+#ifdef PLATFORM_WINDOWS
+        tr.data.ptr.buffer = (const void*)data.ipcData();
+#else
         tr.data.ptr.buffer = data.ipcData();
+#endif
         tr.offsets_size = data.ipcObjectsCount()*sizeof(binder_size_t);
+#ifdef PLATFORM_WINDOWS
+        tr.data.ptr.offsets = (const void*)data.ipcObjects();
+#else
         tr.data.ptr.offsets = data.ipcObjects();
+#endif
     } else if (statusBuffer) {
         tr.flags |= TF_STATUS_CODE;
         *statusBuffer = err;
         tr.data_size = sizeof(status_t);
+#ifdef PLATFORM_WINDOWS
+        tr.data.ptr.buffer = (const void*)statusBuffer;
+#else
         tr.data.ptr.buffer = reinterpret_cast<uintptr_t>(statusBuffer);
+#endif
         tr.offsets_size = 0;
         tr.data.ptr.offsets = 0;
     } else {

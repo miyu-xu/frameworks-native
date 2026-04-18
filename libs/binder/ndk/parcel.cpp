@@ -17,7 +17,6 @@
 #include <android/binder_parcel.h>
 #include <android/binder_parcel_platform.h>
 #include <binder/Parcel.h>
-#include <binder/ParcelFileDescriptor.h>
 #include <binder/unique_fd.h>
 #include <inttypes.h>
 #include <utils/Unicode.h>
@@ -33,7 +32,6 @@ using ::android::Parcel;
 using ::android::sp;
 using ::android::status_t;
 using ::android::binder::unique_fd;
-using ::android::os::ParcelFileDescriptor;
 
 template <typename T>
 using ContiguousArrayAllocator = bool (*)(void* arrayData, int32_t length, T** outBuffer);
@@ -295,15 +293,21 @@ binder_status_t AParcel_writeParcelFileDescriptor(AParcel* parcel, int fd) {
 }
 
 binder_status_t AParcel_readParcelFileDescriptor(const AParcel* parcel, int* fd) {
-    std::optional<ParcelFileDescriptor> parcelFd;
-
-    status_t status = parcel->get()->readParcelable(&parcelFd);
+    int32_t present = 0;
+    status_t status = parcel->get()->readInt32(&present);
     if (status != STATUS_OK) return PruneStatusT(status);
 
-    if (parcelFd) {
-        *fd = parcelFd->release().release();
-    } else {
+    if (present == 0) {
         *fd = -1;
+        return STATUS_OK;
+    }
+    if (present != 1) {
+        return STATUS_BAD_VALUE;
+    }
+
+    *fd = parcel->get()->readParcelFileDescriptor();
+    if (*fd < 0) {
+        return STATUS_UNKNOWN_ERROR;
     }
 
     return STATUS_OK;

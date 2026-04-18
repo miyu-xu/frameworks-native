@@ -228,14 +228,14 @@ binder::Status BackendUnifiedServiceManager::toBinderService(const ::std::string
                 os::ParcelFileDescriptor fd;
                 binder::Status ret = accessor->addConnection(&fd);
                 if (ret.isOk()) {
-                    return base::unique_fd(fd.release());
+                    return android::binder::unique_fd(fd.release());
                 } else {
                     ALOGE("Failed to connect to RpcSession: %s", ret.toString8().c_str());
-                    return base::unique_fd(-1);
+                    return android::binder::unique_fd(-1);
                 }
             };
             auto session = RpcSession::make();
-            status_t status = session->setupPreconnectedClient(base::unique_fd{}, request);
+            status_t status = session->setupPreconnectedClient(android::binder::unique_fd{}, request);
             if (status != OK) {
                 ALOGE("Failed to set up preconnected binder RPC client: %s",
                       statusToString(status).c_str());
