@@ -32,12 +32,14 @@
 #include <linux/android/binder.h>
 #include <sys/ioctl.h>
 
-// struct binder_frozen_state_info {
-//     binder_uintptr_t cookie;
-//     __u32 is_frozen;
-// };
-
 #ifndef BR_FROZEN_BINDER
+struct binder_frozen_state_info {
+    binder_uintptr_t cookie;
+    __u32 is_frozen;
+    __u32 sync_recv;
+    __u32 async_recv;
+    __u32 pending_async_size;
+};
 // Temporary definition of BR_FROZEN_BINDER until UAPI binder.h includes it.
 #define BR_FROZEN_BINDER _IOR('r', 21, struct binder_frozen_state_info)
 #endif // BR_FROZEN_BINDER

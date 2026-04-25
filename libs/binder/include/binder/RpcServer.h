@@ -31,7 +31,10 @@
 namespace android {
 
 class FdTrigger;
+#ifdef PLATFORM_WINDOWS
 class NamedPipeVsockServer;
+class NamedPipeRpcTransport;
+#endif
 class RpcServerTrusty;
 class RpcSocketAddress;
 
@@ -268,7 +271,9 @@ private:
             std::function<void(sp<RpcSession>&&, RpcSession::PreJoinSetupResult&&)>&& joinFn);
     static status_t acceptSocketConnection(const RpcServer& server, RpcTransportFd* out);
     static status_t recvmsgSocketConnection(const RpcServer& server, RpcTransportFd* out);
+#ifdef PLATFORM_WINDOWS
     static status_t acceptNamedPipeConnection(const RpcServer& server, RpcTransportFd* out);
+#endif
 
     [[nodiscard]] status_t setupSocketServer(const RpcSocketAddress& address);
 
@@ -279,9 +284,11 @@ private:
     std::bitset<8> mSupportedFileDescriptorTransportModes = std::bitset<8>().set(
             static_cast<size_t>(RpcSession::FileDescriptorTransportMode::NONE));
     RpcTransportFd mServer; // socket we are accepting sessions on
+#ifdef PLATFORM_WINDOWS
     std::unique_ptr<NamedPipeVsockServer> mNamedPipeVsockServer; // named pipe vsock server for Windows
     std::vector<std::unique_ptr<NamedPipeRpcTransport>> mNamedPipeTransports; // stored named pipe transports for Windows
     std::map<int, NamedPipeRpcTransport*> mNamedPipeTransportMap; // map dummy fd to transport object for Windows
+#endif
 
     RpcMutex mLock; // for below
     std::unique_ptr<RpcMaybeThread> mJoinThread;

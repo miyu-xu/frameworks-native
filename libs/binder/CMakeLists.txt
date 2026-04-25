@@ -41,11 +41,14 @@ include_directories(
     ${CMAKE_SOURCE_DIR}
     ${BINDER_DIR}
     ${BINDER_DIR}/platform
+    ${BINDER_DIR}/platform/host_stubs
     ${BINDER_DIR}/include
     ${BINDER_DIR}/include_rpc_unstable
+    ${BINDER_DIR}/liblog_stub/include
     ${CMAKE_SOURCE_DIR}/system/core/libutils/include
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/include
     ${CMAKE_SOURCE_DIR}/system/core/libcutils/include
+    ${CMAKE_SOURCE_DIR}/system/core/libsystem/include
 )
 
 # 为Android日志系统创建兼容性定义
@@ -70,6 +73,7 @@ set(BINDER_CORE_SOURCES
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/String16.cpp
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/Unicode.cpp
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/SharedBuffer.cpp
+    ${CMAKE_SOURCE_DIR}/system/core/libutils/Threads.cpp
     ${BINDER_DIR}/Parcel.cpp
     ${BINDER_DIR}/BpBinder.cpp
     ${BINDER_DIR}/BufferedTextOutput.cpp
@@ -83,6 +87,7 @@ set(BINDER_CORE_SOURCES
     ${BINDER_DIR}/TextOutput.cpp
     ${BINDER_DIR}/Utils.cpp
     ${BINDER_DIR}/Debug.cpp
+    ${BINDER_DIR}/file.cpp
     ${BINDER_DIR}/ProcessState.cpp
 )
 
@@ -164,9 +169,12 @@ target_include_directories(binder-rpc
         $<BUILD_INTERFACE:${BINDER_DIR}/ndk/include_platform>
     PRIVATE
         ${BINDER_DIR}
+        ${BINDER_DIR}/platform/host_stubs
         ${CMAKE_SOURCE_DIR}/system/core/libutils/include
         ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/include
         ${CMAKE_SOURCE_DIR}/system/core/libcutils/include
+        ${CMAKE_SOURCE_DIR}/system/core/libsystem/include
+        ${BINDER_DIR}/liblog_stub/include
 )
 
 # 编译定义
@@ -175,6 +183,7 @@ target_compile_definitions(binder-rpc
         $<$<BOOL:${PLATFORM_WINDOWS}>:PLATFORM_WINDOWS=1>
         $<$<BOOL:${PLATFORM_LINUX}>:PLATFORM_LINUX=1>
         $<$<BOOL:${PLATFORM_MACOS}>:PLATFORM_MACOS=1>
+        BINDER_NO_LIBBASE=1
         LOG_NDEBUG=0
         __LP64__
         $<$<BOOL:${PLATFORM_WINDOWS}>:BYTE_ORDER_BIG_ENDIAN=1>

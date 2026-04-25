@@ -257,7 +257,9 @@ AIBinder* ARpcSession_setupVsockClient(ARpcSession* /*handle*/, unsigned int /*c
 
 AIBinder* ARpcSession_setupUnixDomainClient(ARpcSession* handle, const char* name) {
     std::string pathname(name);
-    pathname = ANDROID_SOCKET_DIR "/" + pathname;
+    if (pathname.empty() || pathname.front() != '/') {
+        pathname = ANDROID_SOCKET_DIR "/" + pathname;
+    }
     auto session = handleToStrongPointer<RpcSession>(handle);
     if (status_t status = session->setupUnixDomainClient(pathname.c_str()); status != OK) {
         ALOGE("Failed to set up Unix Domain RPC client with path: %s error: %s", pathname.c_str(),

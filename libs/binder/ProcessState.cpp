@@ -54,6 +54,12 @@ namespace android {
 using namespace android::binder::impl;
 using android::binder::unique_fd;
 
+namespace {
+
+constexpr const char* kRpcOnlyDriver = "binder-rpc-host";
+
+}
+
 class PoolThread : public Thread
 {
 public:
@@ -74,13 +80,12 @@ protected:
 
 sp<ProcessState> ProcessState::self()
 {
-    return init(nullptr, false /*requireDefault*/);
+    return init(kRpcOnlyDriver, false /*requireDefault*/);
 }
 
 sp<ProcessState> ProcessState::initWithDriver(const char* driver)
 {
-    // For RPC-only, driver is not used
-    return init(nullptr, true /*requireDefault*/);
+    return init(driver != nullptr ? driver : kRpcOnlyDriver, true /*requireDefault*/);
 }
 
 sp<ProcessState> ProcessState::selfOrNull()

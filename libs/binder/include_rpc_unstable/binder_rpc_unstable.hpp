@@ -17,6 +17,7 @@
 #pragma once
 
 // #include <sys/socket.h>
+#include <stddef.h>
 #include <stdint.h>
 
 extern "C" {
@@ -109,8 +110,8 @@ void ARpcServer_free(ARpcServer* server);
 AIBinder* ARpcSession_setupVsockClient(ARpcSession* session, unsigned int cid,
                                        unsigned int port);
 
-// Connects to an RPC server over a Unix Domain Socket of the given name.
-// The final Unix Domain Socket path name is /dev/socket/`name`.
+// Connects to an RPC server over a Unix Domain Socket. Android named sockets
+// are resolved under /dev/socket/`name`; absolute paths are used as-is.
 // Returns the root Binder object of the server.
 AIBinder* ARpcSession_setupUnixDomainClient(ARpcSession* session, const char* name);
 

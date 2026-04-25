@@ -338,8 +338,8 @@ status_t RpcServer::recvmsgSocketConnection(const RpcServer& server, RpcTranspor
     return OK;
 }
 
-status_t RpcServer::acceptNamedPipeConnection(const RpcServer& server, RpcTransportFd* out) {
 #ifdef PLATFORM_WINDOWS
+status_t RpcServer::acceptNamedPipeConnection(const RpcServer& server, RpcTransportFd* out) {
     if (server.mNamedPipeVsockServer == nullptr) {
         ALOGE("Named pipe VSOCK server is not initialized");
         return INVALID_OPERATION;
@@ -379,11 +379,8 @@ status_t RpcServer::acceptNamedPipeConnection(const RpcServer& server, RpcTransp
     
     LOG_RPC_DETAIL("Named pipe transport accepted and stored for dummy fd %d", dummyFdValue);
     return OK;
-#else
-    ALOGE("acceptNamedPipeConnection should only be called on Windows platform");
-    return INVALID_OPERATION;
-#endif
 }
+#endif
 
 void RpcServer::join() {
 

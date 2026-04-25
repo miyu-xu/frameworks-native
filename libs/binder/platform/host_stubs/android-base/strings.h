@@ -1,10 +1,10 @@
-#ifndef __WIN32_ANDROID_BASE_STRINGS_H__
-#define __WIN32_ANDROID_BASE_STRINGS_H__
+#pragma once
 
 #include <string_view>
 
 namespace android {
 namespace base {
+
 inline bool ConsumePrefix(std::string_view* str, std::string_view prefix) {
     if (str->substr(0, prefix.size()) == prefix) {
         str->remove_prefix(prefix.size());
@@ -12,6 +12,6 @@ inline bool ConsumePrefix(std::string_view* str, std::string_view prefix) {
     }
     return false;
 }
+
 } // namespace base
 } // namespace android
-#endif // __WIN32_ANDROID_BASE_STRINGS_H__

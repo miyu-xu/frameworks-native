@@ -19,13 +19,15 @@
 #include <binder/IInterface.h>
 // Trusty has its own definition of socket APIs from trusty_ipc.h
 #ifndef __TRUSTY__
-// #include <sys/socket.h>
+#include <sys/socket.h>
 #endif // __TRUSTY__
 #include <utils/String16.h>
 #include <utils/Vector.h>
 #include <optional>
 
+#ifdef _WIN32
 typedef int uid_t;
+#endif
 
 namespace android {
 

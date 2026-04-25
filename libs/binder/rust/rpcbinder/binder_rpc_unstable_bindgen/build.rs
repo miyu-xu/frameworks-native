@@ -20,16 +20,15 @@ use std::path::PathBuf;
 fn main() {
     // Get the current directory (crate root)
     let crate_root = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
-    // Try to find AOSP root by going up several directories
-    // From: frameworks/native/libs/binder/rust/rpcbinder
-    // We want to go to: ../../../../.. (5 levels up)
+    // Walk from frameworks/native/libs/binder/rust/rpcbinder/binder_rpc_unstable_bindgen
+    // back to the workspace root.
     let aosp_root = crate_root
-        .parent().and_then(|p| p.parent()) // rust
-        .and_then(|p| p.parent()) // rpcbinder
-        .and_then(|p| p.parent()) // binder
-        .and_then(|p| p.parent()) // libs
-        .and_then(|p| p.parent()) // native
-        .and_then(|p| p.parent()) // frameworks
+        .parent().and_then(|p| p.parent()) // rpcbinder -> rust
+        .and_then(|p| p.parent()) // rust -> binder
+        .and_then(|p| p.parent()) // binder -> libs
+        .and_then(|p| p.parent()) // libs -> native
+        .and_then(|p| p.parent()) // native -> frameworks
+        .and_then(|p| p.parent()) // frameworks -> workspace root
         .map(|p| p.to_path_buf());
     
     let aosp_root = aosp_root.unwrap_or_else(|| PathBuf::from("."));
