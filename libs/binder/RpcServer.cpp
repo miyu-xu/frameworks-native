@@ -42,6 +42,7 @@
 #include "RpcTransportUtils.h"
 #include "RpcWireFormat.h"
 #include "Utils.h"
+#include "platform/unix_socket_compat.h"
 
 #ifdef PLATFORM_WINDOWS
 #include "platform/namedpipe_vsock.h"
@@ -287,11 +288,11 @@ status_t RpcServer::acceptSocketConnection(const RpcServer& server, RpcTransport
         return -savedErrno;
     }
 #else
-    RpcTransportFd clientSocket(unique_fd(TEMP_FAILURE_RETRY(
-            accept4(server.mServer.fd.get(), nullptr, nullptr, SOCK_CLOEXEC | SOCK_NONBLOCK))));
+    RpcTransportFd clientSocket(unique_fd(
+            binder::os::acceptHostSocket(borrowed_fd(server.mServer.fd.get()))));
     if (!clientSocket.fd.ok()) {
         int savedErrno = errno;
-        ALOGE("Could not accept4 socket: %s", strerror(savedErrno));
+        ALOGE("Could not accept socket: %s", strerror(savedErrno));
         return -savedErrno;
     }
 #endif
@@ -859,8 +860,7 @@ status_t RpcServer::setupSocketServer(const RpcSocketAddress& addr) {
         }
     }
 #else
-    unique_fd socket_fd(TEMP_FAILURE_RETRY(
-            socket(addr.addr()->sa_family, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0)));
+    unique_fd socket_fd(binder::os::makeHostSocket(addr.addr()->sa_family, SOCK_STREAM, 0));
 #endif
     if (!socket_fd.ok()) {
 #ifdef PLATFORM_WINDOWS

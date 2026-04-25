@@ -43,6 +43,7 @@
 #include "RpcTransportUtils.h"
 #include "RpcWireFormat.h"
 #include "Utils.h"
+#include "platform/unix_socket_compat.h"
 
 #ifdef PLATFORM_WINDOWS
 #include "platform/namedpipe_vsock.h"
@@ -160,13 +161,18 @@ status_t RpcSession::setupUnixDomainSocketBootstrapClient(unique_fd bootstrapFd)
         int socks[2];
 #ifdef PLATFORM_WINDOWS
         if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0, (SOCKET*)socks) < 0) {
-#else
-        if (socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0, socks) < 0) {
-#endif
             int savedErrno = errno;
             ALOGE("Failed socketpair: %s", strerror(savedErrno));
             return -savedErrno;
         }
+#else
+        if (status_t status =
+                    binder::os::makeHostSocketPair(AF_UNIX, SOCK_STREAM, 0, socks);
+            status != OK) {
+            ALOGE("Failed socketpair: %s", strerror(-status));
+            return status;
+        }
+#endif
         unique_fd clientFd(socks[0]), serverFd(socks[1]);
 
         int zero = 0;
@@ -691,11 +697,11 @@ status_t singleSocketConnection(const RpcSocketAddress& addr,
     for (size_t tries = 0; tries < 5; tries++) {
         if (tries > 0) usleep(10000);
 
-        unique_fd serverFd(TEMP_FAILURE_RETRY(
 #ifdef PLATFORM_WINDOWS
-                socket(addr.addr()->sa_family, SOCK_STREAM, 0)));
+        unique_fd serverFd(TEMP_FAILURE_RETRY(socket(addr.addr()->sa_family, SOCK_STREAM, 0)));
 #else
-                socket(addr.addr()->sa_family, SOCK_STREAM | SOCK_CLOEXEC | SOCK_NONBLOCK, 0)));
+        unique_fd serverFd(
+                binder::os::makeHostSocket(addr.addr()->sa_family, SOCK_STREAM, 0));
 #endif
         if (!serverFd.ok()) {
             int savedErrno = errno;

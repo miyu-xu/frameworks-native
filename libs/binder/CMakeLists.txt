@@ -63,6 +63,16 @@ set(RPC_CORE_SOURCES
     ${BINDER_DIR}/libbinder_rpc_unstable.cpp
 )
 
+set(IPC_THREAD_STATE_SOURCE ${BINDER_DIR}/IPCThreadState.cpp)
+if(PLATFORM_MACOS)
+    set(IPC_THREAD_STATE_SOURCE ${BINDER_DIR}/platform/IPCThreadState_host.cpp)
+endif()
+
+set(IRESULT_RECEIVER_SOURCE ${BINDER_DIR}/IResultReceiver.cpp)
+if(PLATFORM_WINDOWS)
+    set(IRESULT_RECEIVER_SOURCE ${BINDER_DIR}/platform/IResultReceiver_windows.cpp)
+endif()
+
 # Android Binder核心组件源文件
 set(BINDER_CORE_SOURCES
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/RefBase.cpp
@@ -77,9 +87,10 @@ set(BINDER_CORE_SOURCES
     ${BINDER_DIR}/Parcel.cpp
     ${BINDER_DIR}/BpBinder.cpp
     ${BINDER_DIR}/BufferedTextOutput.cpp
-    ${BINDER_DIR}/IPCThreadState.cpp
+    ${IPC_THREAD_STATE_SOURCE}
     ${BINDER_DIR}/FdTrigger.cpp
     ${BINDER_DIR}/IInterface.cpp
+    ${IRESULT_RECEIVER_SOURCE}
     ${BINDER_DIR}/Binder.cpp
     ${BINDER_DIR}/Stability.cpp
     ${BINDER_DIR}/Static.cpp
@@ -110,6 +121,7 @@ if(PLATFORM_WINDOWS)
 elseif(PLATFORM_MACOS)
     set(PLATFORM_SOURCES
         ${BINDER_DIR}/platform/OS_macos.cpp
+        ${BINDER_DIR}/platform/macos_stubs.cpp
         ${BINDER_DIR}/platform/macos_uds_vsock_path.cpp
         ${OS_UNIX_COMMON_SOURCES}
     )

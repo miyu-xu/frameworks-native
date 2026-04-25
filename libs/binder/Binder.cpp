@@ -592,6 +592,20 @@ int BBinder::getMinSchedulerPriority() {
     if (e == nullptr) return 0;
     return e->mPriority;
 }
+#else
+void BBinder::setMinSchedulerPolicy(int, int) {
+    LOG_ALWAYS_FATAL_IF(mParceled,
+                        "setMinSchedulerPolicy() should not be called after a binder object "
+                        "is parceled/sent to another process");
+}
+
+int BBinder::getMinSchedulerPolicy() {
+    return 0;
+}
+
+int BBinder::getMinSchedulerPriority() {
+    return 0;
+}
 #endif // __linux__
 
 bool BBinder::isInheritRt() {

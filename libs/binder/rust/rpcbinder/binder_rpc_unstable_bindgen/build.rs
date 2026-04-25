@@ -34,7 +34,10 @@ fn main() {
     let aosp_root = aosp_root.unwrap_or_else(|| PathBuf::from("."));
     
     // Start building bindgen command
-    let mut builder = bindgen::Builder::default();
+    let mut builder = bindgen::Builder::default()
+        .clang_arg("-x")
+        .clang_arg("c++")
+        .clang_arg("-std=c++17");
     
     // Add include paths based on user's request
     // Note: On Windows, we avoid adding platform directory to prevent conflicts

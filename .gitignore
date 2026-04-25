@@ -7,3 +7,4 @@
 # Rust artifacts
 **/target/
 *.so
+.DS_Store

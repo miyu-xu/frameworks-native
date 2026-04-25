@@ -17,7 +17,11 @@
 #define LOG_TAG "Parcel"
 //#define LOG_NDEBUG 0
 
+#ifdef __APPLE__
+#include <machine/endian.h>
+#else
 #include <endian.h>
+#endif
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>

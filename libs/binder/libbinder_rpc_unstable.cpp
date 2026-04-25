@@ -96,9 +96,10 @@ ARpcServer* ARpcServer_newVsock(AIBinder* service, unsigned int cid, unsigned in
 #endif
 
     unsigned int bindCid = VMADDR_CID_ANY; // bind to the remote interface
-#ifdef PLATFORM_WINDOWS
+#if defined(PLATFORM_WINDOWS) || defined(PLATFORM_MACOS)
     // Windows maps Binder RPC "vsock" endpoints to named pipes whose names include the bind CID.
-    // The guest virtio-vsock bridge connects to \\.\pipe\binder_rpc_vsock_{guest_cid}_{port}, so
+    // macOS maps Binder RPC "vsock" endpoints to UDS paths whose names include the bind CID.
+    // The guest virtio-vsock bridge connects to binder_rpc_vsock_{guest_cid}_{port}, so
     // VM-scoped services must bind their real CID instead of VMADDR_CID_ANY.
     bindCid = cid;
     if (cid == VMADDR_CID_LOCAL) {

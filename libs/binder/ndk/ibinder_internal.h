@@ -119,6 +119,8 @@ struct ABpBinder : public AIBinder {
     ::android::sp<::android::IBinder> mRemote;
     bool mServiceFuzzing = false;
     struct DeathRecipientInfo {
+        DeathRecipientInfo(const android::sp<AIBinder_DeathRecipient>& inRecipient, void* inCookie)
+            : recipient(inRecipient), cookie(inCookie) {}
         android::wp<AIBinder_DeathRecipient> recipient;
         void* cookie;
     };

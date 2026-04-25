@@ -27,6 +27,7 @@
 #include "OS.h"
 #include "RpcState.h"
 #include "RpcTransportUtils.h"
+#include "Utils.h"
 
 namespace android {
 
