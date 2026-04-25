@@ -6,3 +6,4 @@
 
 # Rust artifacts
 **/target/
+*.so
