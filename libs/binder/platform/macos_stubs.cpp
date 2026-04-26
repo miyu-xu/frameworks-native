@@ -6,30 +6,36 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+// L1: Basic fd validation via fcntl
 int ashmem_valid(int fd) {
     return fd >= 0 && fcntl(fd, F_GETFD) != -1 ? 1 : 0;
 }
 
+// L0: Unsupported on macOS (no ashmem equivalent)
 int ashmem_create_region(const char*, size_t) {
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on macOS
 int ashmem_set_prot_region(int, int) {
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on macOS
 int ashmem_pin_region(int, size_t, size_t) {
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on macOS
 int ashmem_unpin_region(int, size_t, size_t) {
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on macOS
 int ashmem_get_size_region(int) {
     errno = ENOSYS;
     return -1;
@@ -73,8 +79,10 @@ native_handle_t* native_handle_create(int numFds, int numInts) {
     return h;
 }
 
+// L1: Safe no-op on macOS (no fdsan equivalent)
 void native_handle_set_fdsan_tag(const native_handle_t*) {}
 
+// L1: Safe no-op on macOS (no fdsan equivalent)
 void native_handle_unset_fdsan_tag(const native_handle_t*) {}
 
 native_handle_t* native_handle_clone(const native_handle_t* handle) {

@@ -242,8 +242,36 @@ install(FILES
 
 # 测试目标（可选）
 if(BUILD_TESTING)
-    enable_testing()
-    # 这里可以添加测试
+    # --- RPC 最小 smoke test ---
+    # 利用 Unix socket pair 在同一个进程中建立 RPC server+client 并发送 ping 事务。
+    add_executable(rpc_smoke_test tests/host/rpc_smoke_test.cpp)
+    target_link_libraries(rpc_smoke_test PRIVATE binder-rpc)
+    target_include_directories(rpc_smoke_test PRIVATE
+        ${CMAKE_SOURCE_DIR}
+        ${BINDER_DIR}
+        ${BINDER_DIR}/include
+        ${CMAKE_SOURCE_DIR}/system/core/libutils/include
+        ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/include
+        ${CMAKE_SOURCE_DIR}/system/core/libcutils/include
+    )
+    target_compile_definitions(rpc_smoke_test PRIVATE -DBUILD_TESTING -DBINDER_NO_LIBBASE=1)
+    add_test(NAME rpc_smoke_test COMMAND rpc_smoke_test)
+
+    # --- 符号导出验证测试 ---
+    # 使用 nm (或 dumpbin) 检查 libbinder-rpc 是否导出了所有预期符号。
+    # 仅在 Unix 平台上通过 shell 实现；Windows 上可使用 dumpbin 或跳过。
+    if(NOT PLATFORM_WINDOWS)
+        set(SYMBOL_CHECK_SCRIPT ${BINDER_DIR}/tests/host/check_symbols.sh)
+        add_test(
+            NAME symbol_check
+            COMMAND ${CMAKE_COMMAND} -E env
+                bash ${SYMBOL_CHECK_SCRIPT}
+                "$<TARGET_FILE:binder-rpc>"
+        )
+        set_tests_properties(symbol_check PROPERTIES
+            DEPENDS binder-rpc
+        )
+    endif()
 endif()
 
 # 输出配置信息

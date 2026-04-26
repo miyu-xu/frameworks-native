@@ -11,6 +11,7 @@
 
 
 // ashmem stubs for Windows
+// L1: Basic fd validation, no ashmem-specific checks
 int ashmem_valid(int fd) {
     // For host-RPC use, treat a valid CRT fd as "ashmem-valid enough".
     if (fd < 0) return 0;
@@ -18,30 +19,35 @@ int ashmem_valid(int fd) {
     return h != -1 ? 1 : 0;
 }
 
+// L0: Unsupported on Windows
 int ashmem_create_region(const char *name, size_t size) {
     // On Windows, we don't have ashmem, return error
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on Windows
 int ashmem_set_prot_region(int fd, int prot) {
     // On Windows, we don't have ashmem, return error
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on Windows
 int ashmem_pin_region(int fd, size_t offset, size_t len) {
     // On Windows, we don't have ashmem, return error
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on Windows
 int ashmem_unpin_region(int fd, size_t offset, size_t len) {
     // On Windows, we don't have ashmem, return error
     errno = ENOSYS;
     return -1;
 }
 
+// L0: Unsupported on Windows
 int ashmem_get_size_region(int fd) {
     // On Windows, we don't have ashmem, return error
     errno = ENOSYS;
@@ -49,6 +55,7 @@ int ashmem_get_size_region(int fd) {
 }
 
 // native_handle stubs for Windows
+// L2: Native handle close — real Windows implementation
 int native_handle_close(const native_handle_t* h) {
     if (!h) return -1;
 
@@ -88,14 +95,17 @@ native_handle_t* native_handle_create(int numFds, int numInts) {
     return h;
 }
 
+// L1: Safe no-op on Windows (no fdsan equivalent)
 void native_handle_set_fdsan_tag(const native_handle_t* handle) {
     // On Windows, we don't have fdsan, so do nothing
 }
 
+// L1: Safe no-op on Windows (no fdsan equivalent)
 void native_handle_unset_fdsan_tag(const native_handle_t* handle) {
     // On Windows, we don't have fdsan, so do nothing
 }
 
+// L2: Native handle clone — real Windows implementation
 native_handle_t* native_handle_clone(const native_handle_t* handle) {
     if (!handle) return nullptr;
 
@@ -163,6 +173,7 @@ void androidSetThreadName(const char* name) {
 
 // Missing NDK Binder platform APIs on Windows host builds.
 // These are required by Rust binder consumers but are not available in our host build.
+// L1: Returns false (kernel binder not available on host)
 bool AIBinder_isHandlingTransaction() {
     // Kernel binder thread state is unavailable on host Windows build.
     return false;
