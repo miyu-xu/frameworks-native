@@ -82,9 +82,7 @@ public:
     // Appropriate values are:
     // SCHED_NORMAL: -20 <= priority <= 19
     // SCHED_RR/SCHED_FIFO: 1 <= priority <= 99
-#ifndef PLATFORM_WINDOWS
     LIBBINDER_EXPORTED void setMinSchedulerPolicy(int policy, int priority);
-#endif // PLATFORM_WINDOWS
     LIBBINDER_EXPORTED int getMinSchedulerPolicy();
     LIBBINDER_EXPORTED int getMinSchedulerPriority();
 

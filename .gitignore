@@ -7,4 +7,6 @@
 # Rust artifacts
 **/target/
 *.so
+libs/binder/rust/sys/libs/*.dll
+libs/binder/rust/sys/libs/*.dll.a
 .DS_Store

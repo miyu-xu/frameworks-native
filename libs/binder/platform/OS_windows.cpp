@@ -3,7 +3,13 @@
 #include <binder/RpcTransportRaw.h>
 #include <binder/unique_fd.h>
 #include <utils/Errors.h>
+#include <utils/Timers.h>
+#include <log/log.h>
 #include <sys/socket.h>
+#include <chrono>
+#include <cstdarg>
+#include <cstdio>
+#include <climits>
 #include <random>
 
 int set_non_blocking(socket_t sock) {
@@ -219,5 +225,35 @@ std::unique_ptr<RpcTransportCtxFactory> makeDefaultRpcTransportCtxFactory() {
 }
 
 } // namespace android::binder::os
+
+extern "C" nsecs_t systemTime(int clock) {
+    if (clock < SYSTEM_TIME_REALTIME || clock > SYSTEM_TIME_BOOTTIME) {
+        std::abort();
+    }
+
+    if (clock == SYSTEM_TIME_REALTIME) {
+        return std::chrono::duration_cast<std::chrono::nanoseconds>(
+                       std::chrono::system_clock::now().time_since_epoch())
+                .count();
+    }
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(
+                   std::chrono::steady_clock::now().time_since_epoch())
+            .count();
+}
+
+extern "C" int toMillisecondTimeoutDelay(nsecs_t referenceTime, nsecs_t timeoutTime) {
+    if (timeoutTime <= referenceTime) return 0;
+    const uint64_t timeoutDelay = static_cast<uint64_t>(timeoutTime - referenceTime);
+    if (timeoutDelay > static_cast<uint64_t>((INT_MAX - 1) * 1000000LL)) return -1;
+    return static_cast<int>((timeoutDelay + 999999ULL) / 1000000ULL);
+}
+
+extern "C" LIBBINDER_EXPORTED int __android_log_print(int, const char*, const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    const int result = std::vfprintf(stderr, fmt, args);
+    va_end(args);
+    return result;
+}
 
 

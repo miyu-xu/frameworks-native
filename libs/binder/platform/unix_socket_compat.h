@@ -11,6 +11,13 @@
 namespace android::binder::os {
 
 inline status_t setCloseOnExec(borrowed_fd fd) {
+#ifdef PLATFORM_WINDOWS
+    // Windows handles are non-inheritable by default in the socket paths used
+    // by the host build. MinGW does not provide the POSIX F_GETFD/F_SETFD
+    // commands, so there is nothing to apply here.
+    (void)fd;
+    return OK;
+#else
     int flags = TEMP_FAILURE_RETRY(fcntl(fd.get(), F_GETFD));
     if (flags == -1) {
         return -errno;
@@ -19,6 +26,7 @@ inline status_t setCloseOnExec(borrowed_fd fd) {
         return -errno;
     }
     return OK;
+#endif
 }
 
 inline status_t setSocketHostFlags(borrowed_fd fd) {
@@ -69,7 +77,15 @@ inline unique_fd acceptHostSocket(borrowed_fd fd) {
 }
 
 inline status_t makeHostSocketPair(int domain, int type, int protocol, int socks[2]) {
-#ifdef PLATFORM_MACOS
+#ifdef PLATFORM_WINDOWS
+    SOCKET nativeSocks[2];
+    if (TEMP_FAILURE_RETRY(socketpair(domain, type, protocol, nativeSocks)) < 0) {
+        return -errno;
+    }
+    socks[0] = static_cast<int>(nativeSocks[0]);
+    socks[1] = static_cast<int>(nativeSocks[1]);
+    return OK;
+#elif defined(PLATFORM_MACOS)
     if (TEMP_FAILURE_RETRY(socketpair(domain, type, protocol, socks)) < 0) {
         return -errno;
     }

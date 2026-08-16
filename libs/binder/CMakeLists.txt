@@ -45,8 +45,8 @@ include_directories(
     ${BINDER_DIR}/include
     ${BINDER_DIR}/include_rpc_unstable
     ${BINDER_DIR}/liblog_stub/include
-    ${CMAKE_SOURCE_DIR}/system/core/libutils/include
     ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/include
+    ${CMAKE_SOURCE_DIR}/system/core/libutils/include
     ${CMAKE_SOURCE_DIR}/system/core/libcutils/include
     ${CMAKE_SOURCE_DIR}/system/core/libsystem/include
 )
@@ -109,11 +109,8 @@ set(OS_UNIX_COMMON_SOURCES ${BINDER_DIR}/OS_unix_base.cpp)
 if(PLATFORM_WINDOWS)
     set(PLATFORM_SOURCES
         ${BINDER_DIR}/platform/OS_windows.cpp
-        ${BINDER_DIR}/platform/Mutex_windows.cpp
         ${BINDER_DIR}/platform/windows_stubs.cpp
-        ${BINDER_DIR}/platform/Thread_windows.cpp
         ${BINDER_DIR}/platform/IResultReceiver_windows.cpp
-        ${BINDER_DIR}/platform/Condition_windows.cpp
         ${BINDER_DIR}/platform/Pipe_windows.cpp
         ${BINDER_DIR}/platform/namedpipe_vsock.cpp
         ${BINDER_DIR}/platform/namedpipe_rpc_transport.cpp
@@ -182,8 +179,8 @@ target_include_directories(binder-rpc
     PRIVATE
         ${BINDER_DIR}
         ${BINDER_DIR}/platform/host_stubs
-        ${CMAKE_SOURCE_DIR}/system/core/libutils/include
         ${CMAKE_SOURCE_DIR}/system/core/libutils/binder/include
+        ${CMAKE_SOURCE_DIR}/system/core/libutils/include
         ${CMAKE_SOURCE_DIR}/system/core/libcutils/include
         ${CMAKE_SOURCE_DIR}/system/core/libsystem/include
         ${BINDER_DIR}/liblog_stub/include

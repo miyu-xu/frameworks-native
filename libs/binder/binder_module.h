@@ -32,7 +32,7 @@
 #include <linux/android/binder.h>
 #include <sys/ioctl.h>
 
-#ifndef BR_FROZEN_BINDER
+#if !defined(BR_FROZEN_BINDER) && !defined(PLATFORM_WINDOWS)
 struct binder_frozen_state_info {
     binder_uintptr_t cookie;
     __u32 is_frozen;
@@ -42,26 +42,26 @@ struct binder_frozen_state_info {
 };
 // Temporary definition of BR_FROZEN_BINDER until UAPI binder.h includes it.
 #define BR_FROZEN_BINDER _IOR('r', 21, struct binder_frozen_state_info)
-#endif // BR_FROZEN_BINDER
+#endif // !BR_FROZEN_BINDER && !PLATFORM_WINDOWS
 
-#ifndef BR_CLEAR_FREEZE_NOTIFICATION_DONE
+#if !defined(BR_CLEAR_FREEZE_NOTIFICATION_DONE) && !defined(PLATFORM_WINDOWS)
 // Temporary definition of BR_CLEAR_FREEZE_NOTIFICATION_DONE until UAPI binder.h includes it.
 #define BR_CLEAR_FREEZE_NOTIFICATION_DONE _IOR('r', 22, binder_uintptr_t)
-#endif // BR_CLEAR_FREEZE_NOTIFICATION_DONE
+#endif // !BR_CLEAR_FREEZE_NOTIFICATION_DONE && !PLATFORM_WINDOWS
 
-#ifndef BC_REQUEST_FREEZE_NOTIFICATION
+#if !defined(BC_REQUEST_FREEZE_NOTIFICATION) && !defined(PLATFORM_WINDOWS)
 // Temporary definition of BC_REQUEST_FREEZE_NOTIFICATION until UAPI binder.h includes it.
 #define BC_REQUEST_FREEZE_NOTIFICATION _IOW('c', 19, struct binder_handle_cookie)
-#endif // BC_REQUEST_FREEZE_NOTIFICATION
+#endif // !BC_REQUEST_FREEZE_NOTIFICATION && !PLATFORM_WINDOWS
 
-#ifndef BC_CLEAR_FREEZE_NOTIFICATION
+#if !defined(BC_CLEAR_FREEZE_NOTIFICATION) && !defined(PLATFORM_WINDOWS)
 // Temporary definition of BC_CLEAR_FREEZE_NOTIFICATION until UAPI binder.h includes it.
 #define BC_CLEAR_FREEZE_NOTIFICATION _IOW('c', 20, struct binder_handle_cookie)
-#endif // BC_CLEAR_FREEZE_NOTIFICATION
+#endif // !BC_CLEAR_FREEZE_NOTIFICATION && !PLATFORM_WINDOWS
 
-#ifndef BC_FREEZE_NOTIFICATION_DONE
+#if !defined(BC_FREEZE_NOTIFICATION_DONE) && !defined(PLATFORM_WINDOWS)
 // Temporary definition of BC_FREEZE_NOTIFICATION_DONE until UAPI binder.h includes it.
 #define BC_FREEZE_NOTIFICATION_DONE _IOW('c', 21, binder_uintptr_t)
-#endif // BC_FREEZE_NOTIFICATION_DONE
+#endif // !BC_FREEZE_NOTIFICATION_DONE && !PLATFORM_WINDOWS
 
 #endif // _BINDER_MODULE_H_
